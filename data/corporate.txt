@@ -1,0 +1,249 @@
+# Corporate language module.
+# Header: "# category=<id>". Lines: type|phrase|tone|English meaning|Vietnamese|Korean|When to use|Example|Avoid (optional)
+# type: abbr, term, expr. tone: formal, neutral, casual.
+
+# category=meetings
+expr|Shall we get started?|neutral|A polite way to open a meeting.|Chúng ta bắt đầu nhé?|시작할까요?|At the start of a meeting, once most people have joined.|"It's 10 o'clock. Shall we get started?"|"Start now!"
+expr|The purpose of today's meeting is to...|formal|States the goal of the meeting clearly.|Mục đích của buổi họp hôm nay là...|오늘 회의의 목적은...입니다|Right after opening, so everyone knows what you want to achieve.|"The purpose of today's meeting is to agree on the scope for phase 2."|
+expr|Let's go through the agenda.|neutral|Introduces the list of topics for the meeting.|Chúng ta cùng điểm qua chương trình họp.|안건을 살펴보겠습니다.|After the opening, before the first topic.|"Let's go through the agenda. We have three items today."|
+expr|Can everyone see my screen?|neutral|Checks that screen sharing is working.|Mọi người có thấy màn hình của tôi không?|제 화면 보이시나요?|In online meetings, right after you start sharing.|"Can everyone see my screen? I'm sharing the backlog now."|
+expr|Sorry to interrupt, but...|neutral|A polite way to cut in while someone is speaking.|Xin lỗi vì ngắt lời, nhưng...|말씀 중에 죄송하지만...|When you must add something important before the speaker finishes.|"Sorry to interrupt, but the deadline you mentioned changed yesterday."|"Wait, wait, that's wrong."
+expr|Could you say that again, please?|neutral|Asks someone to repeat what they said.|Bạn có thể nói lại được không?|다시 한번 말씀해 주시겠어요?|When you didn't hear or understand something.|"Sorry, the connection dropped. Could you say that again, please?"|"What?"
+expr|Just to clarify, do you mean...?|neutral|Checks your understanding of what someone said.|Để làm rõ, ý bạn là...?|확인차 여쭤보면, ...라는 뜻인가요?|When a point is unclear and a mistake would be costly.|"Just to clarify, do you mean the report should be daily, not weekly?"|
+expr|If I understand correctly, ...|neutral|Repeats a point in your own words to confirm it.|Nếu tôi hiểu đúng thì...|제가 제대로 이해했다면...|Before agreeing to a requirement or task.|"If I understand correctly, guests can check out without an account."|
+expr|Let's take this offline.|neutral|Suggests discussing a topic later with fewer people.|Chúng ta sẽ bàn riêng chuyện này sau.|이건 따로 이야기하죠.|When a topic is too detailed or only concerns a few people.|"This is a detailed database question. Let's take this offline."|
+expr|Let's park that for now.|neutral|Suggests pausing a topic to come back later.|Tạm gác lại vấn đề đó nhé.|그건 일단 보류하죠.|When a discussion goes off topic or runs out of time.|"Good point about pricing. Let's park that for now and add it to the parking lot."|
+expr|We're running out of time.|neutral|Warns that the meeting is nearly over.|Chúng ta sắp hết thời gian rồi.|시간이 얼마 남지 않았습니다.|Near the end of a meeting, to move to decisions.|"We're running out of time, so let's agree on next steps."|
+expr|Does anyone have anything to add?|neutral|Invites others to speak before moving on.|Có ai muốn bổ sung gì không?|추가하실 말씀 있으신가요?|At the end of each topic or the meeting.|"Before we move on, does anyone have anything to add?"|
+expr|Let me recap what we agreed.|neutral|Summarises the decisions made.|Để tôi tóm tắt lại những gì chúng ta đã thống nhất.|합의한 내용을 정리하겠습니다.|At the end of a meeting, before closing.|"Let me recap what we agreed: Lan updates the BRD, Minh checks the API."|
+expr|Who's going to take care of this?|neutral|Asks who will own a task.|Ai sẽ phụ trách việc này?|이건 누가 맡으실 건가요?|When an action item has no owner yet.|"Who's going to take care of the test data?"|
+expr|I'll send out the minutes after the meeting.|neutral|Promises to share the meeting notes.|Tôi sẽ gửi biên bản sau buổi họp.|회의 후에 회의록을 보내드리겠습니다.|When closing a meeting you organised.|"Thanks, everyone. I'll send out the minutes after the meeting."|
+expr|Thanks for your time, everyone.|neutral|A polite way to close a meeting.|Cảm ơn mọi người đã dành thời gian.|시간 내주셔서 감사합니다.|At the very end of a meeting.|"That's all for today. Thanks for your time, everyone."|
+expr|You're on mute.|casual|Tells someone their microphone is off.|Bạn đang tắt mic.|음소거 상태세요.|In online meetings, when someone talks but nobody hears them.|"Hoa, I think you're on mute."|
+expr|You're breaking up.|casual|Says someone's audio is cutting out.|Tiếng của bạn bị ngắt quãng.|소리가 끊겨요.|When a bad connection makes someone hard to hear.|"Sorry, you're breaking up. Could you turn off your camera?"|
+expr|Let's give it a couple more minutes for people to join.|neutral|Suggests waiting briefly for late attendees.|Chúng ta đợi thêm vài phút để mọi người vào nhé.|다른 분들이 들어오실 때까지 몇 분만 더 기다리죠.|At the start of a meeting when key people are missing.|"Only four of us so far. Let's give it a couple more minutes for people to join."|
+expr|I'd like to add something here.|neutral|Asks for a turn to speak.|Tôi muốn bổ sung một chút.|여기에 덧붙이고 싶은 게 있습니다.|When you want to contribute during a discussion.|"I'd like to add something here. Testers also need the API spec."|
+expr|Can we move on to the next item?|neutral|Suggests going to the next topic.|Chúng ta chuyển sang mục tiếp theo được không?|다음 안건으로 넘어갈까요?|When a topic is finished or not getting anywhere.|"I think we've covered this. Can we move on to the next item?"|
+term|agenda|neutral|The list of topics for a meeting.|chương trình họp|안건|Sent before a meeting so people can prepare.|"Please send the agenda by Monday."|
+term|action item|neutral|A task someone must do after the meeting.|việc cần làm sau họp|실행 항목|Written in minutes with an owner and a due date.|"I have two action items from today's call."|
+term|minutes|neutral|The written record of a meeting.|biên bản họp|회의록|Shared after a meeting to record decisions.|"Did anyone take minutes?"|
+term|parking lot|neutral|A list of topics to discuss another time.|danh sách chủ đề để bàn sau|보류 목록|When a topic is important but not for this meeting.|"Let's add the pricing question to the parking lot."|
+term|attendee|neutral|A person who joins a meeting.|người tham dự|참석자|In invites and minutes.|"There were twelve attendees from three teams."|
+term|facilitator|neutral|The person who runs a meeting or workshop.|người điều phối cuộc họp|진행자|In workshops, retros and planning meetings.|"I'll be the facilitator for the retro."|
+term|sync|casual|A short meeting to share updates and align.|buổi trao đổi ngắn|짧은 미팅, 싱크|In tech teams, for quick check-ins.|"Can we have a 15-minute sync with QA tomorrow?"|
+term|touch base|casual|To have a short talk to check how things are.|trao đổi nhanh|잠깐 이야기 나누다|When you want a brief update, not a long meeting.|"Let's touch base on Friday about the demo."|
+term|huddle|casual|A short, informal team meeting.|cuộc họp nhanh|짧은 팀 회의|For quick problem solving.|"Let's have a quick huddle after lunch."|
+abbr|AOB|formal|Any other business: the last agenda item for other topics.|các vấn đề khác|기타 안건|At the end of a formal agenda.|"Item 4: AOB."|
+abbr|AFK|casual|Away from keyboard.|đang không ở máy|자리 비움|In chat during calls or work.|"AFK for 10 minutes, getting coffee."|
+
+# category=email
+expr|I hope this email finds you well.|formal|A polite opening line in an email.|Hy vọng bạn vẫn khỏe.|잘 지내고 계시길 바랍니다.|At the start of a formal email, especially to clients.|"Dear Mr. Nam, I hope this email finds you well."|
+expr|I'm writing to...|formal|States the reason for the email.|Tôi viết email này để...|...하고자 메일 드립니다.|In the first line, after the greeting.|"I'm writing to confirm the dates for UAT."|
+expr|Please find attached...|formal|Tells the reader there is a file attached.|Vui lòng xem tệp đính kèm...|첨부된 ...를 확인해 주세요.|When you attach a document.|"Please find attached the updated BRD, version 1.2."|"I attached the file, check it."
+expr|As discussed,...|neutral|Refers back to an earlier conversation.|Như đã trao đổi,...|논의한 대로...|In follow-up emails after a meeting or call.|"As discussed, here are the test results from today."|
+expr|Just a gentle reminder that...|neutral|A polite way to remind someone.|Xin nhắc nhẹ rằng...|...를 다시 한번 알려드립니다.|When someone hasn't replied or a deadline is near.|"Just a gentle reminder that feedback on the mockups is due tomorrow."|"You still haven't replied!"
+expr|Could you please confirm...?|formal|Asks the reader to confirm something.|Bạn vui lòng xác nhận...?|...를 확인해 주시겠어요?|When you need a clear yes or no.|"Could you please confirm that the API will be ready by the 15th?"|
+expr|I'd appreciate it if you could...|formal|A polite request.|Tôi rất cảm kích nếu bạn có thể...|...해 주시면 감사하겠습니다.|When asking for a favour or extra work.|"I'd appreciate it if you could review the spec before Thursday."|"You must review the spec."
+expr|Please let me know if you have any questions.|neutral|Invites questions at the end of an email.|Nếu có câu hỏi, bạn cứ cho tôi biết nhé.|궁금한 점이 있으면 알려주세요.|In the closing of most work emails.|"Please let me know if you have any questions about the plan."|
+expr|Looking forward to hearing from you.|formal|Says you hope to get a reply.|Mong sớm nhận được phản hồi từ bạn.|회신 기다리겠습니다.|At the end of an email that needs an answer.|"Looking forward to hearing from you. Best regards, Thu."|
+expr|Thank you for your prompt reply.|formal|Thanks someone for answering quickly.|Cảm ơn bạn đã phản hồi nhanh chóng.|빠른 답변 감사합니다.|At the start of a reply to a fast response.|"Thank you for your prompt reply. That clears things up."|
+expr|Apologies for the delayed response.|formal|Says sorry for replying late.|Xin lỗi vì phản hồi chậm.|답변이 늦어 죄송합니다.|When you reply after a long time.|"Apologies for the delayed response. I was on leave last week."|
+expr|I'm looping in [name].|neutral|Says you've added someone to the email.|Tôi thêm [tên] vào email này.|[이름]님을 참조로 추가합니다.|When a new person needs to follow the thread.|"I'm looping in Minh, who owns the payment API."|
+expr|Moving [name] to BCC.|neutral|Politely removes someone from the visible recipients.|Chuyển [tên] sang BCC.|[이름]님은 숨은 참조로 옮깁니다.|When someone introduced you and no longer needs every reply.|"Thanks for the introduction, An. Moving you to BCC."|
+expr|Please disregard my previous email.|formal|Asks the reader to ignore an earlier email.|Vui lòng bỏ qua email trước của tôi.|이전 메일은 무시해 주세요.|When you sent wrong information.|"Please disregard my previous email. The correct date is May 3."|
+expr|Kind regards,|formal|A polite closing before your name.|Trân trọng,|감사합니다(맺음말)|At the end of formal emails.|"Kind regards, Thu Huynh, Business Analyst"|
+expr|Best,|casual|A short, friendly email closing.|Thân,|감사합니다(가벼운 맺음말)|With colleagues you email often.|"Thanks for the fix! Best, Thu"|
+expr|Out of office until [date].|neutral|An automatic reply when you're away.|Vắng mặt đến ngày [ngày].|[날짜]까지 부재중입니다.|Set as an auto-reply before leave.|"I'm out of office until 12 May with limited access to email."|
+abbr|CC|neutral|Carbon copy: sends a visible copy of an email to someone.|gửi kèm bản sao|참조|When someone should know but doesn't need to act.|"I'll CC the PM so she's aware."|
+abbr|BCC|neutral|Blind carbon copy: a hidden copy others can't see.|gửi bản sao ẩn|숨은 참조|When sending to many people or removing someone politely.|"Use BCC for the customer mailing list."|
+abbr|RE:|neutral|Reply: shows the email is a reply.|trả lời|회신|Added automatically to subject lines.|"RE: Sprint 12 demo"|
+abbr|FW: / FWD:|neutral|Forward: an email passed on to someone else.|chuyển tiếp|전달|When you pass an email to a new person.|"FW: Client feedback on checkout"|
+abbr|EOM|casual|End of message: the subject line is the whole message.|hết nội dung|본문 없음|For very short emails.|"Subject: Demo moved to 3 p.m. EOM"|
+abbr|NRN|casual|No reply needed.|không cần trả lời|회신 불필요|When the email is just information.|"Uploaded the slides. NRN."|
+term|thread|neutral|A chain of emails or messages on one topic.|chuỗi email/tin nhắn|스레드|To keep a discussion in one place.|"Please reply in this thread, not a new email."|
+term|subject line|neutral|The title of an email.|tiêu đề email|제목|Write it clearly so people know what the email is about.|"Use a subject line like 'Action needed: approve scope by Fri'."|
+term|signature|neutral|Your name and job details at the end of an email.|chữ ký email|서명|Set up once in your email settings.|"Add your job title to your signature."|
+
+# category=chat
+abbr|ASAP|neutral|As soon as possible.|càng sớm càng tốt|가능한 한 빨리|For urgent requests. Use carefully, it can sound demanding.|"Can you check the login bug ASAP? Users can't sign in."|
+abbr|FYI|neutral|For your information.|để bạn biết|참고로|Sharing information that needs no action.|"FYI, the staging server restarts at 6 p.m."|
+abbr|EOD|neutral|End of day.|cuối ngày|업무 종료 시각까지|For same-day deadlines.|"I'll send the test report by EOD."|
+abbr|COB|neutral|Close of business: end of the working day.|cuối giờ làm việc|업무 마감 시간|Similar to EOD, more formal.|"Please submit your timesheet by COB Friday."|
+abbr|EOW|neutral|End of week.|cuối tuần (làm việc)|이번 주 말까지|For weekly deadlines.|"The draft will be ready by EOW."|
+abbr|ETA|neutral|Estimated time of arrival or completion.|thời gian dự kiến hoàn thành|예상 완료 시간|Asking when something will be done.|"What's the ETA for the hotfix?"|
+abbr|TBD|neutral|To be decided or determined.|sẽ quyết định sau|추후 결정|When a detail isn't decided yet.|"Release date: TBD."|
+abbr|TBC|neutral|To be confirmed.|sẽ xác nhận sau|추후 확정|When a detail is likely but not final.|"Workshop on 5 June, time TBC."|
+abbr|N/A|neutral|Not applicable.|không áp dụng|해당 없음|In forms and documents when a field doesn't apply.|"Phone extension: N/A."|
+abbr|OOO|neutral|Out of office.|vắng mặt|부재중|Showing you're away from work.|"I'm OOO tomorrow, Lan will cover for me."|
+abbr|PTO|neutral|Paid time off: holiday or leave.|nghỉ phép có lương|유급 휴가|Talking about vacation days.|"I'm taking PTO next week."|
+abbr|WFH|casual|Working from home.|làm việc tại nhà|재택근무|Telling your team where you're working.|"WFH today, ping me on Teams."|
+abbr|BRB|casual|Be right back.|quay lại ngay|금방 올게요|Leaving chat for a moment.|"BRB, someone's at the door."|
+abbr|IMO / IMHO|casual|In my opinion / in my humble opinion.|theo ý tôi|제 생각에는|Giving a personal view politely.|"IMO, we should split this story in two."|
+abbr|AFAIK|casual|As far as I know.|theo những gì tôi biết|제가 알기로는|When you're fairly but not fully sure.|"AFAIK, the API doesn't support pagination yet."|
+abbr|TL;DR|casual|Too long; didn't read: a short summary.|tóm tắt nhanh|요약하면|At the top of a long message.|"TL;DR: release moves to Monday because of a payment bug."|
+abbr|LGTM|casual|Looks good to me.|tôi thấy ổn|좋아 보입니다|Approving code, a doc or a plan.|"LGTM, approved!"|
+abbr|WIP|neutral|Work in progress: not finished yet.|đang làm dở|작업 중|Marking drafts and unfinished pull requests.|"[WIP] Checkout redesign: don't merge yet."|
+abbr|PTAL|casual|Please take a look.|bạn xem giúp nhé|한번 봐 주세요|Asking someone to review something.|"Updated the PR. PTAL."|
+abbr|ICYMI|casual|In case you missed it.|phòng khi bạn bỏ lỡ|못 보셨을까 봐|Re-sharing important news.|"ICYMI: the office is closed on Friday."|
+abbr|NVM|casual|Never mind.|thôi bỏ qua|신경 쓰지 마세요|Cancelling a question you solved yourself.|"Where's the config file? NVM, found it."|
+abbr|TIA|casual|Thanks in advance.|cảm ơn trước|미리 감사드립니다|At the end of a request.|"Could someone share the VPN guide? TIA!"|
+abbr|NP|casual|No problem.|không có gì|천만에요|Replying to thanks.|"Thanks for the help!" "NP!"|
+abbr|DM|casual|Direct message: a private message.|tin nhắn riêng|개인 메시지|Moving a conversation out of a group channel.|"I'll DM you the test account details."|
+abbr|1:1|neutral|One-on-one: a private meeting between two people.|họp riêng 1-1|일대일 미팅|Regular meetings with your manager.|"Let's discuss your goals in our 1:1."|
+abbr|POC|neutral|Point of contact, or proof of concept (check the context).|đầu mối liên hệ / bản thử nghiệm khái niệm|담당자 / 개념 증명|In project plans and introductions.|"Minh is our POC for the bank integration."|
+expr|Quick question:|casual|Opens a short question in chat.|Hỏi nhanh chút:|간단한 질문인데요:|When you need a fast answer.|"Quick question: which branch should I deploy?"|
+expr|Ping me if you need anything.|casual|Invites someone to message you.|Cần gì cứ nhắn tôi nhé.|필요하면 메시지 주세요.|Offering help in chat.|"I've shared the doc. Ping me if you need anything."|
+expr|No worries.|casual|It's OK; don't worry about it.|Không sao đâu.|괜찮아요.|Replying to an apology or thanks.|"Sorry for the late reply!" "No worries."|
+expr|On it!|casual|I'm starting on this now.|Tôi làm ngay!|바로 할게요!|Accepting a task in chat.|"Can you check the failing test?" "On it!"|
+expr|Heads-up:|casual|An early warning about something.|Báo trước:|미리 알려드리면:|Before something that affects others.|"Heads-up: I'm merging a big change to main in 10 minutes."|
+term|ping|casual|To send someone a short message.|nhắn tin nhanh|메시지를 보내다|In chat tools like Slack or Teams.|"I'll ping you when the build is green."|
+term|channel|neutral|A group chat space for a team or topic.|kênh chat|채널|In Slack, Teams and similar tools.|"Post release updates in the #release channel."|
+term|thread (chat)|neutral|Replies grouped under one message.|chuỗi trả lời|스레드|To keep group chats tidy.|"Please reply in the thread so the channel stays clean."|
+term|@mention|neutral|Tagging someone so they get notified.|gắn tên ai đó|멘션|When you need a specific person's attention.|"@mention the QA lead when the build is ready."|
+
+# category=docs
+term|BRD|formal|Business requirements document.|tài liệu yêu cầu nghiệp vụ|비즈니스 요구사항 문서|Written by BAs at the start of a project.|"The BRD lists all business requirements for the new CRM."|
+term|SRS|formal|Software requirements specification.|đặc tả yêu cầu phần mềm|소프트웨어 요구사항 명세서|A detailed requirement document for developers and testers.|"Section 3 of the SRS covers the login rules."|
+term|SOW|formal|Statement of work: the contract's scope, deliverables and timeline.|tài liệu phạm vi công việc|작업 기술서|Signed with a client or vendor.|"That feature isn't in the SOW, so it needs a change request."|
+term|SOP|formal|Standard operating procedure: step-by-step instructions for a routine task.|quy trình vận hành chuẩn|표준 운영 절차|For repeatable tasks like deployments.|"Follow the SOP for monthly releases."|
+term|NDA|formal|Non-disclosure agreement: a contract to keep information secret.|thỏa thuận bảo mật|비밀 유지 계약|Before sharing confidential information.|"Please sign the NDA before the kick-off."|
+term|MoU|formal|Memorandum of understanding: a written agreement of intent.|biên bản ghi nhớ|양해 각서|Before a formal contract.|"Both companies signed an MoU."|
+term|version history|neutral|A record of a document's changes.|lịch sử phiên bản|버전 기록|At the start of requirement documents.|"Check the version history to see what changed in v1.3."|
+term|sign-off|formal|Formal approval of a document.|ký duyệt|승인|Before work starts or a phase ends.|"We need the client's sign-off on the BRD."|
+term|out of scope|neutral|Not included in the project.|ngoài phạm vi|범위 외|To be clear about what you won't do.|"Mobile app is out of scope for phase 1."|
+term|assumption|neutral|Something believed true without proof.|giả định|가정|Listed in documents so risks are visible.|"Assumption: users have a smartphone."|
+term|constraint|neutral|A limit the project must work within.|ràng buộc|제약 조건|Listed in project documents.|"Constraint: the budget cannot exceed $50,000."|
+term|appendix|neutral|Extra material at the end of a document.|phụ lục|부록|For detailed tables and supporting data.|"See Appendix B for the field list."|
+term|glossary|neutral|A list of terms and their meanings.|bảng thuật ngữ|용어집|So everyone uses words the same way.|"Add 'settlement' to the glossary."|
+term|executive summary|formal|A short summary for senior readers.|tóm tắt cho lãnh đạo|요약 보고|At the start of reports and proposals.|"Keep the executive summary to half a page."|
+abbr|e.g.|neutral|For example.|ví dụ|예를 들어|Before examples in writing.|"Payment methods, e.g. card, e-wallet and COD."|
+abbr|i.e.|neutral|That is; in other words.|tức là|즉|Before an explanation in writing.|"Only admins, i.e. store managers, can approve refunds."|
+abbr|etc.|neutral|And so on.|vân vân|등|At the end of a list.|"Supports Chrome, Safari, Edge, etc."|
+abbr|vs.|neutral|Versus: compared with.|so với|대|When comparing two things.|"Option A vs. option B"|
+abbr|w.r.t.|neutral|With respect to; about.|liên quan đến|~에 관하여|In notes and technical writing.|"No changes w.r.t. the payment flow."|
+abbr|Q1–Q4|neutral|The four quarters of a year.|quý 1 đến quý 4|1~4분기|In plans and reports.|"Launch is planned for Q3."|
+abbr|YoY|neutral|Year over year: compared with the same time last year.|so với cùng kỳ năm trước|전년 대비|In business reports.|"Revenue grew 20% YoY."|
+abbr|MoM|neutral|Month over month.|so với tháng trước|전월 대비|In monthly reports.|"Active users are up 5% MoM."|
+abbr|YTD|neutral|Year to date: from the start of the year until now.|từ đầu năm đến nay|연초 대비 누계|In financial reports.|"YTD sales are ahead of target."|
+abbr|FAQ|neutral|Frequently asked questions.|câu hỏi thường gặp|자주 묻는 질문|Help pages and documents.|"Add this to the FAQ for support staff."|
+abbr|SME|neutral|Subject matter expert.|chuyên gia nghiệp vụ|주제 전문가|When a document needs an expert review.|"The SME from finance reviewed the tax rules."|
+expr|This document outlines...|formal|Introduces what a document covers.|Tài liệu này trình bày...|본 문서는 ...를 설명합니다|In the first line of a document's introduction.|"This document outlines the requirements for the loyalty program."|
+expr|For more details, refer to...|formal|Points the reader to another source.|Để biết thêm chi tiết, xem...|자세한 내용은 ...를 참조하세요|When you don't want to repeat information.|"For more details, refer to the API specification."|
+expr|The system shall...|formal|States a mandatory requirement.|Hệ thống phải...|시스템은 ...해야 한다|In formal requirement documents.|"The system shall lock the account after five failed logins."|
+expr|As shown in Figure 2,...|formal|Refers to a diagram or picture.|Như thể hiện trong Hình 2,...|그림 2에서 보듯이...|When explaining a diagram in a document.|"As shown in Figure 2, the refund needs two approvals."|
+expr|Open questions|neutral|A section listing questions not yet answered.|Các câu hỏi còn bỏ ngỏ|미해결 질문|At the end of drafts, before sign-off.|"Open questions: 1. Who approves refunds over 5 million?"|
+
+# category=status
+expr|Yesterday I worked on..., today I'll..., no blockers.|neutral|The standard stand-up update structure.|Hôm qua tôi làm..., hôm nay tôi sẽ..., không có vướng mắc.|어제는 ...했고, 오늘은 ...할 예정이며, 이슈는 없습니다.|In daily stand-ups.|"Yesterday I finished the login tests. Today I'll test checkout. No blockers."|
+expr|I'm blocked by...|neutral|Says what is stopping your work.|Tôi đang bị vướng vì...|...때문에 진행이 막혀 있습니다.|In stand-ups, as early as possible.|"I'm blocked by the missing test account. Can someone create one?"|
+expr|It's on track.|neutral|The work will finish on time.|Đúng tiến độ.|일정대로 진행 중입니다.|In status reports and updates.|"The payment integration is on track for Friday."|
+expr|We're slightly behind schedule.|neutral|Admits a small delay honestly.|Chúng ta đang hơi chậm tiến độ.|일정보다 약간 늦어지고 있습니다.|When reporting a delay early.|"We're slightly behind schedule because of the API change, but we can catch up by Tuesday."|"Don't worry, it's fine." (when it's not)
+expr|It's at risk.|neutral|The work may not finish on time.|Có nguy cơ trễ.|일정에 위험이 있습니다.|Raising a risk before it becomes a problem.|"The release is at risk unless we get the bank's API keys this week."|
+expr|I'm about 80% done.|neutral|Gives an estimate of progress.|Tôi đã làm được khoảng 80%.|약 80% 완료했습니다.|When asked about progress.|"I'm about 80% done with the test cases. I'll finish this afternoon."|
+expr|I should have it ready by...|neutral|Gives a realistic completion time.|Tôi sẽ hoàn thành trước...|...까지 준비될 것 같습니다.|Committing to a time.|"I should have it ready by tomorrow noon."|
+expr|I'll keep you posted.|neutral|Promises to share updates.|Tôi sẽ cập nhật cho bạn.|계속 소식 전해 드릴게요.|When something isn't finished yet.|"Still waiting for the vendor. I'll keep you posted."|
+expr|Quick update on...|neutral|Opens a short progress message.|Cập nhật nhanh về...|...에 대한 간단한 업데이트입니다|In chat or email updates.|"Quick update on the hotfix: it's deployed to staging."|
+expr|Here's where we are with...|neutral|Introduces a progress summary.|Đây là tình hình hiện tại của...|...의 현재 상황입니다|At the start of a status meeting or email.|"Here's where we are with UAT: 40 of 55 cases passed."|
+expr|The main risk is...|neutral|Names the biggest risk.|Rủi ro chính là...|주요 리스크는 ...입니다|In status reports.|"The main risk is that the client may change the design again."|
+expr|Next steps are...|neutral|Lists what happens next.|Các bước tiếp theo là...|다음 단계는 ...입니다|At the end of an update.|"Next steps are to fix the two critical bugs and retest."|
+term|RAG status|neutral|Red, Amber, Green: a simple project health rating.|trạng thái đỏ/vàng/xanh|RAG 상태|In status reports for managers.|"The project is Amber this week because of the delay."|
+term|blocker|neutral|Something stopping progress.|vướng mắc chặn công việc|진행 장애 요소|In stand-ups and status reports.|"Any blockers?" "Yes, I still don't have VPN access."|
+term|dependency|neutral|Work that must happen before yours.|sự phụ thuộc|의존 관계|In plans and updates.|"We have a dependency on the payments team."|
+term|bandwidth|casual|Time or capacity to take on work.|thời gian/khả năng nhận thêm việc|여력|When discussing workload.|"I don't have the bandwidth for a new task this sprint."|
+term|ballpark figure|casual|A rough estimate.|con số ước lượng sơ bộ|대략적인 수치|When an exact number isn't needed yet.|"Can you give me a ballpark figure for the testing effort?"|
+
+# category=disagree
+expr|I see your point, but...|neutral|Shows you understand before disagreeing.|Tôi hiểu ý bạn, nhưng...|말씀하신 요점은 이해하지만...|Disagreeing politely in meetings.|"I see your point, but adding this now would delay the release."|"No, that's wrong."
+expr|I'm not sure I agree with that.|neutral|A soft way to disagree.|Tôi không chắc là mình đồng ý với điều đó.|그 부분은 동의하기 어려울 것 같습니다.|When you disagree with a senior person or client.|"I'm not sure I agree with that. Our data shows users want guest checkout."|"You're wrong."
+expr|Have we considered...?|neutral|Suggests an alternative without saying "no".|Chúng ta đã cân nhắc... chưa?|...도 고려해 보셨나요?|When you want to offer another option.|"Have we considered releasing the MVP first and adding reports later?"|
+expr|That's a fair point.|neutral|Accepts someone's argument.|Đó là một ý đúng.|일리 있는 말씀입니다.|Showing you listened, even if you still disagree.|"That's a fair point. Let's check the numbers before deciding."|
+expr|I agree up to a point.|neutral|Partly agrees.|Tôi đồng ý ở một mức độ nào đó.|어느 정도는 동의합니다.|When some parts are right and some aren't.|"I agree up to a point, but the deadline is still too tight."|
+expr|Could we look at it from another angle?|neutral|Invites a different view.|Chúng ta có thể nhìn từ góc độ khác không?|다른 관점에서 볼 수 있을까요?|When a discussion is stuck.|"Could we look at it from the user's angle?"|
+expr|I'd push back on that a little.|neutral|Politely challenges an idea.|Tôi xin phản biện một chút.|그 부분은 조금 다르게 생각합니다.|When you need to disagree firmly but politely.|"I'd push back on that a little. Testing can't finish in two days."|
+expr|What if we...?|neutral|Proposes a different approach.|Nếu chúng ta... thì sao?|...하면 어떨까요?|Suggesting a compromise.|"What if we release to 10% of users first?"|
+expr|Unfortunately, that won't be possible.|formal|A polite, clear refusal.|Rất tiếc, điều đó không thể thực hiện được.|안타깝지만 어렵겠습니다.|When you must say no to a client or manager.|"Unfortunately, that won't be possible within this sprint. We can plan it for the next one."|"No way."
+expr|I can do X, but not Y.|neutral|Says yes to part of a request.|Tôi có thể làm X, nhưng không làm được Y.|X는 가능하지만 Y는 어렵습니다.|Managing scope without a flat "no".|"I can update the report this week, but not the dashboard."|
+expr|To be honest, I have some concerns about...|neutral|Raises worries openly but politely.|Thành thật mà nói, tôi có vài lo ngại về...|솔직히 ...에 대해 우려가 있습니다.|Before a risky decision is made.|"To be honest, I have some concerns about the data migration plan."|
+expr|That makes sense.|neutral|Agrees that something is logical.|Điều đó hợp lý.|일리가 있네요.|Showing understanding.|"That makes sense. Let's go with option B."|
+expr|I couldn't agree more.|neutral|Strongly agrees.|Tôi hoàn toàn đồng ý.|전적으로 동의합니다.|When you fully support an idea.|"I couldn't agree more. Security has to come first."|
+expr|Let's agree to disagree.|neutral|Accepts that you won't reach agreement.|Chúng ta tôn trọng ý kiến khác nhau nhé.|서로 의견이 다르다는 걸 인정하죠.|When a discussion isn't moving and a decision isn't needed now.|"OK, let's agree to disagree on the naming and move on."|
+expr|Can we take a step back?|neutral|Suggests looking at the bigger picture.|Chúng ta lùi lại nhìn tổng thể được không?|한 발 물러서서 볼까요?|When a discussion gets lost in details.|"Can we take a step back? What problem are we solving for the user?"|
+term|push back|neutral|To resist or challenge a request.|phản đối, từ chối|반대하다|When a request is unrealistic.|"The team pushed back on the two-week deadline."|
+term|common ground|neutral|Things both sides agree on.|điểm chung|공통점|In negotiations and disagreements.|"Let's start from common ground: we both want fewer bugs."|
+term|devil's advocate|neutral|Someone who argues the other side to test an idea.|người cố tình phản biện|일부러 반대 의견을 내는 사람|Introducing a challenging question.|"Let me play devil's advocate: what if users don't want this?"|
+
+# category=requests
+expr|Would you mind...?|neutral|A polite way to ask for something.|Bạn có phiền... không?|...해 주실 수 있을까요?|Asking colleagues for help.|"Would you mind reviewing my test cases?"|"Review my test cases."
+expr|Could you help me with...?|neutral|Asks for help.|Bạn có thể giúp tôi... không?|...를 도와주실 수 있나요?|When you're stuck.|"Could you help me with this SQL query?"|
+expr|When would be a good time to...?|neutral|Asks for a convenient time.|Khi nào thì tiện để...?|언제 ...하기 좋으세요?|Scheduling with busy people.|"When would be a good time to walk you through the flow?"|
+expr|Just following up on...|neutral|Politely reminds someone about an earlier request.|Tôi muốn hỏi lại về...|...건으로 다시 연락드립니다|When you haven't received a reply.|"Just following up on my email about the API keys."|"Why haven't you replied?"
+expr|Any update on...?|neutral|Asks about progress.|Có cập nhật gì về... chưa?|...에 대한 진행 상황이 있나요?|Short follow-up in chat.|"Any update on the staging deployment?"|
+expr|Is there anything I can do to help?|neutral|Offers support.|Tôi có thể giúp gì không?|제가 도울 일이 있을까요?|When a teammate is struggling or blocked.|"You look busy with the release. Is there anything I can do to help?"|
+expr|I need this by...|neutral|States a clear deadline.|Tôi cần việc này trước...|...까지 필요합니다|When timing matters.|"I need the final mockups by Wednesday for the client demo."|
+expr|Could we push this to...?|neutral|Asks to move something later.|Chúng ta dời việc này sang... được không?|...로 미룰 수 있을까요?|When you need more time.|"Could we push the review to Thursday? The build isn't ready."|
+expr|Would it be possible to...?|formal|A very polite request.|Liệu có thể... được không?|...하는 것이 가능할까요?|With clients and senior people.|"Would it be possible to extend UAT by two days?"|
+expr|Let me check and get back to you.|neutral|Promises an answer after checking.|Để tôi kiểm tra rồi trả lời bạn.|확인 후 다시 연락드리겠습니다.|When you don't know the answer yet.|"Good question. Let me check with the developers and get back to you."|"I don't know."
+expr|I'll get back to you by...|neutral|Promises a reply by a set time.|Tôi sẽ trả lời bạn trước...|...까지 답변드리겠습니다|Setting expectations.|"I'll get back to you by end of day."|
+expr|Thanks for the reminder.|neutral|Thanks someone for reminding you.|Cảm ơn đã nhắc tôi.|알려주셔서 감사합니다.|When you forgot something.|"Thanks for the reminder! I'll send it now."|
+term|follow up|neutral|To contact someone again about something.|theo dõi tiếp, nhắc lại|후속 조치하다|After meetings or unanswered requests.|"I'll follow up with the client tomorrow."|
+term|escalate|neutral|To take a problem to someone more senior.|báo cáo lên cấp trên|상부에 보고하다|When a problem can't be solved at your level.|"If the vendor doesn't reply by Friday, I'll escalate to the PM."|
+term|nudge|casual|A gentle reminder.|nhắc nhẹ|살짝 상기시키기|When someone needs a small push.|"Can you give the designer a nudge about the icons?"|
+term|turnaround time|neutral|How long it takes to complete a request.|thời gian xử lý|처리 시간|When discussing service speed.|"What's the usual turnaround time for a code review?"|
+
+# category=feedback
+expr|Great job on...|neutral|Praises specific work.|Làm tốt lắm về...|...정말 잘하셨어요|Giving positive feedback.|"Great job on the demo. The client loved the flow."|
+expr|One thing that could be improved is...|neutral|Introduces constructive feedback gently.|Một điều có thể cải thiện là...|개선할 수 있는 점은 ...입니다|After positive points.|"One thing that could be improved is the error messages."|"This is bad."
+expr|Have you thought about...?|neutral|Suggests an idea without ordering.|Bạn đã nghĩ đến... chưa?|...는 생각해 보셨나요?|Coaching or reviewing someone's work.|"Have you thought about adding a loading state here?"|
+expr|It might be clearer if...|neutral|Suggests an improvement softly.|Có lẽ sẽ rõ hơn nếu...|...하면 더 명확할 것 같아요|Reviewing documents or designs.|"It might be clearer if you split this requirement into two."|
+expr|Thanks for the feedback.|neutral|Accepts feedback politely.|Cảm ơn góp ý của bạn.|피드백 감사합니다.|When receiving comments, even critical ones.|"Thanks for the feedback. I'll update the diagram today."|
+expr|That's a good catch.|casual|Thanks someone for spotting a problem.|Phát hiện hay đấy.|잘 찾아내셨네요.|In reviews when someone finds a mistake.|"That's a good catch. The total was missing VAT."|
+expr|Could you elaborate on that?|neutral|Asks for more detail.|Bạn có thể nói rõ hơn không?|좀 더 자세히 설명해 주시겠어요?|When feedback is vague.|"You said the design feels slow. Could you elaborate on that?"|
+expr|I take your point.|neutral|Accepts someone's criticism.|Tôi hiểu ý bạn.|말씀 이해합니다.|When feedback is fair.|"I take your point. The document was too long."|
+term|constructive feedback|neutral|Helpful criticism that shows how to improve.|góp ý mang tính xây dựng|건설적인 피드백|In reviews and 1:1s.|"Thanks for the constructive feedback on my presentation."|
+term|nitpick|casual|A very small, minor comment.|góp ý nhỏ nhặt|사소한 지적|In code and document reviews, to show it's not important.|"Nitpick: there's a double space in line 3."|
+term|blind spot|neutral|Something you don't notice about your work or behaviour.|điểm mù|맹점|In feedback and self-reflection.|"Testing edge cases is a blind spot for our team."|
+term|kudos|casual|Praise for an achievement.|lời khen ngợi|칭찬|In team chats and meetings.|"Kudos to the QA team for finding that bug before release!"|
+term|retro|neutral|Short for retrospective: a meeting to improve how the team works.|họp cải tiến|회고|At the end of a sprint.|"Let's raise this in the retro."|
+
+# category=jargon
+term|circle back|casual|To return to a topic later.|quay lại bàn sau|나중에 다시 이야기하다|When a topic needs more time or information.|"Let's circle back on the pricing once we have the data."|
+term|low-hanging fruit|casual|An easy task with quick benefits.|việc dễ làm mà hiệu quả nhanh|쉽게 얻을 수 있는 성과|Prioritising quick wins.|"Fixing the typos is low-hanging fruit. Let's do it first."|
+term|quick win|neutral|A fast, easy improvement.|thành công nhanh|빠른 성과|In planning and improvement work.|"Adding a search box would be a quick win for users."|
+term|move the needle|casual|To make a noticeable difference.|tạo ra khác biệt rõ rệt|눈에 띄는 변화를 만들다|Discussing impact.|"Changing the button color won't move the needle on sales."|
+term|on the same page|casual|Having the same understanding.|cùng chung hiểu biết|같은 생각을 하고 있는|Checking alignment.|"Let's make sure we're on the same page about the scope."|
+term|in the loop|casual|Informed about what's happening.|được cập nhật thông tin|상황을 알고 있는|Keeping people informed.|"Please keep me in the loop on the client's decision."|
+term|loop in|casual|To add someone to a conversation.|thêm ai đó vào cuộc trao đổi|대화에 포함시키다|In emails and chats.|"I'll loop in the tech lead."|
+term|deep dive|neutral|A detailed look at a topic.|phân tích chuyên sâu|심층 분석|For detailed sessions.|"Let's schedule a deep dive into the payment flow."|
+term|big picture|neutral|The overall situation, not details.|bức tranh tổng thể|큰 그림|When people get lost in details.|"Let's look at the big picture before we discuss fields."|
+term|stakeholder buy-in|neutral|Support and agreement from stakeholders.|sự ủng hộ của các bên liên quan|이해관계자의 지지|Before big changes.|"We need stakeholder buy-in before changing the process."|
+term|pain point|neutral|A problem that frustrates users or the business.|điểm khó khăn|불편 사항|In discovery and requirements.|"The main pain point is the slow refund process."|
+term|value-add|neutral|Something that adds extra value.|giá trị gia tăng|부가 가치|Justifying features or work.|"What's the value-add of this feature for customers?"|
+term|deliverable|neutral|Something you must hand over.|sản phẩm bàn giao|산출물|In project plans and contracts.|"The first deliverable is the wireframes."|
+term|scope creep|neutral|When a project slowly grows beyond what was agreed.|phình phạm vi|범위 확장|Warning about extra requests.|"Adding reports now is scope creep."|
+term|hard stop|casual|A fixed time you must leave.|giờ phải dừng cố định|정해진 종료 시각|At the start of a meeting.|"I have a hard stop at 4 p.m."|
+term|game changer|casual|Something that changes things a lot.|bước ngoặt|판도를 바꾸는 것|Describing big improvements.|"Automated testing was a game changer for our releases."|
+term|best practice|neutral|A method widely accepted as the best.|thông lệ tốt nhất|모범 사례|Recommending ways of working.|"It's best practice to write acceptance criteria for every story."|
+term|win-win|neutral|Good for both sides.|đôi bên cùng có lợi|모두에게 이로운|In negotiations.|"A phased release is a win-win for the client and the team."|
+term|ramp up|neutral|To increase gradually, or to get up to speed.|tăng dần / làm quen nhanh|점차 늘리다, 적응하다|For new people or growing efforts.|"New joiners need two weeks to ramp up."|
+term|run it by|casual|To show something to someone for their opinion.|hỏi ý kiến ai đó|의견을 구하다|Before making a decision.|"Let me run it by the PM first."|
+term|sanity check|casual|A quick check that something makes sense.|kiểm tra nhanh xem có hợp lý không|간단한 확인|Before sending or releasing.|"Can you sanity check my numbers before I send the report?"|
+term|wear many hats|casual|To have several different roles.|kiêm nhiều vai trò|여러 역할을 맡다|In small teams and startups.|"In a startup, the BA often wears many hats."|
+term|the ball is in their court|casual|It's their turn to act or decide.|đến lượt họ quyết định|이제 그쪽이 결정할 차례|After you've done your part.|"We sent the proposal. The ball is in their court now."|
+term|take ownership|neutral|To accept responsibility for something.|nhận trách nhiệm|책임지고 맡다|In feedback and expectations.|"I'd like you to take ownership of the UAT plan."|
+
+# category=present
+expr|Today I'm going to walk you through...|neutral|Introduces what you will present.|Hôm nay tôi sẽ trình bày cho mọi người về...|오늘은 ...를 차례대로 설명드리겠습니다|At the start of a demo or presentation.|"Today I'm going to walk you through the new checkout flow."|
+expr|Let me start with some background.|neutral|Introduces context first.|Tôi xin bắt đầu với một chút bối cảnh.|먼저 배경을 말씀드리겠습니다.|Before the main content.|"Let me start with some background on why we changed the process."|
+expr|As you can see on this slide,...|neutral|Points the audience to a slide.|Như mọi người thấy trên slide này,...|이 슬라이드에서 보시듯이...|Explaining charts or screens.|"As you can see on this slide, drop-off is highest at payment."|
+expr|Moving on to...|neutral|Introduces the next section.|Chuyển sang phần...|다음으로 ...로 넘어가겠습니다|Between sections.|"Moving on to the test results."|
+expr|To sum up,...|neutral|Starts the summary.|Tóm lại,...|요약하자면...|At the end of a presentation.|"To sum up, the new flow cuts checkout time by half."|
+expr|I'd be happy to take any questions.|neutral|Opens the floor for questions.|Tôi rất sẵn lòng trả lời câu hỏi.|질문 있으시면 답변드리겠습니다.|After your presentation.|"That's all from me. I'd be happy to take any questions."|
+expr|That's a great question.|neutral|Acknowledges a question before answering.|Câu hỏi rất hay.|좋은 질문입니다.|Buying a moment to think.|"That's a great question. The data comes from the CRM."|
+expr|I don't have that information right now, but I'll find out.|neutral|Honestly admits you don't know.|Hiện tôi chưa có thông tin đó, nhưng tôi sẽ tìm hiểu.|지금은 그 정보가 없지만 확인해 보겠습니다.|When you can't answer a question.|"I don't have the exact cost right now, but I'll find out and email you."|Guessing an answer.
+expr|Let me show you how it works.|neutral|Starts a live demo.|Để tôi cho mọi người xem cách nó hoạt động.|어떻게 작동하는지 보여드리겠습니다.|In demos and sprint reviews.|"Let me show you how it works. First, I add an item to the cart."|
+expr|The key takeaway is...|neutral|States the main message.|Điểm chính cần nhớ là...|핵심 요점은 ...입니다|At the end of a section or presentation.|"The key takeaway is that most bugs come from unclear requirements."|
+term|takeaway|neutral|The main point to remember.|điểm chính rút ra|핵심 요점|In presentations and workshops.|"What's your main takeaway from the workshop?"|
+term|walkthrough|neutral|A step-by-step explanation or demo.|buổi trình bày từng bước|단계별 설명|For designs, documents and features.|"I'll do a walkthrough of the new screens."|
+term|demo|neutral|A live show of how something works.|buổi trình diễn|시연|In sprint reviews and sales meetings.|"The demo is at 3 p.m. on Friday."|
+term|deck|casual|A set of presentation slides.|bộ slide|발표 자료|In business conversations.|"Can you send me the deck after the meeting?"|
+term|Q&A|neutral|Questions and answers.|phần hỏi đáp|질의응답|At the end of presentations.|"We'll have ten minutes for Q&A."|

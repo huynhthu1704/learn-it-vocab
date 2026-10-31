@@ -68,7 +68,7 @@ function termIPA(term) {
 }
 
 // ---- parse ----
-const files = fs.readdirSync('data').filter(f => f.endsWith('.txt')).sort();
+const files = fs.readdirSync('data').filter(f => /^\d.*\.txt$/.test(f)).sort();
 // Each .txt file holds lines: term|part of speech|Vietnamese meaning|example sentence|topic
 // A line '# level=1 role=dev' sets the level and role for the lines below it.
 const seen = new Map(); const words = []; const dups = [];
@@ -111,6 +111,18 @@ const out = JSON.stringify(words.map(({ id, term, pos, vi, ex, topic, level, rol
 if (noIpa.length) { console.error('Add these to data/pronunciation-overrides.json first:', noIpa.map(w => w.term).join(', ')); process.exit(1); }
 fs.writeFileSync('words.json', out);
 // Build the website: inject the word database into the template
-const html = fs.readFileSync('src/template.html', 'utf8').replace('/*__WORDS__*/[]', out.replace(/<\//g, '<\\/'));
+// Corporate language module: data/corporate.txt
+const CORP = []; let cat = null;
+for (const line of fs.readFileSync('data/corporate.txt', 'utf8').split('\n')) {
+  if (!line.trim()) continue;
+  if (line.startsWith('#')) { const m = line.match(/category=(\w+)/); if (m) cat = m[1]; continue; }
+  const f = line.split('|').map(x => x.trim());
+  if (f.length < 8 || !cat) { console.error('BAD corporate line:', line); process.exit(1); }
+  const [type, p, tone, d, v, k, ctx, ex, av] = f;
+  CORP.push({ id: CORP.length + 1, cat, type, p, tone, d, v, k, ctx, ex, av: av || '' });
+}
+console.log('corporate entries', CORP.length, Object.entries(CORP.reduce((a, c) => (a[c.cat] = (a[c.cat] || 0) + 1, a), {})).map(x => x.join(':')).join(' '));
+const safe = s => s.replace(/<\//g, '<\\/');
+const html = fs.readFileSync('src/template.html', 'utf8').replace('/*__WORDS__*/[]', safe(out)).replace('/*__CORP__*/[]', safe(JSON.stringify(CORP)));
 fs.writeFileSync('index.html', html);
 console.log('Wrote words.json and index.html');

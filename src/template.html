@@ -183,6 +183,28 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 .ptable td .progress{width:160px}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-weight:600;font-size:14px;z-index:80;transition:transform .25s;max-width:90vw}
 .toast.show{transform:translateX(-50%) translateY(0)}
+.cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.ccard{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:22px 24px;display:flex;flex-direction:column;gap:12px}
+.ccard .phrase{font-size:22px;font-weight:800;line-height:1.25;flex:1}
+.ccard .top{display:flex;gap:12px;align-items:flex-start}
+.ctx{display:flex;gap:10px;font-size:14px;color:var(--ink);background:#F7F8FC;border-radius:12px;padding:10px 12px;align-items:flex-start}
+.ctx b{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:2px}
+.cex{display:flex;gap:10px;align-items:flex-start;border-left:3px solid var(--blue);padding:4px 0 4px 12px;font-style:italic;font-size:15px}
+.avoid{display:flex;gap:10px;align-items:flex-start;font-size:14px;background:#FEF2F2;border-radius:12px;padding:10px 12px;color:#7F1D1D}
+.avoid b{font-style:normal}
+.tone-formal{background:#EEF2FF;color:#4338CA}.tone-neutral{background:#F1F5F9;color:#334155}.tone-casual{background:#ECFDF5;color:#047857}
+.catchips{display:flex;gap:8px;flex-wrap:wrap}
+.catchips button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-weight:600;font-size:13px;color:var(--muted)}
+.catchips button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.catchips button.on svg{stroke:#fff}
+.wp-band{background:linear-gradient(135deg,#0F172A,#1E3A8A);border-radius:32px;padding:44px 48px;color:#fff;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center}
+.wp-band h2{font-size:34px;font-weight:800;margin:10px 0}
+.wp-band p{color:#C7D2FE;margin:0 0 20px}
+.wp-band .sample{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.wp-band .sample b{display:block;font-size:18px}
+.wp-band .sample span{color:#C7D2FE;font-size:14px}
+@media (max-width:760px){.catchips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch}.catchips button{flex:none}}
+@media (max-width:900px){.cgrid{grid-template-columns:1fr}.wp-band{grid-template-columns:1fr;padding:32px 24px}}
 .view{display:none}
 .view.on{display:block}
 .settings{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
@@ -224,6 +246,7 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
     <div class="links" id="links">
       <a href="#home" data-nav="home">Home</a>
       <a href="#browse" data-nav="browse">Browse words</a>
+      <a href="#workplace" data-nav="workplace">Workplace English</a>
       <a href="#flashcards" data-nav="flashcards">Flashcards</a>
       <a href="#quiz" data-nav="quiz">Quiz</a>
       <a href="#progress" data-nav="progress">My progress</a>
@@ -270,6 +293,14 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
     <div class="wrap">
       <div class="sec-head"><div class="eyebrow">Learn by business domain</div><h2>Speak the language of your client's industry</h2><p>Projects happen in a business domain. Learn the words BAs, developers and testers hear in banking, e-commerce, healthcare and more.</p></div>
       <div class="grid4" id="domainCards"></div>
+    </div>
+  </section>
+  <section class="block" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="wp-band">
+        <div><div class="eyebrow" style="color:#93C5FD">New module · Workplace English</div><h2>The corporate language nobody teaches you</h2><p id="wpBandText">Abbreviations, business terms and ready-to-use expressions for meetings, emails, chat, documents and status updates, with context, examples and what to avoid.</p><a class="btn lg" style="background:#fff;color:var(--ink)" href="#workplace">Open Workplace English <span data-icon="arrow" data-c="#1B1F2A" data-s="20"></span></a></div>
+        <div id="wpSamples"></div>
+      </div>
     </div>
   </section>
   <section class="block">
@@ -320,6 +351,23 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   </div>
 </main>
 
+<!-- WORKPLACE ENGLISH -->
+<main id="v-workplace" class="view">
+  <div class="wrap page-head"><h1>Workplace English</h1><p>Corporate abbreviations, terms and expressions, with when to use them, real examples and what to avoid.</p></div>
+  <div class="filters"><div class="wrap">
+    <div class="frow">
+      <label class="search"><span data-icon="search" data-c="#5B6475" data-s="18"></span><input id="cq" type="search" placeholder="Search, e.g. EOD, circle back, push back, nhắc nhở, 회의" autocomplete="off"></label>
+      <div class="seg" id="cType"></div>
+      <a class="btn primary sm" href="#quiz" id="cPractice">Practise in a quiz</a>
+    </div>
+    <div class="frow"><div class="catchips" id="cCats"></div><span class="count" id="cCount"></span></div>
+  </div></div>
+  <div class="wrap" style="padding-bottom:72px">
+    <div class="cgrid" id="cGrid"></div>
+    <div class="empty" id="cEmpty" style="display:none">Nothing matches. Try another search or category.</div>
+  </div>
+</main>
+
 <!-- FLASHCARDS -->
 <main id="v-flashcards" class="view">
   <div class="wrap page-head center" style="text-align:center"><h1>Flashcards</h1><p>Look at the word, say it, then flip. Words you miss come back again.</p></div>
@@ -336,9 +384,10 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 
 <!-- QUIZ -->
 <main id="v-quiz" class="view">
-  <div class="wrap page-head" style="text-align:center"><h1>Quiz</h1><p>10 quick questions: meanings, missing words and listening.</p></div>
+  <div class="wrap page-head" style="text-align:center"><h1>Quiz</h1><p>10 quick questions on IT vocabulary or Workplace English.</p></div>
   <div class="wrap">
     <div class="setup">
+      <select class="sel" id="qzSource"><option value="vocab">IT vocabulary</option><option value="corp">Workplace English</option></select>
       <select class="sel" id="qzLevel"></select>
       <select class="sel" id="qzRole"></select>
       <button class="btn primary sm" id="qzStart">Start new quiz</button>
@@ -381,6 +430,9 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 <script>
 const WORDS = /*__WORDS__*/[];
 const BY_ID = new Map(WORDS.map(w => [w.id, w]));
+const CORP = /*__CORP__*/[];
+const CATS = { meetings:{ n:'Meetings', i:'meeting' }, email:{ n:'Emails', i:'communication' }, chat:{ n:'Chat & abbreviations', i:'chat' }, docs:{ n:'Documentation', i:'document' }, status:{ n:'Status updates', i:'agile' }, disagree:{ n:'Agreeing & disagreeing', i:'people' }, requests:{ n:'Requests & follow-ups', i:'time' }, feedback:{ n:'Feedback', i:'quality' }, jargon:{ n:'Business jargon', i:'business' }, present:{ n:'Presentations & demos', i:'devices' } };
+const TYPES = { abbr:'Abbreviation', term:'Term', expr:'Expression' };
 const ROLES = { student: { name: 'University students', short: 'Students', icon: 'study', c: '#16A34A', t: '#E7F6EC', d: 'Lectures, labs, thesis work and your first job hunt.' },
   dev: { name: 'Developers', short: 'Developers', icon: 'code', c: '#2563EB', t: '#E8F0FE', d: 'Code review, releases, architecture and teamwork.' },
   test: { name: 'Testers (QA)', short: 'Testers', icon: 'testing', c: '#EA580C', t: '#FFF1E7', d: 'Test cases, bug reports, automation and quality.' },
@@ -591,6 +643,7 @@ function renderHome() {
       <div class="mini-words">${sample.map(s => `<span class="pill" style="background:${R.t};color:${R.c}">${esc(s.t)}</span>`).join('')}</div>
       <div class="go" style="color:${R.c}">${fmt(n)} words ${svg('arrow', R.c, 18, 2)}</div></a>`;
   }).join('');
+  $('#wpSamples').innerHTML = ['EOD', 'Let\'s take this offline.', 'circle back'].map(p => CORP.find(c => c.p === p)).filter(Boolean).map(c => `<div class="sample"><b>${esc(c.p)}</b><span>${esc(c.d)}</span></div>`).join('') + `<div style="color:#C7D2FE;font-size:14px">${CORP.length} items in ${Object.keys(CATS).length} categories</div>`;
   $('#domainCards').innerHTML = Object.entries(DOMAINS).map(([k, D]) => {
     const pool = WORDS.filter(w => w.c === k); const sample = pool.filter(w => w.l === 2).slice(0, 3);
     return `<a class="card role-card" href="#browse" data-domain-link="${k}"><div class="itile" style="background:${D.t}">${svg(k, D.c, 30, 2)}</div><h3>${TOPIC_NAMES[k]}</h3><p>${D.d}</p>
@@ -646,6 +699,34 @@ $('#fTopic').onchange = e => { F.topic = e.target.value; shown = 36; renderBrows
 $('#fStatus').onchange = e => { F.status = e.target.value; shown = 36; renderBrowse(); };
 let qT; $('#q').oninput = e => { clearTimeout(qT); qT = setTimeout(() => { F.q = e.target.value; shown = 36; renderBrowse(); }, 120); };
 $('#moreBtn').onclick = () => { shown += 48; renderBrowse(); };
+
+/* ---------- workplace english ---------- */
+const CF = { q: '', cat: 'all', type: 'all' };
+function corpCard(c) {
+  const C = CATS[c.cat];
+  return `<div class="ccard">
+    <div class="top"><div class="phrase">${esc(c.p)}</div>${spkBtn(c.p.replace(/\[name\]/g, 'Minh').replace(/\[date\]/g, 'Monday'), '#fff', '#2563EB', 36)}</div>
+    <div class="prow"><span class="pill" style="background:#E8F0FE;color:#1D4ED8">${TYPES[c.type]}</span><span class="pill tone-${c.tone}">${c.tone[0].toUpperCase() + c.tone.slice(1)}</span><span class="pill" style="background:var(--bg);color:var(--muted)">${C.n}</span></div>
+    ${defsHTML(c)}
+    <div class="ctx">${svg('time', '#5B6475', 18, 2)}<div><b>When to use</b>${esc(c.ctx)}</div></div>
+    <div class="cex">${spkBtn(c.ex.replace(/^"|"$/g, '').replace(/[“”"]/g, ''), '#2563EB', '#E8F0FE', 28)}<span>${esc(c.ex)}</span></div>
+    ${c.av ? `<div class="avoid">${svg('x', '#DC2626', 18, 2.5)}<div><b>Avoid:</b> ${esc(c.av)}</div></div>` : ''}
+  </div>`;
+}
+function renderCorp() {
+  $('#cType').innerHTML = segHTML([['all', 'All'], ['abbr', 'Abbreviations'], ['term', 'Terms'], ['expr', 'Expressions']], CF.type, 'ct');
+  $('#cCats').innerHTML = `<button data-cc="all" class="${CF.cat === 'all' ? 'on' : ''}">All (${CORP.length})</button>` + Object.entries(CATS).map(([k, C]) => `<button data-cc="${k}" class="${CF.cat === k ? 'on' : ''}">${svg(C.i, CF.cat === k ? '#fff' : '#5B6475', 15, 2)}${C.n} (${CORP.filter(c => c.cat === k).length})</button>`).join('');
+  const q = norm(CF.q.trim());
+  const list = CORP.filter(c => (CF.cat === 'all' || c.cat === CF.cat) && (CF.type === 'all' || c.type === CF.type) &&
+    (!q || [c.p, c.d, c.v, c.k, c.ex, c.ctx].some(x => norm(x).includes(q))));
+  $('#cGrid').innerHTML = list.map(corpCard).join('');
+  $('#cCount').textContent = `${list.length} items`;
+  $('#cEmpty').style.display = list.length ? 'none' : 'block';
+}
+$('#cType').onclick = e => { const b = e.target.closest('[data-ct]'); if (b) { CF.type = b.dataset.ct; renderCorp(); } };
+$('#cCats').onclick = e => { const b = e.target.closest('[data-cc]'); if (b) { CF.cat = b.dataset.cc; renderCorp(); } };
+let cqT; $('#cq').oninput = e => { clearTimeout(cqT); cqT = setTimeout(() => { CF.q = e.target.value; renderCorp(); }, 120); };
+$('#cPractice').onclick = () => { $('#qzSource').value = 'corp'; QZ = null; };
 
 /* ---------- flashcards ---------- */
 function fillLR(lvSel, rlSel) {
@@ -704,7 +785,14 @@ function makeQuestion(w, pool) {
   const opts = shuffle([w, ...dis]);
   return { w, type, opts };
 }
+function makeCorpQuestion(c) {
+  const same = shuffle(CORP.filter(x => x.id !== c.id && x.cat === c.cat)), other = shuffle(CORP.filter(x => x.id !== c.id && x.cat !== c.cat));
+  const dis = [...same, ...other].filter((x, i, a) => a.findIndex(y => y.d === x.d) === i && x.d !== c.d).slice(0, 3);
+  const type = ['cmeaning', 'cwhich', 'csituation'][Math.floor(Math.random() * 3)];
+  return { w: c, corp: true, type, opts: shuffle([c, ...dis]) };
+}
 function startQuiz() {
+  if ($('#qzSource').value === 'corp') { QZ = { qs: shuffle(CORP).slice(0, 10).map(makeCorpQuestion), i: 0, score: 0, wrong: [] }; renderQ(); return; }
   let pool = filterPool($('#qzLevel').value, $('#qzRole').value, 'all');
   if (pool.length < 8) pool = WORDS;
   const learning = shuffle(pool.filter(w => S.learning[w.id])).slice(0, 3);
@@ -717,19 +805,22 @@ function renderQ() {
   if (!q) {
     S.quizzes++; S.best = Math.max(S.best, QZ.score); practised(0);
     $('#quizArea').innerHTML = `<div class="card qcard" style="text-align:center"><div class="eyebrow">Quiz complete</div><div class="result-big" style="margin:14px 0">${QZ.score}/10</div><p style="color:var(--muted)">${QZ.score >= 8 ? 'Excellent work!' : QZ.score >= 5 ? 'Good job. Review the words below.' : 'Keep practising, you will get there.'}</p>
-      ${QZ.wrong.length ? `<div style="text-align:left;margin-top:18px"><b>Words to review</b><ul class="review">${QZ.wrong.map(w => `<li><a href="#" data-open="${w.id}" style="font-weight:700">${esc(w.t)}</a> <span class="ipa">${esc(w.i)}</span> · ${esc(w.v)}</li>`).join('')}</ul></div>` : ''}
+      ${QZ.wrong.length ? `<div style="text-align:left;margin-top:18px"><b>Words to review</b><ul class="review">${QZ.wrong.map(w => w.p ? `<li><b>${esc(w.p)}</b> · ${esc(w.d)}</li>` : `<li><a href="#" data-open="${w.id}" style="font-weight:700">${esc(w.t)}</a> <span class="ipa">${esc(w.i)}</span> · ${esc(w.v)}</li>`).join('')}</ul></div>` : ''}
       <div class="fc-actions"><button class="btn primary" id="qzAgain">New quiz</button><a class="btn secondary" href="#flashcards">Practise with flashcards</a></div></div>`;
     $('#qzAgain').onclick = startQuiz; return;
   }
-  const w = q.w; const L = LEVELS[w.l];
+  const w = q.w; const L = q.corp ? { c: '#2563EB', t: '#E8F0FE', name: CATS[w.cat].n } : LEVELS[w.l];
   let prompt = '', optText;
-  if (q.type === 'meaning') { prompt = `What does <b style="color:${L.c}">${esc(w.t)}</b> mean? ${spkBtn(w.t, L.c, L.t, 32)}`; optText = o => esc(o.v); }
+  if (q.type === 'cmeaning') { prompt = `What does <b style="color:#2563EB">“${esc(w.p)}”</b> mean? ${spkBtn(w.p, '#2563EB', '#E8F0FE', 32)}`; optText = o => esc(o.d); }
+  else if (q.type === 'cwhich') { prompt = `Which ${TYPES[w.type].toLowerCase()} means <b style="color:#2563EB">“${esc(w.d)}”</b>?`; optText = o => esc(o.p); }
+  else if (q.type === 'csituation') { prompt = `What would you say or write here?<br><span style="font-weight:600">${esc(w.ctx)}</span>`; optText = o => esc(o.p); }
+  else if (q.type === 'meaning') { prompt = `What does <b style="color:${L.c}">${esc(w.t)}</b> mean? ${spkBtn(w.t, L.c, L.t, 32)}`; optText = o => esc(o.v); }
   else if (q.type === 'term') { prompt = `Which word means <b style="color:${L.c}">“${esc(w.v)}”</b>?`; optText = o => esc(o.t); }
   else if (q.type === 'define') { prompt = `Which word matches this definition?<br><span style="font-weight:600">“${esc(w.d)}”</span>`; optText = o => esc(o.t); }
   else if (q.type === 'listen') { prompt = `Listen and choose the word you hear. ${spkBtn(w.t, '#fff', L.c, 44)} ${spkBtn(w.t, L.c, L.t, 44, true)}`; optText = o => esc(o.t); }
   else { prompt = `Choose the word that fits:<br><span style="font-weight:600">“${gapSentence(w)}”</span>`; optText = o => esc(o.t); }
   $('#quizArea').innerHTML = `<div class="card qcard">
-    <div class="qtop"><span class="count">Question ${QZ.i + 1} of 10 · Score ${QZ.score}</span>${levelPill(w)}</div>
+    <div class="qtop"><span class="count">Question ${QZ.i + 1} of 10 · Score ${QZ.score}</span>${q.corp ? `<span class="pill" style="background:#E8F0FE;color:#1D4ED8">${CATS[w.cat].n}</span>` : levelPill(w)}</div>
     <div class="progress"><i style="width:${QZ.i * 10}%"></i></div>
     <div class="qtext">${prompt}</div>
     <div class="opts">${q.opts.map(o => `<button class="opt" data-ans="${o.id}">${optText(o)}<span></span></button>`).join('')}</div>
@@ -738,7 +829,8 @@ function renderQ() {
   document.querySelectorAll('[data-ans]').forEach(b => b.onclick = () => {
     const ok = +b.dataset.ans === w.id;
     document.querySelectorAll('[data-ans]').forEach(x => { x.disabled = true; if (+x.dataset.ans === w.id) { x.classList.add('right'); x.lastChild.innerHTML = svg('check', '#16A34A', 20, 2.5); } });
-    if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); setKnown(w.id, false); } else { QZ.score++; practised(); }
+    if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); if (!q.corp) setKnown(w.id, false); else practised(0); } else { QZ.score++; practised(); }
+    if (q.corp) { $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <b>${esc(w.p)}</b>: ${esc(w.d)}<div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:8px;font-style:italic">${esc(w.ex)}</div></div><div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`; $('#qNext').onclick = () => { QZ.i++; renderQ(); }; $('#qNext').focus(); return; }
     $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <b>${esc(w.t)}</b> <span class="ipa">${esc(w.i)}</span> = ${esc(w.v)}<div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:6px;font-style:italic">${highlight(w, L.c)}</div></div>
       <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`;
     $('#qNext').onclick = () => { QZ.i++; renderQ(); };
@@ -746,6 +838,7 @@ function renderQ() {
   });
 }
 $('#qzStart').onclick = startQuiz;
+$('#qzSource').onchange = () => { const c = $('#qzSource').value === 'corp'; $('#qzLevel').style.display = $('#qzRole').style.display = c ? 'none' : ''; };
 
 /* ---------- progress ---------- */
 function renderProgress() {
@@ -775,7 +868,7 @@ function route() {
   const h = location.hash.slice(1) || 'home';
   if (h.startsWith('word-')) { if (!document.querySelector('.view.on')) show('browse'); openWord(h.slice(5), modalList.length ? undefined : browseIds); return; }
   $('#overlay').classList.remove('open');
-  show(['home', 'browse', 'flashcards', 'quiz', 'progress'].includes(h) ? h : 'home');
+  show(['home', 'browse', 'workplace', 'flashcards', 'quiz', 'progress'].includes(h) ? h : 'home');
 }
 function show(v) {
   currentView = lastView = v;
@@ -784,8 +877,9 @@ function show(v) {
   $('#links').classList.remove('open');
   if (v === 'home') renderHome();
   if (v === 'browse') renderBrowse();
+  if (v === 'workplace') renderCorp();
   if (v === 'flashcards' && !FC) startFC();
-  if (v === 'quiz' && !QZ) startQuiz();
+  if (v === 'quiz') { $('#qzSource').onchange(); if (!QZ) startQuiz(); }
   if (v === 'progress') renderProgress();
   window.scrollTo(0, 0);
 }
