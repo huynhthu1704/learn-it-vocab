@@ -102,7 +102,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 .spk:hover{filter:brightness(.95)}
 .mean{font-size:14px;font-weight:500}
 .mean b{font-weight:700}
-.ex{font-size:14px;font-style:italic;color:var(--ink);border-top:1px solid var(--line);padding-top:8px;margin-top:2px}
+.ex{font-size:14px;font-style:italic;color:var(--ink);border-top:1px solid var(--line);padding-top:10px;margin-top:2px;display:flex;gap:8px;align-items:flex-start}
+.ex .spk{margin-top:-2px}
 mark{background:none;font-weight:700}
 .badge-corner{position:absolute;top:10px;left:10px}
 .status-dot{position:absolute;top:12px;right:12px;display:flex;gap:6px}
@@ -487,7 +488,7 @@ function wordCard(w) {
       <div class="term">${esc(w.t)}</div>
       <div class="prow">${spkBtn(w.t, L.c, L.t)}<span class="ipa" style="font-size:14px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
       <div class="mean"><b>Nghĩa:</b> ${esc(w.v)}</div>
-      <div class="ex">${highlight(w, L.c)}</div>
+      <div class="ex">${spkBtn(w.e, L.c, L.t, 26)}<span>${highlight(w, L.c)}</span></div>
     </div></div>`;
 }
 
