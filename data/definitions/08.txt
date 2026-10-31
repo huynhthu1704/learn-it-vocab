@@ -1,0 +1,231 @@
+interest rate|The percentage charged for borrowing money or paid on savings.|금리, 이자율
+loan|Money borrowed that must be paid back.|대출
+ATM|A machine for taking out cash.|현금 인출기
+QR payment|Paying by scanning a QR code.|QR 결제
+e-wallet|An app that stores money for digital payments.|전자 지갑
+transaction history|A list of past payments and transfers.|거래 내역
+beneficiary|The person who receives money from a transfer.|수취인
+eKYC|Verifying a customer's identity online.|비대면 실명 확인
+product page|A page showing details about one product.|상품 상세 페이지
+product catalogue|The full list of products for sale.|상품 카탈로그
+add to cart|To put a product in the shopping cart.|장바구니에 담다
+promo code|A code that gives a discount.|프로모션 코드
+flash sale|A big discount for a very short time.|반짝 세일
+wishlist|A saved list of items a user wants.|위시리스트
+guest checkout|Buying without creating an account.|비회원 결제
+cash on delivery|Paying in cash when the goods arrive.|착불 결제
+COD|Short for cash on delivery.|착불 결제
+order tracking|Following where an order is.|주문 추적
+product review|A customer's opinion and rating of a product.|상품 리뷰
+out of stock|Not available to buy right now.|품절된
+shipping fee|The cost of delivering an order.|배송비
+patient|A person receiving medical care.|환자
+appointment booking|Reserving a time to see a doctor.|진료 예약
+check-in|Registering when you arrive.|접수
+doctor|A person trained to treat illness.|의사
+nurse|A person who cares for patients.|간호사
+clinic|A place where people get medical care.|의원, 클리닉
+prescription|A doctor's written order for medicine.|처방전
+pharmacy|A shop that sells medicine.|약국
+medical record|A record of a patient's health and treatment.|의료 기록
+lab test|A medical test on a sample like blood.|임상 검사
+health insurance card|A card proving a person has health insurance.|건강 보험증
+insurance policy|A contract that gives insurance protection.|보험 증권
+policyholder|The person who owns an insurance policy.|보험 계약자
+insurance agent|A person who sells insurance.|보험 설계사
+coverage|What an insurance policy pays for.|보장 범위
+quote|An estimated price.|견적
+renewal|Extending a contract for another period.|갱신
+motor insurance|Insurance for cars and motorbikes.|자동차 보험
+life insurance|Insurance that pays money when the insured person dies.|생명 보험
+claim form|A form used to ask an insurer for payment.|보험금 청구서
+shipment|Goods sent together.|화물, 출하
+tracking number|A code used to follow a parcel.|운송장 번호
+delivery address|The address where goods are delivered.|배송지 주소
+driver|A person who drives a vehicle.|운전기사
+parcel|A wrapped package sent by post.|소포
+pick-up|Collecting goods from a place.|픽업, 집하
+delivery time|How long delivery takes.|배송 기간
+failed delivery|When goods could not be delivered.|배송 실패
+proof of delivery|Evidence that goods were delivered.|배송 완료 증빙
+learner|A person who is learning.|학습자
+teacher|A person who teaches.|교사
+enrolment|Signing up for a course.|등록
+online course|A course taken on the internet.|온라인 강좌
+lesson|A period of learning.|수업, 레슨
+certificate|An official document showing you completed something.|수료증
+parent account|An account parents use to follow a child's learning.|학부모 계정
+attendance tracking|Recording who attends classes.|출석 관리
+mobile plan|A package of calls, texts and data for a phone.|휴대폰 요금제
+data package|An amount of mobile internet data you buy.|데이터 요금제
+SIM card|A small card that connects a phone to a mobile network.|유심 카드
+eSIM|A digital SIM built into a phone.|이심(eSIM)
+top-up|Adding money to a prepaid phone or account.|충전
+subscriber|A person who pays for a service.|가입자
+phone bill|A bill for phone service.|휴대폰 요금 고지서
+coverage area|The area where a mobile network works.|서비스 지역
+roaming|Using your phone service in another country.|로밍
+job posting|A public advertisement for a job.|채용 공고
+candidate|A person applying for a job.|지원자
+job offer letter|A letter offering someone a job.|채용 제안서
+employment contract|A legal agreement between employer and employee.|근로 계약서
+salary|Regular pay for work.|급여
+payslip|A document showing pay and deductions.|급여 명세서
+annual leave|Paid days off each year.|연차 휴가
+leave request|A request for time off work.|휴가 신청
+timesheet|A record of hours worked.|근무 시간 기록표
+credit scoring|Rating how likely a person is to repay a loan.|신용 평가
+loan origination|The process of creating a new loan.|대출 실행 절차
+disbursement|Paying out loan money.|대출금 지급
+repayment schedule|A plan of loan payment dates and amounts.|상환 일정
+overdraft|Spending more than the money in your account.|당좌 대월
+transaction limit|The maximum amount allowed in a transaction.|거래 한도
+two-factor authentication|Logging in with two kinds of proof, like a password and code.|2단계 인증
+card dispute|A customer challenging a card payment.|카드 거래 이의 제기
+chargeback|Reversing a card payment after a dispute.|지불 거절, 차지백
+interbank transfer|Moving money between different banks.|타행 이체
+NAPAS|Vietnam's national payment network.|베트남 국가 결제망
+fraud detection|Finding dishonest or illegal transactions.|사기 탐지
+merchant|A business that accepts payments.|가맹점
+statement|A record of account activity over a period.|거래 내역서
+order fulfilment|Preparing and delivering an order.|주문 처리
+marketplace|A platform where many sellers sell to buyers.|오픈마켓
+seller center|A portal where sellers manage their shop.|판매자 센터
+cart abandonment|Leaving items in the cart without buying.|장바구니 이탈
+product variant|One version of a product, like a size or colour.|상품 옵션
+bundle deal|A discount for buying items together.|묶음 할인
+free shipping threshold|The order value above which shipping is free.|무료 배송 기준 금액
+return policy|The rules for returning products.|반품 정책
+return request|A customer asking to return a product.|반품 요청
+average order value|The average amount spent per order.|평균 주문 금액
+upsell|To encourage buying a better, more expensive item.|상향 판매하다
+cross-sell|To encourage buying related items.|교차 판매하다
+EHR|Electronic health record.|전자 건강 기록
+electronic health record|A digital record of a patient's health.|전자 건강 기록
+triage|Sorting patients by how urgent their condition is.|환자 분류
+outpatient|A patient who visits without staying overnight.|외래 환자
+inpatient|A patient who stays in hospital.|입원 환자
+diagnosis|Identifying an illness.|진단
+referral|Sending a patient to another doctor or specialist.|의뢰, 전원
+waiting time|How long someone waits.|대기 시간
+patient consent|A patient's permission for treatment or data use.|환자 동의
+telemedicine|Medical care through video or phone.|원격 진료
+premium|The money paid for insurance.|보험료
+deductible|The amount you pay before insurance pays.|자기 부담금
+claim|A request to an insurer for payment.|보험금 청구
+claims handler|A person who processes insurance claims.|보상 담당자
+policy term|How long an insurance policy lasts.|보험 기간
+exclusion|Something an insurance policy does not cover.|면책 사항
+beneficiary of a policy|The person who receives the insurance payout.|보험 수익자
+broker|A person who arranges deals for clients.|중개인
+grace period|Extra time allowed to pay without penalty.|유예 기간
+warehouse management system|Software that controls warehouse operations.|창고 관리 시스템
+WMS|Short for warehouse management system.|창고 관리 시스템
+inbound|Goods coming into a warehouse.|입고
+outbound|Goods leaving a warehouse.|출고
+put-away|Moving received goods to their storage place.|적치
+pick list|A list of items to collect for orders.|피킹 리스트
+packing|Putting goods into boxes for shipping.|포장
+dispatch|To send goods or vehicles out.|발송하다
+last-mile delivery|The final step of delivery to the customer.|라스트마일 배송
+route planning|Choosing the best routes for deliveries.|경로 계획
+carrier|A company that transports goods.|운송업체
+LMS|Learning management system.|학습 관리 시스템
+learning management system|Software for running online courses.|학습 관리 시스템
+gradebook|A record of students' grades.|성적부
+assessment|A test of knowledge or skill.|평가
+course completion rate|The percentage of learners who finish a course.|강좌 이수율
+live class|A real-time online class.|실시간 수업
+self-paced|Done at your own speed.|자기 주도형의
+prepaid|Paid for in advance.|선불의
+postpaid|Paid for after use.|후불의
+SIM activation|Turning on a new SIM card.|유심 개통
+subscriber registration|Recording a subscriber's identity.|가입자 등록
+billing cycle|The period covered by one bill.|청구 주기
+data usage|How much mobile data has been used.|데이터 사용량
+number portability|Keeping your phone number when changing provider.|번호 이동
+add-on|An extra package added to a plan.|부가 서비스
+recruitment|The process of hiring people.|채용
+applicant tracking system|Software that manages job applications.|지원자 관리 시스템
+probation period|A trial period for a new employee.|수습 기간
+social insurance|Government insurance for illness, pensions and more.|사회 보험
+personal income tax|Tax on a person's income.|개인 소득세
+gross salary|Salary before tax and deductions.|세전 급여
+net salary|Salary after tax and deductions.|실수령 급여
+overtime pay|Extra pay for working overtime.|초과 근무 수당
+leave balance|The number of leave days left.|잔여 휴가 일수
+headcount plan|A plan for how many people to hire.|인력 계획
+KYC|Know your customer: checking a customer's identity.|고객 확인 제도
+AML|Anti-money laundering.|자금 세탁 방지
+anti-money laundering|Rules and checks to stop criminals hiding illegal money.|자금 세탁 방지
+PCI DSS|Security rules for handling card data.|카드 데이터 보안 표준
+core banking|The central system that runs a bank's accounts.|코어 뱅킹
+ledger|A record of all financial transactions.|원장
+settlement|The final transfer of money to complete a payment.|정산, 결제 완료
+reconciliation report|A report comparing records to find differences.|대사 보고서
+open banking|Sharing bank data with other apps through APIs, with consent.|오픈 뱅킹
+credit limit|The maximum amount you can borrow on a card.|신용 한도
+non-performing loan|A loan that is not being repaid.|부실 채권
+risk scoring|Giving a number that shows level of risk.|위험 점수화
+sanctions screening|Checking customers against government sanctions lists.|제재 대상 심사
+tokenization|Replacing sensitive data like card numbers with a token.|토큰화
+GMV|Gross merchandise value.|총 거래액
+gross merchandise value|The total value of goods sold on a platform.|총 거래액
+omnichannel retail|Selling through connected online and offline channels.|옴니채널 소매
+dynamic pricing|Changing prices based on demand.|동적 가격 책정
+recommendation engine|A system that suggests products to users.|추천 엔진
+dropshipping|Selling products that a supplier ships directly to customers.|드롭쉬핑
+click and collect|Buying online and picking up in a store.|온라인 주문 매장 픽업
+reverse logistics|Moving returned goods back from customers.|역물류
+ICD code|A standard code for a disease or diagnosis.|ICD 질병 분류 코드
+HL7|A standard for exchanging health data.|HL7 표준
+FHIR|A modern standard for exchanging health data through APIs.|FHIR 표준
+interoperability standard|A standard that lets systems exchange data.|상호 운용성 표준
+clinical workflow|The steps in caring for a patient.|진료 업무 흐름
+medical billing|Charging for medical services.|의료비 청구
+protected health information|Health data that must be kept private by law.|보호 대상 건강 정보
+HIPAA|A US law that protects health information.|미국 건강 보험 정보 보호법
+audit log access|Seeing who viewed or changed records.|감사 로그 열람
+underwriting|Assessing risk to decide whether to insure and at what price.|보험 심사
+underwriter|A person who assesses insurance risk.|보험 심사역
+actuary|An expert who calculates insurance risk and prices.|보험 계리사
+loss ratio|Claims paid divided by premiums earned.|손해율
+claims fraud|Making false insurance claims.|보험 사기
+reinsurance|Insurance bought by insurance companies.|재보험
+rider|An optional extra added to an insurance policy.|특약
+surrender value|The money you get if you cancel a policy early.|해지 환급금
+bancassurance|Selling insurance through banks.|방카슈랑스
+insurtech|Technology used in insurance.|인슈어테크
+transport management system|Software for planning and tracking shipments.|운송 관리 시스템
+cross-docking|Moving goods from incoming to outgoing trucks without storing them.|크로스도킹
+fulfilment center|A warehouse that processes online orders.|풀필먼트 센터
+SLA compliance|Meeting the agreed service levels.|SLA 준수
+customs clearance|Getting goods approved to enter or leave a country.|통관
+bill of lading|A document listing goods being shipped.|선하증권
+freight forwarder|A company that arranges shipping for others.|운송 주선업체
+cold chain|Keeping goods cold throughout delivery.|콜드 체인
+demand forecasting|Predicting how much customers will buy.|수요 예측
+safety stock|Extra stock kept in case of high demand.|안전 재고
+learning analytics|Using data to understand and improve learning.|학습 분석
+adaptive learning|Learning that adjusts to each learner.|적응형 학습
+SCORM|A standard format for e-learning content.|SCORM 표준
+learning path|A planned sequence of courses.|학습 경로
+proctoring|Supervising exams to prevent cheating.|시험 감독
+microlearning|Learning in very short lessons.|마이크로러닝
+gamification|Adding game features like points to non-game activities.|게이미피케이션
+ARPU|Average revenue per user.|가입자당 평균 매출
+average revenue per user|Total revenue divided by number of users.|가입자당 평균 매출
+churn prediction|Predicting which customers will leave.|이탈 예측
+OSS/BSS|Systems that run a telecom's network and business operations.|운영/비즈니스 지원 시스템
+network operations center|A place where engineers monitor a network.|네트워크 운영 센터
+rating engine|Software that calculates the charge for each use.|과금 엔진
+interconnect billing|Charging between telecom operators for connected calls.|상호 접속 정산
+talent acquisition|Finding and hiring skilled people.|인재 확보
+employer branding|A company's reputation as a place to work.|고용주 브랜딩
+compensation and benefits|Pay and extra benefits for employees.|보상 및 복리후생
+payroll run|Processing salaries for a pay period.|급여 처리
+labour law compliance|Following employment laws.|노동법 준수
+attrition rate|The rate at which employees leave.|이직률
+employee self-service|A portal where employees manage their own HR tasks.|직원 셀프 서비스
+360-degree feedback|Feedback from managers, peers and team members.|다면 평가
+succession planning|Preparing people to fill key roles in future.|승계 계획

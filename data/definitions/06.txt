@@ -1,0 +1,300 @@
+chaos engineering|Deliberately breaking parts of a system to test how it copes.|카오스 엔지니어링
+fault injection|Adding errors on purpose to test how a system reacts.|결함 주입
+resilience testing|Testing how well a system recovers from failures.|복원력 테스트
+soak testing|Running a system under load for a long time.|내구성 테스트
+spike testing|Testing sudden large increases in load.|스파이크 테스트
+scalability testing|Testing how a system performs as load grows.|확장성 테스트
+percentile|A value below which a given percentage of results fall.|백분위수
+performance baseline|Normal performance results used for comparison.|성능 기준선
+capacity testing|Testing the maximum load a system can handle.|용량 테스트
+threat modeling|Identifying possible security threats in a design.|위협 모델링
+OWASP Top 10|A list of the ten most critical web security risks.|OWASP 10대 취약점
+vulnerability scan|An automated check for known security weaknesses.|취약점 스캔
+penetration testing|Simulated attacks to find security weaknesses.|모의 침투 테스트
+privilege escalation|Gaining more access rights than allowed.|권한 상승
+data masking|Hiding real sensitive data with fake values.|데이터 마스킹
+synthetic data|Artificially created data that looks real.|합성 데이터
+test data management|Creating, storing and controlling test data.|테스트 데이터 관리
+data integrity|Data being accurate and unchanged by mistakes.|데이터 무결성
+migration testing|Testing that data moved correctly to a new system.|마이그레이션 테스트
+reconciliation|Comparing two sets of records to make sure they match.|대사, 조정
+ETL testing|Testing extract, transform and load processes.|ETL 테스트
+risk assessment|Judging how likely and how serious risks are.|위험 평가
+risk matrix|A grid comparing likelihood and impact of risks.|위험 매트릭스
+likelihood|How probable something is.|가능성
+test maturity|How advanced and effective a team's testing is.|테스트 성숙도
+process improvement|Making a process work better.|프로세스 개선
+quality metrics|Measures used to track quality.|품질 지표
+mean time to detect|The average time to discover a problem.|평균 탐지 시간
+mean time to recovery|The average time to restore service after a failure.|평균 복구 시간
+defect removal efficiency|The percentage of defects found before release.|결함 제거 효율
+defect trend|How the number of defects changes over time.|결함 추세
+defect clustering|Most defects being found in a few modules.|결함 집중
+pesticide paradox|Repeating the same tests stops finding new bugs.|살충제 패러독스
+exhaustive testing|Testing every possible input; usually impossible.|완전 테스트
+combinatorial testing|Testing combinations of inputs efficiently.|조합 테스트
+pairwise testing|Testing every pair of input values at least once.|페어와이즈 테스트
+branch coverage|The percentage of code branches executed by tests.|분기 커버리지
+statement coverage|The percentage of code statements executed by tests.|구문 커버리지
+shift-right testing|Testing and monitoring after release in production.|시프트 라이트 테스트
+testing in production|Checking features with real users and data in production.|운영 환경 테스트
+synthetic monitoring|Automated scripts that act like users to check a service.|합성 모니터링
+canary testing|Testing a new version on a small group of real users.|카나리 테스트
+release readiness|Whether a release is ready to go live.|출시 준비 상태
+go-live checklist|A list of tasks to finish before going live.|운영 개시 체크리스트
+production readiness|Whether a system is ready for real users.|운영 준비 상태
+risk-based prioritization|Ordering work by level of risk.|위험 기반 우선순위
+test optimization|Making a test suite faster and more useful.|테스트 최적화
+test maintenance|Updating tests when the product changes.|테스트 유지 보수
+flaky test|A test that passes and fails without code changes.|불안정한 테스트
+quarantine|To separate something so it doesn't affect others.|격리하다
+self-healing tests|Automated tests that fix their own locators.|자가 치유 테스트
+AI-assisted testing|Using AI to help design or run tests.|AI 지원 테스트
+test generation|Creating test cases automatically.|테스트 생성
+model-based testing|Generating tests from a model of system behaviour.|모델 기반 테스트
+continuous testing|Running tests automatically throughout development.|지속적 테스트
+DevOps|A culture joining development and operations to release faster.|데브옵스
+DevSecOps|DevOps with security built into every step.|데브섹옵스
+infrastructure testing|Testing servers, networks and configuration.|인프라 테스트
+containerized tests|Tests that run inside containers.|컨테이너화된 테스트
+test parallelization|Splitting tests to run at the same time.|테스트 병렬화
+test sharding|Dividing a test suite into parts that run separately.|테스트 샤딩
+test reporting|Presenting test results clearly.|테스트 보고
+traceability|The ability to link items across stages.|추적성
+regulatory compliance|Following laws and regulations.|규제 준수
+verification|Checking that the product was built correctly.|검증
+V-model|A model linking each development phase to a test level.|V 모델
+test level|A stage of testing, such as unit or system testing.|테스트 레벨
+test type|A kind of testing, such as security or performance.|테스트 유형
+independent testing|Testing by people who did not build the software.|독립 테스트
+test policy|A company document describing its testing principles.|테스트 정책
+test charter|A short mission statement for an exploratory test session.|테스트 차터
+session-based testing|Exploratory testing in timed, focused sessions.|세션 기반 테스트
+critical thinking|Analysing information carefully before judging.|비판적 사고
+domain expertise|Deep knowledge of a business area.|도메인 전문성
+business impact|The effect on the business.|비즈니스 영향
+customer-facing|Seen or used directly by customers.|고객 대면의
+escalation path|The steps for raising a problem to higher levels.|에스컬레이션 경로
+quality advocate|A person who promotes quality in a team.|품질 옹호자
+QA manager|The manager of the quality assurance team.|QA 매니저
+SDET|Software development engineer in test: a developer who builds tests.|테스트 개발 엔지니어
+test architect|An expert who designs test strategy and tools.|테스트 아키텍트
+coach|To train and guide someone.|코칭하다
+upskill|To learn new skills.|역량을 강화하다
+tool evaluation|Comparing tools to choose the best one.|도구 평가
+return on investment|What you gain compared with what you spend.|투자 수익률
+cost of quality|The cost of preventing, finding and fixing defects.|품질 비용
+stakeholder communication|Keeping stakeholders informed.|이해관계자 커뮤니케이션
+quality narrative|A clear story about product quality, beyond numbers.|품질 현황 설명
+sign-off criteria|Conditions needed before approval is given.|승인 기준
+residual risk|Risk that remains after actions are taken.|잔여 위험
+known limitation|A known weakness that users should be aware of.|알려진 제한 사항
+severity matrix|A table that defines levels of severity.|심각도 매트릭스
+service level|The agreed quality of a service.|서비스 수준
+SLA breach|Failing to meet a service level agreement.|SLA 위반
+post-release validation|Checking a release after it goes live.|출시 후 검증
+hypercare|A period of extra support right after go-live.|하이퍼케어(집중 지원 기간)
+customer escalation|A serious complaint raised by a customer to higher levels.|고객 에스컬레이션
+war room|A room or call where people solve an urgent problem together.|비상 대책실
+outage|A period when a service is not working.|서비스 중단
+blast radius|How many users or systems a failure affects.|영향 범위
+username field|The box where you type your username.|사용자 이름 입력란
+home page|The main page of a website.|홈페이지
+learning platform|An online system for courses and learning.|학습 플랫폼
+timetable|A schedule of classes.|시간표
+classroom|A room where classes are taught.|교실
+projector|A machine that shows images on a wall or screen.|프로젝터
+whiteboard marker|A pen for writing on a whiteboard.|화이트보드 마커
+group chat|A conversation with several people in a messaging app.|단체 채팅
+due date|The date by which something must be done.|마감일
+late submission|Handing in work after the deadline.|지각 제출
+draft version|An unfinished version.|초안 버전
+final version|The finished version.|최종 버전
+word count|The number of words in a text.|단어 수
+font size|How big the letters are.|글자 크기
+page number|The number on each page.|쪽 번호
+cover page|The first page with the title and author.|표지
+table of contents|A list of sections and their page numbers.|목차
+heading|A title at the top of a section.|제목
+paragraph|A group of sentences about one idea.|단락
+bullet point|A short item in a list marked with a dot.|글머리 기호
+keyboard shortcut|A key combination that does an action quickly.|키보드 단축키
+USB drive|A small portable storage device.|USB 드라이브
+charger|A device for charging a battery.|충전기
+battery|A part that stores power for a device.|배터리
+headset|Headphones with a microphone.|헤드셋
+webcam|A camera on or attached to a computer.|웹캠
+mute|To turn off your microphone's sound.|음소거하다
+unmute|To turn your microphone's sound back on.|음소거를 해제하다
+raise your hand|To use the hand button in an online meeting to ask to speak.|손을 들다
+breakout room|A smaller separate room in an online meeting.|소회의실
+recording|A saved copy of audio or video.|녹화본
+calculator|A device or app for doing maths.|계산기
+equation|A maths statement that two things are equal.|방정식
+fraction|A part of a whole, like 1/2.|분수
+decimal|A number with a decimal point, like 2.5.|소수
+sum|The result of adding numbers.|합계
+total|The full amount.|총계
+hello world|A first simple program that prints "Hello, world".|헬로 월드
+print|To show output on the screen in code.|출력하다
+statement|One instruction in code.|문장, 명령문
+semicolon|The ; symbol.|세미콜론
+bracket|A symbol like ( ), [ ] or { }.|괄호
+indentation|Spaces at the start of a line of code.|들여쓰기
+line of code|One line of a program.|코드 한 줄
+file name|The name of a file.|파일 이름
+extension|The letters after the dot in a file name, like .pdf.|확장자
+folder structure|How folders are organised in a project.|폴더 구조
+project setup|Preparing a project so you can start working.|프로젝트 설정
+dark mode|A display with light text on a dark background.|다크 모드
+plugin|An add-on that gives a program extra features.|플러그인
+extension pack|A bundle of several editor extensions.|확장 팩
+autocomplete|A feature that finishes what you type.|자동 완성
+search and replace|Finding text and changing it to other text.|찾아 바꾸기
+snippet|A small piece of code.|코드 조각
+sample|A small example of something.|샘플
+default|The value used when no other is chosen.|기본값
+optional|Not required.|선택적인
+required|Must be provided.|필수의
+true|The boolean value meaning yes.|참
+false|The boolean value meaning no.|거짓
+empty string|Text with no characters.|빈 문자열
+undefined|Not yet given a value.|정의되지 않은
+quick question|A short question that needs a fast answer.|간단한 질문
+heads-up|An early warning or notice.|미리 알림
+ETA|Estimated time of arrival or completion.|예상 완료 시간
+ASAP|As soon as possible.|가능한 한 빨리
+FYI|For your information.|참고로
+lunch break|Time off for lunch during the workday.|점심시간
+day off|A day when you don't work.|휴일
+sick leave|Time off work because you are ill.|병가
+work from home|To do your job from home.|재택근무하다
+office chat|A messaging app used at work, like Slack or Teams.|사내 메신저
+team lead|The person who leads a team.|팀장
+colleague|A person you work with.|동료
+test step result|The result of one step in a test case.|테스트 단계 결과
+test title|The name of a test case.|테스트 제목
+bug title|A short summary that names a bug.|버그 제목
+summary line|One short line that summarises something.|요약 줄
+environment details|Information about the device, browser and version used.|환경 정보
+operating system version|The version number of an operating system.|운영 체제 버전
+app crash|When an app suddenly closes.|앱 충돌
+blank page|A page with nothing shown.|빈 페이지
+infinite loading|Loading that never finishes.|무한 로딩
+spinner|A spinning icon that shows something is loading.|로딩 스피너
+wrong message|A message that shows incorrect text.|잘못된 메시지
+placeholder text|Light example text inside an empty input box.|자리 표시 텍스트
+label|Text that names a field or button.|라벨
+tooltip|A small text box that appears when you hover over something.|툴팁
+image upload|Sending a picture to a system.|이미지 업로드
+file size limit|The largest file size allowed.|파일 크기 제한
+character limit|The most characters allowed in a field.|글자 수 제한
+leading space|A space at the start of text.|앞 공백
+case sensitive|Treating capital and small letters as different.|대소문자를 구분하는
+copy and paste|To copy something and put it somewhere else.|복사하여 붙여넣기
+back button|A button that returns to the previous screen.|뒤로 가기 버튼
+browser back|The browser's button for the previous page.|브라우저 뒤로 가기
+new tab|An additional page inside the browser window.|새 탭
+zoom in|To make things on the screen look bigger.|확대하다
+font issue|A problem with how letters are displayed.|글꼴 문제
+encoding|The system used to store text characters.|인코딩
+time format|How time is written, like 14:00 or 2 p.m.|시간 형식
+currency|The money used in a country.|통화
+rounding|Changing a number to a simpler nearby number.|반올림
+calculation error|A mistake in a calculation.|계산 오류
+order history|A list of past orders.|주문 내역
+confirmation email|An email confirming an action, like an order.|확인 이메일
+OTP|One-time password: a code that works only once.|일회용 비밀번호
+captcha|A test that checks you are a human, not a robot.|캡차
+dark theme|A dark colour design for an app.|다크 테마
+test idea|A thought about something to test.|테스트 아이디어
+retest result|The result of testing a fix again.|재테스트 결과
+customer need|What a customer wants or must have.|고객 요구
+business owner|A person who owns a business.|사업주
+shop owner|A person who owns a shop.|가게 주인
+cashier|A person who takes payments in a shop.|계산원
+POS|Point of sale: the system used to take payments in a shop.|판매 시점 관리 시스템
+receipt|A paper or message proving you paid.|영수증
+membership|Being a member of a group or program.|회원 자격
+point|A unit customers collect as a reward.|포인트
+booking|An arrangement to reserve something.|예약
+appointment|An arranged time to meet someone.|약속, 예약
+reminder|A message that helps you remember.|알림, 리마인더
+cancel|To stop something that was planned.|취소하다
+confirm order|To agree that an order is correct and will go ahead.|주문을 확인하다
+stock|Goods available to sell.|재고
+supplier|A company that provides goods.|공급업체
+purchase order|An official document to order goods from a supplier.|구매 주문서
+approval step|A step where someone must approve.|승인 단계
+paper form|A form filled in on paper.|종이 양식
+handwritten|Written by hand.|손으로 쓴
+phone call|A conversation by phone.|전화 통화
+Zalo|A popular Vietnamese messaging app.|잘로(베트남 메신저)
+Facebook page|A business page on Facebook.|페이스북 페이지
+landing page|A web page made for a specific campaign.|랜딩 페이지
+contact form|A form for sending a message to a company.|문의 양식
+FAQ|Frequently asked questions.|자주 묻는 질문
+terms and conditions|The rules users must accept to use a service.|이용 약관
+privacy policy|A document explaining how personal data is used.|개인정보 처리방침
+meeting room|A room used for meetings.|회의실
+whiteboard session|A meeting where people draw ideas on a whiteboard.|화이트보드 회의
+sticky note|A small paper note that sticks to surfaces.|포스트잇
+first draft|The first version of a document.|초안
+comment thread|A chain of comments and replies.|댓글 스레드
+reply|To answer a message.|답장하다
+reply all|To answer everyone on an email.|전체 답장하다
+CC|To send a copy of an email to someone.|참조로 보내다
+out of office|Away from work.|부재중
+time zone difference|The difference in time between two places.|시차
+lab assignment|A practical task done in a lab.|실습 과제
+course outline|A summary of what a course covers.|강의 개요
+learning outcome|What learners should be able to do after a course.|학습 성과
+rubric|A guide that explains how work will be graded.|채점 기준표
+grading criteria|The standards used to grade work.|채점 기준
+weighting|How much each part counts towards the total.|가중치
+group contract|An agreement on how a group will work together.|조별 협약
+peer assessment|Students grading each other's work.|동료 평가
+free rider|A person who benefits without doing their share.|무임승차자
+meeting log|A record of group meetings.|회의 기록
+task allocation|Giving tasks to people.|업무 분담
+work log|A record of work done.|작업 일지
+user manual|A guide to using a product.|사용 설명서
+installation guide|Instructions for installing software.|설치 안내서
+system requirements|The hardware and software needed to run a program.|시스템 요구 사항
+test plan document|A formal document describing a test plan.|테스트 계획서
+screenshot evidence|Screenshots used to prove something happened.|스크린샷 증거
+source code submission|Handing in your program's code.|소스 코드 제출
+zip file|A compressed file containing other files.|압축 파일
+plagiarism checker|A tool that finds copied text.|표절 검사기
+reference list|A list of sources at the end of a document.|참고 문헌 목록
+in-text citation|A short source note inside the text.|본문 내 인용
+quotation|Exact words copied from a source.|인용문
+key point|An important idea.|요점
+evidence|Facts that show something is true.|증거
+comparison|Looking at how things are similar or different.|비교
+advantage|A good point or benefit.|장점
+disadvantage|A bad point or drawback.|단점
+pros and cons|Advantages and disadvantages.|장단점
+case study|A detailed study of one real example.|사례 연구
+guest speaker|A visitor invited to give a talk.|초청 연사
+field trip|A visit to a place to learn.|현장 학습
+career fair|An event where employers meet job seekers.|취업 박람회
+alumni|Former students of a school.|동문
+code review comment|A comment left on code during review.|코드 리뷰 코멘트
+suggestion|An idea offered for consideration.|제안
+LGTM|"Looks good to me": approval in code review.|좋아 보입니다(승인)
+WIP commit|A commit of unfinished work.|작업 중 커밋
+squash|To combine several commits into one.|커밋을 합치다
+force push|To overwrite the remote branch with your version.|강제 푸시하다
+upstream|The original repository or branch you track.|업스트림
+fork|To make your own copy of someone else's repository.|포크하다
+gitignore|A file listing files Git should ignore.|gitignore 파일
+dev environment|The setup developers use to write and run code.|개발 환경
+hot reload|Updating a running app instantly when code changes.|핫 리로드
+build tool|A tool that prepares code for release.|빌드 도구
+bundle|One combined file of code for the browser.|번들
+minify|To make code smaller by removing spaces and comments.|압축하다(minify)
+polyfill|Code that adds a missing feature to older browsers.|폴리필
+browser support|Which browsers a site works in.|브라우저 지원
+media query|A CSS rule that applies styles based on screen size.|미디어 쿼리
+flexbox|A CSS layout method for arranging items in a row or column.|플렉스박스

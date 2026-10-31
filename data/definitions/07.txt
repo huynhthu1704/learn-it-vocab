@@ -1,0 +1,241 @@
+grid layout|A CSS layout that places items in rows and columns.|그리드 레이아웃
+design token|A named value for a design choice, like a colour or spacing.|디자인 토큰
+style guide|Rules for how a product looks and how text is written.|스타일 가이드
+form validation|Checking form inputs before they are sent.|폼 유효성 검사
+input sanitization|Cleaning user input to remove harmful content.|입력값 정제
+rate limiting|Limiting how many requests a user can send.|요청 제한
+file upload|Sending a file to a server.|파일 업로드
+image compression|Making image files smaller.|이미지 압축
+time zone handling|Showing and storing times correctly for different time zones.|시간대 처리
+date library|A library that helps work with dates and times.|날짜 라이브러리
+localization|Adapting a product for a language and region.|현지화
+translation key|An ID used to look up translated text.|번역 키
+error page|A page shown when something goes wrong.|오류 페이지
+empty state|What a screen shows when there is no data yet.|빈 상태 화면
+loading state|What a screen shows while data loads.|로딩 상태
+skeleton screen|A grey outline of a page shown while it loads.|스켈레톤 화면
+toast message|A small message that appears briefly and disappears.|토스트 메시지
+modal|A window that appears on top of the page and blocks it until closed.|모달 창
+test coverage report|A report showing how much is covered by tests.|테스트 커버리지 보고서
+risk area|A part of the product where problems are more likely.|위험 영역
+user flow|The path a user takes through screens.|사용자 흐름
+error state|How a screen looks when something goes wrong.|오류 상태
+boundary|The edge or limit of a range.|경계
+invalid input|Input that breaks the rules.|잘못된 입력
+null value|A value that means "nothing".|널 값
+large file|A file with a big size.|대용량 파일
+special characters|Symbols that are not letters or numbers.|특수 문자
+Vietnamese diacritics|The accent marks used in Vietnamese letters.|베트남어 성조 부호
+emoji input|Typing emoji characters into a field.|이모지 입력
+long text|Text with many characters.|긴 텍스트
+truncation|Cutting text short, often with "...".|잘림, 생략
+overflow|Content that goes outside its box.|넘침, 오버플로
+responsive layout|A layout that adapts to screen size.|반응형 레이아웃
+pixel perfect|Matching the design exactly.|픽셀 단위로 정확한
+design review|A meeting to check a design.|디자인 검토
+spec review|A meeting to check a specification.|명세서 검토
+ambiguity|When something can be understood in more than one way.|모호함
+clarification|An explanation that makes something clearer.|해명, 설명
+test sign-off|Formal confirmation that testing is complete.|테스트 완료 승인
+release checklist|A list of checks before a release.|릴리스 체크리스트
+smoke test result|The outcome of a smoke test.|스모크 테스트 결과
+bug bash|An event where many people test to find bugs.|버그 배시
+dogfooding|Using your own product inside the company.|사내 사용(도그푸딩)
+crowd testing|Testing by many outside people on their own devices.|크라우드 테스트
+test account setup|Creating accounts for testing.|테스트 계정 설정
+mock server|A fake server that returns prepared responses.|목 서버
+API response|The data an API sends back.|API 응답
+response body|The main content of an HTTP response.|응답 본문
+status 500|An HTTP code meaning a server error.|500 서버 오류
+timeout error|An error when a request takes too long.|시간 초과 오류
+retry|To try again.|재시도하다
+idle timeout|Ending a session after a period of no activity.|유휴 시간 초과
+business analysis|Finding business needs and recommending solutions.|비즈니스 분석
+BABOK|The Business Analysis Body of Knowledge guide.|BABOK 지식 체계
+CBAP|A professional certification for business analysts.|CBAP 자격증
+PSPO|A certification for Scrum product owners.|PSPO 자격증
+PMP|A professional certification for project managers.|PMP 자격증
+interview script|A prepared list of interview questions.|인터뷰 질문지
+open-ended question|A question that needs a full answer, not yes or no.|개방형 질문
+closed question|A question answered with yes, no or a short fact.|폐쇄형 질문
+follow-up question|A question that asks for more detail.|후속 질문
+probe|To ask more questions to learn more.|깊이 파고들다
+active listening|Listening carefully and showing you understand.|적극적 경청
+note-taker|The person who writes notes in a meeting.|기록 담당자
+meeting invite|A calendar message inviting someone to a meeting.|회의 초대
+reschedule|To change the time of a meeting or event.|일정을 변경하다
+time slot|A set period of time.|시간대, 시간 슬롯
+dry run|A practice run before the real event.|리허설, 시험 운영
+screen flow|The order in which screens appear.|화면 흐름
+UI copy|The words shown in an interface.|UI 문구
+error message text|The words in an error message.|오류 메시지 문구
+field length|The number of characters a field can hold.|필드 길이
+mandatory field|A field that must be filled in.|필수 필드
+default value|The value used if the user doesn't choose one.|기본값
+dropdown list|A list that opens to show choices.|드롭다운 목록
+lookup table|A table of fixed values used for reference.|조회 테이블
+calculation rule|A rule for how a value is calculated.|계산 규칙
+approval matrix|A table showing who approves what.|승인 매트릭스
+notification rule|A rule for when and how to send notifications.|알림 규칙
+report layout|How a report is arranged.|보고서 레이아웃
+sample report|An example of a report.|샘플 보고서
+user role matrix|A table of roles and what each can do.|사용자 역할 매트릭스
+permission level|How much access a user has.|권한 수준
+audit requirement|A requirement to record actions for auditing.|감사 요구사항
+reporting requirement|A requirement for reports a system must produce.|보고 요구사항
+integration requirement|A requirement for connecting to another system.|연동 요구사항
+literature gap|An area existing studies have not covered.|문헌상의 공백
+theoretical framework|The theory a study is based on.|이론적 틀
+research design|The plan for how a study will be done.|연구 설계
+control group|A group that does not get the treatment, for comparison.|대조군
+variable|A factor that can change in a study.|변수
+dependent variable|The result you measure in a study.|종속 변수
+independent variable|The factor you change in a study.|독립 변수
+survey instrument|The questionnaire used in a survey.|조사 도구
+Likert scale|A rating scale, such as 1 (disagree) to 5 (agree).|리커트 척도
+pilot study|A small test study before the main one.|예비 연구
+data collection|Gathering data.|데이터 수집
+data analysis|Examining data to find meaning.|데이터 분석
+outlier|A value very different from the others.|이상값
+standard deviation|How spread out values are from the average.|표준 편차
+mean|The average of a set of numbers.|평균
+median|The middle value in an ordered list.|중앙값
+distribution|How values are spread across a range.|분포
+confidence interval|A range likely to contain the true value.|신뢰 구간
+p-value|The probability that a result happened by chance.|p값
+t-test|A statistical test comparing two averages.|t-검정
+validity|How well a study measures what it claims to measure.|타당도
+reliability|How consistent and dependable something is.|신뢰도
+generalize|To apply a result more widely.|일반화하다
+implication|A possible effect or meaning of a result.|시사점
+recommendation|Advice about what should be done.|권고
+appendix|Extra material at the end of a document.|부록
+figure caption|A short text describing a figure.|그림 설명
+oral presentation|A spoken presentation.|구두 발표
+viva|An oral exam where you defend your thesis.|구두 심사
+examiner|A person who judges an exam or thesis.|심사 위원
+revision|A changed and improved version.|수정, 개정
+camera-ready|The final version of a paper ready to publish.|최종 인쇄본
+preprint|A research paper shared before peer review.|프리프린트
+citation count|How many times a paper has been cited.|인용 횟수
+h-index|A number measuring a researcher's impact.|h-지수
+research ethics|Rules for conducting research honestly and safely.|연구 윤리
+grant|Money given to fund research.|연구비
+architecture decision|An important choice about system design.|아키텍처 결정
+quality attribute|A quality a system must have, like security or speed.|품질 속성
+resilience|The ability to recover from problems.|복원력
+redundancy|Extra copies that take over if one fails.|이중화
+multi-region|Running in several geographic regions.|멀티 리전
+data residency|Rules about which country data must be stored in.|데이터 저장 위치 규정
+latency budget|The maximum delay allowed for each part.|지연 시간 예산
+tail latency|The slowest response times.|꼬리 지연 시간
+backpressure|Slowing producers when consumers can't keep up.|배압
+dead letter queue|A queue for messages that could not be processed.|데드 레터 큐
+saga pattern|A way to manage a transaction across several services.|사가 패턴
+CQRS|Separating reading data from changing data.|명령 조회 책임 분리
+event sourcing|Storing every change as an event.|이벤트 소싱
+outbox pattern|Saving events in the database before sending them, so none are lost.|아웃박스 패턴
+schema registry|A central store for data formats.|스키마 레지스트리
+data contract|An agreement on data format between teams.|데이터 계약
+stream processing|Processing data continuously as it arrives.|스트림 처리
+batch processing|Processing data in groups at set times.|일괄 처리
+data warehouse|A central database designed for reporting.|데이터 웨어하우스
+data lake|A store for large amounts of raw data.|데이터 레이크
+vector database|A database that stores and searches embeddings.|벡터 데이터베이스
+embedding|A list of numbers that represents meaning.|임베딩
+retrieval-augmented generation|An AI answering using information it looks up first.|검색 증강 생성
+prompt engineering|Writing good instructions for AI models.|프롬프트 엔지니어링
+guardrail|A rule that keeps an AI's output safe.|가드레일
+hallucination|When an AI states something false as fact.|환각
+evaluation set|Data used to measure a model's quality.|평가 데이터 세트
+MLOps|Practices for deploying and maintaining ML models.|MLOps
+model drift|A model getting worse as real data changes.|모델 드리프트
+technical leadership|Guiding technical direction and people.|기술 리더십
+mentorship|A relationship where an experienced person guides another.|멘토십
+hiring loop|The series of interviews for a job candidate.|채용 면접 과정
+system design interview|An interview about designing large systems.|시스템 설계 면접
+engineering culture|The shared values and habits of an engineering team.|엔지니어링 문화
+psychological safety|Feeling safe to speak up without fear.|심리적 안전감
+quality strategy|The plan for achieving product quality.|품질 전략
+quality culture|A culture where everyone cares about quality.|품질 문화
+whole-team approach|Everyone in the team sharing responsibility for quality.|전체 팀 접근법
+three amigos|A short meeting of a BA, developer and tester about a story.|쓰리 아미고 회의
+example mapping|A workshop to explore rules and examples for a story.|예제 매핑
+specification by example|Describing requirements with concrete examples.|예제를 통한 명세
+living documentation|Documentation that is always up to date because it is tested.|살아 있는 문서
+acceptance test|A test that checks acceptance criteria.|인수 테스트
+test automation pyramid|The test pyramid model for automated tests.|테스트 자동화 피라미드
+ice cream cone|An anti-pattern with too many UI tests and few unit tests.|아이스크림 콘 안티패턴
+UI automation|Automated testing through the user interface.|UI 자동화
+API automation|Automated testing of APIs.|API 자동화
+mobile automation|Automated testing of mobile apps.|모바일 자동화
+Appium|A tool for automating mobile app tests.|앱피움
+Playwright|A tool for automating web browser tests.|플레이라이트
+Cypress|A tool for testing web applications.|사이프러스
+k6|A tool for load testing.|k6 부하 테스트 도구
+test containers|Temporary containers used in tests, such as a real database.|테스트 컨테이너
+ephemeral environment|A short-lived environment created for one task.|임시 환경
+environment parity|Keeping environments as similar as possible.|환경 일치
+config drift|When environment settings slowly become different.|설정 드리프트
+feature flag testing|Testing a feature with its flag on and off.|기능 플래그 테스트
+A/B experiment|An experiment comparing two versions.|A/B 실험
+data validation|Checking that data is correct and complete.|데이터 검증
+schema validation|Checking data matches the expected structure.|스키마 검증
+backward compatibility test|A test that checks old versions still work.|하위 호환성 테스트
+upgrade testing|Testing an upgrade from one version to another.|업그레이드 테스트
+installation testing|Testing that software installs correctly.|설치 테스트
+disaster recovery test|A practice of restoring systems after a disaster.|재해 복구 훈련
+failover test|A test of switching to a backup system.|장애 조치 테스트
+recovery time objective|The maximum time allowed to restore a service.|목표 복구 시간
+recovery point objective|The maximum data loss allowed, measured in time.|목표 복구 시점
+accessibility audit|A review of how accessible a product is.|접근성 감사
+color contrast|The difference between text and background colours.|색상 대비
+keyboard navigation|Using a site with only a keyboard.|키보드 탐색
+alt text|Text describing an image for screen readers.|대체 텍스트
+focus order|The order in which elements are selected with the Tab key.|포커스 순서
+problem statement|A clear description of the problem to solve.|문제 정의
+hypothesis statement|A testable statement of what you believe.|가설 문장
+assumption mapping|Sorting assumptions by importance and evidence.|가정 매핑
+riskiest assumption|The belief that would hurt most if wrong.|가장 위험한 가정
+discovery sprint|A short sprint focused on learning, not building.|탐색 스프린트
+design sprint|A five-day process to design and test an idea.|디자인 스프린트
+user interview|A conversation with a user to learn about their needs.|사용자 인터뷰
+interview synthesis|Combining interview findings into insights.|인터뷰 종합
+affinity mapping|Grouping notes by similar themes.|친화도 매핑
+insight|A deep, useful understanding.|인사이트, 통찰
+empathy map|A chart of what a user says, thinks, does and feels.|공감 지도
+service blueprint|A diagram of a service, including steps behind the scenes.|서비스 청사진
+touchpoint|Any point where a customer interacts with a business.|접점
+moment of truth|A key moment that shapes a customer's opinion.|진실의 순간
+friction|Anything that makes a task harder for users.|마찰, 불편 요소
+drop-off|The point where users leave a process.|이탈 지점
+activation rate|The percentage of new users who reach a key first action.|활성화율
+engagement|How much users interact with a product.|참여도
+stickiness|How often users come back.|고착도
+DAU|Daily active users.|일간 활성 사용자
+MAU|Monthly active users.|월간 활성 사용자
+growth loop|A cycle where users bring in more users.|성장 루프
+referral program|Rewards for users who invite others.|추천 프로그램
+feature adoption|How many users use a feature.|기능 사용률
+sunset a feature|To gradually remove a feature.|기능을 단계적으로 종료하다
+product analytics|Data about how people use a product.|제품 분석
+event tracking plan|A list of user actions to record for analytics.|이벤트 추적 계획
+dashboard requirement|What a dashboard must show.|대시보드 요구사항
+self-service|Letting customers do things themselves.|셀프 서비스
+customer support|Helping customers with problems.|고객 지원
+ticket deflection|Reducing support tickets by helping users help themselves.|문의 감소
+operational efficiency|Doing work with less time and cost.|운영 효율성
+headcount|The number of employees.|인원수
+quarterly planning|Planning work for the next three months.|분기 계획
+annual budget|The budget for one year.|연간 예산
+board meeting|A meeting of a company's board of directors.|이사회
+strategic initiative|An important project that supports company strategy.|전략적 과제
+bank account|An account at a bank for keeping money.|은행 계좌
+savings account|A bank account that pays interest on saved money.|저축 계좌
+current account|A bank account for everyday payments.|입출금 계좌
+balance|The amount of money in an account.|잔액
+deposit|Money put into an account.|예금, 입금
+withdrawal|Taking money out of an account.|출금
+transfer|Moving money from one account to another.|이체
+debit card|A card that takes money directly from your account.|체크카드
+credit card|A card that lets you borrow money to pay later.|신용카드

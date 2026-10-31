@@ -1,0 +1,300 @@
+requirement|Something a system must do or have to meet a business need.|요구사항
+stakeholder|A person or group affected by or interested in a project.|이해관계자
+meeting minutes|A written record of what was discussed and decided in a meeting.|회의록
+business analyst|A person who finds and describes business needs and turns them into requirements.|비즈니스 분석가
+product owner|The person who decides what the team builds and in what order.|프로덕트 오너
+project manager|The person who plans a project and makes sure it finishes on time and budget.|프로젝트 매니저
+BA|Short for business analyst.|비즈니스 분석가
+PO|Short for product owner.|프로덕트 오너
+PM|Short for project manager (or product manager).|프로젝트 매니저
+client|A person or company that pays for a product or service.|고객, 클라이언트
+end user|The person who actually uses the finished product.|최종 사용자
+business|A company, or the work of buying, selling and making money.|비즈니스, 사업
+goal|Something you want to achieve.|목표
+problem|Something that is wrong or difficult and needs a solution.|문제
+need|Something a person or business must have.|필요, 니즈
+scope|What is included in a project and what is not.|범위
+project|A planned piece of work with a clear goal, start and end.|프로젝트
+plan|A set of steps decided in advance to reach a goal.|계획
+timeline|A schedule that shows when each part of the work happens.|일정표, 타임라인
+milestone|An important point or event in a project schedule.|마일스톤, 주요 단계
+budget|The amount of money available for something.|예산
+cost|The amount of money needed to do or buy something.|비용
+team|A group of people who work together.|팀
+meeting|An event where people get together to discuss something.|회의
+agenda|A list of topics to discuss in a meeting.|안건, 회의 일정
+kick-off meeting|The first meeting that officially starts a project.|킥오프 회의
+attendee|A person who goes to a meeting or event.|참석자
+action item|A task someone agrees to do after a meeting.|실행 항목, 후속 조치
+follow up|To check on something again or continue it later.|후속 조치하다
+confirm|To say that something is true or will happen.|확인하다
+clarify|To make something clearer and easier to understand.|명확히 하다
+question|Something you ask to get information.|질문
+answer|A reply to a question.|답변
+interview|A meeting where one person asks another questions to get information.|인터뷰, 면담
+workshop|A working session where a group discusses and solves a problem together.|워크숍
+survey|A set of questions asked to many people to collect opinions or data.|설문 조사
+feedback|Comments about how good or bad something is, given to help improve it.|피드백
+email|A message sent electronically over the internet.|이메일
+call|A phone or video conversation.|통화
+document|A file or paper with written information.|문서
+template|A ready-made format you fill in or copy.|템플릿, 양식
+version|One form of something that is slightly different from earlier forms.|버전
+draft|An early version that is not finished yet.|초안
+final|Last and complete, with no more changes.|최종의
+approve|To officially agree that something is good or can go ahead.|승인하다
+approval|Official agreement that something can go ahead.|승인
+sign off|To give final official approval.|최종 승인하다
+change request|A formal request to change agreed scope or requirements.|변경 요청
+feature|A specific thing a product can do.|기능
+function|A purpose or job that a system performs.|기능
+process|A series of steps to get something done.|프로세스, 절차
+workflow|The order of steps that work goes through.|업무 흐름, 워크플로
+step|One action in a series of actions.|단계
+flow|The path or sequence of steps.|흐름
+flowchart|A diagram that shows the steps of a process with boxes and arrows.|순서도
+diagram|A simple drawing that explains how something works.|다이어그램, 도표
+wireframe|A simple sketch of a screen layout without colors or details.|와이어프레임
+mockup|A detailed picture of how a screen will look.|목업, 시안
+prototype|An early model of a product used to test ideas.|프로토타입, 시제품
+screen|One page or view in an app or website.|화면
+user|A person who uses a system or product.|사용자
+customer|A person or company that buys products or services.|고객
+admin|A person who manages a system and its users.|관리자
+role|The job or position someone has; in software, what a user is allowed to do.|역할
+report|A document or screen that presents information or results.|보고서
+data|Facts, numbers or information stored in a system.|데이터
+field|A space in a form or record for one piece of information.|필드, 입력란
+list|A set of items written one after another.|목록
+status|The current state of something.|상태
+date|A particular day, month and year.|날짜
+price|The amount of money something costs.|가격
+discount|A reduction in the normal price.|할인
+invoice|A document that lists what a customer must pay.|청구서, 인보이스
+payment|Money paid for something, or the act of paying.|결제, 지불
+order|A request from a customer to buy something.|주문
+product|Something that is made and sold.|제품, 상품
+service|Work done for customers rather than a physical product.|서비스
+sales|The business of selling, or the number of things sold.|매출, 영업
+marketing|The work of promoting and selling products.|마케팅
+finance|The management of money in a company.|재무
+HR|Human resources: the department that manages employees.|인사부
+department|A part of a company that does one kind of work.|부서
+manager|A person in charge of a team or part of a company.|관리자, 매니저
+staff|The people who work for an organisation.|직원
+employee|A person who works for a company for pay.|직원
+company|A business organisation.|회사
+branch|One local office or shop of a larger company.|지점
+store|A shop where goods are sold.|매장, 가게
+warehouse|A large building where goods are stored.|창고
+delivery|The act of bringing goods to a customer.|배송
+refund|Money given back to a customer.|환불
+rule|A statement of what must or must not happen.|규칙
+business rule|A rule that controls how a business process or decision works.|비즈니스 규칙
+must|Used to say something is required.|~해야 한다
+should|Used to say something is recommended or expected.|~하는 것이 좋다
+priority|Something more important that should be done first.|우선순위
+important|Having great value or effect.|중요한
+urgent|Needing action immediately.|긴급한
+deadline|The latest time by which something must be finished.|마감일
+delay|A situation where something happens later than planned.|지연
+on time|At the planned time, not late.|제시간에
+progress|Movement towards finishing something.|진행 상황
+update|New information about how something is going.|업데이트, 최신 정보
+status report|A regular report on progress, risks and next steps.|진행 상황 보고서
+issue|A problem that needs attention.|이슈, 문제
+risk|Something that might happen and cause a problem.|위험, 리스크
+assumption|Something believed to be true without proof.|가정
+dependency|When one thing needs another thing to happen first.|의존성
+decision|A choice made after thinking.|결정
+option|One of several possible choices.|선택지
+agree|To have the same opinion.|동의하다
+disagree|To have a different opinion.|동의하지 않다
+suggest|To put forward an idea for others to consider.|제안하다
+propose|To formally suggest a plan or idea.|제안하다
+explain|To make something clear by describing it.|설명하다
+describe|To say what something is like.|묘사하다, 설명하다
+current process|The way work is done today.|현재 프로세스
+new process|The improved way work will be done in future.|새 프로세스
+manual|Done by people by hand, not by a machine.|수동의
+automatic|Done by a machine or system without people.|자동의
+system|A set of software and hardware working together.|시스템
+website|A set of pages on the internet.|웹사이트
+mobile app|A program made for phones and tablets.|모바일 앱
+login|The act of entering a system with a username and password.|로그인
+sign up|To create a new account.|회원 가입하다
+notification|A message that tells a user something has happened.|알림
+search|A feature for finding information by typing words.|검색
+filter|A tool that shows only items that match chosen conditions.|필터
+export|To save data from a system in a file for use elsewhere.|내보내다
+import|To bring data into a system from a file or another system.|가져오다
+Excel|Microsoft's spreadsheet program.|엑셀
+spreadsheet|A document with data in rows and columns.|스프레드시트
+backlog|An ordered list of work the team still needs to do.|백로그
+user story|A short description of a feature from the user's point of view.|사용자 스토리
+sprint|A short, fixed period (often two weeks) when a team completes planned work.|스프린트
+demo|A show of how a product or feature works.|데모, 시연
+release|A version of software made available to users.|릴리스, 출시 버전
+go-live|The moment a new system starts being used for real.|운영 개시
+training|Teaching people how to do something.|교육, 훈련
+user guide|A document that explains how to use a product.|사용자 가이드
+glossary|A list of special words and their meanings.|용어집
+term|A word or phrase with a special meaning.|용어
+note-taking|Writing down key points during a meeting or class.|필기, 메모하기
+listen|To pay attention to what someone is saying.|듣다, 경청하다
+summary|A short version of the main points.|요약
+next steps|The actions that will happen after a meeting or discussion.|다음 단계
+deploy|To put new software on a server so users can use it.|배포하다
+repository|A place where a project's code and its history are stored.|저장소
+framework|A ready-made structure of code you build an application on.|프레임워크
+library|A collection of ready-made code you can use in your program.|라이브러리
+frontend|The part of an application users see and interact with.|프런트엔드
+backend|The server side of an application that handles data and logic.|백엔드
+full-stack|Working on both the frontend and the backend.|풀스택
+server|A computer that provides data or services to other computers.|서버
+request|A message sent from a client to a server asking for something.|요청
+response|The message a server sends back after a request.|응답
+JSON|A simple text format for storing and sending data.|JSON 데이터 형식
+source code|The instructions programmers write to make software.|소스 코드
+editor|A program used to write and edit code.|편집기, 에디터
+IDE|A program with tools to write, run and debug code in one place.|통합 개발 환경
+terminal|A window where you type text commands to the computer.|터미널
+command|An instruction you type for the computer to carry out.|명령어
+script|A small program that runs a task automatically.|스크립트
+syntax|The rules for how code must be written.|문법, 구문
+compile|To turn source code into a program the computer can run.|컴파일하다
+build|A version of the software created from the code.|빌드
+crash|When a program suddenly stops working.|충돌하다, 다운되다
+debug|To find and fix errors in code.|디버그하다
+log|A record of events that happen in a system.|로그
+console|A panel that shows messages and errors from a program.|콘솔
+commit|A saved set of code changes in version control.|커밋
+push|To send your saved code changes to a shared repository.|푸시하다
+pull|To get the latest code changes from a shared repository.|풀하다
+merge|To combine changes from one branch into another.|병합하다
+clone|To copy a repository from a server to your computer.|복제하다
+Git|A tool that tracks changes to code over time.|깃(Git)
+GitHub|A website for storing code and working on it together.|깃허브
+task|A piece of work to be done.|작업, 과제
+ticket|A record of a task or problem in a tracking tool.|티켓
+estimate|A rough guess of how much time or effort something will take.|추정치
+done|Completely finished.|완료된
+in progress|Being worked on now.|진행 중인
+blocked|Unable to continue because of a problem.|진행이 막힌
+stand-up|A short daily team meeting to share progress and problems.|스탠드업 회의
+teammate|A person on the same team.|팀원
+senior|A person with more experience and responsibility.|시니어
+junior|A person with less experience, usually new to the job.|주니어
+tech lead|The person who guides the technical work of a team.|테크 리드
+code review|Checking another person's code before it is merged.|코드 리뷰
+review|To look at something carefully to check or judge it.|검토하다
+comment|A note added to explain code or give an opinion.|주석, 코멘트
+test|To check that software works as expected.|테스트하다
+unit test|A test that checks one small piece of code.|단위 테스트
+environment|A setup of servers and settings where software runs.|환경
+local|On your own computer, not on a server.|로컬의
+production|The live system that real users use.|운영 환경, 프로덕션
+staging|A copy of the live system used for final checks before release.|스테이징 환경
+hotfix|A quick fix for an urgent problem in the live system.|긴급 수정
+page|One screen of a website.|페이지
+form|A part of a page where users enter information.|폼, 입력 양식
+dropdown|A list of options that opens when you click it.|드롭다운
+checkbox|A small box you click to select or unselect an option.|체크박스
+pop-up|A small window that appears on top of the page.|팝업
+layout|The way things are arranged on a screen.|레이아웃, 배치
+responsive|Changing its layout to fit any screen size.|반응형의
+style|How something looks: colors, sizes and spacing.|스타일
+font|A set of letters in a particular design.|글꼴
+color|Red, blue, green and so on.|색상
+loading|Waiting while data or a page is being fetched.|로딩 중
+click event|Something that happens in code when a user clicks.|클릭 이벤트
+array|An ordered list of values in code.|배열
+object|A unit of code that holds data and actions together.|객체
+class|A template in code for creating objects.|클래스
+method|A function that belongs to an object or class.|메서드
+parameter|A named input that a function accepts.|매개변수
+argument|The actual value you pass into a function.|인수
+return|To send a value back from a function.|반환하다
+boolean|A value that is either true or false.|불리언
+null|A special value that means "no value".|널(null) 값
+value|The data stored in a variable or field.|값
+key|A unique name used to find a value.|키
+index|The position number of an item in a list.|인덱스
+type|The kind of data, such as number or text.|자료형
+error message|Text that tells the user something went wrong.|오류 메시지
+exception|An error that happens while a program is running.|예외
+warning|A message about a possible problem.|경고
+typo|A small mistake in typing.|오타
+login page|The page where users sign in.|로그인 페이지
+profile|A page with a user's personal information and settings.|프로필
+dashboard|A screen that shows key information at a glance.|대시보드
+permission|Being allowed to do a particular action.|권한
+access|The right or ability to use something.|접근 권한
+token|A code that proves who a user is or what they can do.|토큰
+password reset|Creating a new password when you forget the old one.|비밀번호 재설정
+domain|A website's name, such as example.com.|도메인
+URL|A web address.|URL, 웹 주소
+host|To keep a website or app on a server so people can reach it.|호스팅하다
+hosting|A service that keeps websites online on its servers.|호스팅
+upload|To send a file from your device to a server.|업로드하다
+image|A picture.|이미지
+size|How big something is.|크기
+speed|How fast something happens.|속도
+slow|Taking a long time.|느린
+fast|Quick.|빠른
+work|To function correctly.|작동하다
+broken|Not working.|고장 난
+solve|To find an answer to a problem.|해결하다
+try|To attempt to do something.|시도하다
+cache|Saved copies of data that make loading faster.|캐시
+refresh|To load a page again to see the newest version.|새로 고침하다
+reload|To load something again.|다시 불러오다
+config|A file with settings that control how software runs.|설정 파일
+setting|An option that controls how something works.|설정
+package|A bundle of code you can install and use.|패키지
+npm|A tool for installing JavaScript packages.|npm 패키지 관리자
+documentation|Written information that explains how something works.|문서, 기술 문서
+README|A file that introduces a project and how to use it.|README 파일
+example code|Sample code that shows how to use something.|예제 코드
+copy-paste|To copy something and paste it somewhere else.|복사하여 붙여넣다
+Stack Overflow|A popular question-and-answer website for programmers.|스택 오버플로
+pair programming|Two developers working on the same code together.|페어 프로그래밍
+help|To make it easier for someone to do something.|돕다
+ask|To say something to get information or help.|묻다, 요청하다
+share|To let others see or use something.|공유하다
+check|To look at something to make sure it is correct.|확인하다
+change|A difference made to something.|변경
+remove|To take something away.|제거하다
+add|To put something in.|추가하다
+rename|To give something a new name.|이름을 바꾸다
+move|To change the position of something.|옮기다
+create|To make something new.|만들다, 생성하다
+start|To begin or make something begin.|시작하다
+stop|To end or make something end.|중지하다
+port|A number that identifies a channel for network connections on a computer.|포트
+localhost|Your own computer, when used as a server.|로컬호스트
+online|Connected to or available on the internet.|온라인의
+down|Not working or not available.|다운된, 작동하지 않는
+up|Working and available.|작동 중인
+user interface|The screens and controls people use to interact with software.|사용자 인터페이스
+UI|Short for user interface.|UI, 사용자 인터페이스
+UX|User experience: how easy and pleasant a product is to use.|사용자 경험
+Figma|A popular online tool for designing screens.|피그마
+Android|Google's operating system for phones.|안드로이드
+iOS|Apple's operating system for iPhones.|iOS
+search bar|A box where you type words to search.|검색창
+sort|To arrange items in an order.|정렬하다
+pagination|Splitting a long list into pages.|페이지 나누기
+timeout|An error when something takes too long to respond.|시간 초과
+working hours|The hours when people are at work.|근무 시간
+remote|Working from somewhere other than the office.|원격의
+overtime|Time worked after normal working hours.|초과 근무
+laptop|A small portable computer.|노트북
+onboarding|The process of helping a new person start in a job or product.|온보딩
+computer|An electronic machine that processes data.|컴퓨터
+keyboard|The set of keys you type on.|키보드
+mouse|A small device you move to control the pointer.|마우스
+monitor|A separate screen connected to a computer.|모니터
+printer|A machine that prints on paper.|프린터
+software|Programs that run on a computer.|소프트웨어
+hardware|The physical parts of a computer.|하드웨어

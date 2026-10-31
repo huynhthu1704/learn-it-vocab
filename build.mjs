@@ -85,6 +85,17 @@ for (const f of files) {
     seen.set(key, w); words.push(w);
   }
 }
+// English and Korean definitions: data/definitions/*.txt, lines "term|English definition|Korean"
+const DEF = new Map();
+for (const f of fs.readdirSync('data/definitions').filter(f => f.endsWith('.txt')).sort())
+  for (const line of fs.readFileSync('data/definitions/' + f, 'utf8').split('\n')) {
+    if (!line.trim() || line.startsWith('#')) continue;
+    const [t, en, ko] = line.split('|').map(x => x.trim());
+    if (t && en && ko && !DEF.has(t.toLowerCase())) DEF.set(t.toLowerCase(), { en, ko });
+  }
+for (const w of words) { const d = DEF.get(w.term.toLowerCase()); if (d) { w.en = d.en; w.ko = d.ko; } }
+const noDef = words.filter(w => !w.en);
+if (noDef.length) { console.error('Missing definitions in data/definitions/:', noDef.map(w => w.term).join(', ')); process.exit(1); }
 const noIpa = words.filter(w => !w.ipa);
 console.log('total unique', words.length, 'duplicates dropped', dups.length, 'missing IPA terms', noIpa.length);
 console.log('missing tokens:', [...missing].join(', '));
@@ -96,7 +107,7 @@ console.log('topics', topics.length, topics.join(','));
 // examples that don't contain the term (for highlight check)
 const noHit = words.filter(w => !w.ex.toLowerCase().includes(w.term.toLowerCase().slice(0, Math.max(3, w.term.length - 3))));
 console.log('examples without term:', noHit.length, noHit.slice(0, 40).map(w => w.term).join(' | '));
-const out = JSON.stringify(words.map(({ id, term, pos, vi, ex, topic, level, roles, ipa }) => ({ id, t: term, p: pos, v: vi, e: ex, c: topic, l: level, r: roles, i: ipa })));
+const out = JSON.stringify(words.map(({ id, term, pos, vi, ex, topic, level, roles, ipa, en, ko }) => ({ id, t: term, p: pos, v: vi, e: ex, c: topic, l: level, r: roles, i: ipa, d: en, k: ko })));
 if (noIpa.length) { console.error('Add these to data/pronunciation-overrides.json first:', noIpa.map(w => w.term).join(', ')); process.exit(1); }
 fs.writeFileSync('words.json', out);
 // Build the website: inject the word database into the template

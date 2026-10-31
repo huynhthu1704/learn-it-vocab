@@ -1,6 +1,6 @@
 # Learn IT Vocab
 
-Illustrated IT vocabulary for Vietnamese learners. It has **2,268 words and phrases** across 3 levels, 4 roles in IT teams and 8 business domains. Every word has a topic icon, American IPA, audio, a Vietnamese meaning and a workplace example sentence.
+Illustrated IT vocabulary for Vietnamese learners. It has **2,268 words and phrases** across 3 levels, 4 roles in IT teams and 8 business domains. Every word has a topic icon, American IPA, audio, an English definition, Vietnamese and Korean meanings, and a workplace example sentence.
 
 | | Beginner | Intermediate | Advanced |
 |---|---|---|---|
@@ -31,6 +31,7 @@ words.json                       ← the word database (generated)
 src/template.html                ← website code: HTML, CSS and JavaScript
 data/1-student.txt … 6-extra-l3.txt   ← the word lists you edit
 data/pronunciation-overrides.json     ← IPA for words the dictionary doesn't know
+data/definitions/*.txt           ← English definition and Korean meaning: term|English|Korean
 build.mjs                        ← builds words.json and index.html
 ```
 
@@ -48,6 +49,8 @@ build.mjs                        ← builds words.json and index.html
    - Topic is one of: agile, ai, architecture, bug, business, career, cloud, code, communication, data, design, devices, document, math, meeting, mobile, money, network, people, performance, process, quality, release, security, study, testing, time, web, or a domain: banking, ecommerce, healthcare, insurance, logistics, education, telecom, hr. The topic picks the icon.
    - Put the word itself in the example sentence, so it can be highlighted and used in "fill the gap" quiz questions.
 
+   - Add the word's English definition and Korean meaning to a file in `data/definitions/` (`term|English definition|Korean`). The build stops and lists any word without one.
+
 2. Rebuild:
 
    ```bash
@@ -63,4 +66,4 @@ build.mjs                        ← builds words.json and index.html
 
 - Audio uses the browser's built-in voice (Web Speech API), so it sounds different on each device and may be missing in some browsers. The IPA is always shown.
 - Icons are per topic (36 topics), not one per word.
-- The Vietnamese meanings and examples should be reviewed by a teacher before use in class.
+- The Vietnamese and Korean meanings and the examples should be reviewed by a teacher before use in class.

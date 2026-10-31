@@ -1,0 +1,300 @@
+decision maker|The person with the authority to make the final choice.|의사 결정권자
+RACI|A chart showing who is Responsible, Accountable, Consulted and Informed for each task.|RACI 책임 매트릭스
+stakeholder map|A diagram that places stakeholders by their power and interest.|이해관계자 지도
+stakeholder analysis|Identifying stakeholders and how to work with each one.|이해관계자 분석
+communication plan|A plan for who gets what information, when and how.|커뮤니케이션 계획
+expectation|What someone believes will happen or should happen.|기대
+negotiate|To discuss something to reach an agreement.|협상하다
+conflict|A serious disagreement.|갈등
+consensus|Agreement among everyone in a group.|합의
+facilitate|To lead a meeting or process so it runs smoothly.|진행하다, 촉진하다
+brainstorming|A group activity to produce many ideas quickly.|브레인스토밍
+observation|Watching people work to understand how they do things.|관찰
+questionnaire|A written set of questions people answer.|설문지
+focus group|A small group of people asked for their opinions together.|포커스 그룹
+document analysis|Studying existing documents to find requirements.|문서 분석
+requirement traceability|Linking each requirement to its design, code and tests.|요구사항 추적성
+baseline|An approved version used as a reference point for changes.|기준선
+change control|A formal process for approving or rejecting changes.|변경 통제
+impact analysis|Studying what a change will affect.|영향 분석
+effort|The amount of work needed to do something.|공수, 노력
+man-day|The amount of work one person does in one day.|인일(맨데이)
+resource|People, money or tools available for work.|자원
+capacity|How much work a team can do in a period.|수용 능력, 역량
+Gantt chart|A bar chart showing tasks over time.|간트 차트
+critical path|The chain of tasks that decides the shortest project length.|주 공정 경로
+deliverable|A product or document that must be handed over.|산출물
+phase|One stage of a project.|단계
+work breakdown structure|A breakdown of a project into smaller pieces of work.|작업 분할 구조
+risk register|A list of project risks with owners and actions.|리스크 관리 대장
+mitigation|Actions that reduce a risk or its effect.|완화
+issue log|A list of current problems and how they are being handled.|이슈 관리 대장
+escalation|Raising a problem to a more senior person.|상부 보고, 에스컬레이션
+status meeting|A regular meeting to share progress and problems.|진행 상황 회의
+steering committee|A group of senior people who guide a project's direction.|운영 위원회
+KPI|Key performance indicator: a number that shows how well something is doing.|핵심 성과 지표
+metric|A measurement used to track something.|지표
+conversion rate|The percentage of visitors who complete a desired action, like buying.|전환율
+churn|The rate at which customers stop using a product.|이탈률
+retention|Keeping customers or users over time.|유지율
+revenue|The money a business earns from sales.|매출, 수익
+profit|Money earned after costs are paid.|이익
+business case|A document explaining why a project is worth doing.|비즈니스 케이스
+cost-benefit analysis|Comparing costs with expected benefits.|비용 편익 분석
+feasibility study|A study of whether a project is possible and worth doing.|타당성 조사
+vendor|A company that sells products or services to another company.|공급업체
+RFP|Request for proposal: a document asking vendors to submit offers.|제안 요청서
+contract|A legal agreement between parties.|계약
+SLA|Service level agreement: a promise about service quality, like response time.|서비스 수준 협약
+outsourcing|Paying another company to do work.|아웃소싱
+offshore team|A team working in another country.|해외 팀
+CRM|Software for managing customer relationships and sales.|고객 관계 관리 시스템
+ERP|Software that runs core business processes like finance and stock.|전사적 자원 관리 시스템
+e-commerce|Buying and selling online.|전자상거래
+inventory|The goods a business has in stock.|재고
+SKU|A unique code for each product and variant.|재고 관리 코드
+checkout flow|The steps a customer goes through to pay.|결제 흐름
+payment gateway|A service that processes online card payments.|결제 게이트웨이
+shipping|Sending goods to customers.|배송
+promotion|A special offer to increase sales.|프로모션
+voucher|A code or ticket that gives a discount.|바우처, 쿠폰
+loyalty program|A scheme that rewards repeat customers.|로열티 프로그램
+user acceptance|Users agreeing that a system meets their needs.|사용자 인수
+handover|Passing work or responsibility to another person or team.|인수인계
+support team|The team that helps users with problems.|지원팀
+change management|Helping people adapt to new systems or ways of working.|변화 관리
+adoption|How many people start using something new.|도입률, 채택
+training plan|A plan for teaching people how to use something.|교육 계획
+constraint|A limit or restriction on a project.|제약 조건
+assumption log|A list of assumptions made during a project.|가정 목록
+open question|A question that has not been answered yet.|미해결 질문
+parking lot|A list of topics to discuss later, outside the current meeting.|보류 목록
+timebox|A fixed, limited amount of time for an activity.|타임박스
+recap|A short summary of what was said or agreed.|요약
+align|To agree and work in the same direction.|조율하다, 맞추다
+push back|To politely refuse or argue against something.|반대 의견을 내다
+trade-off|Giving up one thing to get another.|트레이드오프, 절충
+outcome|The result or effect of an action.|성과, 결과
+refactor|To improve the structure of code without changing what it does.|리팩터링하다
+code smell|A sign in code that something may be badly designed.|코드 스멜
+clean code|Code that is easy to read, understand and change.|클린 코드
+naming convention|Agreed rules for naming things in code.|명명 규칙
+coding standard|Agreed rules for how code should be written.|코딩 표준
+linter|A tool that checks code for errors and style problems.|린터
+formatter|A tool that automatically formats code.|코드 포매터
+request changes|To ask the author to change code before it is approved.|변경을 요청하다
+nitpick|A very small, unimportant comment or correction.|사소한 지적
+rebase|To move your branch's changes on top of another branch.|리베이스하다
+cherry-pick|To copy one specific commit to another branch.|체리픽하다
+main branch|The primary branch of a repository.|메인 브랜치
+feature branch|A branch used to build one feature.|기능 브랜치
+stash|To save unfinished changes temporarily.|임시 저장하다
+revert|To undo a change.|되돌리다
+diff|The differences between two versions of code.|차이(diff)
+tag|A label that marks a specific version in the code history.|태그
+semantic versioning|A version-number system: MAJOR.MINOR.PATCH.|유의적 버전 관리
+changelog|A file listing changes in each version.|변경 이력
+API|A defined way for programs to talk to each other.|API
+endpoint|A specific URL in an API that does one job.|엔드포인트
+HTTP method|The type of request, such as GET or POST.|HTTP 메서드
+GET request|An HTTP request that reads data.|GET 요청
+POST request|An HTTP request that sends data to create something.|POST 요청
+status code|A number that tells whether a request succeeded, like 200 or 404.|상태 코드
+payload|The data carried in a request or response.|페이로드
+header|Extra information sent with an HTTP request or response.|헤더
+authentication|Checking who a user is.|인증
+authorization|Checking what a user is allowed to do.|권한 부여
+session|The period a user is logged in.|세션
+cookie|A small piece of data a website stores in your browser.|쿠키
+CORS|Browser rules that control requests between different websites.|교차 출처 리소스 공유
+hashing|Turning data into a fixed code that cannot be reversed.|해싱
+environment variable|A setting stored outside the code, such as a password.|환경 변수
+secret|Sensitive information like a password or key.|비밀 정보
+API key|A secret code that identifies who is calling an API.|API 키
+ORM|A tool that lets you use a database through objects in code.|ORM
+migration|A script that changes the structure of a database.|마이그레이션
+schema|The structure of a database: tables, fields and links.|스키마
+transaction|A group of database changes that all succeed or all fail.|트랜잭션
+seed data|Starting data loaded into a database.|초기 데이터
+NoSQL|Databases that do not use traditional tables.|NoSQL
+async|Running without waiting for other tasks to finish.|비동기의
+callback|A function passed in to run later.|콜백
+promise|An object representing a value that will be ready later.|프로미스
+event|Something that happens, like a click, that code can respond to.|이벤트
+state|The current data an app holds.|상태
+component|A reusable piece of a user interface.|컴포넌트
+props|Values passed into a component.|props(속성)
+hook|A special React function for using state and other features.|훅
+render|To display content on the screen.|렌더링하다
+virtual DOM|A copy of the page structure used to update the screen efficiently.|가상 DOM
+single-page application|A web app that loads one page and updates it without reloading.|싱글 페이지 애플리케이션
+routing|Choosing which page or screen to show for a URL.|라우팅
+state management|How an app stores and updates its data.|상태 관리
+TypeScript|JavaScript with types added.|타입스크립트
+type safety|Protection against using the wrong type of data.|타입 안정성
+generic|Code that works with many data types.|제네릭
+module|A separate file or part of a program.|모듈
+helper function|A small function that helps other code.|헬퍼 함수
+utility|A small, general-purpose tool or function.|유틸리티
+constant|A value that does not change.|상수
+hardcode|To put a fixed value directly in code.|하드코딩하다
+magic number|A number in code with no explanation.|매직 넘버
+duplicate code|The same code repeated in several places.|중복 코드
+null check|Checking whether a value is null before using it.|널 검사
+error handling|Code that deals with errors.|오류 처리
+try-catch|Code that tries something and handles any error.|try-catch 구문
+stack trace|A list of function calls that led to an error.|스택 트레이스
+reproduce|To make a bug happen again.|재현하다
+memory leak|When a program keeps using memory it no longer needs.|메모리 누수
+performance|How fast and efficient something is.|성능
+optimize|To make something faster or more efficient.|최적화하다
+bottleneck|The slowest part that limits the whole system.|병목 현상
+latency|The delay before a response arrives.|지연 시간
+lazy loading|Loading content only when it is needed.|지연 로딩
+rate limit|A limit on how many requests are allowed in a period.|요청 횟수 제한
+third-party|Made by an outside company.|타사의
+integration|Connecting two systems so they work together.|통합, 연동
+SDK|A set of tools for building software for a platform.|소프트웨어 개발 키트
+webhook|A message one system sends to another when an event happens.|웹훅
+cron job|A task that runs automatically on a schedule.|크론 작업
+background job|A task that runs behind the scenes.|백그라운드 작업
+queue|A list of tasks waiting to be processed in order.|큐, 대기열
+container|A package that holds an app and everything it needs to run.|컨테이너
+Docker|A tool for building and running containers.|도커
+CI|Continuous integration: automatically building and testing code on every change.|지속적 통합
+pipeline|A series of automated steps, such as build, test and deploy.|파이프라인
+build failure|When the automated build does not succeed.|빌드 실패
+deployment|The act of releasing software to an environment.|배포
+rollback|Going back to an earlier working version.|롤백
+monitoring|Watching a system to check it works well.|모니터링
+alert|An automatic warning about a problem.|경보, 알림
+on-call|Ready to respond to system problems outside normal hours.|온콜 대기
+incident|An unplanned event that breaks or slows a service.|장애, 사고
+uptime|The time a system is working and available.|가동 시간
+AWS|Amazon Web Services, a cloud platform.|AWS
+bucket|A storage container for files in cloud storage.|버킷
+CDN|A network of servers that delivers content quickly worldwide.|콘텐츠 전송 네트워크
+load balancer|A tool that spreads traffic across several servers.|로드 밸런서
+unit testing|Testing small pieces of code on their own.|단위 테스트
+mock|A fake object that imitates a real one in tests.|목 객체
+test coverage|How much of the code or requirements is tested.|테스트 커버리지
+integration test|A test that checks parts working together.|통합 테스트
+assertion|A check in a test that something is true.|단언, 어설션
+TDD|Test-driven development: writing tests before code.|테스트 주도 개발
+sprint planning|A meeting to choose and plan work for the next sprint.|스프린트 계획 회의
+story points|A unit for estimating the effort of a user story.|스토리 포인트
+retrospective|A meeting where the team discusses how to improve.|회고
+velocity|How much work a team completes per sprint.|속도(벨로시티)
+definition of done|Conditions work must meet to count as finished.|완료 정의
+spike|A short task to research or test an idea.|스파이크(기술 조사)
+tech debt|Short for technical debt.|기술 부채
+legacy code|Old code that is still in use.|레거시 코드
+scalable|Able to handle more users or data.|확장 가능한
+maintainable|Easy to fix and change.|유지 보수하기 쉬운
+readable|Easy to read and understand.|읽기 쉬운
+reusable|Able to be used again.|재사용 가능한
+backward compatible|Still works with older versions.|하위 호환되는
+deprecated|Still available but no longer recommended.|더 이상 권장되지 않는
+breaking change|A change that stops existing code or apps from working.|호환성을 깨는 변경
+feature flag|A switch that turns a feature on or off without new code.|기능 플래그
+A/B test|Comparing two versions to see which works better.|A/B 테스트
+analytics|Collecting and studying data about usage.|분석
+tracking|Recording what users do.|추적
+logging|Recording events in log files.|로깅
+spec|Short for specification: a detailed description of what to build.|명세서
+mentoring|Guiding and teaching a less experienced person.|멘토링
+knowledge sharing|Sharing what you know with colleagues.|지식 공유
+tech talk|A short presentation on a technical topic.|기술 발표
+performance review|A regular meeting to evaluate an employee's work.|인사 평가
+side project|A personal project done outside your main job.|사이드 프로젝트
+data structure|A way of organising data in a program.|자료 구조
+capstone project|A final project at the end of a university program.|캡스톤 프로젝트
+version control|A system that tracks changes to files over time.|버전 관리
+linked list|A list where each item points to the next one.|연결 리스트
+stack|A structure where the last item added is the first removed.|스택
+tree|A structure of nodes with parent and child links.|트리
+graph|A structure of nodes connected by edges.|그래프
+node|One item in a tree, list or graph.|노드
+hash table|A structure that stores key-value pairs for fast lookup.|해시 테이블
+recursion|When a function calls itself.|재귀
+iteration|Repeating steps in a loop.|반복
+sorting|Putting items in order.|정렬
+searching|Finding an item in data.|검색
+binary search|A fast search that halves a sorted list each step.|이진 탐색
+pseudocode|Simple, plain-language steps that describe code.|의사 코드
+object-oriented programming|Programming based on objects and classes.|객체 지향 프로그래밍
+OOP|Short for object-oriented programming.|객체 지향 프로그래밍
+inheritance|When a class gets features from a parent class.|상속
+encapsulation|Keeping data and code together and hiding the details.|캡슐화
+polymorphism|One interface working with different types.|다형성
+abstraction|Showing only important details and hiding complexity.|추상화
+interface|A set of methods a class promises to provide.|인터페이스
+constructor|A special method that creates an object.|생성자
+instance|One object created from a class.|인스턴스
+attribute|A property or piece of data of an object.|속성
+compiler|A program that turns source code into machine code.|컴파일러
+interpreter|A program that runs code line by line.|인터프리터
+runtime|The time when a program is running.|런타임
+syntax error|An error from code written with wrong syntax.|구문 오류
+logic error|A mistake that makes a program give the wrong result.|논리 오류
+debugger|A tool for running code step by step to find bugs.|디버거
+breakpoint|A point where the debugger pauses the program.|중단점
+SQL|A language for working with databases.|SQL
+query|A request for data from a database.|쿼리
+primary key|A unique ID for each row in a table.|기본 키
+foreign key|A field that links to the primary key of another table.|외래 키
+relational database|A database that stores data in related tables.|관계형 데이터베이스
+normalization|Organising database tables to reduce repeated data.|정규화
+ERD|Entity relationship diagram: a picture of tables and their links.|개체 관계도
+entity|A thing about which data is stored, like Customer.|개체, 엔터티
+join|Combining rows from two tables based on a related field.|조인
+operating systems|The university course about how operating systems work.|운영 체제(과목)
+thread|A single path of execution inside a program.|스레드
+CPU|Central processing unit: the main processor.|중앙 처리 장치
+RAM|Fast, temporary memory used while a computer runs.|램(RAM)
+binary|A number system using only 0 and 1.|2진법
+bit|The smallest unit of data: 0 or 1.|비트
+byte|A unit of data made of 8 bits.|바이트
+protocol|A set of rules for how data is sent.|프로토콜
+IP address|A number that identifies a device on a network.|IP 주소
+router|A device that sends data between networks.|라우터
+TCP/IP|The basic set of protocols that runs the internet.|TCP/IP
+HTTP|The protocol used to load web pages.|HTTP
+web development|Building websites and web apps.|웹 개발
+software engineering|Designing, building and maintaining software in a structured way.|소프트웨어 공학
+life cycle|All the stages something goes through.|생명 주기
+requirements|The needs a system must meet.|요구사항
+UML|A standard language of diagrams for designing software.|UML
+class diagram|A UML diagram showing classes and their relationships.|클래스 다이어그램
+sequence diagram|A diagram showing messages between parts in time order.|시퀀스 다이어그램
+waterfall|A method where each phase finishes before the next starts.|폭포수 모델
+Agile|A way of working in short cycles with frequent feedback.|애자일
+Scrum|An Agile framework that uses sprints and set roles.|스크럼
+GitHub repository|A project's code stored on GitHub.|깃허브 저장소
+commit history|The list of all commits in a repository.|커밋 이력
+pull request|A request to review and merge code changes.|풀 리퀘스트
+merge conflict|When Git cannot combine two changes automatically.|병합 충돌
+open source|Software whose code anyone can see and use.|오픈 소스
+report writing|Writing structured reports.|보고서 작성
+citation|A note showing where information came from.|인용
+reference|A source of information you used.|참고 문헌
+plagiarism|Using someone else's work as your own.|표절
+academic integrity|Honesty in study and research.|학문적 진실성
+literature review|A summary of existing research on a topic.|문헌 연구
+methodology|The methods used in research.|방법론
+hypothesis|An idea that can be tested.|가설
+experiment|A test done to learn something.|실험
+dataset|A collection of related data.|데이터 세트
+statistics|The study of data and numbers.|통계
+probability|How likely something is to happen.|확률
+matrix|A grid of numbers in rows and columns.|행렬
+discrete mathematics|Maths about separate values, like logic and sets.|이산 수학
+logic|Reasoning using true and false statements.|논리
+formula|A rule written with symbols and numbers.|공식
+calculate|To work out a number.|계산하다
+average|The middle value found by adding numbers and dividing.|평균
+percentage|A part of 100.|백분율
+supervisor|A person who oversees your work or thesis.|지도 교수, 상사
+advisor|A person who gives academic or career advice.|지도 교수, 조언자
+teaching assistant|A student who helps a lecturer teach.|조교
+TA|Short for teaching assistant.|조교

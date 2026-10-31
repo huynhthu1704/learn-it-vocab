@@ -1,0 +1,300 @@
+program|A set of instructions that a computer runs.|프로그램
+programming|Writing instructions for computers.|프로그래밍
+code|Instructions written in a programming language.|코드
+coding|The activity of writing code.|코딩
+algorithm|A set of steps for solving a problem.|알고리즘
+database|An organised collection of data stored in a computer.|데이터베이스
+file|A named collection of data stored on a computer.|파일
+folder|A place on a computer where files are kept together.|폴더
+download|To copy a file from the internet to your device.|다운로드하다
+install|To put software on a device so it can be used.|설치하다
+uninstall|To remove software from a device.|제거하다
+password|A secret word used to log in.|비밀번호
+username|The name you use to log in.|사용자 이름
+log in|To enter a system using your username and password.|로그인하다
+log out|To leave a system so others cannot use your account.|로그아웃하다
+account|A personal record that lets you use a system or service.|계정
+attachment|A file sent together with an email or message.|첨부 파일
+internet|The worldwide network that connects computers.|인터넷
+web page|A single page on a website.|웹 페이지
+browser|A program for opening websites, such as Chrome.|브라우저
+link|Text or a button that takes you to another page.|링크
+offline|Not connected to the internet.|오프라인의
+app|A program, especially on a phone.|앱
+application|A program designed for a particular task.|애플리케이션
+mobile|Used on phones and tablets.|모바일의
+smartphone|A mobile phone that can run apps and use the internet.|스마트폰
+tablet|A flat, portable computer with a touch screen.|태블릿
+cloud|Servers on the internet that store data and run software.|클라우드
+storage|Space for keeping data on a device or server.|저장 공간
+memory|The part of a computer that holds data while programs run.|메모리
+processor|The chip that carries out a computer's instructions.|프로세서
+operating system|The main software that runs a computer, such as Windows.|운영 체제
+Windows|Microsoft's operating system.|윈도우
+Linux|A free, open-source operating system.|리눅스
+variable|A named place in code that stores a value.|변수
+loop|Code that repeats steps several times.|반복문
+condition|A test in code that is true or false.|조건
+if statement|Code that runs only when a condition is true.|if 문
+input|Data that goes into a program.|입력
+output|Data that a program produces.|출력
+number|A value like 1, 2 or 3.5.|숫자
+string|A piece of text in code.|문자열
+integer|A whole number with no decimal part.|정수
+error|A mistake or a problem that stops something working.|오류
+bug|A mistake in software that makes it work wrongly.|버그
+fix|To repair something that is broken.|수정하다
+run|To start a program.|실행하다
+save|To store your work so it is not lost.|저장하다
+copy|To make the same thing again.|복사하다
+paste|To put copied content into a new place.|붙여넣다
+delete|To remove something permanently.|삭제하다
+open|To start using a file or program.|열다
+close|To stop using a file or program.|닫다
+click|To press a mouse button.|클릭하다
+select|To choose something.|선택하다
+button|Something on a screen you click to do an action.|버튼
+menu|A list of options or commands.|메뉴
+icon|A small picture that stands for a program or action.|아이콘
+window|A rectangular area on a screen where a program is shown.|창
+tab|One of several pages open in the same browser window.|탭
+settings|The options you can change in an app or device.|설정
+lecture|A talk given to students about a subject.|강의
+lecturer|A person who teaches at a university.|강사
+course|A series of lessons on a subject.|강좌, 과목
+subject|An area of knowledge studied at school.|과목
+semester|Half of a school year.|학기
+credit|A unit that shows how much a course counts towards a degree.|학점
+exam|A formal test of knowledge.|시험
+midterm|An exam in the middle of a semester.|중간고사
+quiz|A short test.|퀴즈
+assignment|A piece of work given to a student.|과제
+homework|Schoolwork done at home.|숙제
+submit|To formally hand in work.|제출하다
+grade|A mark showing how good a piece of work is.|성적
+score|The number of points someone gets.|점수
+pass|To succeed in a test or course.|합격하다, 통과하다
+fail|To not succeed in a test or course.|불합격하다
+group project|A project done by a team of students.|조별 과제
+presentation|A talk that shows information to an audience.|발표
+slide|One page of a presentation.|슬라이드
+research|Careful study to find new facts.|연구
+lab|A room for practical work and experiments.|실습실
+tutorial|A lesson or guide that teaches something step by step.|튜토리얼
+example|Something that shows what others of the same type are like.|예시
+exercise|A task to practise a skill.|연습 문제
+understand|To know the meaning of something.|이해하다
+practise|To do something again and again to get better.|연습하다
+learn|To get knowledge or a skill.|배우다
+study|To spend time learning about a subject.|공부하다
+skill|An ability to do something well.|기술, 능력
+major|The main subject a university student studies.|전공
+degree|A qualification given by a university.|학위
+graduate|To finish university and get a degree.|졸업하다
+internship|A period of work to gain experience, often while studying.|인턴십
+intern|A student or new graduate working to gain experience.|인턴
+job|Paid work.|일, 직업
+CV|A document listing your education and work experience.|이력서
+job fair|An event where companies meet people looking for jobs.|채용 박람회
+office|A building or room where people work at desks.|사무실
+developer|A person who writes software.|개발자
+tester|A person who checks software for problems.|테스터
+designer|A person who plans how a product looks and works.|디자이너
+HTML|The language used to build the structure of web pages.|HTML
+CSS|The language used to style web pages.|CSS
+JavaScript|A programming language that makes web pages interactive.|자바스크립트
+Python|A popular programming language that is easy to read.|파이썬
+Java|A widely used programming language.|자바
+table|Data arranged in rows and columns.|표, 테이블
+row|A horizontal line of data in a table.|행
+column|A vertical line of data in a table.|열
+chart|A picture that shows data, such as a bar chart.|차트
+video|Moving pictures recorded on a device.|동영상
+audio|Sound.|오디오
+camera|A device for taking photos or video.|카메라
+microphone|A device that records sound.|마이크
+headphones|A device you wear over your ears to listen.|헤드폰
+Wi-Fi|A way to connect to the internet without cables.|와이파이
+network|A group of connected computers.|네트워크
+connect|To join things together.|연결하다
+connection|A link between devices or to the internet.|연결
+virus|Harmful software that spreads and damages computers.|컴퓨터 바이러스
+backup|A copy of data kept in case the original is lost.|백업
+restart|To turn off and turn on again.|재시작하다
+shortcut|A quick key combination for a common action.|단축키
+screenshot|A picture of what is on a screen.|스크린샷
+chat|A conversation by typing short messages.|채팅
+message|A short piece of written information sent to someone.|메시지
+online meeting|A meeting held over the internet.|온라인 회의
+schedule|A plan of times for activities.|일정
+calendar|A tool showing days and events.|달력, 캘린더
+note|A short piece of writing to help you remember.|메모
+solution|A way to solve a problem.|해결책
+result|What happens because of something.|결과
+idea|A thought or suggestion.|아이디어
+test case|A set of steps and expected results for checking one thing.|테스트 케이스
+defect|A fault in software that makes it behave wrongly.|결함
+expected result|What should happen if the software works correctly.|예상 결과
+actual result|What really happens when you test.|실제 결과
+QA|Quality assurance: work to make sure a product is good.|품질 보증
+quality|How good something is.|품질
+testing|Checking software to find problems.|테스트
+manual testing|Testing done by a person, not by scripts.|수동 테스트
+bug report|A document describing a bug and how to reproduce it.|버그 보고서
+steps to reproduce|The exact actions needed to make a bug happen again.|재현 단계
+precondition|Something that must be true before a test or step starts.|사전 조건
+test data|Data prepared for testing.|테스트 데이터
+test step|One action in a test case.|테스트 단계
+fixed|Repaired.|수정된
+closed|Finished and no longer active.|종료된
+reopen|To open again something that was closed.|다시 열다
+retest|To test again after a fix.|재테스트하다
+verify|To check that something is true or works.|검증하다
+high|Above the normal level.|높은
+low|Below the normal level.|낮은
+critical|Extremely serious.|치명적인
+minor|Small and not very important.|사소한
+screen recording|A video of what happens on a screen.|화면 녹화
+attach|To add a file to a message or ticket.|첨부하다
+device|A machine such as a phone or computer.|기기
+Chrome|Google's web browser.|크롬
+Safari|Apple's web browser.|사파리
+build number|A number that identifies one build of the software.|빌드 번호
+test environment|A setup of servers used for testing.|테스트 환경
+test plan|A document describing what, how and when to test.|테스트 계획
+test suite|A group of test cases run together.|테스트 스위트
+checklist|A list of items to check one by one.|체크리스트
+scenario|A description of a situation or a sequence of user actions.|시나리오
+happy path|The normal flow where everything goes right.|정상 경로
+negative test|A test using wrong or unexpected input.|부정 테스트
+positive test|A test using correct input.|긍정 테스트
+valid|Correct and acceptable.|유효한
+invalid|Not correct or not acceptable.|유효하지 않은
+required field|A field that must be filled in.|필수 입력란
+validation|Checking that data is correct before accepting it.|유효성 검사
+special character|A symbol that is not a letter or number, like @ or #.|특수 문자
+empty|Containing nothing.|비어 있는
+maximum|The largest allowed amount.|최댓값
+minimum|The smallest allowed amount.|최솟값
+limit|The largest or smallest amount allowed.|제한
+logout|The act of leaving your account.|로그아웃
+checkout|The step where a customer pays for items in a cart.|결제
+cart|A list of items a customer wants to buy.|장바구니
+404 error|An error that means the page was not found.|404 오류
+spelling mistake|A word written incorrectly.|철자 오류
+alignment|How items line up with each other.|정렬
+overlap|To cover part of something else.|겹치다
+cut off|Partly hidden because there is not enough space.|잘린
+missing|Not there when it should be.|누락된
+wrong|Not correct.|틀린
+correct|Right; without mistakes.|올바른
+freeze|To stop responding to input.|멈추다
+loading time|How long a page or app takes to load.|로딩 시간
+always|Every time.|항상
+sometimes|On some occasions.|가끔
+randomly|Without a clear pattern.|무작위로
+again|One more time.|다시
+step by step|In a careful order, one step at a time.|단계별로
+assign|To give a task to someone.|할당하다
+assignee|The person a task is given to.|담당자
+reporter|The person who reported an issue.|보고자
+Jira|A popular tool for tracking tasks and bugs.|지라
+board|A screen showing tasks in columns by status.|보드
+duplicate|An exact copy of something that already exists.|중복
+test account|An account created only for testing.|테스트 계정
+email address|The address used to send someone email.|이메일 주소
+phone number|The number used to call someone.|전화번호
+time zone|An area of the world that uses the same time.|시간대
+language|A system of words used by people, such as English.|언어
+mobile view|How a page looks on a phone.|모바일 화면
+desktop|A computer that stays on a desk.|데스크톱
+portrait|Holding a screen upright, taller than wide.|세로 모드
+landscape|Holding a screen sideways, wider than tall.|가로 모드
+screen size|The size of a device's display.|화면 크기
+popup|A small window that appears on top of the page.|팝업
+disabled|Turned off so it cannot be used.|비활성화된
+enabled|Turned on so it can be used.|활성화된
+visible|Able to be seen.|보이는
+hidden|Not shown.|숨겨진
+scroll|To move content up or down on a screen.|스크롤하다
+tap|To touch a screen quickly with a finger.|탭하다
+swipe|To move a finger across a touch screen.|스와이프하다
+double-click|To click a mouse button twice quickly.|더블 클릭하다
+drag and drop|To move an item by holding it and releasing it somewhere else.|끌어서 놓다
+clear cache|To delete saved browser data so pages load fresh.|캐시를 지우다
+log file|A file that records events and errors.|로그 파일
+console error|An error message shown in the browser console.|콘솔 오류
+test result|The outcome of a test: pass or fail.|테스트 결과
+test report|A summary of testing done and its results.|테스트 보고서
+coverage|How much of something has been tested or included.|커버리지, 적용 범위
+smoke test|A quick test to check that the main functions work.|스모크 테스트
+sanity check|A quick check that something makes sense.|간단한 점검
+exploratory testing|Testing without fixed scripts, learning as you test.|탐색적 테스트
+user acceptance testing|Testing by real users to confirm the system meets their needs.|사용자 인수 테스트
+UAT|Short for user acceptance testing.|사용자 인수 테스트
+release note|A document that lists what changed in a new version.|릴리스 노트
+new feature|A function added for the first time.|새 기능
+regression|A bug in something that used to work.|회귀 결함
+workaround|A temporary way to avoid a problem.|임시 해결책
+known issue|A problem that is already known but not yet fixed.|알려진 문제
+root cause|The real, original reason a problem happened.|근본 원인
+impact|The effect something has.|영향
+ready for test|Finished by developers and ready to be tested.|테스트 준비 완료
+blocker|A problem that stops work from continuing.|차단 이슈
+acceptance criteria|Conditions a story must meet to be accepted as done.|인수 조건
+scope creep|When a project slowly grows beyond what was agreed.|범위 확장
+product backlog|The ordered list of everything that might go into a product.|제품 백로그
+backlog refinement|Regular work to clarify, split and estimate backlog items.|백로그 정제
+grooming|Another name for backlog refinement.|백로그 정리
+epic|A large piece of work split into several user stories.|에픽
+story|Short for user story.|스토리
+INVEST|A checklist for good user stories: Independent, Negotiable, Valuable, Estimable, Small, Testable.|INVEST 원칙
+definition of ready|Conditions a story must meet before the team starts it.|준비 완료 정의
+sprint goal|The main objective the team wants to reach in a sprint.|스프린트 목표
+sprint review|A meeting at the end of a sprint to show finished work.|스프린트 리뷰
+daily scrum|The short daily Scrum meeting.|데일리 스크럼
+Scrum Master|The person who helps a Scrum team work well and removes blockers.|스크럼 마스터
+increment|The usable, finished work added in a sprint.|증분
+Kanban|A method that shows work on a board and limits work in progress.|칸반
+WIP limit|The maximum number of tasks allowed in progress at once.|진행 중 작업 제한
+MVP|Minimum viable product: the simplest version that is still useful.|최소 기능 제품
+roadmap|A high-level plan of what will be built over time.|로드맵
+release plan|A plan of which features go into which release.|릴리스 계획
+prioritize|To decide the order of importance.|우선순위를 정하다
+MoSCoW|A prioritisation method: Must, Should, Could, Won't.|MoSCoW 우선순위 기법
+must-have|Something that is absolutely required.|필수 항목
+nice-to-have|Something useful but not essential.|있으면 좋은 항목
+elicitation|Finding out requirements from stakeholders.|요구사항 도출
+elicit|To draw out information from people.|끌어내다, 도출하다
+requirements gathering|Collecting requirements from stakeholders.|요구사항 수집
+functional requirement|What the system must do.|기능 요구사항
+non-functional requirement|How well the system must work, such as speed or security.|비기능 요구사항
+BRD|Business requirements document.|비즈니스 요구사항 문서
+SRS|Software requirements specification.|소프트웨어 요구사항 명세서
+FRD|Functional requirements document.|기능 요구사항 문서
+use case|A description of how a user interacts with a system to reach a goal.|유스케이스
+actor|A person or system that interacts with the system in a use case.|액터
+main flow|The normal steps in a use case.|기본 흐름
+alternative flow|Other valid steps a user might take.|대체 흐름
+exception flow|Steps that happen when something goes wrong.|예외 흐름
+postcondition|What must be true after a use case finishes.|사후 조건
+user persona|A fictional profile that represents a type of user.|사용자 페르소나
+user journey|The steps a user goes through to reach a goal.|사용자 여정
+customer journey map|A diagram of a customer's experience across all steps.|고객 여정 지도
+pain point|A problem or frustration that users experience.|불편 사항, 페인 포인트
+as-is process|How a process works today.|현행 프로세스
+to-be process|How a process should work in the future.|목표 프로세스
+BPMN|A standard notation for drawing business processes.|BPMN 표기법
+swimlane|A lane in a diagram that shows who does each step.|스윔레인
+activity diagram|A UML diagram that shows the flow of activities.|활동 다이어그램
+context diagram|A diagram showing a system and the outside parties it connects to.|컨텍스트 다이어그램
+data flow diagram|A diagram showing how data moves through a system.|데이터 흐름도
+data dictionary|A list that describes every data field.|데이터 사전
+mapping|Matching fields in one system to fields in another.|매핑
+validation rule|A rule that checks whether data is acceptable.|검증 규칙
+edge case|An unusual situation at the limits of what is possible.|엣지 케이스
+business process|A set of activities a business does to reach a result.|비즈니스 프로세스
+domain knowledge|Knowledge about a specific industry or business area.|도메인 지식
+subject matter expert|A person with deep knowledge of a topic.|주제 전문가
+SME|Short for subject matter expert.|주제 전문가
+sponsor|The senior person who supports and funds a project.|후원자, 스폰서

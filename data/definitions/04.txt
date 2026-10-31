@@ -1,0 +1,300 @@
+office hours|Set times when a teacher is available to meet students.|면담 시간
+syllabus|A document listing a course's topics, rules and deadlines.|강의 계획서
+prerequisite|A course you must pass before taking another one.|선수 과목
+elective|A course you choose rather than one that is required.|선택 과목
+GPA|Grade point average: the average of all your grades.|평균 학점
+transcript|An official record of a student's courses and grades.|성적 증명서
+scholarship|Money given to a student to help pay for study.|장학금
+exchange program|A program where students study at a university abroad for a time.|교환 학생 프로그램
+hackathon|An event where teams build software in a short time.|해커톤
+competition|An event where people try to win.|대회
+club|A group of people who meet for a shared interest.|동아리
+mentor|An experienced person who advises someone less experienced.|멘토
+portfolio|A collection of your best work to show employers.|포트폴리오
+LinkedIn|A social network for professionals and jobs.|링크드인
+cover letter|A letter sent with a CV explaining why you want the job.|자기소개서
+recruiter|A person who finds people for jobs.|채용 담당자
+entry-level|Suitable for people with little or no work experience.|신입 수준의
+fresher|A recent graduate looking for a first job.|신입
+technical interview|A job interview that tests technical skills.|기술 면접
+coding test|A test where candidates solve programming problems.|코딩 테스트
+soft skills|Personal skills like communication and teamwork.|소프트 스킬
+teamwork|Working well together with others.|팀워크
+time management|Using your time well to finish work.|시간 관리
+presentation skills|The ability to present information clearly to an audience.|발표 능력
+peer|A person at the same level as you.|동료
+revise|To study again before an exam, or to change a piece of writing.|복습하다, 수정하다
+retake|To take a course or exam again.|재수강하다, 재시험 보다
+attendance|Being present at classes or meetings.|출석
+group member|A person in a group.|조원
+contribute|To give work or ideas to help something succeed.|기여하다
+divide|To split into parts.|나누다
+responsibility|A duty to take care of something.|책임
+requirement analysis|Studying and refining requirements.|요구사항 분석
+user interface design|Designing screens and controls that people use.|사용자 인터페이스 디자인
+usability|How easy something is to use.|사용성
+accessibility|How easily people with disabilities can use something.|접근성
+REST API|A common style of web API that uses standard HTTP methods.|REST API
+virtual machine|A computer simulated by software on another computer.|가상 머신
+command line|A text interface for typing commands.|명령줄
+shell|A program that reads and runs typed commands.|셸
+machine learning|Computers learning patterns from data.|머신 러닝
+artificial intelligence|Computer systems that do tasks that usually need human thinking.|인공 지능
+AI|Short for artificial intelligence.|인공 지능
+neural network|A computer model inspired by the brain that learns from data.|신경망
+training data|Data used to teach a machine learning model.|학습 데이터
+accuracy|How often something is correct.|정확도
+cybersecurity|Protecting systems and data from attacks.|사이버 보안
+encryption|Changing data into a secret code so others cannot read it.|암호화
+firewall|A system that blocks unwanted network traffic.|방화벽
+phishing|Tricking people into giving secret information, often by email.|피싱
+defend|To present and answer questions about your thesis or project.|변론하다, 디펜스하다
+committee|A group of people chosen to make decisions or judge.|위원회
+thesis|A long piece of research writing for a degree.|학위 논문
+proposal|A plan or suggestion presented for approval.|제안서
+regression testing|Re-testing to make sure new changes didn't break old features.|회귀 테스트
+severity|How serious a bug is.|심각도
+test strategy|The overall approach to testing a product.|테스트 전략
+test scope|What will and will not be tested.|테스트 범위
+in scope|Included in the agreed work.|범위에 포함된
+out of scope|Not included in the agreed work.|범위를 벗어난
+entry criteria|Conditions that must be met before testing starts.|시작 기준
+exit criteria|Conditions that must be met before testing ends.|종료 기준
+test cycle|One full round of testing.|테스트 주기
+test execution|Running the tests.|테스트 실행
+test design|Creating test cases and test data.|테스트 설계
+test scenario|A high-level description of what to test.|테스트 시나리오
+traceability matrix|A table linking requirements to test cases.|추적성 매트릭스
+requirement coverage|How many requirements have tests.|요구사항 커버리지
+boundary value analysis|Testing values at the edges of allowed ranges.|경계값 분석
+equivalence partitioning|Grouping inputs that behave the same and testing one from each group.|동등 분할
+decision table|A table showing actions for each combination of conditions.|결정 테이블
+state transition|A change from one state to another.|상태 전이
+black-box testing|Testing without looking at the code.|블랙박스 테스트
+white-box testing|Testing based on knowledge of the code.|화이트박스 테스트
+functional testing|Testing what the system does.|기능 테스트
+non-functional testing|Testing qualities like speed, security and usability.|비기능 테스트
+integration testing|Testing how parts work together.|통합 테스트
+system testing|Testing the complete system.|시스템 테스트
+end-to-end testing|Testing a full user flow from start to finish.|엔드 투 엔드 테스트
+API testing|Testing APIs directly, without the user interface.|API 테스트
+Postman|A popular tool for sending and testing API requests.|포스트맨
+compatibility testing|Testing on different devices, browsers and systems.|호환성 테스트
+cross-browser testing|Testing on several web browsers.|크로스 브라우저 테스트
+usability testing|Watching real users try a product to find problems.|사용성 테스트
+localization testing|Testing a product for a specific language and region.|현지화 테스트
+retesting|Testing a fixed bug again.|재테스트
+confirmation testing|Testing that confirms a bug has been fixed.|확인 테스트
+test data preparation|Creating the data needed for tests.|테스트 데이터 준비
+test management tool|Software for organising test cases and results.|테스트 관리 도구
+test run|One execution of a set of tests.|테스트 실행 회차
+test case ID|The unique number of a test case.|테스트 케이스 ID
+reproducible|Able to be made to happen again.|재현 가능한
+intermittent|Happening sometimes, not all the time.|간헐적인
+flaky|Sometimes passing and sometimes failing without a code change.|불안정한
+bug life cycle|The stages a bug goes through from new to closed.|버그 생명 주기
+triage|Reviewing bugs to decide their priority and owner.|분류, 트리아지
+defect density|The number of defects per size of code or module.|결함 밀도
+defect leakage|Bugs that escape testing and reach production.|결함 누출
+escaped defect|A bug found after release.|유출 결함
+won't fix|A decision not to fix a bug.|수정하지 않음
+not a bug|Behaviour that is correct, not a fault.|버그 아님
+by design|Working the way it was intended.|의도된 동작
+cannot reproduce|Unable to make the bug happen again.|재현 불가
+deferred|Postponed to a later time.|연기된
+expected behaviour|How the system should act.|예상 동작
+actual behaviour|How the system really acts.|실제 동작
+inconsistent|Not the same in all places or times.|일관성 없는
+mismatch|A difference between two things that should match.|불일치
+discrepancy|A difference between things that should be the same.|차이, 불일치
+shift left|Testing earlier in the development process.|시프트 레프트
+peer review|A review of work by colleagues.|동료 검토
+walkthrough|A meeting where the author explains a document or design step by step.|워크스루
+static testing|Testing without running the code, such as reviews.|정적 테스트
+dynamic testing|Testing by running the software.|동적 테스트
+test automation|Using scripts and tools to run tests automatically.|테스트 자동화
+automation script|Code that runs a test automatically.|자동화 스크립트
+Selenium|A tool for automating web browsers.|셀레늄
+locator|A way to find an element on a page in automated tests.|로케이터
+XPath|A language for finding elements in a page's structure.|XPath
+selector|A pattern used to find elements on a page.|선택자
+page object|A pattern that represents a page as a class in test code.|페이지 객체
+wait|A pause in a test until something appears.|대기
+test framework|A set of tools and rules for writing tests.|테스트 프레임워크
+headless|Running a browser without showing its window.|헤드리스
+parallel execution|Running several tests at the same time.|병렬 실행
+CI pipeline|An automated pipeline that builds and tests every change.|CI 파이프라인
+nightly build|A build created automatically every night.|야간 빌드
+smoke suite|A set of quick tests for the main functions.|스모크 테스트 묶음
+regression suite|A set of tests run to catch regressions.|회귀 테스트 묶음
+pass rate|The percentage of tests that pass.|통과율
+metrics|Measurements used to track performance.|지표
+performance testing|Testing speed and stability under load.|성능 테스트
+load testing|Testing with the expected number of users.|부하 테스트
+stress testing|Testing beyond normal load to find the breaking point.|스트레스 테스트
+response time|How long a system takes to respond.|응답 시간
+concurrent users|Users active at the same time.|동시 사용자
+JMeter|A tool for load and performance testing.|제이미터
+security testing|Testing for weaknesses attackers could use.|보안 테스트
+SQL injection|An attack that puts harmful SQL into an input field.|SQL 인젝션
+access control|Rules about who can use what.|접근 제어
+role-based access|Permissions given based on a user's role.|역할 기반 접근
+session timeout|Automatic logout after a period without activity.|세션 만료
+data privacy|Protecting personal information.|데이터 프라이버시
+mobile testing|Testing apps on phones and tablets.|모바일 테스트
+emulator|Software that imitates a device, such as an Android phone.|에뮬레이터
+simulator|Software that imitates a device's behaviour, such as an iPhone.|시뮬레이터
+real device|An actual physical phone or tablet.|실제 기기
+device farm|A collection of real devices available for testing.|디바이스 팜
+network condition|The speed and quality of the connection.|네트워크 상태
+offline mode|Using an app without an internet connection.|오프라인 모드
+push notification|A message an app sends to your phone's screen.|푸시 알림
+deep link|A link that opens a specific screen inside an app.|딥 링크
+app store|An online shop for downloading apps.|앱 스토어
+beta testing|Testing by a group of real users before full release.|베타 테스트
+alpha testing|Early testing inside the company.|알파 테스트
+production issue|A problem in the live system.|운영 장애
+release candidate|A version that may become the final release.|릴리스 후보
+go/no-go|A decision about whether to release or not.|출시 여부 결정
+sign-off|Formal approval.|최종 승인
+quality gate|A set of conditions a build must meet to move forward.|품질 게이트
+risk-based testing|Testing the riskiest areas first.|위험 기반 테스트
+test estimation|Estimating how much time testing will take.|테스트 공수 산정
+environment issue|A problem caused by the environment, not the code.|환경 문제
+configuration|The settings of a system.|구성, 설정
+database check|Looking in the database to confirm data is correct.|데이터베이스 확인
+SQL query|A command written in SQL to read or change data.|SQL 쿼리
+log analysis|Reading logs to find the cause of problems.|로그 분석
+browser console|The browser panel that shows script messages and errors.|브라우저 콘솔
+network tab|The DevTools panel that shows every network request.|네트워크 탭
+DevTools|Built-in browser tools for inspecting and debugging pages.|개발자 도구
+cache issue|A problem caused by old saved data.|캐시 문제
+test evidence|Proof that a test was run, such as screenshots.|테스트 증적
+audit|An official check of records or processes.|감사
+compliance|Following rules, laws or standards.|준수, 컴플라이언스
+standard|An agreed level of quality or way of doing something.|표준
+ISTQB|An international certification for software testers.|ISTQB 자격증
+QA engineer|A person who plans and carries out quality testing.|QA 엔지니어
+automation engineer|A tester who writes automated tests.|자동화 엔지니어
+test lead|The person who leads the testing team.|테스트 리드
+collaborate|To work together with others.|협업하다
+escalate|To raise a problem to someone more senior.|상부에 보고하다
+communicate|To share information with others.|소통하다
+gap analysis|Comparing the current state with the desired state.|격차 분석
+prioritization|Deciding the order of importance.|우선순위 지정
+ROI|Return on investment: what you gain compared with what you spend.|투자 수익률
+stakeholder alignment|When stakeholders agree on goals and direction.|이해관계자 간 합의
+value proposition|Why customers should choose your product.|가치 제안
+product vision|The long-term goal of a product.|제품 비전
+product strategy|The plan for how a product will reach its vision.|제품 전략
+product discovery|Finding out what to build before building it.|제품 발견
+product-market fit|When a product meets a strong market need.|제품-시장 적합성
+OKR|Objectives and key results: a goal-setting method.|목표 및 핵심 결과
+north star metric|The one key number that shows product success.|북극성 지표
+outcome-based roadmap|A roadmap organised by goals rather than features.|성과 기반 로드맵
+opportunity solution tree|A diagram linking a goal to opportunities and solutions.|기회-솔루션 트리
+jobs to be done|A theory that people "hire" products to get a job done.|해결할 과업 이론
+hypothesis-driven development|Building features as experiments to test ideas.|가설 기반 개발
+validated learning|Knowledge proven by real experiments with users.|검증된 학습
+lean canvas|A one-page business plan for startups.|린 캔버스
+business model canvas|A one-page chart of how a business creates value.|비즈니스 모델 캔버스
+SWOT analysis|Studying strengths, weaknesses, opportunities and threats.|SWOT 분석
+competitive analysis|Studying competitors' products and strategies.|경쟁 분석
+market research|Collecting information about customers and markets.|시장 조사
+TAM|Total addressable market: the total demand for a product.|전체 시장 규모
+unit economics|Revenue and cost per customer or per unit.|단위 경제성
+customer lifetime value|The total money a customer brings over time.|고객 생애 가치
+customer acquisition cost|The cost of winning one new customer.|고객 획득 비용
+payback period|The time needed to earn back an investment.|투자 회수 기간
+NPV|Net present value: today's value of future cash flows.|순현재가치
+total cost of ownership|The full cost of buying and running something over time.|총소유비용
+CAPEX|Capital expenditure: money spent on long-term assets.|자본 지출
+OPEX|Operating expenditure: money spent on running the business.|운영 비용
+business value|The benefit something brings to the business.|비즈니스 가치
+cost of delay|The value lost by doing something later.|지연 비용
+WSJF|Weighted shortest job first: prioritising by value divided by size.|WSJF 우선순위 기법
+RICE scoring|Prioritising by Reach, Impact, Confidence and Effort.|RICE 점수화
+Kano model|A model that groups features by how they affect satisfaction.|카노 모델
+weighted scoring|Scoring options using weighted criteria.|가중치 점수법
+decision matrix|A table for comparing options against criteria.|의사결정 매트릭스
+five whys|Asking "why" five times to find a root cause.|5 Whys 기법
+fishbone diagram|A diagram that shows possible causes of a problem.|특성 요인도(피쉬본)
+process optimization|Making a process faster, cheaper or better.|프로세스 최적화
+process automation|Using technology to do process steps automatically.|프로세스 자동화
+RPA|Robotic process automation: software bots doing repetitive tasks.|로보틱 프로세스 자동화
+value stream mapping|Mapping all steps that deliver value to find waste.|가치 흐름 지도
+lean|Focused on removing waste.|린(군살 없는)
+Six Sigma|A method for reducing errors in processes.|식스 시그마
+operating model|How an organisation is set up to deliver value.|운영 모델
+target operating model|The future operating model an organisation wants.|목표 운영 모델
+capability map|A map of what a business is able to do.|역량 지도
+enterprise architecture|The overall design of an organisation's systems and processes.|전사 아키텍처
+solution architecture|The design of a solution for a specific business problem.|솔루션 아키텍처
+system integration|Connecting different systems to work together.|시스템 통합
+interface specification|A document describing how two systems exchange data.|인터페이스 명세서
+API contract|The agreed format of an API's requests and responses.|API 계약
+data governance|Rules and roles for managing data well.|데이터 거버넌스
+master data|Core business data such as customers and products.|마스터 데이터
+single source of truth|One trusted place where data is kept.|단일 진실 공급원
+data lineage|Where data comes from and how it changes.|데이터 계보
+data quality|How accurate and complete data is.|데이터 품질
+business intelligence|Using data and reports to make business decisions.|비즈니스 인텔리전스
+data-driven decision|A decision based on data rather than opinion.|데이터 기반 의사결정
+cohort analysis|Comparing groups of users who started at the same time.|코호트 분석
+funnel analysis|Studying where users drop out in a series of steps.|퍼널 분석
+leading indicator|A measure that predicts future results.|선행 지표
+lagging indicator|A measure that shows past results.|후행 지표
+benchmark|A standard to compare against.|벤치마크
+regulatory requirement|A requirement that comes from law or regulation.|규제 요구사항
+audit trail|A record of who did what and when.|감사 추적
+data protection|Keeping personal data safe and used legally.|데이터 보호
+risk appetite|How much risk an organisation is willing to accept.|위험 성향
+governance|The rules and structure for how decisions are made.|거버넌스
+portfolio management|Choosing and managing a group of projects.|포트폴리오 관리
+program management|Managing several related projects together.|프로그램 관리
+PMO|Project management office: a team that sets project standards.|프로젝트 관리 조직
+benefits realization|Making sure a project delivers its expected benefits.|효과 실현
+earned value|A method comparing work done with planned work and cost.|획득 가치
+burn rate|How fast a company spends its money.|자금 소진율
+burndown chart|A chart showing work remaining over time.|번다운 차트
+burnup chart|A chart showing work completed and total scope over time.|번업 차트
+forecast|A prediction of what will happen.|예측
+predictability|How reliably something can be predicted.|예측 가능성
+dependency management|Tracking and handling dependencies between work.|의존성 관리
+scaled agile|Using Agile across many teams in a large organisation.|대규모 애자일
+SAFe|Scaled Agile Framework: a method for Agile in large organisations.|SAFe 프레임워크
+PI planning|A big planning event for several teams in SAFe.|PI 계획
+release train|A group of teams that plan and release together on a schedule.|릴리스 트레인
+product manager|The person responsible for a product's strategy and success.|프로덕트 매니저
+chief product officer|The executive in charge of all products.|최고 제품 책임자
+executive summary|A short summary of a report for senior leaders.|요약 보고
+executive sponsor|A senior leader who supports a project.|임원 후원자
+C-level|The top executives of a company, such as the CEO.|최고 경영진
+buy-in|Agreement and support from people.|지지, 동의
+influence|To affect what someone thinks or does.|영향을 미치다
+persuade|To make someone agree or do something.|설득하다
+storytelling|Using stories to explain ideas.|스토리텔링
+narrative|The story that connects information together.|내러티브
+facilitation|The skill of running meetings and workshops well.|진행, 퍼실리테이션
+conflict resolution|Solving disagreements.|갈등 해결
+difficult conversation|A conversation about a sensitive or unpleasant topic.|어려운 대화
+manage expectations|To make sure people expect what is realistic.|기대치를 관리하다
+say no|To refuse.|거절하다
+compromise|An agreement where each side gives up something.|타협
+mitigation plan|A plan to reduce a risk.|완화 계획
+contingency plan|A backup plan if something goes wrong.|비상 계획
+critical success factor|Something that must go right for success.|핵심 성공 요인
+success criteria|Measures that show whether something succeeded.|성공 기준
+post-implementation review|A review after a system goes live.|구현 후 검토
+lessons learned|Knowledge gained from experience to use next time.|교훈
+continuous improvement|Always looking for ways to do better.|지속적 개선
+digital transformation|Using digital technology to change how a business works.|디지털 전환
+change impact assessment|Studying how a change will affect people and processes.|변화 영향 평가
+organizational change|A change in how an organisation is structured or works.|조직 변화
+resistance to change|When people don't want to accept change.|변화에 대한 저항
+change champion|A person who supports and promotes a change.|변화 선도자
+customer centricity|Putting the customer at the centre of decisions.|고객 중심주의
+voice of the customer|Customers' needs and opinions.|고객의 목소리
+NPS|Net promoter score: how likely customers are to recommend you.|순추천지수
+customer satisfaction|How happy customers are.|고객 만족도
+omnichannel|Using many connected sales channels.|옴니채널
