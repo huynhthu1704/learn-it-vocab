@@ -88,7 +88,7 @@ dependency management|n|quản lý phụ thuộc|Dependency management across te
 scaled agile|n|Agile quy mô lớn|The bank uses scaled agile.|agile
 SAFe|n|khung Agile quy mô lớn SAFe|We work in SAFe with eight teams.|agile
 PI planning|n|lập kế hoạch PI|PI planning takes two days.|agile
-release train|n|đoàn tàu phát hành|Our release train has six teams.|agile
+release train|n|nhóm nhiều đội cùng lên kế hoạch và phát hành theo lịch cố định (Agile Release Train)|Our release train has six teams.|agile
 product manager|n|quản lý sản phẩm|The product manager owns the strategy.|people
 chief product officer|n|giám đốc sản phẩm|The chief product officer approved the roadmap.|people
 executive summary|n|bản tóm tắt cho lãnh đạo|Start the report with an executive summary.|communication

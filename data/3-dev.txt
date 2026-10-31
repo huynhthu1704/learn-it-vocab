@@ -117,7 +117,7 @@ cold start|n|khởi động nguội|Serverless functions have a cold start.|clou
 edge case|n|trường hợp biên|Cover every edge case in the tests.|testing
 regression|n|lỗi hồi quy|This change caused a regression.|bug
 hotfix release|n|bản phát hành sửa lỗi khẩn|We shipped a hotfix release at night.|release
-release train|n|lịch phát hành định kỳ|Miss the release train and wait two weeks.|release
+release train|n|lịch phát hành định kỳ (bỏ lỡ thì chờ đợt sau)|Miss the release train and wait two weeks.|release
 feature toggle|n|công tắc tính năng|Use a feature toggle for the new checkout.|release
 dark launch|n|phát hành ẩn|We did a dark launch of the new search.|release
 technical roadmap|n|lộ trình kỹ thuật|The technical roadmap includes a new database.|business

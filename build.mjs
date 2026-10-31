@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { build as esbuild } from 'esbuild';
+import { tagRoles } from './roles.mjs';
 import { dictionary as CMU } from 'cmu-pronouncing-dictionary';
 
 const ROLES = { student: 'University students', dev: 'Developers', test: 'Testers (QA)', ba: 'BA / PO / PM' };
@@ -97,6 +98,7 @@ for (const f of fs.readdirSync('data/definitions').filter(f => f.endsWith('.txt'
 for (const w of words) { const d = DEF.get(w.term.toLowerCase()); if (d) { w.en = d.en; w.ko = d.ko; } }
 const noDef = words.filter(w => !w.en);
 if (noDef.length) { console.error('Missing definitions in data/definitions/:', noDef.map(w => w.term).join(', ')); process.exit(1); }
+for (const w of words) tagRoles(w);
 const noIpa = words.filter(w => !w.ipa);
 console.log('total unique', words.length, 'duplicates dropped', dups.length, 'missing IPA terms', noIpa.length);
 console.log('missing tokens:', [...missing].join(', '));

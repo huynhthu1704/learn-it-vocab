@@ -1,5 +1,5 @@
 rules_version = '2';
-// Paste this into Firebase console → Firestore Database → Rules → Publish.
+// Firebase console → Firestore Database → Rules → paste → Publish.
 service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
@@ -14,7 +14,17 @@ service cloud.firestore {
     // Admin list: a signed-in user may check only their own entry. Create entries by hand in the console.
     match /admins/{uid} { allow read: if signedIn() && request.auth.uid == uid; allow write: if false; }
 
-    // A learner's own progress: only they can read or write it.
-    match /users/{uid} { allow read, write: if signedIn() && request.auth.uid == uid; }
+    // Reports of wrong definitions: any signed-in user can file one; admins review them.
+    match /reports/{id} {
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid && request.resource.data.status == 'open';
+      allow read: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+
+    // A learner's own data (progress, preferences, personal word lists): only they can read or write it.
+    match /users/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+      match /{sub=**} { allow read, write: if signedIn() && request.auth.uid == uid; }
+    }
   }
 }
