@@ -28,7 +28,7 @@ Each line: `type|phrase|tone|English meaning|Vietnamese|Korean|When to use|Examp
 - **Quiz**: 10 mixed questions on IT vocabulary (meaning, word, definition, fill the gap, listening) or Workplace English (meaning, phrase, what to say in a situation).
 - **My progress**: known words, daily streak, saved words, and a choice of American or British voice and speed.
 
-Progress is saved in each visitor's browser (localStorage), so no account or server is needed.
+Progress is saved in each visitor's browser, and synced to Firestore when they sign in with Google.
 
 ## Project structure
 
@@ -39,7 +39,9 @@ src/template.html                ← website code: HTML, CSS and JavaScript
 data/1-student.txt … 6-extra-l3.txt   ← the word lists you edit
 data/pronunciation-overrides.json     ← IPA for words the dictionary doesn't know
 data/definitions/*.txt           ← English definition and Korean meaning: term|English|Korean
-build.mjs                        ← builds words.json and index.html
+build.mjs                        ← builds words.json, index.html and cloud.js
+src/cloud.js, src/firebase-config.js  ← Firebase code and config (bundled into cloud.js)
+firestore.rules                  ← Firestore security rules
 ```
 
 ## How to add or edit words
@@ -68,6 +70,36 @@ build.mjs                        ← builds words.json and index.html
    The IPA comes from the CMU Pronouncing Dictionary (American English). If a word isn't in it, the build stops and lists the word. Add its IPA to `data/pronunciation-overrides.json`, then build again.
 
 3. Commit and push. GitHub Pages updates the live site within a minute or two.
+
+## Firebase (Firestore + Google sign-in)
+
+The site reads its content from Cloud Firestore and lets learners sign in with Google to sync progress. If Firebase isn't configured or can't be reached, it falls back to the built-in copy of the data and keeps progress in the browser.
+
+**Firestore layout**
+
+| Collection | Contents | Who can write |
+|---|---|---|
+| `words/{w0001}` | one document per word (term, ipa, english, vietnamese, korean, example, topic, level, roles) | admins |
+| `corporate/{c001}` | one document per Workplace English entry | admins |
+| `bundles/{name}` | packed copies of both collections; the site reads these, so a visit costs about 7 reads instead of 2,500 | admins |
+| `meta/info` | version, counts, publish date | admins |
+| `admins/{uid}` | who may publish (create by hand in the console) | nobody (console only) |
+| `users/{uid}` | a learner's own progress | that user |
+
+Everyone can read the content collections. The rules are in `firestore.rules`.
+
+**Set up once**
+
+1. Put the web app config in `src/firebase-config.js` and run `npm run build`.
+2. Firebase console → Firestore Database → Rules: paste `firestore.rules` and click **Publish**.
+3. Open the site → My progress → **Sign in with Google** → copy your User ID.
+4. Firebase console → Firestore → **Start collection** `admins` → Document ID = your User ID → add any field (e.g. `role` = `admin`) → Save.
+5. Reload the site → My progress → **Publish built-in content to Firestore** (click twice to confirm).
+
+**Editing content later**
+
+- Edit a document in `words` or `corporate` in the Firebase console, then click **Rebuild after console edits** on the My progress page so visitors see the change.
+- Or edit the files in `data/`, run `npm run build`, push, and click **Publish built-in content to Firestore**. Publishing overwrites edits made in the console.
 
 ## Notes
 

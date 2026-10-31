@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { build as esbuild } from 'esbuild';
 import { dictionary as CMU } from 'cmu-pronouncing-dictionary';
 
 const ROLES = { student: 'University students', dev: 'Developers', test: 'Testers (QA)', ba: 'BA / PO / PM' };
@@ -125,4 +126,6 @@ console.log('corporate entries', CORP.length, Object.entries(CORP.reduce((a, c) 
 const safe = s => s.replace(/<\//g, '<\\/');
 const html = fs.readFileSync('src/template.html', 'utf8').replace('/*__WORDS__*/[]', safe(out)).replace('/*__CORP__*/[]', safe(JSON.stringify(CORP)));
 fs.writeFileSync('index.html', html);
-console.log('Wrote words.json and index.html');
+// Bundle the Firebase code (src/cloud.js + src/firebase-config.js) into cloud.js
+await esbuild({ entryPoints: ['src/cloud.js'], bundle: true, format: 'esm', minify: true, outfile: 'cloud.js', logLevel: 'warning' });
+console.log('Wrote words.json, index.html and cloud.js');

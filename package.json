@@ -8,6 +8,8 @@
     "build": "node build.mjs"
   },
   "dependencies": {
-    "cmu-pronouncing-dictionary": "^3.0.0"
+    "cmu-pronouncing-dictionary": "^3.0.0",
+    "esbuild": "^0.28.2",
+    "firebase": "^11.10.0"
   }
 }

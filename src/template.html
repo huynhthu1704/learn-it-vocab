@@ -398,8 +398,9 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 
 <!-- PROGRESS -->
 <main id="v-progress" class="view">
-  <div class="wrap page-head"><h1>My progress</h1><p>Saved in this browser only. Use the same device to keep your streak.</p></div>
+  <div class="wrap page-head"><h1>My progress</h1><p>Saved in this browser. Sign in with Google to keep it on every device.</p></div>
   <div class="wrap" style="padding-bottom:72px">
+    <div class="card" id="accountCard" style="padding:24px;margin-bottom:24px"></div>
     <div class="statgrid" id="statgrid"></div>
     <div class="card" style="padding:24px;margin-bottom:24px">
       <h3 style="font-size:20px;margin-bottom:8px">Progress by level and role</h3>
@@ -428,9 +429,11 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 <div class="toast" id="toast"></div>
 
 <script>
-const WORDS = /*__WORDS__*/[];
-const BY_ID = new Map(WORDS.map(w => [w.id, w]));
-const CORP = /*__CORP__*/[];
+const BUILTIN_WORDS = /*__WORDS__*/[];
+const BUILTIN_CORP = /*__CORP__*/[];
+let WORDS = BUILTIN_WORDS;
+let BY_ID = new Map(WORDS.map(w => [w.id, w]));
+let CORP = BUILTIN_CORP;
 const CATS = { meetings:{ n:'Meetings', i:'meeting' }, email:{ n:'Emails', i:'communication' }, chat:{ n:'Chat & abbreviations', i:'chat' }, docs:{ n:'Documentation', i:'document' }, status:{ n:'Status updates', i:'agile' }, disagree:{ n:'Agreeing & disagreeing', i:'people' }, requests:{ n:'Requests & follow-ups', i:'time' }, feedback:{ n:'Feedback', i:'quality' }, jargon:{ n:'Business jargon', i:'business' }, present:{ n:'Presentations & demos', i:'devices' } };
 const TYPES = { abbr:'Abbreviation', term:'Term', expr:'Expression' };
 const ROLES = { student: { name: 'University students', short: 'Students', icon: 'study', c: '#16A34A', t: '#E7F6EC', d: 'Lectures, labs, thesis work and your first job hunt.' },
@@ -501,7 +504,7 @@ function hydrateIcons(root = document) { root.querySelectorAll('[data-icon]').fo
 const STORE = 'itvocab-v1';
 let S = { known: {}, learning: {}, saved: {}, days: {}, quizzes: 0, best: 0, accent: 'en-US', rate: 1 };
 try { const raw = localStorage.getItem(STORE); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
-function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} updateChips(); }
+function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} updateChips(); if (typeof queueCloudSave === 'function') queueCloudSave(); }
 const today = () => new Date().toISOString().slice(0, 10);
 function practised(n = 1) { const d = today(); S.days[d] = (S.days[d] || 0) + n; save(); }
 function streak() { let n = 0; const d = new Date(); if (!S.days[today()]) d.setDate(d.getDate() - 1); for (;;) { const k = d.toISOString().slice(0, 10); if (S.days[k]) { n++; d.setDate(d.getDate() - 1); } else break; } return n; }
@@ -690,9 +693,10 @@ function renderBrowse() {
   $('#moreBtn').style.display = list.length > shown ? '' : 'none';
   $('#moreBtn').textContent = `Show more words (${fmt(list.length - shown)} left)`;
 }
-{ const opt = ([k, n]) => `<option value="${k}">${n} (${WORDS.filter(w => w.c === k).length})</option>`;
+function fillTopics() { const opt = ([k, n]) => `<option value="${k}">${n} (${WORDS.filter(w => w.c === k).length})</option>`;
   const all = Object.entries(TOPIC_NAMES); const isDom = ([k]) => k in DOMAINS;
-  $('#fTopic').innerHTML = '<option value="all">All topics</option><optgroup label="Business domains">' + all.filter(isDom).map(opt).join('') + '</optgroup><optgroup label="IT topics">' + all.filter(x => !isDom(x)).sort((a, b) => a[1].localeCompare(b[1])).map(opt).join('') + '</optgroup>'; }
+  $('#fTopic').innerHTML = '<option value="all">All topics</option><optgroup label="Business domains">' + all.filter(isDom).map(opt).join('') + '</optgroup><optgroup label="IT topics">' + all.filter(x => !isDom(x)).sort((a, b) => a[1].localeCompare(b[1])).map(opt).join('') + '</optgroup>'; $('#fTopic').value = F.topic; }
+fillTopics();
 $('#fLevel').onclick = e => { const b = e.target.closest('[data-lv]'); if (b) { F.level = b.dataset.lv; syncFilterUI(); } };
 $('#fRole').onclick = e => { const b = e.target.closest('[data-rl]'); if (b) { F.role = b.dataset.rl; syncFilterUI(); } };
 $('#fTopic').onchange = e => { F.topic = e.target.value; shown = 36; renderBrowse(); };
@@ -843,7 +847,7 @@ $('#qzSource').onchange = () => { const c = $('#qzSource').value === 'corp'; $('
 /* ---------- progress ---------- */
 function renderProgress() {
   const known = Object.keys(S.known).length, learning = Object.keys(S.learning).length, saved = Object.keys(S.saved).length;
-  $('#statgrid').innerHTML = [[fmt(known), 'words known'], [fmt(learning), 'words learning'], [streak() + ' days', 'current streak'], [S.quizzes ? `${S.best}/10` : '–', `best quiz (${S.quizzes} taken)`]]
+  $('#statgrid').innerHTML = [[fmt(known), 'words known'], [fmt(learning), 'words learning'], [streak() + (streak() === 1 ? ' day' : ' days'), 'current streak'], [S.quizzes ? `${S.best}/10` : '–', `best quiz (${S.quizzes} taken)`]]
     .map(([b, s]) => `<div class="card stat"><b>${b}</b><span>${s}</span></div>`).join('');
   let rows = '<tr><th>Role</th>' + Object.values(LEVELS).map(L => `<th>${L.name}</th>`).join('') + '</tr>';
   for (const [k, R] of Object.entries(ROLES)) {
@@ -860,6 +864,88 @@ $('#testVoice').onclick = () => speak('We deploy the new version every Friday.')
 let resetArmed = false;
 $('#resetBtn').onclick = () => { if (!resetArmed) { resetArmed = true; $('#resetBtn').textContent = 'Click again to confirm reset'; setTimeout(() => { resetArmed = false; $('#resetBtn').textContent = 'Reset all progress'; }, 4000); return; }
   S.known = {}; S.learning = {}; S.saved = {}; S.days = {}; S.quizzes = 0; S.best = 0; save(); resetArmed = false; $('#resetBtn').textContent = 'Reset all progress'; renderProgress(); toast('Progress reset.'); };
+
+/* ---------- cloud (Firebase) ---------- */
+let cloudUser = null, cloudAdmin = false, cloudMeta = null, cloudBusy = '', cloudSaveT = null, cloudStatus = '';
+function applyContent(c) {
+  WORDS = c.words; CORP = c.corp; BY_ID = new Map(WORDS.map(w => [w.id, w])); cloudMeta = c.meta;
+  fillTopics(); $('#footCount').textContent = fmt(WORDS.length); modalList = []; FC = null; QZ = null;
+  refreshVisible(); if (currentView === 'workplace') renderCorp();
+}
+const progressPayload = () => ({ known: S.known, learning: S.learning, saved: S.saved, days: S.days, quizzes: S.quizzes, best: S.best });
+function queueCloudSave() {
+  if (!cloudUser || !window.Cloud) return;
+  clearTimeout(cloudSaveT);
+  cloudSaveT = setTimeout(async () => { try { await Cloud.saveProgress(cloudUser.uid, progressPayload()); cloudStatus = 'Progress synced ' + new Date().toLocaleTimeString(); } catch (e) { cloudStatus = 'Could not sync progress: ' + e.message; } if (currentView === 'progress') renderAccount(); }, 1500);
+}
+async function syncProgress() {
+  try {
+    const c = await Cloud.loadProgress(cloudUser.uid);
+    if (c) {
+      S.known = { ...(c.known || {}), ...S.known };
+      S.learning = { ...(c.learning || {}), ...S.learning }; for (const k in S.known) delete S.learning[k];
+      S.saved = { ...(c.saved || {}), ...S.saved };
+      for (const [d, n] of Object.entries(c.days || {})) S.days[d] = Math.max(S.days[d] || 0, n);
+      S.quizzes = Math.max(S.quizzes, c.quizzes || 0); S.best = Math.max(S.best, c.best || 0);
+    }
+    save(); cloudStatus = 'Progress synced with your account';
+  } catch (e) { cloudStatus = 'Could not load your saved progress: ' + e.message; }
+  refreshVisible();
+}
+function renderAccount() {
+  const el = $('#accountCard'); if (!el) return;
+  const C = window.Cloud;
+  const source = cloudMeta ? `Content: loaded from Firestore (${fmt(cloudMeta.words)} words, ${cloudMeta.corporate} Workplace English items${cloudMeta.publishedAt ? ', published ' + cloudMeta.publishedAt.toLocaleString() : ''}).` : 'Content: built-in copy of the data.';
+  if (!C || !C.enabled) { el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0">Cloud sync is not set up on this copy of the site, so progress is saved in this browser only. ${source}</p>`; return; }
+  if (!cloudUser) {
+    el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0 0 14px">Sign in to keep your progress on every device. Without signing in, progress stays in this browser.</p>
+      <button class="btn primary" id="signInBtn">${svg('people', '#fff', 18, 2)} Sign in with Google</button><p class="hint" style="text-align:left">${source}</p>`;
+    $('#signInBtn').onclick = async () => { try { await Cloud.signIn(); } catch (e) { toast('Sign-in failed: ' + (e.code || e.message)); } };
+    return;
+  }
+  const u = cloudUser;
+  let admin = '';
+  if (cloudAdmin) admin = `<div style="border-top:1px solid var(--line);margin-top:18px;padding-top:18px">
+      <h3 style="font-size:18px;margin-bottom:6px">Admin: content in Firestore</h3>
+      <p style="color:var(--muted);margin:0 0 12px">${cloudMeta ? `Published: ${fmt(cloudMeta.words)} words and ${cloudMeta.corporate} Workplace English items.` : 'Nothing published yet. Publish to copy all content into Firestore.'}</p>
+      <div class="mrow"><button class="btn primary sm" id="publishBtn" ${cloudBusy ? 'disabled' : ''}>Publish built-in content to Firestore</button>
+      <button class="btn secondary sm" id="rebuildBtn" ${cloudBusy || !cloudMeta ? 'disabled' : ''}>Rebuild after console edits</button></div>
+      <p class="hint" style="text-align:left">${cloudBusy || 'Publish uploads the 2,268 words and 226 Workplace English items from this site (it overwrites edits made in the console). After editing words or corporate documents in the Firebase console, click Rebuild so visitors see the changes.'}</p></div>`;
+  el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3>
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+      <div><b>${esc(u.displayName || u.email)}</b> <span style="color:var(--muted)">${esc(u.email || '')}</span>${cloudAdmin ? ' <span class="pill" style="background:#FEF3C7;color:#B45309">Admin</span>' : ''}
+        <div class="hint" style="text-align:left;margin-top:4px">${esc(cloudStatus || 'Progress syncs automatically.')}</div>
+        <div class="hint" style="text-align:left;margin-top:2px">User ID: <code id="uidText">${esc(u.uid)}</code> <button class="btn ghost sm" id="copyUid" style="padding:2px 8px">Copy</button></div></div>
+      <button class="btn secondary sm" id="signOutBtn">Sign out</button></div>
+    <p class="hint" style="text-align:left">${source}</p>${admin}`;
+  $('#signOutBtn').onclick = () => Cloud.logOut();
+  $('#copyUid').onclick = async () => { try { await navigator.clipboard.writeText(u.uid); toast('User ID copied'); } catch (e) { toast('Select the ID and copy it.'); } };
+  let armed = false;
+  if ($('#publishBtn')) $('#publishBtn').onclick = async () => {
+    if (!armed) { armed = true; $('#publishBtn').textContent = 'Click again to confirm publish'; return; }
+    try {
+      cloudBusy = 'Publishing… 0%'; renderAccount();
+      await Cloud.publishAll(BUILTIN_WORDS, BUILTIN_CORP, (n, t) => { cloudBusy = `Publishing… ${Math.round(n / t * 100)}%`; renderAccount(); });
+      cloudBusy = ''; const c = await Cloud.loadContent(); if (c) applyContent(c); toast('Published to Firestore.');
+    } catch (e) { cloudBusy = ''; toast('Publish failed: ' + (e.code || e.message)); }
+    renderAccount();
+  };
+  if ($('#rebuildBtn')) $('#rebuildBtn').onclick = async () => {
+    try { cloudBusy = 'Rebuilding…'; renderAccount(); const r = await Cloud.rebuildBundles(); cloudBusy = ''; const c = await Cloud.loadContent(); if (c) applyContent(c); toast(`Rebuilt: ${r.words} words, ${r.corporate} items.`); }
+    catch (e) { cloudBusy = ''; toast('Rebuild failed: ' + (e.code || e.message)); }
+    renderAccount();
+  };
+}
+let cloudStarted = false;
+async function initCloud() {
+  if (cloudStarted || !window.Cloud) return; cloudStarted = true;
+  const C = window.Cloud;
+  if (!C.enabled) { renderAccount(); return; }
+  try { const c = await C.loadContent(); if (c && c.words.length) applyContent(c); } catch (e) { console.warn('Firestore content not loaded, using built-in copy', e); }
+  C.onUser(async u => { cloudUser = u; cloudAdmin = u ? await C.isAdmin(u.uid) : false; if (u) await syncProgress(); renderAccount(); });
+  renderAccount();
+}
+window.addEventListener('cloud-ready', initCloud);
 
 /* ---------- router ---------- */
 let currentView = 'home', lastView = 'home';
@@ -880,7 +966,7 @@ function show(v) {
   if (v === 'workplace') renderCorp();
   if (v === 'flashcards' && !FC) startFC();
   if (v === 'quiz') { $('#qzSource').onchange(); if (!QZ) startQuiz(); }
-  if (v === 'progress') renderProgress();
+  if (v === 'progress') { renderProgress(); renderAccount(); }
   window.scrollTo(0, 0);
 }
 $('#menuBtn').onclick = () => $('#links').classList.toggle('open');
@@ -889,6 +975,8 @@ hydrateIcons(); updateChips();
 $('#footCount').textContent = fmt(WORDS.length);
 syncFilterUI();
 route();
+if (window.Cloud) initCloud();
 </script>
+<script type="module" src="cloud.js"></script>
 </body>
 </html>
