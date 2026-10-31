@@ -1,0 +1,152 @@
+# level=3 role=student
+literature gap|n|khoảng trống tài liệu|We found a literature gap in Vietnamese NLP.|study
+theoretical framework|n|khung lý thuyết|Explain your theoretical framework.|study
+research design|n|thiết kế nghiên cứu|The research design uses two groups.|study
+control group|n|nhóm đối chứng|The control group used the old app.|study
+variable|n|biến (nghiên cứu)|Age is a control variable.|study
+dependent variable|n|biến phụ thuộc|Task time is the dependent variable.|study
+independent variable|n|biến độc lập|The UI version is the independent variable.|study
+survey instrument|n|công cụ khảo sát|We validated the survey instrument.|study
+Likert scale|n|thang đo Likert|Answers use a five-point Likert scale.|study
+pilot study|n|nghiên cứu thử nghiệm|Run a pilot study with five people.|study
+data collection|n|thu thập dữ liệu|Data collection took a month.|data
+data analysis|n|phân tích dữ liệu|Data analysis used Python.|data
+outlier|n|giá trị ngoại lai|Remove the outliers carefully.|math
+standard deviation|n|độ lệch chuẩn|The standard deviation is small.|math
+mean|n|giá trị trung bình|The mean response time is 2 seconds.|math
+median|n|trung vị|Report the median, not just the mean.|math
+distribution|n|phân phối|The data has a normal distribution.|math
+confidence interval|n|khoảng tin cậy|Show the 95 percent confidence interval.|math
+p-value|n|giá trị p|The p-value is below 0.05.|math
+t-test|n|kiểm định t|We used a t-test to compare groups.|math
+validity|n|tính hợp lệ|Discuss threats to validity.|study
+reliability|n|độ tin cậy|Reliability was high.|study
+generalize|v|khái quát hóa|We can't generalize from 20 users.|study
+implication|n|hàm ý|What are the practical implications?|study
+recommendation|n|khuyến nghị|End with three recommendations.|study
+appendix|n|phụ lục|Put the full survey in the appendix.|document
+figure caption|n|chú thích hình|Each figure caption should explain the chart.|document
+oral presentation|n|bài thuyết trình nói|The oral presentation is 15 minutes.|communication
+viva|n|buổi bảo vệ vấn đáp|My viva is next Tuesday.|study
+examiner|n|giám khảo|The examiner asked about my dataset.|people
+revision|n|chỉnh sửa|Submit the revision in two weeks.|study
+camera-ready|adj|bản cuối sẵn sàng in|Send the camera-ready paper.|study
+preprint|n|bản thảo trước khi bình duyệt|We posted a preprint on arXiv.|study
+citation count|n|số lượt trích dẫn|The paper has a high citation count.|study
+h-index|n|chỉ số h|Her h-index is 12.|study
+research ethics|n|đạo đức nghiên cứu|Research ethics approval took a month.|study
+grant|n|tài trợ nghiên cứu|We applied for a research grant.|money
+# level=3 role=dev
+architecture decision|n|quyết định kiến trúc|Every architecture decision has trade-offs.|architecture
+non-functional requirement|n|yêu cầu phi chức năng|Latency is a non-functional requirement.|architecture
+quality attribute|n|thuộc tính chất lượng|Security is a key quality attribute.|architecture
+reliability|n|độ tin cậy|Reliability matters more than new features.|architecture
+resilience|n|khả năng phục hồi|We improved resilience with retries.|architecture
+redundancy|n|dư thừa dự phòng|Redundancy removes single points of failure.|architecture
+multi-region|adj|đa vùng|We run a multi-region setup.|cloud
+data residency|n|lưu trú dữ liệu theo quốc gia|Data residency rules require local servers.|security
+latency budget|n|ngân sách độ trễ|Each service has a latency budget.|performance
+tail latency|n|độ trễ đuôi|Tail latency hurts user experience.|performance
+backpressure|n|áp lực ngược|Use backpressure to protect the consumer.|architecture
+dead letter queue|n|hàng đợi thư lỗi|Failed messages go to a dead letter queue.|architecture
+saga pattern|n|mẫu saga|We use the saga pattern for orders.|architecture
+CQRS|n|tách biệt lệnh và truy vấn|CQRS separates reads and writes.|architecture
+event sourcing|n|lưu trữ theo sự kiện|Event sourcing keeps every change.|architecture
+outbox pattern|n|mẫu outbox|The outbox pattern avoids lost events.|architecture
+schema registry|n|kho lưu trữ lược đồ|Register the event in the schema registry.|data
+data contract|n|hợp đồng dữ liệu|Teams agree on a data contract.|data
+stream processing|n|xử lý luồng dữ liệu|Fraud checks use stream processing.|data
+batch processing|n|xử lý theo lô|Reports use batch processing at night.|data
+data warehouse|n|kho dữ liệu|Analytics reads from the data warehouse.|data
+data lake|n|hồ dữ liệu|Raw logs go into the data lake.|data
+vector database|n|cơ sở dữ liệu vector|We store embeddings in a vector database.|ai
+embedding|n|vector nhúng|Create an embedding for each document.|ai
+retrieval-augmented generation|n|sinh văn bản tăng cường truy xuất|Our chatbot uses retrieval-augmented generation.|ai
+prompt engineering|n|kỹ thuật viết prompt|Prompt engineering improved the answers.|ai
+guardrail|n|rào chắn an toàn|Add a guardrail for unsafe output.|ai
+hallucination|n|ảo giác (AI bịa thông tin)|The model's hallucination rate is too high.|ai
+evaluation set|n|bộ dữ liệu đánh giá|Build an evaluation set before launch.|ai
+MLOps|n|vận hành học máy|MLOps automates model deployment.|ai
+model drift|n|trôi mô hình|Monitor for model drift.|ai
+technical leadership|n|lãnh đạo kỹ thuật|Technical leadership means guiding, not ordering.|career
+mentorship|n|sự kèm cặp|Mentorship grows the team.|career
+hiring loop|n|vòng tuyển dụng|I'm on the hiring loop for seniors.|career
+system design interview|n|phỏng vấn thiết kế hệ thống|Prepare for the system design interview.|career
+engineering culture|n|văn hóa kỹ thuật|Good engineering culture values testing.|people
+psychological safety|n|an toàn tâm lý|Psychological safety helps people speak up.|people
+# level=3 role=test
+quality strategy|n|chiến lược chất lượng|I wrote the quality strategy for 2027.|quality
+quality culture|n|văn hóa chất lượng|Quality culture means everyone tests.|quality
+whole-team approach|n|cách tiếp cận cả nhóm|We use a whole-team approach to quality.|quality
+three amigos|n|buổi trao đổi ba vai trò|The three amigos meet before each story.|meeting
+example mapping|n|lập bản đồ ví dụ|Example mapping found missing rules.|testing
+specification by example|n|đặc tả bằng ví dụ|We practise specification by example.|testing
+living documentation|n|tài liệu sống|BDD scenarios are living documentation.|document
+acceptance test|n|kiểm thử chấp nhận|Automate each acceptance test.|testing
+test automation pyramid|n|kim tự tháp tự động hóa kiểm thử|Our test automation pyramid is upside down.|testing
+ice cream cone|n|mô hình kiểm thử hình kem ốc quế|Too many UI tests form an ice cream cone.|testing
+UI automation|n|tự động hóa giao diện|UI automation is slow and fragile.|testing
+API automation|n|tự động hóa API|API automation runs in two minutes.|testing
+mobile automation|n|tự động hóa di động|Appium handles mobile automation.|testing
+Appium|n|công cụ Appium|Appium tests run on real devices.|testing
+Playwright|n|công cụ Playwright|We moved from Selenium to Playwright.|testing
+Cypress|n|công cụ Cypress|The frontend team uses Cypress.|testing
+k6|n|công cụ kiểm thử tải k6|We wrote load tests in k6.|performance
+test containers|n|container cho kiểm thử|Test containers start a real database.|testing
+ephemeral environment|n|môi trường tạm thời|Each PR gets an ephemeral environment.|cloud
+environment parity|n|sự tương đồng môi trường|Environment parity reduces surprises.|cloud
+config drift|n|lệch cấu hình|Config drift caused the staging bug.|cloud
+feature flag testing|n|kiểm thử cờ tính năng|Test both states in feature flag testing.|testing
+A/B experiment|n|thử nghiệm A/B|Validate the A/B experiment setup.|data
+data validation|n|xác thực dữ liệu|Data validation runs after each import.|data
+schema validation|n|xác thực lược đồ|Schema validation catches API changes.|testing
+backward compatibility test|n|kiểm thử tương thích ngược|Run a backward compatibility test for old apps.|testing
+upgrade testing|n|kiểm thử nâng cấp|Upgrade testing covers version 3 to 4.|testing
+installation testing|n|kiểm thử cài đặt|Installation testing found a missing file.|testing
+disaster recovery test|n|diễn tập khôi phục thảm họa|The disaster recovery test passed.|cloud
+failover test|n|kiểm thử chuyển đổi dự phòng|The failover test took 40 seconds.|cloud
+recovery time objective|n|mục tiêu thời gian khôi phục|Our recovery time objective is one hour.|cloud
+recovery point objective|n|mục tiêu điểm khôi phục|The recovery point objective is five minutes.|cloud
+accessibility audit|n|đánh giá khả năng tiếp cận|The accessibility audit found 40 issues.|testing
+color contrast|n|độ tương phản màu|The color contrast is too low.|design
+keyboard navigation|n|điều hướng bằng bàn phím|Keyboard navigation skips the menu.|testing
+alt text|n|văn bản thay thế cho ảnh|Every image needs alt text.|design
+focus order|n|thứ tự tiêu điểm|The focus order is wrong.|testing
+# level=3 role=ba
+problem statement|n|tuyên bố vấn đề|Start with a clear problem statement.|business
+hypothesis statement|n|tuyên bố giả thuyết|Write a hypothesis statement for each idea.|business
+assumption mapping|n|lập bản đồ giả định|Assumption mapping shows the riskiest bets.|business
+riskiest assumption|n|giả định rủi ro nhất|Test the riskiest assumption first.|business
+discovery sprint|n|sprint khám phá|We ran a two-week discovery sprint.|agile
+design sprint|n|sprint thiết kế|The design sprint ended with a prototype.|design
+user interview|n|phỏng vấn người dùng|I did twelve user interviews.|communication
+interview synthesis|n|tổng hợp kết quả phỏng vấn|Interview synthesis took two days.|business
+affinity mapping|n|nhóm ý tưởng theo mối liên hệ|Affinity mapping grouped the notes.|meeting
+insight|n|hiểu biết sâu sắc|The key insight is that users don't trust COD.|business
+empathy map|n|bản đồ thấu cảm|Fill in the empathy map for each persona.|design
+service blueprint|n|bản thiết kế dịch vụ|The service blueprint shows backstage steps.|process
+touchpoint|n|điểm chạm khách hàng|There are eight touchpoints.|business
+moment of truth|n|khoảnh khắc quyết định|Delivery is the moment of truth.|business
+friction|n|điểm gây cản trở|Remove friction from sign-up.|design
+drop-off|n|điểm người dùng rời bỏ|Most drop-off happens at payment.|data
+activation rate|n|tỷ lệ kích hoạt|Our activation rate is 40 percent.|data
+engagement|n|mức độ tương tác|Engagement rose after the update.|data
+stickiness|n|độ gắn bó|DAU over MAU shows stickiness.|data
+DAU|n|người dùng hoạt động hằng ngày|DAU reached 20,000.|data
+MAU|n|người dùng hoạt động hằng tháng|MAU is our main growth metric.|data
+growth loop|n|vòng lặp tăng trưởng|Referrals create a growth loop.|business
+referral program|n|chương trình giới thiệu|The referral program gives both users a voucher.|business
+feature adoption|n|mức sử dụng tính năng|Feature adoption is only 10 percent.|data
+sunset a feature|v|loại bỏ dần tính năng|We decided to sunset a feature nobody uses.|business
+product analytics|n|phân tích sản phẩm|Product analytics shows how users behave.|data
+event tracking plan|n|kế hoạch theo dõi sự kiện|Write an event tracking plan.|data
+dashboard requirement|n|yêu cầu bảng điều khiển|Managers listed ten dashboard requirements.|data
+self-service|adj|tự phục vụ|Customers want self-service returns.|business
+customer support|n|chăm sóc khách hàng|Customer support gets 300 tickets a day.|business
+ticket deflection|n|giảm yêu cầu hỗ trợ|Good FAQs improve ticket deflection.|business
+operational efficiency|n|hiệu quả vận hành|The project improves operational efficiency.|business
+headcount|n|số lượng nhân sự|We can't add headcount this year.|business
+quarterly planning|n|lập kế hoạch theo quý|Quarterly planning starts next week.|business
+annual budget|n|ngân sách năm|It's not in the annual budget.|money
+board meeting|n|họp hội đồng quản trị|The CEO presents at the board meeting.|meeting
+strategic initiative|n|sáng kiến chiến lược|This is a strategic initiative for the bank.|business

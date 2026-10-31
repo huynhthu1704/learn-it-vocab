@@ -1,0 +1,149 @@
+# level=2 role=student
+lab assignment|n|bài thực hành|The lab assignment is about sockets.|study
+course outline|n|đề cương khóa học|The course outline lists four projects.|study
+learning outcome|n|chuẩn đầu ra|Each lecture has three learning outcomes.|study
+rubric|n|tiêu chí chấm điểm|Read the rubric before you start.|study
+grading criteria|n|tiêu chí chấm điểm|The grading criteria include code style.|study
+weighting|n|trọng số|The final exam has a 50 percent weighting.|study
+group contract|n|thỏa thuận nhóm|We signed a group contract.|study
+peer assessment|n|đánh giá đồng đẳng|Peer assessment affects your grade.|study
+free rider|n|người không đóng góp trong nhóm|We had a free rider in our group.|people
+meeting log|n|nhật ký họp nhóm|Keep a meeting log for the project.|meeting
+task allocation|n|phân công nhiệm vụ|Task allocation was fair.|agile
+Gantt chart|n|biểu đồ Gantt|Include a Gantt chart in the proposal.|time
+work log|n|nhật ký công việc|Update your work log every week.|document
+user manual|n|hướng dẫn sử dụng|Write a short user manual.|document
+installation guide|n|hướng dẫn cài đặt|The installation guide has five steps.|document
+system requirements|n|yêu cầu hệ thống|List the system requirements.|document
+test plan document|n|tài liệu kế hoạch kiểm thử|Submit the test plan document.|testing
+screenshot evidence|n|ảnh chụp làm bằng chứng|Add screenshot evidence of each test.|testing
+source code submission|n|nộp mã nguồn|Source code submission is through GitHub.|study
+zip file|n|tệp nén zip|Upload one zip file.|document
+plagiarism checker|n|công cụ kiểm tra đạo văn|The plagiarism checker found 30 percent.|study
+reference list|n|danh mục tài liệu tham khảo|Use APA style for the reference list.|study
+in-text citation|n|trích dẫn trong bài|Add an in-text citation after the quote.|study
+quotation|n|trích dẫn nguyên văn|Keep each quotation short.|study
+summary|n|tóm tắt|Write a summary of the article.|study
+key point|n|ý chính|Highlight the key points.|study
+argument|n|luận điểm|Support your argument with data.|study
+evidence|n|bằng chứng|What evidence do you have?|study
+comparison|n|sự so sánh|Make a comparison of three frameworks.|study
+advantage|n|ưu điểm|One advantage of Python is readability.|study
+disadvantage|n|nhược điểm|A disadvantage is speed.|study
+pros and cons|n|ưu và nhược điểm|List the pros and cons.|study
+case study|n|nghiên cứu tình huống|We read a case study about Grab.|study
+guest speaker|n|diễn giả khách mời|The guest speaker works at FPT.|people
+field trip|n|chuyến đi thực tế|We had a field trip to a software company.|study
+career fair|n|ngày hội việc làm|I met recruiters at the career fair.|career
+alumni|n|cựu sinh viên|Alumni share job tips.|people
+# level=2 role=dev
+code review comment|n|bình luận khi xem xét mã|I replied to every code review comment.|quality
+suggestion|n|đề xuất|Good suggestion, I'll change it.|communication
+LGTM|phr|trông ổn rồi (duyệt mã)|LGTM, ready to merge.|quality
+WIP commit|n|commit đang làm dở|Squash your WIP commits.|code
+squash|v|gộp commit|Squash the commits before merging.|code
+force push|v|đẩy mã ghi đè|Never force push to main.|code
+upstream|n|kho/nhánh gốc|Pull the latest changes from upstream.|code
+fork|v|tạo bản sao kho mã|Fork the repo and open a PR.|code
+gitignore|n|tệp loại trừ của Git|Add node_modules to gitignore.|code
+dev environment|n|môi trường phát triển|Set up your dev environment with Docker.|cloud
+hot reload|n|tải lại nóng|Hot reload shows changes instantly.|code
+build tool|n|công cụ đóng gói|Vite is our build tool.|code
+bundle|n|gói mã đã đóng gói|The JavaScript bundle is too big.|performance
+minify|v|nén gọn mã|Minify the CSS for production.|performance
+polyfill|n|đoạn mã bổ trợ tương thích|Add a polyfill for old browsers.|web
+browser support|n|hỗ trợ trình duyệt|What is our browser support policy?|web
+media query|n|truy vấn phương tiện CSS|Use a media query for mobile.|web
+flexbox|n|bố cục flexbox|Center it with flexbox.|web
+grid layout|n|bố cục lưới|The dashboard uses grid layout.|web
+design token|n|biến thiết kế|Use design tokens for colors.|design
+style guide|n|hướng dẫn phong cách|Follow the style guide.|design
+form validation|n|kiểm tra dữ liệu biểu mẫu|Add form validation on both sides.|web
+input sanitization|n|làm sạch dữ liệu đầu vào|Input sanitization prevents attacks.|security
+rate limiting|n|giới hạn tần suất truy cập|Add rate limiting to the login API.|security
+file upload|n|tải tệp lên|Limit file upload size to 10 MB.|web
+image compression|n|nén ảnh|Image compression saved 60 percent.|performance
+time zone handling|n|xử lý múi giờ|Time zone handling is tricky.|code
+date library|n|thư viện xử lý ngày|We replaced the old date library.|code
+localization|n|bản địa hóa|Localization adds Vietnamese and English.|code
+translation key|n|khóa dịch|Add a translation key for this label.|code
+error page|n|trang báo lỗi|Design a friendly error page.|web
+empty state|n|trạng thái trống|Show an empty state when there are no orders.|design
+loading state|n|trạng thái đang tải|Add a loading state to the button.|design
+skeleton screen|n|khung tải tạm thời|Use a skeleton screen while data loads.|design
+toast message|n|thông báo nổi ngắn|Show a toast message after saving.|design
+modal|n|hộp thoại phủ|Confirm deletion in a modal.|design
+# level=2 role=test
+test coverage report|n|báo cáo độ bao phủ kiểm thử|Share the test coverage report.|testing
+risk area|n|vùng rủi ro|Checkout is a risk area.|testing
+critical path|n|luồng quan trọng nhất|Test the critical path first.|testing
+user flow|n|luồng người dùng|Test the full user flow.|testing
+error state|n|trạng thái lỗi|Check every error state.|testing
+boundary|n|ranh giới|Test just below and above the boundary.|testing
+invalid input|n|dữ liệu nhập không hợp lệ|Invalid input should show a message.|testing
+null value|n|giá trị rỗng|Send a null value to the API.|testing
+large file|n|tệp lớn|Upload a large file to test limits.|testing
+special characters|n|các ký tự đặc biệt|Use special characters in the name.|testing
+Vietnamese diacritics|n|dấu tiếng Việt|Search fails with Vietnamese diacritics.|testing
+emoji input|n|nhập biểu tượng cảm xúc|Emoji input crashes the chat.|testing
+long text|n|văn bản dài|Long text overflows the card.|testing
+truncation|n|cắt bớt văn bản|Truncation hides the price.|design
+overflow|n|tràn nội dung|There's an overflow on small screens.|design
+responsive layout|n|bố cục đáp ứng|Check the responsive layout at 375 pixels.|web
+breakpoint|n|điểm ngắt giao diện|The layout breaks at the tablet breakpoint.|web
+pixel perfect|adj|chính xác từng điểm ảnh|The design should be pixel perfect.|design
+design review|n|rà soát thiết kế|QA joins the design review.|meeting
+spec review|n|rà soát đặc tả|I found gaps during the spec review.|document
+ambiguity|n|sự mơ hồ|Report any ambiguity in requirements.|document
+clarification|n|sự làm rõ|I asked the BA for clarification.|communication
+test sign-off|n|xác nhận hoàn tất kiểm thử|Test sign-off is due Thursday.|release
+release checklist|n|danh sách kiểm tra phát hành|Go through the release checklist.|release
+smoke test result|n|kết quả kiểm thử khói|Post the smoke test result in Slack.|testing
+bug bash|n|buổi săn lỗi tập thể|We held a bug bash before launch.|testing
+dogfooding|n|dùng thử sản phẩm nội bộ|Dogfooding found ten usability issues.|testing
+crowd testing|n|kiểm thử cộng đồng|We used crowd testing for devices.|testing
+test account setup|n|thiết lập tài khoản kiểm thử|Test account setup takes time.|testing
+mock server|n|máy chủ giả lập|Use a mock server for the partner API.|testing
+API response|n|phản hồi API|Check the API response body.|testing
+response body|n|nội dung phản hồi|The response body is empty.|testing
+status 500|n|lỗi máy chủ mã 500|The API returns status 500.|bug
+timeout error|n|lỗi hết thời gian chờ|We get a timeout error under load.|bug
+retry|v|thử lại|The app should retry three times.|testing
+idle timeout|n|hết hạn khi không hoạt động|Test the idle timeout.|security
+# level=2 role=ba
+business analysis|n|phân tích nghiệp vụ|Business analysis starts before coding.|business
+BABOK|n|bộ kiến thức phân tích nghiệp vụ BABOK|BABOK defines six knowledge areas.|business
+CBAP|n|chứng chỉ phân tích nghiệp vụ CBAP|She is studying for the CBAP.|career
+PSPO|n|chứng chỉ Product Owner PSPO|I passed the PSPO I exam.|career
+PMP|n|chứng chỉ quản lý dự án PMP|The PM has a PMP certificate.|career
+interview script|n|kịch bản phỏng vấn|Prepare an interview script.|document
+open-ended question|n|câu hỏi mở|Ask open-ended questions.|communication
+closed question|n|câu hỏi đóng|Use closed questions to confirm details.|communication
+follow-up question|n|câu hỏi tiếp nối|Good BAs ask follow-up questions.|communication
+probe|v|thăm dò sâu hơn|Probe when an answer is vague.|communication
+active listening|n|lắng nghe chủ động|Active listening builds trust.|communication
+paraphrase|v|diễn đạt lại|Paraphrase to check understanding.|communication
+note-taker|n|người ghi chép|Assign a note-taker for the meeting.|meeting
+meeting invite|n|lời mời họp|Send the meeting invite with the agenda.|meeting
+reschedule|v|dời lịch|Can we reschedule to Friday?|meeting
+time slot|n|khung giờ|Pick a time slot that works for you.|time
+dry run|n|buổi chạy thử|Let's do a dry run of the demo.|meeting
+walkthrough|n|buổi trình bày chi tiết|I gave a walkthrough of the new flow.|meeting
+screen flow|n|luồng màn hình|Draw the screen flow for checkout.|design
+UI copy|n|nội dung chữ trên giao diện|Review the UI copy with marketing.|design
+error message text|n|nội dung thông báo lỗi|Write clear error message text.|document
+field length|n|độ dài trường dữ liệu|The field length is 50 characters.|data
+mandatory field|n|trường bắt buộc|Phone is a mandatory field.|data
+default value|n|giá trị mặc định|The default value is Vietnam.|data
+dropdown list|n|danh sách thả xuống|Use a dropdown list for provinces.|design
+lookup table|n|bảng tra cứu|Store provinces in a lookup table.|data
+calculation rule|n|quy tắc tính toán|Document each calculation rule.|document
+approval matrix|n|ma trận phê duyệt|The approval matrix depends on amount.|process
+notification rule|n|quy tắc gửi thông báo|Write the notification rules.|document
+report layout|n|bố cục báo cáo|The client approved the report layout.|data
+sample report|n|báo cáo mẫu|Ask for a sample report.|data
+user role matrix|n|ma trận vai trò người dùng|The user role matrix lists permissions.|security
+permission level|n|cấp độ quyền|Managers have a higher permission level.|security
+audit requirement|n|yêu cầu kiểm toán|There's an audit requirement for refunds.|security
+reporting requirement|n|yêu cầu báo cáo|Finance has ten reporting requirements.|data
+integration requirement|n|yêu cầu tích hợp|List each integration requirement.|architecture

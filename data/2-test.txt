@@ -1,0 +1,141 @@
+# level=2 role=test
+regression testing|n|kiểm thử hồi quy|We run regression testing after every release.|testing
+severity|n|mức độ nghiêm trọng|This bug has high severity because users cannot pay.|bug
+test strategy|n|chiến lược kiểm thử|The test strategy covers web and mobile.|testing
+test scope|n|phạm vi kiểm thử|Payment is in the test scope.|testing
+in scope|adj|thuộc phạm vi|Reports are in scope for this release.|testing
+out of scope|adj|ngoài phạm vi|Performance testing is out of scope.|testing
+entry criteria|n|tiêu chí bắt đầu|Entry criteria: the build is deployed to QA.|testing
+exit criteria|n|tiêu chí kết thúc|Exit criteria: no critical bugs open.|testing
+test cycle|n|chu kỳ kiểm thử|This test cycle lasts five days.|testing
+test execution|n|thực thi kiểm thử|Test execution starts on Monday.|testing
+test design|n|thiết kế kiểm thử|Test design takes longer than execution.|testing
+test scenario|n|kịch bản kiểm thử|Write test scenarios first, then test cases.|testing
+traceability matrix|n|ma trận truy vết|The traceability matrix links tests to requirements.|document
+requirement coverage|n|độ bao phủ yêu cầu|Requirement coverage is 95 percent.|testing
+boundary value analysis|n|phân tích giá trị biên|Use boundary value analysis for the age field.|testing
+equivalence partitioning|n|phân vùng tương đương|Equivalence partitioning reduces the number of tests.|testing
+decision table|n|bảng quyết định|A decision table helps test the discount rules.|testing
+state transition|n|chuyển đổi trạng thái|Test every state transition of an order.|testing
+black-box testing|n|kiểm thử hộp đen|Black-box testing looks only at inputs and outputs.|testing
+white-box testing|n|kiểm thử hộp trắng|White-box testing checks the code paths.|testing
+functional testing|n|kiểm thử chức năng|Functional testing checks what the system does.|testing
+non-functional testing|n|kiểm thử phi chức năng|Non-functional testing checks speed and security.|testing
+integration testing|n|kiểm thử tích hợp|Integration testing found a problem with the bank API.|testing
+system testing|n|kiểm thử hệ thống|System testing runs on the full app.|testing
+end-to-end testing|n|kiểm thử đầu cuối|End-to-end testing covers order to delivery.|testing
+API testing|n|kiểm thử API|I do API testing with Postman.|testing
+Postman|n|công cụ Postman|Import the collection into Postman.|testing
+compatibility testing|n|kiểm thử tương thích|Compatibility testing covers five browsers.|testing
+cross-browser testing|n|kiểm thử đa trình duyệt|Cross-browser testing found a Safari bug.|testing
+usability testing|n|kiểm thử tính dễ dùng|Usability testing showed users got lost.|testing
+localization testing|n|kiểm thử bản địa hóa|Localization testing checks the Vietnamese text.|testing
+retesting|n|kiểm thử lại lỗi đã sửa|Retesting confirmed the fix.|testing
+confirmation testing|n|kiểm thử xác nhận|Confirmation testing passed.|testing
+test environment|n|môi trường kiểm thử|The test environment is down this morning.|cloud
+test data preparation|n|chuẩn bị dữ liệu kiểm thử|Test data preparation took a full day.|data
+test management tool|n|công cụ quản lý kiểm thử|We use TestRail as our test management tool.|testing
+test run|n|lượt chạy kiểm thử|Create a new test run for build 2.3.|testing
+test case ID|n|mã ca kiểm thử|Write the test case ID in the bug.|testing
+reproduce|v|tái hiện (lỗi)|I can reproduce the issue on Android only.|bug
+reproducible|adj|có thể tái hiện|The bug is reproducible every time.|bug
+intermittent|adj|không thường xuyên, lúc có lúc không|It's an intermittent issue.|bug
+flaky|adj|chập chờn (kết quả không ổn định)|This test is flaky.|testing
+bug life cycle|n|vòng đời lỗi|Learn the bug life cycle in Jira.|bug
+triage|n|phân loại lỗi|We do bug triage every morning.|bug
+defect density|n|mật độ lỗi|Defect density is high in the payment module.|quality
+defect leakage|n|lỗi lọt ra môi trường thật|Defect leakage to production must be low.|quality
+escaped defect|n|lỗi bị lọt|This escaped defect cost us a lot.|quality
+won't fix|adj|không sửa|The PO marked it as won't fix.|bug
+not a bug|adj|không phải lỗi|The developer closed it as not a bug.|bug
+by design|adj|theo thiết kế|This behaviour is by design.|bug
+cannot reproduce|adj|không tái hiện được|The ticket was closed as cannot reproduce.|bug
+deferred|adj|hoãn lại|The bug was deferred to the next release.|bug
+expected behaviour|n|hành vi mong đợi|What is the expected behaviour here?|testing
+actual behaviour|n|hành vi thực tế|The actual behaviour is a blank page.|testing
+inconsistent|adj|không nhất quán|The date format is inconsistent.|bug
+mismatch|n|sự không khớp|There's a mismatch between the design and the app.|bug
+discrepancy|n|sự sai lệch|I found a discrepancy in the totals.|bug
+acceptance criteria|n|tiêu chí chấp nhận|My tests follow the acceptance criteria.|agile
+user story|n|câu chuyện người dùng|Each user story needs test cases.|agile
+sprint|n|chu kỳ phát triển|Testing happens inside the sprint.|agile
+shift left|n|kiểm thử sớm|Shift left means testing earlier.|testing
+peer review|n|đánh giá chéo|Do a peer review of each other's test cases.|quality
+walkthrough|n|buổi rà soát|We did a walkthrough of the requirements.|meeting
+static testing|n|kiểm thử tĩnh|Reviewing documents is static testing.|testing
+dynamic testing|n|kiểm thử động|Dynamic testing runs the software.|testing
+test automation|n|tự động hóa kiểm thử|We started test automation this year.|testing
+automation script|n|kịch bản tự động|The automation script logs in and checks out.|testing
+Selenium|n|công cụ Selenium|We automate web tests with Selenium.|testing
+locator|n|bộ định vị phần tử|The locator for the button changed.|testing
+XPath|n|biểu thức XPath|Avoid long XPath expressions.|testing
+selector|n|bộ chọn CSS|Use a stable selector.|testing
+page object|n|mẫu page object|We use the page object pattern.|testing
+wait|n|thời gian chờ|Add an explicit wait for the popup.|testing
+assertion|n|phép khẳng định|Add an assertion for the total price.|testing
+test framework|n|khung kiểm thử|We use Playwright as our test framework.|testing
+headless|adj|chạy không giao diện|Run the tests in headless mode.|testing
+parallel execution|n|chạy song song|Parallel execution saves time.|testing
+CI pipeline|n|đường ống tích hợp liên tục|The tests run in the CI pipeline.|release
+nightly build|n|bản dựng hằng đêm|The nightly build failed.|release
+smoke suite|n|bộ kiểm thử khói|The smoke suite has 20 tests.|testing
+regression suite|n|bộ kiểm thử hồi quy|The regression suite takes two hours.|testing
+test report|n|báo cáo kiểm thử|The test report shows 5 failures.|document
+pass rate|n|tỷ lệ đạt|The pass rate is 92 percent.|data
+metrics|n|chỉ số đo lường|We track QA metrics weekly.|data
+dashboard|n|bảng tổng quan|The QA dashboard shows open bugs.|data
+performance testing|n|kiểm thử hiệu năng|Performance testing starts after UAT.|performance
+load testing|n|kiểm thử tải|Load testing with 1,000 users failed.|performance
+stress testing|n|kiểm thử áp lực|Stress testing found the breaking point.|performance
+response time|n|thời gian phản hồi|The response time must be under two seconds.|performance
+concurrent users|n|người dùng đồng thời|The site supports 500 concurrent users.|performance
+JMeter|n|công cụ JMeter|We used JMeter for load tests.|performance
+security testing|n|kiểm thử bảo mật|Security testing is done by another team.|security
+SQL injection|n|tấn công chèn SQL|Test the search field for SQL injection.|security
+access control|n|kiểm soát truy cập|Check access control for each role.|security
+role-based access|n|truy cập theo vai trò|Role-based access stops staff from seeing salaries.|security
+session timeout|n|hết hạn phiên|Test the session timeout after 15 minutes.|security
+data privacy|n|quyền riêng tư dữ liệu|Data privacy rules apply to customer emails.|security
+mobile testing|n|kiểm thử di động|Mobile testing needs real devices.|mobile
+emulator|n|trình giả lập|Use an emulator for older Android versions.|mobile
+simulator|n|trình mô phỏng|Test on the iOS simulator first.|mobile
+real device|n|thiết bị thật|Always confirm on a real device.|mobile
+device farm|n|kho thiết bị kiểm thử|We rent a device farm in the cloud.|mobile
+network condition|n|điều kiện mạng|Test the app on a slow network condition.|network
+offline mode|n|chế độ ngoại tuyến|Test offline mode on the train.|mobile
+push notification|n|thông báo đẩy|The push notification has the wrong text.|mobile
+deep link|n|liên kết sâu|The deep link opens the wrong screen.|mobile
+app store|n|cửa hàng ứng dụng|The build is ready for the app store.|mobile
+beta testing|n|kiểm thử beta|Beta testing runs for two weeks.|testing
+alpha testing|n|kiểm thử alpha|Alpha testing is done in-house.|testing
+production issue|n|lỗi trên môi trường thật|We had a production issue last night.|bug
+hotfix|n|bản vá khẩn|Test the hotfix before it goes live.|release
+release candidate|n|bản ứng viên phát hành|Release candidate 2 looks stable.|release
+go/no-go|n|quyết định phát hành hay không|QA joins the go/no-go meeting.|release
+sign-off|n|sự xác nhận đồng ý|We need QA sign-off before release.|release
+quality gate|n|cổng chất lượng|The build did not pass the quality gate.|quality
+risk-based testing|n|kiểm thử dựa trên rủi ro|We use risk-based testing when time is short.|testing
+test estimation|n|ước lượng kiểm thử|Test estimation is three days.|agile
+effort|n|công sức|How much effort is needed for testing?|agile
+blocker|n|vấn đề chặn|The login bug is a blocker for all tests.|agile
+dependency|n|sự phụ thuộc|Testing has a dependency on the test data.|process
+environment issue|n|sự cố môi trường|It's an environment issue, not a bug.|cloud
+configuration|n|cấu hình|The configuration on QA is different.|cloud
+database check|n|kiểm tra cơ sở dữ liệu|Do a database check after the order.|data
+SQL query|n|câu truy vấn SQL|I wrote an SQL query to verify the data.|data
+log analysis|n|phân tích nhật ký|Log analysis showed a timeout.|bug
+browser console|n|bảng console trình duyệt|Check the browser console for errors.|bug
+network tab|n|thẻ Network trong DevTools|The network tab shows a 500 error.|bug
+DevTools|n|công cụ cho nhà phát triển|Open DevTools with F12.|bug
+cache issue|n|lỗi bộ nhớ đệm|It was a cache issue on my browser.|bug
+test evidence|n|bằng chứng kiểm thử|Attach test evidence for each case.|document
+audit|n|kiểm toán / rà soát|Test evidence is needed for the audit.|quality
+compliance|n|tuân thủ|Banking apps need compliance testing.|quality
+standard|n|tiêu chuẩn|Follow the company testing standard.|quality
+ISTQB|n|chứng chỉ kiểm thử ISTQB|I passed the ISTQB foundation exam.|career
+QA engineer|n|kỹ sư đảm bảo chất lượng|I'm a QA engineer at a fintech startup.|people
+automation engineer|n|kỹ sư kiểm thử tự động|We're hiring an automation engineer.|people
+test lead|n|trưởng nhóm kiểm thử|The test lead approved the plan.|people
+collaborate|v|cộng tác|Testers collaborate closely with developers.|communication
+escalate|v|báo cáo lên cấp trên|Escalate the issue to the PM.|communication
+communicate|v|giao tiếp|Communicate risks early.|communication

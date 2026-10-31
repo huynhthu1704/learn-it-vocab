@@ -1,0 +1,144 @@
+# level=3 role=dev
+technical debt|n|nợ kỹ thuật|Quick fixes created a lot of technical debt.|quality
+microservices|n|kiến trúc vi dịch vụ|We split the old monolith into microservices.|architecture
+CI/CD pipeline|n|quy trình tích hợp và triển khai liên tục|The CI/CD pipeline runs all tests before each release.|release
+rollback|n|khôi phục về phiên bản trước|We did a rollback after the release broke checkout.|release
+monolith|n|ứng dụng nguyên khối|The monolith is hard to deploy.|architecture
+domain-driven design|n|thiết kế hướng miền|We use domain-driven design for the core services.|architecture
+bounded context|n|ngữ cảnh giới hạn|Orders and payments are separate bounded contexts.|architecture
+event-driven architecture|n|kiến trúc hướng sự kiện|Event-driven architecture reduces coupling.|architecture
+message broker|n|trung gian tin nhắn|Kafka is our message broker.|architecture
+pub/sub|n|mô hình xuất bản/đăng ký|Notifications use pub/sub.|architecture
+idempotent|adj|lũy đẳng (gọi nhiều lần cùng kết quả)|The payment endpoint must be idempotent.|architecture
+eventual consistency|n|nhất quán cuối cùng|The search index has eventual consistency.|architecture
+loose coupling|n|liên kết lỏng|Loose coupling makes services easier to change.|architecture
+high cohesion|n|tính gắn kết cao|Each module should have high cohesion.|architecture
+separation of concerns|n|phân tách mối quan tâm|Keep separation of concerns between UI and logic.|architecture
+dependency injection|n|tiêm phụ thuộc|Use dependency injection to make testing easier.|code
+inversion of control|n|đảo ngược điều khiển|Spring uses inversion of control.|code
+clean architecture|n|kiến trúc sạch|We follow clean architecture in the mobile app.|architecture
+hexagonal architecture|n|kiến trúc lục giác|Hexagonal architecture isolates the core logic.|architecture
+API gateway|n|cổng API|All requests go through the API gateway.|architecture
+service mesh|n|lưới dịch vụ|We added a service mesh for traffic control.|architecture
+circuit breaker|n|cơ chế ngắt mạch|A circuit breaker stops calls to a failing service.|architecture
+retry policy|n|chính sách thử lại|Add a retry policy with backoff.|architecture
+exponential backoff|n|thời gian chờ tăng theo cấp số|Use exponential backoff for retries.|architecture
+graceful degradation|n|suy giảm có kiểm soát|Graceful degradation keeps core features working.|architecture
+single point of failure|n|điểm lỗi duy nhất|The old database was a single point of failure.|architecture
+horizontal scaling|n|mở rộng theo chiều ngang|We prefer horizontal scaling.|cloud
+vertical scaling|n|mở rộng theo chiều dọc|Vertical scaling has a limit.|cloud
+autoscaling|n|tự động mở rộng|Autoscaling added ten servers during the sale.|cloud
+Kubernetes|n|nền tảng điều phối container Kubernetes|We run 40 services on Kubernetes.|cloud
+pod|n|pod (Kubernetes)|The pod keeps restarting.|cloud
+orchestration|n|điều phối|Kubernetes handles container orchestration.|cloud
+infrastructure as code|n|hạ tầng dưới dạng mã|We manage infrastructure as code with Terraform.|cloud
+Terraform|n|công cụ Terraform|The Terraform plan shows three changes.|cloud
+observability|n|khả năng quan sát hệ thống|Observability helps us find problems fast.|cloud
+distributed tracing|n|truy vết phân tán|Distributed tracing showed the slow service.|cloud
+metrics|n|số liệu đo lường|Export metrics to Prometheus.|cloud
+SLO|n|mục tiêu mức dịch vụ|Our SLO is 99.95 percent availability.|cloud
+SLA|n|cam kết mức dịch vụ|We missed the SLA last month.|business
+error budget|n|ngân sách lỗi|We used half our error budget this quarter.|cloud
+postmortem|n|báo cáo phân tích sau sự cố|Write a blameless postmortem.|bug
+blameless|adj|không đổ lỗi|We have a blameless culture.|people
+root cause analysis|n|phân tích nguyên nhân gốc|Root cause analysis found a bad config.|bug
+incident response|n|ứng phó sự cố|Our incident response took 20 minutes.|bug
+runbook|n|sổ tay vận hành|Follow the runbook for database failover.|document
+failover|n|chuyển đổi dự phòng|Failover to the backup region worked.|cloud
+disaster recovery|n|khôi phục sau thảm họa|We test disaster recovery twice a year.|cloud
+blue-green deployment|n|triển khai xanh-lục|Blue-green deployment gives zero downtime.|release
+canary release|n|phát hành thử nghiệm dần|The canary release goes to five percent of users.|release
+zero downtime|n|không gián đoạn dịch vụ|We need zero downtime during the migration.|release
+continuous delivery|n|phân phối liên tục|Continuous delivery lets us release any day.|release
+trunk-based development|n|phát triển trên nhánh chính|We moved to trunk-based development.|code
+monorepo|n|kho mã đơn nhất|All services live in one monorepo.|code
+code ownership|n|quyền sở hữu mã|Every module has clear code ownership.|code
+static analysis|n|phân tích tĩnh|Static analysis found a security issue.|quality
+code coverage|n|độ bao phủ mã|Code coverage must stay above 80 percent.|testing
+mutation testing|n|kiểm thử đột biến|Mutation testing checks how good our tests are.|testing
+contract testing|n|kiểm thử hợp đồng|Contract testing protects the API between teams.|testing
+property-based testing|n|kiểm thử dựa trên thuộc tính|Property-based testing found a rare bug.|testing
+caching strategy|n|chiến lược bộ nhớ đệm|Our caching strategy uses Redis.|performance
+cache invalidation|n|vô hiệu hóa bộ nhớ đệm|Cache invalidation is one of the hard problems.|performance
+read replica|n|bản sao chỉ đọc|Send reports to the read replica.|data
+connection pool|n|nhóm kết nối|The connection pool is full.|data
+query optimization|n|tối ưu truy vấn|Query optimization cut the time by 90 percent.|performance
+N+1 query|n|lỗi truy vấn N+1|The page has an N+1 query problem.|performance
+denormalization|n|phi chuẩn hóa|We used denormalization for faster reads.|data
+data migration|n|di chuyển dữ liệu|The data migration took a weekend.|data
+schema change|n|thay đổi lược đồ|Plan the schema change carefully.|data
+backward compatibility|n|khả năng tương thích ngược|Keep backward compatibility for old apps.|architecture
+API versioning|n|quản lý phiên bản API|We use URL-based API versioning.|architecture
+GraphQL|n|ngôn ngữ truy vấn GraphQL|The mobile team prefers GraphQL.|architecture
+gRPC|n|giao thức gRPC|Internal services talk through gRPC.|architecture
+WebSocket|n|giao thức WebSocket|Chat uses a WebSocket connection.|network
+throttling|n|điều tiết lưu lượng|Throttling protects the API.|architecture
+OAuth|n|giao thức ủy quyền OAuth|Users log in with OAuth.|security
+JWT|n|mã thông báo JWT|The JWT expires in one hour.|security
+single sign-on|n|đăng nhập một lần|Staff use single sign-on.|security
+zero trust|n|mô hình không tin cậy mặc định|We follow a zero trust model.|security
+vulnerability|n|lỗ hổng bảo mật|A scanner found a vulnerability.|security
+penetration test|n|kiểm thử xâm nhập|The penetration test is next week.|security
+XSS|n|tấn công chèn mã kịch bản|Escape user input to prevent XSS.|security
+least privilege|n|đặc quyền tối thiểu|Follow the principle of least privilege.|security
+secrets management|n|quản lý thông tin bí mật|Use Vault for secrets management.|security
+encryption at rest|n|mã hóa dữ liệu lưu trữ|Customer data needs encryption at rest.|security
+compliance|n|tuân thủ quy định|We need PCI compliance for card data.|security
+audit log|n|nhật ký kiểm toán|Every admin action goes to the audit log.|security
+concurrency control|n|kiểm soát đồng thời|Use optimistic concurrency control.|data
+race condition|n|điều kiện tranh chấp|A race condition caused double payments.|bug
+deadlock|n|bế tắc khóa|The database had a deadlock.|bug
+thread safety|n|an toàn luồng|Thread safety matters when many requests share one cache.|code
+immutability|n|tính bất biến|Immutability makes state easier to reason about.|code
+functional programming|n|lập trình hàm|We use functional programming in data jobs.|code
+side effect|n|tác dụng phụ|This function has a hidden side effect.|code
+pure function|n|hàm thuần|Pure functions are easy to test.|code
+abstraction|n|sự trừu tượng hóa|Don't add abstraction too early.|code
+over-engineering|n|thiết kế quá mức cần thiết|That solution is over-engineering.|quality
+premature optimization|n|tối ưu hóa quá sớm|Avoid premature optimization.|performance
+YAGNI|n|nguyên tắc chưa cần thì chưa làm|YAGNI: don't build it until we need it.|quality
+DRY|n|nguyên tắc không lặp lại|Keep the code DRY.|quality
+KISS|n|nguyên tắc giữ đơn giản|KISS: the simple solution is fine.|quality
+design document|n|tài liệu thiết kế|Write a design document before you build.|document
+RFC|n|đề xuất kỹ thuật cần góp ý|I posted an RFC for the new cache.|document
+ADR|n|bản ghi quyết định kiến trúc|We record each choice in an ADR.|document
+architecture review|n|buổi đánh giá kiến trúc|The architecture review is on Thursday.|meeting
+proof of concept|n|bằng chứng khả thi|Build a proof of concept first.|design
+build vs buy|n|tự xây hay mua giải pháp|We had a build vs buy discussion.|business
+vendor lock-in|n|phụ thuộc nhà cung cấp|Using one cloud may cause vendor lock-in.|cloud
+cost optimization|n|tối ưu chi phí|Cloud cost optimization saved 30 percent.|money
+capacity planning|n|lập kế hoạch năng lực|Capacity planning for the Tet sale starts now.|cloud
+load testing|n|kiểm thử tải|Load testing showed we need more servers.|performance
+p99 latency|n|độ trễ phân vị 99|Our p99 latency is 400 milliseconds.|performance
+profiling|n|phân tích hiệu năng mã|Profiling showed a slow JSON parser.|performance
+memory footprint|n|mức sử dụng bộ nhớ|Reduce the memory footprint of the app.|performance
+garbage collection|n|thu gom rác bộ nhớ|Garbage collection pauses slow the API.|performance
+cold start|n|khởi động nguội|Serverless functions have a cold start.|cloud
+edge case|n|trường hợp biên|Cover every edge case in the tests.|testing
+regression|n|lỗi hồi quy|This change caused a regression.|bug
+hotfix release|n|bản phát hành sửa lỗi khẩn|We shipped a hotfix release at night.|release
+release train|n|lịch phát hành định kỳ|Miss the release train and wait two weeks.|release
+feature toggle|n|công tắc tính năng|Use a feature toggle for the new checkout.|release
+dark launch|n|phát hành ẩn|We did a dark launch of the new search.|release
+technical roadmap|n|lộ trình kỹ thuật|The technical roadmap includes a new database.|business
+engineering manager|n|quản lý kỹ thuật|My engineering manager runs one-on-ones.|people
+staff engineer|n|kỹ sư cấp cao (staff)|A staff engineer leads cross-team designs.|people
+principal engineer|n|kỹ sư trưởng|The principal engineer reviewed our design.|people
+one-on-one|n|buổi trao đổi riêng|I have a one-on-one with my manager weekly.|meeting
+code ownership model|n|mô hình sở hữu mã|We changed our code ownership model.|code
+on-call rotation|n|lịch trực luân phiên|The on-call rotation is weekly.|cloud
+toil|n|công việc lặp lại thủ công|Automate toil where you can.|process
+developer experience|n|trải nghiệm nhà phát triển|Faster builds improve developer experience.|process
+platform team|n|nhóm nền tảng|The platform team owns CI.|people
+cross-functional team|n|nhóm liên chức năng|We work in a cross-functional team.|people
+stakeholder|n|bên liên quan|Explain the risk to stakeholders.|people
+trade-off|n|sự đánh đổi|Every architecture choice is a trade-off.|architecture
+justify|v|lý giải, biện minh|Justify why we need a new service.|communication
+push back|v|phản biện, từ chối|Push back if the deadline is unrealistic.|communication
+de-risk|v|giảm thiểu rủi ro|A spike will de-risk the integration.|business
+sunset|v|ngừng hỗ trợ dần|We will sunset the old API next year.|release
+deprecate|v|đánh dấu không còn dùng|We deprecated version one.|release
+greenfield|adj|dự án mới hoàn toàn|It's a greenfield project.|business
+brownfield|adj|dự án trên hệ thống cũ|Brownfield projects need careful migration.|business
+legacy system|n|hệ thống cũ|We integrate with a legacy system.|architecture
+strangler pattern|n|mẫu thay thế dần (strangler)|We use the strangler pattern to replace the monolith.|architecture

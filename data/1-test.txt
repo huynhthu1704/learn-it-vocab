@@ -1,0 +1,148 @@
+# level=1 role=test
+test case|n|ca kiểm thử|I wrote ten test cases for the checkout page.|testing
+defect|n|lỗi, khiếm khuyết|I reported the defect to the developer.|bug
+expected result|n|kết quả mong đợi|The expected result is a success message.|testing
+actual result|n|kết quả thực tế|The actual result is an error page.|testing
+tester|n|người kiểm thử|Every team has one tester.|people
+QA|n|đảm bảo chất lượng|She works in QA at a bank.|quality
+quality|n|chất lượng|Our goal is high quality, not just speed.|quality
+testing|n|việc kiểm thử|Testing starts after the build is ready.|testing
+manual testing|n|kiểm thử thủ công|I do manual testing on the mobile app.|testing
+bug report|n|báo cáo lỗi|Write a clear bug report with steps.|bug
+steps to reproduce|n|các bước tái hiện lỗi|Add the steps to reproduce to the ticket.|bug
+precondition|n|điều kiện tiên quyết|Precondition: the user is logged in.|testing
+test data|n|dữ liệu kiểm thử|We need test data for ten users.|data
+test step|n|bước kiểm thử|Each test step should be short.|testing
+pass|v|đạt|The test case passed.|testing
+fail|v|không đạt|Two tests failed on Android.|testing
+status|n|trạng thái|Change the status to Fixed.|agile
+open|adj|đang mở|There are five open bugs.|bug
+fixed|adj|đã sửa|The developer marked the bug as fixed.|bug
+closed|adj|đã đóng|I closed the bug after retesting.|bug
+reopen|v|mở lại|I reopened the bug because it still happens.|bug
+retest|v|kiểm thử lại|Please retest after the fix.|testing
+verify|v|xác nhận|Verify that the email is sent.|testing
+check|v|kiểm tra|Check the price on the cart page.|testing
+priority|n|mức độ ưu tiên|This bug has high priority.|agile
+high|adj|cao|The severity is high.|bug
+low|adj|thấp|It is a low priority issue.|bug
+critical|adj|nghiêm trọng|Users cannot pay. It's critical.|bug
+minor|adj|nhỏ, không nghiêm trọng|It's a minor spelling mistake.|bug
+major|adj|lớn, nghiêm trọng|This is a major bug in checkout.|bug
+screenshot|n|ảnh chụp màn hình|Please attach a screenshot to the bug report.|bug
+screen recording|n|video quay màn hình|Add a screen recording of the crash.|bug
+attach|v|đính kèm|Attach the log file to the ticket.|document
+device|n|thiết bị|Which device did you test on?|devices
+browser|n|trình duyệt|The bug only happens in Safari browser.|web
+Chrome|n|trình duyệt Chrome|It works fine in Chrome.|web
+Safari|n|trình duyệt Safari|The button is hidden in Safari.|web
+version|n|phiên bản|Write the app version in the report.|release
+build number|n|số bản dựng|Test build number 1.4.2.|release
+test environment|n|môi trường kiểm thử|The test environment is down.|cloud
+test plan|n|kế hoạch kiểm thử|The test plan covers all main features.|testing
+test suite|n|bộ kiểm thử|Run the full test suite before release.|testing
+checklist|n|danh sách kiểm tra|Use the checklist for each release.|testing
+scenario|n|kịch bản|Think about every scenario a user might try.|testing
+happy path|n|luồng sử dụng bình thường|The happy path works well.|testing
+negative test|n|kiểm thử trường hợp sai|Try a negative test with a wrong password.|testing
+positive test|n|kiểm thử trường hợp đúng|Start with a positive test.|testing
+valid|adj|hợp lệ|Enter a valid email address.|testing
+invalid|adj|không hợp lệ|The form accepts an invalid phone number.|testing
+required field|n|trường bắt buộc|Leave the required field empty and click Save.|testing
+error message|n|thông báo lỗi|The error message should be in Vietnamese.|bug
+validation|n|kiểm tra tính hợp lệ|The form has no validation.|testing
+input|n|dữ liệu nhập|Try special characters as input.|testing
+special character|n|ký tự đặc biệt|Special characters break the search.|testing
+empty|adj|trống|What happens if the cart is empty?|testing
+maximum|n|giá trị tối đa|The maximum length is 50 characters.|testing
+minimum|n|giá trị tối thiểu|The minimum order is 100,000 dong.|testing
+limit|n|giới hạn|There is no limit on file size.|testing
+login|n|việc đăng nhập|Login fails with a correct password.|security
+logout|n|việc đăng xuất|Logout does not clear the session.|security
+checkout|n|thanh toán (giỏ hàng)|I tested checkout with three cards.|business
+cart|n|giỏ hàng|Items disappear from the cart.|business
+payment|n|thanh toán|Payment fails for Visa cards.|money
+order|n|đơn hàng|The order status is wrong.|business
+search|n|tìm kiếm|Search returns no results.|web
+result|n|kết quả|The search result is wrong.|testing
+link|n|đường dẫn|The link opens a 404 page.|web
+404 error|n|lỗi không tìm thấy trang|Clicking Help shows a 404 error.|bug
+spelling mistake|n|lỗi chính tả|There's a spelling mistake in the title.|bug
+alignment|n|căn chỉnh|The alignment of the buttons is off.|design
+overlap|v|chồng lên nhau|The text overlaps the image on small screens.|design
+cut off|adj|bị cắt mất|The last word is cut off.|design
+missing|adj|bị thiếu|The logo is missing on the home page.|bug
+wrong|adj|sai|The total price is wrong.|bug
+correct|adj|đúng|The calculation is correct now.|testing
+freeze|v|bị đơ|The app freezes after I upload a photo.|bug
+crash|n|sự cố sập ứng dụng|The crash happens every time.|bug
+slow|adj|chậm|The page is very slow to load.|performance
+loading time|n|thời gian tải|The loading time is ten seconds.|performance
+always|adv|luôn luôn|The bug happens always.|bug
+sometimes|adv|thỉnh thoảng|The bug happens sometimes.|bug
+randomly|adv|ngẫu nhiên|The app logs out randomly.|bug
+again|adv|lại lần nữa|Try it again after restarting.|testing
+step by step|adv|từng bước|Describe the problem step by step.|process
+note|n|ghi chú|Add a note about the test account.|document
+comment|n|bình luận|The developer left a comment on the bug.|communication
+assign|v|giao (việc)|Assign the bug to the backend team.|agile
+assignee|n|người được giao|Who is the assignee for this ticket?|agile
+reporter|n|người báo cáo|I am the reporter of this bug.|agile
+Jira|n|công cụ quản lý công việc Jira|Log the bug in Jira.|agile
+board|n|bảng công việc|Move the ticket on the board.|agile
+column|n|cột|The bug is in the To Do column.|agile
+duplicate|n|trùng lặp|This bug is a duplicate of another ticket.|bug
+feedback|n|phản hồi|Users gave feedback about the new menu.|communication
+user|n|người dùng|A user reported this bug.|people
+customer|n|khách hàng|The customer found the bug first.|business
+test account|n|tài khoản kiểm thử|Use the test account to log in.|testing
+password|n|mật khẩu|Try a password with ten characters.|security
+email address|n|địa chỉ email|The email address is not saved.|communication
+phone number|n|số điện thoại|The phone number field accepts letters.|testing
+date|n|ngày tháng|The date format is wrong.|testing
+time zone|n|múi giờ|Check the time in a different time zone.|time
+language|n|ngôn ngữ|Switch the language to English.|testing
+mobile view|n|giao diện trên điện thoại|The menu looks bad in mobile view.|mobile
+desktop|n|máy tính để bàn|Test on desktop and mobile.|devices
+portrait|n|chế độ màn hình dọc|The layout breaks in portrait.|mobile
+landscape|n|chế độ màn hình ngang|Rotate the phone to landscape.|mobile
+screen size|n|kích thước màn hình|Test on three screen sizes.|mobile
+install|v|cài đặt|Install the test build on your phone.|mobile
+update|n|bản cập nhật|After the update, the app crashes.|release
+notification|n|thông báo|The push notification never arrives.|mobile
+popup|n|cửa sổ bật lên|The popup cannot be closed.|design
+button|n|nút|The Save button is disabled.|design
+disabled|adj|bị vô hiệu hóa|The button stays disabled.|design
+enabled|adj|được kích hoạt|The button should be enabled.|design
+visible|adj|hiển thị|The error is not visible to users.|design
+hidden|adj|bị ẩn|The price is hidden behind the menu.|design
+scroll|v|cuộn|Scroll down to the footer.|design
+tap|v|chạm (trên màn hình)|Tap the heart icon twice.|mobile
+swipe|v|vuốt|Swipe left to delete the item.|mobile
+double-click|v|nhấp đúp|Double-click opens two windows.|testing
+drag and drop|v|kéo và thả|Drag and drop doesn't work on Firefox.|design
+refresh|v|làm mới|Refresh the page and check again.|web
+clear cache|v|xóa bộ nhớ đệm|Clear cache before you test.|performance
+log file|n|tệp nhật ký|The log file shows a timeout.|bug
+console error|n|lỗi trong bảng console|There is a console error on load.|bug
+test result|n|kết quả kiểm thử|Share the test results with the team.|testing
+test report|n|báo cáo kiểm thử|I send the test report every Friday.|document
+coverage|n|độ bao phủ|We need better coverage of the payment flow.|testing
+smoke test|n|kiểm thử khói (kiểm tra nhanh)|Run a smoke test after each deploy.|testing
+sanity check|n|kiểm tra nhanh hợp lý|Do a sanity check on the new build.|testing
+exploratory testing|n|kiểm thử thăm dò|I found it during exploratory testing.|testing
+user acceptance testing|n|kiểm thử chấp nhận người dùng|User acceptance testing starts next week.|testing
+UAT|n|kiểm thử chấp nhận người dùng|The client joins UAT on Monday.|testing
+release note|n|ghi chú phát hành|Read the release notes before testing.|release
+new feature|n|tính năng mới|Test the new feature first.|release
+regression|n|lỗi hồi quy|This is a regression from last week.|bug
+workaround|n|cách xử lý tạm thời|Is there a workaround for users?|bug
+known issue|n|lỗi đã biết|Add it to the list of known issues.|bug
+root cause|n|nguyên nhân gốc|We still don't know the root cause.|bug
+impact|n|ảnh hưởng|The impact is small.|business
+risk|n|rủi ro|This change has a high risk.|business
+deadline|n|hạn chót|Testing must finish before the deadline.|time
+sign off|v|xác nhận hoàn tất|QA signs off before release.|release
+approve|v|phê duyệt|The lead approved the test plan.|process
+ready for test|adj|sẵn sàng để kiểm thử|The story is ready for test.|agile
+blocker|n|vấn đề gây cản trở|The broken login is a blocker.|agile

@@ -1,0 +1,152 @@
+# level=1 role=student
+username field|n|ô nhập tên đăng nhập|Type your student ID in the username field.|web
+home page|n|trang chủ|The home page shows all your courses.|web
+learning platform|n|nền tảng học tập|Upload the file to the learning platform.|study
+timetable|n|thời khóa biểu|Check the timetable for room changes.|time
+classroom|n|phòng học|The classroom has a projector.|study
+projector|n|máy chiếu|The projector is not working.|devices
+whiteboard marker|n|bút viết bảng|We need a new whiteboard marker.|study
+group chat|n|nhóm trò chuyện|Our group chat is very active.|communication
+due date|n|ngày đến hạn|The due date is October 20th.|time
+late submission|n|nộp bài trễ|Late submission loses ten percent.|study
+draft version|n|phiên bản nháp|Send me a draft version first.|document
+final version|n|phiên bản cuối|Upload only the final version.|document
+word count|n|số lượng từ|The word count limit is 1,500.|document
+font size|n|cỡ chữ|Use font size 12 for the report.|design
+page number|n|số trang|Add page numbers to the report.|document
+cover page|n|trang bìa|Put your name on the cover page.|document
+table of contents|n|mục lục|Word can make a table of contents for you.|document
+heading|n|tiêu đề|Use a heading for each section.|document
+paragraph|n|đoạn văn|Each paragraph should have one idea.|document
+bullet point|n|gạch đầu dòng|List the features as bullet points.|document
+keyboard shortcut|n|phím tắt bàn phím|Learn keyboard shortcuts to work faster.|devices
+USB drive|n|ổ USB|Save a copy on your USB drive.|devices
+charger|n|bộ sạc|I forgot my laptop charger.|devices
+battery|n|pin|My battery is almost dead.|devices
+headset|n|tai nghe có micrô|Wear a headset in online classes.|devices
+webcam|n|camera máy tính|My webcam is blurry.|devices
+mute|v|tắt tiếng|Please mute your microphone.|meeting
+unmute|v|bật tiếng|Unmute yourself to ask a question.|meeting
+raise your hand|v|giơ tay (phát biểu)|Raise your hand in Zoom to speak.|meeting
+breakout room|n|phòng thảo luận nhóm nhỏ|We discussed it in a breakout room.|meeting
+recording|n|bản ghi hình|The lecture recording is online.|meeting
+calculator|n|máy tính bỏ túi|You can't use a calculator in this exam.|math
+equation|n|phương trình|Solve the equation for x.|math
+fraction|n|phân số|Convert the fraction to a decimal.|math
+decimal|n|số thập phân|Round the decimal to two places.|math
+sum|n|tổng|Calculate the sum of the list.|math
+total|n|tổng cộng|What is the total cost?|math
+# level=1 role=dev
+hello world|n|chương trình chào thế giới|My first program printed hello world.|code
+print|v|in ra|Print the result to check it.|code
+statement|n|câu lệnh|Each statement ends with a semicolon.|code
+semicolon|n|dấu chấm phẩy|You forgot a semicolon.|code
+bracket|n|dấu ngoặc|A bracket is missing on line five.|code
+indentation|n|thụt lề|Python uses indentation for blocks.|code
+line of code|n|dòng mã|This function has 200 lines of code.|code
+file name|n|tên tệp|Use lowercase file names.|code
+extension|n|phần mở rộng tệp|The file extension is .js.|code
+folder structure|n|cấu trúc thư mục|Keep a clean folder structure.|code
+project setup|n|thiết lập dự án|Project setup takes ten minutes.|code
+dark mode|n|chế độ tối|I code in dark mode.|design
+plugin|n|tiện ích bổ sung|Install the Prettier plugin.|code
+extension pack|n|gói tiện ích mở rộng|This extension pack helps with Java.|code
+autocomplete|n|tự động hoàn thành|Autocomplete saves me a lot of typing.|code
+search and replace|n|tìm và thay thế|Use search and replace to rename it.|code
+snippet|n|đoạn mã ngắn|Share a snippet, not the whole file.|code
+sample|n|mẫu|Here is a sample request.|code
+default|adj|mặc định|The default port is 3000.|code
+optional|adj|không bắt buộc|This parameter is optional.|code
+required|adj|bắt buộc|The name field is required.|code
+true|adj|đúng (giá trị logic)|The function returns true.|code
+false|adj|sai (giá trị logic)|isAdmin is false for normal users.|code
+empty string|n|chuỗi rỗng|Check for an empty string.|code
+undefined|adj|chưa được định nghĩa|The variable is undefined.|bug
+quick question|n|câu hỏi nhanh|Quick question: which branch should I use?|communication
+heads-up|n|lời báo trước|Just a heads-up: the server restarts at noon.|communication
+ETA|n|thời gian dự kiến hoàn thành|What's the ETA for the fix?|time
+ASAP|adv|càng sớm càng tốt|Please fix it ASAP.|time
+FYI|phr|để bạn biết|FYI, the API changed today.|communication
+lunch break|n|giờ nghỉ trưa|Let's talk after the lunch break.|time
+day off|n|ngày nghỉ|I'm taking a day off on Friday.|time
+sick leave|n|nghỉ ốm|He is on sick leave today.|time
+work from home|v|làm việc tại nhà|I work from home on Wednesdays.|career
+office chat|n|ứng dụng chat công ty|Send it in the office chat.|communication
+team lead|n|trưởng nhóm|Ask the team lead for access.|people
+colleague|n|đồng nghiệp|My colleague showed me the codebase.|people
+# level=1 role=test
+test step result|n|kết quả từng bước kiểm thử|Record the test step result.|testing
+test title|n|tiêu đề ca kiểm thử|Make the test title short and clear.|testing
+bug title|n|tiêu đề lỗi|A good bug title says what and where.|bug
+summary line|n|dòng tóm tắt|Write the summary line first.|bug
+environment details|n|thông tin môi trường|Add environment details to the bug.|bug
+operating system version|n|phiên bản hệ điều hành|Note the operating system version.|devices
+app crash|n|ứng dụng bị sập|The app crash happens on startup.|bug
+blank page|n|trang trắng|Clicking Next shows a blank page.|bug
+infinite loading|n|tải mãi không xong|The page has infinite loading.|bug
+spinner|n|biểu tượng đang tải|The spinner never stops.|design
+wrong message|n|thông báo sai|The app shows the wrong message.|bug
+placeholder text|n|văn bản gợi ý trong ô nhập|The placeholder text is in English.|design
+label|n|nhãn|The label is missing on this field.|design
+tooltip|n|chú thích khi rê chuột|The tooltip covers the button.|design
+image upload|n|tải ảnh lên|Image upload fails over 5 MB.|testing
+file size limit|n|giới hạn dung lượng tệp|Test the file size limit.|testing
+character limit|n|giới hạn ký tự|The character limit is not enforced.|testing
+leading space|n|khoảng trắng đầu chuỗi|A leading space breaks the login.|testing
+case sensitive|adj|phân biệt chữ hoa chữ thường|Is the email field case sensitive?|testing
+copy and paste|v|sao chép và dán|Copy and paste works in the password field.|testing
+back button|n|nút quay lại|The back button loses my data.|testing
+browser back|n|nút quay lại của trình duyệt|Browser back shows an old page.|testing
+new tab|n|thẻ mới|The link should open in a new tab.|web
+zoom in|v|phóng to|Zoom in to 200 percent and check.|testing
+font issue|n|lỗi phông chữ|There is a font issue in Vietnamese text.|bug
+encoding|n|mã hóa ký tự|Wrong encoding shows strange characters.|bug
+time format|n|định dạng thời gian|Use the 24-hour time format.|testing
+currency|n|đơn vị tiền tệ|Show the currency as VND.|money
+rounding|n|làm tròn|There's a rounding error in the total.|bug
+calculation error|n|lỗi tính toán|The tax has a calculation error.|bug
+order history|n|lịch sử đơn hàng|Order history shows old prices.|business
+confirmation email|n|email xác nhận|The confirmation email has a typo.|communication
+OTP|n|mã xác thực dùng một lần|The OTP arrives late.|security
+captcha|n|mã captcha|The captcha is hard to read.|security
+dark theme|n|giao diện tối|Text is invisible in the dark theme.|design
+test idea|n|ý tưởng kiểm thử|Write down every test idea.|testing
+retest result|n|kết quả kiểm thử lại|Add the retest result to the ticket.|testing
+# level=1 role=ba
+customer need|n|nhu cầu khách hàng|Start with the customer need.|business
+business owner|n|chủ doanh nghiệp|The business owner wants a website.|people
+shop owner|n|chủ cửa hàng|The shop owner checks sales every night.|people
+cashier|n|thu ngân|The cashier uses the POS system.|people
+POS|n|hệ thống bán hàng tại quầy|The POS prints receipts.|business
+receipt|n|biên lai|Customers can get an e-receipt.|money
+membership|n|thẻ thành viên|Membership gives free shipping.|business
+point|n|điểm thưởng|Customers earn one point per 10,000 dong.|business
+booking|n|đặt chỗ|Customers make a booking online.|business
+appointment|n|cuộc hẹn|Users can change their appointment.|time
+reminder|n|lời nhắc|Send a reminder one day before.|communication
+cancel|v|hủy|Users can cancel within 24 hours.|business
+confirm order|v|xác nhận đơn hàng|Staff confirm the order by phone.|business
+stock|n|hàng trong kho|Show "out of stock" when stock is zero.|business
+supplier|n|nhà cung cấp|Suppliers update prices monthly.|business
+purchase order|n|đơn đặt hàng|Managers approve each purchase order.|business
+approval step|n|bước phê duyệt|There are two approval steps.|process
+paper form|n|biểu mẫu giấy|They still use a paper form.|process
+handwritten|adj|viết tay|Orders are handwritten today.|process
+phone call|n|cuộc gọi điện thoại|Most orders come by phone call.|communication
+Zalo|n|ứng dụng nhắn tin Zalo|Customers order through Zalo.|communication
+Facebook page|n|trang Facebook|The shop sells on its Facebook page.|business
+landing page|n|trang đích|Marketing needs a landing page.|web
+contact form|n|biểu mẫu liên hệ|Add a contact form to the website.|web
+FAQ|n|câu hỏi thường gặp|Put the shipping rules in the FAQ.|document
+terms and conditions|n|điều khoản và điều kiện|Users must accept the terms and conditions.|document
+privacy policy|n|chính sách quyền riêng tư|Link the privacy policy in the footer.|document
+meeting room|n|phòng họp|Book a meeting room for the workshop.|meeting
+whiteboard session|n|buổi thảo luận trên bảng|We had a whiteboard session.|meeting
+sticky note|n|giấy ghi chú dán|Write each idea on a sticky note.|meeting
+first draft|n|bản nháp đầu tiên|Here's the first draft of the BRD.|document
+comment thread|n|chuỗi bình luận|Reply in the comment thread.|communication
+reply|v|trả lời|Please reply by Thursday.|communication
+reply all|v|trả lời tất cả|Don't reply all to this email.|communication
+CC|v|gửi kèm bản sao email|CC the PM on the email.|communication
+out of office|adj|vắng mặt khỏi văn phòng|The client is out of office this week.|communication
+time zone difference|n|chênh lệch múi giờ|The time zone difference is five hours.|time

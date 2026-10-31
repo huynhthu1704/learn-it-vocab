@@ -1,0 +1,178 @@
+# level=1 role=student
+computer|n|máy tính|I left my computer charging in the lab.|devices
+laptop|n|máy tính xách tay|Bring your laptop to the workshop tomorrow.|devices
+keyboard|n|bàn phím|My keyboard stopped working during the exam.|devices
+mouse|n|chuột máy tính|Click the button with your mouse.|devices
+screen|n|màn hình|Share your screen so we can see the code.|devices
+monitor|n|màn hình rời|The lab has two monitors for each student.|devices
+printer|n|máy in|The printer in the library is out of paper.|devices
+software|n|phần mềm|You need to install this software before class.|code
+hardware|n|phần cứng|We study both hardware and software this term.|devices
+program|n|chương trình|Write a program that adds two numbers.|code
+programming|n|lập trình|Programming is my favourite subject.|code
+code|n|mã nguồn|Please send me your code before Friday.|code
+coding|n|việc viết mã|I practise coding for one hour every day.|code
+algorithm|n|thuật toán|We learned a sorting algorithm in class today.|code
+database|n|cơ sở dữ liệu|Our app stores all user data in a database.|data
+data|n|dữ liệu|The teacher gave us a file with sample data.|data
+file|n|tệp tin|Save the file before you close the program.|document
+folder|n|thư mục|Put all your images in one folder.|document
+download|v|tải xuống|Download the slides from the course page.|web
+upload|v|tải lên|Upload your report to the learning system.|web
+install|v|cài đặt|Install Python before the first lab.|code
+uninstall|v|gỡ cài đặt|Uninstall the old version first.|code
+update|v|cập nhật|Update your browser to the latest version.|release
+password|n|mật khẩu|Never share your password with other students.|security
+username|n|tên đăng nhập|Your username is your student ID.|security
+log in|v|đăng nhập|Log in with your university email.|security
+log out|v|đăng xuất|Always log out on a shared computer.|security
+account|n|tài khoản|I created an account on the learning platform.|security
+email|n|thư điện tử|Send the teacher an email if you are sick.|communication
+attachment|n|tệp đính kèm|The assignment is in the attachment.|communication
+internet|n|mạng internet|The internet is slow in the dorm tonight.|network
+website|n|trang web|Our group made a website for a coffee shop.|web
+web page|n|trang web (một trang)|Each web page needs a clear title.|web
+browser|n|trình duyệt|Open the link in your browser.|web
+link|n|đường dẫn|I sent the link to the group chat.|web
+online|adj|trực tuyến|The class is online this week.|web
+offline|adj|ngoại tuyến|You can read the notes offline.|web
+app|n|ứng dụng|We built a simple to-do app.|mobile
+application|n|ứng dụng|The application crashed when I opened it.|mobile
+mobile|adj|di động|Mobile apps are popular with young users.|mobile
+smartphone|n|điện thoại thông minh|Test the app on your smartphone too.|devices
+tablet|n|máy tính bảng|The design should work on a tablet.|devices
+cloud|n|đám mây (điện toán)|Save your project in the cloud.|cloud
+storage|n|bộ nhớ lưu trữ|My laptop is running out of storage.|cloud
+memory|n|bộ nhớ|This program uses too much memory.|devices
+processor|n|bộ xử lý|A faster processor makes the game smoother.|devices
+operating system|n|hệ điều hành|Windows and macOS are operating systems.|devices
+Windows|n|hệ điều hành Windows|The lab computers run Windows.|devices
+Linux|n|hệ điều hành Linux|We use Linux for the networking course.|devices
+variable|n|biến|Store the user's age in a variable.|code
+function|n|hàm|This function returns the total price.|code
+loop|n|vòng lặp|Use a loop to print the numbers one to ten.|code
+condition|n|điều kiện|The condition checks if the number is even.|code
+if statement|n|câu lệnh if|Add an if statement to check the password.|code
+input|n|dữ liệu đầu vào|The program asks the user for input.|code
+output|n|kết quả đầu ra|The output should be a list of names.|code
+number|n|số|Enter a number between one and ten.|math
+string|n|chuỗi ký tự|A name is stored as a string.|code
+integer|n|số nguyên|The age must be an integer.|math
+error|n|lỗi|I got an error when I ran the code.|bug
+bug|n|lỗi phần mềm|I found a bug in my homework program.|bug
+fix|v|sửa|Can you help me fix this error?|bug
+run|v|chạy (chương trình)|Run the program and check the result.|code
+save|v|lưu|Save your work every ten minutes.|document
+copy|v|sao chép|Copy the code from the slide.|code
+paste|v|dán|Paste the link into the chat.|code
+delete|v|xóa|Do not delete the original file.|document
+open|v|mở|Open the project in your editor.|code
+close|v|đóng|Close all windows before the test.|code
+click|v|nhấp chuột|Click the green button to start.|web
+type|v|gõ phím|Type your name in the box.|devices
+search|v|tìm kiếm|Search for the error message online.|web
+select|v|chọn|Select the file you want to upload.|web
+button|n|nút bấm|The submit button is at the bottom.|design
+menu|n|thanh menu|Open the File menu and choose Save.|design
+icon|n|biểu tượng|Click the gear icon to open settings.|design
+window|n|cửa sổ|A new window opens when you click here.|design
+tab|n|thẻ (trình duyệt)|I have too many tabs open.|web
+settings|n|phần cài đặt|Change the language in the settings.|design
+lecture|n|bài giảng|The lecture starts at eight o'clock.|study
+lecturer|n|giảng viên|Our lecturer explains the code very clearly.|study
+class|n|lớp học|We have a programming class on Monday.|study
+course|n|khóa học / môn học|This course is about web development.|study
+subject|n|môn học|Maths is a difficult subject for me.|study
+semester|n|học kỳ|This semester I take five subjects.|study
+credit|n|tín chỉ|This course is worth three credits.|study
+exam|n|bài thi|The final exam is next month.|study
+midterm|n|thi giữa kỳ|I studied all weekend for the midterm.|study
+quiz|n|bài kiểm tra ngắn|We have a short quiz every Friday.|study
+assignment|n|bài tập được giao|The programming assignment is due on Friday.|study
+homework|n|bài tập về nhà|Did you finish the homework?|study
+deadline|n|hạn chót|The deadline is midnight on Sunday.|time
+submit|v|nộp|Submit your report before the deadline.|study
+grade|n|điểm số|I got a good grade on the project.|study
+score|n|điểm|What was your score on the quiz?|study
+pass|v|đạt / qua môn|I passed the database course.|study
+fail|v|trượt / không đạt|If you copy code, you may fail the course.|study
+group project|n|dự án nhóm|Our group project is a booking website.|study
+teammate|n|đồng đội|My teammate wrote the login page.|people
+team|n|nhóm|Our team has four members.|people
+presentation|n|bài thuyết trình|I am nervous about our presentation.|communication
+slide|n|trang trình chiếu|Add a diagram to this slide.|communication
+report|n|báo cáo|Write a two-page report about your app.|document
+research|n|nghiên cứu|We did research on mobile payment apps.|study
+library|n|thư viện|I study in the library after class.|study
+lab|n|phòng thực hành|The lab is open until nine p.m.|study
+tutorial|n|buổi hướng dẫn / bài hướng dẫn|I watched a tutorial about HTML.|study
+example|n|ví dụ|Can you show me an example?|study
+exercise|n|bài tập|Do exercises one to five at home.|study
+question|n|câu hỏi|I have a question about the assignment.|communication
+answer|n|câu trả lời|Check your answer with a friend.|communication
+explain|v|giải thích|Can you explain this line of code?|communication
+understand|v|hiểu|I don't understand recursion yet.|communication
+practise|v|luyện tập|Practise typing to code faster.|study
+learn|v|học|I want to learn web design.|study
+study|v|học tập|We study together in the library.|study
+skill|n|kỹ năng|Teamwork is an important skill.|career
+major|n|chuyên ngành|My major is information technology.|study
+degree|n|bằng cấp|She has a degree in computer science.|career
+graduate|v|tốt nghiệp|I will graduate next year.|career
+internship|n|kỳ thực tập|She got an internship at a software company.|career
+intern|n|thực tập sinh|The interns join the team in June.|career
+job|n|công việc|I want a job as a web developer.|career
+CV|n|sơ yếu lý lịch|Update your CV before the job fair.|career
+interview|n|buổi phỏng vấn|I have an interview on Thursday.|career
+job fair|n|hội chợ việc làm|Many IT companies come to the job fair.|career
+company|n|công ty|This company makes banking software.|business
+office|n|văn phòng|The office is near the university.|business
+manager|n|quản lý|The manager asked about my projects.|people
+developer|n|lập trình viên|I want to be a mobile developer.|people
+tester|n|người kiểm thử|A tester checks that the app works.|people
+designer|n|nhà thiết kế|The designer made the app icons.|people
+user|n|người dùng|The user can change the language.|people
+customer|n|khách hàng|The customer wants a faster website.|business
+HTML|n|ngôn ngữ đánh dấu HTML|We wrote our first page in HTML.|web
+CSS|n|ngôn ngữ định kiểu CSS|Use CSS to change the colours.|web
+JavaScript|n|ngôn ngữ JavaScript|JavaScript makes the page interactive.|web
+Python|n|ngôn ngữ Python|Python is easy for beginners.|code
+Java|n|ngôn ngữ Java|Our first course uses Java.|code
+table|n|bảng|The data is stored in a table.|data
+row|n|hàng|Each row is one student.|data
+column|n|cột|Add a column for the phone number.|data
+list|n|danh sách|Make a list of all the features.|data
+chart|n|biểu đồ|The chart shows sales by month.|data
+spreadsheet|n|bảng tính|I keep my budget in a spreadsheet.|data
+diagram|n|sơ đồ|Draw a diagram of the system.|design
+image|n|hình ảnh|The image is too large to upload.|design
+video|n|video|Watch the video before the lab.|web
+audio|n|âm thanh|Turn on the audio during the call.|devices
+camera|n|máy ảnh / camera|Please turn on your camera.|devices
+microphone|n|micrô|Your microphone is muted.|devices
+headphones|n|tai nghe|Use headphones in the lab.|devices
+Wi-Fi|n|mạng không dây|What is the Wi-Fi password?|network
+network|n|mạng|The campus network is down.|network
+connect|v|kết nối|Connect your laptop to the projector.|network
+connection|n|kết nối|My internet connection is unstable.|network
+virus|n|virus máy tính|Scan the USB for viruses.|security
+backup|n|bản sao lưu|Always keep a backup of your thesis.|data
+restart|v|khởi động lại|Restart your computer and try again.|devices
+shortcut|n|phím tắt|Ctrl+S is the shortcut for Save.|devices
+version|n|phiên bản|Which version of Python do you use?|release
+feature|n|tính năng|Dark mode is a popular feature.|design
+screenshot|n|ảnh chụp màn hình|Send me a screenshot of the error.|bug
+chat|n|tin nhắn trò chuyện|Ask your question in the class chat.|communication
+message|n|tin nhắn|I sent you a message on Zalo.|communication
+online meeting|n|cuộc họp trực tuyến|Our group has an online meeting tonight.|meeting
+schedule|n|lịch trình|Check the class schedule on the website.|time
+calendar|n|lịch|Add the exam date to your calendar.|time
+note|n|ghi chú|Take notes during the lecture.|document
+document|n|tài liệu|Share the document with your group.|document
+template|n|mẫu|Use the report template from the teacher.|document
+problem|n|vấn đề|We solved the problem together.|bug
+solution|n|giải pháp|Her solution is short and clear.|process
+step|n|bước|Follow each step in the guide.|process
+result|n|kết quả|The result is correct.|process
+idea|n|ý tưởng|I have an idea for our project.|design
+project|n|dự án|What is your final project about?|study

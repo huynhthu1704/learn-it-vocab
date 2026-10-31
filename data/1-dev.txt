@@ -1,0 +1,162 @@
+# level=1 role=dev
+deploy|v|triển khai (đưa phần mềm lên chạy)|We deploy the new version every Friday.|release
+repository|n|kho mã nguồn|Clone the repository before you start coding.|code
+framework|n|bộ khung phát triển|Laravel is a popular PHP framework.|code
+library|n|thư viện mã|We use a library to format dates.|code
+frontend|n|phần giao diện người dùng|She works on the frontend with React.|web
+backend|n|phần xử lý phía máy chủ|The backend is written in Java.|architecture
+full-stack|adj|làm cả frontend và backend|He is a full-stack developer.|career
+server|n|máy chủ|The server is down again.|cloud
+client|n|máy khách / khách hàng|The client sends a request to the server.|architecture
+request|n|yêu cầu (gửi đến máy chủ)|The request took three seconds.|web
+response|n|phản hồi|The response is in JSON format.|web
+JSON|n|định dạng dữ liệu JSON|The API returns data in JSON.|data
+source code|n|mã nguồn|The source code is on GitHub.|code
+editor|n|trình soạn thảo mã|I use VS Code as my editor.|code
+IDE|n|môi trường phát triển tích hợp|IntelliJ is a popular IDE for Java.|code
+terminal|n|cửa sổ dòng lệnh|Open the terminal and run the script.|code
+command|n|câu lệnh|Type this command to start the server.|code
+script|n|đoạn mã chạy tự động|I wrote a script to rename the files.|code
+syntax|n|cú pháp|Check the syntax on line ten.|code
+compile|v|biên dịch|The code did not compile.|code
+build|n|bản dựng|The build failed this morning.|release
+crash|v|bị sập / ngừng đột ngột|The app crashes when I click Save.|bug
+debug|v|gỡ lỗi|I spent two hours debugging this function.|bug
+log|n|nhật ký hệ thống|Check the log to find the error.|bug
+console|n|bảng điều khiển (console)|Print the value to the console.|code
+commit|n|lần lưu thay đổi mã|Write a clear message for each commit.|code
+push|v|đẩy mã lên kho|Push your changes before you leave.|code
+pull|v|kéo mã mới về|Pull the latest code first.|code
+branch|n|nhánh mã|Create a new branch for this feature.|code
+merge|v|hợp nhất|Merge your branch after the review.|code
+clone|v|sao chép kho mã về máy|Clone the repo to your laptop.|code
+Git|n|công cụ quản lý mã Git|We use Git for version control.|code
+GitHub|n|nền tảng GitHub|Our project is public on GitHub.|code
+task|n|nhiệm vụ|I finished my task for today.|agile
+ticket|n|phiếu công việc|Assign this ticket to me.|agile
+estimate|n|ước lượng|My estimate is two days.|agile
+done|adj|hoàn thành|This feature is done.|agile
+in progress|adj|đang thực hiện|The login page is still in progress.|agile
+blocked|adj|bị chặn / không thể tiếp tục|I am blocked because the API is not ready.|agile
+stand-up|n|cuộc họp đứng hằng ngày|I'll mention it at stand-up.|meeting
+teammate|n|đồng đội|My teammate reviewed my code.|people
+senior|n|nhân viên cấp cao|Ask a senior developer for help.|people
+junior|n|nhân viên mới / cấp thấp|Juniors pair with seniors in the first month.|people
+tech lead|n|trưởng nhóm kỹ thuật|The tech lead approved the design.|people
+code review|n|xem xét mã|Please do a code review of my changes.|quality
+review|v|xem xét / đánh giá|Can you review my code today?|quality
+comment|n|bình luận / chú thích|Add a comment to explain this function.|code
+test|v|kiểm thử|Test your code before you push it.|testing
+unit test|n|kiểm thử đơn vị|Write a unit test for this method.|testing
+environment|n|môi trường|The app works in my local environment.|cloud
+local|adj|cục bộ (trên máy)|It works on my local machine.|devices
+production|n|môi trường thật (production)|Never test on production.|release
+staging|n|môi trường thử nghiệm trước khi phát hành|Deploy to staging first.|release
+release|n|bản phát hành|The next release is on Monday.|release
+hotfix|n|bản sửa lỗi khẩn|We pushed a hotfix for the payment bug.|release
+feature|n|tính năng|I am building the search feature.|design
+page|n|trang|The home page loads slowly.|web
+form|n|biểu mẫu|Validate the form before sending it.|web
+field|n|trường nhập liệu|The email field is required.|web
+dropdown|n|danh sách thả xuống|Choose a city from the dropdown.|design
+checkbox|n|ô đánh dấu|Tick the checkbox to accept the terms.|design
+pop-up|n|cửa sổ bật lên|Close the pop-up to continue.|design
+layout|n|bố cục|The layout breaks on small screens.|design
+responsive|adj|tương thích nhiều kích thước màn hình|The website must be responsive.|web
+style|n|kiểu dáng|Change the button style.|design
+font|n|phông chữ|Use the same font on every page.|design
+color|n|màu sắc|The brand color is blue.|design
+loading|n|đang tải|Show a loading icon while we fetch data.|web
+click event|n|sự kiện nhấp chuột|Add a click event to the button.|code
+array|n|mảng|Store the names in an array.|code
+object|n|đối tượng|Each user is an object with a name and age.|code
+class|n|lớp (lập trình)|Create a class called Product.|code
+method|n|phương thức|Call the save method.|code
+parameter|n|tham số|This function takes two parameters.|code
+argument|n|đối số|Pass the user ID as an argument.|code
+return|v|trả về|The function returns true or false.|code
+boolean|n|kiểu luận lý đúng/sai|isActive is a boolean.|code
+null|n|giá trị rỗng (null)|The name is null, so the app crashes.|code
+value|n|giá trị|Print the value of x.|code
+key|n|khóa|Each key in the map is unique.|data
+list|n|danh sách|Return a list of products.|data
+index|n|chỉ số|The first index is zero.|code
+type|n|kiểu dữ liệu|What type is this variable?|code
+error message|n|thông báo lỗi|The error message is not clear.|bug
+exception|n|ngoại lệ|Catch the exception and log it.|bug
+warning|n|cảnh báo|Fix the warnings before you commit.|bug
+typo|n|lỗi đánh máy|There is a typo in the variable name.|bug
+login page|n|trang đăng nhập|I found a bug on the login page.|web
+sign up|v|đăng ký|Users sign up with their email.|web
+profile|n|hồ sơ người dùng|Users can edit their profile.|web
+dashboard|n|bảng điều khiển tổng quan|The dashboard shows today's orders.|design
+admin|n|quản trị viên|Only the admin can delete users.|security
+permission|n|quyền truy cập|You don't have permission to edit this file.|security
+access|n|quyền truy cập|I need access to the server.|security
+token|n|mã xác thực|The token expires after one hour.|security
+password reset|n|đặt lại mật khẩu|The password reset email never arrived.|security
+domain|n|tên miền|We bought a new domain for the shop.|web
+URL|n|địa chỉ web|Copy the URL from the address bar.|web
+host|v|lưu trữ (website)|We host the site on AWS.|cloud
+hosting|n|dịch vụ lưu trữ web|The hosting costs ten dollars a month.|cloud
+upload|v|tải lên|Users can upload a profile photo.|web
+image|n|hình ảnh|The image is too big.|design
+size|n|kích thước|Reduce the image size.|design
+speed|n|tốc độ|Page speed is important for SEO.|performance
+slow|adj|chậm|The app is slow on old phones.|performance
+fast|adj|nhanh|The new version is much faster.|performance
+work|v|hoạt động|The button doesn't work.|bug
+broken|adj|bị hỏng|The link is broken.|bug
+issue|n|vấn đề|I created an issue on GitHub.|bug
+solve|v|giải quyết|We solved the issue together.|process
+try|v|thử|Try clearing the cache.|process
+cache|n|bộ nhớ đệm|Clear the cache and reload the page.|performance
+refresh|v|làm mới|Refresh the page to see the change.|web
+reload|v|tải lại|Reload the app after you change the config.|web
+config|n|tệp cấu hình|Update the config for the new database.|code
+setting|n|thiết lập|Change this setting to true.|code
+package|n|gói thư viện|Install the package with npm.|code
+dependency|n|thư viện phụ thuộc|Add the new dependency to the project.|code
+npm|n|trình quản lý gói npm|Run npm install first.|code
+documentation|n|tài liệu hướng dẫn|Read the documentation before asking.|document
+README|n|tệp giới thiệu dự án|Explain how to run the app in the README.|document
+example code|n|mã ví dụ|The example code helped me a lot.|code
+copy-paste|v|sao chép và dán|Don't copy-paste code you don't understand.|code
+Stack Overflow|n|diễn đàn hỏi đáp lập trình|I found the answer on Stack Overflow.|code
+pair programming|n|lập trình theo cặp|We did pair programming all afternoon.|agile
+help|v|giúp đỡ|Can you help me with this bug?|communication
+ask|v|hỏi|Don't be afraid to ask questions.|communication
+share|v|chia sẻ|Share your screen, please.|communication
+check|v|kiểm tra|Can you check my pull request?|quality
+change|n|thay đổi|I made a small change to the header.|code
+remove|v|xóa bỏ|Remove the unused code.|code
+add|v|thêm|Add a new field to the form.|code
+rename|v|đổi tên|Rename this variable to userName.|code
+move|v|di chuyển|Move the button to the right.|design
+create|v|tạo|Create a new project in the IDE.|code
+start|v|khởi động|Start the server on port 3000.|code
+stop|v|dừng|Stop the app and run it again.|code
+port|n|cổng|The app runs on port 8080.|network
+localhost|n|máy cục bộ|Open localhost in your browser.|network
+online|adj|trực tuyến|The new site is online now.|web
+down|adj|ngừng hoạt động|The website is down.|cloud
+up|adj|đang hoạt động|Is the server up again?|cloud
+user interface|n|giao diện người dùng|The user interface is simple and clean.|design
+UI|n|giao diện người dùng|The UI looks great on mobile.|design
+UX|n|trải nghiệm người dùng|Good UX makes users happy.|design
+mockup|n|bản mô phỏng thiết kế|Follow the mockup from the designer.|design
+Figma|n|công cụ thiết kế Figma|The designs are in Figma.|design
+mobile app|n|ứng dụng di động|We are building a mobile app for a gym.|mobile
+Android|n|hệ điều hành Android|The bug only happens on Android.|mobile
+iOS|n|hệ điều hành iOS|We release the iOS version next week.|mobile
+notification|n|thông báo|Users get a notification when the order ships.|mobile
+search bar|n|thanh tìm kiếm|Put the search bar at the top.|design
+filter|n|bộ lọc|Add a filter by price.|data
+sort|v|sắp xếp|Sort the products by name.|data
+pagination|n|phân trang|Add pagination to the product list.|web
+timeout|n|hết thời gian chờ|The request failed with a timeout.|network
+working hours|n|giờ làm việc|Our working hours are nine to six.|time
+remote|adj|làm việc từ xa|I work remote on Fridays.|career
+overtime|n|làm thêm giờ|We did overtime before the release.|time
+laptop|n|máy tính xách tay|The company gave me a new laptop.|devices
+onboarding|n|giai đoạn hội nhập nhân viên mới|My onboarding took one week.|career

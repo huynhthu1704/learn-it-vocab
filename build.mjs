@@ -1,0 +1,105 @@
+import fs from 'fs';
+import { dictionary as CMU } from 'cmu-pronouncing-dictionary';
+
+const ROLES = { student: 'University students', dev: 'Developers', test: 'Testers (QA)', ba: 'BA / PO / PM' };
+const POS = { n: 'noun', v: 'verb', adj: 'adjective', adv: 'adverb', phr: 'phrase' };
+const overrides = JSON.parse(fs.readFileSync('data/pronunciation-overrides.json', 'utf8'));
+
+// ---- ARPAbet -> IPA ----
+const V = { AA: 'ɑː', AE: 'æ', AH: 'ʌ', AO: 'ɔː', AW: 'aʊ', AY: 'aɪ', EH: 'e', ER: 'ɜːr', EY: 'eɪ', IH: 'ɪ', IY: 'iː', OW: 'oʊ', OY: 'ɔɪ', UH: 'ʊ', UW: 'uː' };
+const C = { B: 'b', CH: 'tʃ', D: 'd', DH: 'ð', F: 'f', G: 'ɡ', HH: 'h', JH: 'dʒ', K: 'k', L: 'l', M: 'm', N: 'n', NG: 'ŋ', P: 'p', R: 'r', S: 's', SH: 'ʃ', T: 't', TH: 'θ', V: 'v', W: 'w', Y: 'j', Z: 'z', ZH: 'ʒ' };
+const ONSETS = new Set(['pl','pr','tr','kl','kr','bl','br','dr','fl','fr','ɡl','ɡr','sp','sk','sl','sm','sn','sw','st','str','spr','skr','spl','θr','ʃr','tw','kw','skw','dw','ɡw','pj','bj','kj','fj','mj','hj','vj','spj','skj']);
+function arpa2ipa(arpa) {
+  const ph = arpa.split(' ');
+  const units = []; // {type:'C'|'V', ipa, stress}
+  for (const p of ph) {
+    const m = p.match(/^([A-Z]+)(\d)?$/);
+    const base = m[1], st = m[2];
+    if (V[base]) {
+      let ipa = V[base];
+      if (st === '0') { if (base === 'AH') ipa = 'ə'; else if (base === 'ER') ipa = 'ər'; else if (base === 'IY') ipa = 'i'; else if (base === 'UW') ipa = 'u'; else if (base === 'AA') ipa = 'ɑː'; }
+      units.push({ type: 'V', ipa, stress: st });
+    } else units.push({ type: 'C', ipa: C[base] });
+  }
+  const nV = units.filter(u => u.type === 'V').length;
+  let out = '', pendingC = [], first = true;
+  for (const u of units) {
+    if (u.type === 'C') { pendingC.push(u.ipa); continue; }
+    let mark = '';
+    if (nV > 1 && u.stress === '1') mark = 'ˈ'; else if (nV > 1 && u.stress === '2') mark = 'ˌ';
+    if (first) { out += mark + pendingC.join(''); }
+    else {
+      // choose onset: longest valid suffix
+      let k = 0;
+      for (let i = 0; i < pendingC.length; i++) { const suf = pendingC.slice(i).join(''); if (pendingC.length - i === 1 || ONSETS.has(suf)) { k = i; break; } }
+      if (pendingC.length === 0) out += mark;
+      else out += pendingC.slice(0, k).join('') + mark + pendingC.slice(k).join('');
+    }
+    out += u.ipa; pendingC = []; first = false;
+  }
+  out += pendingC.join('');
+  return out;
+}
+const LETTER = { A:'eɪ',B:'biː',C:'siː',D:'diː',E:'iː',F:'ef',G:'dʒiː',H:'eɪtʃ',I:'aɪ',J:'dʒeɪ',K:'keɪ',L:'el',M:'em',N:'en',O:'oʊ',P:'piː',Q:'kjuː',R:'ɑːr',S:'es',T:'tiː',U:'juː',V:'viː',W:'ˈdʌbəljuː',X:'eks',Y:'waɪ',Z:'ziː' };
+function spell(tok) {
+  const ls = tok.toUpperCase().split('').filter(c => LETTER[c]);
+  return ls.map((c, i) => (i === ls.length - 1 ? 'ˈ' : i === 0 ? 'ˌ' : '') + LETTER[c].replace('ˈ', '')).join(' ');
+}
+const missing = new Set();
+function wordIPA(tok) {
+  if (overrides[tok] !== undefined) return overrides[tok];
+  const lower = tok.toLowerCase();
+  if (overrides[lower] !== undefined) return overrides[lower];
+  if (/^[A-Z]{2,5}s?$/.test(tok)) return spell(tok.replace(/s$/, '')) + (tok.endsWith('s') && tok.length > 2 ? 'z' : '');
+  const key = lower.replace(/[^a-z']/g, '');
+  if (CMU[key]) return arpa2ipa(CMU[key]);
+  // camelCase split, e.g. GitHub, TypeScript
+  const parts = tok.match(/[A-Z]?[a-z]+|[A-Z]+(?![a-z])/g);
+  if (parts && parts.length > 1 && parts.every(p => CMU[p.toLowerCase()])) return 'ˈ' + parts.map(p => arpa2ipa(CMU[p.toLowerCase()]).replace(/[ˈˌ]/g, '')).join('');
+  missing.add(tok);
+  return null;
+}
+function termIPA(term) {
+  if (overrides['__term__' + term]) return overrides['__term__' + term];
+  const toks = term.split(/[\s\-\/]+/).filter(Boolean);
+  const parts = toks.map(t => wordIPA(t.replace(/[()&.,]/g, '')));
+  if (parts.some(p => p === null)) return null;
+  return '/' + parts.join(' ') + '/';
+}
+
+// ---- parse ----
+const files = fs.readdirSync('data').filter(f => f.endsWith('.txt')).sort();
+// Each .txt file holds lines: term|part of speech|Vietnamese meaning|example sentence|topic
+// A line '# level=1 role=dev' sets the level and role for the lines below it.
+const seen = new Map(); const words = []; const dups = [];
+for (const f of files) {
+  let level, role;
+  for (const line of fs.readFileSync('data/' + f, 'utf8').split('\n')) {
+    if (!line.trim()) continue;
+    if (line.startsWith('#')) { level = +line.match(/level=(\d)/)[1]; role = line.match(/role=(\w+)/)[1]; continue; }
+    const [term, pos, vi, ex, topic] = line.split('|').map(s => s.trim());
+    if (!topic) { console.error('BAD LINE', f, line); continue; }
+    const key = term.toLowerCase();
+    if (seen.has(key)) { dups.push(`${term} (${f})`); const w = seen.get(key); if (!w.roles.includes(role)) w.roles.push(role); continue; }
+    const w = { id: words.length + 1, term, pos: POS[pos] || pos, vi, ex, topic, level, role, roles: [role], ipa: termIPA(term) };
+    seen.set(key, w); words.push(w);
+  }
+}
+const noIpa = words.filter(w => !w.ipa);
+console.log('total unique', words.length, 'duplicates dropped', dups.length, 'missing IPA terms', noIpa.length);
+console.log('missing tokens:', [...missing].join(', '));
+const byBucket = {};
+for (const w of words) { const k = w.level + '-' + w.role; byBucket[k] = (byBucket[k] || 0) + 1; }
+console.log(byBucket);
+const topics = [...new Set(words.map(w => w.topic))].sort();
+console.log('topics', topics.length, topics.join(','));
+// examples that don't contain the term (for highlight check)
+const noHit = words.filter(w => !w.ex.toLowerCase().includes(w.term.toLowerCase().slice(0, Math.max(3, w.term.length - 3))));
+console.log('examples without term:', noHit.length, noHit.slice(0, 40).map(w => w.term).join(' | '));
+const out = JSON.stringify(words.map(({ id, term, pos, vi, ex, topic, level, roles, ipa }) => ({ id, t: term, p: pos, v: vi, e: ex, c: topic, l: level, r: roles, i: ipa })));
+if (noIpa.length) { console.error('Add these to data/pronunciation-overrides.json first:', noIpa.map(w => w.term).join(', ')); process.exit(1); }
+fs.writeFileSync('words.json', out);
+// Build the website: inject the word database into the template
+const html = fs.readFileSync('src/template.html', 'utf8').replace('/*__WORDS__*/[]', out.replace(/<\//g, '<\\/'));
+fs.writeFileSync('index.html', html);
+console.log('Wrote words.json and index.html');

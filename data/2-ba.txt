@@ -1,0 +1,143 @@
+# level=2 role=ba
+backlog|n|danh sách công việc tồn đọng|The PO reorders the backlog every week.|agile
+acceptance criteria|n|tiêu chí chấp nhận|Each story needs clear acceptance criteria.|agile
+scope creep|n|phình phạm vi dự án|Too many small requests led to scope creep.|business
+product backlog|n|danh sách sản phẩm tồn đọng|The product backlog has 120 items.|agile
+backlog refinement|n|tinh chỉnh backlog|We do backlog refinement on Wednesdays.|agile
+grooming|n|tinh chỉnh backlog|Grooming helps the team understand stories.|agile
+epic|n|nhóm câu chuyện lớn|Online payment is an epic.|agile
+story|n|câu chuyện người dùng|Split this story into two.|agile
+INVEST|n|tiêu chí INVEST cho user story|Check each story against INVEST.|agile
+definition of ready|n|định nghĩa sẵn sàng|The story doesn't meet the definition of ready.|agile
+sprint goal|n|mục tiêu sprint|The sprint goal is guest checkout.|agile
+sprint review|n|họp đánh giá sprint|We show new features in the sprint review.|meeting
+daily scrum|n|họp Scrum hằng ngày|The daily scrum takes 15 minutes.|meeting
+Scrum Master|n|người điều phối Scrum|The Scrum Master removes blockers.|people
+increment|n|phần sản phẩm tăng thêm|Each sprint delivers a working increment.|agile
+Kanban|n|phương pháp Kanban|The support team uses Kanban.|agile
+WIP limit|n|giới hạn công việc đang làm|Our WIP limit is three tasks.|agile
+MVP|n|sản phẩm khả dụng tối thiểu|The MVP has only five features.|business
+roadmap|n|lộ trình sản phẩm|The roadmap shows the next three quarters.|business
+release plan|n|kế hoạch phát hành|The release plan has four releases.|release
+prioritize|v|sắp xếp ưu tiên|We need to prioritize the backlog.|agile
+MoSCoW|n|phương pháp ưu tiên MoSCoW|Use MoSCoW to rank the requirements.|agile
+must-have|n|yêu cầu bắt buộc|Online payment is a must-have.|agile
+nice-to-have|n|yêu cầu có thì tốt|Dark mode is a nice-to-have.|agile
+elicitation|n|thu thập yêu cầu|Elicitation took three weeks.|document
+elicit|v|khai thác, thu thập|We elicit requirements through interviews.|document
+requirements gathering|n|thu thập yêu cầu|Requirements gathering starts next week.|document
+functional requirement|n|yêu cầu chức năng|This is a functional requirement for login.|document
+non-functional requirement|n|yêu cầu phi chức năng|Speed is a non-functional requirement.|document
+BRD|n|tài liệu yêu cầu nghiệp vụ|The BRD is 40 pages long.|document
+SRS|n|đặc tả yêu cầu phần mềm|Developers read the SRS.|document
+FRD|n|tài liệu yêu cầu chức năng|Update the FRD with the new rules.|document
+use case|n|ca sử dụng|Write a use case for refunds.|document
+actor|n|tác nhân|The customer is the main actor.|document
+main flow|n|luồng chính|The main flow has six steps.|process
+alternative flow|n|luồng thay thế|Paying by voucher is an alternative flow.|process
+exception flow|n|luồng ngoại lệ|Card declined is an exception flow.|process
+precondition|n|điều kiện tiên quyết|Precondition: the user has an account.|document
+postcondition|n|điều kiện sau|Postcondition: the order is saved.|document
+user persona|n|chân dung người dùng|Our main user persona is a busy mother.|design
+user journey|n|hành trình người dùng|Map the user journey from search to delivery.|design
+customer journey map|n|bản đồ hành trình khách hàng|The customer journey map shows pain points.|design
+pain point|n|điểm khó khăn|The main pain point is slow delivery.|business
+as-is process|n|quy trình hiện tại|We documented the as-is process.|process
+to-be process|n|quy trình tương lai|The to-be process removes two steps.|process
+BPMN|n|ký hiệu mô hình quy trình BPMN|I drew the process in BPMN.|process
+swimlane|n|làn bơi (trong sơ đồ)|Each department has its own swimlane.|process
+activity diagram|n|sơ đồ hoạt động|An activity diagram shows the steps.|design
+context diagram|n|sơ đồ ngữ cảnh|The context diagram shows external systems.|design
+data flow diagram|n|sơ đồ luồng dữ liệu|Draw a data flow diagram for orders.|data
+data dictionary|n|từ điển dữ liệu|The data dictionary lists every field.|data
+mapping|n|ánh xạ dữ liệu|Create a field mapping for the import.|data
+validation rule|n|quy tắc kiểm tra dữ liệu|Add a validation rule for phone numbers.|document
+edge case|n|trường hợp biên|What about the edge case of zero items?|testing
+business process|n|quy trình nghiệp vụ|We improved three business processes.|process
+domain|n|lĩnh vực nghiệp vụ|I'm new to the banking domain.|business
+domain knowledge|n|kiến thức nghiệp vụ|Domain knowledge helps you ask better questions.|business
+subject matter expert|n|chuyên gia nghiệp vụ|We need a subject matter expert from finance.|people
+SME|n|chuyên gia nghiệp vụ|Ask the SME about tax rules.|people
+sponsor|n|nhà tài trợ dự án|The sponsor approved the budget.|people
+decision maker|n|người ra quyết định|Who is the decision maker on this?|people
+RACI|n|ma trận trách nhiệm RACI|Create a RACI for the project.|people
+stakeholder map|n|bản đồ bên liên quan|Update the stakeholder map.|people
+stakeholder analysis|n|phân tích bên liên quan|Stakeholder analysis is the first step.|people
+communication plan|n|kế hoạch giao tiếp|The communication plan sets weekly updates.|communication
+expectation|n|kỳ vọng|Manage the client's expectations.|communication
+negotiate|v|đàm phán|We negotiated a smaller scope.|communication
+conflict|n|mâu thuẫn|There is a conflict between two departments.|people
+consensus|n|sự đồng thuận|We reached consensus on the design.|communication
+facilitate|v|điều phối|I facilitated the workshop.|meeting
+brainstorming|n|động não|We had a brainstorming session.|meeting
+observation|n|quan sát|Observation showed staff use paper notes.|document
+questionnaire|n|bảng câu hỏi|Send the questionnaire to all branches.|document
+focus group|n|nhóm tập trung|We ran a focus group with eight users.|meeting
+document analysis|n|phân tích tài liệu|Document analysis of old forms helped a lot.|document
+requirement traceability|n|truy vết yêu cầu|Requirement traceability links stories to tests.|document
+baseline|n|bản cơ sở|The requirements baseline is version 1.0.|document
+change control|n|kiểm soát thay đổi|All changes go through change control.|process
+impact analysis|n|phân tích ảnh hưởng|Do an impact analysis before the change.|business
+estimate|n|ước lượng|The team's estimate is three sprints.|agile
+effort|n|nỗ lực / công sức|The effort is 40 man-days.|agile
+man-day|n|ngày công|The task needs five man-days.|agile
+resource|n|nguồn lực|We don't have enough resources.|business
+capacity|n|năng lực / công suất|The team's capacity is 30 points.|agile
+Gantt chart|n|biểu đồ Gantt|The Gantt chart shows the schedule.|time
+critical path|n|đường găng|Testing is on the critical path.|time
+deliverable|n|sản phẩm bàn giao|The first deliverable is the SRS.|business
+phase|n|giai đoạn|Phase one ends in March.|business
+work breakdown structure|n|cấu trúc phân rã công việc|Create a work breakdown structure.|business
+risk register|n|sổ đăng ký rủi ro|Add it to the risk register.|business
+mitigation|n|giảm thiểu rủi ro|What is our mitigation plan?|business
+issue log|n|nhật ký vấn đề|Track it in the issue log.|business
+escalation|n|sự báo cáo vượt cấp|This needs escalation to the director.|communication
+status meeting|n|họp cập nhật tình hình|The status meeting is every Monday.|meeting
+steering committee|n|ban chỉ đạo|The steering committee meets monthly.|people
+KPI|n|chỉ số hiệu suất chính|Our KPI is order conversion rate.|data
+metric|n|chỉ số|Choose a metric to measure success.|data
+conversion rate|n|tỷ lệ chuyển đổi|The conversion rate is two percent.|data
+churn|n|tỷ lệ khách rời bỏ|Churn went down after the update.|data
+retention|n|tỷ lệ giữ chân|Retention is our main goal this year.|data
+revenue|n|doanh thu|The new feature increased revenue.|money
+profit|n|lợi nhuận|Profit is lower this quarter.|money
+business case|n|luận chứng kinh doanh|Write a business case for the new CRM.|business
+cost-benefit analysis|n|phân tích chi phí-lợi ích|The cost-benefit analysis supports the project.|money
+feasibility study|n|nghiên cứu khả thi|We did a feasibility study first.|business
+vendor|n|nhà cung cấp|We compared three vendors.|business
+RFP|n|hồ sơ mời thầu|We sent an RFP to five vendors.|business
+contract|n|hợp đồng|The contract includes support.|business
+SLA|n|thỏa thuận mức dịch vụ|The SLA is a four-hour response time.|business
+outsourcing|n|thuê ngoài|They chose outsourcing for development.|business
+offshore team|n|đội ngũ ở nước ngoài|The offshore team is in Vietnam.|people
+CRM|n|hệ thống quản lý quan hệ khách hàng|Sales uses a CRM.|business
+ERP|n|hệ thống hoạch định nguồn lực doanh nghiệp|The ERP handles finance and stock.|business
+e-commerce|n|thương mại điện tử|We build e-commerce websites.|business
+inventory|n|hàng tồn kho|Inventory updates in real time.|business
+SKU|n|mã hàng|Each SKU has a size and color.|business
+checkout flow|n|luồng thanh toán|Simplify the checkout flow.|process
+payment gateway|n|cổng thanh toán|We integrate a local payment gateway.|money
+shipping|n|vận chuyển|Shipping is free over 500,000 dong.|business
+promotion|n|chương trình khuyến mãi|Marketing wants a new promotion engine.|business
+voucher|n|phiếu giảm giá|Customers can apply a voucher at checkout.|money
+loyalty program|n|chương trình khách hàng thân thiết|The loyalty program gives points.|business
+UAT|n|kiểm thử chấp nhận người dùng|The BA supports the client during UAT.|testing
+user acceptance|n|sự chấp nhận của người dùng|User acceptance is the final step.|testing
+demo|n|buổi trình diễn|Prepare the demo script.|meeting
+handover|n|bàn giao|The handover to support is next week.|process
+support team|n|đội hỗ trợ|The support team gets the user guide.|people
+change management|n|quản lý thay đổi|Change management helps staff accept the new system.|business
+adoption|n|mức độ sử dụng|User adoption is slow.|business
+training plan|n|kế hoạch đào tạo|Write a training plan for 50 staff.|career
+dependency|n|sự phụ thuộc|Track every dependency between teams.|process
+constraint|n|ràng buộc|Budget is our main constraint.|business
+assumption log|n|danh sách giả định|Keep an assumption log.|document
+open question|n|câu hỏi còn bỏ ngỏ|We still have five open questions.|document
+parking lot|n|danh sách chủ đề để bàn sau|Put that in the parking lot.|meeting
+timebox|n|khung thời gian cố định|Timebox the discussion to ten minutes.|meeting
+recap|n|tóm tắt lại|Let me recap what we agreed.|meeting
+align|v|thống nhất|We need to align with the sales team.|communication
+push back|v|phản đối, từ chối|Don't be afraid to push back on bad ideas.|communication
+trade-off|n|sự đánh đổi|There's a trade-off between time and features.|business
+value|n|giá trị|Which feature brings the most value?|business
+outcome|n|kết quả mong muốn|Focus on outcomes, not outputs.|business

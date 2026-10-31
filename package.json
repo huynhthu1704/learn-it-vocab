@@ -1,0 +1,13 @@
+{
+  "name": "learn-it-vocab",
+  "version": "1.0.0",
+  "description": "Illustrated IT vocabulary for Vietnamese learners: 3 levels x 4 roles, with IPA, meanings, examples, flashcards and quizzes.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "cmu-pronouncing-dictionary": "^3.0.0"
+  }
+}

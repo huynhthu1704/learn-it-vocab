@@ -1,0 +1,147 @@
+# level=1 role=ba
+requirement|n|yêu cầu|The client added a new requirement yesterday.|document
+stakeholder|n|bên liên quan|We interviewed three stakeholders this week.|people
+meeting minutes|n|biên bản cuộc họp|I will send the meeting minutes after the call.|meeting
+business analyst|n|chuyên viên phân tích nghiệp vụ|A business analyst writes the requirements.|people
+product owner|n|chủ sở hữu sản phẩm|The product owner decides the priorities.|people
+project manager|n|quản lý dự án|The project manager tracks the budget.|people
+BA|n|chuyên viên phân tích nghiệp vụ|Ask the BA about this business rule.|people
+PO|n|chủ sở hữu sản phẩm|The PO accepted the story.|people
+PM|n|quản lý dự án|The PM sent the weekly report.|people
+client|n|khách hàng|The client wants a mobile app.|business
+end user|n|người dùng cuối|End users are shop owners.|people
+business|n|kinh doanh / doanh nghiệp|We need to understand the business first.|business
+goal|n|mục tiêu|The goal is to sell more online.|business
+problem|n|vấn đề|What problem are we solving?|business
+need|n|nhu cầu|Users need a faster checkout.|business
+scope|n|phạm vi|This feature is out of scope.|business
+project|n|dự án|The project starts in May.|business
+plan|n|kế hoạch|Let's make a plan for next month.|business
+timeline|n|tiến độ thời gian|The timeline is very tight.|time
+milestone|n|cột mốc|The first milestone is the demo in June.|time
+budget|n|ngân sách|The budget is 50,000 dollars.|money
+cost|n|chi phí|What is the cost of this change?|money
+team|n|đội nhóm|Our team has eight people.|people
+meeting|n|cuộc họp|I have three meetings today.|meeting
+agenda|n|chương trình họp|Please send the agenda before the meeting.|meeting
+kick-off meeting|n|cuộc họp khởi động dự án|The kick-off meeting is on Monday.|meeting
+attendee|n|người tham dự|There are six attendees.|meeting
+action item|n|việc cần làm sau họp|I have two action items from the meeting.|meeting
+follow up|v|theo dõi tiếp|I'll follow up with the client tomorrow.|communication
+confirm|v|xác nhận|Can you confirm the delivery date?|communication
+clarify|v|làm rõ|I need to clarify this requirement.|communication
+question|n|câu hỏi|I prepared ten questions for the client.|communication
+answer|n|câu trả lời|We are waiting for the client's answer.|communication
+interview|n|phỏng vấn|I did an interview with the warehouse team.|communication
+workshop|n|buổi hội thảo làm việc|We ran a two-hour workshop with users.|meeting
+survey|n|khảo sát|We sent a survey to 200 customers.|data
+feedback|n|góp ý / phản hồi|The client's feedback was positive.|communication
+email|n|email|I'll send you an email with the details.|communication
+call|n|cuộc gọi|Let's have a quick call.|communication
+document|n|tài liệu|I updated the requirement document.|document
+template|n|mẫu tài liệu|Use the company template for the BRD.|document
+version|n|phiên bản|This is version 2 of the document.|document
+draft|n|bản nháp|Here is the first draft.|document
+final|adj|bản cuối cùng|Is this the final version?|document
+approve|v|phê duyệt|The client approved the design.|process
+approval|n|sự phê duyệt|We are waiting for approval.|process
+sign off|v|ký duyệt|The sponsor signed off the scope.|process
+change request|n|yêu cầu thay đổi|The client sent a change request.|process
+feature|n|tính năng|The main feature is online booking.|design
+function|n|chức năng|This function lets users print invoices.|design
+process|n|quy trình|Let's map the order process.|process
+workflow|n|luồng công việc|The approval workflow has three steps.|process
+step|n|bước|Step two is payment.|process
+flow|n|luồng|Draw the login flow.|process
+flowchart|n|lưu đồ|I drew a flowchart of the refund process.|process
+diagram|n|sơ đồ|This diagram shows the system.|design
+wireframe|n|bản phác thảo giao diện|The wireframe shows the home page layout.|design
+mockup|n|bản mô phỏng giao diện|The designer shared the mockups.|design
+prototype|n|bản mẫu thử|Users tested the prototype.|design
+screen|n|màn hình|This screen shows order history.|design
+user|n|người dùng|Each user has a role.|people
+customer|n|khách hàng|Customers can track their orders.|business
+admin|n|quản trị viên|The admin can add products.|people
+role|n|vai trò|There are three user roles.|people
+report|n|báo cáo|Managers need a sales report.|data
+data|n|dữ liệu|Where does this data come from?|data
+field|n|trường dữ liệu|Add a field for the delivery address.|data
+list|n|danh sách|Show a list of all orders.|data
+status|n|trạng thái|The order status changes to Shipped.|data
+date|n|ngày|The due date is March 1st.|time
+price|n|giá|The price includes VAT.|money
+discount|n|giảm giá|Members get a ten percent discount.|money
+invoice|n|hóa đơn|The system sends an invoice by email.|money
+payment|n|thanh toán|We accept card payment and COD.|money
+order|n|đơn hàng|Customers can cancel an order within one hour.|business
+product|n|sản phẩm|Each product has a photo and price.|business
+service|n|dịch vụ|The company sells cleaning services.|business
+sales|n|doanh số / bán hàng|Sales went up ten percent.|business
+marketing|n|tiếp thị|Marketing wants a newsletter feature.|business
+finance|n|tài chính|Finance needs monthly reports.|money
+HR|n|nhân sự|HR uses the system to manage leave.|business
+department|n|phòng ban|Which department owns this process?|business
+manager|n|quản lý|The store manager approves refunds.|people
+staff|n|nhân viên|Staff log in with their employee ID.|people
+employee|n|nhân viên|Each employee has a profile.|people
+company|n|công ty|The company has five branches.|business
+branch|n|chi nhánh|Each branch has its own stock.|business
+store|n|cửa hàng|The store opens at nine.|business
+warehouse|n|kho hàng|The warehouse ships orders every day.|business
+delivery|n|giao hàng|Delivery takes two days.|business
+refund|n|hoàn tiền|Customers can ask for a refund.|money
+rule|n|quy tắc|There is a rule for free shipping.|document
+business rule|n|quy tắc nghiệp vụ|Write each business rule clearly.|document
+must|v|phải|The system must send a confirmation email.|document
+should|v|nên|The page should load in two seconds.|document
+priority|n|ưu tiên|Payment is our top priority.|agile
+important|adj|quan trọng|This is the most important feature.|business
+urgent|adj|khẩn cấp|The client says it's urgent.|time
+deadline|n|hạn chót|The deadline for this feature is next Monday.|time
+delay|n|sự chậm trễ|There is a delay of one week.|time
+on time|adj|đúng hạn|We delivered on time.|time
+progress|n|tiến độ|What is the progress on the report?|agile
+update|n|thông tin cập nhật|I'll give you an update on Friday.|communication
+status report|n|báo cáo tình trạng|I write a status report every week.|document
+issue|n|vấn đề|We have an issue with the payment gateway.|bug
+risk|n|rủi ro|The main risk is the late API.|business
+assumption|n|giả định|Our assumption is that users have smartphones.|document
+dependency|n|sự phụ thuộc|The app has a dependency on the bank API.|process
+decision|n|quyết định|The client made a decision yesterday.|business
+option|n|lựa chọn|We have two options.|business
+agree|v|đồng ý|We agree on the scope.|communication
+disagree|v|không đồng ý|The sales team disagrees with the design.|communication
+suggest|v|đề xuất|I suggest a simple version first.|communication
+propose|v|đề nghị|We propose two phases.|communication
+explain|v|giải thích|Can you explain the current process?|communication
+describe|v|mô tả|Describe the problem in one sentence.|communication
+current process|n|quy trình hiện tại|The current process uses Excel.|process
+new process|n|quy trình mới|The new process saves two hours a day.|process
+manual|adj|thủ công|They do it manually with paper forms.|process
+automatic|adj|tự động|Make the reminder email automatic.|process
+system|n|hệ thống|The old system is very slow.|architecture
+website|n|trang web|The website needs a new design.|web
+mobile app|n|ứng dụng di động|Customers order through the mobile app.|mobile
+login|n|đăng nhập|Login with Google is a must-have.|security
+sign up|n|đăng ký tài khoản|Sign up should take one minute.|web
+notification|n|thông báo|Send a notification when the order ships.|mobile
+search|n|chức năng tìm kiếm|Search by product name and color.|web
+filter|n|bộ lọc|Users can filter by size.|web
+export|v|xuất (dữ liệu)|Export the report to Excel.|data
+import|v|nhập (dữ liệu)|Import products from a CSV file.|data
+Excel|n|phần mềm Excel|The team tracks orders in Excel.|data
+spreadsheet|n|bảng tính|Share the spreadsheet with the client.|data
+backlog|n|danh sách công việc tồn đọng|Add this idea to the backlog.|agile
+user story|n|câu chuyện người dùng|Write a user story for the wishlist.|agile
+sprint|n|chu kỳ phát triển ngắn|This sprint ends on Friday.|agile
+demo|n|buổi trình diễn sản phẩm|We show a demo to the client every two weeks.|meeting
+release|n|bản phát hành|The first release is in July.|release
+go-live|n|ngày đưa vào vận hành|Go-live is planned for September.|release
+training|n|đào tạo|Staff need training on the new system.|career
+user guide|n|hướng dẫn sử dụng|I wrote a user guide for the cashiers.|document
+glossary|n|bảng thuật ngữ|Add new terms to the glossary.|document
+term|n|thuật ngữ|What does this term mean?|document
+note-taking|n|ghi chép|Good note-taking is a key BA skill.|meeting
+listen|v|lắng nghe|Listen more than you speak in interviews.|communication
+summary|n|bản tóm tắt|Send a short summary after the call.|communication
+next steps|n|các bước tiếp theo|Let's agree on the next steps.|meeting

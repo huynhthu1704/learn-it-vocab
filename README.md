@@ -1,0 +1,62 @@
+# Learn IT Vocab
+
+Illustrated IT vocabulary for Vietnamese learners. It has **2,031 words and phrases** across 3 levels and 4 roles in IT teams. Every word has a topic icon, American IPA, audio, a Vietnamese meaning and a workplace example sentence.
+
+| | Beginner | Intermediate | Advanced |
+|---|---|---|---|
+| University students | ✓ | ✓ | ✓ |
+| Developers | ✓ | ✓ | ✓ |
+| Testers (QA) | ✓ | ✓ | ✓ |
+| BA / PO / PM | ✓ | ✓ | ✓ |
+
+## Features
+
+- **Browse**: search in English or Vietnamese, with or without accents. Filter by level, role, topic and status (new, learning, known, saved).
+- **Word card**: listen at normal and slow speed, read the IPA, see the meaning and an example, and jump to related words.
+- **Flashcards**: sets of 10. Missed cards come back later in the same set.
+- **Quiz**: 10 mixed questions (meaning, word, fill the gap, listening).
+- **My progress**: known words, daily streak, saved words, and a choice of American or British voice and speed.
+
+Progress is saved in each visitor's browser (localStorage), so no account or server is needed.
+
+## Project structure
+
+```
+index.html                       ← the website (generated, served by GitHub Pages)
+words.json                       ← the word database (generated)
+src/template.html                ← website code: HTML, CSS and JavaScript
+data/1-student.txt … 6-extra-l3.txt   ← the word lists you edit
+data/pronunciation-overrides.json     ← IPA for words the dictionary doesn't know
+build.mjs                        ← builds words.json and index.html
+```
+
+## How to add or edit words
+
+1. Open a file in `data/`. Each line is one word:
+
+   ```
+   term|part of speech|Vietnamese meaning|example sentence|topic
+   deploy|v|triển khai (đưa phần mềm lên chạy)|We deploy the new version every Friday.|release
+   ```
+
+   - The line `# level=1 role=dev` sets the level (1, 2 or 3) and role (`student`, `dev`, `test`, `ba`) for the lines below it.
+   - Part of speech: `n`, `v`, `adj`, `adv` or `phr`.
+   - Topic is one of: agile, ai, architecture, bug, business, career, cloud, code, communication, data, design, devices, document, math, meeting, mobile, money, network, people, performance, process, quality, release, security, study, testing, time, web. The topic picks the icon.
+   - Put the word itself in the example sentence, so it can be highlighted and used in "fill the gap" quiz questions.
+
+2. Rebuild:
+
+   ```bash
+   npm install
+   npm run build
+   ```
+
+   The IPA comes from the CMU Pronouncing Dictionary (American English). If a word isn't in it, the build stops and lists the word. Add its IPA to `data/pronunciation-overrides.json`, then build again.
+
+3. Commit and push. GitHub Pages updates the live site within a minute or two.
+
+## Notes
+
+- Audio uses the browser's built-in voice (Web Speech API), so it sounds different on each device and may be missing in some browsers. The IPA is always shown.
+- Icons are per topic (28 topics), not one per word.
+- The Vietnamese meanings and examples should be reviewed by a teacher before use in class.

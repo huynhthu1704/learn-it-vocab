@@ -1,0 +1,145 @@
+# level=3 role=ba
+gap analysis|n|phân tích khoảng cách|The gap analysis shows what the old system cannot do.|business
+prioritization|n|sắp xếp thứ tự ưu tiên|We used the MoSCoW method for prioritization.|agile
+trade-off|n|sự đánh đổi|Launching early is a trade-off between speed and quality.|business
+ROI|n|lợi tức đầu tư|The new feature should deliver a strong ROI within a year.|money
+stakeholder alignment|n|sự thống nhất giữa các bên liên quan|We need stakeholder alignment before we change the scope.|people
+value proposition|n|tuyên bố giá trị|Our value proposition is next-day delivery.|business
+product vision|n|tầm nhìn sản phẩm|The product vision guides every decision.|business
+product strategy|n|chiến lược sản phẩm|Our product strategy focuses on small shops.|business
+product discovery|n|khám phá sản phẩm|Product discovery runs alongside delivery.|business
+product-market fit|n|sự phù hợp sản phẩm-thị trường|We haven't reached product-market fit yet.|business
+OKR|n|mục tiêu và kết quả then chốt|Our OKR is to double active users.|data
+north star metric|n|chỉ số định hướng chính|Weekly orders is our north star metric.|data
+outcome-based roadmap|n|lộ trình theo kết quả|We switched to an outcome-based roadmap.|business
+opportunity solution tree|n|cây cơ hội-giải pháp|We mapped ideas on an opportunity solution tree.|business
+jobs to be done|n|lý thuyết công việc cần hoàn thành|Jobs to be done helped us understand buyers.|business
+hypothesis-driven development|n|phát triển dựa trên giả thuyết|We use hypothesis-driven development.|business
+experiment|n|thử nghiệm|Run a small experiment before building.|business
+validated learning|n|học tập đã được kiểm chứng|Each release should bring validated learning.|business
+lean canvas|n|mô hình kinh doanh tinh gọn|Fill in the lean canvas together.|business
+business model canvas|n|mô hình kinh doanh canvas|The business model canvas shows revenue streams.|business
+SWOT analysis|n|phân tích SWOT|The SWOT analysis showed a new threat.|business
+competitive analysis|n|phân tích đối thủ cạnh tranh|Our competitive analysis covers five apps.|business
+market research|n|nghiên cứu thị trường|Market research shows strong demand.|business
+TAM|n|tổng quy mô thị trường khả dụng|The TAM is 500 million dollars.|money
+unit economics|n|kinh tế đơn vị|Unit economics must work before we scale.|money
+customer lifetime value|n|giá trị vòng đời khách hàng|Customer lifetime value is three million dong.|money
+customer acquisition cost|n|chi phí thu hút khách hàng|Customer acquisition cost is too high.|money
+payback period|n|thời gian hoàn vốn|The payback period is 18 months.|money
+NPV|n|giá trị hiện tại ròng|The project has a positive NPV.|money
+total cost of ownership|n|tổng chi phí sở hữu|Compare the total cost of ownership.|money
+CAPEX|n|chi phí đầu tư vốn|Hardware is a CAPEX item.|money
+OPEX|n|chi phí vận hành|Cloud moves cost from CAPEX to OPEX.|money
+business value|n|giá trị kinh doanh|Rank stories by business value.|business
+cost of delay|n|chi phí do chậm trễ|The cost of delay is high for this feature.|money
+WSJF|n|ưu tiên công việc ngắn nhất có trọng số|SAFe uses WSJF to prioritize.|agile
+RICE scoring|n|chấm điểm RICE|We use RICE scoring for new ideas.|agile
+Kano model|n|mô hình Kano|The Kano model separates basic and delight features.|business
+weighted scoring|n|chấm điểm có trọng số|Weighted scoring made the decision clear.|business
+decision matrix|n|ma trận quyết định|Use a decision matrix to compare vendors.|business
+root cause|n|nguyên nhân gốc|Find the root cause, not the symptom.|business
+five whys|n|phương pháp 5 câu hỏi tại sao|We used five whys to find the real problem.|business
+fishbone diagram|n|biểu đồ xương cá|The fishbone diagram shows six causes.|business
+process optimization|n|tối ưu hóa quy trình|Process optimization saved 200 hours a month.|process
+process automation|n|tự động hóa quy trình|RPA is one kind of process automation.|process
+RPA|n|tự động hóa quy trình bằng robot|RPA handles invoice entry.|process
+value stream mapping|n|lập bản đồ dòng giá trị|Value stream mapping found long wait times.|process
+lean|adj|tinh gọn|We follow lean principles.|process
+Six Sigma|n|phương pháp Six Sigma|The project used Six Sigma tools.|process
+bottleneck|n|điểm nghẽn|Approval is the bottleneck in the process.|process
+operating model|n|mô hình vận hành|The new operating model has fewer handoffs.|business
+target operating model|n|mô hình vận hành mục tiêu|Design the target operating model.|business
+capability map|n|bản đồ năng lực|The capability map shows weak areas.|business
+enterprise architecture|n|kiến trúc doanh nghiệp|Enterprise architecture approved the new system.|architecture
+solution architecture|n|kiến trúc giải pháp|The solution architecture uses three services.|architecture
+system integration|n|tích hợp hệ thống|System integration is the biggest risk.|architecture
+interface specification|n|đặc tả giao diện tích hợp|Write the interface specification for the bank API.|document
+API contract|n|hợp đồng API|Agree on the API contract early.|architecture
+data governance|n|quản trị dữ liệu|Data governance defines who owns each field.|data
+master data|n|dữ liệu chủ|Customer master data lives in the CRM.|data
+single source of truth|n|nguồn dữ liệu duy nhất đáng tin cậy|The ERP is the single source of truth for stock.|data
+data lineage|n|nguồn gốc dữ liệu|Data lineage shows where the number comes from.|data
+data quality|n|chất lượng dữ liệu|Poor data quality breaks reports.|data
+business intelligence|n|trí tuệ kinh doanh|Business intelligence dashboards support managers.|data
+data-driven decision|n|quyết định dựa trên dữ liệu|We want more data-driven decisions.|data
+cohort analysis|n|phân tích theo nhóm|Cohort analysis shows retention by month.|data
+funnel analysis|n|phân tích phễu|Funnel analysis shows drop-off at payment.|data
+leading indicator|n|chỉ số dẫn dắt|Sign-ups are a leading indicator.|data
+lagging indicator|n|chỉ số trễ|Revenue is a lagging indicator.|data
+benchmark|n|mốc so sánh|Industry benchmarks show we are slow.|data
+regulatory requirement|n|yêu cầu pháp lý|eKYC is a regulatory requirement.|security
+compliance|n|tuân thủ|Compliance reviewed the new flow.|security
+audit trail|n|dấu vết kiểm toán|The system keeps an audit trail of approvals.|security
+data protection|n|bảo vệ dữ liệu|Data protection law affects our design.|security
+risk appetite|n|khẩu vị rủi ro|The bank has a low risk appetite.|business
+governance|n|quản trị|Project governance needs a steering committee.|business
+portfolio management|n|quản lý danh mục dự án|Portfolio management chooses which projects to fund.|business
+program management|n|quản lý chương trình|Program management connects several projects.|business
+PMO|n|văn phòng quản lý dự án|The PMO collects weekly status.|business
+benefits realization|n|hiện thực hóa lợi ích|Track benefits realization after go-live.|business
+earned value|n|giá trị thu được|Earned value shows we are over budget.|money
+burn rate|n|tốc độ tiêu tiền|Our burn rate is 50,000 dollars a month.|money
+burndown chart|n|biểu đồ burndown|The burndown chart shows we're behind.|agile
+burnup chart|n|biểu đồ burnup|A burnup chart shows scope changes clearly.|agile
+forecast|n|dự báo|The forecast says we finish in June.|time
+predictability|n|khả năng dự đoán|Stakeholders value predictability.|agile
+dependency management|n|quản lý phụ thuộc|Dependency management across teams is hard.|process
+scaled agile|n|Agile quy mô lớn|The bank uses scaled agile.|agile
+SAFe|n|khung Agile quy mô lớn SAFe|We work in SAFe with eight teams.|agile
+PI planning|n|lập kế hoạch PI|PI planning takes two days.|agile
+release train|n|đoàn tàu phát hành|Our release train has six teams.|agile
+product manager|n|quản lý sản phẩm|The product manager owns the strategy.|people
+chief product officer|n|giám đốc sản phẩm|The chief product officer approved the roadmap.|people
+executive summary|n|bản tóm tắt cho lãnh đạo|Start the report with an executive summary.|communication
+executive sponsor|n|nhà tài trợ cấp lãnh đạo|The executive sponsor supports the project.|people
+C-level|adj|cấp lãnh đạo cao nhất|Present the plan to C-level managers.|people
+buy-in|n|sự ủng hộ|We need buy-in from the sales director.|communication
+influence|v|gây ảnh hưởng|A good PO can influence without authority.|communication
+persuade|v|thuyết phục|Use data to persuade stakeholders.|communication
+storytelling|n|kể chuyện|Storytelling makes your proposal memorable.|communication
+narrative|n|câu chuyện xuyên suốt|Build a clear narrative for the board.|communication
+facilitation|n|kỹ năng điều phối|Good facilitation keeps workshops on time.|meeting
+conflict resolution|n|giải quyết mâu thuẫn|Conflict resolution is part of the PM role.|people
+difficult conversation|n|cuộc trò chuyện khó khăn|I had a difficult conversation with the client.|communication
+manage expectations|v|quản lý kỳ vọng|Manage expectations early about the delay.|communication
+say no|v|từ chối|A PO must learn to say no.|communication
+compromise|n|sự thỏa hiệp|We reached a compromise on scope.|communication
+escalate|v|đưa lên cấp cao hơn|Escalate when the risk affects the deadline.|communication
+mitigation plan|n|kế hoạch giảm thiểu|Present a mitigation plan with the risk.|business
+contingency plan|n|kế hoạch dự phòng|We have a contingency plan if the vendor fails.|business
+critical success factor|n|yếu tố thành công then chốt|User adoption is a critical success factor.|business
+success criteria|n|tiêu chí thành công|Define success criteria before the launch.|business
+post-implementation review|n|đánh giá sau triển khai|The post-implementation review is in three months.|meeting
+lessons learned|n|bài học kinh nghiệm|Write down lessons learned.|meeting
+continuous improvement|n|cải tiến liên tục|Continuous improvement is part of our culture.|process
+digital transformation|n|chuyển đổi số|The bank is in the middle of digital transformation.|business
+change impact assessment|n|đánh giá ảnh hưởng thay đổi|The change impact assessment covers 300 staff.|business
+organizational change|n|thay đổi tổ chức|Organizational change takes time.|business
+resistance to change|n|sự kháng cự thay đổi|Expect resistance to change from senior staff.|people
+change champion|n|người tiên phong thay đổi|Each branch has a change champion.|people
+customer centricity|n|lấy khách hàng làm trung tâm|Customer centricity drives our design.|business
+voice of the customer|n|tiếng nói khách hàng|Include voice of the customer in every review.|business
+NPS|n|chỉ số khách hàng giới thiệu|Our NPS increased to 45.|data
+customer satisfaction|n|mức độ hài lòng của khách hàng|Customer satisfaction is our top KPI.|data
+omnichannel|adj|đa kênh hợp nhất|We want an omnichannel shopping experience.|business
+go-to-market|n|chiến lược đưa sản phẩm ra thị trường|The go-to-market plan starts in Hanoi.|business
+pricing strategy|n|chiến lược giá|The pricing strategy uses three tiers.|money
+monetization|n|kiếm tiền từ sản phẩm|Monetization comes from subscriptions.|money
+subscription model|n|mô hình thuê bao|We moved to a subscription model.|money
+B2B|adj|doanh nghiệp với doanh nghiệp|It's a B2B platform for restaurants.|business
+B2C|adj|doanh nghiệp với người tiêu dùng|B2C apps need simple onboarding.|business
+SaaS|n|phần mềm dạng dịch vụ|We sell a SaaS product.|cloud
+platform|n|nền tảng|We are building a platform, not just an app.|business
+ecosystem|n|hệ sinh thái|Partners grow our ecosystem.|business
+partnership|n|quan hệ đối tác|The partnership with a bank opened new users.|business
+scalability|n|khả năng mở rộng|Business scalability needs process automation.|business
+sustainability|n|tính bền vững|Sustainability of the team matters too.|business
+due diligence|n|thẩm định|Do due diligence on the vendor.|business
+procurement|n|mua sắm|Procurement takes two months.|business
+statement of work|n|tài liệu phạm vi công việc|The statement of work lists all deliverables.|document
+fixed price|adj|giá cố định|It's a fixed price contract.|money
+time and materials|n|hợp đồng theo thời gian và vật tư|Agile fits time and materials better.|money
+change order|n|lệnh thay đổi hợp đồng|Extra scope needs a change order.|business
+acceptance sign-off|n|biên bản nghiệm thu|We got the acceptance sign-off.|release
+warranty period|n|thời gian bảo hành|Bugs in the warranty period are free to fix.|business

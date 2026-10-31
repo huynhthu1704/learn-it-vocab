@@ -1,0 +1,138 @@
+# level=3 role=test
+test automation|n|tự động hóa kiểm thử|Test automation saves us two days per release.|testing
+edge case|n|trường hợp biên|An empty cart is an edge case we forgot to test.|testing
+root cause analysis|n|phân tích nguyên nhân gốc|Root cause analysis showed a time zone bug.|bug
+test coverage|n|độ bao phủ kiểm thử|Our test coverage is now 80 percent.|testing
+quality engineering|n|kỹ thuật chất lượng|Our team moved from QA to quality engineering.|quality
+quality assurance|n|đảm bảo chất lượng|Quality assurance covers the whole process.|quality
+quality control|n|kiểm soát chất lượng|Quality control checks the final product.|quality
+test pyramid|n|kim tự tháp kiểm thử|Follow the test pyramid: many unit tests, few UI tests.|testing
+test architecture|n|kiến trúc kiểm thử|I designed the test architecture for the new app.|testing
+automation framework|n|khung tự động hóa|We built our own automation framework.|testing
+keyword-driven testing|n|kiểm thử hướng từ khóa|Keyword-driven testing helps non-coders.|testing
+data-driven testing|n|kiểm thử hướng dữ liệu|Data-driven testing runs one script with many inputs.|testing
+behaviour-driven development|n|phát triển hướng hành vi|We write scenarios in behaviour-driven development.|testing
+BDD|n|phát triển hướng hành vi|BDD scenarios are written in Gherkin.|testing
+Gherkin|n|ngôn ngữ Gherkin|Write Given, When, Then steps in Gherkin.|testing
+Cucumber|n|công cụ Cucumber|Cucumber runs our BDD scenarios.|testing
+test oracle|n|nguồn xác định kết quả đúng|The old system is our test oracle.|testing
+test harness|n|bộ khung chạy thử nghiệm|The test harness mocks the bank API.|testing
+test double|n|đối tượng thay thế khi kiểm thử|Use a test double for the email service.|testing
+stub|n|hàm giả (stub)|The stub returns a fixed response.|testing
+service virtualization|n|ảo hóa dịch vụ|Service virtualization replaces the partner API.|testing
+contract testing|n|kiểm thử hợp đồng API|Contract testing caught a breaking change.|testing
+visual regression testing|n|kiểm thử hồi quy giao diện|Visual regression testing compares screenshots.|testing
+accessibility testing|n|kiểm thử khả năng tiếp cận|Accessibility testing found low color contrast.|testing
+WCAG|n|chuẩn hướng dẫn tiếp cận nội dung web|The site must meet WCAG 2.1 AA.|testing
+screen reader|n|trình đọc màn hình|Test the form with a screen reader.|testing
+chaos engineering|n|kỹ thuật hỗn loạn|Chaos engineering tests how the system handles failure.|testing
+fault injection|n|chèn lỗi có chủ đích|Fault injection simulates a database outage.|testing
+resilience testing|n|kiểm thử khả năng phục hồi|Resilience testing showed retries work.|testing
+soak testing|n|kiểm thử độ bền|Soak testing ran for 24 hours.|performance
+spike testing|n|kiểm thử đột biến tải|Spike testing simulates a flash sale.|performance
+scalability testing|n|kiểm thử khả năng mở rộng|Scalability testing used 10,000 users.|performance
+throughput|n|thông lượng|Throughput dropped at 2,000 requests per second.|performance
+percentile|n|phân vị|The 95th percentile response time is too high.|performance
+performance baseline|n|mốc hiệu năng cơ sở|Compare results with the performance baseline.|performance
+capacity testing|n|kiểm thử công suất|Capacity testing sets our server limits.|performance
+threat modeling|n|mô hình hóa mối đe dọa|Threat modeling happens before design sign-off.|security
+OWASP Top 10|n|10 rủi ro bảo mật web OWASP|We test against the OWASP Top 10.|security
+vulnerability scan|n|quét lỗ hổng|The vulnerability scan runs weekly.|security
+penetration testing|n|kiểm thử xâm nhập|Penetration testing found an open admin page.|security
+privilege escalation|n|leo thang đặc quyền|A normal user achieved privilege escalation.|security
+data masking|n|che giấu dữ liệu|Use data masking for real customer data.|security
+synthetic data|n|dữ liệu tổng hợp|We generate synthetic data for tests.|data
+test data management|n|quản lý dữ liệu kiểm thử|Test data management is our biggest problem.|data
+data integrity|n|tính toàn vẹn dữ liệu|Check data integrity after the migration.|data
+migration testing|n|kiểm thử di chuyển dữ liệu|Migration testing compared one million records.|data
+reconciliation|n|đối soát|Reconciliation shows ten missing orders.|data
+ETL testing|n|kiểm thử ETL|ETL testing checks the data warehouse.|data
+risk assessment|n|đánh giá rủi ro|The risk assessment shows payment is high risk.|business
+risk matrix|n|ma trận rủi ro|Place each feature on the risk matrix.|business
+likelihood|n|khả năng xảy ra|Rate the likelihood from one to five.|business
+mitigation|n|biện pháp giảm thiểu|Extra testing is our mitigation.|business
+test maturity|n|độ trưởng thành kiểm thử|Our test maturity is still low.|quality
+process improvement|n|cải tiến quy trình|I lead process improvement for QA.|process
+lessons learned|n|bài học kinh nghiệm|Share lessons learned after the release.|meeting
+quality metrics|n|chỉ số chất lượng|We report quality metrics to management.|data
+mean time to detect|n|thời gian trung bình phát hiện lỗi|Mean time to detect is two hours.|data
+mean time to recovery|n|thời gian trung bình khôi phục|Our mean time to recovery improved.|data
+defect removal efficiency|n|hiệu quả loại bỏ lỗi|Defect removal efficiency is 95 percent.|quality
+defect trend|n|xu hướng lỗi|The defect trend is going down.|data
+defect clustering|n|tập trung lỗi|Defect clustering shows most bugs are in payment.|quality
+pesticide paradox|n|nghịch lý thuốc trừ sâu|Update old tests to avoid the pesticide paradox.|testing
+exhaustive testing|n|kiểm thử toàn diện mọi trường hợp|Exhaustive testing is impossible.|testing
+combinatorial testing|n|kiểm thử tổ hợp|Combinatorial testing reduces test cases.|testing
+pairwise testing|n|kiểm thử theo cặp|Pairwise testing covers browser and OS pairs.|testing
+mutation testing|n|kiểm thử đột biến|Mutation testing measures test quality.|testing
+code coverage|n|độ bao phủ mã|High code coverage doesn't mean good tests.|testing
+branch coverage|n|độ bao phủ nhánh|Branch coverage is 70 percent.|testing
+statement coverage|n|độ bao phủ câu lệnh|Statement coverage is easy to reach.|testing
+shift-right testing|n|kiểm thử trên môi trường thật|Shift-right testing uses real user data.|testing
+testing in production|n|kiểm thử trên môi trường thật|Testing in production needs feature flags.|testing
+synthetic monitoring|n|giám sát tổng hợp|Synthetic monitoring checks login every minute.|cloud
+observability|n|khả năng quan sát|Observability helps testers find issues fast.|cloud
+canary testing|n|kiểm thử canary|Canary testing exposes five percent of users.|release
+release readiness|n|mức độ sẵn sàng phát hành|I presented the release readiness report.|release
+go-live checklist|n|danh sách kiểm tra trước vận hành|Complete the go-live checklist.|release
+production readiness|n|sẵn sàng cho môi trường thật|Production readiness includes monitoring.|release
+risk-based prioritization|n|ưu tiên dựa trên rủi ro|Use risk-based prioritization for regression.|testing
+test optimization|n|tối ưu bộ kiểm thử|Test optimization cut the suite to one hour.|testing
+test maintenance|n|bảo trì kiểm thử|Test maintenance takes 30 percent of our time.|testing
+flaky test|n|kiểm thử chập chờn|Quarantine every flaky test.|testing
+quarantine|v|cách ly|Quarantine the test until it's fixed.|testing
+self-healing tests|n|kiểm thử tự sửa|The tool offers self-healing tests.|testing
+AI-assisted testing|n|kiểm thử có hỗ trợ AI|AI-assisted testing writes first drafts of test cases.|ai
+test generation|n|sinh ca kiểm thử|Test generation from requirements saves time.|ai
+model-based testing|n|kiểm thử dựa trên mô hình|Model-based testing uses a state diagram.|testing
+continuous testing|n|kiểm thử liên tục|Continuous testing runs on every commit.|testing
+quality gate|n|cổng chất lượng|The quality gate blocks the merge.|quality
+DevOps|n|văn hóa DevOps|QA is part of DevOps.|release
+DevSecOps|n|DevOps tích hợp bảo mật|DevSecOps adds security scans to CI.|security
+infrastructure testing|n|kiểm thử hạ tầng|Infrastructure testing checks our servers.|cloud
+containerized tests|n|kiểm thử chạy trong container|Containerized tests run the same everywhere.|cloud
+test parallelization|n|song song hóa kiểm thử|Test parallelization uses ten machines.|testing
+test sharding|n|chia nhỏ bộ kiểm thử|Test sharding splits the suite.|testing
+test reporting|n|báo cáo kiểm thử|Allure gives us better test reporting.|document
+traceability|n|khả năng truy vết|Traceability is needed for the audit.|document
+regulatory compliance|n|tuân thủ quy định pháp lý|Banking apps need regulatory compliance.|security
+validation|n|thẩm định|Validation asks: did we build the right thing?|quality
+verification|n|kiểm định|Verification asks: did we build it right?|quality
+V-model|n|mô hình chữ V|The V-model links each phase to a test level.|process
+test level|n|cấp độ kiểm thử|There are four test levels.|testing
+test type|n|loại kiểm thử|Security is a test type, not a level.|testing
+independent testing|n|kiểm thử độc lập|An independent testing team checks the release.|testing
+test policy|n|chính sách kiểm thử|The test policy is set by the company.|document
+test charter|n|bản định hướng kiểm thử thăm dò|Write a test charter before exploratory testing.|testing
+session-based testing|n|kiểm thử theo phiên|We use session-based testing with 60-minute sessions.|testing
+heuristic|n|nguyên tắc kinh nghiệm|Use the SFDPOT heuristic.|testing
+critical thinking|n|tư duy phản biện|Critical thinking is a tester's best tool.|career
+domain expertise|n|chuyên môn nghiệp vụ|Domain expertise helps find business bugs.|business
+business impact|n|ảnh hưởng kinh doanh|Explain the business impact of the bug.|business
+customer-facing|adj|tiếp xúc trực tiếp với khách hàng|It's a customer-facing feature.|business
+escalation path|n|quy trình báo cáo vượt cấp|Follow the escalation path for critical bugs.|communication
+quality advocate|n|người thúc đẩy chất lượng|Testers are quality advocates in the team.|people
+QA manager|n|quản lý đảm bảo chất lượng|The QA manager set new goals.|people
+SDET|n|kỹ sư phát triển phần mềm kiểm thử|SDETs write test code daily.|people
+test architect|n|kiến trúc sư kiểm thử|The test architect chose the tools.|people
+coach|v|hướng dẫn|I coach developers on testing.|career
+upskill|v|nâng cao kỹ năng|We upskill manual testers in automation.|career
+proof of concept|n|bằng chứng khả thi|We ran a proof of concept for Playwright.|testing
+tool evaluation|n|đánh giá công cụ|The tool evaluation compared four tools.|testing
+return on investment|n|lợi tức đầu tư|Automation has a good return on investment.|money
+cost of quality|n|chi phí chất lượng|Cost of quality includes fixing bugs late.|money
+technical debt|n|nợ kỹ thuật|Old test scripts are technical debt.|quality
+stakeholder communication|n|giao tiếp với các bên liên quan|Stakeholder communication is part of my job.|communication
+quality narrative|n|bức tranh tổng thể về chất lượng|Tell a quality narrative, not just numbers.|communication
+sign-off criteria|n|tiêu chí ký duyệt|Agree on sign-off criteria early.|release
+residual risk|n|rủi ro còn lại|Report the residual risk before release.|business
+known limitation|n|hạn chế đã biết|List each known limitation in the release notes.|release
+severity matrix|n|ma trận mức độ nghiêm trọng|Use the severity matrix to rate bugs.|bug
+service level|n|mức dịch vụ|Testing supports our service level targets.|business
+SLA breach|n|vi phạm cam kết dịch vụ|An SLA breach costs us money.|business
+post-release validation|n|xác minh sau phát hành|Do post-release validation in production.|release
+hypercare|n|giai đoạn hỗ trợ tăng cường sau vận hành|We stay in hypercare for two weeks.|release
+customer escalation|n|khiếu nại leo thang từ khách hàng|A customer escalation came from the bank.|communication
+war room|n|phòng xử lý khủng hoảng|We opened a war room during the outage.|meeting
+outage|n|sự cố ngừng dịch vụ|The outage lasted one hour.|bug
+blast radius|n|phạm vi ảnh hưởng|Feature flags reduce the blast radius.|release

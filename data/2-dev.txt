@@ -1,0 +1,148 @@
+# level=2 role=dev
+refactor|v|tái cấu trúc mã|Let's refactor this function before adding new features.|code
+code smell|n|dấu hiệu mã kém chất lượng|A 300-line method is a code smell.|quality
+clean code|n|mã sạch|Clean code is easy to read and change.|quality
+naming convention|n|quy ước đặt tên|Follow the naming convention for variables.|code
+coding standard|n|tiêu chuẩn viết mã|Our coding standard uses four spaces.|quality
+linter|n|công cụ kiểm tra mã tĩnh|The linter found unused imports.|quality
+formatter|n|công cụ định dạng mã|Run the formatter before you commit.|quality
+approve|v|phê duyệt|Two people must approve each pull request.|quality
+request changes|v|yêu cầu chỉnh sửa|The reviewer requested changes on my PR.|quality
+nitpick|n|góp ý nhỏ, chi tiết|This is just a nitpick, not a blocker.|quality
+rebase|v|đặt lại gốc nhánh|Rebase your branch on main.|code
+cherry-pick|v|chọn một commit để áp dụng|Cherry-pick the fix into the release branch.|code
+main branch|n|nhánh chính|Never push directly to the main branch.|code
+feature branch|n|nhánh tính năng|Work on a feature branch.|code
+stash|v|cất tạm thay đổi|Stash your changes before you switch branches.|code
+revert|v|hoàn tác|Revert the commit that broke the build.|code
+diff|n|phần khác biệt|The diff is too big to review.|code
+tag|n|nhãn phiên bản|Create a tag for version 2.0.|release
+semantic versioning|n|đánh số phiên bản ngữ nghĩa|We follow semantic versioning.|release
+changelog|n|nhật ký thay đổi|Add your change to the changelog.|release
+API|n|giao diện lập trình ứng dụng|The mobile app calls the payment API.|architecture
+endpoint|n|điểm cuối API|Add a new endpoint for orders.|architecture
+HTTP method|n|phương thức HTTP|Use the POST HTTP method to create data.|web
+GET request|n|yêu cầu GET|A GET request should not change data.|web
+POST request|n|yêu cầu POST|The form sends a POST request.|web
+status code|n|mã trạng thái|The API returns status code 500.|web
+payload|n|dữ liệu gửi kèm|The payload is too large.|web
+header|n|phần đầu (HTTP)|Add the token to the request header.|web
+authentication|n|xác thực|We use OAuth for authentication.|security
+authorization|n|phân quyền|Authorization checks what the user can do.|security
+session|n|phiên làm việc|The session expires after 30 minutes.|security
+cookie|n|cookie|The app stores the session in a cookie.|security
+CORS|n|chia sẻ tài nguyên khác nguồn|The request is blocked by CORS.|security
+hashing|n|băm (mật khẩu)|Use hashing for passwords, never plain text.|security
+environment variable|n|biến môi trường|Store the API key in an environment variable.|code
+secret|n|thông tin bí mật|Never commit secrets to Git.|security
+API key|n|khóa API|The API key is invalid.|security
+ORM|n|công cụ ánh xạ đối tượng-quan hệ|We use an ORM instead of raw SQL.|data
+migration|n|tệp di chuyển cấu trúc dữ liệu|Run the migration to add the new column.|data
+schema|n|lược đồ dữ liệu|The schema has twenty tables.|data
+index|n|chỉ mục|Add an index to speed up the query.|performance
+transaction|n|giao dịch (cơ sở dữ liệu)|Wrap the payment in a transaction.|data
+seed data|n|dữ liệu mẫu ban đầu|Seed data creates test users.|data
+NoSQL|n|cơ sở dữ liệu phi quan hệ|MongoDB is a NoSQL database.|data
+async|adj|bất đồng bộ|This function is async, so use await.|code
+callback|n|hàm gọi lại|Pass a callback to handle the result.|code
+promise|n|đối tượng Promise|The function returns a promise.|code
+event|n|sự kiện|Listen for the submit event.|code
+state|n|trạng thái|Keep the cart in global state.|code
+component|n|thành phần (giao diện)|Make the button a reusable component.|code
+props|n|thuộc tính truyền vào component|Pass the title as props.|code
+hook|n|hook (React)|Use a hook to fetch data.|code
+render|v|hiển thị / kết xuất|The list renders twice.|code
+virtual DOM|n|DOM ảo|React updates the virtual DOM first.|web
+single-page application|n|ứng dụng một trang|Our admin panel is a single-page application.|web
+routing|n|định tuyến|Add routing for the profile page.|web
+state management|n|quản lý trạng thái|We use Redux for state management.|code
+TypeScript|n|ngôn ngữ TypeScript|TypeScript catches type errors early.|code
+type safety|n|an toàn kiểu dữ liệu|TypeScript gives us type safety.|code
+generic|n|kiểu tổng quát|Write a generic function for lists.|code
+module|n|mô-đun|Split the code into modules.|code
+import|v|nhập (mô-đun)|Import the helper from utils.|code
+export|v|xuất (mô-đun)|Export the function so others can use it.|code
+helper function|n|hàm hỗ trợ|Move this logic into a helper function.|code
+utility|n|tiện ích|Put date utilities in one file.|code
+constant|n|hằng số|Use a constant for the tax rate.|code
+hardcode|v|gán cứng giá trị|Don't hardcode the server URL.|code
+magic number|n|số "ma thuật" không rõ nghĩa|Replace this magic number with a constant.|quality
+duplicate code|n|mã trùng lặp|Remove the duplicate code.|quality
+edge case|n|trường hợp biên|Handle the edge case when the list is empty.|testing
+null check|n|kiểm tra giá trị null|Add a null check before you read the name.|code
+error handling|n|xử lý lỗi|Add error handling to the API call.|bug
+try-catch|n|khối try-catch|Wrap the call in a try-catch.|bug
+stack trace|n|vết ngăn xếp lỗi|Paste the full stack trace in the ticket.|bug
+reproduce|v|tái hiện (lỗi)|I can't reproduce the bug on my machine.|bug
+root cause|n|nguyên nhân gốc|The root cause was a missing index.|bug
+memory leak|n|rò rỉ bộ nhớ|A memory leak makes the app slower over time.|performance
+performance|n|hiệu năng|We need to improve page performance.|performance
+optimize|v|tối ưu|Optimize the images for mobile.|performance
+bottleneck|n|điểm nghẽn|The database is the bottleneck.|performance
+latency|n|độ trễ|The API latency is 800 milliseconds.|performance
+lazy loading|n|tải chậm theo nhu cầu|Use lazy loading for images.|performance
+pagination|n|phân trang|The API supports pagination.|web
+rate limit|n|giới hạn tần suất gọi|We hit the API rate limit.|architecture
+third-party|adj|bên thứ ba|We use a third-party payment service.|architecture
+integration|n|tích hợp|The Stripe integration is done.|architecture
+SDK|n|bộ công cụ phát triển phần mềm|Install the Firebase SDK.|code
+webhook|n|webhook|Stripe sends a webhook after payment.|architecture
+cron job|n|tác vụ chạy theo lịch|A cron job sends reports at midnight.|process
+background job|n|tác vụ chạy nền|Send emails in a background job.|process
+queue|n|hàng đợi|Push the task to a message queue.|architecture
+container|n|container|The app runs in a Docker container.|cloud
+Docker|n|nền tảng Docker|Run the database with Docker.|cloud
+image|n|image (Docker)|Build a new Docker image.|cloud
+CI|n|tích hợp liên tục|CI runs the tests on every push.|release
+pipeline|n|đường ống tự động|The pipeline failed at the test step.|release
+build failure|n|lỗi bản dựng|Fix the build failure before you merge.|release
+deployment|n|việc triển khai|The deployment took ten minutes.|release
+rollback|n|khôi phục phiên bản|We need a rollback plan.|release
+monitoring|n|giám sát hệ thống|Monitoring alerts us when the API is down.|cloud
+alert|n|cảnh báo|I got an alert at 3 a.m.|cloud
+on-call|adj|trực sự cố|I'm on-call this week.|cloud
+incident|n|sự cố|We had an incident during the sale.|bug
+uptime|n|thời gian hoạt động|Our uptime is 99.9 percent.|cloud
+AWS|n|nền tảng đám mây AWS|We host everything on AWS.|cloud
+bucket|n|kho lưu trữ (S3)|Upload images to an S3 bucket.|cloud
+CDN|n|mạng phân phối nội dung|Serve images through a CDN.|performance
+load balancer|n|bộ cân bằng tải|The load balancer sends traffic to three servers.|architecture
+unit testing|n|kiểm thử đơn vị|Unit testing catches bugs early.|testing
+mock|n|đối tượng giả lập|Use a mock for the payment API.|testing
+test coverage|n|độ bao phủ kiểm thử|Test coverage dropped to 60 percent.|testing
+integration test|n|kiểm thử tích hợp|The integration test calls the real database.|testing
+assertion|n|câu lệnh khẳng định|The assertion failed.|testing
+TDD|n|phát triển hướng kiểm thử|We tried TDD on this module.|testing
+sprint planning|n|họp lập kế hoạch sprint|We estimate stories in sprint planning.|agile
+story points|n|điểm câu chuyện|This task is five story points.|agile
+retrospective|n|họp cải tiến cuối sprint|In the retrospective, we discussed code reviews.|agile
+velocity|n|tốc độ hoàn thành|Our velocity is 30 points per sprint.|agile
+definition of done|n|định nghĩa hoàn thành|Tests are part of our definition of done.|agile
+acceptance criteria|n|tiêu chí chấp nhận|Read the acceptance criteria before coding.|agile
+spike|n|nhiệm vụ nghiên cứu ngắn|Let's do a spike on the new library.|agile
+tech debt|n|nợ kỹ thuật|We spend 20 percent of time on tech debt.|quality
+legacy code|n|mã cũ kế thừa|The legacy code has no tests.|quality
+workaround|n|cách xử lý tạm|This is a workaround, not a real fix.|bug
+trade-off|n|sự đánh đổi|Caching is a trade-off between speed and freshness.|architecture
+scalable|adj|có khả năng mở rộng|Is this design scalable?|architecture
+maintainable|adj|dễ bảo trì|Small functions are more maintainable.|quality
+readable|adj|dễ đọc|Make the code more readable.|quality
+reusable|adj|có thể tái sử dụng|Build reusable components.|code
+backward compatible|adj|tương thích ngược|The new API must be backward compatible.|architecture
+deprecated|adj|không còn được khuyến khích dùng|This method is deprecated.|code
+breaking change|n|thay đổi phá vỡ tương thích|This is a breaking change for mobile clients.|release
+feature flag|n|cờ bật/tắt tính năng|Hide the feature behind a feature flag.|release
+A/B test|n|thử nghiệm A/B|We ran an A/B test on the button color.|data
+analytics|n|phân tích dữ liệu|Add analytics to the checkout page.|data
+tracking|n|theo dõi|Tracking shows where users drop off.|data
+logging|n|ghi nhật ký|Add logging to the payment service.|bug
+estimate|v|ước lượng|Can you estimate this task?|agile
+scope|n|phạm vi|That's outside the scope of this ticket.|agile
+requirement|n|yêu cầu|The requirement is not clear to me.|document
+spec|n|bản đặc tả|Follow the spec from the BA.|document
+mentoring|n|kèm cặp|Seniors spend time mentoring juniors.|career
+knowledge sharing|n|chia sẻ kiến thức|We have a knowledge sharing session every Friday.|meeting
+tech talk|n|buổi chia sẻ kỹ thuật|I gave a tech talk on testing.|meeting
+promotion|n|thăng chức|She got a promotion to senior developer.|career
+performance review|n|đánh giá hiệu suất làm việc|My performance review is next month.|career
+side project|n|dự án cá nhân ngoài giờ|I learned Go with a side project.|career

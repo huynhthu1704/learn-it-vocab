@@ -1,0 +1,141 @@
+# level=3 role=student
+scalability|n|khả năng mở rộng|Our thesis compares the scalability of two database designs.|architecture
+time complexity|n|độ phức tạp thời gian|Binary search has a time complexity of O(log n).|math
+peer review|n|đánh giá chéo|The paper passed peer review last month.|study
+thesis defense|n|bảo vệ luận văn|I practised my thesis defense in English.|study
+space complexity|n|độ phức tạp không gian|Merge sort has a space complexity of O(n).|math
+Big O notation|n|ký hiệu Big O|Explain your answer using Big O notation.|math
+asymptotic|adj|tiệm cận|We discussed the asymptotic behaviour of the algorithm.|math
+dynamic programming|n|quy hoạch động|Dynamic programming stores results to avoid repeat work.|code
+greedy algorithm|n|thuật toán tham lam|A greedy algorithm picks the best choice at each step.|code
+divide and conquer|n|chia để trị|Merge sort uses divide and conquer.|code
+heuristic|n|phương pháp kinh nghiệm|We used a heuristic to speed up the search.|code
+optimization problem|n|bài toán tối ưu|Routing is an optimization problem.|math
+NP-complete|adj|thuộc lớp NP-đầy đủ|The travelling salesman problem is NP-complete.|math
+graph theory|n|lý thuyết đồ thị|Graph theory helps model social networks.|math
+shortest path|n|đường đi ngắn nhất|Dijkstra finds the shortest path.|math
+concurrency|n|tính đồng thời|Concurrency bugs are hard to reproduce.|code
+parallelism|n|tính song song|Parallelism speeds up image processing.|code
+deadlock|n|bế tắc (khóa chết)|Two threads waiting for each other cause a deadlock.|bug
+race condition|n|điều kiện tranh chấp|A race condition corrupted the counter.|bug
+mutex|n|khóa loại trừ tương hỗ|Use a mutex to protect shared data.|code
+distributed system|n|hệ thống phân tán|My thesis is about distributed systems.|architecture
+consistency|n|tính nhất quán|We traded consistency for availability.|architecture
+availability|n|tính sẵn sàng|High availability needs more than one server.|architecture
+fault tolerance|n|khả năng chịu lỗi|The design improves fault tolerance.|architecture
+CAP theorem|n|định lý CAP|The CAP theorem says you can't have all three.|architecture
+replication|n|sao chép dữ liệu|Replication keeps a copy on another server.|data
+sharding|n|phân mảnh dữ liệu|Sharding splits the data across machines.|data
+throughput|n|thông lượng|Throughput doubled after the change.|performance
+benchmark|n|bài đo hiệu năng|Our benchmark used one million records.|performance
+empirical|adj|thực nghiệm|We present empirical results in chapter four.|study
+quantitative|adj|định lượng|We used a quantitative method.|study
+qualitative|adj|định tính|Interviews gave us qualitative data.|study
+research question|n|câu hỏi nghiên cứu|State your research question clearly.|study
+research gap|n|khoảng trống nghiên cứu|Our work fills a research gap.|study
+contribution|n|đóng góp|The main contribution is a faster model.|study
+limitation|n|hạn chế|One limitation is the small dataset.|study
+future work|n|hướng phát triển|Future work will test more languages.|study
+abstract|n|tóm tắt (bài báo)|Write the abstract last.|study
+conference paper|n|bài báo hội nghị|Our conference paper was accepted.|study
+journal|n|tạp chí khoa học|She published in an IEEE journal.|study
+publish|v|công bố|We plan to publish the results.|study
+evaluation|n|đánh giá|The evaluation uses three metrics.|study
+baseline model|n|mô hình cơ sở|Our model beats the baseline model.|ai
+state of the art|adj|tiên tiến nhất hiện nay|This is a state of the art method.|ai
+precision|n|độ chính xác (precision)|Precision tells us how many results are correct.|ai
+recall|n|độ phủ (recall)|Recall is more important for fraud detection.|ai
+F1 score|n|điểm F1|The F1 score is 0.87.|ai
+overfitting|n|quá khớp|The model is overfitting the training data.|ai
+underfitting|n|chưa khớp|A simple model may cause underfitting.|ai
+cross-validation|n|kiểm định chéo|We used five-fold cross-validation.|ai
+feature engineering|n|kỹ thuật đặc trưng|Feature engineering improved accuracy.|ai
+hyperparameter|n|siêu tham số|We tuned the learning rate hyperparameter.|ai
+gradient descent|n|giảm độ dốc|Gradient descent minimises the loss.|ai
+loss function|n|hàm mất mát|Choose the right loss function.|ai
+deep learning|n|học sâu|Deep learning needs a lot of data.|ai
+large language model|n|mô hình ngôn ngữ lớn|We fine-tuned a large language model.|ai
+fine-tuning|n|tinh chỉnh mô hình|Fine-tuning took two days on a GPU.|ai
+natural language processing|n|xử lý ngôn ngữ tự nhiên|Natural language processing is my research area.|ai
+computer vision|n|thị giác máy tính|Computer vision can detect defects in products.|ai
+GPU|n|bộ xử lý đồ họa|Training needs a GPU.|devices
+inference|n|suy luận (mô hình)|Inference takes 50 milliseconds.|ai
+bias|n|thiên lệch|The dataset has a gender bias.|ai
+ethics|n|đạo đức|We discussed the ethics of facial recognition.|ai
+explainability|n|khả năng giải thích|Banks need explainability in AI decisions.|ai
+reproducibility|n|khả năng tái lập|Share your code for reproducibility.|study
+open dataset|n|tập dữ liệu mở|We used an open dataset from Kaggle.|data
+data cleaning|n|làm sạch dữ liệu|Data cleaning took most of the time.|data
+data pipeline|n|đường ống dữ liệu|We built a data pipeline in Python.|data
+visualization|n|trực quan hóa|The visualization shows clear clusters.|data
+correlation|n|tương quan|Correlation is not causation.|math
+regression|n|hồi quy (thống kê)|We used linear regression.|math
+statistical significance|n|ý nghĩa thống kê|The difference has statistical significance.|math
+sample size|n|cỡ mẫu|Our sample size is too small.|math
+compiler design|n|thiết kế trình biên dịch|Compiler design is an elective in year four.|code
+formal methods|n|phương pháp hình thức|Formal methods prove the code is correct.|math
+cryptography|n|mật mã học|Cryptography protects online payments.|security
+public key|n|khóa công khai|Share your public key, not your private key.|security
+hash function|n|hàm băm|A good hash function avoids collisions.|security
+blockchain|n|chuỗi khối|Our project studies blockchain for supply chains.|architecture
+cloud computing|n|điện toán đám mây|Cloud computing changed how startups work.|cloud
+virtualization|n|ảo hóa|Virtualization runs many systems on one server.|cloud
+serverless|adj|không máy chủ|We built a serverless backend.|cloud
+microservice architecture|n|kiến trúc vi dịch vụ|We compared monolith and microservice architecture.|architecture
+design pattern|n|mẫu thiết kế|Singleton is a common design pattern.|code
+SOLID principles|n|nguyên tắc SOLID|Our code follows SOLID principles.|quality
+software architecture|n|kiến trúc phần mềm|Draw the software architecture in chapter three.|architecture
+system design|n|thiết kế hệ thống|System design questions are common in interviews.|architecture
+whiteboard interview|n|phỏng vấn viết bảng|I failed my first whiteboard interview.|career
+behavioural interview|n|phỏng vấn hành vi|Prepare STAR stories for the behavioural interview.|career
+STAR method|n|phương pháp STAR|Use the STAR method to answer.|career
+salary negotiation|n|đàm phán lương|Salary negotiation is hard for freshers.|career
+job offer|n|lời mời làm việc|I got two job offers.|career
+probation|n|thời gian thử việc|Probation lasts two months.|career
+career path|n|lộ trình sự nghiệp|What career path do you want?|career
+graduate program|n|chương trình dành cho sinh viên mới tốt nghiệp|I joined a graduate program at a bank.|career
+master's degree|n|bằng thạc sĩ|I plan to do a master's degree abroad.|study
+PhD|n|bằng tiến sĩ|She is doing a PhD in AI.|study
+research assistant|n|trợ lý nghiên cứu|I work as a research assistant.|people
+lab report|n|báo cáo thí nghiệm|The lab report needs graphs.|document
+technical writing|n|viết tài liệu kỹ thuật|Technical writing is a useful skill.|document
+academic English|n|tiếng Anh học thuật|Academic English uses more formal words.|communication
+paraphrase|v|diễn đạt lại|Paraphrase the source instead of copying it.|communication
+argue|v|lập luận|We argue that caching is enough.|communication
+justify|v|biện minh / lý giải|Justify your choice of database.|communication
+critique|n|bài phê bình|Write a critique of the paper.|study
+rebuttal|n|phản biện|We wrote a rebuttal to the reviewers.|study
+Q&A session|n|phần hỏi đáp|The Q&A session lasted 20 minutes.|meeting
+elevator pitch|n|lời giới thiệu ngắn gọn|Practise a 30-second elevator pitch.|communication
+startup|n|công ty khởi nghiệp|I want to join a startup after graduation.|business
+incubator|n|vườn ươm khởi nghiệp|Our team joined a university incubator.|business
+intellectual property|n|sở hữu trí tuệ|Who owns the intellectual property of the thesis?|business
+license|n|giấy phép|Check the license before you use the code.|code
+open-source contribution|n|đóng góp mã nguồn mở|Open-source contribution looks great on a CV.|career
+technical debt|n|nợ kỹ thuật|Our project built up technical debt.|quality
+code quality|n|chất lượng mã|The lecturer grades code quality too.|quality
+interoperability|n|khả năng tương tác|Interoperability between systems is a challenge.|architecture
+latency|n|độ trễ|Lower latency improves user experience.|performance
+edge computing|n|điện toán biên|Edge computing processes data near the device.|cloud
+Internet of Things|n|Internet vạn vật|Our IoT project uses Internet of Things sensors.|devices
+IoT|n|Internet vạn vật|IoT devices send data every second.|devices
+embedded system|n|hệ thống nhúng|An embedded system controls the washing machine.|devices
+real-time|adj|thời gian thực|The system must react in real-time.|performance
+simulation|n|mô phỏng|We ran a simulation of the traffic.|study
+prototype|n|bản mẫu|We built a working prototype.|design
+human-computer interaction|n|tương tác người-máy|I took a course in human-computer interaction.|design
+user study|n|nghiên cứu người dùng|Our user study had 20 participants.|design
+participant|n|người tham gia|Each participant tested the app for ten minutes.|people
+informed consent|n|sự đồng ý có hiểu biết|Get informed consent before the study.|study
+anonymize|v|ẩn danh hóa|Anonymize the data before analysis.|security
+GDPR|n|quy định bảo vệ dữ liệu GDPR|GDPR protects personal data in Europe.|security
+personal data|n|dữ liệu cá nhân|Don't store personal data without permission.|security
+digital transformation|n|chuyển đổi số|Digital transformation is a hot topic in Vietnam.|business
+fintech|n|công nghệ tài chính|Many graduates join fintech companies.|money
+edtech|n|công nghệ giáo dục|Our app is an edtech product.|business
+abstraction layer|n|tầng trừu tượng|Add an abstraction layer over the database.|architecture
+trade-off analysis|n|phân tích đánh đổi|Include a trade-off analysis in your report.|architecture
+proof of concept|n|bằng chứng khái niệm|We built a proof of concept in two weeks.|design
+methodology chapter|n|chương phương pháp|The methodology chapter explains our steps.|study
+findings|n|kết quả nghiên cứu|Our findings support the hypothesis.|study
+conclusion|n|kết luận|Keep the conclusion short.|study

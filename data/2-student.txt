@@ -1,0 +1,158 @@
+# level=2 role=student
+data structure|n|cấu trúc dữ liệu|A stack is a simple data structure.|code
+capstone project|n|đồ án tốt nghiệp|Our capstone project is a food delivery app.|study
+version control|n|quản lý phiên bản|Version control lets the team undo mistakes.|code
+array|n|mảng|Sort the array from smallest to largest.|code
+linked list|n|danh sách liên kết|Each node in a linked list points to the next one.|code
+stack|n|ngăn xếp|A stack works as last in, first out.|code
+queue|n|hàng đợi|Print jobs wait in a queue.|code
+tree|n|cấu trúc cây|A binary tree has at most two children per node.|code
+graph|n|đồ thị|Use a graph to model the bus routes.|math
+node|n|nút|Delete the node from the tree.|code
+hash table|n|bảng băm|A hash table makes lookups very fast.|code
+recursion|n|đệ quy|Recursion is when a function calls itself.|code
+iteration|n|phép lặp|Solve it with iteration instead of recursion.|code
+sorting|n|sắp xếp|We compared five sorting algorithms.|code
+searching|n|tìm kiếm|Binary searching only works on sorted data.|code
+binary search|n|tìm kiếm nhị phân|Binary search cuts the list in half each time.|code
+pseudocode|n|mã giả|Write the pseudocode before you code.|code
+flowchart|n|lưu đồ|Draw a flowchart of your algorithm.|design
+object-oriented programming|n|lập trình hướng đối tượng|Java is built around object-oriented programming.|code
+OOP|n|lập trình hướng đối tượng|The exam has many OOP questions.|code
+inheritance|n|tính kế thừa|Dog and Cat use inheritance from Animal.|code
+encapsulation|n|tính đóng gói|Encapsulation hides the internal data.|code
+polymorphism|n|tính đa hình|Polymorphism lets one method work in many ways.|code
+abstraction|n|tính trừu tượng|Abstraction hides the complex details.|code
+interface|n|giao diện (lập trình)|The class implements the Payable interface.|code
+constructor|n|hàm khởi tạo|The constructor sets the default values.|code
+instance|n|thể hiện / đối tượng|Create an instance of the Car class.|code
+attribute|n|thuộc tính|Name is an attribute of the Student class.|code
+compiler|n|trình biên dịch|The compiler found three errors.|code
+interpreter|n|trình thông dịch|Python uses an interpreter.|code
+runtime|n|thời gian chạy|The error only appears at runtime.|code
+syntax error|n|lỗi cú pháp|A missing bracket causes a syntax error.|bug
+logic error|n|lỗi logic|The program runs but has a logic error.|bug
+debugger|n|trình gỡ lỗi|Use the debugger to step through the code.|bug
+breakpoint|n|điểm dừng|Set a breakpoint on line 20.|bug
+SQL|n|ngôn ngữ truy vấn SQL|Write an SQL query to find all students.|data
+query|n|truy vấn|The query returns 50 rows.|data
+primary key|n|khóa chính|Student ID is the primary key.|data
+foreign key|n|khóa ngoại|Class ID is a foreign key in this table.|data
+relational database|n|cơ sở dữ liệu quan hệ|MySQL is a relational database.|data
+normalization|n|chuẩn hóa dữ liệu|Normalization reduces duplicate data.|data
+ERD|n|sơ đồ thực thể quan hệ|Draw an ERD for the library system.|data
+entity|n|thực thể|Book and Member are entities.|data
+join|n|phép nối bảng|Use a join to combine the two tables.|data
+operating systems|n|môn hệ điều hành|Operating systems is a hard course.|devices
+process|n|tiến trình|Each process has its own memory.|devices
+thread|n|luồng xử lý|The program uses two threads.|devices
+CPU|n|bộ xử lý trung tâm|The CPU is at one hundred percent.|devices
+RAM|n|bộ nhớ RAM|This laptop has 16 gigabytes of RAM.|devices
+binary|n|hệ nhị phân|Computers store data in binary.|math
+bit|n|bit|A byte has eight bits.|math
+byte|n|byte|Each character uses one byte.|math
+protocol|n|giao thức|HTTP is a protocol for the web.|network
+IP address|n|địa chỉ IP|Every device has an IP address.|network
+router|n|bộ định tuyến|Restart the router.|network
+TCP/IP|n|bộ giao thức TCP/IP|We learned the TCP/IP model.|network
+HTTP|n|giao thức HTTP|The browser sends an HTTP request.|network
+web development|n|phát triển web|I want to specialise in web development.|web
+software engineering|n|kỹ thuật phần mềm|Software engineering covers the whole life cycle.|study
+life cycle|n|vòng đời|The software development life cycle has six phases.|process
+requirements|n|yêu cầu|Collect the requirements before design.|document
+use case|n|ca sử dụng|Draw a use case diagram for the ATM.|design
+UML|n|ngôn ngữ mô hình hóa UML|We drew a class diagram in UML.|design
+class diagram|n|sơ đồ lớp|The class diagram shows the relationships.|design
+sequence diagram|n|sơ đồ tuần tự|The sequence diagram shows the login steps.|design
+waterfall|n|mô hình thác nước|Waterfall finishes one phase before the next.|process
+Agile|n|phương pháp Agile|We used Agile for our capstone.|agile
+Scrum|n|khung làm việc Scrum|Our team followed Scrum with two-week sprints.|agile
+GitHub repository|n|kho mã GitHub|Share your GitHub repository with the lecturer.|code
+commit history|n|lịch sử commit|The lecturer checks your commit history.|code
+pull request|n|yêu cầu hợp nhất mã|Open a pull request for your teammate.|code
+merge conflict|n|xung đột khi hợp nhất|We spent an hour fixing a merge conflict.|code
+open source|adj|mã nguồn mở|Linux is open source.|code
+documentation|n|tài liệu kỹ thuật|Good documentation helps new teammates.|document
+report writing|n|viết báo cáo|Report writing is part of the grade.|document
+citation|n|trích dẫn|Add a citation for every source.|study
+reference|n|tài liệu tham khảo|List your references at the end.|study
+plagiarism|n|đạo văn|Plagiarism means you fail the course.|study
+academic integrity|n|liêm chính học thuật|AI tools must follow academic integrity rules.|study
+literature review|n|tổng quan tài liệu|Chapter two is the literature review.|study
+methodology|n|phương pháp luận|Explain your methodology clearly.|study
+hypothesis|n|giả thuyết|Our hypothesis is that caching improves speed.|study
+experiment|n|thí nghiệm|We ran an experiment with 30 users.|study
+dataset|n|tập dữ liệu|We downloaded a public dataset.|data
+statistics|n|thống kê|We used statistics to compare the results.|math
+probability|n|xác suất|Probability is part of the AI course.|math
+matrix|n|ma trận|Images are stored as a matrix of numbers.|math
+discrete mathematics|n|toán rời rạc|Discrete mathematics teaches logic and sets.|math
+logic|n|logic|Boolean logic uses true and false.|math
+formula|n|công thức|Use this formula to calculate the average.|math
+calculate|v|tính toán|The function calculates the total.|math
+average|n|trung bình|The average score was seven.|math
+percentage|n|phần trăm|Show the result as a percentage.|math
+supervisor|n|người hướng dẫn|My supervisor reviews my thesis every week.|people
+advisor|n|cố vấn học tập|Ask your advisor which courses to take.|people
+teaching assistant|n|trợ giảng|The teaching assistant marks the labs.|people
+TA|n|trợ giảng|Email the TA if you miss a lab.|people
+office hours|n|giờ tiếp sinh viên|Go to office hours if you are stuck.|study
+syllabus|n|đề cương môn học|The syllabus lists all the deadlines.|study
+prerequisite|n|môn tiên quyết|Data structures is a prerequisite for algorithms.|study
+elective|n|môn tự chọn|I took mobile development as an elective.|study
+GPA|n|điểm trung bình tích lũy|My GPA is 3.4.|study
+transcript|n|bảng điểm|Companies sometimes ask for your transcript.|career
+scholarship|n|học bổng|She won a scholarship for top students.|study
+exchange program|n|chương trình trao đổi|I joined an exchange program in Japan.|study
+hackathon|n|cuộc thi lập trình hackathon|Our team won second prize at the hackathon.|career
+competition|n|cuộc thi|We joined a programming competition.|career
+club|n|câu lạc bộ|I'm in the IT club.|study
+mentor|n|người cố vấn|My mentor helps me plan my career.|people
+portfolio|n|hồ sơ năng lực|Put your best projects in your portfolio.|career
+LinkedIn|n|mạng LinkedIn|Update your LinkedIn profile.|career
+cover letter|n|thư xin việc|Write a short cover letter for each job.|career
+recruiter|n|nhà tuyển dụng|A recruiter messaged me on LinkedIn.|career
+entry-level|adj|cấp độ mới vào nghề|This is an entry-level position.|career
+fresher|n|người mới tốt nghiệp|The company hires ten freshers each year.|career
+technical interview|n|phỏng vấn kỹ thuật|The technical interview had three coding questions.|career
+coding test|n|bài kiểm tra lập trình|The coding test is 90 minutes.|career
+soft skills|n|kỹ năng mềm|Soft skills matter as much as coding.|career
+teamwork|n|làm việc nhóm|Teamwork made our project a success.|career
+time management|n|quản lý thời gian|Time management is hard during exam season.|time
+presentation skills|n|kỹ năng thuyết trình|Practise your presentation skills in English.|communication
+peer|n|bạn đồng học|Ask a peer to review your report.|people
+feedback|n|nhận xét|The lecturer gave useful feedback.|communication
+revise|v|ôn tập / chỉnh sửa|I need to revise for the final exam.|study
+retake|v|học lại / thi lại|I have to retake the networking course.|study
+attendance|n|sự chuyên cần|Attendance is ten percent of the grade.|study
+group member|n|thành viên nhóm|One group member did not contribute.|people
+contribute|v|đóng góp|Everyone must contribute to the code.|people
+divide|v|phân chia|We divided the tasks equally.|agile
+responsibility|n|trách nhiệm|Testing was my responsibility.|people
+requirement analysis|n|phân tích yêu cầu|Requirement analysis took two weeks.|document
+user interface design|n|thiết kế giao diện người dùng|We studied user interface design principles.|design
+usability|n|tính dễ sử dụng|We tested the usability with five users.|design
+accessibility|n|khả năng tiếp cận|Accessibility helps users with disabilities.|design
+framework|n|bộ khung|We built the backend with Spring framework.|code
+API|n|giao diện lập trình ứng dụng|Our app uses a weather API.|architecture
+REST API|n|API theo kiến trúc REST|We built a REST API for the mobile app.|architecture
+endpoint|n|điểm cuối API|Call the /students endpoint.|architecture
+virtual machine|n|máy ảo|Run Linux in a virtual machine.|cloud
+command line|n|dòng lệnh|Learn the basic command line tools.|code
+shell|n|trình thông dịch lệnh|Write a shell script to back up files.|code
+machine learning|n|học máy|I'm taking a machine learning course.|ai
+artificial intelligence|n|trí tuệ nhân tạo|Artificial intelligence is changing many jobs.|ai
+AI|n|trí tuệ nhân tạo|Can we use AI tools for homework?|ai
+neural network|n|mạng nơ-ron|A neural network learns from examples.|ai
+training data|n|dữ liệu huấn luyện|We need more training data.|ai
+accuracy|n|độ chính xác|The model has 90 percent accuracy.|ai
+cybersecurity|n|an ninh mạng|Cybersecurity jobs are in high demand.|security
+encryption|n|mã hóa|Encryption protects passwords.|security
+firewall|n|tường lửa|The firewall blocks unknown traffic.|security
+phishing|n|lừa đảo qua email|Don't click links in phishing emails.|security
+deployment|n|việc triển khai|Deployment is part of the final demo.|release
+demo|n|buổi trình diễn|The demo crashed in front of the class.|meeting
+defend|v|bảo vệ (đồ án)|We defend our project next Tuesday.|study
+committee|n|hội đồng|The committee asked hard questions.|people
+thesis|n|luận văn|My thesis is about chatbots.|study
+proposal|n|đề cương / đề xuất|Submit your thesis proposal in October.|study
