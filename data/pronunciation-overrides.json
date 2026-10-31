@@ -1,5 +1,6 @@
 {
  "10": "ten",
+ "360": "ˌθriː ˈhʌndrəd ənd ˈsɪksti",
  "404": "ˌfɔːr oʊ ˈfɔːr",
  "500": "ˌfaɪv ˈhʌndrəd",
  "wireframe": "ˈwaɪərfreɪm",
@@ -164,5 +165,21 @@
  "GitHub": "ˈɡɪthʌb",
  "dogfooding": "ˈdɔːɡfuːdɪŋ",
  "TypeScript": "ˈtaɪpskrɪpt",
- "JavaScript": "ˈdʒɑːvəskrɪpt"
+ "JavaScript": "ˈdʒɑːvəskrɪpt",
+ "eKYC": "ˌiː keɪ waɪ ˈsiː",
+ "enrolment": "ɪnˈroʊlmənt",
+ "payslip": "ˈpeɪslɪp",
+ "timesheet": "ˈtaɪmʃiːt",
+ "fulfilment": "fʊlˈfɪlmənt",
+ "upsell": "ˈʌpsel",
+ "gradebook": "ˈɡreɪdbʊk",
+ "postpaid": "ˈpoʊstpeɪd",
+ "tokenization": "ˌtoʊkənəˈzeɪʃən",
+ "dropshipping": "ˈdrɑːpʃɪpɪŋ",
+ "HL7": "ˌeɪtʃ el ˈsevən",
+ "bancassurance": "ˈbæŋkəˌʃʊrəns",
+ "insurtech": "ɪnˈʃʊrtek",
+ "proctoring": "ˈprɑːktərɪŋ",
+ "microlearning": "ˈmaɪkroʊˌlɜːrnɪŋ",
+ "gamification": "ˌɡeɪmɪfɪˈkeɪʃən"
 }

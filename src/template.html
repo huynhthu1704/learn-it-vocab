@@ -82,7 +82,7 @@ section.alt{background:var(--bg)}
 .level-card p{margin:0;color:var(--muted)}
 .progress{height:8px;background:#EEF0F5;border-radius:99px;overflow:hidden}
 .progress>i{display:block;height:100%;border-radius:99px;background:var(--blue)}
-.step{background:var(--bg);border-radius:var(--r-lg);padding:30px}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:30px}
 .step h3{font-size:26px;margin:14px 0 8px}
 .step p{margin:0;color:var(--muted)}
 .cta-band{background:linear-gradient(90deg,var(--blue-d),var(--blue));border-radius:32px;padding:52px 56px;display:flex;justify-content:space-between;align-items:center;gap:24px;color:#fff;flex-wrap:wrap}
@@ -262,11 +262,17 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   </section>
   <section class="block alt">
     <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">Learn by business domain</div><h2>Speak the language of your client's industry</h2><p>Projects happen in a business domain. Learn the words BAs, developers and testers hear in banking, e-commerce, healthcare and more.</p></div>
+      <div class="grid4" id="domainCards"></div>
+    </div>
+  </section>
+  <section class="block">
+    <div class="wrap">
       <div class="sec-head"><div class="eyebrow">Three levels</div><h2>Grow from first words to fluent meetings</h2><p>Pick a level and move up any time. Your progress is saved in this browser.</p></div>
       <div class="grid3" id="levelCards"></div>
     </div>
   </section>
-  <section class="block">
+  <section class="block alt">
     <div class="wrap">
       <div class="sec-head center"><div class="eyebrow">How each word is taught</div><h2>See it. Hear it. Use it.</h2><p>Three short steps per word, so the meaning, the sound and the usage stick together.</p></div>
       <div class="grid3">
@@ -376,7 +382,9 @@ const ROLES = { student: { name: 'University students', short: 'Students', icon:
 const LEVELS = { 1: { name: 'Beginner', c: '#16A34A', t: '#E7F6EC', d: 'Everyday IT words for your first months in class or at work.' },
   2: { name: 'Intermediate', c: '#2563EB', t: '#E8F0FE', d: 'Join team discussions, write tickets and follow the Agile process.' },
   3: { name: 'Advanced', c: '#7C3AED', t: '#F1EAFE', d: 'Explain trade-offs, present designs and talk about business impact.' } };
-const TOPIC_NAMES = { agile:'Agile & Scrum', ai:'AI & machine learning', architecture:'Architecture', bug:'Bugs & errors', business:'Business', career:'Career', cloud:'Cloud & DevOps', code:'Coding', communication:'Communication', data:'Data', design:'UI & design', devices:'Devices & hardware', document:'Documents', math:'Maths & statistics', meeting:'Meetings', mobile:'Mobile', money:'Money & finance', network:'Networking', people:'People & roles', performance:'Performance', process:'Process', quality:'Quality', release:'Releases', security:'Security', study:'University life', testing:'Testing', time:'Time & schedule', web:'Web' };
+const TOPIC_NAMES = { agile:'Agile & Scrum', ai:'AI & machine learning', architecture:'Architecture', bug:'Bugs & errors', business:'Business', career:'Career', cloud:'Cloud & DevOps', code:'Coding', communication:'Communication', data:'Data', design:'UI & design', devices:'Devices & hardware', document:'Documents', math:'Maths & statistics', meeting:'Meetings', mobile:'Mobile', money:'Money & finance', network:'Networking', people:'People & roles', performance:'Performance', process:'Process', quality:'Quality', release:'Releases', security:'Security', study:'University life', testing:'Testing', time:'Time & schedule', web:'Web',
+  banking:'Banking & Fintech', ecommerce:'E-commerce & Retail', healthcare:'Healthcare', insurance:'Insurance', logistics:'Logistics & Supply Chain', education:'Education (EdTech)', telecom:'Telecom', hr:'HR & Payroll' };
+const DOMAINS = { banking:{ c:'#2563EB', t:'#E8F0FE', d:'Accounts, cards, loans, payments, KYC and regulation.' }, ecommerce:{ c:'#7C3AED', t:'#F1EAFE', d:'Catalogue, cart, checkout, orders, returns and promotions.' }, healthcare:{ c:'#DC2626', t:'#FEECEC', d:'Patients, appointments, health records and privacy rules.' }, insurance:{ c:'#16A34A', t:'#E7F6EC', d:'Policies, premiums, underwriting and claims.' }, logistics:{ c:'#EA580C', t:'#FFF1E7', d:'Warehouses, shipments, tracking and last-mile delivery.' }, education:{ c:'#2563EB', t:'#E8F0FE', d:'Courses, enrolment, LMS, grading and learner analytics.' }, telecom:{ c:'#7C3AED', t:'#F1EAFE', d:'Plans, SIM activation, billing cycles and network terms.' }, hr:{ c:'#EA580C', t:'#FFF1E7', d:'Hiring, onboarding, leave, payroll and performance.' } };
 const IC = {
   agile:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
   ai:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
@@ -406,6 +414,14 @@ const IC = {
   testing:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 9l1.5 1.5L12 8M8 15l1.5 1.5L12 14M14 9h3M14 15h3"/>',
   time:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>',
   web:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/>',
+  banking:'<path d="M3 10l9-6 9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18"/>',
+  ecommerce:'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L22 7H6"/>',
+  healthcare:'<path d="M20.8 5.6a5.5 5.5 0 0 0-8.8 0 5.5 5.5 0 0 0-8.8 6.6L12 21l8.8-8.8a5.5 5.5 0 0 0 0-6.6z"/><path d="M3.5 12h4l2-3 3 6 2-3h6"/>',
+  insurance:'<path d="M2 12a10 10 0 0 1 20 0z"/><path d="M12 12v7a2 2 0 0 1-4 0"/><path d="M12 2v0"/>',
+  logistics:'<path d="M1 6h13v10H1z"/><path d="M14 9h4l4 4v3h-8z"/><circle cx="5.5" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/>',
+  education:'<path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/>',
+  telecom:'<path d="M12 10v12"/><circle cx="12" cy="8" r="2"/><path d="M8.5 4.5a5 5 0 0 0 0 7M15.5 4.5a5 5 0 0 1 0 7M5.5 1.5a9.5 9.5 0 0 0 0 13M18.5 1.5a9.5 9.5 0 0 1 0 13"/>',
+  hr:'<rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M8 17a4 4 0 0 1 8 0"/>',
   speaker:'<path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/>',
   slow:'<path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/>',
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>', back:'<path d="M19 12H5M11 18l-6-6 6-6"/>',
@@ -566,6 +582,12 @@ function renderHome() {
       <div class="mini-words">${sample.map(s => `<span class="pill" style="background:${R.t};color:${R.c}">${esc(s.t)}</span>`).join('')}</div>
       <div class="go" style="color:${R.c}">${fmt(n)} words ${svg('arrow', R.c, 18, 2)}</div></a>`;
   }).join('');
+  $('#domainCards').innerHTML = Object.entries(DOMAINS).map(([k, D]) => {
+    const pool = WORDS.filter(w => w.c === k); const sample = pool.filter(w => w.l === 2).slice(0, 3);
+    return `<a class="card role-card" href="#browse" data-domain-link="${k}"><div class="itile" style="background:${D.t}">${svg(k, D.c, 30, 2)}</div><h3>${TOPIC_NAMES[k]}</h3><p>${D.d}</p>
+      <div class="mini-words">${sample.map(s => `<span class="pill" style="background:${D.t};color:${D.c}">${esc(s.t)}</span>`).join('')}</div>
+      <div class="go" style="color:${D.c}">${fmt(pool.length)} words ${svg('arrow', D.c, 18, 2)}</div></a>`;
+  }).join('');
   $('#levelCards').innerHTML = Object.entries(LEVELS).map(([k, L]) => {
     const pool = WORDS.filter(w => w.l == k); const kn = pool.filter(w => S.known[w.id]).length;
     const sample = shuffle(pool).slice(0, 4);
@@ -576,6 +598,7 @@ function renderHome() {
       <div class="go" style="color:${L.c};margin-top:12px">Start ${L.name} ${svg('arrow', L.c, 18, 2)}</div></div></a>`;
   }).join('');
   document.querySelectorAll('[data-role-link]').forEach(a => a.onclick = () => { F.role = a.dataset.roleLink; F.level = 'all'; syncFilterUI(); });
+  document.querySelectorAll('[data-domain-link]').forEach(a => a.onclick = () => { F.topic = a.dataset.domainLink; F.level = 'all'; F.role = 'all'; syncFilterUI(); });
   document.querySelectorAll('[data-level-link]').forEach(a => a.onclick = () => { F.level = a.dataset.levelLink; F.role = 'all'; syncFilterUI(); });
 }
 $('#wotdNext').onclick = () => { wotdIdx++; renderWotd(); };
@@ -605,7 +628,9 @@ function renderBrowse() {
   $('#moreBtn').style.display = list.length > shown ? '' : 'none';
   $('#moreBtn').textContent = `Show more words (${fmt(list.length - shown)} left)`;
 }
-$('#fTopic').innerHTML = '<option value="all">All topics</option>' + Object.entries(TOPIC_NAMES).sort((a, b) => a[1].localeCompare(b[1])).map(([k, n]) => `<option value="${k}">${n} (${WORDS.filter(w => w.c === k).length})</option>`).join('');
+{ const opt = ([k, n]) => `<option value="${k}">${n} (${WORDS.filter(w => w.c === k).length})</option>`;
+  const all = Object.entries(TOPIC_NAMES); const isDom = ([k]) => k in DOMAINS;
+  $('#fTopic').innerHTML = '<option value="all">All topics</option><optgroup label="Business domains">' + all.filter(isDom).map(opt).join('') + '</optgroup><optgroup label="IT topics">' + all.filter(x => !isDom(x)).sort((a, b) => a[1].localeCompare(b[1])).map(opt).join('') + '</optgroup>'; }
 $('#fLevel').onclick = e => { const b = e.target.closest('[data-lv]'); if (b) { F.level = b.dataset.lv; syncFilterUI(); } };
 $('#fRole').onclick = e => { const b = e.target.closest('[data-rl]'); if (b) { F.role = b.dataset.rl; syncFilterUI(); } };
 $('#fTopic').onchange = e => { F.topic = e.target.value; shown = 36; renderBrowse(); };

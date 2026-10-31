@@ -1,0 +1,246 @@
+# Domain knowledge vocabulary, based on the 8 domains in BAPO Path.
+# Topic = the business domain. These words are tagged for BA/PO/PM, developers and testers.
+# level=1 role=ba,dev,test
+bank account|n|tài khoản ngân hàng|Users can open a bank account in the app in ten minutes.|banking
+savings account|n|tài khoản tiết kiệm|The savings account pays four percent interest.|banking
+current account|n|tài khoản thanh toán|Salary goes into a current account.|banking
+balance|n|số dư|The home screen shows the account balance.|banking
+deposit|n|tiền gửi / nạp tiền|The deposit appears in the account at once.|banking
+withdrawal|n|rút tiền|ATM withdrawal has a daily limit.|banking
+transfer|n|chuyển khoản|A transfer to another bank takes a few seconds.|banking
+debit card|n|thẻ ghi nợ|Lock your debit card in the app if you lose it.|banking
+credit card|n|thẻ tín dụng|The credit card statement comes every month.|banking
+interest rate|n|lãi suất|The loan has a fixed interest rate.|banking
+loan|n|khoản vay|Customers can apply for a loan online.|banking
+ATM|n|máy rút tiền tự động|The ATM finder shows the nearest machines.|banking
+QR payment|n|thanh toán bằng mã QR|QR payment is popular in small shops.|banking
+e-wallet|n|ví điện tử|Users can top up their e-wallet from a bank account.|banking
+transaction history|n|lịch sử giao dịch|Transaction history shows the last six months.|banking
+beneficiary|n|người thụ hưởng|Save a beneficiary to transfer faster next time.|banking
+eKYC|n|định danh khách hàng điện tử|eKYC uses an ID photo and a selfie.|banking
+product page|n|trang chi tiết sản phẩm|The product page needs a size guide.|ecommerce
+product catalogue|n|danh mục sản phẩm|The product catalogue has 5,000 items.|ecommerce
+add to cart|v|thêm vào giỏ hàng|Add to cart should work without logging in.|ecommerce
+promo code|n|mã khuyến mãi|The promo code gives 50,000 dong off.|ecommerce
+flash sale|n|đợt giảm giá chớp nhoáng|The flash sale starts at midnight.|ecommerce
+wishlist|n|danh sách yêu thích|Users can move items from the wishlist to the cart.|ecommerce
+guest checkout|n|thanh toán không cần tài khoản|Guest checkout increased sales.|ecommerce
+cash on delivery|n|thanh toán khi nhận hàng|Most customers still choose cash on delivery.|ecommerce
+COD|n|thanh toán khi nhận hàng|COD orders are cancelled more often.|ecommerce
+order tracking|n|theo dõi đơn hàng|Order tracking shows each delivery step.|ecommerce
+product review|n|đánh giá sản phẩm|Only buyers can write a product review.|ecommerce
+out of stock|adj|hết hàng|Show a message when a size is out of stock.|ecommerce
+shipping fee|n|phí vận chuyển|The shipping fee depends on the province.|ecommerce
+patient|n|bệnh nhân|The patient can see test results in the app.|healthcare
+appointment booking|n|đặt lịch khám|Appointment booking is open 24 hours a day.|healthcare
+check-in|n|làm thủ tục tiếp nhận|Patients do check-in at the kiosk.|healthcare
+doctor|n|bác sĩ|Each doctor has a weekly schedule.|healthcare
+nurse|n|y tá / điều dưỡng|The nurse records blood pressure.|healthcare
+clinic|n|phòng khám|The clinic has three branches.|healthcare
+prescription|n|đơn thuốc|The doctor sends the prescription to the pharmacy.|healthcare
+pharmacy|n|nhà thuốc|The pharmacy gets the order automatically.|healthcare
+medical record|n|hồ sơ bệnh án|Only doctors can edit the medical record.|healthcare
+lab test|n|xét nghiệm|Lab test results arrive within two hours.|healthcare
+health insurance card|n|thẻ bảo hiểm y tế|Scan the health insurance card at reception.|healthcare
+insurance policy|n|hợp đồng bảo hiểm|The insurance policy lasts one year.|insurance
+policyholder|n|người được bảo hiểm / chủ hợp đồng|The policyholder can update their address online.|insurance
+insurance agent|n|đại lý bảo hiểm|An insurance agent explains the plan.|insurance
+coverage|n|phạm vi bảo hiểm|Check what the coverage includes.|insurance
+quote|n|báo giá|Users get a quote in two minutes.|insurance
+renewal|n|tái tục hợp đồng|Send a renewal reminder 30 days before expiry.|insurance
+motor insurance|n|bảo hiểm xe cơ giới|Motor insurance is required by law.|insurance
+life insurance|n|bảo hiểm nhân thọ|Life insurance plans are long-term.|insurance
+claim form|n|mẫu yêu cầu bồi thường|Upload photos with the claim form.|insurance
+shipment|n|lô hàng / chuyến hàng|The shipment left the warehouse this morning.|logistics
+tracking number|n|mã vận đơn|Copy the tracking number into the search box.|logistics
+delivery address|n|địa chỉ giao hàng|The delivery address is missing a ward.|logistics
+driver|n|tài xế|The driver confirms each delivery in the app.|logistics
+parcel|n|bưu kiện|The parcel weighs two kilograms.|logistics
+pick-up|n|lấy hàng|Book a pick-up from the shop.|logistics
+delivery time|n|thời gian giao hàng|Delivery time is two to three days.|logistics
+failed delivery|n|giao hàng không thành công|After two failed deliveries, the parcel returns.|logistics
+proof of delivery|n|bằng chứng giao hàng|The driver takes a photo as proof of delivery.|logistics
+learner|n|người học|Each learner has a progress page.|education
+teacher|n|giáo viên|The teacher creates weekly quizzes.|education
+enrolment|n|ghi danh / đăng ký khóa học|Enrolment closes on Friday.|education
+online course|n|khóa học trực tuyến|The online course has ten lessons.|education
+lesson|n|bài học|Each lesson takes 15 minutes.|education
+certificate|n|chứng chỉ|Learners get a certificate after the final test.|education
+parent account|n|tài khoản phụ huynh|Parents see grades in the parent account.|education
+attendance tracking|n|theo dõi chuyên cần|Attendance tracking is automatic in online classes.|education
+mobile plan|n|gói cước di động|The new mobile plan includes 4 GB per day.|telecom
+data package|n|gói dữ liệu|Buy a data package in the app.|telecom
+SIM card|n|thẻ SIM|Insert the SIM card and restart the phone.|telecom
+eSIM|n|SIM điện tử|eSIM activation uses a QR code.|telecom
+top-up|n|nạp tiền điện thoại|Users can top-up with a bank card.|telecom
+subscriber|n|thuê bao|The operator has 30 million subscribers.|telecom
+phone bill|n|hóa đơn điện thoại|The phone bill is due on the 15th.|telecom
+coverage area|n|vùng phủ sóng|Check the 5G coverage area on the map.|telecom
+roaming|n|chuyển vùng quốc tế|Turn on roaming before you travel.|telecom
+job posting|n|tin tuyển dụng|The job posting is live on three websites.|hr
+candidate|n|ứng viên|The candidate passed the first interview.|hr
+job offer letter|n|thư mời nhận việc|HR sends the job offer letter by email.|hr
+employment contract|n|hợp đồng lao động|Sign the employment contract on your first day.|hr
+salary|n|lương|Salary is paid on the 5th of each month.|hr
+payslip|n|phiếu lương|Employees download their payslip in the app.|hr
+annual leave|n|nghỉ phép năm|Employees get 12 days of annual leave.|hr
+leave request|n|đơn xin nghỉ phép|Managers approve each leave request.|hr
+timesheet|n|bảng chấm công|Submit your timesheet every Friday.|hr
+# level=2 role=ba,dev,test
+credit scoring|n|chấm điểm tín dụng|Credit scoring decides the loan limit.|banking
+loan origination|n|khởi tạo khoản vay|Loan origination takes three days today.|banking
+disbursement|n|giải ngân|Disbursement happens after the contract is signed.|banking
+repayment schedule|n|lịch trả nợ|The repayment schedule shows 12 monthly payments.|banking
+overdraft|n|thấu chi|Overdraft lets customers spend more than their balance.|banking
+transaction limit|n|hạn mức giao dịch|The daily transaction limit is 100 million dong.|banking
+two-factor authentication|n|xác thực hai yếu tố|Two-factor authentication protects every transfer.|banking
+card dispute|n|khiếu nại giao dịch thẻ|A card dispute can take 45 days.|banking
+chargeback|n|hoàn tiền giao dịch thẻ|The merchant lost the chargeback.|banking
+interbank transfer|n|chuyển khoản liên ngân hàng|Interbank transfer is free in the app.|banking
+NAPAS|n|công ty cổ phần thanh toán quốc gia Việt Nam|Instant transfers go through NAPAS.|banking
+fraud detection|n|phát hiện gian lận|Fraud detection blocks unusual transactions.|banking
+merchant|n|người bán / đơn vị chấp nhận thanh toán|The merchant gets paid the next day.|banking
+statement|n|sao kê|Customers can download a PDF statement.|banking
+order fulfilment|n|xử lý và hoàn tất đơn hàng|Order fulfilment takes one day.|ecommerce
+marketplace|n|sàn thương mại điện tử|We also sell on a marketplace.|ecommerce
+seller center|n|kênh quản lý người bán|Sellers upload products in the seller center.|ecommerce
+cart abandonment|n|bỏ giỏ hàng|Cart abandonment is 70 percent on mobile.|ecommerce
+product variant|n|biến thể sản phẩm|Each color and size is a product variant.|ecommerce
+bundle deal|n|ưu đãi mua kèm|A bundle deal gives ten percent off.|ecommerce
+free shipping threshold|n|ngưỡng miễn phí vận chuyển|The free shipping threshold is 300,000 dong.|ecommerce
+return policy|n|chính sách đổi trả|Our return policy allows seven days.|ecommerce
+return request|n|yêu cầu trả hàng|The customer sent a return request.|ecommerce
+average order value|n|giá trị đơn hàng trung bình|Bundles raised the average order value.|ecommerce
+upsell|v|bán thêm sản phẩm cao cấp hơn|Upsell a bigger size at checkout.|ecommerce
+cross-sell|v|bán chéo sản phẩm|Cross-sell socks with shoes.|ecommerce
+EHR|n|hồ sơ sức khỏe điện tử|The EHR connects all departments.|healthcare
+electronic health record|n|hồ sơ sức khỏe điện tử|Doctors read the electronic health record before the visit.|healthcare
+triage|n|phân loại bệnh nhân theo mức độ ưu tiên|Triage decides who sees the doctor first.|healthcare
+outpatient|n|bệnh nhân ngoại trú|Outpatient visits take 20 minutes.|healthcare
+inpatient|n|bệnh nhân nội trú|Inpatient records include daily notes.|healthcare
+diagnosis|n|chẩn đoán|The doctor enters the diagnosis.|healthcare
+referral|n|giấy chuyển viện / giới thiệu khám|A referral is needed for the specialist.|healthcare
+waiting time|n|thời gian chờ|The app shows the waiting time.|healthcare
+patient consent|n|sự đồng ý của bệnh nhân|We need patient consent to share data.|healthcare
+telemedicine|n|khám bệnh từ xa|Telemedicine visits use video calls.|healthcare
+premium|n|phí bảo hiểm|The premium is paid every month.|insurance
+deductible|n|mức khấu trừ|The deductible is two million dong.|insurance
+claim|n|yêu cầu bồi thường|The claim was approved in five days.|insurance
+claims handler|n|nhân viên xử lý bồi thường|A claims handler reviews the photos.|insurance
+policy term|n|thời hạn hợp đồng bảo hiểm|The policy term is one year.|insurance
+exclusion|n|điều khoản loại trừ|Read the exclusions before you buy.|insurance
+beneficiary of a policy|n|người thụ hưởng hợp đồng bảo hiểm|Update the beneficiary of a policy after marriage.|insurance
+broker|n|môi giới bảo hiểm|The broker compares five insurers.|insurance
+grace period|n|thời gian ân hạn|There is a 30-day grace period for late premiums.|insurance
+warehouse management system|n|hệ thống quản lý kho|The warehouse management system tracks every shelf.|logistics
+WMS|n|hệ thống quản lý kho|The WMS prints the pick list.|logistics
+inbound|n|hàng nhập kho|Inbound goods are checked at the dock.|logistics
+outbound|n|hàng xuất kho|Outbound orders leave at 4 p.m.|logistics
+put-away|n|cất hàng lên kệ|Put-away must finish before night shift.|logistics
+pick list|n|danh sách lấy hàng|The pick list is sorted by shelf.|logistics
+packing|n|đóng gói|Packing takes two minutes per order.|logistics
+dispatch|v|xuất phát / điều phối giao hàng|We dispatch trucks every two hours.|logistics
+last-mile delivery|n|giao hàng chặng cuối|Last-mile delivery is the most expensive part.|logistics
+route planning|n|lập kế hoạch tuyến đường|Route planning saves fuel.|logistics
+carrier|n|đơn vị vận chuyển|We work with three carriers.|logistics
+LMS|n|hệ thống quản lý học tập|Teachers upload slides to the LMS.|education
+learning management system|n|hệ thống quản lý học tập|The learning management system tracks progress.|education
+gradebook|n|sổ điểm|The gradebook updates after each quiz.|education
+assessment|n|bài đánh giá|The final assessment has 40 questions.|education
+course completion rate|n|tỷ lệ hoàn thành khóa học|The course completion rate is 35 percent.|education
+live class|n|lớp học trực tiếp trực tuyến|The live class starts at 8 p.m.|education
+self-paced|adj|tự học theo tốc độ riêng|The course is self-paced.|education
+prepaid|adj|trả trước|Prepaid users top up in the app.|telecom
+postpaid|adj|trả sau|Postpaid users get a bill each month.|telecom
+SIM activation|n|kích hoạt SIM|SIM activation needs an ID check.|telecom
+subscriber registration|n|đăng ký thông tin thuê bao|Subscriber registration is required by law.|telecom
+billing cycle|n|chu kỳ tính cước|The billing cycle ends on the 30th.|telecom
+data usage|n|dung lượng dữ liệu đã dùng|The app shows data usage in real time.|telecom
+number portability|n|chuyển mạng giữ số|Number portability lets users keep their number.|telecom
+add-on|n|gói cước bổ sung|Buy a roaming add-on before travelling.|telecom
+recruitment|n|tuyển dụng|Recruitment takes six weeks on average.|hr
+applicant tracking system|n|hệ thống theo dõi ứng viên|The applicant tracking system screens CVs.|hr
+probation period|n|thời gian thử việc|The probation period is two months.|hr
+social insurance|n|bảo hiểm xã hội|Social insurance is deducted from salary.|hr
+personal income tax|n|thuế thu nhập cá nhân|Payroll calculates personal income tax.|hr
+gross salary|n|lương gộp (trước thuế)|Gross salary is 30 million dong.|hr
+net salary|n|lương thực nhận|Net salary is paid after tax.|hr
+overtime pay|n|tiền làm thêm giờ|Overtime pay is 150 percent.|hr
+leave balance|n|số ngày phép còn lại|Your leave balance is eight days.|hr
+headcount plan|n|kế hoạch nhân sự|The headcount plan adds five engineers.|hr
+# level=3 role=ba,dev,test
+KYC|n|định danh khách hàng|KYC must finish before the account opens.|banking
+AML|n|phòng chống rửa tiền|AML rules flag large cash deposits.|banking
+anti-money laundering|n|phòng chống rửa tiền|Anti-money laundering checks run every night.|banking
+PCI DSS|n|tiêu chuẩn bảo mật dữ liệu thẻ thanh toán|We can't store card numbers under PCI DSS.|banking
+core banking|n|hệ thống ngân hàng lõi|The app reads balances from core banking.|banking
+ledger|n|sổ cái|Every transaction is written to the ledger.|banking
+settlement|n|quyết toán / tất toán giao dịch|Card settlement happens at the end of the day.|banking
+reconciliation report|n|báo cáo đối soát|Finance checks the reconciliation report daily.|banking
+open banking|n|ngân hàng mở|Open banking lets apps read account data with consent.|banking
+credit limit|n|hạn mức tín dụng|The credit limit is based on income.|banking
+non-performing loan|n|nợ xấu|The bank wants fewer non-performing loans.|banking
+risk scoring|n|chấm điểm rủi ro|Risk scoring runs during onboarding.|banking
+sanctions screening|n|sàng lọc danh sách trừng phạt|Sanctions screening checks every new customer.|banking
+tokenization|n|mã hóa thẻ thành token|Tokenization replaces the card number with a token.|banking
+GMV|n|tổng giá trị hàng hóa giao dịch|GMV grew 40 percent this year.|ecommerce
+gross merchandise value|n|tổng giá trị hàng hóa giao dịch|Gross merchandise value includes cancelled orders.|ecommerce
+omnichannel retail|n|bán lẻ đa kênh|Omnichannel retail links stores and the app.|ecommerce
+dynamic pricing|n|định giá linh hoạt|Dynamic pricing changes prices by demand.|ecommerce
+recommendation engine|n|hệ thống gợi ý sản phẩm|The recommendation engine shows similar items.|ecommerce
+dropshipping|n|bán hàng không cần nhập kho|Dropshipping sellers never touch the product.|ecommerce
+click and collect|n|mua trực tuyến, nhận tại cửa hàng|Click and collect is free.|ecommerce
+reverse logistics|n|logistics ngược (hàng hoàn trả)|Reverse logistics handles returned items.|ecommerce
+customer lifetime value|n|giá trị vòng đời khách hàng|Loyalty members have higher customer lifetime value.|ecommerce
+ICD code|n|mã phân loại bệnh ICD|Each diagnosis needs an ICD code.|healthcare
+HL7|n|chuẩn trao đổi dữ liệu y tế HL7|The lab system sends results using HL7.|healthcare
+FHIR|n|chuẩn dữ liệu y tế FHIR|The new API follows FHIR.|healthcare
+interoperability standard|n|tiêu chuẩn liên thông|Hospitals need an interoperability standard.|healthcare
+clinical workflow|n|quy trình lâm sàng|Don't slow down the clinical workflow.|healthcare
+medical billing|n|thanh toán viện phí|Medical billing links to insurance claims.|healthcare
+protected health information|n|thông tin sức khỏe được bảo vệ|Protected health information must be encrypted.|healthcare
+HIPAA|n|đạo luật bảo mật thông tin y tế HIPAA|US clients ask for HIPAA compliance.|healthcare
+audit log access|n|truy cập nhật ký kiểm toán|Patients can request audit log access.|healthcare
+underwriting|n|thẩm định rủi ro bảo hiểm|Underwriting decides the premium.|insurance
+underwriter|n|chuyên viên thẩm định bảo hiểm|The underwriter asked for health records.|insurance
+actuary|n|chuyên gia tính toán bảo hiểm|The actuary built the pricing model.|insurance
+loss ratio|n|tỷ lệ tổn thất|The loss ratio is too high for motor insurance.|insurance
+claims fraud|n|gian lận bồi thường|AI helps detect claims fraud.|insurance
+reinsurance|n|tái bảo hiểm|Big risks are shared through reinsurance.|insurance
+rider|n|quyền lợi bổ sung (hợp đồng bảo hiểm)|Add a hospital rider to the life policy.|insurance
+surrender value|n|giá trị hoàn lại|The surrender value is low in the first years.|insurance
+bancassurance|n|bán bảo hiểm qua ngân hàng|Bancassurance sells policies at bank branches.|insurance
+insurtech|n|công nghệ bảo hiểm|Insurtech apps sell small policies online.|insurance
+transport management system|n|hệ thống quản lý vận tải|The transport management system plans every route.|logistics
+cross-docking|n|chuyển hàng trực tiếp không lưu kho|Cross-docking cuts storage time.|logistics
+fulfilment center|n|trung tâm xử lý đơn hàng|The new fulfilment center is near Hanoi.|logistics
+SLA compliance|n|mức tuân thủ cam kết dịch vụ|SLA compliance for delivery is 96 percent.|logistics
+customs clearance|n|thông quan|Customs clearance took three days.|logistics
+bill of lading|n|vận đơn đường biển|The bill of lading lists every container.|logistics
+freight forwarder|n|công ty giao nhận vận tải|A freight forwarder handles the import.|logistics
+cold chain|n|chuỗi cung ứng lạnh|Vaccines need a cold chain.|logistics
+demand forecasting|n|dự báo nhu cầu|Demand forecasting reduces extra stock.|logistics
+safety stock|n|tồn kho an toàn|Keep safety stock for best sellers.|logistics
+learning analytics|n|phân tích dữ liệu học tập|Learning analytics shows who may drop out.|education
+adaptive learning|n|học tập thích ứng|Adaptive learning changes questions by level.|education
+SCORM|n|chuẩn nội dung học trực tuyến SCORM|Export the course as a SCORM package.|education
+learning path|n|lộ trình học tập|Each role has its own learning path.|education
+proctoring|n|giám sát thi trực tuyến|Online proctoring uses the webcam.|education
+microlearning|n|học tập vi mô|Microlearning lessons are five minutes long.|education
+gamification|n|trò chơi hóa|Gamification adds points and badges.|education
+ARPU|n|doanh thu trung bình trên mỗi thuê bao|ARPU rose after the new plans.|telecom
+average revenue per user|n|doanh thu trung bình trên mỗi người dùng|Average revenue per user is a key telecom metric.|telecom
+churn prediction|n|dự đoán khách hàng rời bỏ|Churn prediction targets users likely to leave.|telecom
+OSS/BSS|n|hệ thống hỗ trợ vận hành và kinh doanh|Billing runs on the OSS/BSS platform.|telecom
+network operations center|n|trung tâm điều hành mạng|The network operations center watches outages.|telecom
+rating engine|n|bộ tính cước|The rating engine prices every call.|telecom
+interconnect billing|n|tính cước kết nối giữa nhà mạng|Interconnect billing settles with other operators.|telecom
+talent acquisition|n|thu hút nhân tài|Talent acquisition owns the hiring process.|hr
+employer branding|n|thương hiệu nhà tuyển dụng|Employer branding helps attract engineers.|hr
+compensation and benefits|n|lương thưởng và phúc lợi|Compensation and benefits are reviewed yearly.|hr
+payroll run|n|kỳ chạy lương|The payroll run is on the 25th.|hr
+labour law compliance|n|tuân thủ luật lao động|Labour law compliance affects overtime rules.|hr
+attrition rate|n|tỷ lệ nghỉ việc|Our attrition rate is 15 percent.|hr
+employee self-service|n|cổng tự phục vụ cho nhân viên|Employee self-service lets staff update their data.|hr
+360-degree feedback|n|đánh giá đa chiều 360 độ|We use 360-degree feedback for managers.|hr
+succession planning|n|hoạch định kế nhiệm|Succession planning covers key roles.|hr

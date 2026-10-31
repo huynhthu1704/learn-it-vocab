@@ -76,12 +76,12 @@ for (const f of files) {
   let level, role;
   for (const line of fs.readFileSync('data/' + f, 'utf8').split('\n')) {
     if (!line.trim()) continue;
-    if (line.startsWith('#')) { level = +line.match(/level=(\d)/)[1]; role = line.match(/role=(\w+)/)[1]; continue; }
+    if (line.startsWith('#')) { if (!/level=/.test(line)) continue; level = +line.match(/level=(\d)/)[1]; role = line.match(/role=([\w,]+)/)[1].split(','); continue; }
     const [term, pos, vi, ex, topic] = line.split('|').map(s => s.trim());
     if (!topic) { console.error('BAD LINE', f, line); continue; }
     const key = term.toLowerCase();
-    if (seen.has(key)) { dups.push(`${term} (${f})`); const w = seen.get(key); if (!w.roles.includes(role)) w.roles.push(role); continue; }
-    const w = { id: words.length + 1, term, pos: POS[pos] || pos, vi, ex, topic, level, role, roles: [role], ipa: termIPA(term) };
+    if (seen.has(key)) { dups.push(`${term} (${f})`); const w = seen.get(key); for (const r of role) if (!w.roles.includes(r)) w.roles.push(r); continue; }
+    const w = { id: words.length + 1, term, pos: POS[pos] || pos, vi, ex, topic, level, role: role[0], roles: [...role], ipa: termIPA(term) };
     seen.set(key, w); words.push(w);
   }
 }

@@ -1,6 +1,6 @@
 # Learn IT Vocab
 
-Illustrated IT vocabulary for Vietnamese learners. It has **2,031 words and phrases** across 3 levels and 4 roles in IT teams. Every word has a topic icon, American IPA, audio, a Vietnamese meaning and a workplace example sentence.
+Illustrated IT vocabulary for Vietnamese learners. It has **2,268 words and phrases** across 3 levels, 4 roles in IT teams and 8 business domains. Every word has a topic icon, American IPA, audio, a Vietnamese meaning and a workplace example sentence.
 
 | | Beginner | Intermediate | Advanced |
 |---|---|---|---|
@@ -8,6 +8,10 @@ Illustrated IT vocabulary for Vietnamese learners. It has **2,031 words and phra
 | Developers | ✓ | ✓ | ✓ |
 | Testers (QA) | ✓ | ✓ | ✓ |
 | BA / PO / PM | ✓ | ✓ | ✓ |
+
+## Business domains
+
+The domain list in `data/7-domains.txt` follows the 8 domains in [BAPO Path](https://huynhthu1704.github.io/bapo-path/): Banking & Fintech, E-commerce & Retail, Healthcare, Insurance, Logistics & Supply Chain, Education (EdTech), Telecom, and HR & Payroll. These words are tagged for BA/PO/PM, developers and testers.
 
 ## Features
 
@@ -39,9 +43,9 @@ build.mjs                        ← builds words.json and index.html
    deploy|v|triển khai (đưa phần mềm lên chạy)|We deploy the new version every Friday.|release
    ```
 
-   - The line `# level=1 role=dev` sets the level (1, 2 or 3) and role (`student`, `dev`, `test`, `ba`) for the lines below it.
+   - The line `# level=1 role=dev` sets the level (1, 2 or 3) and role (`student`, `dev`, `test`, `ba`) for the lines below it. Use commas for several roles: `role=ba,dev,test`.
    - Part of speech: `n`, `v`, `adj`, `adv` or `phr`.
-   - Topic is one of: agile, ai, architecture, bug, business, career, cloud, code, communication, data, design, devices, document, math, meeting, mobile, money, network, people, performance, process, quality, release, security, study, testing, time, web. The topic picks the icon.
+   - Topic is one of: agile, ai, architecture, bug, business, career, cloud, code, communication, data, design, devices, document, math, meeting, mobile, money, network, people, performance, process, quality, release, security, study, testing, time, web, or a domain: banking, ecommerce, healthcare, insurance, logistics, education, telecom, hr. The topic picks the icon.
    - Put the word itself in the example sentence, so it can be highlighted and used in "fill the gap" quiz questions.
 
 2. Rebuild:
@@ -58,5 +62,5 @@ build.mjs                        ← builds words.json and index.html
 ## Notes
 
 - Audio uses the browser's built-in voice (Web Speech API), so it sounds different on each device and may be missing in some browsers. The IPA is always shown.
-- Icons are per topic (28 topics), not one per word.
+- Icons are per topic (36 topics), not one per word.
 - The Vietnamese meanings and examples should be reviewed by a teacher before use in class.
