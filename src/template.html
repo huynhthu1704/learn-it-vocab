@@ -216,6 +216,7 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   .hero h1{font-size:44px}
 }
 @media (max-width:760px){
+  #navUser{display:none!important}
   .links{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;padding:10px 16px 16px;border-bottom:1px solid var(--line)}
   .links.open{display:flex}
   .menu-btn{display:block}
@@ -254,6 +255,8 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
     <div class="navr">
       <span class="chip hide-sm" id="streakChip" title="Days in a row with practice"></span>
       <span class="chip" id="knownChip" title="Words you know"></span>
+      <button class="btn primary sm" id="navSignIn" style="display:none">Sign in</button>
+      <a class="chip" id="navUser" href="#progress" style="display:none;text-decoration:none"></a>
       <button class="menu-btn" id="menuBtn" aria-label="Menu"><span data-icon="menu" data-c="#1B1F2A" data-s="20"></span></button>
     </div>
   </div>
@@ -892,7 +895,18 @@ async function syncProgress() {
   } catch (e) { cloudStatus = 'Could not load your saved progress: ' + e.message; }
   refreshVisible();
 }
+function renderNavAccount() {
+  const C = window.Cloud, b = $('#navSignIn'), u = $('#navUser');
+  if (!C || !C.enabled) { b.style.display = u.style.display = 'none'; return; }
+  if (cloudUser) {
+    b.style.display = 'none'; u.style.display = '';
+    const name = cloudUser.displayName || cloudUser.email || 'Account';
+    u.innerHTML = `<span style="width:22px;height:22px;border-radius:99px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:12px">${esc(name[0].toUpperCase())}</span>${esc(name.split(' ')[0])}`;
+  } else { u.style.display = 'none'; b.style.display = ''; }
+}
+$('#navSignIn').onclick = async () => { try { await Cloud.signIn(); } catch (e) { toast('Sign-in failed: ' + (e.code || e.message)); } };
 function renderAccount() {
+  renderNavAccount();
   const el = $('#accountCard'); if (!el) return;
   const C = window.Cloud;
   const source = cloudMeta ? `Content: loaded from Firestore (${fmt(cloudMeta.words)} words, ${cloudMeta.corporate} Workplace English items${cloudMeta.publishedAt ? ', published ' + cloudMeta.publishedAt.toLocaleString() : ''}).` : 'Content: built-in copy of the data.';

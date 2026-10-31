@@ -4,10 +4,10 @@
 // If apiKey is empty, the site runs in "local mode": it uses the built-in copy of the data
 // and keeps progress in the browser only.
 export const firebaseConfig = {
-  apiKey: '',
-  authDomain: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: '',
-  appId: '',
+  apiKey: 'AIzaSyAaI76a3_DacfghbfnKjUOPTxBJ2P0zVYc',
+  authDomain: 'learn-it-vocab.firebaseapp.com',
+  projectId: 'learn-it-vocab',
+  storageBucket: 'learn-it-vocab.firebasestorage.app',
+  messagingSenderId: '782463429248',
+  appId: '1:782463429248:web:9cef1eb417f26478641465',
 };
