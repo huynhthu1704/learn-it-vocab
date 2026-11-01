@@ -244,3 +244,9 @@ attrition rate|n|tỷ lệ nghỉ việc|Our attrition rate is 15 percent.|hr
 employee self-service|n|cổng tự phục vụ cho nhân viên|Employee self-service lets staff update their data.|hr
 360-degree feedback|n|đánh giá đa chiều 360 độ|We use 360-degree feedback for managers.|hr
 succession planning|n|hoạch định kế nhiệm|Succession planning covers key roles.|hr
+# IT terms for BA / PO / PM (moved from BAPO Path). Kept at the end so existing word ids don't change.
+# level=1 role=ba,dev,test
+SDLC|n|vòng đời phát triển phần mềm|Our SDLC has six phases, from planning to maintenance.|process
+# level=2 role=ba,test,dev
+SIT|n|kiểm thử tích hợp hệ thống|SIT starts once all modules are connected to the core banking system.|testing
+CI/CD|n|tích hợp và triển khai liên tục|With CI/CD, a fix can reach production on the same day.|release

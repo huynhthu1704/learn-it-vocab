@@ -229,3 +229,6 @@ attrition rate|The rate at which employees leave.|이직률
 employee self-service|A portal where employees manage their own HR tasks.|직원 셀프 서비스
 360-degree feedback|Feedback from managers, peers and team members.|다면 평가
 succession planning|Preparing people to fill key roles in future.|승계 계획
+SDLC|Software development life cycle: the stages software goes through, from planning and requirements to design, build, testing, release and maintenance.|소프트웨어 개발 생명주기
+SIT|System integration testing: testing that separate modules and systems work correctly together.|시스템 통합 테스트
+CI/CD|Continuous integration and continuous delivery: automatically building, testing and releasing every code change.|지속적 통합·지속적 배포

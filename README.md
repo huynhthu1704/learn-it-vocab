@@ -19,6 +19,14 @@ The domain list in `data/7-domains.txt` follows the 8 domains in [BAPO Path](htt
 
 Each line: `type|phrase|tone|English meaning|Vietnamese|Korean|When to use|Example|Avoid (optional)`. Types are `abbr`, `term` and `expr`; tone is `formal`, `neutral` or `casual`. A line `# category=meetings` sets the category for the lines below it.
 
+## Open the site for one role
+
+Add `?role=` to any page link to show only that role's words, for example
+`https://huynhthu1704.github.io/learn-it-vocab/#home?role=ba` (BA / PO / PM). Browse, flashcards and quizzes then
+use that role, and a bar at the top shows the filter with a **Show all roles** button. The choice is remembered in the
+browser until the learner clears it; `?role=all` clears it too. Role ids: `student`, `dev`, `test`, `ba`, `pmo`, `hr`,
+`bizdev`, `sales`, `exec`. BAPO Path links here with `?role=ba`.
+
 ## Features
 
 - **Browse**: search in English or Vietnamese, with or without accents. Filter by level, role, topic and status (new, learning, known, saved).

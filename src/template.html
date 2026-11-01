@@ -268,6 +268,15 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   .modal .term{font-size:32px}
   .ptable td .progress{width:80px}
 }
+.focusbar{display:none;background:#F1EAFE;border-bottom:1px solid #E4D8FC}
+.focusbar.on{display:block}
+.focusbar .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;font-size:14px;color:#4C1D95}
+.focusbar b{font-weight:700}
+.focusbar .grow{flex:1;min-width:0}
+.focusbar .btn{padding:7px 12px;font-size:13px}
+.focusbar .btn.ghost{background:transparent;color:#6D28D9;border:1px solid #D8C6FB}
+.focusbar .btn.solid{background:#7C3AED;color:#fff}
+@media (max-width:700px){.focusbar .grow{flex:1 1 calc(100% - 34px)}.focusbar .hint{display:none}}
 </style>
 </head>
 <body>
@@ -292,6 +301,12 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
     </div>
   </div>
 </nav>
+<div class="focusbar" id="focusBar" role="status"><div class="wrap">
+  <span data-icon="meeting" data-c="#7C3AED" data-s="18"></span>
+  <span class="grow" id="focusText"></span>
+  <a class="btn sm solid" href="#browse" id="focusBrowse">See the words</a>
+  <button class="btn sm ghost" id="focusClear">Show all roles</button>
+</div></div>
 
 <!-- HOME -->
 <main id="v-home" class="view">
@@ -724,7 +739,7 @@ function renderHome() {
 $('#wotdNext').onclick = () => { wotdIdx++; renderWotd(); };
 
 /* ---------- browse ---------- */
-const F = { q: '', level: 'all', role: 'all', topic: 'all', status: 'all' };
+const F = { q: '', level: 'all', role: (S.focusRole && ROLES[S.focusRole]) ? S.focusRole : 'all', topic: 'all', status: 'all' };
 let shown = 36, browseIds = [];
 function segHTML(items, cur, key) { return items.map(([v, label]) => `<button data-${key}="${v}" class="${String(cur) === String(v) ? 'on' : ''}">${label}</button>`).join(''); }
 function syncFilterUI() {
@@ -807,6 +822,7 @@ function fillLR(lvSel, rlSel) {
   $(rlSel).innerHTML = '<option value="all">All roles</option>' + Object.entries(ROLES).map(([k, R]) => `<option value="${k}">${R.name}</option>`).join('');
 }
 fillLR('#fcLevel', '#fcRole'); fillLR('#qzLevel', '#qzRole');
+if (S.focusRole && ROLES[S.focusRole]) { $('#fcRole').value = S.focusRole; $('#qzRole').value = S.focusRole; }
 let FC = null;
 function startFC() {
   const mode = $('#fcMode').value;
@@ -936,10 +952,19 @@ $('#resetBtn').onclick = () => { if (!resetArmed) { resetArmed = true; $('#reset
 
 /* ---------- cloud (Firebase) ---------- */
 let cloudUser = null, cloudAdmin = false, cloudMeta = null, cloudBusy = '', cloudSaveT = null, cloudStatus = '';
+// Cloud content wins for words it has, but words and role tags added to the code after the last
+// publish are kept, so a new release shows up even before an admin re-publishes.
+function mergeWords(cloud) {
+  const byId = new Map(cloud.map(w => [w.id, w]));
+  const out = cloud.map(w => { const b = BY_TERM_BUILTIN.get(w.t); return b ? { ...w, r: [...new Set([...w.r, ...b.r])] } : w; });
+  for (const b of BUILTIN_WORDS) if (!byId.has(b.id) && !cloud.some(w => w.t === b.t)) out.push(b);
+  return out;
+}
+const BY_TERM_BUILTIN = new Map(BUILTIN_WORDS.map(w => [w.t, w]));
 function applyContent(c) {
-  WORDS = c.words; CORP = c.corp; BY_ID = new Map(WORDS.map(w => [w.id, w])); cloudMeta = c.meta;
+  WORDS = mergeWords(c.words); CORP = c.corp; BY_ID = new Map(WORDS.map(w => [w.id, w])); cloudMeta = c.meta;
   fillTopics(); $('#footCount').textContent = fmt(WORDS.length); modalList = []; FC = null; QZ = null;
-  refreshVisible(); if (currentView === 'workplace') renderCorp();
+  refreshVisible(); renderFocus(); if (currentView === 'workplace') renderCorp();
 }
 const progressPayload = () => ({ known: S.known, learning: S.learning, saved: S.saved, days: S.days, quizzes: S.quizzes, best: S.best });
 function queueCloudSave() {
@@ -1042,8 +1067,31 @@ window.addEventListener('cloud-ready', initCloud);
 /* ---------- router ---------- */
 let currentView = 'home', lastView = 'home';
 function refreshVisible() { if (currentView === 'browse') renderBrowse(); if (currentView === 'progress') renderProgress(); if (currentView === 'home') renderHome(); }
+// A link can open the site focused on one role, e.g. #home?role=ba (BA / PO / PM) or #browse?role=ba.
+// The choice is remembered until the learner clicks "Show all roles". ?role=all clears it.
+function setFocusRole(r) {
+  S.focusRole = (r && ROLES[r]) ? r : null; save();
+  F.role = S.focusRole || 'all'; F.level = 'all'; F.topic = 'all';
+  $('#fcRole').value = $('#qzRole').value = S.focusRole || 'all'; FC = null; QZ = null;
+  syncFilterUI(); renderFocus();
+}
+function renderFocus() {
+  const r = S.focusRole && ROLES[S.focusRole];
+  $('#focusBar').classList.toggle('on', !!r);
+  if (!r) return;
+  const n = WORDS.filter(w => w.r.includes(S.focusRole)).length;
+  $('#focusText').innerHTML = `Showing words for <b>${esc(r.name)}</b> · ${fmt(n)} of ${fmt(WORDS.length)} words<span class="hint">. Browse, flashcards and quizzes use this role.</span>`;
+}
+$('#focusClear').onclick = () => setFocusRole(null);
+$('#focusBrowse').onclick = () => { F.role = S.focusRole || 'all'; syncFilterUI(); };
 function route() {
-  const h = location.hash.slice(1) || 'home';
+  let h = location.hash.slice(1) || 'home';
+  const qi = h.indexOf('?');
+  if (qi >= 0) {
+    const params = new URLSearchParams(h.slice(qi + 1)); h = h.slice(0, qi) || 'home';
+    if (params.has('role')) setFocusRole(params.get('role'));
+    history.replaceState(null, '', '#' + h);
+  }
   if (h.startsWith('word-')) { if (!document.querySelector('.view.on')) show('browse'); openWord(h.slice(5), modalList.length ? undefined : browseIds); return; }
   $('#overlay').classList.remove('open');
   show(['home', 'browse', 'workplace', 'flashcards', 'quiz', 'progress'].includes(h) ? h : 'home');
@@ -1067,6 +1115,7 @@ window.addEventListener('hashchange', route);
 hydrateIcons(); updateChips();
 $('#footCount').textContent = fmt(WORDS.length);
 syncFilterUI();
+renderFocus();
 route();
 if (window.Cloud) initCloud();
 </script>

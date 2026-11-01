@@ -37,6 +37,11 @@ const EXEC = L(`technical debt, digital transformation, build vs buy, vendor loc
   organizational change, customer centricity, operational efficiency, revenue, profit, budget, annual budget, burn rate, unit economics, go-to-market,
   pricing strategy, partnership, due diligence, engineering culture, psychological safety, technical leadership, developer experience, outage, disaster recovery`);
 
+// IT terms every BA, PO and PM needs (the IT glossary that used to live in BAPO Path's General Knowledge).
+const BAPO_IT = L(`SDLC, requirement, functional requirement, non-functional requirement, MVP, scope creep, technical debt, change request, API,
+  frontend, backend, integration, microservices, database, SQL, data migration, dashboard, UAT, bug, test case, regression testing, SIT,
+  environment, deployment, CI/CD, go-live, rollback, authentication, authorization`);
+
 export function tagRoles(w) {
   const add = (rs) => { for (const r of rs) if (!w.roles.includes(r)) w.roles.push(r); };
   const t = w.term.toLowerCase(), c = w.topic, l = w.level;
@@ -53,6 +58,8 @@ export function tagRoles(w) {
   if (['agile', 'process'].includes(c) || (c === 'release' && l <= 2) || PMO.includes(t)) add(['pmo']);
   // Manager / C-level
   if (((c === 'business' || c === 'money') && l >= 2) || EXEC.includes(t)) add(['exec']);
+  // BA / PO / PM: the core IT glossary.
+  if (BAPO_IT.includes(t)) add(['ba']);
   // Testers also need most bug words; BAs need most domain words.
   if (c === 'bug' && l <= 2) add(['dev', 'test']);
 }
