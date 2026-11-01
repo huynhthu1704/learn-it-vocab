@@ -7,7 +7,6 @@
 //   bundles/words-01..     packed copies, 150 words each, so a visit costs ~20 reads instead of 2,500
 //   bundles/corp-01..      packed Workplace English, 100 items each
 //   meta/info              layout version, counts, bundle names and publish date
-//   images/{w0001}         one photo per word, stored as a compressed WebP data URL (read: everyone, write: admins)
 //   reports/{id}           "this word is wrong" reports from learners (create: signed in, review: admins)
 //   admins/{uid}           who may edit content (create by hand in the console)
 //   users/{uid}            a learner's progress and preferences (owner only)
@@ -15,7 +14,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, getDocs, query, where, orderBy, limit, writeBatch, serverTimestamp } from 'firebase/firestore';
-import { getAI, getGenerativeModel, GoogleAIBackend, ResponseModality } from 'firebase/ai';
+import { getAI, getGenerativeModel, GoogleAIBackend } from 'firebase/ai';
 import { firebaseConfig } from './firebase-config.js';
 
 const enabled = Boolean(firebaseConfig.apiKey);
@@ -135,11 +134,6 @@ async function saveItems(kind, items, opts = {}) {
   await batch.commit();
 }
 
-// ---------- photos ----------
-const getImage = async (id) => { const s = await getDoc(doc(db, 'images', wid(id))); return s.exists() ? s.data().data : null; };
-const saveImage = (id, dataUrl, prompt) => setDoc(doc(db, 'images', wid(id)), { data: dataUrl, prompt: prompt || '', updatedAt: serverTimestamp() });
-const deleteImage = (id) => deleteDoc(doc(db, 'images', wid(id)));
-
 // ---------- reports ----------
 const submitReport = (r) => addDoc(collection(db, 'reports'), { ...r, uid: auth.currentUser.uid, email: auth.currentUser.email || '', name: auth.currentUser.displayName || '', status: 'open', createdAt: serverTimestamp() });
 async function listReports(status = 'open') {
@@ -166,8 +160,8 @@ const deleteList = (uid, id) => deleteDoc(doc(db, 'users', uid, 'lists', id));
 
 // ---------- AI (Firebase AI Logic → Gemini) ----------
 // Turn it on once: Firebase console → AI Logic → Get started → Gemini Developer API.
-const TEXT_MODEL = 'gemini-2.5-flash', IMAGE_MODEL = 'gemini-2.5-flash-image';
-let textModel = null, imageModel = null;
+const TEXT_MODEL = 'gemini-2.5-flash';
+let textModel = null;
 function aiModels() {
   if (!ai) ai = getAI(app, { backend: new GoogleAIBackend() });
   if (!textModel) textModel = getGenerativeModel(ai, { model: TEXT_MODEL, generationConfig: { responseMimeType: 'application/json', temperature: 0.3 } });
@@ -178,14 +172,6 @@ async function aiJSON(prompt) {
   const r = await textModel.generateContent(prompt);
   const text = r.response.text().trim().replace(/^```(?:json)?\s*|\s*```$/g, '');
   return JSON.parse(text);
-}
-async function aiImage(prompt) {
-  aiModels();
-  if (!imageModel) imageModel = getGenerativeModel(ai, { model: IMAGE_MODEL, generationConfig: { responseModalities: [ResponseModality.TEXT, ResponseModality.IMAGE] } });
-  const r = await imageModel.generateContent(prompt);
-  const part = r.response.inlineDataParts?.()?.[0];
-  if (!part) throw new Error('The model did not return an image. Try again or change the prompt.');
-  return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
 }
 
 // ---------- auth ----------
@@ -201,10 +187,9 @@ const saveProgress = (uid, p) => setDoc(doc(db, 'users', uid), { ...p, updatedAt
 window.Cloud = {
   enabled, projectId: firebaseConfig.projectId,
   loadContent, syncBuiltin, rebuildBundles, saveItems,
-  getImage, saveImage, deleteImage,
   submitReport, listReports, updateReport, myReports,
   listLists, saveList, deleteList,
-  aiJSON, aiImage,
+  aiJSON,
   signIn, logOut, onUser, isAdmin, loadProgress, saveProgress,
 };
 window.dispatchEvent(new Event('cloud-ready'));

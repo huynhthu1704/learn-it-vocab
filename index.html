@@ -243,8 +243,6 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 .story>b{color:#B45309}
 .story details summary{cursor:pointer;font-weight:700;color:#B45309;font-size:14px;margin-top:6px}
 .wcard .plain{padding:8px 10px;font-size:13px;border-radius:10px}
-.ill img.photo,.fc-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.fc-photo{width:100%;max-width:300px;height:170px;border-radius:20px;position:relative;overflow:hidden;display:grid;place-items:center;flex:none}
 .ill{overflow:hidden}
 .langbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-weight:800;font-size:12px;letter-spacing:.04em;color:var(--ink);display:inline-flex;gap:4px;align-items:center}
 .langpop{position:absolute;right:16px;top:62px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);padding:14px;width:min(320px,calc(100vw - 32px));z-index:30;display:none}
@@ -307,7 +305,6 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   .logo{font-size:17px}
   .wgrid{grid-template-columns:1fr}
   .setup .sel,.setup .btn{flex:1 1 100%}
-  .fc-photo{height:130px}
   .exbox p{font-size:15px}
   .defs.big{font-size:15px}
   .tabs{flex-wrap:nowrap;overflow-x:auto}
@@ -574,7 +571,7 @@ h1 .tl,h2 .tl{font-size:.55em;margin-top:6px}
 
 <!-- ADMIN -->
 <main id="v-admin" class="view" data-notr>
-  <div class="wrap page-head"><h1>Admin</h1><p>Review reports from learners, correct any word, and use AI to fill in translations, explanations, stories and photos.</p></div>
+  <div class="wrap page-head"><h1>Admin</h1><p>Review reports from learners, correct any word, and use AI to fill in translations, explanations and stories.</p></div>
   <div class="wrap" style="padding-bottom:72px">
     <div class="tabs" id="adminTabs"></div>
     <div id="adminArea"></div>
@@ -767,20 +764,6 @@ function storyHTML(w) {
   if (!w.st || !w.st.en) return '';
   return `<div class="story"><b>${svg('book', '#B45309', 15, 2.2)}<span>Story: how it works in real life</span></b><div data-notr><p style="margin:0">${spkBtn(w.st.en, '#B45309', '#fff', 26)} ${esc(w.st.en)}</p>${myLangs().filter(l => w.st[l]).map(l => `<details><summary>${LANGS[l].name}</summary><p style="margin:6px 0 0">${spkBtn(w.st[l], '#B45309', '#fff', 24, false, l)} <span lang="${l}">${esc(w.st[l])}</span></p></details>`).join('')}</div></div>`;
 }
-/* ---------- photos (one per word, stored in Firestore images/{id}) ---------- */
-const PHOTOS = new Map();
-function photoTag(w) { const d = PHOTOS.get(w.id); return d ? `<img class="photo" src="${d}" alt="${esc(w.t)}" loading="lazy">` : (w.img ? `<span data-photo="${w.id}" hidden></span>` : ''); }
-let photoQ = new Set(), photoT = null;
-function loadPhotos(root = document) {
-  if (!window.Cloud || !Cloud.enabled) return;
-  root.querySelectorAll('[data-photo]').forEach(el => photoQ.add(+el.dataset.photo));
-  clearTimeout(photoT);
-  photoT = setTimeout(async () => {
-    const ids = [...photoQ].filter(id => !PHOTOS.has(id)); photoQ.clear();
-    await Promise.all(ids.slice(0, 40).map(async id => { try { const d = await Cloud.getImage(id); PHOTOS.set(id, d || ''); } catch (e) { PHOTOS.set(id, ''); } }));
-    document.querySelectorAll('[data-photo]').forEach(el => { const d = PHOTOS.get(+el.dataset.photo); if (d) { const w = BY_ID.get(+el.dataset.photo); el.outerHTML = `<img class="photo" src="${d}" alt="${esc(w ? w.t : '')}">`; } else if (d === '') el.remove(); });
-  }, 60);
-}
 /* ---------- multi-select ---------- */
 const SEL = new Set(); let selecting = false;
 function setSelecting(on) { selecting = on; if (!on) SEL.clear(); $('#grid').classList.toggle('selecting', on); $('#savedGrid') && $('#savedGrid').classList.toggle('selecting', on); $('#selectBtn').textContent = on ? 'Select all shown' : 'Select words'; updateBulk(); }
@@ -792,7 +775,7 @@ function wordCard(w) {
   return `<div class="wcard${SEL.has(w.id) ? ' sel' : ''}" role="button" tabindex="0" data-open="${w.id}">
     <div class="ill" style="background:${L.t}"><span class="selbox">${svg('check', '#fff', 16, 3)}</span><span class="badge-corner">${stBadge}</span>
       <span class="status-dot"><button class="star ${S.saved[w.id] ? 'on' : ''}" data-star="${w.id}" title="Save word" aria-label="Save word">${svg('star', S.saved[w.id] ? '#F59E0B' : '#9AA3B2', 16, 2)}</button></span>
-      <div class="tile">${svg(w.c, L.c, 40, 1.7)}</div>${photoTag(w)}</div>
+      <div class="tile">${svg(w.c, L.c, 40, 1.7)}</div></div>
     <div class="body">
       <div class="term" data-notr>${esc(w.t)}</div>
       <div class="prow" data-notr>${spkBtn(w.t, L.c, L.t)}<span class="ipa" style="font-size:14px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
@@ -812,7 +795,7 @@ function openWord(id, list) {
   const rel = shuffle(WORDS.filter(x => x.c === w.c && x.id !== w.id && x.l === w.l)).slice(0, 8);
   $('#modal').innerHTML = `
     <button class="close" data-close aria-label="Close">${svg('x', '#1B1F2A', 20, 2)}</button>
-    <div class="ill" style="background:${L.t};position:relative"><div class="tile">${svg(w.c, L.c, 68, 1.6)}</div>${photoTag(w)}</div>
+    <div class="ill" style="background:${L.t};position:relative"><div class="tile">${svg(w.c, L.c, 68, 1.6)}</div></div>
     <div class="body">
       <div class="prow">${levelPill(w)}${w.r.map(r => `<span class="pill" style="background:${ROLES[r].t};color:${ROLES[r].c}">${ROLES[r].name}</span>`).join('')}<span class="pill" style="background:var(--bg);color:var(--muted)">${TOPIC_NAMES[w.c]}</span></div>
       <div class="term" data-notr>${esc(w.t)}</div>
@@ -831,7 +814,7 @@ function openWord(id, list) {
       ${idx >= 0 ? `<div class="navarrows"><button class="btn ghost sm" data-step="-1" ${idx <= 0 ? 'disabled' : ''}>${svg('back', '#1B1F2A', 18, 2)} Previous</button><span class="count">${idx + 1} / ${fmt(modalList.length)}</span><button class="btn ghost sm" data-step="1" ${idx >= modalList.length - 1 ? 'disabled' : ''}>Next ${svg('arrow', '#1B1F2A', 18, 2)}</button></div>` : ''}
     </div>`;
   $('#modal').dataset.id = w.id;
-  $('#overlay').classList.add('open'); loadPhotos($('#modal'));
+  $('#overlay').classList.add('open');
   if (location.hash !== '#word-' + w.id) { history.replaceState(null, '', '#word-' + w.id); }
 }
 function closeModal() { $('#overlay').classList.remove('open'); if (location.hash.startsWith('#word-')) history.replaceState(null, '', '#' + (lastView || 'browse')); refreshVisible(); }
@@ -863,7 +846,7 @@ function renderWotd() {
   const day = Math.floor(Date.now() / 864e5);
   const w = WORDS[(day * 7919 + wotdIdx * 131) % WORDS.length]; const L = LEVELS[w.l];
   $('#wotd').innerHTML = `<div class="card" style="overflow:hidden;border-radius:28px;box-shadow:var(--shadow-lg)">
-    <div class="ill" style="height:180px;background:${L.t};display:grid;place-items:center;position:relative"><div class="tile" style="width:116px;height:116px;border-radius:30px;background:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(26,31,51,.1)">${svg(w.c, L.c, 62, 1.6)}</div>${photoTag(w)}</div>
+    <div class="ill" style="height:180px;background:${L.t};display:grid;place-items:center;position:relative"><div class="tile" style="width:116px;height:116px;border-radius:30px;background:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(26,31,51,.1)">${svg(w.c, L.c, 62, 1.6)}</div></div>
     <div style="padding:24px 28px 28px;display:flex;flex-direction:column;gap:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-size:34px;font-weight:800;line-height:1.1" data-notr>${esc(w.t)}</span><span class="pill" style="background:${ROLES[w.r[0]].t};color:${ROLES[w.r[0]].c}">${ROLES[w.r[0]].short} · ${L.name}</span></div>
       <div class="prow" data-notr>${spkBtn(w.t, '#fff', L.c, 40)}<span class="ipa" style="font-size:18px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
@@ -872,7 +855,7 @@ function renderWotd() {
       ${exampleHTML(w, L.c, L.t, 32)}
       <button class="btn secondary" data-open="${w.id}">See full word card</button>
     </div></div>`;
-  loadPhotos($('#wotd'));
+ 
 }
 function renderHome() {
   $('#statWords').textContent = fmt(WORDS.length);
@@ -925,7 +908,7 @@ function renderBrowse() {
   if (F.role !== 'all' && !q) list.sort((a, b) => (b.r[0] === F.role) - (a.r[0] === F.role) || a.l - b.l || a.id - b.id);
   if (q) list.sort((a, b) => (norm(b.t).startsWith(q) - norm(a.t).startsWith(q)) || a.t.length - b.t.length);
   browseIds = list.map(w => w.id);
-  $('#grid').innerHTML = list.slice(0, shown).map(wordCard).join(''); loadPhotos($('#grid'));
+  $('#grid').innerHTML = list.slice(0, shown).map(wordCard).join('');
   $('#count').textContent = `${fmt(list.length)} words`;
   $('#empty').style.display = list.length ? 'none' : 'block';
   $('#moreBtn').style.display = list.length > shown ? '' : 'none';
@@ -1012,7 +995,7 @@ function renderFC() {
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span class="count">Card ${FC.done + 1} · ${FC.queue.length} left</span>${levelPill(w)}</div>
     <div class="progress" style="margin-bottom:20px"><i style="width:${FC.done / (FC.done + FC.queue.length) * 100}%"></i></div>
     <div class="fc" id="fc"><div class="fc-inner">
-      <div class="fc-face"><div class="fc-photo" style="background:${L.t}${PHOTOS.get(w.id) || w.img ? '' : ';width:120px;height:120px;border-radius:32px'}">${svg(w.c, L.c, 62, 1.6)}${photoTag(w)}</div>
+      <div class="fc-face"><div style="width:120px;height:120px;border-radius:32px;background:${L.t};display:grid;place-items:center">${svg(w.c, L.c, 62, 1.6)}</div>
         <div class="term" data-notr>${esc(w.t)}</div><div class="prow" style="justify-content:center" data-notr>${spkBtn(w.t, '#fff', L.c, 44)}<span class="ipa" style="font-size:20px">${esc(w.i)}</span></div>
         <div class="hint">Say it out loud. What does it mean? Tap the card to flip.</div></div>
       <div class="fc-face fc-back" style="justify-content:flex-start"><span class="pill" style="background:${L.t};color:${L.c}" data-notr>${esc(w.p)}</span><div class="term" style="font-size:30px" data-notr>${esc(w.t)}</div>
@@ -1022,7 +1005,7 @@ function renderFC() {
     </div></div>
     <div class="fc-actions"><button class="btn secondary lg" id="fcNo">Again</button><button class="btn primary lg" id="fcYes">${svg('check', '#fff', 20, 2.5)} I knew it</button></div>
     <p class="hint">Keyboard: Space to flip · 1 = Again · 2 = I knew it</p>`;
-  loadPhotos($('#fcArea'));
+ 
   $('#fc').onclick = e => { if (!e.target.closest('[data-say]')) $('#fc').classList.toggle('flip'); };
   $('#fcYes').onclick = () => { setKnown(w.id, true); FC.got++; FC.done++; FC.queue.shift(); renderFC(); };
   $('#fcNo').onclick = () => { setKnown(w.id, false); FC.again++; FC.done++; const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
@@ -1112,7 +1095,7 @@ function renderProgress() {
   }
   $('#ptable').innerHTML = rows;
   const sv = WORDS.filter(w => S.saved[w.id]);
-  $('#savedGrid').innerHTML = sv.length ? sv.map(wordCard).join('') : '<p style="color:var(--muted);margin:0">No saved words yet. Tap ★ on any word card.</p>'; loadPhotos($('#savedGrid')); renderLangCard();
+  $('#savedGrid').innerHTML = sv.length ? sv.map(wordCard).join('') : '<p style="color:var(--muted);margin:0">No saved words yet. Tap ★ on any word card.</p>'; renderLangCard();
   $('#accent').value = S.accent; $('#rate').value = String(S.rate);
 }
 $('#accent').onchange = e => { S.accent = e.target.value; save(); };
@@ -1450,7 +1433,6 @@ function admEdit(el) {
       <div class="mrow"><button class="btn secondary sm" id="eAI">${svg('sparkle', '#7C3AED', 16, 2)} AI: fill empty fields</button>${kind === 'words' && findItem(kind, o.id) ? `<button class="btn ghost sm" data-open="${o.id}">Preview</button>` : ''}</div></div>
     ${ADM.fromReport ? `<div class="plain" style="margin-bottom:12px">Saving will also mark the report as accepted.</div>` : ''}
     <div class="fgrid">${EDIT_FIELDS[kind].map(f => fieldInput(kind, f, o)).join('')}</div>
-    ${kind === 'words' ? `<div class="fld" style="margin-top:14px"><span>Photo</span><div class="pwrap" id="ePhoto"></div></div>` : ''}
     <div class="mrow" style="margin-top:18px;justify-content:flex-end"><button class="btn primary" id="eSave">Save and publish</button></div></div>`;
   form.querySelectorAll('.lchk input').forEach(cb => cb.onchange = () => cb.parentElement.classList.toggle('on', cb.checked));
   const collect = () => {
@@ -1477,31 +1459,6 @@ function admEdit(el) {
       form.querySelectorAll('[data-f]').forEach(inp => { const v = getPath(item, inp.dataset.f); if (v !== undefined && !inp.value) inp.value = v; });
       toast('AI filled the empty fields. Check them, then save.');
     } catch (e) { toast(aiError(e)); }
-  });
-  if (kind === 'words') renderPhotoEditor(o);
-}
-async function renderPhotoEditor(o) {
-  const box = $('#ePhoto'); if (!box) return;
-  box.innerHTML = '<span class="spinner sm"></span>';
-  let cur = PHOTOS.get(o.id); if (cur === undefined && o.img) { try { cur = await Cloud.getImage(o.id) || ''; PHOTOS.set(o.id, cur); } catch (e) { cur = ''; } }
-  box.innerHTML = `${cur ? `<img class="thumb" src="${cur}" alt="">` : '<div class="thumb" style="display:grid;place-items:center;color:var(--muted);font-size:12px">No photo</div>'}
-    <button class="btn secondary sm" id="phGen">${svg('sparkle', '#7C3AED', 16, 2)} ${cur ? 'Make a new photo' : 'Make a photo with AI'}</button>
-    <label class="btn secondary sm" style="cursor:pointer">${svg('upload', '#1B1F2A', 16, 2)} Upload<input type="file" accept="image/*" id="phFile" hidden></label>
-    ${cur ? '<button class="btn ghost sm" id="phDel" style="color:var(--red)">Remove</button>' : ''}`;
-  const store = async (dataUrl, prompt) => { const small = await compressImage(dataUrl); await Cloud.saveImage(o.id, small, prompt); PHOTOS.set(o.id, small); if (!o.img) { await Cloud.saveItems('words', [{ id: o.id, img: 1 }]); o.img = 1; } toast('Photo saved.'); renderPhotoEditor(o); };
-  $('#phGen').onclick = () => withButton($('#phGen'), async () => { if (needsSync()) { toast('Sync built-in words to Firestore first.'); return; } try { const p = photoPrompt(o); await store(await Cloud.aiImage(p), p); } catch (e) { toast(aiError(e)); } });
-  $('#phFile').onchange = e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => store(r.result, 'uploaded').catch(err => toast('Upload failed: ' + err.message)); r.readAsDataURL(f); };
-  if ($('#phDel')) $('#phDel').onclick = () => withButton($('#phDel'), async () => { await Cloud.deleteImage(o.id); await Cloud.saveItems('words', [{ id: o.id, img: 0 }]); o.img = 0; PHOTOS.set(o.id, ''); toast('Photo removed.'); renderPhotoEditor(o); });
-}
-function compressImage(src, maxW = 640, maxH = 440, q = 0.72) {
-  return new Promise((ok, fail) => {
-    const img = new Image(); img.onerror = () => fail(new Error('Could not read the image'));
-    img.onload = () => {
-      const r = Math.min(1, maxW / img.width, maxH / img.height); const c = document.createElement('canvas');
-      c.width = Math.round(img.width * r); c.height = Math.round(img.height * r); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-      let d = c.toDataURL('image/webp', q); if (!d.startsWith('data:image/webp')) d = c.toDataURL('image/jpeg', q); ok(d);
-    };
-    img.src = src;
   });
 }
 
@@ -1539,10 +1496,7 @@ const AI_TASKS = {
     need: c => !(c.x && c.x.vi && c.x.ko && c.x.fr && c.ct && c.ct.vi && c.ct.ko && c.ct.fr),
     prompt: l => `Translate the "whenToUse" note and the "example" of each workplace English phrase from ${AUDIENCE}. Keep the English phrase itself in English inside the example translation. ${LANG_RULE}\nReturn JSON: [{"id": number, "whenToUse": {"vi": string, "ko": string, "fr": string}, "example": {"vi": string, "ko": string, "fr": string}}].\nItems: ${JSON.stringify(l.map(c => ({ id: c.id, phrase: c.p, whenToUse: c.ctx, example: c.ex })))}`,
     apply: (c, r) => ({ ct: { ...(c.ct || {}), ...(r.whenToUse || {}) }, x: { ...(c.x || {}), ...(r.example || {}) } }) },
-  photos: { kind: 'words', label: 'Photos', desc: 'Makes one realistic photo per word with Gemini image generation. Slow (a few seconds per photo) and may need billing.', batch: 1, photo: true,
-    need: w => !w.img },
 };
-const photoPrompt = w => `A realistic, clear photograph that illustrates the IT workplace concept "${w.t}" (${w.d}). Show a real-life scene, for example people and screens in a modern office or a familiar object, so the meaning is obvious at a glance. Landscape 4:3, natural light. No text, no letters, no numbers, no logos, no watermarks.`;
 async function aiRunBatch(task, list) {
   const T = AI_TASKS[task];
   const out = await Cloud.aiJSON(T.prompt(list));
@@ -1553,7 +1507,7 @@ async function aiRunBatch(task, list) {
 }
 async function aiFillItem(kind, item) {
   for (const [k, T] of Object.entries(AI_TASKS)) {
-    if (T.kind !== kind || T.photo || !T.need(item)) continue;
+    if (T.kind !== kind || !T.need(item)) continue;
     if (k === 'story' && !isComplex(item) && item.st) continue;
     const patches = await aiRunBatch(k, [item]);
     for (const { p } of patches) for (const [f, v] of Object.entries(p)) {
@@ -1566,7 +1520,7 @@ function admAI(el) {
   const counts = Object.fromEntries(Object.entries(AI_TASKS).map(([k, T]) => [k, admItems(T.kind).filter(T.need).length]));
   const running = ADM.run;
   el.innerHTML = `<p style="color:var(--muted);margin-top:0">AI writes the text; you stay in control: every result can be checked and corrected in <b>Edit words</b>, and learners can report mistakes. Runs save as they go, so you can stop at any time.</p>
-    <div class="agrid">${Object.entries(AI_TASKS).map(([k, T]) => `<div class="aitool"><h4>${svg(T.photo ? 'image' : 'sparkle', '#7C3AED', 18, 2)} ${T.label}</h4><p>${T.desc}</p>
+    <div class="agrid">${Object.entries(AI_TASKS).map(([k, T]) => `<div class="aitool"><h4>${svg('sparkle', '#7C3AED', 18, 2)} ${T.label}</h4><p>${T.desc}</p>
       <div class="count"><span>${fmt(counts[k])}</span> <span>still to do</span></div>
       <div class="mrow"><select class="sel" data-n="${k}">${[10, 50, 200, 1000, 5000].map(n => `<option value="${n}">${n === 5000 ? 'All' : 'Next ' + n}</option>`).join('')}</select><button class="btn primary sm" data-run="${k}" ${running || !counts[k] ? 'disabled' : ''}>Run</button></div></div>`).join('')}</div>
     <div class="card" style="padding:16px;margin-top:18px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><b>${running ? `<span class="spinner sm"></span> ${AI_TASKS[running.task].label}: ${running.done} / ${running.total}` : 'Activity'}</b>${running ? '<button class="btn secondary sm" id="aiStop">Stop</button>' : ''}</div>
@@ -1585,10 +1539,7 @@ async function runAI(task, max) {
   for (let i = 0; i < todo.length && !R.stop; i += T.batch) {
     const list = todo.slice(i, i + T.batch);
     try {
-      if (T.photo) {
-        const w = list[0]; const p = photoPrompt(w); const small = await compressImage(await Cloud.aiImage(p));
-        await Cloud.saveImage(w.id, small, p); PHOTOS.set(w.id, small); w.img = 1; await Cloud.saveItems('words', [{ id: w.id, img: 1 }]); log(`photo: ${w.t}`);
-      } else {
+      {
         const patches = await aiRunBatch(task, list);
         await Cloud.saveItems(T.kind, patches.map(({ o, p }) => ({ id: o.id, ...p })));
         for (const { o, p } of patches) Object.assign(o, p);
@@ -1606,13 +1557,13 @@ function admContent(el) {
   el.innerHTML = `<div class="stack">
     <div class="card" style="padding:22px"><h3 style="font-size:19px;margin-bottom:6px">Sync built-in words to Firestore</h3>
       <p style="color:var(--muted);margin:0 0 12px">The site's data files have <b>${fmt(BUILTIN_WORDS.length)}</b> words and <b>${BUILTIN_CORP.length}</b> Workplace English items. Firestore has <b>${cloudMeta ? fmt(fsWords) : 'nothing yet'}</b>${cloudMeta && cloudMeta.publishedAt ? ` (updated ${cloudMeta.publishedAt.toLocaleString()})` : ''}.
-      Sync adds new words and refreshes the built-in fields (meanings, IPA, roles) of words nobody edited online. Your edits, accepted reports, AI translations, explanations, stories and photos are kept.</p>
+      Sync adds new words and refreshes the built-in fields (meanings, IPA, roles) of words nobody edited online. Your edits, accepted reports, AI translations, explanations and stories are kept.</p>
       <button class="btn primary sm" id="syncBtn">Sync built-in words to Firestore</button></div>
     <div class="card" style="padding:22px"><h3 style="font-size:19px;margin-bottom:6px">Rebuild bundles</h3>
       <p style="color:var(--muted);margin:0 0 12px">Edited a document by hand in the Firebase console? Rebuild so visitors see it. (Edits made on this page publish by themselves.)</p>
       <button class="btn secondary sm" id="rebuildBtn" ${cloudMeta ? '' : 'disabled'}>Rebuild after console edits</button></div>
     <div class="card" style="padding:22px"><h3 style="font-size:19px;margin-bottom:6px">Turn on AI (once)</h3>
-      <p style="color:var(--muted);margin:0">Firebase console → <b>AI Logic</b> → <b>Get started</b> → choose <b>Gemini Developer API</b>. Text tools work on the free plan. Photos use <code>gemini-2.5-flash-image</code>, which may need the Blaze plan. To stop other sites using your AI quota, turn on <b>App Check</b> later.</p></div></div>`;
+      <p style="color:var(--muted);margin:0">Firebase console → <b>AI Logic</b> → <b>Get started</b> → choose <b>Gemini Developer API</b>. Text tools work on the free plan. To stop other sites using your AI quota, turn on <b>App Check</b> later.</p></div></div>`;
   $('#syncBtn').onclick = () => withButton($('#syncBtn'), async () => {
     try { busy('Syncing to Firestore… 0%'); const r = await Cloud.syncBuiltin(BUILTIN_WORDS, BUILTIN_CORP, (n, t) => busy(`Syncing to Firestore… ${Math.round(n / t * 100)}%`)); busy('Loading the new content…'); const c = await Cloud.loadContent(); if (c) applyContent(c); toast(`Synced: ${fmt(r.words)} words, ${r.corporate} items (${r.added} added, ${r.updated} updated).`); }
     catch (e) { toast('Sync failed: ' + (e.code || e.message)); } finally { busy(''); renderAdmin(); }
@@ -1800,6 +1751,6 @@ route();
 applyLanguage();
 if (window.Cloud) initCloud();
 </script>
-<script type="module" src="cloud.js"></script>
+<script type="module" src="cloud.js?v=90fb3354cb"></script>
 </body>
 </html>

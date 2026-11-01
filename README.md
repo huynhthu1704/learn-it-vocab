@@ -2,7 +2,7 @@
 
 <img src="logo.svg" width="56" align="right" alt="Learn IT Vocab logo">
 
-Illustrated IT vocabulary for people who work in IT in Vietnam, Korea and beyond. It has **2,466 words and phrases** across 3 levels, 9 roles and 8 business domains, plus **226 Workplace English** items. Every word has a picture, American IPA, audio, an English definition, meanings in Vietnamese, Korean and French, and a workplace example.
+Illustrated IT vocabulary for people who work in IT in Vietnam, Korea and beyond. It has **2,466 words and phrases** across 3 levels, 9 roles and 8 business domains, plus **226 Workplace English** items. Every word has a topic icon, American IPA, audio, an English definition, meanings in Vietnamese, Korean and French, and a workplace example.
 
 Roles: University students · Developers · Testers (QA) · BA / PO / PM · PMO · IT HR · Business development · Sales · Manager / C-level. A word that matters to several roles (for example *share*, *deadline*, *budget*) shows up under each of them (`roles.mjs`).
 
@@ -20,12 +20,11 @@ browser until the learner clears it; `?role=all` clears it too. Role ids: `stude
 - **Interface language**: English only, Vietnamese only, Korean only, French only, or English plus the learner's languages. The interface text lives in `data/i18n.txt`.
 - **Plain words**: a short everyday explanation of each word for people without a tech background. It shows on word cards automatically for HR, business development, sales and managers.
 - **Stories**: a short real-life story for advanced and complex words, in all four languages.
-- **Photos**: one photo per word, made with AI or uploaded by an admin. Words without a photo show their topic icon.
 - **Browse**: search in English, Vietnamese, Korean or French. Filter by level, role, topic and status. Select many words at once to mark them as learnt, still learning or saved.
 - **Flashcards**, **Quiz** and **Workplace English** as before; quiz meanings follow the learner's first language.
 - **My lists**: upload a PDF, Word file, text or Markdown (in any language) or paste text. AI picks out the key words, adds the English term, IPA, meanings in all languages and an example, and the learner saves them as their own list.
 - **Report a problem**: on any word, a signed-in learner can say what is wrong and suggest the correct text.
-- **Admin**: review reports (accept, edit, reject), edit any word or Workplace English item, run the AI tools, and sync the built-in data to Firestore.
+- **Admin**: review reports (accept, edit, reject), edit any word or Workplace English item, run the AI tools (translations, explanations, stories), and sync the built-in data to Firestore.
 - **Mobile**: every page works on a phone.
 
 ## Project structure
@@ -72,21 +71,20 @@ To change interface text, edit `data/i18n.txt` and rebuild.
 
 | Collection | Contents | Who can write |
 |---|---|---|
-| `words/{w0001}` | one document per word: term, ipa, english, vietnamese, korean, french, example, exampleTranslations, plainExplanation, story, topic, level, roles, hasImage | admins |
+| `words/{w0001}` | one document per word: term, ipa, english, vietnamese, korean, french, example, exampleTranslations, plainExplanation, story, topic, level, roles | admins |
 | `corporate/{c001}` | one document per Workplace English item, with whenToUseTranslations and exampleTranslations | admins |
 | `bundles/words-01…`, `corp-01…` | packed copies the site reads (150 words each), so a visit costs about 20 reads | admins |
 | `meta/info` | layout, counts, bundle names, publish date | admins |
-| `images/{w0001}` | one compressed photo per word | admins |
 | `reports/{id}` | learners' corrections | signed-in learners create, admins review |
 | `admins/{uid}` | who is an admin (create by hand in the console) | console only |
 | `users/{uid}` and `users/{uid}/lists/{id}` | a learner's progress, language settings and word lists | that learner |
 
 **Set up once**
 
-1. Firebase console → Firestore Database → Rules: paste `firestore.rules` and click **Publish** (it now includes `images`).
-2. Firebase console → **AI Logic** → **Get started** → **Gemini Developer API**. The text tools and file upload use `gemini-2.5-flash`. Photos use `gemini-2.5-flash-image`, which may need the Blaze (pay-as-you-go) plan.
+1. Firebase console → Firestore Database → Rules: paste `firestore.rules` and click **Publish**.
+2. Firebase console → **AI Logic** → **Get started** → **Gemini Developer API**. The text tools and file upload use `gemini-2.5-flash`, which works on the free plan.
 3. Open the site → **Admin → Content & sync → Sync built-in words to Firestore**.
-4. **Admin → AI tools**: run *Translate examples*, *Plain-language explanations*, *Stories for complex words*, *Translate Workplace English* and, if billing is on, *Photos*. Start with "Next 10" to check the quality, then run the rest. Each run saves as it goes and can be stopped.
+4. **Admin → AI tools**: run *Translate examples*, *Plain-language explanations*, *Stories for complex words*, and *Translate Workplace English*. Start with "Next 10" to check the quality, then run the rest. Each run saves as it goes and can be stopped.
 5. Later: turn on **App Check** so other sites cannot use your AI quota.
 
 ## Notes

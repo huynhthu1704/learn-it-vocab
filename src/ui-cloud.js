@@ -326,7 +326,6 @@ function admEdit(el) {
       <div class="mrow"><button class="btn secondary sm" id="eAI">${svg('sparkle', '#7C3AED', 16, 2)} AI: fill empty fields</button>${kind === 'words' && findItem(kind, o.id) ? `<button class="btn ghost sm" data-open="${o.id}">Preview</button>` : ''}</div></div>
     ${ADM.fromReport ? `<div class="plain" style="margin-bottom:12px">Saving will also mark the report as accepted.</div>` : ''}
     <div class="fgrid">${EDIT_FIELDS[kind].map(f => fieldInput(kind, f, o)).join('')}</div>
-    ${kind === 'words' ? `<div class="fld" style="margin-top:14px"><span>Photo</span><div class="pwrap" id="ePhoto"></div></div>` : ''}
     <div class="mrow" style="margin-top:18px;justify-content:flex-end"><button class="btn primary" id="eSave">Save and publish</button></div></div>`;
   form.querySelectorAll('.lchk input').forEach(cb => cb.onchange = () => cb.parentElement.classList.toggle('on', cb.checked));
   const collect = () => {
@@ -353,31 +352,6 @@ function admEdit(el) {
       form.querySelectorAll('[data-f]').forEach(inp => { const v = getPath(item, inp.dataset.f); if (v !== undefined && !inp.value) inp.value = v; });
       toast('AI filled the empty fields. Check them, then save.');
     } catch (e) { toast(aiError(e)); }
-  });
-  if (kind === 'words') renderPhotoEditor(o);
-}
-async function renderPhotoEditor(o) {
-  const box = $('#ePhoto'); if (!box) return;
-  box.innerHTML = '<span class="spinner sm"></span>';
-  let cur = PHOTOS.get(o.id); if (cur === undefined && o.img) { try { cur = await Cloud.getImage(o.id) || ''; PHOTOS.set(o.id, cur); } catch (e) { cur = ''; } }
-  box.innerHTML = `${cur ? `<img class="thumb" src="${cur}" alt="">` : '<div class="thumb" style="display:grid;place-items:center;color:var(--muted);font-size:12px">No photo</div>'}
-    <button class="btn secondary sm" id="phGen">${svg('sparkle', '#7C3AED', 16, 2)} ${cur ? 'Make a new photo' : 'Make a photo with AI'}</button>
-    <label class="btn secondary sm" style="cursor:pointer">${svg('upload', '#1B1F2A', 16, 2)} Upload<input type="file" accept="image/*" id="phFile" hidden></label>
-    ${cur ? '<button class="btn ghost sm" id="phDel" style="color:var(--red)">Remove</button>' : ''}`;
-  const store = async (dataUrl, prompt) => { const small = await compressImage(dataUrl); await Cloud.saveImage(o.id, small, prompt); PHOTOS.set(o.id, small); if (!o.img) { await Cloud.saveItems('words', [{ id: o.id, img: 1 }]); o.img = 1; } toast('Photo saved.'); renderPhotoEditor(o); };
-  $('#phGen').onclick = () => withButton($('#phGen'), async () => { if (needsSync()) { toast('Sync built-in words to Firestore first.'); return; } try { const p = photoPrompt(o); await store(await Cloud.aiImage(p), p); } catch (e) { toast(aiError(e)); } });
-  $('#phFile').onchange = e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => store(r.result, 'uploaded').catch(err => toast('Upload failed: ' + err.message)); r.readAsDataURL(f); };
-  if ($('#phDel')) $('#phDel').onclick = () => withButton($('#phDel'), async () => { await Cloud.deleteImage(o.id); await Cloud.saveItems('words', [{ id: o.id, img: 0 }]); o.img = 0; PHOTOS.set(o.id, ''); toast('Photo removed.'); renderPhotoEditor(o); });
-}
-function compressImage(src, maxW = 640, maxH = 440, q = 0.72) {
-  return new Promise((ok, fail) => {
-    const img = new Image(); img.onerror = () => fail(new Error('Could not read the image'));
-    img.onload = () => {
-      const r = Math.min(1, maxW / img.width, maxH / img.height); const c = document.createElement('canvas');
-      c.width = Math.round(img.width * r); c.height = Math.round(img.height * r); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-      let d = c.toDataURL('image/webp', q); if (!d.startsWith('data:image/webp')) d = c.toDataURL('image/jpeg', q); ok(d);
-    };
-    img.src = src;
   });
 }
 
@@ -415,10 +389,7 @@ const AI_TASKS = {
     need: c => !(c.x && c.x.vi && c.x.ko && c.x.fr && c.ct && c.ct.vi && c.ct.ko && c.ct.fr),
     prompt: l => `Translate the "whenToUse" note and the "example" of each workplace English phrase from ${AUDIENCE}. Keep the English phrase itself in English inside the example translation. ${LANG_RULE}\nReturn JSON: [{"id": number, "whenToUse": {"vi": string, "ko": string, "fr": string}, "example": {"vi": string, "ko": string, "fr": string}}].\nItems: ${JSON.stringify(l.map(c => ({ id: c.id, phrase: c.p, whenToUse: c.ctx, example: c.ex })))}`,
     apply: (c, r) => ({ ct: { ...(c.ct || {}), ...(r.whenToUse || {}) }, x: { ...(c.x || {}), ...(r.example || {}) } }) },
-  photos: { kind: 'words', label: 'Photos', desc: 'Makes one realistic photo per word with Gemini image generation. Slow (a few seconds per photo) and may need billing.', batch: 1, photo: true,
-    need: w => !w.img },
 };
-const photoPrompt = w => `A realistic, clear photograph that illustrates the IT workplace concept "${w.t}" (${w.d}). Show a real-life scene, for example people and screens in a modern office or a familiar object, so the meaning is obvious at a glance. Landscape 4:3, natural light. No text, no letters, no numbers, no logos, no watermarks.`;
 async function aiRunBatch(task, list) {
   const T = AI_TASKS[task];
   const out = await Cloud.aiJSON(T.prompt(list));
@@ -429,7 +400,7 @@ async function aiRunBatch(task, list) {
 }
 async function aiFillItem(kind, item) {
   for (const [k, T] of Object.entries(AI_TASKS)) {
-    if (T.kind !== kind || T.photo || !T.need(item)) continue;
+    if (T.kind !== kind || !T.need(item)) continue;
     if (k === 'story' && !isComplex(item) && item.st) continue;
     const patches = await aiRunBatch(k, [item]);
     for (const { p } of patches) for (const [f, v] of Object.entries(p)) {
@@ -442,7 +413,7 @@ function admAI(el) {
   const counts = Object.fromEntries(Object.entries(AI_TASKS).map(([k, T]) => [k, admItems(T.kind).filter(T.need).length]));
   const running = ADM.run;
   el.innerHTML = `<p style="color:var(--muted);margin-top:0">AI writes the text; you stay in control: every result can be checked and corrected in <b>Edit words</b>, and learners can report mistakes. Runs save as they go, so you can stop at any time.</p>
-    <div class="agrid">${Object.entries(AI_TASKS).map(([k, T]) => `<div class="aitool"><h4>${svg(T.photo ? 'image' : 'sparkle', '#7C3AED', 18, 2)} ${T.label}</h4><p>${T.desc}</p>
+    <div class="agrid">${Object.entries(AI_TASKS).map(([k, T]) => `<div class="aitool"><h4>${svg('sparkle', '#7C3AED', 18, 2)} ${T.label}</h4><p>${T.desc}</p>
       <div class="count"><span>${fmt(counts[k])}</span> <span>still to do</span></div>
       <div class="mrow"><select class="sel" data-n="${k}">${[10, 50, 200, 1000, 5000].map(n => `<option value="${n}">${n === 5000 ? 'All' : 'Next ' + n}</option>`).join('')}</select><button class="btn primary sm" data-run="${k}" ${running || !counts[k] ? 'disabled' : ''}>Run</button></div></div>`).join('')}</div>
     <div class="card" style="padding:16px;margin-top:18px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><b>${running ? `<span class="spinner sm"></span> ${AI_TASKS[running.task].label}: ${running.done} / ${running.total}` : 'Activity'}</b>${running ? '<button class="btn secondary sm" id="aiStop">Stop</button>' : ''}</div>
@@ -461,10 +432,7 @@ async function runAI(task, max) {
   for (let i = 0; i < todo.length && !R.stop; i += T.batch) {
     const list = todo.slice(i, i + T.batch);
     try {
-      if (T.photo) {
-        const w = list[0]; const p = photoPrompt(w); const small = await compressImage(await Cloud.aiImage(p));
-        await Cloud.saveImage(w.id, small, p); PHOTOS.set(w.id, small); w.img = 1; await Cloud.saveItems('words', [{ id: w.id, img: 1 }]); log(`photo: ${w.t}`);
-      } else {
+      {
         const patches = await aiRunBatch(task, list);
         await Cloud.saveItems(T.kind, patches.map(({ o, p }) => ({ id: o.id, ...p })));
         for (const { o, p } of patches) Object.assign(o, p);
@@ -482,13 +450,13 @@ function admContent(el) {
   el.innerHTML = `<div class="stack">
     <div class="card" style="padding:22px"><h3 style="font-size:19px;margin-bottom:6px">Sync built-in words to Firestore</h3>
       <p style="color:var(--muted);margin:0 0 12px">The site's data files have <b>${fmt(BUILTIN_WORDS.length)}</b> words and <b>${BUILTIN_CORP.length}</b> Workplace English items. Firestore has <b>${cloudMeta ? fmt(fsWords) : 'nothing yet'}</b>${cloudMeta && cloudMeta.publishedAt ? ` (updated ${cloudMeta.publishedAt.toLocaleString()})` : ''}.
-      Sync adds new words and refreshes the built-in fields (meanings, IPA, roles) of words nobody edited online. Your edits, accepted reports, AI translations, explanations, stories and photos are kept.</p>
+      Sync adds new words and refreshes the built-in fields (meanings, IPA, roles) of words nobody edited online. Your edits, accepted reports, AI translations, explanations and stories are kept.</p>
       <button class="btn primary sm" id="syncBtn">Sync built-in words to Firestore</button></div>
     <div class="card" style="padding:22px"><h3 style="font-size:19px;margin-bottom:6px">Rebuild bundles</h3>
       <p style="color:var(--muted);margin:0 0 12px">Edited a document by hand in the Firebase console? Rebuild so visitors see it. (Edits made on this page publish by themselves.)</p>
       <button class="btn secondary sm" id="rebuildBtn" ${cloudMeta ? '' : 'disabled'}>Rebuild after console edits</button></div>
     <div class="card" style="padding:22px"><h3 style="font-size:19px;margin-bottom:6px">Turn on AI (once)</h3>
-      <p style="color:var(--muted);margin:0">Firebase console → <b>AI Logic</b> → <b>Get started</b> → choose <b>Gemini Developer API</b>. Text tools work on the free plan. Photos use <code>gemini-2.5-flash-image</code>, which may need the Blaze plan. To stop other sites using your AI quota, turn on <b>App Check</b> later.</p></div></div>`;
+      <p style="color:var(--muted);margin:0">Firebase console → <b>AI Logic</b> → <b>Get started</b> → choose <b>Gemini Developer API</b>. Text tools work on the free plan. To stop other sites using your AI quota, turn on <b>App Check</b> later.</p></div></div>`;
   $('#syncBtn').onclick = () => withButton($('#syncBtn'), async () => {
     try { busy('Syncing to Firestore… 0%'); const r = await Cloud.syncBuiltin(BUILTIN_WORDS, BUILTIN_CORP, (n, t) => busy(`Syncing to Firestore… ${Math.round(n / t * 100)}%`)); busy('Loading the new content…'); const c = await Cloud.loadContent(); if (c) applyContent(c); toast(`Synced: ${fmt(r.words)} words, ${r.corporate} items (${r.added} added, ${r.updated} updated).`); }
     catch (e) { toast('Sync failed: ' + (e.code || e.message)); } finally { busy(''); renderAdmin(); }

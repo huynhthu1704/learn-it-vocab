@@ -151,7 +151,9 @@ const html = fs.readFileSync('src/template.html', 'utf8')
   .replace('/*__CLOUD_UI__*/', () => fs.readFileSync('src/ui-cloud.js', 'utf8'))
   .replace('/*__WORDS__*/[]', () => safe(out)).replace('/*__CORP__*/[]', () => safe(JSON.stringify(CORP)))
   .replace('/*__I18N__*/{}', () => safe(JSON.stringify(I18N)));
-fs.writeFileSync('index.html', html);
-// Bundle the Firebase code (src/cloud.js + src/firebase-config.js) into cloud.js
+// Bundle cloud.js first, then point index.html at it with a version tag so browsers never mix an old cloud.js with a new page.
 await esbuild({ entryPoints: ['src/cloud.js'], bundle: true, format: 'esm', minify: true, outfile: 'cloud.js', logLevel: 'warning' });
+const cloudVer = (await import('node:crypto')).createHash('sha1').update(fs.readFileSync('cloud.js')).digest('hex').slice(0, 10);
+fs.writeFileSync('index.html', html.replace('src="cloud.js"', `src="cloud.js?v=${cloudVer}"`));
+// Bundle the Firebase code (src/cloud.js + src/firebase-config.js) into cloud.js
 console.log('Wrote words.json, index.html and cloud.js');
