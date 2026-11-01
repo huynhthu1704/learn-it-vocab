@@ -199,7 +199,7 @@ let modelIdx = 0; const textModels = {};
 function textModel() {
   if (!ai) ai = getAI(app, { backend: new GoogleAIBackend() });
   const name = TEXT_MODELS[modelIdx];
-  if (!textModels[name]) textModels[name] = getGenerativeModel(ai, { model: name, generationConfig: { responseMimeType: 'application/json', temperature: 0.3 } });
+  if (!textModels[name]) textModels[name] = getGenerativeModel(ai, { model: name, generationConfig: { responseMimeType: 'application/json', temperature: 0.3 } }, { timeout: 600000 }); // free-tier replies can take a few minutes
   return textModels[name];
 }
 async function aiJSON(prompt) {

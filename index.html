@@ -1653,7 +1653,7 @@ async function aiFillItem(kind, item) {
 function admAI(el) {
   const counts = Object.fromEntries(Object.entries(AI_TASKS).map(([k, T]) => [k, admItems(T.kind).filter(T.need).length]));
   const running = ADM.run;
-  el.innerHTML = `<p style="color:var(--muted);margin-top:0">AI writes the text; you stay in control: every result can be checked and corrected in <b>Edit words</b>, and learners can report mistakes. Runs save as they go, so you can stop at any time.</p>
+  el.innerHTML = `<p style="color:var(--muted);margin-top:0">AI writes the text; you stay in control: every result can be checked and corrected in <b>Edit words</b>, and learners can report mistakes. Runs save as they go, so you can stop at any time. On the free Gemini plan each batch can take 1–3 minutes: keep this tab open while it runs.</p>
     <div class="agrid">${Object.entries(AI_TASKS).map(([k, T]) => `<div class="aitool"><h4>${svg('sparkle', '#7C3AED', 18, 2)} ${T.label}</h4><p>${T.desc}</p>
       <div class="count"><span>${fmt(counts[k])}</span> <span>still to do</span></div>
       <div class="mrow"><select class="sel" data-n="${k}">${[10, 50, 200, 1000, 5000].map(n => `<option value="${n}">${n === 5000 ? 'All' : 'Next ' + n}</option>`).join('')}</select><button class="btn primary sm" data-run="${k}" ${running || !counts[k] ? 'disabled' : ''}>Run</button></div></div>`).join('')}</div>
@@ -2173,6 +2173,6 @@ updateDue();
 maybeAskRole();
 if (window.Cloud) initCloud();
 </script>
-<script type="module" src="cloud.js?v=6804d14a6f"></script>
+<script type="module" src="cloud.js?v=3f1da1b888"></script>
 </body>
 </html>
