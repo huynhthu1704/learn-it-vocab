@@ -22,8 +22,11 @@ service cloud.firestore {
     }
 
     // A learner's own data (progress, preferences, personal word lists): only they can read or write it.
+    // Admins may read the top-level user document (progress, settings, usage counts; no names or e-mails)
+    // for the Insights dashboard. Personal word lists stay private.
     match /users/{uid} {
       allow read, write: if signedIn() && request.auth.uid == uid;
+      allow read: if isAdmin();
       match /{sub=**} { allow read, write: if signedIn() && request.auth.uid == uid; }
     }
   }

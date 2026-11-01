@@ -313,6 +313,34 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   .ccard .phrase{font-size:19px}
 }
 .view{display:none}
+.vz-filters{margin-bottom:16px}
+.vz-tiles{grid-template-columns:repeat(4,1fr)}
+.vz-tile small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.vz-card{padding:20px 22px;margin-bottom:18px}
+.vz-card h3{font-size:18px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.vz-sub{color:var(--muted);font-size:13px;margin:0 0 12px}
+.vz-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.vz-grid>.vz-card{margin-bottom:0}
+.vz-grid+.vz-card,.vz-grid+.vz-grid{margin-top:18px}
+.vz-bars{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.vz-row{display:grid;grid-template-columns:minmax(90px,38%) 1fr auto;gap:10px;align-items:center;font-size:14px}
+.vz-lab{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vz-track{height:12px;background:#F1F3F7;border-radius:4px;overflow:hidden}
+.vz-track i{display:block;height:100%;background:#2a78d6;border-radius:0 4px 4px 0}
+.vz-row:hover .vz-track i{background:#1c5cab}
+.vz-val{font-weight:700;font-variant-numeric:tabular-nums;min-width:52px;text-align:right}
+.vz-val small{color:var(--muted);font-weight:500;margin-left:6px}
+.vz-line{position:relative}
+.vz-line svg{width:100%;height:200px;display:block;cursor:crosshair}
+.vz-tip{position:absolute;top:0;display:none;background:var(--ink);color:#fff;border-radius:8px;padding:6px 10px;font-size:13px;pointer-events:none;width:120px}
+.vz-tip small{opacity:.75}
+.vz-sugg{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:10px 12px;font-size:14px}
+.vz-sugg>span{flex:1}
+.vz-sugg svg{flex:none;margin-top:2px}
+.vz-table td,.vz-table th{padding:8px 10px;font-size:14px;white-space:nowrap}
+.vz-table a{text-decoration:none}
+@media (max-width:900px){.vz-grid{grid-template-columns:1fr}.vz-tiles{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){.vz-sugg{flex-wrap:wrap}.vz-sugg .btn{margin-left:28px}.vz-card{padding:16px}}
 .close{z-index:5}
 .closebar{display:none}
 @media (max-width:760px){
@@ -704,6 +732,16 @@ function migrateMerged(st) { for (const k of ['known', 'learning', 'saved']) for
 migrateMerged(S);
 function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} updateChips(); if (typeof queueCloudSave === 'function') queueCloudSave(); }
 const today = () => new Date().toISOString().slice(0, 10);
+// Light usage stats for the admin Insights page (only saved to the cloud for signed-in learners).
+function track(kind, key, n = 1) {
+  const T = S.stats = S.stats || {};
+  if (kind === 'missed') { T.missed = [{ q: key, d: today() }, ...(T.missed || []).filter(x => x.q !== key)].slice(0, 30); }
+  else if (kind === 'score') { T.scores = [...(T.scores || []), key].slice(-20); }
+  else if (kind === 'count') { T[key] = (T[key] || 0) + n; }
+  else { const m = T[kind] = T[kind] || {}; m[key] = (m[key] || 0) + n; const ks = Object.keys(m); if (ks.length > 400) { ks.sort((a, b) => m[b] - m[a]).slice(300).forEach(k => delete m[k]); } }
+  try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {}
+  if (typeof queueCloudSave === 'function') queueCloudSave();
+}
 function practised(n = 1) { const d = today(); S.days[d] = (S.days[d] || 0) + n; save(); }
 function streak() { let n = 0; const d = new Date(); if (!S.days[today()]) d.setDate(d.getDate() - 1); for (;;) { const k = d.toISOString().slice(0, 10); if (S.days[k]) { n++; d.setDate(d.getDate() - 1); } else break; } return n; }
 function status(id) { return S.known[id] ? 'known' : S.learning[id] ? 'learning' : 'new'; }
@@ -729,7 +767,7 @@ function speak(text, rate, lang) {
     speechSynthesis.cancel();
     const code = lang && LANGS[lang] ? LANGS[lang].tts : S.accent;
     const u = new SpeechSynthesisUtterance(lang ? text : text.replace(/\//g, ' ').replace(/\bvs\b/g, 'versus'));
-    u.lang = code; u.rate = rate || +S.rate || 1;
+    u.lang = code; u.rate = rate || +S.rate || 1; track('plays', lang || 'en');
     const base = code.slice(0, 2), norm2 = l => (l || '').replace('_', '-');
     const v = voices.find(v => norm2(v.lang) === code && /Google|Samantha|Daniel|Natural|Microsoft/.test(v.name)) || voices.find(v => norm2(v.lang) === code) || voices.find(v => norm2(v.lang).startsWith(base));
     if (v) u.voice = v; else if (lang && voices.length) toast(`No ${LANGS[lang].en} voice on this device, so it may sound wrong. Add one in your system settings.`);
@@ -809,6 +847,7 @@ function wordCard(w) {
 let modalList = [];
 function openWord(id, list) {
   const w = BY_ID.get(+id); if (!w) return;
+  if (+$('#modal').dataset.id !== w.id || !$('#overlay').classList.contains('open')) track('views', w.id);
   if (list) modalList = list;
   const L = LEVELS[w.l]; const st = status(w.id);
   const idx = modalList.indexOf(w.id);
@@ -933,6 +972,7 @@ function renderBrowse() {
   $('#grid').innerHTML = list.slice(0, shown).map(wordCard).join('');
   $('#count').textContent = `${fmt(list.length)} ${list.length === 1 ? 'word' : 'words'}`;
   $('#empty').style.display = list.length ? 'none' : 'block';
+  clearTimeout(renderBrowse.mt); if (!list.length && q.length >= 3) { const raw = F.q.trim().toLowerCase(); renderBrowse.mt = setTimeout(() => track('missed', raw), 1500); }
   $('#moreBtn').style.display = list.length > shown ? '' : 'none';
   $('#moreBtn').textContent = `Show more words (${fmt(list.length - shown)} left)`;
 }
@@ -1029,8 +1069,8 @@ function renderFC() {
     <p class="hint">Keyboard: Space to flip · 1 = Again · 2 = I knew it</p>`;
  
   $('#fc').onclick = e => { if (!e.target.closest('[data-say]')) $('#fc').classList.toggle('flip'); };
-  $('#fcYes').onclick = () => { setKnown(w.id, true); FC.got++; FC.done++; FC.queue.shift(); renderFC(); };
-  $('#fcNo').onclick = () => { setKnown(w.id, false); FC.again++; FC.done++; const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
+  $('#fcYes').onclick = () => { setKnown(w.id, true); FC.got++; FC.done++; track('count', 'cards'); FC.queue.shift(); renderFC(); };
+  $('#fcNo').onclick = () => { setKnown(w.id, false); FC.again++; FC.done++; track('count', 'cards'); const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
 }
 $('#fcStart').onclick = startFC;
 document.addEventListener('keydown', e => {
@@ -1068,7 +1108,7 @@ function startQuiz() {
 function renderQ() {
   const q = QZ.qs[QZ.i];
   if (!q) {
-    S.quizzes++; S.best = Math.max(S.best, QZ.score); practised(0);
+    S.quizzes++; S.best = Math.max(S.best, QZ.score); track('score', QZ.score); practised(0);
     $('#quizArea').innerHTML = `<div class="card qcard" style="text-align:center"><div class="eyebrow">Quiz complete</div><div class="result-big" style="margin:14px 0">${QZ.score}/10</div><p style="color:var(--muted)">${QZ.score >= 8 ? 'Excellent work!' : QZ.score >= 5 ? 'Good job. Review the words below.' : 'Keep practising, you will get there.'}</p>
       ${QZ.wrong.length ? `<div style="text-align:left;margin-top:18px"><b>Words to review</b><ul class="review" data-notr>${QZ.wrong.map(w => w.cat ? `<li><b>${esc(w.p)}</b> · ${esc(meaningOf(w))}</li>` : `<li><a href="#" data-open="${w.id}" style="font-weight:700">${esc(w.t)}</a> <span class="ipa">${esc(w.i)}</span> · ${esc(meaningOf(w))}</li>`).join('')}</ul></div>` : ''}
       <div class="fc-actions"><button class="btn primary" id="qzAgain">New quiz</button><a class="btn secondary" href="#flashcards">Practise with flashcards</a></div></div>`;
@@ -1095,7 +1135,7 @@ function renderQ() {
   document.querySelectorAll('[data-ans]').forEach(b => b.onclick = () => {
     const ok = +b.dataset.ans === w.id;
     document.querySelectorAll('[data-ans]').forEach(x => { x.disabled = true; if (+x.dataset.ans === w.id) { x.classList.add('right'); x.lastChild.innerHTML = svg('check', '#16A34A', 20, 2.5); } });
-    if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); if (!q.corp) setKnown(w.id, false); else practised(0); } else { QZ.score++; practised(); }
+    if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); if (!q.corp) track('wrong', w.id); if (!q.corp) setKnown(w.id, false); else practised(0); } else { QZ.score++; practised(); }
     if (q.corp) { $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <b data-notr>${esc(w.p)}</b><div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:8px;font-style:italic" data-notr>${esc(w.ex)}${xRows(w.x, '#2563EB', '#fff', 22)}</div></div><div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`; $('#qNext').onclick = () => { QZ.i++; renderQ(); }; $('#qNext').focus(); return; }
     $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <span data-notr><b>${esc(w.t)}</b> <span class="ipa">${esc(w.i)}</span></span><div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:6px">${exampleHTML(w, L.c, L.t, 28, false)}</div></div>
       <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`;
@@ -1144,7 +1184,10 @@ function applyContent(c) {
   refreshVisible(); renderFocus(); if (currentView === 'workplace') renderCorp();
 }
 const prefsPayload = () => ({ langs: S.langs, ui: S.ui, plain: S.plain, role: S.role, accent: S.accent, rate: S.rate, prefsAt: S.prefsAt || 0 });
-const progressPayload = () => ({ known: S.known, learning: S.learning, saved: S.saved, days: S.days, quizzes: S.quizzes, best: S.best, prefs: prefsPayload() });
+const isMobile = () => matchMedia('(max-width: 760px)').matches;
+// What the admin Insights page reads. No names or e-mails: learners are counted, not identified.
+const progressPayload = () => ({ known: S.known, learning: S.learning, saved: S.saved, days: S.days, quizzes: S.quizzes, best: S.best, prefs: prefsPayload(),
+  stats: S.stats || {}, meta: { firstSeen: S.firstSeen || today(), lastSeen: today(), device: isMobile() ? 'mobile' : 'desktop', lists: S.listCount || 0, listWords: S.listWords || 0 } });
 function queueCloudSave() {
   if (!cloudUser || !window.Cloud) return;
   clearTimeout(cloudSaveT);
@@ -1160,8 +1203,11 @@ async function syncProgress() {
       S.saved = { ...(c.saved || {}), ...S.saved };
       for (const [d, n] of Object.entries(c.days || {})) S.days[d] = Math.max(S.days[d] || 0, n);
       S.quizzes = Math.max(S.quizzes, c.quizzes || 0); S.best = Math.max(S.best, c.best || 0);
+      if (c.meta && c.meta.firstSeen && (!S.firstSeen || c.meta.firstSeen < S.firstSeen)) S.firstSeen = c.meta.firstSeen;
+      if (c.stats && !S.stats) S.stats = c.stats;
       if (c.prefs && (c.prefs.prefsAt || 0) > (S.prefsAt || 0)) { Object.assign(S, c.prefs); applyLanguage(); }
     }
+    if (!S.firstSeen) S.firstSeen = today();
     save(); cloudStatus = 'Progress synced with your account';
   } catch (e) { cloudStatus = 'Could not load your saved progress: ' + e.message; }
   refreshVisible();
@@ -1365,7 +1411,7 @@ const EDIT_FIELDS = {
     ['ctx', 'When to use', 'area'], ['ct.vi', 'When to use (Vietnamese)', 'area'], ['ct.ko', 'When to use (Korean)', 'area'], ['ct.fr', 'When to use (French)', 'area'],
     ['ex', 'Example', 'area'], ['x.vi', 'Example in Vietnamese', 'area'], ['x.ko', 'Example in Korean', 'area'], ['x.fr', 'Example in French', 'area'], ['av', 'Avoid', 'area']],
 };
-const ADM = { tab: 'reports', kind: 'words', editId: null, q: '', repStatus: 'open', reports: null, fromReport: null, run: null, log: [] };
+const ADM = { tab: 'insights', kind: 'words', editId: null, q: '', repStatus: 'open', reports: null, fromReport: null, run: null, log: [] };
 function admItems(kind) { return kind === 'corporate' ? CORP : WORDS; }
 function replaceLocal(kind, item) {
   if (kind === 'corporate') { const i = CORP.findIndex(c => c.id === item.id); if (i >= 0) CORP[i] = item; else CORP.push(item); }
@@ -1379,11 +1425,11 @@ function renderAdmin() {
   if (!cloudUser) { area.innerHTML = `<div class="card" style="padding:24px"><p style="margin-top:0">Sign in with an admin account.</p>${signInButton('admSignIn')}</div>`; $('#admSignIn').onclick = () => doSignIn($('#admSignIn')); $('#adminTabs').innerHTML = ''; return; }
   if (!cloudAdmin) { area.innerHTML = `<div class="card" style="padding:24px"><p style="margin:0">This account is not an admin. To make it one, add a document with this user ID in the <b>admins</b> collection in the Firebase console: <code>${esc(cloudUser.uid)}</code></p></div>`; $('#adminTabs').innerHTML = ''; return; }
   const open = ADM.reports && ADM.repStatus === 'open' ? ADM.reports.length : null;
-  $('#adminTabs').innerHTML = [['reports', 'Reports' + (open ? ` (${open})` : '')], ['edit', 'Edit words'], ['ai', 'AI tools'], ['content', 'Content & sync']].map(([k, n]) => `<button data-atab="${k}" class="${ADM.tab === k ? 'on' : ''}">${n}</button>`).join('');
+  $('#adminTabs').innerHTML = [['insights', 'Insights'], ['reports', 'Reports' + (open ? ` (${open})` : '')], ['edit', 'Edit words'], ['ai', 'AI tools'], ['content', 'Content & sync']].map(([k, n]) => `<button data-atab="${k}" class="${ADM.tab === k ? 'on' : ''}">${n}</button>`).join('');
   $('#adminTabs').onclick = e => { const b = e.target.closest('[data-atab]'); if (b) { ADM.tab = b.dataset.atab; renderAdmin(); } };
   const warn = needsSync() ? `<div class="avoid" style="margin-bottom:16px">${svg('flag', '#DC2626', 18, 2)}<div><b>One-time step:</b> open <b>Content & sync</b> and click <b>Sync built-in words to Firestore</b> before editing, so every word (now ${fmt(BUILTIN_WORDS.length)}) is in the database.</div></div>` : '';
   area.innerHTML = warn + '<div id="admBody"></div>';
-  ({ reports: admReports, edit: admEdit, ai: admAI, content: admContent })[ADM.tab]($('#admBody'));
+  ({ insights: admInsights, reports: admReports, edit: admEdit, ai: admAI, content: admContent })[ADM.tab]($('#admBody'));
 }
 async function admReports(el) {
   el.innerHTML = `<div class="frow" style="margin-bottom:16px"><div class="seg" id="repSeg">${segHTML([['open', 'Waiting'], ['accepted', 'Accepted'], ['rejected', 'Rejected']], ADM.repStatus, 'rs')}</div><button class="btn ghost sm" id="repReload">Refresh</button></div><div class="stack" id="repList"><div class="hint"><span class="spinner sm"></span> Loading reports…</div></div>`;
@@ -1645,6 +1691,8 @@ function renderLists() {
 }
 async function loadMyLists() {
   try { if (!LST.lists) LST.lists = await Cloud.listLists(cloudUser.uid); } catch (e) { $('#lsMine').innerHTML = `<p>Could not load your lists: ${esc(e.code || e.message)}</p>`; return; }
+  const lc = LST.lists.length, lw = LST.lists.reduce((n, l) => n + (l.items || []).length, 0);
+  if (S.listCount !== lc || S.listWords !== lw) { S.listCount = lc; S.listWords = lw; save(); }
   const m = $('#lsMine'); if (!m) return;
   m.innerHTML = LST.lists.length ? LST.lists.map(l => `<div class="card listcard"><div><b style="font-size:18px" data-notr>${esc(l.name)}</b><div class="count"><span>${(l.items || []).length} words</span>${l.source ? ` · <span data-notr>${esc(l.source)}</span>` : ''}${l.createdAt ? ' · ' + l.createdAt.toLocaleDateString() : ''}</div></div><button class="btn secondary sm" data-lopen="${l.id}">Open</button></div>`).join('') : '<p style="color:var(--muted);margin:0">No lists yet. Upload a file above to make your first one.</p>';
   m.onclick = e => { const b = e.target.closest('[data-lopen]'); if (b) { LST.open = LST.lists.find(l => l.id === b.dataset.lopen); renderLists(); window.scrollTo(0, 0); } };
@@ -1717,6 +1765,224 @@ async function initCloud() {
 }
 window.addEventListener('cloud-ready', initCloud);
 
+/* ---------- admin: Insights dashboard ----------
+   Reads every signed-in learner's top-level document (users/{uid}) and all reports, then works out
+   segments, learning results, content gaps and suggested actions. Visitors who never sign in are not counted. */
+const INS = { users: null, reports: null, loadedAt: null, range: 30, role: 'all', q: { top: '', hard: '' }, err: '' };
+const VZ = { blue: '#2a78d6', blueSoft: '#cde2fb', grid: '#E4E7EE', ink: '#1B1F2A', muted: '#5B6475' };
+const dayKey = d => d.toISOString().slice(0, 10);
+const daysAgo = n => { const d = new Date(); d.setDate(d.getDate() - n); return dayKey(d); };
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+const ROLE_LABEL = r => (ROLES[r] ? ROLES[r].name : 'Not chosen yet');
+
+async function loadInsights(force) {
+  if (INS.users && !force) return;
+  INS.err = ''; loading(true);
+  try { [INS.users, INS.reports] = await Promise.all([Cloud.listUsers(), Cloud.listAllReports()]); INS.loadedAt = new Date(); }
+  catch (e) { INS.err = /permission/i.test(String(e.code || e.message)) ? 'Firestore said no. Publish the new firestore.rules (it lets admins read learners’ progress), then refresh.' : 'Could not load: ' + (e.code || e.message); }
+  finally { loading(false); }
+}
+
+// ---------- the numbers ----------
+function computeInsights() {
+  const from = INS.range === 'all' ? '0000' : daysAgo(INS.range - 1), prevFrom = INS.range === 'all' ? '0000' : daysAgo(INS.range * 2 - 1);
+  const all = INS.users.filter(u => !cloudAdmin || true);
+  const users = all.filter(u => INS.role === 'all' || (u.prefs?.role || '') === (INS.role === 'none' ? '' : INS.role));
+  const daysOf = u => Object.keys(u.days || {});
+  const activeIn = (u, a, b = '9999') => daysOf(u).some(d => d >= a && d <= b) || ((u.meta?.lastSeen || '') >= a && (u.meta?.lastSeen || '') <= b);
+  const active = users.filter(u => activeIn(u, from));
+  const prevActive = INS.range === 'all' ? [] : users.filter(u => activeIn(u, prevFrom, daysAgo(INS.range)));
+  const isNew = u => (u.meta?.firstSeen || daysOf(u).sort()[0] || '') >= from;
+  const count = (list, f) => { const m = new Map(); for (const x of list) for (const k of [].concat(f(x))) if (k != null) m.set(k, (m.get(k) || 0) + 1); return m; };
+  const sorted = m => [...m.entries()].sort((a, b) => b[1] - a[1]);
+  const known = u => Object.keys(u.known || {}).map(Number).filter(id => BY_ID.has(id));
+
+  // learning results
+  const knownBy = count(users, u => known(u));
+  const learningBy = count(users, u => Object.keys(u.learning || {}).map(Number));
+  const savedBy = count(users, u => Object.keys(u.saved || {}).map(Number));
+  const wrongBy = new Map(); for (const u of users) for (const [id, n] of Object.entries(u.stats?.wrong || {})) wrongBy.set(+id, (wrongBy.get(+id) || 0) + n);
+  const viewsBy = new Map(); for (const u of users) for (const [id, n] of Object.entries(u.stats?.views || {})) viewsBy.set(+id, (viewsBy.get(+id) || 0) + n);
+  const hard = [...new Set([...learningBy.keys(), ...wrongBy.keys()])].filter(id => BY_ID.has(id))
+    .map(id => ({ id, learning: learningBy.get(id) || 0, wrong: wrongBy.get(id) || 0, known: knownBy.get(id) || 0 }))
+    .map(x => ({ ...x, score: x.learning * 2 + x.wrong - x.known * 0.5 })).filter(x => x.score > 0).sort((a, b) => b.score - a.score);
+  // daily active learners
+  const span = INS.range === 'all' ? 90 : INS.range;
+  const trend = []; for (let i = span - 1; i >= 0; i--) { const d = daysAgo(i); trend.push({ d, v: users.filter(u => (u.days || {})[d]).length }); }
+  // missed searches = words learners looked for and did not find
+  const missed = new Map(); for (const u of users) for (const m of u.stats?.missed || []) { if (BY_ID && WORDS.some(w => w.t.toLowerCase() === m.q || (w.a || '').toLowerCase() === m.q)) continue; const e = missed.get(m.q) || { q: m.q, users: 0, last: '' }; e.users++; if (m.d > e.last) e.last = m.d; missed.set(m.q, e); }
+  // quiz results
+  const scores = users.flatMap(u => u.stats?.scores || []);
+  const plays = new Map(); for (const u of users) for (const [l, n] of Object.entries(u.stats?.plays || {})) plays.set(l, (plays.get(l) || 0) + n);
+  // level progress: share of each level's words the average active learner knows
+  const levelPct = Object.keys(LEVELS).map(l => { const pool = WORDS.filter(w => w.l == l); const ids = new Set(pool.map(w => w.id)); const avg = active.length ? active.reduce((n, u) => n + known(u).filter(id => ids.has(id)).length, 0) / active.length : 0; return { l, avg, pct: pool.length ? avg / pool.length * 100 : 0, total: pool.length }; });
+  const streakOf = u => { let n = 0; const d = new Date(); if (!(u.days || {})[dayKey(d)]) d.setDate(d.getDate() - 1); while ((u.days || {})[dayKey(d)]) { n++; d.setDate(d.getDate() - 1); } return n; };
+  const lastSeenOf = u => [u.meta?.lastSeen || '', ...daysOf(u)].sort().pop() || '';
+  return {
+    all, users, active, prevActive, newUsers: users.filter(isNew), knownBy, savedBy, viewsBy, hard, trend, missed: [...missed.values()].sort((a, b) => b.users - a.users || (b.last > a.last ? 1 : -1)),
+    roles: sorted(count(users, u => u.prefs?.role || '')), langs: sorted(count(users, u => (u.prefs?.langs || ['vi', 'ko']))), ui: sorted(count(users, u => u.prefs?.ui || 'en')),
+    devices: sorted(count(users, u => u.meta?.device || 'unknown')), plays: [...plays.entries()].sort((a, b) => b[1] - a[1]),
+    avgKnown: users.length ? Math.round(users.reduce((n, u) => n + known(u).length, 0) / users.length) : 0,
+    quizzes: users.reduce((n, u) => n + (u.quizzes || 0), 0), avgScore: scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : null,
+    cards: users.reduce((n, u) => n + (u.stats?.cards || 0), 0), levelPct,
+    returning: users.filter(u => daysOf(u).length >= 2).length, weekly: users.filter(u => daysOf(u).filter(d => d >= daysAgo(6)).length >= 3).length,
+    streaks: users.map(streakOf), sleeping: users.filter(u => { const l = lastSeenOf(u); return l && l < daysAgo(13); }).length,
+    listUsers: users.filter(u => (u.meta?.lists || 0) > 0).length, listWords: users.reduce((n, u) => n + (u.meta?.listWords || 0), 0),
+    reports: INS.reports || [], lastSeenOf,
+  };
+}
+
+// ---------- small chart pieces (single series, one hue; hover shows the exact value) ----------
+function hbars(rows, opts = {}) {
+  if (!rows.length) return '<p class="hint" style="text-align:left">No data yet.</p>';
+  const max = opts.max || Math.max(...rows.map(r => r.v), 1), total = opts.total || rows.reduce((n, r) => n + r.v, 0);
+  return `<div class="vz-bars">${rows.map(r => `<div class="vz-row" title="${esc(r.label)}: ${fmt(r.v)}${opts.noPct ? '' : ` (${pct(r.v, total)}%)`}">
+    <span class="vz-lab" data-notr>${esc(r.label)}</span><span class="vz-track"><i style="width:${Math.max(1.5, r.v / max * 100)}%"></i></span><span class="vz-val">${fmt(r.v)}${opts.noPct ? '' : `<small>${pct(r.v, total)}%</small>`}</span></div>`).join('')}</div>`;
+}
+function lineChart(pts) {
+  const W = 640, H = 180, P = { l: 30, r: 10, t: 12, b: 24 };
+  const max = Math.max(2, ...pts.map(p => p.v)), n = pts.length;
+  const x = i => P.l + (n === 1 ? 0 : i / (n - 1) * (W - P.l - P.r)), y = v => H - P.b - v / max * (H - P.t - P.b);
+  const ticks = [0, Math.ceil(max / 2), max];
+  const path = pts.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.v).toFixed(1)}`).join('');
+  const lab = [0, Math.floor((n - 1) / 2), n - 1];
+  return `<div class="vz-line" data-pts='${JSON.stringify(pts)}'><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Learners active each day">
+    ${ticks.map(t => `<line x1="${P.l}" x2="${W - P.r}" y1="${y(t)}" y2="${y(t)}" stroke="${VZ.grid}" stroke-width="1"/><text x="${P.l - 6}" y="${y(t) + 4}" text-anchor="end" font-size="11" fill="${VZ.muted}">${t}</text>`).join('')}
+    <path d="${path} L${x(n - 1)},${H - P.b} L${x(0)},${H - P.b}Z" fill="${VZ.blueSoft}" opacity=".55"/>
+    <path d="${path}" fill="none" stroke="${VZ.blue}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    ${lab.map(i => `<text x="${x(i)}" y="${H - 6}" text-anchor="${i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle'}" font-size="11" fill="${VZ.muted}">${pts[i].d.slice(5)}</text>`).join('')}
+    <line class="vz-x" x1="0" x2="0" y1="${P.t}" y2="${H - P.b}" stroke="${VZ.ink}" stroke-width="1" opacity="0"/><circle class="vz-dot" r="4" fill="${VZ.blue}" stroke="#fff" stroke-width="2" opacity="0"/>
+  </svg><div class="vz-tip"></div></div>`;
+}
+function wireLine(root) {
+  root.querySelectorAll('.vz-line').forEach(box => {
+    const pts = JSON.parse(box.dataset.pts), svgEl = box.querySelector('svg'), tip = box.querySelector('.vz-tip'), W = 640, H = 180, P = { l: 30, r: 10, t: 12, b: 24 };
+    const max = Math.max(2, ...pts.map(p => p.v)), n = pts.length;
+    const move = e => {
+      const r = svgEl.getBoundingClientRect(); const fx = (e.clientX - r.left) / r.width * W;
+      const i = Math.max(0, Math.min(n - 1, Math.round((fx - P.l) / (W - P.l - P.r) * (n - 1)))); const px = P.l + i / Math.max(1, n - 1) * (W - P.l - P.r), py = H - P.b - pts[i].v / max * (H - P.t - P.b);
+      box.querySelector('.vz-x').setAttribute('x1', px); box.querySelector('.vz-x').setAttribute('x2', px); box.querySelector('.vz-x').setAttribute('opacity', .25);
+      const dot = box.querySelector('.vz-dot'); dot.setAttribute('cx', px); dot.setAttribute('cy', py); dot.setAttribute('opacity', 1);
+      tip.style.display = 'block'; tip.style.left = Math.min(r.width - 120, Math.max(0, px / W * r.width - 60)) + 'px'; tip.innerHTML = `<b>${pts[i].v}</b> <span>learner${pts[i].v === 1 ? '' : 's'} active</span><br><small>${pts[i].d}</small>`;
+    };
+    svgEl.onmousemove = move; svgEl.ontouchstart = e => move(e.touches[0]);
+    svgEl.onmouseleave = () => { tip.style.display = 'none'; box.querySelector('.vz-dot').setAttribute('opacity', 0); box.querySelector('.vz-x').setAttribute('opacity', 0); };
+  });
+}
+const tile = (big, label, sub) => `<div class="card stat vz-tile"><b>${big}</b><span>${label}</span>${sub ? `<small>${sub}</small>` : ''}</div>`;
+const delta = (a, b) => { if (INS.range === 'all' || !b) return ''; const d = a - b; return d === 0 ? 'same as the period before' : `${d > 0 ? '▲' : '▼'} ${Math.abs(d)} vs the period before`; };
+function wordTable(key, rows, cols, limit = 100) {
+  const q = norm((INS.q[key] || '').trim());
+  const list = rows.filter(r => !q || norm(BY_ID.get(r.id).t).includes(q) || norm(BY_ID.get(r.id).v || '').includes(q)).slice(0, limit);
+  return `<div class="frow" style="margin-bottom:10px"><label class="search" style="min-width:160px"><input data-tq="${key}" type="search" placeholder="Filter words" value="${esc(INS.q[key] || '')}"></label><button class="btn ghost sm" data-csv="${key}">Download CSV</button></div>
+  <div style="overflow:auto;max-height:420px"><table class="ptable vz-table"><tr><th>#</th><th>Word</th>${cols.map(c => `<th>${c[0]}</th>`).join('')}</tr>
+  ${list.map((r, i) => { const w = BY_ID.get(r.id); return `<tr><td>${i + 1}</td><td><a href="#" data-open="${w.id}" data-notr><b>${esc(w.t)}</b></a><div class="count" data-notr>${esc(LEVELS[w.l].name)} · ${esc(TOPIC_NAMES[w.c] || w.c)}</div></td>${cols.map(c => `<td>${c[1](r, w)}</td>`).join('')}</tr>`; }).join('') || `<tr><td colspan="${cols.length + 2}" class="hint">Nothing yet.</td></tr>`}</table></div>`;
+}
+function csv(name, header, rows) {
+  const s = [header, ...rows].map(r => r.map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + s], { type: 'text/csv;charset=utf-8' })); a.download = name + '.csv'; a.click();
+}
+
+// ---------- suggested actions ("smart insights") ----------
+function suggestions(R) {
+  const out = []; const n = R.users.length;
+  const open = R.reports.filter(r => r.status === 'open').length;
+  if (open) out.push(['flag', `${open} report${open === 1 ? '' : 's'} waiting for review.`, 'Review reports', () => { ADM.tab = 'reports'; ADM.reports = null; renderAdmin(); }]);
+  const gaps = R.missed.slice(0, 5);
+  if (gaps.length) out.push(['search', `Learners searched for words the site doesn't have: ${gaps.map(g => `“${g.q}”${g.users > 1 ? ` (${g.users})` : ''}`).join(', ')}.`, 'Add the first one', () => { const t = gaps[0].q; const id = Math.max(...WORDS.map(w => w.id), ...BUILTIN_WORDS.map(w => w.id)) + 1; ADM.tab = 'edit'; ADM.kind = 'words'; ADM.editId = id; ADM.draft = { id, t, p: 'n', i: '', l: 1, c: 'code', r: ['dev'], d: '', v: '', k: '', f: '', e: '' }; renderAdmin(); }]);
+  const hardNoHelp = R.hard.slice(0, 40).filter(h => { const w = BY_ID.get(h.id); return !(w.st && w.st.en) || !(w.s && w.s.en); });
+  if (hardNoHelp.length >= 3) out.push(['bulb', `${hardNoHelp.length} of the 40 hardest words have no plain explanation or story yet, e.g. ${hardNoHelp.slice(0, 3).map(h => BY_ID.get(h.id).t).join(', ')}.`, 'Open AI tools', () => { ADM.tab = 'ai'; renderAdmin(); }]);
+  const topLang = R.langs[0];
+  if (topLang && LANGS[topLang[0]]) { const L = topLang[0]; const missing = WORDS.filter(w => !(w.x && w.x[L])).length; if (missing > 50) out.push(['globe', `${pct(topLang[1], n)}% of learners read ${LANGS[L].en}, but ${fmt(missing)} examples have no ${LANGS[L].en} translation yet.`, 'Translate examples', () => { ADM.tab = 'ai'; renderAdmin(); }]); }
+  for (const [role, c] of R.roles.slice(0, 3)) if (role && c >= Math.max(2, n * 0.15)) { const words = WORDS.filter(w => w.r.includes(role)).length; if (words < 400) out.push(['people', `${ROLE_LABEL(role)} make up ${pct(c, n)}% of learners but have only ${words} words. Consider adding more.`, 'Add a word', () => { ADM.tab = 'edit'; ADM.editId = null; renderAdmin(); }]); }
+  const noRole = (R.roles.find(r => r[0] === '') || [0, 0])[1];
+  if (noRole >= Math.max(2, n * 0.3)) out.push(['people', `${pct(noRole, n)}% of learners haven't picked a role, so they miss role-based words and plain explanations. A first-visit role picker could help.`]);
+  if (R.sleeping >= Math.max(2, n * 0.3)) out.push(['time', `${R.sleeping} learners haven't practised for 2 weeks or more. A weekly e-mail or a “word of the day” reminder could bring them back.`]);
+  const lp = R.levelPct.find(x => x.l == 1); if (lp && lp.pct > 60) out.push(['star', `Active learners already know ${Math.round(lp.pct)}% of Beginner words. Point them to Intermediate on the home page.`]);
+  const mob = (R.devices.find(d => d[0] === 'mobile') || [0, 0])[1]; if (n >= 5 && mob / n > 0.6) out.push(['mobile', `${pct(mob, n)}% of learners use a phone. Keep new features phone-first.`]);
+  if (R.avgScore != null && R.avgScore < 6) out.push(['quality', `The average quiz score is ${R.avgScore.toFixed(1)}/10. Quizzes may be too hard; consider a Beginner-only quiz by default.`]);
+  if (!out.length) out.push(['check', n ? 'Nothing needs your attention right now.' : 'No signed-in learners yet. Share the site and ask learners to sign in with Google so their progress shows up here.']);
+  return out;
+}
+
+// ---------- the page ----------
+async function admInsights(el) {
+  if (!INS.users && !INS.err) { el.innerHTML = '<div class="hint" style="text-align:left"><span class="spinner sm"></span> Loading learners…</div>'; await loadInsights(); if (ADM.tab === 'insights') renderAdmin(); return; }
+  if (INS.err) { el.innerHTML = `<div class="avoid">${svg('flag', '#DC2626', 18, 2)}<div>${esc(INS.err)}</div></div><button class="btn secondary sm" id="insRetry" style="margin-top:12px">Try again</button>`; $('#insRetry').onclick = async () => { INS.err = ''; INS.users = null; renderAdmin(); }; return; }
+  const R = computeInsights(); const n = R.users.length;
+  const word = id => BY_ID.get(id);
+  const topKnown = [...R.knownBy.entries()].sort((a, b) => b[1] - a[1]).map(([id, c]) => ({ id, c }));
+  const topSaved = [...R.savedBy.entries()].filter(([id]) => BY_ID.has(id)).sort((a, b) => b[1] - a[1]).map(([id, c]) => ({ id, c }));
+  const topViewed = [...R.viewsBy.entries()].filter(([id]) => BY_ID.has(id)).sort((a, b) => b[1] - a[1]).map(([id, c]) => ({ id, c }));
+  const repStatus = ['open', 'accepted', 'rejected'].map(s => ({ label: { open: 'Waiting', accepted: 'Accepted', rejected: 'Rejected' }[s], v: R.reports.filter(r => r.status === s).length }));
+  const repField = [...R.reports.reduce((m, r) => m.set(fieldLabel(r.kind || 'words', r.field), (m.get(fieldLabel(r.kind || 'words', r.field)) || 0) + 1), new Map())].sort((a, b) => b[1] - a[1]).map(([label, v]) => ({ label, v }));
+  const sugg = suggestions(R);
+  el.innerHTML = `
+  <div class="frow vz-filters">
+    <div class="seg" id="insRange">${segHTML([[7, '7 days'], [30, '30 days'], [90, '90 days'], ['all', 'All time']], INS.range, 'ir')}</div>
+    <select class="sel" id="insRole"><option value="all">All roles</option>${Object.entries(ROLES).map(([k, Ro]) => `<option value="${k}" ${INS.role === k ? 'selected' : ''}>${Ro.name}</option>`).join('')}<option value="none" ${INS.role === 'none' ? 'selected' : ''}>Role not chosen</option></select>
+    <button class="btn ghost sm" id="insRefresh">Refresh</button>
+    <span class="count">Signed-in learners only · updated ${INS.loadedAt ? INS.loadedAt.toLocaleTimeString() : ''}</span>
+  </div>
+  <div class="statgrid vz-tiles">
+    ${tile(fmt(n), 'learners', INS.role === 'all' ? '' : esc(INS.role === 'none' ? 'Role not chosen' : ROLE_LABEL(INS.role)))}
+    ${tile(fmt(R.active.length), INS.range === 'all' ? 'ever active' : `active in ${INS.range} days`, delta(R.active.length, R.prevActive.length))}
+    ${tile(fmt(R.newUsers.length), INS.range === 'all' ? 'joined' : `new in ${INS.range} days`)}
+    ${tile(fmt(R.avgKnown), 'words known per learner')}
+    ${tile(fmt(R.quizzes), 'quizzes taken', R.avgScore != null ? `average ${R.avgScore.toFixed(1)}/10` : '')}
+    ${tile(fmt(R.cards), 'flashcards reviewed')}
+    ${tile(fmt(R.returning), 'came back on 2+ days', `${pct(R.returning, n)}% of learners`)}
+    ${tile(fmt(R.reports.filter(r => r.status === 'open').length), 'reports waiting')}
+  </div>
+  <div class="card vz-card"><h3>${svg('sparkle', '#7C3AED', 18, 2)} What to do next</h3><div class="stack" style="gap:8px">${sugg.map(([ic, t, btn], i) => `<div class="vz-sugg">${svg(ic, '#2563EB', 18, 2)}<span>${esc(t)}</span>${btn ? `<button class="btn secondary sm" data-sugg="${i}">${esc(btn)}</button>` : ''}</div>`).join('')}</div></div>
+  <div class="card vz-card"><h3>Learners active each day</h3><p class="vz-sub">How many learners practised on each day${INS.range === 'all' ? ' (last 90 days)' : ''}. Hover for the exact number.</p>${lineChart(R.trend)}</div>
+  <div class="vz-grid">
+    <div class="card vz-card"><h3>Learners by role</h3>${hbars(R.roles.map(([k, v]) => ({ label: ROLE_LABEL(k), v })), { total: n })}</div>
+    <div class="card vz-card"><h3>Languages learners read</h3><p class="vz-sub">A learner can pick several, so the shares add up to more than 100%.</p>${hbars(R.langs.map(([k, v]) => ({ label: LANGS[k] ? LANGS[k].en : k, v })), { total: n })}</div>
+    <div class="card vz-card"><h3>Interface language</h3>${hbars(R.ui.map(([k, v]) => ({ label: k === 'en' ? 'English only' : k === 'multi' ? 'English + their languages' : LANGS[k] ? LANGS[k].en + ' only' : k, v })), { total: n })}</div>
+    <div class="card vz-card"><h3>Phone or computer</h3><p class="vz-sub">The device of each learner's latest visit.</p>${hbars(R.devices.map(([k, v]) => ({ label: { mobile: 'Phone', desktop: 'Computer', unknown: 'Not recorded yet' }[k] || k, v })), { total: n })}</div>
+    <div class="card vz-card"><h3>How far learners are in each level</h3><p class="vz-sub">Share of each level's words the average active learner knows.</p>${hbars(R.levelPct.map(x => ({ label: LEVELS[x.l].name, v: Math.round(x.pct) })), { noPct: true, max: 100 }).replace(/(<span class="vz-val">)(\d+)/g, '$1$2%')}</div>
+    <div class="card vz-card"><h3>Listening, by language</h3><p class="vz-sub">Times learners pressed a listen button.</p>${hbars(R.plays.map(([k, v]) => ({ label: k === 'en' ? 'English' : LANGS[k] ? LANGS[k].en : k, v })))}</div>
+  </div>
+  <div class="card vz-card"><h3>Top 100 words learners know</h3><p class="vz-sub">Words the most learners marked as known.</p>${wordTable('top', topKnown, [['Learners', r => `${r.c} <small class="count">${pct(r.c, n)}%</small>`]])}</div>
+  <div class="vz-grid">
+    <div class="card vz-card"><h3>Hardest words</h3><p class="vz-sub">Most often “still learning” or answered wrong in quizzes. Good candidates for a story or plain explanation.</p>${wordTable('hard', R.hard, [['Still learning', r => r.learning], ['Wrong answers', r => r.wrong], ['Help', (r, w) => `${w.s && w.s.en ? '💡' : ''}${w.st && w.st.en ? '📖' : ''}` || '–']], 50)}</div>
+    <div class="card vz-card"><h3>Words learners look for but can't find</h3><p class="vz-sub">Searches with no result. Add the useful ones.</p>
+      <div style="overflow:auto;max-height:420px"><table class="ptable vz-table"><tr><th>Search</th><th>Learners</th><th>Last</th><th></th></tr>${R.missed.slice(0, 50).map((m, i) => `<tr><td data-notr><b>${esc(m.q)}</b></td><td>${m.users}</td><td>${m.last}</td><td><button class="btn ghost sm" data-addq="${i}">Add</button></td></tr>`).join('') || '<tr><td colspan="4" class="hint">No missed searches yet.</td></tr>'}</table></div></div>
+  </div>
+  <div class="vz-grid">
+    <div class="card vz-card"><h3>Most saved ★</h3>${wordTable('saved', topSaved, [['Learners', r => r.c]], 30)}</div>
+    <div class="card vz-card"><h3>Most opened</h3>${wordTable('viewed', topViewed, [['Opens', r => r.c]], 30)}</div>
+  </div>
+  <div class="vz-grid">
+    <div class="card vz-card"><h3>Engagement</h3>${hbars([
+      { label: 'Practised 3+ days in the last week', v: R.weekly }, { label: 'Came back on 2+ days', v: R.returning },
+      { label: 'Streak of 3+ days now', v: R.streaks.filter(s => s >= 3).length }, { label: 'Not seen for 2+ weeks', v: R.sleeping },
+      { label: 'Made a word list from a file', v: R.listUsers }], { total: n })}
+      <p class="vz-sub" style="margin-top:10px">${fmt(R.listWords)} words saved in learners' own lists.</p></div>
+    <div class="card vz-card"><h3>Reports</h3>${hbars(repStatus, {})}<h4 style="margin:14px 0 6px;font-size:14px">What learners report</h4>${hbars(repField.slice(0, 6), {})}</div>
+  </div>
+  <div class="card vz-card"><h3>Learners</h3><p class="vz-sub">One row per learner. No names or e-mails are stored for this page.</p>
+    <div class="frow" style="margin-bottom:10px"><button class="btn ghost sm" data-csv="users">Download CSV</button></div>
+    <div style="overflow:auto;max-height:420px"><table class="ptable vz-table"><tr><th>Learner</th><th>Role</th><th>Languages</th><th>Known</th><th>Learning</th><th>Quizzes</th><th>Streak</th><th>Last active</th><th>Device</th></tr>
+    ${R.users.map((u, i) => ({ u, i, last: R.lastSeenOf(u) })).sort((a, b) => b.last.localeCompare(a.last)).map(({ u, i, last }) => `<tr><td>#${i + 1}</td><td>${esc(ROLE_LABEL(u.prefs?.role))}</td><td data-notr>${(u.prefs?.langs || ['vi', 'ko']).map(l => LANGS[l] ? LANGS[l].short : l).join(', ')}</td><td>${Object.keys(u.known || {}).length}</td><td>${Object.keys(u.learning || {}).length}</td><td>${u.quizzes || 0}</td><td>${R.streaks[i]}</td><td>${last || '–'}</td><td>${{ mobile: 'Phone', desktop: 'Computer' }[u.meta?.device] || '–'}</td></tr>`).join('')}</table></div></div>`;
+  wireLine(el); hydrateIcons(el);
+  $('#insRange').onclick = e => { const b = e.target.closest('[data-ir]'); if (b) { INS.range = b.dataset.ir === 'all' ? 'all' : +b.dataset.ir; renderAdmin(); } };
+  $('#insRole').onchange = e => { INS.role = e.target.value; renderAdmin(); };
+  $('#insRefresh').onclick = () => withButton($('#insRefresh'), async () => { await loadInsights(true); renderAdmin(); });
+  el.querySelectorAll('[data-sugg]').forEach(b => b.onclick = () => sugg[+b.dataset.sugg][3]());
+  el.querySelectorAll('[data-addq]').forEach(b => b.onclick = () => { const t = R.missed[+b.dataset.addq].q; const id = Math.max(...WORDS.map(w => w.id), ...BUILTIN_WORDS.map(w => w.id)) + 1; ADM.tab = 'edit'; ADM.kind = 'words'; ADM.editId = id; ADM.draft = { id, t, p: 'n', i: '', l: 1, c: 'code', r: ['dev'], d: '', v: '', k: '', f: '', e: '' }; renderAdmin(); });
+  let tq; el.querySelectorAll('[data-tq]').forEach(inp => inp.oninput = () => { clearTimeout(tq); tq = setTimeout(() => { INS.q[inp.dataset.tq] = inp.value; const pos = inp.value.length; renderAdmin(); const again = document.querySelector(`[data-tq="${inp.dataset.tq}"]`); if (again) { again.focus(); again.setSelectionRange(pos, pos); } }, 250); });
+  el.querySelectorAll('[data-csv]').forEach(b => b.onclick = () => {
+    const k = b.dataset.csv; const wr = id => { const w = word(id); return [w.t, w.a || '', LEVELS[w.l].name, TOPIC_NAMES[w.c] || w.c, w.v]; };
+    if (k === 'top') csv('top-known-words', ['Rank', 'Word', 'Full form', 'Level', 'Topic', 'Vietnamese', 'Learners', '% of learners'], topKnown.map((r, i) => [i + 1, ...wr(r.id), r.c, pct(r.c, n)]));
+    if (k === 'hard') csv('hardest-words', ['Rank', 'Word', 'Full form', 'Level', 'Topic', 'Vietnamese', 'Still learning', 'Wrong answers'], R.hard.map((r, i) => [i + 1, ...wr(r.id), r.learning, r.wrong]));
+    if (k === 'saved') csv('most-saved-words', ['Rank', 'Word', 'Full form', 'Level', 'Topic', 'Vietnamese', 'Learners'], topSaved.map((r, i) => [i + 1, ...wr(r.id), r.c]));
+    if (k === 'viewed') csv('most-opened-words', ['Rank', 'Word', 'Full form', 'Level', 'Topic', 'Vietnamese', 'Opens'], topViewed.map((r, i) => [i + 1, ...wr(r.id), r.c]));
+    if (k === 'users') csv('learners', ['Learner', 'Role', 'Languages', 'Interface', 'Known', 'Learning', 'Saved', 'Quizzes', 'Best quiz', 'Days practised', 'First seen', 'Last active', 'Device', 'Word lists'], R.users.map((u, i) => [i + 1, ROLE_LABEL(u.prefs?.role), (u.prefs?.langs || []).join(' '), u.prefs?.ui || 'en', Object.keys(u.known || {}).length, Object.keys(u.learning || {}).length, Object.keys(u.saved || {}).length, u.quizzes || 0, u.best || 0, Object.keys(u.days || {}).length, u.meta?.firstSeen || '', R.lastSeenOf(u), u.meta?.device || '', u.meta?.lists || 0]));
+  });
+}
+
 /* ---------- router ---------- */
 let currentView = 'home', lastView = 'home';
 function refreshVisible() { if (currentView === 'browse') renderBrowse(); if (currentView === 'progress') renderProgress(); if (currentView === 'home') renderHome(); if (currentView === 'lists' && LST.open) renderLists(); }
@@ -1775,6 +2041,6 @@ route();
 applyLanguage();
 if (window.Cloud) initCloud();
 </script>
-<script type="module" src="cloud.js?v=c02f6d502e"></script>
+<script type="module" src="cloud.js?v=c7078fdf4e"></script>
 </body>
 </html>

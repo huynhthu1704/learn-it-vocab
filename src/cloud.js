@@ -153,6 +153,16 @@ async function myReports() {
   return s.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
+// ---------- admin insights: every learner's top-level document (admins only, see firestore.rules) ----------
+async function listUsers() {
+  const s = await getDocs(collection(db, 'users'));
+  return s.docs.map((d) => ({ id: d.id, ...d.data(), updatedAt: d.data().updatedAt?.toDate?.() || null }));
+}
+async function listAllReports() {
+  const s = await getDocs(query(collection(db, 'reports'), limit(1000)));
+  return s.docs.map((d) => ({ id: d.id, ...d.data(), createdAt: d.data().createdAt?.toDate?.() || null }));
+}
+
 // ---------- personal word lists ----------
 async function listLists(uid) {
   const s = await getDocs(collection(db, 'users', uid, 'lists'));
@@ -195,7 +205,7 @@ window.Cloud = {
   enabled, projectId: firebaseConfig.projectId,
   loadContent, syncBuiltin, rebuildBundles, saveItems,
   submitReport, listReports, updateReport, myReports,
-  listLists, saveList, deleteList,
+  listLists, saveList, deleteList, listUsers, listAllReports,
   aiJSON,
   signIn, logOut, onUser, isAdmin, loadProgress, saveProgress,
 };

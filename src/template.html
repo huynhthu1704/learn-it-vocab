@@ -313,6 +313,34 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   .ccard .phrase{font-size:19px}
 }
 .view{display:none}
+.vz-filters{margin-bottom:16px}
+.vz-tiles{grid-template-columns:repeat(4,1fr)}
+.vz-tile small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.vz-card{padding:20px 22px;margin-bottom:18px}
+.vz-card h3{font-size:18px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.vz-sub{color:var(--muted);font-size:13px;margin:0 0 12px}
+.vz-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.vz-grid>.vz-card{margin-bottom:0}
+.vz-grid+.vz-card,.vz-grid+.vz-grid{margin-top:18px}
+.vz-bars{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.vz-row{display:grid;grid-template-columns:minmax(90px,38%) 1fr auto;gap:10px;align-items:center;font-size:14px}
+.vz-lab{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vz-track{height:12px;background:#F1F3F7;border-radius:4px;overflow:hidden}
+.vz-track i{display:block;height:100%;background:#2a78d6;border-radius:0 4px 4px 0}
+.vz-row:hover .vz-track i{background:#1c5cab}
+.vz-val{font-weight:700;font-variant-numeric:tabular-nums;min-width:52px;text-align:right}
+.vz-val small{color:var(--muted);font-weight:500;margin-left:6px}
+.vz-line{position:relative}
+.vz-line svg{width:100%;height:200px;display:block;cursor:crosshair}
+.vz-tip{position:absolute;top:0;display:none;background:var(--ink);color:#fff;border-radius:8px;padding:6px 10px;font-size:13px;pointer-events:none;width:120px}
+.vz-tip small{opacity:.75}
+.vz-sugg{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:10px 12px;font-size:14px}
+.vz-sugg>span{flex:1}
+.vz-sugg svg{flex:none;margin-top:2px}
+.vz-table td,.vz-table th{padding:8px 10px;font-size:14px;white-space:nowrap}
+.vz-table a{text-decoration:none}
+@media (max-width:900px){.vz-grid{grid-template-columns:1fr}.vz-tiles{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){.vz-sugg{flex-wrap:wrap}.vz-sugg .btn{margin-left:28px}.vz-card{padding:16px}}
 .close{z-index:5}
 .closebar{display:none}
 @media (max-width:760px){
@@ -704,6 +732,16 @@ function migrateMerged(st) { for (const k of ['known', 'learning', 'saved']) for
 migrateMerged(S);
 function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} updateChips(); if (typeof queueCloudSave === 'function') queueCloudSave(); }
 const today = () => new Date().toISOString().slice(0, 10);
+// Light usage stats for the admin Insights page (only saved to the cloud for signed-in learners).
+function track(kind, key, n = 1) {
+  const T = S.stats = S.stats || {};
+  if (kind === 'missed') { T.missed = [{ q: key, d: today() }, ...(T.missed || []).filter(x => x.q !== key)].slice(0, 30); }
+  else if (kind === 'score') { T.scores = [...(T.scores || []), key].slice(-20); }
+  else if (kind === 'count') { T[key] = (T[key] || 0) + n; }
+  else { const m = T[kind] = T[kind] || {}; m[key] = (m[key] || 0) + n; const ks = Object.keys(m); if (ks.length > 400) { ks.sort((a, b) => m[b] - m[a]).slice(300).forEach(k => delete m[k]); } }
+  try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {}
+  if (typeof queueCloudSave === 'function') queueCloudSave();
+}
 function practised(n = 1) { const d = today(); S.days[d] = (S.days[d] || 0) + n; save(); }
 function streak() { let n = 0; const d = new Date(); if (!S.days[today()]) d.setDate(d.getDate() - 1); for (;;) { const k = d.toISOString().slice(0, 10); if (S.days[k]) { n++; d.setDate(d.getDate() - 1); } else break; } return n; }
 function status(id) { return S.known[id] ? 'known' : S.learning[id] ? 'learning' : 'new'; }
@@ -729,7 +767,7 @@ function speak(text, rate, lang) {
     speechSynthesis.cancel();
     const code = lang && LANGS[lang] ? LANGS[lang].tts : S.accent;
     const u = new SpeechSynthesisUtterance(lang ? text : text.replace(/\//g, ' ').replace(/\bvs\b/g, 'versus'));
-    u.lang = code; u.rate = rate || +S.rate || 1;
+    u.lang = code; u.rate = rate || +S.rate || 1; track('plays', lang || 'en');
     const base = code.slice(0, 2), norm2 = l => (l || '').replace('_', '-');
     const v = voices.find(v => norm2(v.lang) === code && /Google|Samantha|Daniel|Natural|Microsoft/.test(v.name)) || voices.find(v => norm2(v.lang) === code) || voices.find(v => norm2(v.lang).startsWith(base));
     if (v) u.voice = v; else if (lang && voices.length) toast(`No ${LANGS[lang].en} voice on this device, so it may sound wrong. Add one in your system settings.`);
@@ -809,6 +847,7 @@ function wordCard(w) {
 let modalList = [];
 function openWord(id, list) {
   const w = BY_ID.get(+id); if (!w) return;
+  if (+$('#modal').dataset.id !== w.id || !$('#overlay').classList.contains('open')) track('views', w.id);
   if (list) modalList = list;
   const L = LEVELS[w.l]; const st = status(w.id);
   const idx = modalList.indexOf(w.id);
@@ -933,6 +972,7 @@ function renderBrowse() {
   $('#grid').innerHTML = list.slice(0, shown).map(wordCard).join('');
   $('#count').textContent = `${fmt(list.length)} ${list.length === 1 ? 'word' : 'words'}`;
   $('#empty').style.display = list.length ? 'none' : 'block';
+  clearTimeout(renderBrowse.mt); if (!list.length && q.length >= 3) { const raw = F.q.trim().toLowerCase(); renderBrowse.mt = setTimeout(() => track('missed', raw), 1500); }
   $('#moreBtn').style.display = list.length > shown ? '' : 'none';
   $('#moreBtn').textContent = `Show more words (${fmt(list.length - shown)} left)`;
 }
@@ -1029,8 +1069,8 @@ function renderFC() {
     <p class="hint">Keyboard: Space to flip · 1 = Again · 2 = I knew it</p>`;
  
   $('#fc').onclick = e => { if (!e.target.closest('[data-say]')) $('#fc').classList.toggle('flip'); };
-  $('#fcYes').onclick = () => { setKnown(w.id, true); FC.got++; FC.done++; FC.queue.shift(); renderFC(); };
-  $('#fcNo').onclick = () => { setKnown(w.id, false); FC.again++; FC.done++; const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
+  $('#fcYes').onclick = () => { setKnown(w.id, true); FC.got++; FC.done++; track('count', 'cards'); FC.queue.shift(); renderFC(); };
+  $('#fcNo').onclick = () => { setKnown(w.id, false); FC.again++; FC.done++; track('count', 'cards'); const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
 }
 $('#fcStart').onclick = startFC;
 document.addEventListener('keydown', e => {
@@ -1068,7 +1108,7 @@ function startQuiz() {
 function renderQ() {
   const q = QZ.qs[QZ.i];
   if (!q) {
-    S.quizzes++; S.best = Math.max(S.best, QZ.score); practised(0);
+    S.quizzes++; S.best = Math.max(S.best, QZ.score); track('score', QZ.score); practised(0);
     $('#quizArea').innerHTML = `<div class="card qcard" style="text-align:center"><div class="eyebrow">Quiz complete</div><div class="result-big" style="margin:14px 0">${QZ.score}/10</div><p style="color:var(--muted)">${QZ.score >= 8 ? 'Excellent work!' : QZ.score >= 5 ? 'Good job. Review the words below.' : 'Keep practising, you will get there.'}</p>
       ${QZ.wrong.length ? `<div style="text-align:left;margin-top:18px"><b>Words to review</b><ul class="review" data-notr>${QZ.wrong.map(w => w.cat ? `<li><b>${esc(w.p)}</b> · ${esc(meaningOf(w))}</li>` : `<li><a href="#" data-open="${w.id}" style="font-weight:700">${esc(w.t)}</a> <span class="ipa">${esc(w.i)}</span> · ${esc(meaningOf(w))}</li>`).join('')}</ul></div>` : ''}
       <div class="fc-actions"><button class="btn primary" id="qzAgain">New quiz</button><a class="btn secondary" href="#flashcards">Practise with flashcards</a></div></div>`;
@@ -1095,7 +1135,7 @@ function renderQ() {
   document.querySelectorAll('[data-ans]').forEach(b => b.onclick = () => {
     const ok = +b.dataset.ans === w.id;
     document.querySelectorAll('[data-ans]').forEach(x => { x.disabled = true; if (+x.dataset.ans === w.id) { x.classList.add('right'); x.lastChild.innerHTML = svg('check', '#16A34A', 20, 2.5); } });
-    if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); if (!q.corp) setKnown(w.id, false); else practised(0); } else { QZ.score++; practised(); }
+    if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); if (!q.corp) track('wrong', w.id); if (!q.corp) setKnown(w.id, false); else practised(0); } else { QZ.score++; practised(); }
     if (q.corp) { $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <b data-notr>${esc(w.p)}</b><div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:8px;font-style:italic" data-notr>${esc(w.ex)}${xRows(w.x, '#2563EB', '#fff', 22)}</div></div><div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`; $('#qNext').onclick = () => { QZ.i++; renderQ(); }; $('#qNext').focus(); return; }
     $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <span data-notr><b>${esc(w.t)}</b> <span class="ipa">${esc(w.i)}</span></span><div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:6px">${exampleHTML(w, L.c, L.t, 28, false)}</div></div>
       <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`;

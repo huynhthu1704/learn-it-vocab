@@ -15,7 +15,10 @@ function applyContent(c) {
   refreshVisible(); renderFocus(); if (currentView === 'workplace') renderCorp();
 }
 const prefsPayload = () => ({ langs: S.langs, ui: S.ui, plain: S.plain, role: S.role, accent: S.accent, rate: S.rate, prefsAt: S.prefsAt || 0 });
-const progressPayload = () => ({ known: S.known, learning: S.learning, saved: S.saved, days: S.days, quizzes: S.quizzes, best: S.best, prefs: prefsPayload() });
+const isMobile = () => matchMedia('(max-width: 760px)').matches;
+// What the admin Insights page reads. No names or e-mails: learners are counted, not identified.
+const progressPayload = () => ({ known: S.known, learning: S.learning, saved: S.saved, days: S.days, quizzes: S.quizzes, best: S.best, prefs: prefsPayload(),
+  stats: S.stats || {}, meta: { firstSeen: S.firstSeen || today(), lastSeen: today(), device: isMobile() ? 'mobile' : 'desktop', lists: S.listCount || 0, listWords: S.listWords || 0 } });
 function queueCloudSave() {
   if (!cloudUser || !window.Cloud) return;
   clearTimeout(cloudSaveT);
@@ -31,8 +34,11 @@ async function syncProgress() {
       S.saved = { ...(c.saved || {}), ...S.saved };
       for (const [d, n] of Object.entries(c.days || {})) S.days[d] = Math.max(S.days[d] || 0, n);
       S.quizzes = Math.max(S.quizzes, c.quizzes || 0); S.best = Math.max(S.best, c.best || 0);
+      if (c.meta && c.meta.firstSeen && (!S.firstSeen || c.meta.firstSeen < S.firstSeen)) S.firstSeen = c.meta.firstSeen;
+      if (c.stats && !S.stats) S.stats = c.stats;
       if (c.prefs && (c.prefs.prefsAt || 0) > (S.prefsAt || 0)) { Object.assign(S, c.prefs); applyLanguage(); }
     }
+    if (!S.firstSeen) S.firstSeen = today();
     save(); cloudStatus = 'Progress synced with your account';
   } catch (e) { cloudStatus = 'Could not load your saved progress: ' + e.message; }
   refreshVisible();
@@ -236,7 +242,7 @@ const EDIT_FIELDS = {
     ['ctx', 'When to use', 'area'], ['ct.vi', 'When to use (Vietnamese)', 'area'], ['ct.ko', 'When to use (Korean)', 'area'], ['ct.fr', 'When to use (French)', 'area'],
     ['ex', 'Example', 'area'], ['x.vi', 'Example in Vietnamese', 'area'], ['x.ko', 'Example in Korean', 'area'], ['x.fr', 'Example in French', 'area'], ['av', 'Avoid', 'area']],
 };
-const ADM = { tab: 'reports', kind: 'words', editId: null, q: '', repStatus: 'open', reports: null, fromReport: null, run: null, log: [] };
+const ADM = { tab: 'insights', kind: 'words', editId: null, q: '', repStatus: 'open', reports: null, fromReport: null, run: null, log: [] };
 function admItems(kind) { return kind === 'corporate' ? CORP : WORDS; }
 function replaceLocal(kind, item) {
   if (kind === 'corporate') { const i = CORP.findIndex(c => c.id === item.id); if (i >= 0) CORP[i] = item; else CORP.push(item); }
@@ -250,11 +256,11 @@ function renderAdmin() {
   if (!cloudUser) { area.innerHTML = `<div class="card" style="padding:24px"><p style="margin-top:0">Sign in with an admin account.</p>${signInButton('admSignIn')}</div>`; $('#admSignIn').onclick = () => doSignIn($('#admSignIn')); $('#adminTabs').innerHTML = ''; return; }
   if (!cloudAdmin) { area.innerHTML = `<div class="card" style="padding:24px"><p style="margin:0">This account is not an admin. To make it one, add a document with this user ID in the <b>admins</b> collection in the Firebase console: <code>${esc(cloudUser.uid)}</code></p></div>`; $('#adminTabs').innerHTML = ''; return; }
   const open = ADM.reports && ADM.repStatus === 'open' ? ADM.reports.length : null;
-  $('#adminTabs').innerHTML = [['reports', 'Reports' + (open ? ` (${open})` : '')], ['edit', 'Edit words'], ['ai', 'AI tools'], ['content', 'Content & sync']].map(([k, n]) => `<button data-atab="${k}" class="${ADM.tab === k ? 'on' : ''}">${n}</button>`).join('');
+  $('#adminTabs').innerHTML = [['insights', 'Insights'], ['reports', 'Reports' + (open ? ` (${open})` : '')], ['edit', 'Edit words'], ['ai', 'AI tools'], ['content', 'Content & sync']].map(([k, n]) => `<button data-atab="${k}" class="${ADM.tab === k ? 'on' : ''}">${n}</button>`).join('');
   $('#adminTabs').onclick = e => { const b = e.target.closest('[data-atab]'); if (b) { ADM.tab = b.dataset.atab; renderAdmin(); } };
   const warn = needsSync() ? `<div class="avoid" style="margin-bottom:16px">${svg('flag', '#DC2626', 18, 2)}<div><b>One-time step:</b> open <b>Content & sync</b> and click <b>Sync built-in words to Firestore</b> before editing, so every word (now ${fmt(BUILTIN_WORDS.length)}) is in the database.</div></div>` : '';
   area.innerHTML = warn + '<div id="admBody"></div>';
-  ({ reports: admReports, edit: admEdit, ai: admAI, content: admContent })[ADM.tab]($('#admBody'));
+  ({ insights: admInsights, reports: admReports, edit: admEdit, ai: admAI, content: admContent })[ADM.tab]($('#admBody'));
 }
 async function admReports(el) {
   el.innerHTML = `<div class="frow" style="margin-bottom:16px"><div class="seg" id="repSeg">${segHTML([['open', 'Waiting'], ['accepted', 'Accepted'], ['rejected', 'Rejected']], ADM.repStatus, 'rs')}</div><button class="btn ghost sm" id="repReload">Refresh</button></div><div class="stack" id="repList"><div class="hint"><span class="spinner sm"></span> Loading reports…</div></div>`;
@@ -516,6 +522,8 @@ function renderLists() {
 }
 async function loadMyLists() {
   try { if (!LST.lists) LST.lists = await Cloud.listLists(cloudUser.uid); } catch (e) { $('#lsMine').innerHTML = `<p>Could not load your lists: ${esc(e.code || e.message)}</p>`; return; }
+  const lc = LST.lists.length, lw = LST.lists.reduce((n, l) => n + (l.items || []).length, 0);
+  if (S.listCount !== lc || S.listWords !== lw) { S.listCount = lc; S.listWords = lw; save(); }
   const m = $('#lsMine'); if (!m) return;
   m.innerHTML = LST.lists.length ? LST.lists.map(l => `<div class="card listcard"><div><b style="font-size:18px" data-notr>${esc(l.name)}</b><div class="count"><span>${(l.items || []).length} words</span>${l.source ? ` · <span data-notr>${esc(l.source)}</span>` : ''}${l.createdAt ? ' · ' + l.createdAt.toLocaleDateString() : ''}</div></div><button class="btn secondary sm" data-lopen="${l.id}">Open</button></div>`).join('') : '<p style="color:var(--muted);margin:0">No lists yet. Upload a file above to make your first one.</p>';
   m.onclick = e => { const b = e.target.closest('[data-lopen]'); if (b) { LST.open = LST.lists.find(l => l.id === b.dataset.lopen); renderLists(); window.scrollTo(0, 0); } };

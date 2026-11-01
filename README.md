@@ -25,6 +25,7 @@ browser until the learner clears it; `?role=all` clears it too. Role ids: `stude
 - **Flashcards**, **Quiz** and **Workplace English** as before; quiz meanings follow the learner's first language.
 - **My lists**: upload a PDF, Word file, text or Markdown (in any language) or paste text. AI picks out the key words, adds the English term, IPA, meanings in all languages and an example, and the learner saves them as their own list.
 - **Report a problem**: on any word, a signed-in learner can say what is wrong and suggest the correct text.
+- **Insights** (Admin → Insights): learners by role, language and device, daily active learners, the top 100 known words, hardest words, most saved and opened words, searches with no result (content gaps), engagement, reports, a learner table, CSV downloads and a “What to do next” list worked out from the data. It counts signed-in learners only and stores no names or e-mails.
 - **Admin**: review reports (accept, edit, reject), edit any word or Workplace English item, run the AI tools (translations, explanations, stories), and sync the built-in data to Firestore.
 - **Mobile**: every page works on a phone.
 

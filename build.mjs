@@ -167,7 +167,7 @@ for (const line of fs.readFileSync('data/i18n.txt', 'utf8').split('\n')) {
 }
 console.log('interface strings', Object.keys(I18N).length);
 const html = fs.readFileSync('src/template.html', 'utf8')
-  .replace('/*__CLOUD_UI__*/', () => fs.readFileSync('src/ui-cloud.js', 'utf8'))
+  .replace('/*__CLOUD_UI__*/', () => fs.readFileSync('src/ui-cloud.js', 'utf8') + '\n' + fs.readFileSync('src/ui-insights.js', 'utf8'))
   .replace('/*__WORDS__*/[]', () => safe(out)).replace('/*__CORP__*/[]', () => safe(JSON.stringify(CORP)))
   .replace('/*__I18N__*/{}', () => safe(JSON.stringify(I18N)))
   .replace('/*__MERGED__*/{}', () => JSON.stringify(MERGED));
