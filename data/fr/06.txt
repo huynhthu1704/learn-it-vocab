@@ -1,0 +1,508 @@
+user manual|manuel d'utilisation
+installation guide|guide d'installation
+system requirements|configuration requise
+test plan document|document de plan de test
+screenshot evidence|capture d'écran comme preuve
+source code submission|rendu du code source
+zip file|fichier zip
+plagiarism checker|logiciel anti-plagiat
+reference list|bibliographie
+in-text citation|citation dans le texte
+quotation|citation
+key point|point clé
+evidence|preuve
+comparison|comparaison
+advantage|avantage
+disadvantage|inconvénient
+pros and cons|avantages et inconvénients
+case study|étude de cas
+guest speaker|intervenant invité
+field trip|visite pédagogique
+career fair|forum des métiers
+alumni|anciens élèves
+code review comment|commentaire de revue de code
+suggestion|suggestion
+LGTM|ça me semble bon (validation)
+WIP commit|commit de travail en cours
+squash|fusionner des commits (squash)
+force push|forcer le push
+upstream|dépôt d'origine (upstream)
+fork|forker, dupliquer un dépôt
+gitignore|fichier .gitignore
+dev environment|environnement de développement
+hot reload|rechargement à chaud
+build tool|outil de build
+bundle|paquet JavaScript (bundle)
+minify|minifier
+polyfill|polyfill
+browser support|compatibilité navigateurs
+media query|requête média
+flexbox|flexbox
+grid layout|mise en page en grille
+design token|jeton de design
+style guide|charte graphique
+form validation|validation de formulaire
+input sanitization|assainissement des entrées
+rate limiting|limitation du nombre de requêtes
+file upload|envoi de fichier
+image compression|compression d'image
+time zone handling|gestion des fuseaux horaires
+date library|bibliothèque de dates
+localization|localisation
+translation key|clé de traduction
+error page|page d'erreur
+empty state|état vide
+loading state|état de chargement
+skeleton screen|écran squelette
+toast message|message éphémère (toast)
+modal|fenêtre modale
+test coverage report|rapport de couverture de tests
+risk area|zone à risque
+user flow|parcours utilisateur
+error state|état d'erreur
+boundary|limite
+invalid input|saisie invalide
+null value|valeur nulle
+large file|fichier volumineux
+special characters|caractères spéciaux
+Vietnamese diacritics|accents vietnamiens
+emoji input|saisie d'émojis
+long text|texte long
+truncation|troncature
+overflow|débordement
+responsive layout|mise en page adaptative
+pixel perfect|au pixel près
+design review|revue de design
+spec review|revue de spécification
+ambiguity|ambiguïté
+clarification|clarification
+test sign-off|validation des tests
+release checklist|liste de contrôle de livraison
+smoke test result|résultat du test de fumée
+bug bash|chasse aux bogues collective
+dogfooding|utilisation interne du produit
+crowd testing|test participatif
+test account setup|création des comptes de test
+mock server|serveur simulé
+API response|réponse de l'API
+response body|corps de la réponse
+status 500|erreur serveur 500
+timeout error|erreur de délai dépassé
+retry|réessayer
+idle timeout|expiration après inactivité
+business analysis|analyse métier
+BABOK|référentiel BABOK
+CBAP|certification CBAP
+PSPO|certification PSPO
+PMP|certification PMP
+interview script|guide d'entretien
+open-ended question|question ouverte
+closed question|question fermée
+follow-up question|question de relance
+probe|creuser, approfondir
+active listening|écoute active
+note-taker|preneur de notes
+meeting invite|invitation à une réunion
+reschedule|reprogrammer
+time slot|créneau
+dry run|répétition
+screen flow|enchaînement des écrans
+UI copy|textes de l'interface
+error message text|texte du message d'erreur
+field length|longueur du champ
+mandatory field|champ obligatoire
+default value|valeur par défaut
+dropdown list|liste déroulante
+lookup table|table de référence
+calculation rule|règle de calcul
+approval matrix|matrice de validation
+notification rule|règle de notification
+report layout|mise en page du rapport
+sample report|rapport type
+user role matrix|matrice des rôles utilisateurs
+permission level|niveau d'autorisation
+audit requirement|exigence d'audit
+reporting requirement|exigence de reporting
+integration requirement|exigence d'intégration
+literature gap|lacune dans la littérature
+theoretical framework|cadre théorique
+research design|protocole de recherche
+control group|groupe témoin
+dependent variable|variable dépendante
+independent variable|variable indépendante
+survey instrument|questionnaire d'enquête
+Likert scale|échelle de Likert
+pilot study|étude pilote
+data collection|collecte de données
+data analysis|analyse des données
+outlier|valeur aberrante
+standard deviation|écart type
+mean|moyenne
+median|médiane
+distribution|distribution
+confidence interval|intervalle de confiance
+p-value|valeur p
+t-test|test t
+validity|validité
+reliability|fiabilité
+generalize|généraliser
+implication|implication
+recommendation|recommandation
+appendix|annexe
+figure caption|légende de figure
+oral presentation|présentation orale
+viva|soutenance orale
+examiner|examinateur
+revision|révision
+camera-ready|version définitive
+preprint|prépublication
+citation count|nombre de citations
+h-index|indice h
+research ethics|éthique de la recherche
+grant|subvention de recherche
+architecture decision|décision d'architecture
+quality attribute|attribut de qualité
+resilience|résilience
+redundancy|redondance
+multi-region|multirégion
+data residency|localisation des données
+latency budget|budget de latence
+tail latency|latence de queue
+backpressure|contre-pression
+dead letter queue|file des messages en échec
+saga pattern|modèle saga
+CQRS|séparation commande-requête (CQRS)
+event sourcing|stockage par événements
+outbox pattern|modèle outbox
+schema registry|registre de schémas
+data contract|contrat de données
+stream processing|traitement de flux
+batch processing|traitement par lots
+data warehouse|entrepôt de données
+data lake|lac de données
+vector database|base de données vectorielle
+embedding|plongement vectoriel
+retrieval-augmented generation|génération augmentée par la recherche
+prompt engineering|ingénierie de prompts
+guardrail|garde-fou
+hallucination|hallucination
+evaluation set|jeu d'évaluation
+MLOps|MLOps
+model drift|dérive du modèle
+technical leadership|leadership technique
+mentorship|mentorat
+hiring loop|processus d'entretiens
+system design interview|entretien de conception de système
+engineering culture|culture d'ingénierie
+psychological safety|sécurité psychologique
+quality strategy|stratégie qualité
+quality culture|culture qualité
+whole-team approach|approche d'équipe globale
+three amigos|réunion des trois amigos
+example mapping|cartographie par l'exemple
+specification by example|spécification par l'exemple
+living documentation|documentation vivante
+acceptance test|test d'acceptation
+test automation pyramid|pyramide d'automatisation des tests
+ice cream cone|anti-modèle du cornet de glace
+UI automation|automatisation de l'interface
+API automation|automatisation des API
+mobile automation|automatisation mobile
+Appium|Appium
+Playwright|Playwright
+Cypress|Cypress
+k6|outil de test de charge k6
+test containers|conteneurs de test
+ephemeral environment|environnement éphémère
+environment parity|parité des environnements
+config drift|dérive de configuration
+feature flag testing|test des drapeaux de fonctionnalité
+A/B experiment|expérience A/B
+data validation|validation des données
+schema validation|validation de schéma
+backward compatibility test|test de rétrocompatibilité
+upgrade testing|test de mise à niveau
+installation testing|test d'installation
+disaster recovery test|exercice de reprise après sinistre
+failover test|test de basculement
+recovery time objective|durée maximale d'interruption (RTO)
+recovery point objective|perte de données maximale (RPO)
+accessibility audit|audit d'accessibilité
+color contrast|contraste des couleurs
+keyboard navigation|navigation au clavier
+alt text|texte alternatif
+focus order|ordre de focus
+problem statement|énoncé du problème
+hypothesis statement|énoncé d'hypothèse
+assumption mapping|cartographie des hypothèses
+riskiest assumption|hypothèse la plus risquée
+discovery sprint|sprint de découverte
+design sprint|design sprint
+user interview|entretien utilisateur
+interview synthesis|synthèse des entretiens
+affinity mapping|regroupement par affinités
+insight|enseignement clé
+empathy map|carte d'empathie
+service blueprint|plan de service (blueprint)
+touchpoint|point de contact
+moment of truth|moment de vérité
+friction|friction
+drop-off|point d'abandon
+activation rate|taux d'activation
+engagement|engagement
+stickiness|rétention d'usage
+DAU|utilisateurs actifs quotidiens
+MAU|utilisateurs actifs mensuels
+growth loop|boucle de croissance
+referral program|programme de parrainage
+feature adoption|adoption d'une fonctionnalité
+sunset a feature|retirer une fonctionnalité
+product analytics|analyse produit
+event tracking plan|plan de marquage des événements
+dashboard requirement|exigence de tableau de bord
+self-service|libre-service
+customer support|service client
+ticket deflection|réduction des tickets de support
+operational efficiency|efficacité opérationnelle
+headcount|effectif
+quarterly planning|planification trimestrielle
+annual budget|budget annuel
+board meeting|conseil d'administration
+strategic initiative|initiative stratégique
+bank account|compte bancaire
+savings account|compte d'épargne
+current account|compte courant
+balance|solde
+deposit|dépôt
+withdrawal|retrait
+transfer|virement
+debit card|carte de débit
+credit card|carte de crédit
+interest rate|taux d'intérêt
+loan|prêt
+ATM|distributeur de billets
+QR payment|paiement par QR code
+e-wallet|portefeuille électronique
+transaction history|historique des opérations
+beneficiary|bénéficiaire
+eKYC|vérification d'identité en ligne
+product page|fiche produit
+product catalogue|catalogue produits
+add to cart|ajouter au panier
+promo code|code promo
+flash sale|vente flash
+wishlist|liste de souhaits
+guest checkout|commande sans compte
+cash on delivery|paiement à la livraison
+COD|paiement à la livraison
+order tracking|suivi de commande
+product review|avis produit
+out of stock|en rupture de stock
+shipping fee|frais de port
+patient|patient
+appointment booking|prise de rendez-vous
+check-in|enregistrement à l'accueil
+doctor|médecin
+nurse|infirmier, infirmière
+clinic|clinique, cabinet médical
+prescription|ordonnance
+pharmacy|pharmacie
+medical record|dossier médical
+lab test|analyse de laboratoire
+health insurance card|carte d'assurance maladie
+insurance policy|police d'assurance
+policyholder|assuré, souscripteur
+insurance agent|agent d'assurance
+quote|devis
+renewal|renouvellement
+motor insurance|assurance auto
+life insurance|assurance vie
+claim form|formulaire de déclaration de sinistre
+shipment|expédition, envoi
+tracking number|numéro de suivi
+delivery address|adresse de livraison
+driver|chauffeur, livreur
+parcel|colis
+pick-up|enlèvement
+delivery time|délai de livraison
+failed delivery|échec de livraison
+proof of delivery|preuve de livraison
+learner|apprenant
+teacher|enseignant
+enrolment|inscription
+online course|cours en ligne
+lesson|leçon
+certificate|certificat
+parent account|compte parent
+attendance tracking|suivi de l'assiduité
+mobile plan|forfait mobile
+data package|forfait data
+SIM card|carte SIM
+eSIM|eSIM
+top-up|recharge
+subscriber|abonné
+phone bill|facture de téléphone
+coverage area|zone de couverture
+roaming|itinérance
+job posting|offre d'emploi
+candidate|candidat
+job offer letter|lettre de proposition d'embauche
+employment contract|contrat de travail
+salary|salaire
+payslip|fiche de paie
+annual leave|congés payés
+leave request|demande de congé
+timesheet|feuille de temps
+credit scoring|notation de crédit
+loan origination|montage du prêt
+disbursement|décaissement
+repayment schedule|échéancier de remboursement
+overdraft|découvert
+transaction limit|plafond de transaction
+two-factor authentication|authentification à deux facteurs
+card dispute|contestation de paiement par carte
+chargeback|rétrofacturation
+interbank transfer|virement interbancaire
+NAPAS|réseau national de paiement vietnamien
+fraud detection|détection de fraude
+merchant|commerçant
+order fulfilment|traitement des commandes
+marketplace|place de marché
+seller center|espace vendeur
+cart abandonment|abandon de panier
+product variant|déclinaison de produit
+bundle deal|offre groupée
+free shipping threshold|seuil de livraison gratuite
+return policy|politique de retour
+return request|demande de retour
+average order value|panier moyen
+upsell|faire de la montée en gamme
+cross-sell|faire de la vente croisée
+EHR|dossier de santé électronique
+electronic health record|dossier de santé électronique
+outpatient|patient en ambulatoire
+inpatient|patient hospitalisé
+diagnosis|diagnostic
+referral|orientation vers un spécialiste
+waiting time|temps d'attente
+patient consent|consentement du patient
+telemedicine|télémédecine
+premium|prime d'assurance
+deductible|franchise
+claim|déclaration de sinistre
+claims handler|gestionnaire de sinistres
+policy term|durée du contrat
+exclusion|exclusion de garantie
+beneficiary of a policy|bénéficiaire du contrat
+broker|courtier
+grace period|délai de grâce
+warehouse management system|système de gestion d'entrepôt
+WMS|système de gestion d'entrepôt
+inbound|réception de marchandises
+outbound|expédition de marchandises
+put-away|rangement en stock
+pick list|liste de préparation
+packing|emballage
+dispatch|expédier
+last-mile delivery|livraison du dernier kilomètre
+route planning|planification des tournées
+carrier|transporteur
+LMS|plateforme de gestion de l'apprentissage
+learning management system|plateforme de gestion de l'apprentissage
+gradebook|carnet de notes
+assessment|évaluation
+course completion rate|taux d'achèvement du cours
+live class|cours en direct
+self-paced|à son rythme
+prepaid|prépayé
+postpaid|post-payé (avec abonnement)
+SIM activation|activation de la carte SIM
+subscriber registration|enregistrement de l'abonné
+billing cycle|cycle de facturation
+data usage|consommation de données
+number portability|portabilité du numéro
+add-on|option supplémentaire
+recruitment|recrutement
+applicant tracking system|logiciel de suivi des candidatures
+probation period|période d'essai
+social insurance|assurance sociale
+personal income tax|impôt sur le revenu
+gross salary|salaire brut
+net salary|salaire net
+overtime pay|rémunération des heures supplémentaires
+leave balance|solde de congés
+headcount plan|plan d'effectifs
+KYC|connaissance du client (KYC)
+AML|lutte contre le blanchiment
+anti-money laundering|lutte contre le blanchiment d'argent
+PCI DSS|norme de sécurité PCI DSS
+core banking|système bancaire central
+ledger|grand livre
+settlement|règlement
+reconciliation report|rapport de rapprochement
+open banking|banque ouverte
+credit limit|plafond de crédit
+non-performing loan|prêt non performant
+risk scoring|notation du risque
+sanctions screening|filtrage des listes de sanctions
+tokenization|tokenisation
+GMV|volume brut de marchandises
+gross merchandise value|volume brut de marchandises
+omnichannel retail|commerce omnicanal
+dynamic pricing|tarification dynamique
+recommendation engine|moteur de recommandation
+dropshipping|dropshipping
+click and collect|retrait en magasin
+reverse logistics|logistique inverse
+ICD code|code CIM (classification des maladies)
+HL7|norme HL7
+FHIR|norme FHIR
+interoperability standard|norme d'interopérabilité
+clinical workflow|parcours de soins
+medical billing|facturation médicale
+protected health information|données de santé protégées
+HIPAA|loi américaine HIPAA
+audit log access|accès au journal d'audit
+underwriting|souscription
+underwriter|souscripteur
+actuary|actuaire
+loss ratio|ratio sinistres/primes
+claims fraud|fraude aux sinistres
+reinsurance|réassurance
+rider|garantie complémentaire
+surrender value|valeur de rachat
+bancassurance|bancassurance
+insurtech|insurtech
+transport management system|système de gestion du transport
+cross-docking|cross-docking
+fulfilment center|centre de traitement des commandes
+SLA compliance|respect des niveaux de service
+customs clearance|dédouanement
+bill of lading|connaissement
+freight forwarder|transitaire
+cold chain|chaîne du froid
+demand forecasting|prévision de la demande
+safety stock|stock de sécurité
+learning analytics|analyse de l'apprentissage
+adaptive learning|apprentissage adaptatif
+SCORM|norme SCORM
+learning path|parcours d'apprentissage
+proctoring|surveillance d'examen
+microlearning|micro-apprentissage
+gamification|ludification
+ARPU|revenu moyen par utilisateur
+average revenue per user|revenu moyen par utilisateur
+churn prediction|prédiction de l'attrition
+OSS/BSS|systèmes de support opérationnel et commercial
+network operations center|centre d'exploitation du réseau
+rating engine|moteur de tarification
+interconnect billing|facturation d'interconnexion
+talent acquisition|acquisition de talents
+employer branding|marque employeur
+compensation and benefits|rémunération et avantages
+payroll run|traitement de la paie
+labour law compliance|respect du droit du travail
+attrition rate|taux de rotation du personnel
+employee self-service|portail libre-service des employés
+360-degree feedback|évaluation à 360 degrés
+succession planning|plan de succession

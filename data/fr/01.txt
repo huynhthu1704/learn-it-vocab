@@ -1,0 +1,331 @@
+# term|French meaning
+requirement|exigence, besoin
+stakeholder|partie prenante
+meeting minutes|compte rendu de réunion
+business analyst|analyste métier
+product owner|responsable produit (Product Owner)
+project manager|chef de projet
+BA|analyste métier
+PO|responsable produit
+PM|chef de projet
+client|client
+end user|utilisateur final
+business|entreprise, activité
+goal|objectif
+problem|problème
+need|besoin
+scope|périmètre
+project|projet
+plan|plan
+timeline|calendrier, planning
+milestone|jalon
+budget|budget
+cost|coût
+team|équipe
+meeting|réunion
+agenda|ordre du jour
+kick-off meeting|réunion de lancement
+attendee|participant
+action item|action à mener
+follow up|faire un suivi, relancer
+confirm|confirmer
+clarify|clarifier
+question|question
+answer|réponse
+interview|entretien
+workshop|atelier
+survey|enquête, sondage
+feedback|retour, avis
+email|e-mail, courriel
+call|appel
+document|document
+template|modèle
+version|version
+draft|brouillon
+final|définitif
+approve|approuver
+approval|approbation, validation
+sign off|valider officiellement
+change request|demande de modification
+feature|fonctionnalité
+function|fonction
+process|processus
+workflow|flux de travail
+step|étape
+flow|flux, parcours
+flowchart|organigramme
+diagram|diagramme, schéma
+wireframe|maquette fonctionnelle (wireframe)
+mockup|maquette graphique
+prototype|prototype
+screen|écran
+user|utilisateur
+customer|client
+admin|administrateur
+role|rôle
+report|rapport
+data|données
+field|champ
+list|liste
+status|statut
+date|date
+price|prix
+discount|remise
+invoice|facture
+payment|paiement
+order|commande
+product|produit
+service|service
+sales|ventes
+marketing|marketing
+finance|finance
+HR|ressources humaines (RH)
+department|service, département
+manager|responsable, manager
+staff|personnel
+employee|employé, salarié
+company|entreprise, société
+branch|succursale, agence
+store|magasin
+warehouse|entrepôt
+delivery|livraison
+refund|remboursement
+rule|règle
+business rule|règle de gestion
+must|devoir (obligatoire)
+should|devoir (recommandé)
+priority|priorité
+important|important
+urgent|urgent
+deadline|date limite, échéance
+delay|retard
+on time|à l'heure, dans les délais
+progress|avancement
+update|mise à jour, point d'avancement
+status report|rapport d'avancement
+issue|problème, incident
+risk|risque
+assumption|hypothèse
+dependency|dépendance
+decision|décision
+option|option
+agree|être d'accord
+disagree|ne pas être d'accord
+suggest|suggérer
+propose|proposer
+explain|expliquer
+describe|décrire
+current process|processus actuel
+new process|nouveau processus
+manual|manuel
+automatic|automatique
+system|système
+website|site web
+mobile app|application mobile
+login|connexion
+sign up|s'inscrire
+notification|notification
+search|recherche
+filter|filtre
+export|exporter
+import|importer
+Excel|Excel
+spreadsheet|tableur, feuille de calcul
+backlog|backlog, liste des tâches à faire
+user story|récit utilisateur (user story)
+sprint|sprint
+demo|démonstration
+release|version publiée, mise en production
+go-live|mise en service
+training|formation
+user guide|guide de l'utilisateur
+glossary|glossaire
+term|terme
+note-taking|prise de notes
+listen|écouter
+summary|résumé
+next steps|prochaines étapes
+deploy|déployer
+repository|dépôt de code
+framework|framework, cadriciel
+library|bibliothèque (de code)
+frontend|partie front-end, interface
+backend|partie back-end, serveur
+full-stack|full-stack (front et back)
+server|serveur
+request|requête
+response|réponse
+JSON|format JSON
+source code|code source
+editor|éditeur de code
+IDE|environnement de développement intégré
+terminal|terminal
+command|commande
+script|script
+syntax|syntaxe
+compile|compiler
+build|build, version compilée
+crash|planter
+debug|déboguer
+log|journal (log)
+console|console
+commit|commit, enregistrement de modifications
+push|pousser (le code)
+pull|récupérer (le code)
+merge|fusionner
+clone|cloner
+Git|Git
+GitHub|GitHub
+task|tâche
+ticket|ticket
+estimate|estimation
+done|terminé
+in progress|en cours
+blocked|bloqué
+stand-up|réunion quotidienne (stand-up)
+teammate|coéquipier
+senior|senior
+junior|junior
+tech lead|responsable technique
+code review|revue de code
+review|relire, examiner
+comment|commentaire
+test|tester
+unit test|test unitaire
+environment|environnement
+local|local
+production|production (environnement réel)
+staging|préproduction
+hotfix|correctif urgent
+page|page
+form|formulaire
+dropdown|liste déroulante
+checkbox|case à cocher
+pop-up|fenêtre contextuelle
+layout|mise en page
+responsive|adaptatif (responsive)
+style|style
+font|police de caractères
+color|couleur
+loading|chargement
+click event|événement de clic
+array|tableau
+object|objet
+class|classe
+method|méthode
+parameter|paramètre
+argument|argument
+return|renvoyer
+boolean|booléen
+null|valeur nulle
+value|valeur
+key|clé
+index|indice
+type|type de données
+error message|message d'erreur
+exception|exception
+warning|avertissement
+typo|faute de frappe
+login page|page de connexion
+profile|profil
+dashboard|tableau de bord
+permission|autorisation
+access|accès
+token|jeton
+password reset|réinitialisation du mot de passe
+domain|nom de domaine
+URL|adresse web (URL)
+host|héberger
+hosting|hébergement
+upload|téléverser, envoyer
+image|image
+size|taille
+speed|vitesse
+slow|lent
+fast|rapide
+work|fonctionner
+broken|cassé, en panne
+solve|résoudre
+try|essayer
+cache|cache
+refresh|actualiser
+reload|recharger
+config|fichier de configuration
+setting|paramètre, réglage
+package|paquet
+npm|gestionnaire de paquets npm
+documentation|documentation
+README|fichier README
+example code|code d'exemple
+copy-paste|copier-coller
+Stack Overflow|Stack Overflow
+pair programming|programmation en binôme
+help|aider
+ask|demander
+share|partager
+check|vérifier
+change|modification
+remove|supprimer, retirer
+add|ajouter
+rename|renommer
+move|déplacer
+create|créer
+start|démarrer
+stop|arrêter
+port|port
+localhost|localhost (machine locale)
+online|en ligne
+down|hors service
+up|en service
+user interface|interface utilisateur
+UI|interface utilisateur
+UX|expérience utilisateur
+Figma|Figma
+Android|Android
+iOS|iOS
+search bar|barre de recherche
+sort|trier
+pagination|pagination
+timeout|délai dépassé
+working hours|heures de travail
+remote|à distance, télétravail
+overtime|heures supplémentaires
+laptop|ordinateur portable
+onboarding|intégration
+computer|ordinateur
+keyboard|clavier
+mouse|souris
+monitor|écran
+printer|imprimante
+software|logiciel
+hardware|matériel
+program|programme
+programming|programmation
+code|code
+coding|codage
+algorithm|algorithme
+database|base de données
+file|fichier
+folder|dossier
+download|télécharger
+install|installer
+uninstall|désinstaller
+password|mot de passe
+username|nom d'utilisateur
+log in|se connecter
+log out|se déconnecter
+account|compte
+attachment|pièce jointe
+internet|internet
+web page|page web
+browser|navigateur
+link|lien
+offline|hors ligne
+app|application
+application|application
+mobile|mobile
+smartphone|smartphone
+tablet|tablette
+cloud|cloud, nuage informatique
+storage|stockage
+memory|mémoire

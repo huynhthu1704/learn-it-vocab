@@ -1,0 +1,370 @@
+precision|précision
+recall|rappel
+F1 score|score F1
+overfitting|surapprentissage
+underfitting|sous-apprentissage
+cross-validation|validation croisée
+feature engineering|ingénierie des caractéristiques
+hyperparameter|hyperparamètre
+gradient descent|descente de gradient
+loss function|fonction de perte
+deep learning|apprentissage profond
+large language model|grand modèle de langage
+fine-tuning|ajustement fin
+natural language processing|traitement automatique du langage
+computer vision|vision par ordinateur
+GPU|processeur graphique
+inference|inférence
+bias|biais
+ethics|éthique
+explainability|explicabilité
+reproducibility|reproductibilité
+open dataset|jeu de données ouvert
+data cleaning|nettoyage des données
+data pipeline|chaîne de traitement des données
+visualization|visualisation
+correlation|corrélation
+statistical significance|significativité statistique
+sample size|taille de l'échantillon
+compiler design|conception de compilateurs
+formal methods|méthodes formelles
+cryptography|cryptographie
+public key|clé publique
+hash function|fonction de hachage
+blockchain|chaîne de blocs
+cloud computing|informatique en nuage
+virtualization|virtualisation
+serverless|sans serveur
+microservice architecture|architecture microservices
+design pattern|patron de conception
+SOLID principles|principes SOLID
+software architecture|architecture logicielle
+system design|conception de systèmes
+whiteboard interview|entretien au tableau
+behavioural interview|entretien comportemental
+STAR method|méthode STAR
+salary negotiation|négociation salariale
+job offer|offre d'emploi
+probation|période d'essai
+career path|parcours professionnel
+graduate program|programme jeunes diplômés
+master's degree|master
+PhD|doctorat
+research assistant|assistant de recherche
+lab report|compte rendu de TP
+technical writing|rédaction technique
+academic English|anglais académique
+paraphrase|paraphraser
+argue|argumenter
+critique|critique
+rebuttal|réfutation
+Q&A session|séance de questions-réponses
+elevator pitch|pitch éclair
+startup|start-up
+incubator|incubateur
+intellectual property|propriété intellectuelle
+license|licence
+open-source contribution|contribution open source
+code quality|qualité du code
+interoperability|interopérabilité
+edge computing|informatique en périphérie
+Internet of Things|Internet des objets
+IoT|Internet des objets
+embedded system|système embarqué
+real-time|temps réel
+simulation|simulation
+human-computer interaction|interaction homme-machine
+user study|étude utilisateur
+participant|participant
+informed consent|consentement éclairé
+anonymize|anonymiser
+GDPR|RGPD
+personal data|données personnelles
+fintech|fintech
+edtech|edtech
+abstraction layer|couche d'abstraction
+trade-off analysis|analyse des compromis
+methodology chapter|chapitre méthodologie
+findings|résultats
+conclusion|conclusion
+quality engineering|ingénierie de la qualité
+quality assurance|assurance qualité
+quality control|contrôle qualité
+test pyramid|pyramide des tests
+test architecture|architecture de test
+automation framework|framework d'automatisation
+keyword-driven testing|test piloté par mots-clés
+data-driven testing|test piloté par les données
+behaviour-driven development|développement piloté par le comportement
+BDD|développement piloté par le comportement
+Gherkin|langage Gherkin
+Cucumber|Cucumber
+test oracle|oracle de test
+test harness|harnais de test
+test double|doublure de test
+stub|bouchon (stub)
+service virtualization|virtualisation de services
+visual regression testing|test de régression visuelle
+accessibility testing|test d'accessibilité
+WCAG|règles d'accessibilité WCAG
+screen reader|lecteur d'écran
+chaos engineering|ingénierie du chaos
+fault injection|injection de fautes
+resilience testing|test de résilience
+soak testing|test d'endurance
+spike testing|test de pic de charge
+scalability testing|test d'évolutivité
+percentile|centile
+performance baseline|référence de performance
+capacity testing|test de capacité
+threat modeling|modélisation des menaces
+OWASP Top 10|Top 10 de l'OWASP
+vulnerability scan|analyse de vulnérabilités
+penetration testing|tests d'intrusion
+privilege escalation|élévation de privilèges
+data masking|masquage des données
+synthetic data|données synthétiques
+test data management|gestion des données de test
+data integrity|intégrité des données
+migration testing|test de migration
+reconciliation|rapprochement
+ETL testing|test ETL
+risk assessment|évaluation des risques
+risk matrix|matrice des risques
+likelihood|probabilité
+test maturity|maturité des tests
+process improvement|amélioration des processus
+quality metrics|indicateurs qualité
+mean time to detect|délai moyen de détection
+mean time to recovery|délai moyen de rétablissement
+defect removal efficiency|efficacité d'élimination des défauts
+defect trend|tendance des défauts
+defect clustering|regroupement des défauts
+pesticide paradox|paradoxe du pesticide
+exhaustive testing|test exhaustif
+combinatorial testing|test combinatoire
+pairwise testing|test par paires
+branch coverage|couverture des branches
+statement coverage|couverture des instructions
+shift-right testing|test en production (shift right)
+testing in production|test en production
+synthetic monitoring|supervision synthétique
+canary testing|test canari
+release readiness|état de préparation à la livraison
+go-live checklist|liste de contrôle de mise en service
+production readiness|préparation à la production
+risk-based prioritization|priorisation par les risques
+test optimization|optimisation des tests
+test maintenance|maintenance des tests
+flaky test|test instable
+quarantine|mettre en quarantaine
+self-healing tests|tests auto-réparateurs
+AI-assisted testing|test assisté par IA
+test generation|génération de tests
+model-based testing|test basé sur les modèles
+continuous testing|test continu
+DevOps|DevOps
+DevSecOps|DevSecOps
+infrastructure testing|test d'infrastructure
+containerized tests|tests conteneurisés
+test parallelization|parallélisation des tests
+test sharding|découpage des tests
+test reporting|reporting des tests
+traceability|traçabilité
+regulatory compliance|conformité réglementaire
+verification|vérification
+V-model|cycle en V
+test level|niveau de test
+test type|type de test
+independent testing|test indépendant
+test policy|politique de test
+test charter|charte de test
+session-based testing|test par sessions
+critical thinking|esprit critique
+domain expertise|expertise métier
+business impact|impact métier
+customer-facing|en contact avec les clients
+escalation path|circuit d'escalade
+quality advocate|défenseur de la qualité
+QA manager|responsable qualité
+SDET|ingénieur développement de tests
+test architect|architecte de tests
+coach|accompagner, coacher
+upskill|monter en compétences
+tool evaluation|évaluation d'outils
+return on investment|retour sur investissement
+cost of quality|coût de la qualité
+stakeholder communication|communication avec les parties prenantes
+quality narrative|récit sur la qualité
+sign-off criteria|critères de validation
+residual risk|risque résiduel
+known limitation|limitation connue
+severity matrix|matrice de gravité
+service level|niveau de service
+SLA breach|non-respect du SLA
+post-release validation|validation après livraison
+hypercare|période de support renforcé
+customer escalation|réclamation client escaladée
+war room|cellule de crise
+outage|panne, interruption de service
+blast radius|rayon d'impact
+username field|champ du nom d'utilisateur
+home page|page d'accueil
+learning platform|plateforme d'apprentissage
+timetable|emploi du temps
+classroom|salle de classe
+projector|vidéoprojecteur
+whiteboard marker|feutre pour tableau blanc
+group chat|discussion de groupe
+due date|date de rendu
+late submission|rendu en retard
+draft version|version provisoire
+final version|version finale
+word count|nombre de mots
+font size|taille de police
+page number|numéro de page
+cover page|page de garde
+table of contents|table des matières
+heading|titre
+paragraph|paragraphe
+bullet point|puce
+keyboard shortcut|raccourci clavier
+USB drive|clé USB
+charger|chargeur
+battery|batterie
+headset|casque-micro
+webcam|webcam
+mute|couper le micro
+unmute|réactiver le micro
+raise your hand|lever la main
+breakout room|salle de sous-groupe
+recording|enregistrement
+calculator|calculatrice
+equation|équation
+fraction|fraction
+decimal|nombre décimal
+sum|somme
+total|total
+hello world|programme « Hello world »
+print|afficher
+statement|instruction
+semicolon|point-virgule
+bracket|parenthèse, crochet, accolade
+indentation|indentation
+line of code|ligne de code
+file name|nom de fichier
+extension|extension de fichier
+folder structure|arborescence des dossiers
+project setup|mise en place du projet
+dark mode|mode sombre
+plugin|extension, plugin
+extension pack|pack d'extensions
+autocomplete|saisie semi-automatique
+search and replace|rechercher et remplacer
+snippet|extrait de code
+sample|échantillon, exemple
+default|par défaut
+optional|facultatif
+required|obligatoire
+true|vrai
+false|faux
+empty string|chaîne vide
+undefined|non défini
+quick question|petite question
+heads-up|avertissement préalable
+ETA|délai estimé
+ASAP|dès que possible
+FYI|pour info
+lunch break|pause déjeuner
+day off|jour de congé
+sick leave|arrêt maladie
+work from home|télétravailler
+office chat|messagerie d'entreprise
+team lead|chef d'équipe
+colleague|collègue
+test step result|résultat de l'étape de test
+test title|titre du cas de test
+bug title|titre du bogue
+summary line|ligne de résumé
+environment details|détails de l'environnement
+operating system version|version du système d'exploitation
+app crash|plantage de l'application
+blank page|page blanche
+infinite loading|chargement infini
+spinner|indicateur de chargement
+wrong message|message erroné
+placeholder text|texte indicatif
+label|libellé
+tooltip|info-bulle
+image upload|envoi d'image
+file size limit|taille maximale de fichier
+character limit|limite de caractères
+leading space|espace en début de texte
+case sensitive|sensible à la casse
+copy and paste|copier-coller
+back button|bouton retour
+browser back|retour du navigateur
+new tab|nouvel onglet
+zoom in|zoomer
+font issue|problème de police
+encoding|encodage
+time format|format de l'heure
+currency|devise
+rounding|arrondi
+calculation error|erreur de calcul
+order history|historique des commandes
+confirmation email|e-mail de confirmation
+OTP|code à usage unique
+captcha|captcha
+dark theme|thème sombre
+test idea|idée de test
+retest result|résultat du nouveau test
+customer need|besoin client
+business owner|chef d'entreprise
+shop owner|commerçant
+cashier|caissier
+POS|terminal de point de vente
+receipt|reçu, ticket de caisse
+membership|adhésion
+point|point de fidélité
+booking|réservation
+appointment|rendez-vous
+reminder|rappel
+cancel|annuler
+confirm order|confirmer la commande
+stock|stock
+supplier|fournisseur
+purchase order|bon de commande
+approval step|étape de validation
+paper form|formulaire papier
+handwritten|manuscrit
+phone call|appel téléphonique
+Zalo|Zalo (messagerie vietnamienne)
+Facebook page|page Facebook
+landing page|page d'atterrissage
+contact form|formulaire de contact
+FAQ|foire aux questions
+terms and conditions|conditions générales
+privacy policy|politique de confidentialité
+meeting room|salle de réunion
+whiteboard session|séance au tableau blanc
+sticky note|post-it
+first draft|premier jet
+comment thread|fil de commentaires
+reply|répondre
+reply all|répondre à tous
+CC|mettre en copie
+out of office|absent du bureau
+time zone difference|décalage horaire
+lab assignment|TP à rendre
+course outline|plan du cours
+learning outcome|acquis d'apprentissage
+rubric|grille d'évaluation
+grading criteria|critères de notation
+weighting|coefficient, pondération
+group contract|charte de groupe
+peer assessment|évaluation par les pairs
+free rider|tire-au-flanc
+meeting log|journal des réunions
+task allocation|répartition des tâches
+work log|journal de travail

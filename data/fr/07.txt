@@ -1,0 +1,196 @@
+# term|French meaning
+tech recruiter|recruteur IT
+job description|fiche de poste
+JD|fiche de poste
+tech stack|stack technique
+hiring manager|manager recruteur
+screening call|appel de présélection
+notice period|préavis
+full-time|à temps plein
+part-time|à temps partiel
+contractor|prestataire, contractuel
+freelancer|freelance, indépendant
+hybrid work|travail hybride
+salary range|fourchette de salaire
+benefits package|avantages sociaux
+exit interview|entretien de départ
+sourcing|sourcing de candidats
+headhunting|chasse de têtes
+talent pool|vivier de talents
+candidate pipeline|vivier de candidats en cours
+take-home test|test à faire chez soi
+culture fit|adéquation culturelle
+offer negotiation|négociation de l'offre
+counteroffer|contre-offre
+referral bonus|prime de cooptation
+background check|vérification des antécédents
+offboarding|processus de départ
+career ladder|échelle de carrière
+salary band|grille salariale
+engagement survey|enquête d'engagement
+FTE|équivalent temps plein (ETP)
+time to hire|délai de recrutement
+cost per hire|coût par recrutement
+employer value proposition|proposition de valeur employeur
+performance improvement plan|plan d'amélioration des performances
+retention bonus|prime de fidélisation
+workforce planning|planification des effectifs
+diversity and inclusion|diversité et inclusion
+upskilling budget|budget de montée en compétences
+employee stock option|stock-option salarié
+lead|prospect, piste commerciale
+prospect|client potentiel
+partner|partenaire
+pitch|présentation commerciale, pitch
+pitch deck|présentation de pitch
+target market|marché cible
+networking event|événement de réseautage
+follow-up meeting|réunion de suivi
+qualified lead|prospect qualifié
+cold outreach|prospection à froid
+ideal customer profile|profil client idéal
+market entry|entrée sur le marché
+competitive advantage|avantage concurrentiel
+USP|proposition unique de vente
+pilot project|projet pilote
+proof of value|preuve de valeur
+channel partner|partenaire de distribution
+reseller|revendeur
+account plan|plan de compte
+champion|sponsor interne chez le client
+white label|marque blanche
+revenue share|partage de revenus
+letter of intent|lettre d'intention
+term sheet|lettre d'intention d'investissement (term sheet)
+deal flow|flux d'opportunités
+decision-making unit|centre de décision d'achat
+strategic partnership|partenariat stratégique
+total addressable market|marché total adressable
+deal|affaire, contrat
+customer meeting|rendez-vous client
+price list|liste de prix
+free trial|essai gratuit
+sales target|objectif de ventes
+commission|commission
+account manager|chargé de compte
+quota|quota de ventes
+discovery call|appel de découverte
+objection|objection
+objection handling|traitement des objections
+opportunity|opportunité commerciale
+sales cycle|cycle de vente
+win rate|taux de conversion des opportunités
+pricing tier|palier tarifaire
+key account|grand compte
+customer success|réussite client (customer success)
+renewal rate|taux de renouvellement
+freemium|modèle freemium
+closing|conclusion de la vente
+MRR|revenu récurrent mensuel
+ARR|revenu récurrent annuel
+annual contract value|valeur annuelle du contrat
+sales forecast|prévision des ventes
+discount approval|validation de remise
+procurement team|service achats
+land and expand|stratégie « land and expand »
+project charter|charte de projet
+RAID log|registre RAID (risques, hypothèses, problèmes, dépendances)
+resource allocation|allocation des ressources
+project health check|bilan de santé du projet
+status dashboard|tableau de bord d'avancement
+schedule variance|écart de planning
+budget variance|écart budgétaire
+project intake|réception des demandes de projet
+template library|bibliothèque de modèles
+milestone report|rapport de jalon
+stage gate|jalon de validation (stage gate)
+change advisory board|comité consultatif des changements
+governance framework|cadre de gouvernance
+benefits register|registre des bénéfices
+cross-project dependency|dépendance inter-projets
+baseline schedule|planning de référence
+portfolio review|revue de portefeuille
+P&L|compte de résultat
+gross margin|marge brute
+cash flow|flux de trésorerie
+cost center|centre de coûts
+profit center|centre de profit
+market share|part de marché
+all-hands meeting|réunion générale
+town hall|réunion plénière
+delegation|délégation
+accountability|responsabilité
+quarterly business review|revue trimestrielle d'activité
+EBITDA|EBITDA (excédent brut d'exploitation)
+operating margin|marge opérationnelle
+runway|autonomie financière
+valuation|valorisation
+fundraising|levée de fonds
+board of directors|conseil d'administration
+shareholder|actionnaire
+mission statement|déclaration de mission
+competitive landscape|paysage concurrentiel
+restructuring|restructuration
+mergers and acquisitions|fusions et acquisitions
+decision rights|droits de décision
+stakeholder management|gestion des parties prenantes
+data type|type de données
+operator|opérateur
+comment line|ligne de commentaire
+source file|fichier source
+flow of control|flux de contrôle
+client-server model|modèle client-serveur
+web server|serveur web
+DNS|système de noms de domaine (DNS)
+packet|paquet
+bandwidth|bande passante
+kernel|noyau
+file system|système de fichiers
+pointer|pointeur
+memory allocation|allocation de mémoire
+exception handling|gestion des exceptions
+access modifier|modificateur d'accès
+MVC|modèle-vue-contrôleur
+OSI model|modèle OSI
+TCP|protocole TCP
+UDP|protocole UDP
+subnet|sous-réseau
+socket|socket (point de connexion réseau)
+DHCP|protocole DHCP
+CPU scheduling|ordonnancement du processeur
+virtual memory|mémoire virtuelle
+paging|pagination mémoire
+system call|appel système
+interrupt|interruption
+ACID|propriétés ACID
+stored procedure|procédure stockée
+database view|vue de base de données
+trigger|déclencheur
+supervised learning|apprentissage supervisé
+unsupervised learning|apprentissage non supervisé
+classification|classification
+clustering|regroupement (clustering)
+software testing|test logiciel
+software maintenance|maintenance logicielle
+native app|application native
+cross-platform|multiplateforme
+boolean algebra|algèbre de Boole
+set theory|théorie des ensembles
+computer architecture|architecture des ordinateurs
+instruction set|jeu d'instructions
+assembly language|langage assembleur
+register|registre
+cache memory|mémoire cache
+finite state machine|automate fini
+automata theory|théorie des automates
+regular expression|expression régulière
+Turing machine|machine de Turing
+computability|calculabilité
+linear algebra|algèbre linéaire
+calculus|analyse (calcul différentiel et intégral)
+proof by induction|raisonnement par récurrence
+symmetric encryption|chiffrement symétrique
+digital signature|signature numérique
+SSL/TLS certificate|certificat SSL/TLS
+graduation project|projet de fin d'études
+internship report|rapport de stage

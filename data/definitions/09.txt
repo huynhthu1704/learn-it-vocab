@@ -1,0 +1,195 @@
+tech recruiter|A recruiter who hires people for technology jobs.|IT 채용 담당자
+job description|A document listing a job's duties and requirements.|직무 기술서
+JD|Short for job description.|직무 기술서
+tech stack|The set of technologies a team uses to build its product.|기술 스택
+hiring manager|The manager who needs a new person and decides who to hire.|채용 관리자
+screening call|A short first call to check if a candidate is suitable.|사전 심사 통화
+notice period|The time you must work after you say you will leave a job.|퇴사 예고 기간
+full-time|Working the normal number of hours each week.|정규직의, 전일제의
+part-time|Working fewer hours than full-time.|시간제의
+contractor|A person hired for a fixed period or project, not as an employee.|계약직, 외주 인력
+freelancer|A self-employed person who works for different clients.|프리랜서
+hybrid work|Working partly in the office and partly from home.|하이브리드 근무
+salary range|The lowest and highest pay offered for a job.|급여 범위
+benefits package|All the extra things an employer gives besides salary.|복리후생 패키지
+exit interview|A meeting with an employee who is leaving to learn why.|퇴사 면담
+sourcing|Finding people who could fill a job.|인재 발굴
+headhunting|Finding and approaching skilled people who already have jobs.|헤드헌팅
+talent pool|A group of possible candidates for future jobs.|인재풀
+candidate pipeline|The candidates moving through the hiring steps.|후보자 파이프라인
+take-home test|A task candidates complete at home and send back.|과제형 테스트
+culture fit|How well a person matches a company's values and way of working.|조직 문화 적합성
+offer negotiation|Discussing salary and terms before accepting a job offer.|처우 협상
+counteroffer|An offer from your current employer to make you stay.|카운터오퍼
+referral bonus|Money paid to an employee who recommends a successful hire.|추천 보너스
+background check|Checking a candidate's history, such as past jobs.|평판·경력 조회
+offboarding|The process when an employee leaves the company.|오프보딩
+career ladder|The levels a person can move up in a job family.|경력 사다리
+salary band|The pay range for a job level.|급여 밴드
+engagement survey|A survey that measures how motivated employees feel.|직원 몰입도 조사
+FTE|Full-time equivalent: a measure of staff time equal to one full-time person.|정규직 환산 인원
+time to hire|The number of days from opening a job to an accepted offer.|채용 소요 기간
+cost per hire|The average cost of hiring one person.|채용 단가
+employer value proposition|What makes a company attractive as a place to work.|고용 가치 제안
+performance improvement plan|A formal plan to help an underperforming employee improve.|성과 개선 계획
+retention bonus|Extra money paid to keep an employee from leaving.|잔류 보너스
+workforce planning|Planning how many people with which skills the company will need.|인력 계획
+diversity and inclusion|Having different kinds of people and making everyone feel welcome.|다양성과 포용
+upskilling budget|Money set aside to help employees learn new skills.|역량 개발 예산
+employee stock option|The right for an employee to buy company shares at a set price.|스톡옵션
+lead|A person or company that might become a customer.|잠재 고객
+prospect|A potential customer who is likely to buy.|유망 고객
+partner|A company you work with to reach shared goals.|파트너
+pitch|A short talk to convince someone to buy or invest.|피칭, 제안 발표
+pitch deck|Slides used to present a business or product to clients or investors.|피치덱
+target market|The group of customers a product is made for.|목표 시장
+networking event|An event for meeting people and making business contacts.|네트워킹 행사
+follow-up meeting|A meeting that continues an earlier discussion.|후속 미팅
+qualified lead|A lead that matches what makes a good customer.|적격 잠재 고객
+cold outreach|Contacting people who don't know you yet.|콜드 아웃리치
+ideal customer profile|A description of the type of company most likely to buy.|이상적 고객 프로필
+market entry|Starting to sell in a new market.|시장 진입
+competitive advantage|What makes a company better than its competitors.|경쟁 우위
+USP|Unique selling point: what makes a product different.|고유 판매 제안
+pilot project|A small trial project before a full rollout.|시범 프로젝트
+proof of value|A trial that shows a product brings real benefits.|가치 검증
+channel partner|A company that sells another company's products.|채널 파트너
+reseller|A company that buys products to sell them again.|리셀러
+account plan|A plan for growing the business with one important customer.|고객 계정 계획
+champion|A person inside a customer's company who supports your product.|내부 지지자
+white label|A product made by one company and sold under another's brand.|화이트 라벨
+revenue share|An agreement to split income between partners.|수익 배분
+letter of intent|A document showing serious interest in a deal before the contract.|의향서
+term sheet|A short document listing the main terms of a deal or investment.|텀시트
+deal flow|The number of new business or investment opportunities.|딜 플로
+decision-making unit|All the people involved in a buying decision.|구매 의사결정 집단
+strategic partnership|A long-term partnership that supports both companies' goals.|전략적 제휴
+total addressable market|The total revenue possible if everyone who could buy did.|전체 시장 규모
+deal|An agreement to buy or sell something.|거래
+customer meeting|A meeting with a client or potential client.|고객 미팅
+price list|A list of products and their prices.|가격표
+free trial|A period when people can use a product without paying.|무료 체험
+sales target|The amount a team plans to sell.|매출 목표
+commission|Money a salesperson earns for each sale.|판매 수수료
+account manager|The person who looks after a customer relationship.|고객 관리자
+quota|The sales amount a salesperson must reach.|판매 할당량
+discovery call|A first call to understand a customer's needs.|니즈 파악 통화
+objection|A reason a customer gives for not buying.|이의 제기, 반론
+objection handling|Responding to customer concerns to keep a sale moving.|반론 대응
+opportunity|A possible sale that is being worked on.|영업 기회
+sales cycle|The time and steps from first contact to closing a deal.|영업 주기
+win rate|The percentage of opportunities that become sales.|수주율
+pricing tier|One level in a set of price plans.|가격 등급
+key account|A very important customer.|핵심 고객
+customer success|The team that helps customers get value from a product.|고객 성공
+renewal rate|The percentage of customers who renew their contracts.|갱신율
+freemium|A model with a free basic version and a paid premium version.|부분 유료화
+closing|The final step of getting a customer to sign.|계약 체결
+MRR|Monthly recurring revenue: income from subscriptions each month.|월간 반복 매출
+ARR|Annual recurring revenue: subscription income per year.|연간 반복 매출
+annual contract value|The average yearly value of a customer contract.|연간 계약 가치
+sales forecast|A prediction of future sales.|매출 예측
+discount approval|Permission from a manager to give a bigger discount.|할인 승인
+procurement team|The department in a company that buys goods and services.|구매팀
+land and expand|Starting with a small sale, then growing inside the customer.|소규모 도입 후 확장 전략
+project charter|A document that officially starts a project and states its goals.|프로젝트 헌장
+RAID log|A list of Risks, Assumptions, Issues and Dependencies.|RAID 로그
+resource allocation|Deciding who and what works on which project.|자원 배분
+project health check|A review of how well a project is going.|프로젝트 상태 점검
+status dashboard|A screen showing the status of many projects.|현황 대시보드
+schedule variance|The difference between planned and actual progress.|일정 편차
+budget variance|The difference between planned and actual cost.|예산 편차
+project intake|The process for receiving and reviewing new project requests.|프로젝트 접수
+template library|A shared collection of document templates.|템플릿 라이브러리
+milestone report|A report on whether key milestones were reached.|마일스톤 보고서
+stage gate|A checkpoint where a project must be approved to continue.|단계 관문
+change advisory board|A group that reviews and approves changes to systems.|변경 자문 위원회
+governance framework|The rules and roles for overseeing projects.|거버넌스 체계
+benefits register|A list tracking the benefits projects should deliver.|효과 관리 대장
+cross-project dependency|When one project needs something from another project.|프로젝트 간 의존성
+baseline schedule|The approved original schedule used for comparison.|기준 일정
+portfolio review|A meeting to decide which projects to continue, change or stop.|포트폴리오 검토
+P&L|Profit and loss statement: income minus costs over a period.|손익계산서
+gross margin|Revenue minus the direct cost of goods, as a percentage.|매출 총이익률
+cash flow|Money moving in and out of a business.|현금 흐름
+cost center|A department that costs money but doesn't earn it directly.|비용 센터
+profit center|A department that earns its own profit.|이익 센터
+market share|The percentage of a market a company has.|시장 점유율
+all-hands meeting|A meeting for everyone in the company.|전사 회의
+town hall|A company meeting where leaders share news and answer questions.|타운홀 미팅
+delegation|Giving tasks and authority to other people.|위임
+accountability|Being responsible for results and explaining them.|책임
+quarterly business review|A meeting every three months to review results and plans.|분기 사업 검토
+EBITDA|Earnings before interest, taxes, depreciation and amortisation.|EBITDA(상각 전 영업이익)
+operating margin|Operating profit as a percentage of revenue.|영업 이익률
+runway|How long a company can operate before it runs out of money.|자금 소진 기간
+valuation|An estimate of how much a company is worth.|기업 가치
+fundraising|Raising money from investors.|자금 조달
+board of directors|The group that oversees a company's management.|이사회
+shareholder|A person or organisation that owns shares in a company.|주주
+mission statement|A short statement of a company's purpose.|미션 선언문
+competitive landscape|The competitors in a market and their positions.|경쟁 구도
+restructuring|Changing how a company is organised.|구조 조정
+mergers and acquisitions|Companies joining together or buying other companies.|인수 합병
+decision rights|Who has the authority to make which decisions.|의사결정 권한
+stakeholder management|Planning and managing relationships with stakeholders.|이해관계자 관리
+data type|The kind of value a variable holds, such as number or text.|자료형
+operator|A symbol that performs an operation, like + or ==.|연산자
+comment line|A line in code that explains it and is not run.|주석 줄
+source file|A file containing program code.|소스 파일
+flow of control|The order in which a program's statements run.|제어 흐름
+client-server model|A design where clients request services from a server.|클라이언트-서버 모델
+web server|Software or a computer that delivers web pages.|웹 서버
+DNS|The system that turns website names into IP addresses.|도메인 네임 시스템
+packet|A small unit of data sent over a network.|패킷
+bandwidth|How much data a network can carry per second.|대역폭
+kernel|The core of an operating system.|커널
+file system|The way an operating system stores and organises files.|파일 시스템
+pointer|A variable that holds a memory address.|포인터
+memory allocation|Reserving memory for a program to use.|메모리 할당
+exception handling|Catching and dealing with errors in code.|예외 처리
+access modifier|A keyword like public or private that controls access.|접근 제어자
+MVC|Model-View-Controller: a pattern that separates data, display and logic.|MVC 패턴
+OSI model|A seven-layer model that describes how networks work.|OSI 7계층 모델
+TCP|A network protocol that delivers data reliably and in order.|TCP 프로토콜
+UDP|A fast network protocol that doesn't guarantee delivery.|UDP 프로토콜
+subnet|A smaller part of a larger network.|서브넷
+socket|One end of a two-way network connection between programs.|소켓
+DHCP|A protocol that automatically gives devices IP addresses.|DHCP
+CPU scheduling|Deciding which process uses the CPU next.|CPU 스케줄링
+virtual memory|Using disk space to extend RAM.|가상 메모리
+paging|Splitting memory into fixed-size pages.|페이징
+system call|A request from a program to the operating system.|시스템 호출
+interrupt|A signal that makes the CPU stop and handle an event.|인터럽트
+ACID|Atomicity, Consistency, Isolation, Durability: rules for safe transactions.|ACID 속성
+stored procedure|A saved set of SQL statements in a database.|저장 프로시저
+database view|A saved query that looks like a table.|데이터베이스 뷰
+trigger|Database code that runs automatically when data changes.|트리거
+supervised learning|Machine learning from labelled examples.|지도 학습
+unsupervised learning|Machine learning that finds patterns without labels.|비지도 학습
+classification|Predicting which category something belongs to.|분류
+clustering|Grouping similar items together.|군집화
+software testing|Checking that software works as required.|소프트웨어 테스팅
+software maintenance|Fixing and improving software after release.|소프트웨어 유지 보수
+native app|An app built for one specific platform, like iOS.|네이티브 앱
+cross-platform|Working on several operating systems.|크로스 플랫폼의
+boolean algebra|Maths with true/false values and AND, OR, NOT.|불 대수
+set theory|The maths of collections of objects.|집합론
+computer architecture|The design and structure of a computer's parts.|컴퓨터 구조
+instruction set|The basic commands a CPU understands.|명령어 집합
+assembly language|A low-level language close to machine code.|어셈블리어
+register|A very small, very fast storage place inside the CPU.|레지스터
+cache memory|Small, fast memory that keeps recently used data close to the CPU.|캐시 메모리
+finite state machine|A model with a fixed number of states and rules for moving between them.|유한 상태 기계
+automata theory|The study of abstract machines and what they can compute.|오토마타 이론
+regular expression|A pattern used to match text.|정규 표현식
+Turing machine|A simple theoretical model of a computer.|튜링 기계
+computability|Whether a problem can be solved by a computer at all.|계산 가능성
+linear algebra|Maths about vectors and matrices.|선형 대수학
+calculus|Maths about change, using derivatives and integrals.|미적분학
+proof by induction|A way to prove a statement for all numbers step by step.|수학적 귀납법
+symmetric encryption|Encryption that uses the same key to lock and unlock data.|대칭키 암호화
+digital signature|A code that proves who created a file and that it wasn't changed.|전자 서명
+SSL/TLS certificate|A file that proves a website's identity and enables HTTPS.|SSL/TLS 인증서
+graduation project|The final project students complete to graduate.|졸업 작품
+internship report|A report on what you did and learned during an internship.|인턴십 보고서

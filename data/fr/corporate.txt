@@ -1,0 +1,227 @@
+# Workplace English phrase|French equivalent (used by build.mjs for the corporate module)
+Shall we get started?|On commence ?
+The purpose of today's meeting is to...|L'objectif de la réunion d'aujourd'hui est de...
+Let's go through the agenda.|Passons en revue l'ordre du jour.
+Can everyone see my screen?|Tout le monde voit mon écran ?
+Sorry to interrupt, but...|Désolé de vous interrompre, mais...
+Could you say that again, please?|Pourriez-vous répéter, s'il vous plaît ?
+Just to clarify, do you mean...?|Juste pour clarifier, vous voulez dire... ?
+If I understand correctly, ...|Si je comprends bien, ...
+Let's take this offline.|Voyons cela en aparté.
+Let's park that for now.|Mettons ce point de côté pour l'instant.
+We're running out of time.|Il ne nous reste plus beaucoup de temps.
+Does anyone have anything to add?|Quelqu'un a-t-il quelque chose à ajouter ?
+Let me recap what we agreed.|Je récapitule ce que nous avons décidé.
+Who's going to take care of this?|Qui va s'en occuper ?
+I'll send out the minutes after the meeting.|J'enverrai le compte rendu après la réunion.
+Thanks for your time, everyone.|Merci à tous pour votre temps.
+You're on mute.|Votre micro est coupé.
+You're breaking up.|Le son coupe.
+Let's give it a couple more minutes for people to join.|Attendons encore quelques minutes que tout le monde arrive.
+I'd like to add something here.|J'aimerais ajouter quelque chose.
+Can we move on to the next item?|Pouvons-nous passer au point suivant ?
+agenda|ordre du jour
+action item|action à mener
+minutes|compte rendu
+parking lot|liste des sujets reportés
+attendee|participant
+facilitator|animateur
+sync|point rapide
+touch base|faire un point
+huddle|réunion express
+AOB|divers (points divers)
+AFK|absent du clavier
+I hope this email finds you well.|J'espère que vous allez bien.
+I'm writing to...|Je vous écris pour...
+Please find attached...|Veuillez trouver ci-joint...
+As discussed,...|Comme convenu,...
+Just a gentle reminder that...|Petit rappel :...
+Could you please confirm...?|Pourriez-vous confirmer... ?
+I'd appreciate it if you could...|Je vous serais reconnaissant de bien vouloir...
+Please let me know if you have any questions.|N'hésitez pas si vous avez des questions.
+Looking forward to hearing from you.|Dans l'attente de votre retour.
+Thank you for your prompt reply.|Merci pour votre réponse rapide.
+Apologies for the delayed response.|Désolé pour ma réponse tardive.
+I'm looping in [name].|J'ajoute [nom] en copie.
+Moving [name] to BCC.|Je passe [nom] en copie cachée.
+Please disregard my previous email.|Merci de ne pas tenir compte de mon e-mail précédent.
+Kind regards,|Cordialement,
+Best,|Bien à vous,
+Out of office until [date].|Absent du bureau jusqu'au [date].
+CC|copie (Cc)
+BCC|copie cachée (Cci)
+RE:|réponse (RE:)
+FW: / FWD:|transfert (TR:)
+EOM|fin du message
+NRN|pas besoin de répondre
+thread|fil de discussion
+subject line|objet de l'e-mail
+signature|signature
+ASAP|dès que possible
+FYI|pour info
+EOD|d'ici la fin de la journée
+COB|avant la fin de la journée de travail
+EOW|d'ici la fin de la semaine
+ETA|heure ou date prévue
+TBD|à définir
+TBC|à confirmer
+N/A|non applicable
+OOO|absent du bureau
+PTO|congés payés
+WFH|en télétravail
+BRB|je reviens tout de suite
+IMO / IMHO|à mon avis
+AFAIK|à ma connaissance
+TL;DR|en bref
+LGTM|ça me paraît bon
+WIP|travail en cours
+PTAL|merci d'y jeter un œil
+ICYMI|au cas où vous l'auriez manqué
+NVM|laisse tomber
+TIA|merci d'avance
+NP|pas de problème
+DM|message privé
+1:1|entretien individuel
+POC|interlocuteur / preuve de concept
+Quick question:|Petite question :
+Ping me if you need anything.|Fais-moi signe si tu as besoin de quoi que ce soit.
+No worries.|Pas de souci.
+On it!|Je m'en occupe !
+Heads-up:|Pour info :
+ping|envoyer un petit message
+channel|canal
+thread (chat)|fil de réponses
+@mention|mention (@)
+BRD|document des exigences métier
+SRS|spécification des exigences logicielles
+SOW|énoncé des travaux
+SOP|procédure opérationnelle standard
+NDA|accord de confidentialité
+MoU|protocole d'accord
+version history|historique des versions
+sign-off|validation formelle
+out of scope|hors périmètre
+assumption|hypothèse
+constraint|contrainte
+appendix|annexe
+glossary|glossaire
+executive summary|synthèse
+e.g.|par ex.
+i.e.|c.-à-d.
+etc.|etc.
+vs.|contre / par rapport à
+w.r.t.|concernant
+Q1–Q4|T1–T4 (trimestres)
+YoY|sur un an (en glissement annuel)
+MoM|d'un mois sur l'autre
+YTD|depuis le début de l'année
+FAQ|foire aux questions
+SME|expert métier
+This document outlines...|Ce document présente...
+For more details, refer to...|Pour plus de détails, voir...
+The system shall...|Le système doit...
+As shown in Figure 2,...|Comme le montre la figure 2,...
+Open questions|Questions en suspens
+Yesterday I worked on..., today I'll..., no blockers.|Hier j'ai travaillé sur..., aujourd'hui je vais..., aucun blocage.
+I'm blocked by...|Je suis bloqué par...
+It's on track.|C'est dans les temps.
+We're slightly behind schedule.|Nous avons un léger retard.
+It's at risk.|C'est à risque.
+I'm about 80% done.|J'ai fait environ 80 %.
+I should have it ready by...|Ce devrait être prêt d'ici...
+I'll keep you posted.|Je vous tiens au courant.
+Quick update on...|Petit point sur...
+Here's where we are with...|Voici où nous en sommes sur...
+The main risk is...|Le principal risque est...
+Next steps are...|Les prochaines étapes sont...
+RAG status|statut rouge/orange/vert
+blocker|point bloquant
+dependency|dépendance
+bandwidth|disponibilité (capacité à prendre du travail)
+ballpark figure|chiffre approximatif
+I see your point, but...|Je comprends votre point de vue, mais...
+I'm not sure I agree with that.|Je ne suis pas sûr d'être d'accord.
+Have we considered...?|Avons-nous envisagé... ?
+That's a fair point.|C'est juste.
+I agree up to a point.|Je suis d'accord jusqu'à un certain point.
+Could we look at it from another angle?|Pourrions-nous voir les choses sous un autre angle ?
+I'd push back on that a little.|Je nuancerais un peu ce point.
+What if we...?|Et si nous... ?
+Unfortunately, that won't be possible.|Malheureusement, ce ne sera pas possible.
+I can do X, but not Y.|Je peux faire X, mais pas Y.
+To be honest, I have some concerns about...|Pour être honnête, j'ai quelques inquiétudes au sujet de...
+That makes sense.|C'est logique.
+I couldn't agree more.|Je suis tout à fait d'accord.
+Let's agree to disagree.|Restons-en à nos désaccords.
+Can we take a step back?|Pouvons-nous prendre du recul ?
+push back|s'opposer, contester
+common ground|terrain d'entente
+devil's advocate|avocat du diable
+Would you mind...?|Cela vous dérangerait-il de... ?
+Could you help me with...?|Pourrais-tu m'aider avec... ?
+When would be a good time to...?|Quand serait-il pratique de... ?
+Just following up on...|Je reviens vers vous au sujet de...
+Any update on...?|Des nouvelles concernant... ?
+Is there anything I can do to help?|Puis-je aider d'une manière ou d'une autre ?
+I need this by...|J'en ai besoin d'ici...
+Could we push this to...?|Pourrions-nous décaler cela à... ?
+Would it be possible to...?|Serait-il possible de... ?
+Let me check and get back to you.|Je vérifie et je reviens vers vous.
+I'll get back to you by...|Je vous réponds d'ici...
+Thanks for the reminder.|Merci pour le rappel.
+follow up|relancer, faire le suivi
+escalate|faire remonter (à la hiérarchie)
+nudge|petite relance
+turnaround time|délai de traitement
+Great job on...|Bravo pour...
+One thing that could be improved is...|Un point à améliorer serait...
+Have you thought about...?|As-tu pensé à... ?
+It might be clearer if...|Ce serait peut-être plus clair si...
+Thanks for the feedback.|Merci pour le retour.
+That's a good catch.|Bien vu.
+Could you elaborate on that?|Pourriez-vous développer ?
+I take your point.|J'entends votre remarque.
+constructive feedback|retour constructif
+nitpick|détail mineur, pinaillage
+blind spot|angle mort
+kudos|félicitations
+retro|rétrospective
+circle back|y revenir plus tard
+low-hanging fruit|gains faciles
+quick win|victoire rapide
+move the needle|faire une vraie différence
+on the same page|sur la même longueur d'onde
+in the loop|tenu au courant
+loop in|mettre dans la boucle
+deep dive|analyse approfondie
+big picture|vue d'ensemble
+stakeholder buy-in|adhésion des parties prenantes
+pain point|point de friction
+value-add|valeur ajoutée
+deliverable|livrable
+scope creep|dérive du périmètre
+hard stop|heure de fin impérative
+game changer|changement décisif
+best practice|bonne pratique
+win-win|gagnant-gagnant
+ramp up|monter en puissance, monter en compétences
+run it by|soumettre à l'avis de
+sanity check|vérification rapide
+wear many hats|cumuler les casquettes
+the ball is in their court|la balle est dans leur camp
+take ownership|prendre en charge
+Today I'm going to walk you through...|Aujourd'hui, je vais vous présenter pas à pas...
+Let me start with some background.|Je commence par un peu de contexte.
+As you can see on this slide,...|Comme vous le voyez sur cette diapositive,...
+Moving on to...|Passons à...
+To sum up,...|Pour résumer,...
+I'd be happy to take any questions.|Je réponds volontiers à vos questions.
+That's a great question.|Excellente question.
+I don't have that information right now, but I'll find out.|Je n'ai pas cette information pour l'instant, mais je vais me renseigner.
+Let me show you how it works.|Je vais vous montrer comment ça fonctionne.
+The key takeaway is...|Le point clé à retenir est...
+takeaway|point à retenir
+walkthrough|présentation pas à pas
+demo|démo
+deck|présentation (diapositives)
+Q&A|questions-réponses

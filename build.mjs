@@ -98,6 +98,18 @@ for (const f of fs.readdirSync('data/definitions').filter(f => f.endsWith('.txt'
 for (const w of words) { const d = DEF.get(w.term.toLowerCase()); if (d) { w.en = d.en; w.ko = d.ko; } }
 const noDef = words.filter(w => !w.en);
 if (noDef.length) { console.error('Missing definitions in data/definitions/:', noDef.map(w => w.term).join(', ')); process.exit(1); }
+// French meanings: data/fr/*.txt (term|French), data/fr/corporate.txt (phrase|French)
+const FR = new Map(), FRC = new Map();
+for (const f of fs.readdirSync('data/fr').filter(f => f.endsWith('.txt')).sort())
+  for (const line of fs.readFileSync('data/fr/' + f, 'utf8').split('\n')) {
+    if (!line.trim() || line.startsWith('#')) continue;
+    const i = line.indexOf('|'); const t = line.slice(0, i).trim(), fr = line.slice(i + 1).trim();
+    const m = f === 'corporate.txt' ? FRC : FR;
+    if (t && fr && !m.has(t.toLowerCase())) m.set(t.toLowerCase(), fr);
+  }
+for (const w of words) w.fr = FR.get(w.term.toLowerCase()) || '';
+const noFr = words.filter(w => !w.fr);
+if (noFr.length) console.warn('Words without French (AI can fill these in the admin panel):', noFr.length);
 for (const w of words) tagRoles(w);
 const noIpa = words.filter(w => !w.ipa);
 console.log('total unique', words.length, 'duplicates dropped', dups.length, 'missing IPA terms', noIpa.length);
@@ -110,7 +122,7 @@ console.log('topics', topics.length, topics.join(','));
 // examples that don't contain the term (for highlight check)
 const noHit = words.filter(w => !w.ex.toLowerCase().includes(w.term.toLowerCase().slice(0, Math.max(3, w.term.length - 3))));
 console.log('examples without term:', noHit.length, noHit.slice(0, 40).map(w => w.term).join(' | '));
-const out = JSON.stringify(words.map(({ id, term, pos, vi, ex, topic, level, roles, ipa, en, ko }) => ({ id, t: term, p: pos, v: vi, e: ex, c: topic, l: level, r: roles, i: ipa, d: en, k: ko })));
+const out = JSON.stringify(words.map(({ id, term, pos, vi, ex, topic, level, roles, ipa, en, ko, fr }) => ({ id, t: term, p: pos, v: vi, e: ex, c: topic, l: level, r: roles, i: ipa, d: en, k: ko, f: fr })));
 if (noIpa.length) { console.error('Add these to data/pronunciation-overrides.json first:', noIpa.map(w => w.term).join(', ')); process.exit(1); }
 fs.writeFileSync('words.json', out);
 // Build the website: inject the word database into the template
@@ -122,7 +134,7 @@ for (const line of fs.readFileSync('data/corporate.txt', 'utf8').split('\n')) {
   const f = line.split('|').map(x => x.trim());
   if (f.length < 8 || !cat) { console.error('BAD corporate line:', line); process.exit(1); }
   const [type, p, tone, d, v, k, ctx, ex, av] = f;
-  CORP.push({ id: CORP.length + 1, cat, type, p, tone, d, v, k, ctx, ex, av: av || '' });
+  CORP.push({ id: CORP.length + 1, cat, type, p, tone, d, v, k, f: FRC.get(p.toLowerCase()) || '', ctx, ex, av: av || '' });
 }
 console.log('corporate entries', CORP.length, Object.entries(CORP.reduce((a, c) => (a[c.cat] = (a[c.cat] || 0) + 1, a), {})).map(x => x.join(':')).join(' '));
 const safe = s => s.replace(/<\//g, '<\\/');

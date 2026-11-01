@@ -1,0 +1,360 @@
+metrics|indicateurs
+performance testing|test de performance
+load testing|test de charge
+stress testing|test de stress
+response time|temps de réponse
+concurrent users|utilisateurs simultanés
+JMeter|JMeter
+security testing|test de sécurité
+SQL injection|injection SQL
+access control|contrôle d'accès
+role-based access|accès basé sur les rôles
+session timeout|expiration de session
+data privacy|confidentialité des données
+mobile testing|test mobile
+emulator|émulateur
+simulator|simulateur
+real device|appareil réel
+device farm|parc d'appareils de test
+network condition|condition réseau
+offline mode|mode hors ligne
+push notification|notification push
+deep link|lien profond
+app store|boutique d'applications
+beta testing|test bêta
+alpha testing|test alpha
+production issue|incident de production
+release candidate|version candidate
+go/no-go|décision de mise en production
+sign-off|validation formelle
+quality gate|seuil qualité
+risk-based testing|test basé sur les risques
+test estimation|estimation des tests
+environment issue|problème d'environnement
+configuration|configuration
+database check|vérification en base
+SQL query|requête SQL
+log analysis|analyse des journaux
+browser console|console du navigateur
+network tab|onglet Réseau
+DevTools|outils de développement
+cache issue|problème de cache
+test evidence|preuve de test
+audit|audit
+compliance|conformité
+standard|norme
+ISTQB|certification ISTQB
+QA engineer|ingénieur qualité
+automation engineer|ingénieur en automatisation
+test lead|responsable des tests
+collaborate|collaborer
+escalate|faire remonter, escalader
+communicate|communiquer
+gap analysis|analyse des écarts
+prioritization|priorisation
+ROI|retour sur investissement
+stakeholder alignment|alignement des parties prenantes
+value proposition|proposition de valeur
+product vision|vision produit
+product strategy|stratégie produit
+product discovery|découverte produit
+product-market fit|adéquation produit-marché
+OKR|objectifs et résultats clés (OKR)
+north star metric|indicateur étoile du Nord
+outcome-based roadmap|feuille de route orientée résultats
+opportunity solution tree|arbre opportunités-solutions
+jobs to be done|théorie des tâches à accomplir
+hypothesis-driven development|développement piloté par les hypothèses
+validated learning|apprentissage validé
+lean canvas|lean canvas
+business model canvas|business model canvas
+SWOT analysis|analyse SWOT
+competitive analysis|analyse concurrentielle
+market research|étude de marché
+TAM|marché total adressable
+unit economics|économie unitaire
+customer lifetime value|valeur vie client
+customer acquisition cost|coût d'acquisition client
+payback period|délai de retour sur investissement
+NPV|valeur actuelle nette
+total cost of ownership|coût total de possession
+CAPEX|dépenses d'investissement
+OPEX|dépenses d'exploitation
+business value|valeur métier
+cost of delay|coût du retard
+WSJF|priorisation WSJF
+RICE scoring|score RICE
+Kano model|modèle de Kano
+weighted scoring|notation pondérée
+decision matrix|matrice de décision
+five whys|méthode des 5 pourquoi
+fishbone diagram|diagramme d'Ishikawa
+process optimization|optimisation des processus
+process automation|automatisation des processus
+RPA|automatisation robotisée des processus
+value stream mapping|cartographie de la chaîne de valeur
+lean|lean, allégé
+Six Sigma|Six Sigma
+operating model|modèle opérationnel
+target operating model|modèle opérationnel cible
+capability map|cartographie des capacités
+enterprise architecture|architecture d'entreprise
+solution architecture|architecture de solution
+system integration|intégration des systèmes
+interface specification|spécification d'interface
+API contract|contrat d'API
+data governance|gouvernance des données
+master data|données de référence
+single source of truth|source unique de vérité
+data lineage|lignage des données
+data quality|qualité des données
+business intelligence|informatique décisionnelle
+data-driven decision|décision fondée sur les données
+cohort analysis|analyse de cohorte
+funnel analysis|analyse de l'entonnoir
+leading indicator|indicateur avancé
+lagging indicator|indicateur retardé
+benchmark|référence de comparaison
+regulatory requirement|exigence réglementaire
+audit trail|piste d'audit
+data protection|protection des données
+risk appetite|appétit pour le risque
+governance|gouvernance
+portfolio management|gestion de portefeuille
+program management|gestion de programme
+PMO|bureau de gestion de projets (PMO)
+benefits realization|réalisation des bénéfices
+earned value|valeur acquise
+burn rate|rythme de consommation de trésorerie
+burndown chart|graphique d'avancement (burndown)
+burnup chart|graphique de progression (burnup)
+forecast|prévision
+predictability|prévisibilité
+dependency management|gestion des dépendances
+scaled agile|agilité à l'échelle
+SAFe|framework SAFe
+PI planning|planification d'incrément (PI)
+release train|train de livraison (plusieurs équipes, calendrier commun)
+product manager|chef de produit
+chief product officer|directeur produit
+executive summary|synthèse pour la direction
+executive sponsor|sponsor de la direction
+C-level|direction générale
+buy-in|adhésion
+influence|influencer
+persuade|convaincre
+storytelling|mise en récit
+narrative|récit
+facilitation|animation
+conflict resolution|résolution des conflits
+difficult conversation|conversation difficile
+manage expectations|gérer les attentes
+say no|dire non
+compromise|compromis
+mitigation plan|plan d'atténuation
+contingency plan|plan de secours
+critical success factor|facteur clé de succès
+success criteria|critères de réussite
+post-implementation review|bilan post-mise en œuvre
+lessons learned|retour d'expérience
+continuous improvement|amélioration continue
+digital transformation|transformation numérique
+change impact assessment|évaluation de l'impact du changement
+organizational change|changement organisationnel
+resistance to change|résistance au changement
+change champion|ambassadeur du changement
+customer centricity|orientation client
+voice of the customer|voix du client
+NPS|net promoter score
+customer satisfaction|satisfaction client
+omnichannel|omnicanal
+go-to-market|stratégie de mise sur le marché
+pricing strategy|stratégie tarifaire
+monetization|monétisation
+subscription model|modèle d'abonnement
+B2B|B2B (entre entreprises)
+B2C|B2C (vers les particuliers)
+SaaS|logiciel en tant que service
+platform|plateforme
+ecosystem|écosystème
+partnership|partenariat
+scalability|évolutivité
+sustainability|durabilité
+due diligence|vérification préalable
+procurement|achats
+statement of work|cahier des charges contractuel
+fixed price|forfait
+time and materials|régie
+change order|avenant
+acceptance sign-off|procès-verbal de réception
+warranty period|période de garantie
+technical debt|dette technique
+microservices|microservices
+CI/CD pipeline|chaîne d'intégration et de déploiement continus
+monolith|application monolithique
+domain-driven design|conception pilotée par le domaine
+bounded context|contexte délimité
+event-driven architecture|architecture orientée événements
+message broker|courtier de messages
+pub/sub|publication/abonnement
+idempotent|idempotent
+eventual consistency|cohérence à terme
+loose coupling|couplage faible
+high cohesion|forte cohésion
+separation of concerns|séparation des responsabilités
+dependency injection|injection de dépendances
+inversion of control|inversion de contrôle
+clean architecture|architecture propre
+hexagonal architecture|architecture hexagonale
+API gateway|passerelle d'API
+service mesh|maillage de services
+circuit breaker|disjoncteur (circuit breaker)
+retry policy|politique de nouvelle tentative
+exponential backoff|attente exponentielle
+graceful degradation|dégradation progressive
+single point of failure|point de défaillance unique
+horizontal scaling|mise à l'échelle horizontale
+vertical scaling|mise à l'échelle verticale
+autoscaling|mise à l'échelle automatique
+Kubernetes|Kubernetes
+pod|pod
+orchestration|orchestration
+infrastructure as code|infrastructure en tant que code
+Terraform|Terraform
+observability|observabilité
+distributed tracing|traçage distribué
+SLO|objectif de niveau de service
+error budget|budget d'erreur
+postmortem|analyse post-incident
+blameless|sans recherche de coupable
+root cause analysis|analyse des causes racines
+incident response|gestion des incidents
+runbook|procédure d'exploitation
+failover|basculement
+disaster recovery|reprise après sinistre
+blue-green deployment|déploiement bleu-vert
+canary release|déploiement canari
+zero downtime|sans interruption de service
+continuous delivery|livraison continue
+trunk-based development|développement sur tronc commun
+monorepo|dépôt unique (monorepo)
+code ownership|responsabilité du code
+static analysis|analyse statique
+code coverage|couverture de code
+mutation testing|test de mutation
+contract testing|test de contrat
+property-based testing|test basé sur les propriétés
+caching strategy|stratégie de cache
+cache invalidation|invalidation du cache
+read replica|réplique en lecture
+connection pool|pool de connexions
+query optimization|optimisation des requêtes
+N+1 query|problème de requêtes N+1
+denormalization|dénormalisation
+data migration|migration de données
+schema change|modification de schéma
+backward compatibility|rétrocompatibilité
+API versioning|versionnage d'API
+GraphQL|GraphQL
+gRPC|gRPC
+WebSocket|WebSocket
+throttling|limitation du débit
+OAuth|OAuth
+JWT|jeton JWT
+single sign-on|authentification unique (SSO)
+zero trust|confiance zéro
+vulnerability|vulnérabilité
+penetration test|test d'intrusion
+XSS|script intersite (XSS)
+least privilege|moindre privilège
+secrets management|gestion des secrets
+encryption at rest|chiffrement des données stockées
+audit log|journal d'audit
+concurrency control|contrôle de concurrence
+race condition|situation de compétition
+deadlock|interblocage
+thread safety|sûreté des threads
+immutability|immuabilité
+functional programming|programmation fonctionnelle
+side effect|effet de bord
+pure function|fonction pure
+over-engineering|sur-ingénierie
+premature optimization|optimisation prématurée
+YAGNI|principe YAGNI
+DRY|principe DRY
+KISS|principe KISS
+design document|document de conception
+RFC|demande de commentaires (RFC)
+ADR|registre de décision d'architecture
+architecture review|revue d'architecture
+proof of concept|preuve de concept
+build vs buy|faire ou acheter
+vendor lock-in|dépendance fournisseur
+cost optimization|optimisation des coûts
+capacity planning|planification de capacité
+p99 latency|latence au 99e centile
+profiling|profilage
+memory footprint|empreinte mémoire
+garbage collection|ramasse-miettes
+cold start|démarrage à froid
+hotfix release|livraison de correctif urgent
+feature toggle|bascule de fonctionnalité
+dark launch|lancement discret
+technical roadmap|feuille de route technique
+engineering manager|responsable d'équipe d'ingénierie
+staff engineer|ingénieur principal transverse
+principal engineer|ingénieur principal
+one-on-one|entretien individuel
+code ownership model|modèle de responsabilité du code
+on-call rotation|roulement d'astreinte
+toil|tâches répétitives manuelles
+developer experience|expérience développeur
+platform team|équipe plateforme
+cross-functional team|équipe pluridisciplinaire
+justify|justifier
+de-risk|réduire les risques
+sunset|retirer progressivement
+deprecate|déclarer obsolète
+greenfield|projet entièrement nouveau
+brownfield|projet sur l'existant
+legacy system|système hérité
+strangler pattern|modèle d'étrangleur (remplacement progressif)
+time complexity|complexité en temps
+thesis defense|soutenance de mémoire
+space complexity|complexité en espace
+Big O notation|notation grand O
+asymptotic|asymptotique
+dynamic programming|programmation dynamique
+greedy algorithm|algorithme glouton
+divide and conquer|diviser pour régner
+heuristic|heuristique
+optimization problem|problème d'optimisation
+NP-complete|NP-complet
+graph theory|théorie des graphes
+shortest path|plus court chemin
+concurrency|concurrence
+parallelism|parallélisme
+mutex|verrou d'exclusion mutuelle
+distributed system|système distribué
+consistency|cohérence
+availability|disponibilité
+fault tolerance|tolérance aux pannes
+CAP theorem|théorème CAP
+replication|réplication
+sharding|partitionnement (sharding)
+throughput|débit
+empirical|empirique
+quantitative|quantitatif
+qualitative|qualitatif
+research question|question de recherche
+research gap|lacune de la recherche
+contribution|contribution
+limitation|limite
+future work|perspectives
+abstract|résumé (d'article)
+conference paper|article de conférence
+journal|revue scientifique
+publish|publier
+evaluation|évaluation
+baseline model|modèle de référence
+state of the art|état de l'art

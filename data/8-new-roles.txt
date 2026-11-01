@@ -1,0 +1,149 @@
+# Words for the new roles: IT HR, Business development, Sales, PMO, Manager / C-level.
+# level=1 role=hr
+tech recruiter|n|chuyên viên tuyển dụng IT|Our tech recruiter screens 30 CVs a day.|hr
+job description|n|bản mô tả công việc|Update the job description before we post it.|hr
+JD|n|bản mô tả công việc|Please send me the JD for the tester role.|hr
+tech stack|n|bộ công nghệ sử dụng|Our tech stack is React and Java.|hr
+hiring manager|n|quản lý tuyển dụng (người cần tuyển)|The hiring manager joins the second interview.|hr
+screening call|n|cuộc gọi sàng lọc|The screening call takes 15 minutes.|hr
+notice period|n|thời gian báo trước khi nghỉ việc|Her notice period is 30 days.|hr
+full-time|adj|toàn thời gian|This is a full-time position.|hr
+part-time|adj|bán thời gian|We need a part-time designer.|hr
+contractor|n|người làm theo hợp đồng|We hired a contractor for three months.|hr
+freelancer|n|người làm tự do|A freelancer built our landing page.|hr
+hybrid work|n|làm việc kết hợp (văn phòng và tại nhà)|We offer hybrid work: three days in the office.|hr
+salary range|n|khoảng lương|The salary range is 20 to 30 million dong.|hr
+benefits package|n|gói phúc lợi|The benefits package includes health insurance.|hr
+exit interview|n|phỏng vấn nghỉ việc|We learned a lot from her exit interview.|hr
+# level=2 role=hr
+sourcing|n|tìm nguồn ứng viên|Sourcing on LinkedIn brings the best developers.|hr
+headhunting|n|săn đầu người|We use headhunting for senior roles.|hr
+talent pool|n|nguồn ứng viên tiềm năng|Keep good candidates in our talent pool.|hr
+candidate pipeline|n|danh sách ứng viên đang trong quy trình|The candidate pipeline has 12 testers.|hr
+take-home test|n|bài kiểm tra làm tại nhà|The take-home test should take two hours.|hr
+culture fit|n|sự phù hợp văn hóa|We check culture fit in the final round.|hr
+offer negotiation|n|đàm phán lời mời làm việc|Offer negotiation took a week.|hr
+counteroffer|n|đề nghị giữ chân từ công ty cũ|He accepted a counteroffer from his current company.|hr
+referral bonus|n|thưởng giới thiệu ứng viên|Staff get a referral bonus for each hire.|hr
+background check|n|kiểm tra lý lịch|The background check takes three days.|hr
+offboarding|n|quy trình nghỉ việc|Offboarding includes removing system access.|hr
+career ladder|n|lộ trình thăng tiến|Our career ladder has five engineering levels.|hr
+salary band|n|khung lương|Each job level has a salary band.|hr
+engagement survey|n|khảo sát mức độ gắn kết|The engagement survey runs twice a year.|hr
+FTE|n|nhân sự toàn thời gian tương đương|The team needs two more FTEs.|hr
+# level=3 role=hr
+time to hire|n|thời gian tuyển dụng|Our time to hire for developers is 35 days.|hr
+cost per hire|n|chi phí cho mỗi lần tuyển|Referrals lower our cost per hire.|hr
+employer value proposition|n|giá trị nhà tuyển dụng mang lại|Remote work is part of our employer value proposition.|hr
+performance improvement plan|n|kế hoạch cải thiện hiệu suất|He is on a performance improvement plan.|hr
+retention bonus|n|thưởng giữ chân|Key engineers received a retention bonus.|hr
+workforce planning|n|hoạch định nhân lực|Workforce planning starts with the product roadmap.|hr
+diversity and inclusion|n|đa dạng và hòa nhập|Diversity and inclusion is part of our hiring goals.|hr
+upskilling budget|n|ngân sách nâng cao kỹ năng|Each engineer has an upskilling budget.|hr
+employee stock option|n|quyền chọn mua cổ phiếu cho nhân viên|The startup offers employee stock options.|hr
+# level=1 role=bizdev
+lead|n|khách hàng tiềm năng|We got 20 new leads from the trade show.|business
+prospect|n|khách hàng triển vọng|This bank is a strong prospect for us.|business
+partner|n|đối tác|We are looking for a local partner in Japan.|business
+pitch|n|bài chào hàng / thuyết trình bán ý tưởng|Her pitch to the investors went well.|business
+pitch deck|n|bộ slide thuyết trình gọi vốn / chào hàng|Send me the pitch deck before the meeting.|business
+target market|n|thị trường mục tiêu|Our target market is small online shops.|business
+networking event|n|sự kiện kết nối|I met two clients at a networking event.|business
+follow-up meeting|n|cuộc họp tiếp theo|We booked a follow-up meeting for next week.|business
+# level=2 role=bizdev
+qualified lead|n|khách hàng tiềm năng đủ điều kiện|Only qualified leads go to the sales team.|business
+cold outreach|n|tiếp cận khách hàng chưa quen biết|Cold outreach on LinkedIn has a low reply rate.|business
+ideal customer profile|n|chân dung khách hàng lý tưởng|Our ideal customer profile is a bank with 50+ branches.|business
+market entry|n|thâm nhập thị trường|Market entry into Thailand is planned for 2027.|business
+competitive advantage|n|lợi thế cạnh tranh|Our competitive advantage is fast delivery.|business
+USP|n|điểm bán hàng độc nhất|Our USP is support in Vietnamese and Korean.|business
+pilot project|n|dự án thí điểm|The client wants a three-month pilot project first.|business
+proof of value|n|chứng minh giá trị|The proof of value showed 20 percent time savings.|business
+channel partner|n|đối tác kênh phân phối|A channel partner sells our software in Malaysia.|business
+reseller|n|đại lý bán lại|The reseller adds its own support service.|business
+account plan|n|kế hoạch phát triển khách hàng|We update the account plan for each big client.|business
+champion|n|người ủng hộ bên phía khách hàng|Our champion inside the bank pushed the deal.|business
+# level=3 role=bizdev
+white label|adj|sản phẩm gắn thương hiệu của bên khác|We sell a white label version to telecom companies.|business
+revenue share|n|chia sẻ doanh thu|The partnership uses a 70/30 revenue share.|money
+letter of intent|n|thư bày tỏ ý định|The client signed a letter of intent.|business
+term sheet|n|bản điều khoản sơ bộ|The investor sent a term sheet.|money
+deal flow|n|dòng cơ hội hợp tác/đầu tư|Events help keep our deal flow strong.|business
+decision-making unit|n|nhóm ra quyết định mua hàng|Map the decision-making unit before the proposal.|business
+strategic partnership|n|quan hệ đối tác chiến lược|We signed a strategic partnership with a cloud provider.|business
+total addressable market|n|tổng quy mô thị trường khả dụng|The total addressable market is 2 billion dollars.|money
+# level=1 role=sales
+deal|n|thương vụ|We closed a big deal with a retailer.|business
+customer meeting|n|cuộc gặp khách hàng|I have a customer meeting at 2 p.m.|meeting
+price list|n|bảng giá|Send the client our new price list.|money
+free trial|n|dùng thử miễn phí|The free trial lasts 14 days.|business
+sales target|n|chỉ tiêu doanh số|We reached our sales target in March.|business
+commission|n|hoa hồng|Sales staff get a five percent commission.|money
+account manager|n|quản lý khách hàng|Your account manager will call you tomorrow.|people
+# level=2 role=sales
+quota|n|chỉ tiêu bán hàng|She hit 120 percent of her quota.|business
+discovery call|n|cuộc gọi tìm hiểu nhu cầu|In the discovery call, ask about their pain points.|communication
+objection|n|sự phản đối / lý do từ chối|The most common objection is price.|communication
+objection handling|n|xử lý từ chối|Good objection handling turns a no into a maybe.|communication
+opportunity|n|cơ hội bán hàng|Log every opportunity in the CRM.|business
+sales cycle|n|chu kỳ bán hàng|Our sales cycle for banks is six months.|business
+win rate|n|tỷ lệ chốt thành công|Our win rate improved after the new demo.|data
+pricing tier|n|gói giá theo cấp|We have three pricing tiers: Basic, Pro and Enterprise.|money
+key account|n|khách hàng trọng điểm|This bank is a key account for us.|business
+customer success|n|thành công của khách hàng (bộ phận)|Customer success helps clients use the product well.|business
+renewal rate|n|tỷ lệ gia hạn|Our renewal rate is 90 percent.|data
+freemium|n|mô hình miễn phí cơ bản, trả phí nâng cao|Freemium users can upgrade any time.|business
+closing|n|chốt hợp đồng|Closing usually happens at the end of the quarter.|business
+# level=3 role=sales
+MRR|n|doanh thu định kỳ hàng tháng|Our MRR grew to 50,000 dollars.|money
+ARR|n|doanh thu định kỳ hàng năm|ARR is the key number for SaaS investors.|money
+annual contract value|n|giá trị hợp đồng hằng năm|The annual contract value is 120 million dong.|money
+sales forecast|n|dự báo doanh số|The sales forecast for Q4 looks strong.|data
+discount approval|n|phê duyệt chiết khấu|Discounts above 15 percent need discount approval.|money
+procurement team|n|bộ phận mua hàng|The client's procurement team asked for three quotes.|business
+land and expand|n|bán nhỏ trước, mở rộng sau|Our strategy is land and expand: one team first, then the whole company.|business
+# level=2 role=pmo
+project charter|n|điều lệ dự án|The project charter names the sponsor and goals.|document
+RAID log|n|nhật ký rủi ro, giả định, vấn đề, phụ thuộc|Update the RAID log every Friday.|document
+resource allocation|n|phân bổ nguồn lực|Resource allocation is hard with five projects.|business
+project health check|n|đánh giá sức khỏe dự án|The PMO runs a project health check every month.|business
+status dashboard|n|bảng theo dõi tình trạng dự án|All projects appear on the status dashboard.|data
+schedule variance|n|chênh lệch tiến độ|The schedule variance is two weeks.|time
+budget variance|n|chênh lệch ngân sách|The budget variance is under five percent.|money
+project intake|n|tiếp nhận đề xuất dự án|New ideas go through project intake first.|process
+template library|n|thư viện biểu mẫu|Use the PMO template library for status reports.|document
+milestone report|n|báo cáo cột mốc|Send the milestone report to the sponsor.|document
+# level=3 role=pmo
+stage gate|n|cổng kiểm soát giai đoạn|The project passed the design stage gate.|process
+change advisory board|n|hội đồng xét duyệt thay đổi|The change advisory board meets on Tuesdays.|process
+governance framework|n|khung quản trị|Our governance framework has three approval levels.|business
+benefits register|n|sổ theo dõi lợi ích|Add expected savings to the benefits register.|document
+cross-project dependency|n|phụ thuộc giữa các dự án|There is a cross-project dependency on the new API.|process
+baseline schedule|n|lịch trình cơ sở|Compare progress with the baseline schedule.|time
+portfolio review|n|rà soát danh mục dự án|The portfolio review decides which projects continue.|meeting
+# level=2 role=exec
+P&L|n|báo cáo lãi lỗ|Each business unit owns its own P&L.|money
+gross margin|n|biên lợi nhuận gộp|Our gross margin is 60 percent.|money
+cash flow|n|dòng tiền|Cash flow is tight this quarter.|money
+cost center|n|trung tâm chi phí|IT is treated as a cost center.|money
+profit center|n|trung tâm lợi nhuận|The cloud team became a profit center.|money
+market share|n|thị phần|We have 15 percent market share in Vietnam.|business
+all-hands meeting|n|họp toàn công ty|The CEO shared the results at the all-hands meeting.|meeting
+town hall|n|buổi đối thoại toàn công ty|Ask your question at the town hall.|meeting
+delegation|n|sự ủy quyền, giao việc|Good delegation gives managers time to think.|people
+accountability|n|trách nhiệm giải trình|We need clear accountability for each goal.|people
+quarterly business review|n|họp đánh giá kinh doanh theo quý|We present results at the quarterly business review.|meeting
+# level=3 role=exec
+EBITDA|n|lợi nhuận trước lãi vay, thuế và khấu hao|EBITDA grew 25 percent this year.|money
+operating margin|n|biên lợi nhuận hoạt động|Automation improved our operating margin.|money
+runway|n|thời gian công ty còn đủ tiền hoạt động|We have 18 months of runway.|money
+valuation|n|định giá công ty|The startup's valuation reached 50 million dollars.|money
+fundraising|n|gọi vốn|Fundraising will start after the product launch.|money
+board of directors|n|hội đồng quản trị|The board of directors approved the budget.|people
+shareholder|n|cổ đông|Shareholders expect steady growth.|money
+mission statement|n|tuyên bố sứ mệnh|Our mission statement is on the office wall.|business
+competitive landscape|n|bối cảnh cạnh tranh|The competitive landscape changed after two new players.|business
+restructuring|n|tái cấu trúc|The restructuring merged two departments.|business
+mergers and acquisitions|n|mua bán và sáp nhập|The company grew through mergers and acquisitions.|business
+decision rights|n|quyền quyết định|Clear decision rights speed up projects.|business
+stakeholder management|n|quản lý các bên liên quan|Stakeholder management takes half my week.|people

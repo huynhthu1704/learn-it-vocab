@@ -1,0 +1,350 @@
+processor|processeur
+operating system|système d'exploitation
+Windows|Windows
+Linux|Linux
+variable|variable
+loop|boucle
+condition|condition
+if statement|instruction if
+input|entrée
+output|sortie
+number|nombre
+string|chaîne de caractères
+integer|entier
+error|erreur
+bug|bogue (bug)
+fix|corriger
+run|exécuter, lancer
+save|enregistrer
+copy|copier
+paste|coller
+delete|supprimer
+open|ouvrir
+close|fermer
+click|cliquer
+select|sélectionner
+button|bouton
+menu|menu
+icon|icône
+window|fenêtre
+tab|onglet
+settings|paramètres
+lecture|cours magistral
+lecturer|enseignant, maître de conférences
+course|cours, module
+subject|matière
+semester|semestre
+credit|crédit (ECTS)
+exam|examen
+midterm|partiel de mi-semestre
+quiz|quiz, petit contrôle
+assignment|devoir
+homework|devoirs
+submit|rendre, soumettre
+grade|note
+score|score, note
+pass|réussir
+fail|échouer
+group project|projet de groupe
+presentation|présentation
+slide|diapositive
+research|recherche
+lab|salle de TP, laboratoire
+tutorial|tutoriel, TD
+example|exemple
+exercise|exercice
+understand|comprendre
+practise|s'entraîner
+learn|apprendre
+study|étudier
+skill|compétence
+major|spécialité, matière principale
+degree|diplôme
+graduate|obtenir son diplôme
+internship|stage
+intern|stagiaire
+job|emploi, poste
+CV|CV
+job fair|salon de l'emploi
+office|bureau
+developer|développeur
+tester|testeur
+designer|designer, concepteur
+HTML|HTML
+CSS|CSS
+JavaScript|JavaScript
+Python|Python
+Java|Java
+table|tableau, table
+row|ligne
+column|colonne
+chart|graphique
+video|vidéo
+audio|audio, son
+camera|caméra
+microphone|micro
+headphones|casque audio
+Wi-Fi|Wi-Fi
+network|réseau
+connect|connecter
+connection|connexion
+virus|virus informatique
+backup|sauvegarde
+restart|redémarrer
+shortcut|raccourci
+screenshot|capture d'écran
+chat|messagerie, discussion
+message|message
+online meeting|réunion en ligne
+schedule|emploi du temps, planning
+calendar|calendrier, agenda
+note|note
+solution|solution
+result|résultat
+idea|idée
+test case|cas de test
+defect|défaut, anomalie
+expected result|résultat attendu
+actual result|résultat obtenu
+QA|assurance qualité
+quality|qualité
+testing|tests
+manual testing|test manuel
+bug report|rapport de bogue
+steps to reproduce|étapes de reproduction
+precondition|précondition
+test data|données de test
+test step|étape de test
+fixed|corrigé
+closed|clôturé
+reopen|rouvrir
+retest|retester
+verify|vérifier
+high|élevé
+low|faible
+critical|critique
+minor|mineur
+screen recording|enregistrement d'écran
+attach|joindre
+device|appareil
+Chrome|Chrome
+Safari|Safari
+build number|numéro de build
+test environment|environnement de test
+test plan|plan de test
+test suite|suite de tests
+checklist|liste de vérification
+scenario|scénario
+happy path|parcours nominal
+negative test|test négatif
+positive test|test positif
+valid|valide
+invalid|invalide
+required field|champ obligatoire
+validation|validation, contrôle de saisie
+special character|caractère spécial
+empty|vide
+maximum|maximum
+minimum|minimum
+limit|limite
+logout|déconnexion
+checkout|paiement de la commande
+cart|panier
+404 error|erreur 404
+spelling mistake|faute d'orthographe
+alignment|alignement
+overlap|se chevaucher
+cut off|tronqué, coupé
+missing|manquant
+wrong|faux, incorrect
+correct|correct
+freeze|se figer
+loading time|temps de chargement
+always|toujours
+sometimes|parfois
+randomly|aléatoirement
+again|encore, de nouveau
+step by step|étape par étape
+assign|attribuer
+assignee|responsable assigné
+reporter|rapporteur
+Jira|Jira
+board|tableau de suivi
+duplicate|doublon
+test account|compte de test
+email address|adresse e-mail
+phone number|numéro de téléphone
+time zone|fuseau horaire
+language|langue
+mobile view|affichage mobile
+desktop|ordinateur de bureau
+portrait|mode portrait
+landscape|mode paysage
+screen size|taille d'écran
+popup|fenêtre contextuelle
+disabled|désactivé
+enabled|activé
+visible|visible
+hidden|masqué
+scroll|faire défiler
+tap|appuyer, toucher
+swipe|balayer
+double-click|double-cliquer
+drag and drop|glisser-déposer
+clear cache|vider le cache
+log file|fichier journal
+console error|erreur de console
+test result|résultat de test
+test report|rapport de test
+coverage|couverture
+smoke test|test de fumée
+sanity check|vérification rapide
+exploratory testing|test exploratoire
+user acceptance testing|recette utilisateur
+UAT|recette utilisateur
+release note|note de version
+new feature|nouvelle fonctionnalité
+regression|régression
+workaround|solution de contournement
+known issue|problème connu
+root cause|cause racine
+impact|impact
+ready for test|prêt à tester
+blocker|point bloquant
+acceptance criteria|critères d'acceptation
+scope creep|dérive du périmètre
+product backlog|backlog produit
+backlog refinement|affinage du backlog
+grooming|affinage du backlog
+epic|epic, grande fonctionnalité
+story|récit utilisateur
+INVEST|critères INVEST
+definition of ready|définition de prêt
+sprint goal|objectif du sprint
+sprint review|revue de sprint
+daily scrum|mêlée quotidienne
+Scrum Master|Scrum Master
+increment|incrément
+Kanban|Kanban
+WIP limit|limite de travail en cours
+MVP|produit minimum viable
+roadmap|feuille de route
+release plan|plan de livraison
+prioritize|prioriser
+MoSCoW|méthode MoSCoW
+must-have|indispensable
+nice-to-have|souhaitable
+elicitation|recueil des besoins
+elicit|recueillir, faire émerger
+requirements gathering|collecte des exigences
+functional requirement|exigence fonctionnelle
+non-functional requirement|exigence non fonctionnelle
+BRD|document des exigences métier
+SRS|spécification des exigences logicielles
+FRD|document des exigences fonctionnelles
+use case|cas d'utilisation
+actor|acteur
+main flow|scénario principal
+alternative flow|scénario alternatif
+exception flow|scénario d'exception
+postcondition|postcondition
+user persona|persona
+user journey|parcours utilisateur
+customer journey map|carte du parcours client
+pain point|point de friction
+as-is process|processus actuel
+to-be process|processus cible
+BPMN|notation BPMN
+swimlane|couloir (swimlane)
+activity diagram|diagramme d'activité
+context diagram|diagramme de contexte
+data flow diagram|diagramme de flux de données
+data dictionary|dictionnaire de données
+mapping|correspondance des données
+validation rule|règle de validation
+edge case|cas limite
+business process|processus métier
+domain knowledge|connaissance métier
+subject matter expert|expert métier
+SME|expert métier
+sponsor|commanditaire, sponsor
+decision maker|décideur
+RACI|matrice RACI
+stakeholder map|cartographie des parties prenantes
+stakeholder analysis|analyse des parties prenantes
+communication plan|plan de communication
+expectation|attente
+negotiate|négocier
+conflict|conflit
+consensus|consensus
+facilitate|animer, faciliter
+brainstorming|remue-méninges
+observation|observation
+questionnaire|questionnaire
+focus group|groupe de discussion
+document analysis|analyse documentaire
+requirement traceability|traçabilité des exigences
+baseline|référence de base
+change control|maîtrise des changements
+impact analysis|analyse d'impact
+effort|charge de travail
+man-day|jour-homme
+resource|ressource
+capacity|capacité
+Gantt chart|diagramme de Gantt
+critical path|chemin critique
+deliverable|livrable
+phase|phase
+work breakdown structure|organigramme des tâches (WBS)
+risk register|registre des risques
+mitigation|atténuation
+issue log|registre des problèmes
+escalation|escalade
+status meeting|réunion de suivi
+steering committee|comité de pilotage
+KPI|indicateur clé de performance
+metric|indicateur
+conversion rate|taux de conversion
+churn|taux d'attrition (clients)
+retention|fidélisation
+revenue|chiffre d'affaires
+profit|bénéfice
+business case|dossier d'opportunité
+cost-benefit analysis|analyse coûts-avantages
+feasibility study|étude de faisabilité
+vendor|fournisseur
+RFP|appel d'offres
+contract|contrat
+SLA|accord de niveau de service
+outsourcing|externalisation
+offshore team|équipe offshore
+CRM|logiciel de gestion de la relation client
+ERP|progiciel de gestion intégré (ERP)
+e-commerce|commerce électronique
+inventory|stock, inventaire
+SKU|référence produit (UGS)
+checkout flow|parcours de paiement
+payment gateway|passerelle de paiement
+shipping|expédition
+promotion|promotion
+voucher|bon de réduction
+loyalty program|programme de fidélité
+user acceptance|acceptation par les utilisateurs
+handover|passation
+support team|équipe support
+change management|conduite du changement
+adoption|adoption
+training plan|plan de formation
+constraint|contrainte
+assumption log|registre des hypothèses
+open question|question en suspens
+parking lot|liste des sujets reportés
+timebox|durée limitée (timebox)
+recap|récapitulatif
+align|s'aligner
+push back|s'opposer, contester
+trade-off|compromis
+outcome|résultat
+refactor|refactoriser
+code smell|mauvaise odeur de code
+clean code|code propre

@@ -1,0 +1,350 @@
+naming convention|convention de nommage
+coding standard|norme de codage
+linter|linter, analyseur de code
+formatter|formateur de code
+request changes|demander des modifications
+nitpick|remarque de détail
+rebase|rebaser
+cherry-pick|reprendre un commit (cherry-pick)
+main branch|branche principale
+feature branch|branche de fonctionnalité
+stash|mettre de côté (stash)
+revert|annuler (revenir en arrière)
+diff|différences (diff)
+tag|étiquette de version
+semantic versioning|versionnage sémantique
+changelog|journal des modifications
+API|interface de programmation (API)
+endpoint|point de terminaison
+HTTP method|méthode HTTP
+GET request|requête GET
+POST request|requête POST
+status code|code de statut
+payload|charge utile
+header|en-tête
+authentication|authentification
+authorization|autorisation
+session|session
+cookie|cookie
+CORS|partage de ressources entre origines (CORS)
+hashing|hachage
+environment variable|variable d'environnement
+secret|secret
+API key|clé d'API
+ORM|ORM (mapping objet-relationnel)
+migration|migration
+schema|schéma
+transaction|transaction
+seed data|données initiales
+NoSQL|base NoSQL
+async|asynchrone
+callback|fonction de rappel
+promise|promesse
+event|événement
+state|état
+component|composant
+props|propriétés (props)
+hook|hook
+render|afficher, rendre
+virtual DOM|DOM virtuel
+single-page application|application monopage
+routing|routage
+state management|gestion d'état
+TypeScript|TypeScript
+type safety|sûreté du typage
+generic|générique
+module|module
+helper function|fonction utilitaire
+utility|utilitaire
+constant|constante
+hardcode|coder en dur
+magic number|nombre magique
+duplicate code|code dupliqué
+null check|vérification de nullité
+error handling|gestion des erreurs
+try-catch|bloc try-catch
+stack trace|pile d'appels
+reproduce|reproduire
+memory leak|fuite de mémoire
+performance|performance
+optimize|optimiser
+bottleneck|goulot d'étranglement
+latency|latence
+lazy loading|chargement différé
+rate limit|limite de débit
+third-party|tiers
+integration|intégration
+SDK|kit de développement (SDK)
+webhook|webhook
+cron job|tâche planifiée
+background job|tâche en arrière-plan
+queue|file d'attente
+container|conteneur
+Docker|Docker
+CI|intégration continue
+pipeline|pipeline
+build failure|échec du build
+deployment|déploiement
+rollback|retour arrière
+monitoring|supervision
+alert|alerte
+on-call|d'astreinte
+incident|incident
+uptime|disponibilité
+AWS|AWS
+bucket|compartiment (bucket)
+CDN|réseau de diffusion de contenu
+load balancer|répartiteur de charge
+unit testing|tests unitaires
+mock|simulacre (mock)
+test coverage|couverture de tests
+integration test|test d'intégration
+assertion|assertion
+TDD|développement piloté par les tests
+sprint planning|planification du sprint
+story points|points d'effort
+retrospective|rétrospective
+velocity|vélocité
+definition of done|définition de terminé
+spike|étude technique courte
+tech debt|dette technique
+legacy code|code hérité
+scalable|évolutif
+maintainable|maintenable
+readable|lisible
+reusable|réutilisable
+backward compatible|rétrocompatible
+deprecated|obsolète
+breaking change|changement incompatible
+feature flag|drapeau de fonctionnalité
+A/B test|test A/B
+analytics|analyse d'audience
+tracking|suivi
+logging|journalisation
+spec|spécification
+mentoring|mentorat
+knowledge sharing|partage de connaissances
+tech talk|présentation technique
+performance review|entretien annuel d'évaluation
+side project|projet personnel
+data structure|structure de données
+capstone project|projet de fin d'études
+version control|gestion de versions
+linked list|liste chaînée
+stack|pile
+tree|arbre
+graph|graphe
+node|nœud
+hash table|table de hachage
+recursion|récursivité
+iteration|itération
+sorting|tri
+searching|recherche
+binary search|recherche dichotomique
+pseudocode|pseudo-code
+object-oriented programming|programmation orientée objet
+OOP|programmation orientée objet
+inheritance|héritage
+encapsulation|encapsulation
+polymorphism|polymorphisme
+abstraction|abstraction
+interface|interface
+constructor|constructeur
+instance|instance
+attribute|attribut
+compiler|compilateur
+interpreter|interpréteur
+runtime|exécution
+syntax error|erreur de syntaxe
+logic error|erreur de logique
+debugger|débogueur
+breakpoint|point d'arrêt
+SQL|SQL
+query|requête
+primary key|clé primaire
+foreign key|clé étrangère
+relational database|base de données relationnelle
+normalization|normalisation
+ERD|diagramme entité-association
+entity|entité
+join|jointure
+operating systems|systèmes d'exploitation (cours)
+thread|fil d'exécution (thread)
+CPU|processeur central
+RAM|mémoire vive
+binary|binaire
+bit|bit
+byte|octet
+protocol|protocole
+IP address|adresse IP
+router|routeur
+TCP/IP|TCP/IP
+HTTP|HTTP
+web development|développement web
+software engineering|génie logiciel
+life cycle|cycle de vie
+requirements|exigences
+UML|UML
+class diagram|diagramme de classes
+sequence diagram|diagramme de séquence
+waterfall|modèle en cascade
+Agile|méthode agile
+Scrum|Scrum
+GitHub repository|dépôt GitHub
+commit history|historique des commits
+pull request|demande de fusion (pull request)
+merge conflict|conflit de fusion
+open source|open source
+report writing|rédaction de rapports
+citation|citation
+reference|référence
+plagiarism|plagiat
+academic integrity|intégrité académique
+literature review|revue de littérature
+methodology|méthodologie
+hypothesis|hypothèse
+experiment|expérience
+dataset|jeu de données
+statistics|statistiques
+probability|probabilité
+matrix|matrice
+discrete mathematics|mathématiques discrètes
+logic|logique
+formula|formule
+calculate|calculer
+average|moyenne
+percentage|pourcentage
+supervisor|directeur de mémoire, responsable
+advisor|conseiller
+teaching assistant|chargé de TD
+TA|chargé de TD
+office hours|permanences
+syllabus|programme du cours
+prerequisite|prérequis
+elective|matière optionnelle
+GPA|moyenne générale
+transcript|relevé de notes
+scholarship|bourse d'études
+exchange program|programme d'échange
+hackathon|hackathon
+competition|concours
+club|club, association
+mentor|mentor
+portfolio|portfolio
+LinkedIn|LinkedIn
+cover letter|lettre de motivation
+recruiter|recruteur
+entry-level|débutant (poste)
+fresher|jeune diplômé
+technical interview|entretien technique
+coding test|test de programmation
+soft skills|compétences comportementales
+teamwork|travail d'équipe
+time management|gestion du temps
+presentation skills|aisance à l'oral
+peer|camarade, pair
+revise|réviser
+retake|repasser
+attendance|assiduité
+group member|membre du groupe
+contribute|contribuer
+divide|répartir
+responsibility|responsabilité
+requirement analysis|analyse des exigences
+user interface design|conception d'interface
+usability|utilisabilité
+accessibility|accessibilité
+REST API|API REST
+virtual machine|machine virtuelle
+command line|ligne de commande
+shell|interpréteur de commandes (shell)
+machine learning|apprentissage automatique
+artificial intelligence|intelligence artificielle
+AI|IA
+neural network|réseau de neurones
+training data|données d'entraînement
+accuracy|exactitude
+cybersecurity|cybersécurité
+encryption|chiffrement
+firewall|pare-feu
+phishing|hameçonnage
+defend|soutenir (un projet, un mémoire)
+committee|jury, comité
+thesis|mémoire, thèse
+proposal|proposition
+regression testing|tests de non-régression
+severity|gravité
+test strategy|stratégie de test
+test scope|périmètre de test
+in scope|dans le périmètre
+out of scope|hors périmètre
+entry criteria|critères d'entrée
+exit criteria|critères de sortie
+test cycle|campagne de test
+test execution|exécution des tests
+test design|conception des tests
+test scenario|scénario de test
+traceability matrix|matrice de traçabilité
+requirement coverage|couverture des exigences
+boundary value analysis|analyse des valeurs limites
+equivalence partitioning|partitionnement en classes d'équivalence
+decision table|table de décision
+state transition|transition d'état
+black-box testing|test boîte noire
+white-box testing|test boîte blanche
+functional testing|test fonctionnel
+non-functional testing|test non fonctionnel
+integration testing|tests d'intégration
+system testing|test système
+end-to-end testing|test de bout en bout
+API testing|test d'API
+Postman|Postman
+compatibility testing|test de compatibilité
+cross-browser testing|test multinavigateur
+usability testing|test d'utilisabilité
+localization testing|test de localisation
+retesting|test de confirmation
+confirmation testing|test de confirmation
+test data preparation|préparation des données de test
+test management tool|outil de gestion des tests
+test run|exécution de tests
+test case ID|identifiant du cas de test
+reproducible|reproductible
+intermittent|intermittent
+flaky|instable
+bug life cycle|cycle de vie d'un bogue
+triage|tri des anomalies
+defect density|densité de défauts
+defect leakage|fuite de défauts
+escaped defect|défaut échappé
+won't fix|ne sera pas corrigé
+not a bug|pas un bogue
+by design|comportement voulu
+cannot reproduce|non reproductible
+deferred|reporté
+expected behaviour|comportement attendu
+actual behaviour|comportement observé
+inconsistent|incohérent
+mismatch|écart, non-concordance
+discrepancy|divergence
+shift left|tester plus tôt (shift left)
+peer review|revue par les pairs
+walkthrough|revue guidée
+static testing|test statique
+dynamic testing|test dynamique
+test automation|automatisation des tests
+automation script|script d'automatisation
+Selenium|Selenium
+locator|localisateur
+XPath|XPath
+selector|sélecteur
+page object|objet page (page object)
+wait|attente
+test framework|framework de test
+headless|sans interface (headless)
+parallel execution|exécution parallèle
+CI pipeline|pipeline d'intégration continue
+nightly build|build nocturne
+smoke suite|suite de tests de fumée
+regression suite|suite de non-régression
+pass rate|taux de réussite

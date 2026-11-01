@@ -1,0 +1,64 @@
+# Core terms from university IT programs (courses and textbooks).
+# level=1 role=student
+data type|n|kiểu dữ liệu|Integer and string are common data types.|code
+operator|n|toán tử|Use the + operator to add two numbers.|code
+comment line|n|dòng chú thích|Add a comment line above the loop.|code
+source file|n|tệp mã nguồn|Each class is in its own source file.|code
+flow of control|n|luồng điều khiển|Loops and if statements change the flow of control.|code
+client-server model|n|mô hình máy khách-máy chủ|The web uses the client-server model.|architecture
+web server|n|máy chủ web|Apache is a popular web server.|web
+DNS|n|hệ thống phân giải tên miền|DNS turns a domain name into an IP address.|network
+packet|n|gói tin|Data travels across the network in packets.|network
+bandwidth|n|băng thông|Video calls need more bandwidth.|network
+kernel|n|nhân hệ điều hành|The kernel controls the hardware.|devices
+file system|n|hệ thống tệp|Linux uses the ext4 file system.|devices
+# level=2 role=student
+pointer|n|con trỏ|A pointer stores a memory address.|code
+memory allocation|n|cấp phát bộ nhớ|In C, you handle memory allocation yourself.|code
+exception handling|n|xử lý ngoại lệ|Exception handling stops the program from crashing.|code
+access modifier|n|phạm vi truy cập (public, private)|Use the private access modifier for internal data.|code
+MVC|n|mô hình Model-View-Controller|Our web project follows MVC.|architecture
+OSI model|n|mô hình OSI 7 tầng|The OSI model has seven layers.|network
+TCP|n|giao thức TCP|TCP makes sure all packets arrive.|network
+UDP|n|giao thức UDP|Games often use UDP for speed.|network
+subnet|n|mạng con|Divide the network into two subnets.|network
+socket|n|socket (điểm kết nối mạng)|The chat app opens a socket to the server.|network
+DHCP|n|giao thức cấp phát IP động|DHCP gives each laptop an IP address.|network
+CPU scheduling|n|lập lịch CPU|Round robin is a CPU scheduling algorithm.|devices
+virtual memory|n|bộ nhớ ảo|Virtual memory lets programs use more memory than RAM.|devices
+paging|n|phân trang bộ nhớ|Paging splits memory into fixed-size blocks.|devices
+system call|n|lời gọi hệ thống|Opening a file needs a system call.|devices
+interrupt|n|ngắt|The keyboard sends an interrupt to the CPU.|devices
+ACID|n|tính chất ACID của giao dịch|Banking databases need ACID transactions.|data
+stored procedure|n|thủ tục lưu trữ|The report uses a stored procedure.|data
+database view|n|khung nhìn cơ sở dữ liệu|Create a database view for the monthly report.|data
+trigger|n|trình kích hoạt (trigger)|A trigger updates the stock after each order.|data
+supervised learning|n|học có giám sát|Spam filters use supervised learning.|ai
+unsupervised learning|n|học không giám sát|Clustering is unsupervised learning.|ai
+classification|n|phân loại|The model does image classification.|ai
+clustering|n|phân cụm|We used clustering to group customers.|ai
+software testing|n|kiểm thử phần mềm|Software testing is a third-year course.|testing
+software maintenance|n|bảo trì phần mềm|Most cost goes to software maintenance.|process
+native app|n|ứng dụng gốc (native)|A native app is built for one platform.|mobile
+cross-platform|adj|đa nền tảng|Flutter builds cross-platform apps.|mobile
+boolean algebra|n|đại số Boole|Boolean algebra is used in circuit design.|math
+set theory|n|lý thuyết tập hợp|Set theory helps with SQL joins.|math
+# level=3 role=student
+computer architecture|n|kiến trúc máy tính|Computer architecture explains how the CPU works.|devices
+instruction set|n|tập lệnh|ARM and x86 have different instruction sets.|devices
+assembly language|n|hợp ngữ|We wrote a small program in assembly language.|code
+register|n|thanh ghi|The CPU stores values in registers.|devices
+cache memory|n|bộ nhớ đệm CPU|Cache memory is faster than RAM.|devices
+finite state machine|n|máy trạng thái hữu hạn|A traffic light is a finite state machine.|math
+automata theory|n|lý thuyết ô-tô-mát|Automata theory is part of the theory of computation.|math
+regular expression|n|biểu thức chính quy|Use a regular expression to check emails.|code
+Turing machine|n|máy Turing|A Turing machine is a model of computation.|math
+computability|n|tính khả tính|Computability asks what computers can solve.|math
+linear algebra|n|đại số tuyến tính|Machine learning uses a lot of linear algebra.|math
+calculus|n|giải tích|Calculus is a first-year maths course.|math
+proof by induction|n|chứng minh quy nạp|Prove the formula with proof by induction.|math
+symmetric encryption|n|mã hóa đối xứng|AES is symmetric encryption.|security
+digital signature|n|chữ ký số|A digital signature proves who sent the file.|security
+SSL/TLS certificate|n|chứng chỉ SSL/TLS|HTTPS needs an SSL/TLS certificate.|security
+graduation project|n|đồ án tốt nghiệp|My graduation project is a booking app.|study
+internship report|n|báo cáo thực tập|Submit your internship report by June.|study
