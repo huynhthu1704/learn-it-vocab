@@ -26,10 +26,10 @@ const pad = (n, len) => String(n).padStart(len, '0');
 const wid = (id) => `w${pad(id, 4)}`, cid = (id) => `c${pad(id, 3)}`;
 
 // Readable field names in the console ⇄ short names used by the website.
-const WORD_FIELDS = { id: 'id', term: 't', partOfSpeech: 'p', vietnamese: 'v', english: 'd', korean: 'k', french: 'f', example: 'e', exampleTranslations: 'x', plainExplanation: 's', story: 'st', topic: 'c', level: 'l', roles: 'r', ipa: 'i', hasImage: 'img' };
+const WORD_FIELDS = { id: 'id', term: 't', partOfSpeech: 'p', vietnamese: 'v', english: 'd', korean: 'k', french: 'f', example: 'e', exampleTranslations: 'x', plainExplanation: 's', story: 'st', topic: 'c', level: 'l', roles: 'r', ipa: 'i', fullForm: 'a', fullFormIpa: 'ai' };
 const CORP_FIELDS = { id: 'id', category: 'cat', type: 'type', phrase: 'p', tone: 'tone', english: 'd', vietnamese: 'v', korean: 'k', french: 'f', whenToUse: 'ctx', whenToUseTranslations: 'ct', example: 'ex', exampleTranslations: 'x', avoid: 'av' };
 // Fields that come from the site's built-in data files. A sync refreshes them unless an admin edited the item.
-const CORE = { words: ['t', 'p', 'v', 'd', 'k', 'f', 'e', 'c', 'l', 'r', 'i'], corporate: ['cat', 'type', 'p', 'tone', 'd', 'v', 'k', 'f', 'ctx', 'ex', 'av'] };
+const CORE = { words: ['t', 'p', 'v', 'd', 'k', 'f', 'e', 'c', 'l', 'r', 'i', 'a', 'ai'], corporate: ['cat', 'type', 'p', 'tone', 'd', 'v', 'k', 'f', 'ctx', 'ex', 'av'] };
 const toDoc = (map, o) => { const d = {}; for (const [long, short] of Object.entries(map)) if (o[short] !== undefined) d[long] = o[short]; return d; };
 const fromDoc = (map, d) => { const o = {}; for (const [long, short] of Object.entries(map)) if (d[long] !== undefined && d[long] !== null) o[short] = d[long]; return o; };
 const KIND = {
@@ -83,8 +83,15 @@ const strip = (list) => list.map(({ _edited, ...o }) => o);
 // Bring the site's built-in data into Firestore without losing work done online:
 // new items are added; for existing items the built-in fields are refreshed unless an admin edited the item;
 // AI-made content (translations, explanations, stories, photos) is always kept.
-async function syncBuiltin(builtinWords, builtinCorp, onProgress) {
+// retiredWordIds: words merged into another card (e.g. "job description" into "JD"); their documents are deleted.
+async function syncBuiltin(builtinWords, builtinCorp, retiredWordIds = [], onProgress) {
   const cur = await readAll();
+  const retired = new Set(retiredWordIds);
+  if (retired.size) {
+    const gone = cur.words.filter((w) => retired.has(w.id));
+    for (let i = 0; i < gone.length; i += 400) { const b = writeBatch(db); gone.slice(i, i + 400).forEach((w) => b.delete(doc(db, 'words', wid(w.id)))); await b.commit(); }
+    cur.words = cur.words.filter((w) => !retired.has(w.id));
+  }
   const ops = []; const out = {};
   for (const [kind, builtin, have] of [['words', builtinWords, cur.words], ['corporate', builtinCorp, cur.corp]]) {
     const byId = new Map(have.map((o) => [o.id, o])); let added = 0, updated = 0;

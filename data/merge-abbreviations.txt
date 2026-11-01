@@ -1,0 +1,24 @@
+# One word card for an abbreviation and its full form: ABBREVIATION|full form
+# The abbreviation card is kept (with the full form shown under it); the full-form card is merged into it.
+BA|business analyst
+PO|product owner
+PM|project manager
+UI|user interface
+QA|quality assurance
+UAT|user acceptance testing
+SME|subject matter expert
+OOP|object-oriented programming
+TA|teaching assistant
+AI|artificial intelligence
+ROI|return on investment
+TAM|total addressable market
+IoT|Internet of Things
+BDD|behaviour-driven development
+COD|cash on delivery
+EHR|electronic health record
+WMS|warehouse management system
+LMS|learning management system
+AML|anti-money laundering
+GMV|gross merchandise value
+ARPU|average revenue per user
+JD|job description

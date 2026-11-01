@@ -2,7 +2,8 @@
 let cloudUser = null, cloudAdmin = false, cloudMeta = null, cloudSaveT = null, cloudStatus = '';
 // Until an admin syncs (old layout), fill in what the built-in data has and Firestore does not yet.
 function mergeBuiltin(list, builtin, layout) {
-  if ((layout || 1) >= 2) return list;
+  if ((layout || 1) >= 2) return builtin === BUILTIN_WORDS ? list.filter(o => !MERGED[o.id]) : list;
+  list = list.filter(o => !MERGED[o.id]);
   const have = new Map(list.map(o => [o.id, o])), bi = new Map(builtin.map(o => [o.id, o]));
   const out = list.map(o => { const b = bi.get(o.id); if (!b) return o; const m = { ...o }; if (!m.f && b.f) m.f = b.f; if (b.r) m.r = [...new Set([...(m.r || []), ...b.r])]; return m; });
   for (const b of builtin) if (!have.has(b.id)) out.push(b);
@@ -24,6 +25,7 @@ async function syncProgress() {
   try {
     const c = await Cloud.loadProgress(cloudUser.uid);
     if (c) {
+      migrateMerged(c);
       S.known = { ...(c.known || {}), ...S.known };
       S.learning = { ...(c.learning || {}), ...S.learning }; for (const k in S.known) delete S.learning[k];
       S.saved = { ...(c.saved || {}), ...S.saved };
@@ -224,7 +226,7 @@ function openReport(kind, id) {
 
 /* ---------- admin ---------- */
 const EDIT_FIELDS = {
-  words: [['t', 'Term'], ['p', 'Part of speech'], ['i', 'Pronunciation (IPA)'], ['l', 'Level', 'level'], ['c', 'Topic', 'topic'], ['r', 'Roles', 'roles'],
+  words: [['t', 'Term'], ['a', 'Full form (if the term is an abbreviation)'], ['p', 'Part of speech'], ['i', 'Pronunciation (IPA)'], ['ai', 'Full form IPA'], ['l', 'Level', 'level'], ['c', 'Topic', 'topic'], ['r', 'Roles', 'roles'],
     ['d', 'English definition', 'area'], ['v', 'Vietnamese meaning'], ['k', 'Korean meaning'], ['f', 'French meaning'],
     ['e', 'Example (English)', 'area'], ['x.vi', 'Example in Vietnamese', 'area'], ['x.ko', 'Example in Korean', 'area'], ['x.fr', 'Example in French', 'area'],
     ['s.en', 'Plain explanation (English)', 'area'], ['s.vi', 'Plain explanation (Vietnamese)', 'area'], ['s.ko', 'Plain explanation (Korean)', 'area'], ['s.fr', 'Plain explanation (French)', 'area'],
@@ -458,7 +460,7 @@ function admContent(el) {
     <div class="card" style="padding:22px"><h3 style="font-size:19px;margin-bottom:6px">Turn on AI (once)</h3>
       <p style="color:var(--muted);margin:0">Firebase console → <b>AI Logic</b> → <b>Get started</b> → choose <b>Gemini Developer API</b>. Text tools work on the free plan. To stop other sites using your AI quota, turn on <b>App Check</b> later.</p></div></div>`;
   $('#syncBtn').onclick = () => withButton($('#syncBtn'), async () => {
-    try { busy('Syncing to Firestore… 0%'); const r = await Cloud.syncBuiltin(BUILTIN_WORDS, BUILTIN_CORP, (n, t) => busy(`Syncing to Firestore… ${Math.round(n / t * 100)}%`)); busy('Loading the new content…'); const c = await Cloud.loadContent(); if (c) applyContent(c); toast(`Synced: ${fmt(r.words)} words, ${r.corporate} items (${r.added} added, ${r.updated} updated).`); }
+    try { busy('Syncing to Firestore… 0%'); const r = await Cloud.syncBuiltin(BUILTIN_WORDS, BUILTIN_CORP, Object.keys(MERGED).map(Number), (n, t) => busy(`Syncing to Firestore… ${Math.round(n / t * 100)}%`)); busy('Loading the new content…'); const c = await Cloud.loadContent(); if (c) applyContent(c); toast(`Synced: ${fmt(r.words)} words, ${r.corporate} items (${r.added} added, ${r.updated} updated).`); }
     catch (e) { toast('Sync failed: ' + (e.code || e.message)); } finally { busy(''); renderAdmin(); }
   });
   $('#rebuildBtn').onclick = () => withButton($('#rebuildBtn'), async () => {

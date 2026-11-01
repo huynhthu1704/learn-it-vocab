@@ -412,3 +412,4 @@ Showing words for | Đang hiện từ cho | 다음 직무의 단어 표시 중: 
 Browse, flashcards and quizzes use this role. | Tra từ, thẻ ghi nhớ và trắc nghiệm sẽ dùng vai trò này. | 단어 찾기, 플래시카드, 퀴즈가 이 직무를 따릅니다. | La recherche, les cartes et les quiz suivent ce métier.
 See the words | Xem các từ | 단어 보기 | Voir les mots
 Show all roles | Hiện tất cả vai trò | 모든 직무 보기 | Afficher tous les métiers
+{0} word | {0} từ | {0}개 단어 | {0} mot

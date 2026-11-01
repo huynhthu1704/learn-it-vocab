@@ -111,6 +111,25 @@ for (const w of words) w.fr = FR.get(w.term.toLowerCase()) || '';
 const noFr = words.filter(w => !w.fr);
 if (noFr.length) console.warn('Words without French (AI can fill these in the admin panel):', noFr.length);
 for (const w of words) tagRoles(w);
+// Abbreviation + full form → one word card (data/merge-abbreviations.txt). The abbreviation keeps its id;
+// the full form's id is retired and listed in MERGED so saved progress moves to the kept card.
+const MERGED = {};
+{
+  const byTerm = new Map(words.map(w => [w.term.toLowerCase(), w]));
+  for (const line of fs.readFileSync('data/merge-abbreviations.txt', 'utf8').split('\n')) {
+    if (!line.trim() || line.startsWith('#')) continue;
+    const [ab, full] = line.split('|').map(x => x.trim());
+    const a = byTerm.get(ab.toLowerCase()), f = byTerm.get((full || '').toLowerCase());
+    if (!a || !f) { console.error('data/merge-abbreviations.txt: not found →', line); process.exit(1); }
+    a.alt = f.term; a.altIpa = f.ipa; a.level = Math.min(a.level, f.level);
+    for (const r of f.roles) if (!a.roles.includes(r)) a.roles.push(r);
+    for (const k of ['vi', 'en', 'ko', 'fr']) if (!a[k]) a[k] = f[k];
+    MERGED[f.id] = a.id; f.mergedInto = a.id;
+  }
+  const before = words.length;
+  words.splice(0, words.length, ...words.filter(w => !w.mergedInto));
+  console.log('abbreviations merged with their full form:', before - words.length);
+}
 const noIpa = words.filter(w => !w.ipa);
 console.log('total unique', words.length, 'duplicates dropped', dups.length, 'missing IPA terms', noIpa.length);
 console.log('missing tokens:', [...missing].join(', '));
@@ -122,7 +141,7 @@ console.log('topics', topics.length, topics.join(','));
 // examples that don't contain the term (for highlight check)
 const noHit = words.filter(w => !w.ex.toLowerCase().includes(w.term.toLowerCase().slice(0, Math.max(3, w.term.length - 3))));
 console.log('examples without term:', noHit.length, noHit.slice(0, 40).map(w => w.term).join(' | '));
-const out = JSON.stringify(words.map(({ id, term, pos, vi, ex, topic, level, roles, ipa, en, ko, fr }) => ({ id, t: term, p: pos, v: vi, e: ex, c: topic, l: level, r: roles, i: ipa, d: en, k: ko, f: fr })));
+const out = JSON.stringify(words.map(({ id, term, pos, vi, ex, topic, level, roles, ipa, en, ko, fr, alt, altIpa }) => ({ id, t: term, p: pos, v: vi, e: ex, c: topic, l: level, r: roles, i: ipa, d: en, k: ko, f: fr, ...(alt ? { a: alt, ai: altIpa } : {}) })));
 if (noIpa.length) { console.error('Add these to data/pronunciation-overrides.json first:', noIpa.map(w => w.term).join(', ')); process.exit(1); }
 fs.writeFileSync('words.json', out);
 // Build the website: inject the word database into the template
@@ -150,7 +169,8 @@ console.log('interface strings', Object.keys(I18N).length);
 const html = fs.readFileSync('src/template.html', 'utf8')
   .replace('/*__CLOUD_UI__*/', () => fs.readFileSync('src/ui-cloud.js', 'utf8'))
   .replace('/*__WORDS__*/[]', () => safe(out)).replace('/*__CORP__*/[]', () => safe(JSON.stringify(CORP)))
-  .replace('/*__I18N__*/{}', () => safe(JSON.stringify(I18N)));
+  .replace('/*__I18N__*/{}', () => safe(JSON.stringify(I18N)))
+  .replace('/*__MERGED__*/{}', () => JSON.stringify(MERGED));
 // Bundle cloud.js first, then point index.html at it with a version tag so browsers never mix an old cloud.js with a new page.
 await esbuild({ entryPoints: ['src/cloud.js'], bundle: true, format: 'esm', minify: true, outfile: 'cloud.js', logLevel: 'warning' });
 const cloudVer = (await import('node:crypto')).createHash('sha1').update(fs.readFileSync('cloud.js')).digest('hex').slice(0, 10);

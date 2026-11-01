@@ -2,7 +2,7 @@
 
 <img src="logo.svg" width="56" align="right" alt="Learn IT Vocab logo">
 
-Illustrated IT vocabulary for people who work in IT in Vietnam, Korea and beyond. It has **2,466 words and phrases** across 3 levels, 9 roles and 8 business domains, plus **226 Workplace English** items. Every word has a topic icon, American IPA, audio, an English definition, meanings in Vietnamese, Korean and French, and a workplace example.
+Illustrated IT vocabulary for people who work in IT in Vietnam, Korea and beyond. It has **2,444 words and phrases** across 3 levels, 9 roles and 8 business domains, plus **226 Workplace English** items. Every word has a topic icon, American IPA, audio, an English definition, meanings in Vietnamese, Korean and French, and a workplace example.
 
 Roles: University students · Developers · Testers (QA) · BA / PO / PM · PMO · IT HR · Business development · Sales · Manager / C-level. A word that matters to several roles (for example *share*, *deadline*, *budget*) shows up under each of them (`roles.mjs`).
 
@@ -20,6 +20,7 @@ browser until the learner clears it; `?role=all` clears it too. Role ids: `stude
 - **Interface language**: English only, Vietnamese only, Korean only, French only, or English plus the learner's languages. The interface text lives in `data/i18n.txt`.
 - **Plain words**: a short everyday explanation of each word for people without a tech background. It shows on word cards automatically for HR, business development, sales and managers.
 - **Stories**: a short real-life story for advanced and complex words, in all four languages.
+- **Abbreviations**: an abbreviation and its full form share one card, e.g. *JD = job description*, each with its own listen button. Pairs are listed in `data/merge-abbreviations.txt`.
 - **Browse**: search in English, Vietnamese, Korean or French. Filter by level, role, topic and status. Select many words at once to mark them as learnt, still learning or saved.
 - **Flashcards**, **Quiz** and **Workplace English** as before; quiz meanings follow the learner's first language.
 - **My lists**: upload a PDF, Word file, text or Markdown (in any language) or paste text. AI picks out the key words, adds the English term, IPA, meanings in all languages and an example, and the learner saves them as their own list.

@@ -313,6 +313,17 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   .ccard .phrase{font-size:19px}
 }
 .view{display:none}
+.close{z-index:5}
+.closebar{display:none}
+@media (max-width:760px){
+  .modal .close,.dlg .box .close{position:fixed;top:12px;right:12px;width:44px;height:44px;z-index:80;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+  .closebar{display:flex;justify-content:center;padding-top:6px}
+  .closebar .btn{width:100%}
+}
+.alt{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:15px;color:var(--ink)}
+.alt b{font-weight:700}
+.modal .alt{font-size:19px}
+.fc .alt{justify-content:center;font-size:18px}
 html,body{overflow-x:clip}
 select.sel{max-width:100%}
 h1 .tl,h2 .tl{font-size:.55em;margin-top:6px}
@@ -594,6 +605,8 @@ h1 .tl,h2 .tl{font-size:.55em;margin-top:6px}
 <script>
 const BUILTIN_WORDS = /*__WORDS__*/[];
 const BUILTIN_CORP = /*__CORP__*/[];
+// Full-form cards merged into their abbreviation card: retired id → kept id.
+const MERGED = /*__MERGED__*/{};
 let WORDS = BUILTIN_WORDS;
 let BY_ID = new Map(WORDS.map(w => [w.id, w]));
 let CORP = BUILTIN_CORP;
@@ -686,6 +699,9 @@ const myLangs = () => (S.langs || []).filter(l => LANGS[l]);
 const showPlain = () => S.plain === 'on' || (S.plain === 'auto' && NONTECH.includes(S.role));
 const meaningOf = w => { const l = myLangs()[0]; return (l && w[LANGS[l].key]) || w.d; };
 try { const raw = localStorage.getItem(STORE); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
+// Move progress on a merged full-form word (e.g. "job description") to its abbreviation card ("JD").
+function migrateMerged(st) { for (const k of ['known', 'learning', 'saved']) for (const [from, to] of Object.entries(MERGED)) if (st[k] && st[k][from]) { st[k][to] = 1; delete st[k][from]; } for (const id in st.known || {}) if (st.learning) delete st.learning[id]; }
+migrateMerged(S);
 function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} updateChips(); if (typeof queueCloudSave === 'function') queueCloudSave(); }
 const today = () => new Date().toISOString().slice(0, 10);
 function practised(n = 1) { const d = today(); S.days[d] = (S.days[d] || 0) + n; save(); }
@@ -727,11 +743,12 @@ function termRegex(term) {
   return new RegExp('\\b' + parts.join('[\\s\\-/]+(?:\\w+[\\s\\-]+)?'), 'i');
 }
 function highlight(w, color) {
-  const m = w.e.match(termRegex(w.t));
+  const m = matchTerm(w);
   if (!m) return esc(w.e);
   return esc(w.e.slice(0, m.index)) + `<mark style="color:${color}">${esc(m[0])}</mark>` + esc(w.e.slice(m.index + m[0].length));
 }
-function gapSentence(w) { const m = w.e.match(termRegex(w.t)); if (!m) return null; return esc(w.e.slice(0, m.index)) + '<span style="display:inline-block;min-width:90px;border-bottom:2px solid var(--blue)">&nbsp;</span>' + esc(w.e.slice(m.index + m[0].length)); }
+function matchTerm(w) { return w.e.match(termRegex(w.t)) || (w.a ? w.e.match(termRegex(w.a)) : null); }
+function gapSentence(w) { const m = matchTerm(w); if (!m) return null; return esc(w.e.slice(0, m.index)) + '<span style="display:inline-block;min-width:90px;border-bottom:2px solid var(--blue)">&nbsp;</span>' + esc(w.e.slice(m.index + m[0].length)); }
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const fmt = n => n.toLocaleString('en-US');
 function filterPool(level, role, mode) {
@@ -740,6 +757,8 @@ function filterPool(level, role, mode) {
 }
 function levelPill(w) { const L = LEVELS[w.l]; return `<span class="pill" style="background:${L.t};color:${L.c}">${L.name}</span>`; }
 function spkBtn(text, color, tint, size = 30, slow, lang) { return `<button class="spk" style="background:${tint};width:${size}px;height:${size}px" data-say="${esc(text)}" ${slow ? 'data-rate="0.6"' : ''} ${lang ? `data-lang="${lang}"` : ''} title="Listen${slow ? ' slowly' : ''}${lang ? ' (' + LANGS[lang].en + ')' : ''}" aria-label="Listen">${svg(slow ? 'slow' : 'speaker', color, size * 0.55, 2)}</button>`; }
+// The full form of an abbreviation, shown under the abbreviation ("JD" → "= job description").
+const altHTML = (w, color, tint, size = 26) => w.a ? `<div class="alt" data-notr>${spkBtn(w.a, color, tint, size)}<span>= <b>${esc(w.a)}</b></span>${w.ai ? `<span class="ipa">${esc(w.ai)}</span>` : ''}</div>` : '';
 const langTag = l => `<span class="lang ${l}">${l === 'en' ? 'EN' : LANGS[l].short}</span>`;
 function defsHTML(w, big) {
   return `<div class="defs${big ? ' big' : ''}" data-notr><div class="row">${langTag('en')}<span>${esc(w.d)}</span></div>${myLangs().filter(l => w[LANGS[l].key]).map((l, i) => `<div class="row">${langTag(l)}<span lang="${l}"${i === 0 ? ' style="font-weight:600"' : ''}>${esc(w[LANGS[l].key])}</span></div>`).join('')}</div>`;
@@ -778,6 +797,7 @@ function wordCard(w) {
       <div class="tile">${svg(w.c, L.c, 40, 1.7)}</div></div>
     <div class="body">
       <div class="term" data-notr>${esc(w.t)}</div>
+      ${altHTML(w, L.c, L.t, 24)}
       <div class="prow" data-notr>${spkBtn(w.t, L.c, L.t)}<span class="ipa" style="font-size:14px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
       ${defsHTML(w)}
       ${showPlain() ? plainHTML(w, true) : ''}
@@ -799,6 +819,7 @@ function openWord(id, list) {
     <div class="body">
       <div class="prow">${levelPill(w)}${w.r.map(r => `<span class="pill" style="background:${ROLES[r].t};color:${ROLES[r].c}">${ROLES[r].name}</span>`).join('')}<span class="pill" style="background:var(--bg);color:var(--muted)">${TOPIC_NAMES[w.c]}</span></div>
       <div class="term" data-notr>${esc(w.t)}</div>
+      ${altHTML(w, L.c, L.t, 34)}
       <div class="prow" data-notr>${spkBtn(w.t, '#fff', L.c, 44)}${spkBtn(w.t, L.c, L.t, 44, true)}<span class="ipa" style="font-size:20px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
       ${defsHTML(w, true)}
       ${plainHTML(w)}
@@ -811,6 +832,7 @@ function openWord(id, list) {
       </div>
       ${rel.length ? `<div><div class="eyebrow" style="margin-bottom:8px;color:var(--muted)">More words on this topic</div><div class="related" data-notr>${rel.map(r => `<button data-open="${r.id}">${esc(r.t)}</button>`).join('')}</div></div>` : ''}
       <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="reportlink" data-report="${w.id}">${svg('flag', '#5B6475', 15, 2)}<span>Report a wrong meaning or example</span></button>${cloudAdmin ? `<button class="reportlink" data-adminedit="${w.id}">${svg('edit', '#5B6475', 15, 2)}<span>Edit this word</span></button>` : ''}</div>
+      <div class="closebar"><button class="btn secondary" data-close>${svg('x', '#1B1F2A', 18, 2.2)} Close</button></div>
       ${idx >= 0 ? `<div class="navarrows"><button class="btn ghost sm" data-step="-1" ${idx <= 0 ? 'disabled' : ''}>${svg('back', '#1B1F2A', 18, 2)} Previous</button><span class="count">${idx + 1} / ${fmt(modalList.length)}</span><button class="btn ghost sm" data-step="1" ${idx >= modalList.length - 1 ? 'disabled' : ''}>Next ${svg('arrow', '#1B1F2A', 18, 2)}</button></div>` : ''}
     </div>`;
   $('#modal').dataset.id = w.id;
@@ -848,7 +870,7 @@ function renderWotd() {
   $('#wotd').innerHTML = `<div class="card" style="overflow:hidden;border-radius:28px;box-shadow:var(--shadow-lg)">
     <div class="ill" style="height:180px;background:${L.t};display:grid;place-items:center;position:relative"><div class="tile" style="width:116px;height:116px;border-radius:30px;background:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(26,31,51,.1)">${svg(w.c, L.c, 62, 1.6)}</div></div>
     <div style="padding:24px 28px 28px;display:flex;flex-direction:column;gap:12px">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-size:34px;font-weight:800;line-height:1.1" data-notr>${esc(w.t)}</span><span class="pill" style="background:${ROLES[w.r[0]].t};color:${ROLES[w.r[0]].c}">${ROLES[w.r[0]].short} · ${L.name}</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-size:34px;font-weight:800;line-height:1.1" data-notr>${esc(w.t)}</span>${w.a ? `<span style="flex-basis:100%">${altHTML(w, L.c, L.t, 28)}</span>` : ''}<span class="pill" style="background:${ROLES[w.r[0]].t};color:${ROLES[w.r[0]].c}">${ROLES[w.r[0]].short} · ${L.name}</span></div>
       <div class="prow" data-notr>${spkBtn(w.t, '#fff', L.c, 40)}<span class="ipa" style="font-size:18px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
       ${defsHTML(w)}
       ${showPlain() ? plainHTML(w, true) : ''}
@@ -904,12 +926,12 @@ function renderBrowse() {
   const q = norm(F.q.trim());
   const list = WORDS.filter(w => (F.level === 'all' || w.l == F.level) && (F.role === 'all' || w.r.includes(F.role)) && (F.topic === 'all' || w.c === F.topic) &&
     (F.status === 'all' || (F.status === 'saved' ? S.saved[w.id] : status(w.id) === F.status)) &&
-    (!q || norm(w.t).includes(q) || norm(w.v).includes(q) || norm(w.k).includes(q) || norm(w.d).includes(q) || norm(w.f || '').includes(q)));
+    (!q || norm(w.t).includes(q) || norm(w.a || '').includes(q) || norm(w.v).includes(q) || norm(w.k).includes(q) || norm(w.d).includes(q) || norm(w.f || '').includes(q)));
   if (F.role !== 'all' && !q) list.sort((a, b) => (b.r[0] === F.role) - (a.r[0] === F.role) || a.l - b.l || a.id - b.id);
   if (q) list.sort((a, b) => (norm(b.t).startsWith(q) - norm(a.t).startsWith(q)) || a.t.length - b.t.length);
   browseIds = list.map(w => w.id);
   $('#grid').innerHTML = list.slice(0, shown).map(wordCard).join('');
-  $('#count').textContent = `${fmt(list.length)} words`;
+  $('#count').textContent = `${fmt(list.length)} ${list.length === 1 ? 'word' : 'words'}`;
   $('#empty').style.display = list.length ? 'none' : 'block';
   $('#moreBtn').style.display = list.length > shown ? '' : 'none';
   $('#moreBtn').textContent = `Show more words (${fmt(list.length - shown)} left)`;
@@ -996,9 +1018,9 @@ function renderFC() {
     <div class="progress" style="margin-bottom:20px"><i style="width:${FC.done / (FC.done + FC.queue.length) * 100}%"></i></div>
     <div class="fc" id="fc"><div class="fc-inner">
       <div class="fc-face"><div style="width:120px;height:120px;border-radius:32px;background:${L.t};display:grid;place-items:center">${svg(w.c, L.c, 62, 1.6)}</div>
-        <div class="term" data-notr>${esc(w.t)}</div><div class="prow" style="justify-content:center" data-notr>${spkBtn(w.t, '#fff', L.c, 44)}<span class="ipa" style="font-size:20px">${esc(w.i)}</span></div>
+        <div class="term" data-notr>${esc(w.t)}</div>${altHTML(w, L.c, L.t, 30)}<div class="prow" style="justify-content:center" data-notr>${spkBtn(w.t, '#fff', L.c, 44)}<span class="ipa" style="font-size:20px">${esc(w.i)}</span></div>
         <div class="hint">Say it out loud. What does it mean? Tap the card to flip.</div></div>
-      <div class="fc-face fc-back" style="justify-content:flex-start"><span class="pill" style="background:${L.t};color:${L.c}" data-notr>${esc(w.p)}</span><div class="term" style="font-size:30px" data-notr>${esc(w.t)}</div>
+      <div class="fc-face fc-back" style="justify-content:flex-start"><span class="pill" style="background:${L.t};color:${L.c}" data-notr>${esc(w.p)}</span><div class="term" style="font-size:30px" data-notr>${esc(w.t)}</div>${altHTML(w, L.c, L.t, 28)}
         <div style="text-align:left;width:100%">${defsHTML(w, true)}</div>
         ${showPlain() && w.s ? `<div style="text-align:left;width:100%">${plainHTML(w)}</div>` : ''}
         <div style="text-align:left;width:100%">${exampleHTML(w, L.c, L.t, 34)}</div></div>
@@ -1059,10 +1081,10 @@ function renderQ() {
   else if (q.type === 'cwhich') { prompt = ask('Which phrase has this meaning?', `<b style="color:#2563EB">“${esc(w.d)}”</b>`); optText = o => esc(o.p); }
   else if (q.type === 'csituation') { prompt = ask('What would you say or write here?', `<span style="font-weight:600">${esc(w.ctx)}</span>`); optText = o => esc(o.p); }
   else if (q.type === 'meaning') { prompt = ask('What does this word mean?', `<b style="color:${L.c}">${esc(w.t)}</b> ${spkBtn(w.t, L.c, L.t, 32)}`); optText = o => esc(meaningOf(o)); }
-  else if (q.type === 'term') { prompt = ask('Which word has this meaning?', `<b style="color:${L.c}">“${esc(meaningOf(w))}”</b>`); optText = o => esc(o.t); }
-  else if (q.type === 'define') { prompt = ask('Which word matches this definition?', `<span style="font-weight:600">“${esc(w.d)}”</span>`); optText = o => esc(o.t); }
-  else if (q.type === 'listen') { prompt = ask('Listen and choose the word you hear.', `${spkBtn(w.t, '#fff', L.c, 44)} ${spkBtn(w.t, L.c, L.t, 44, true)}`); optText = o => esc(o.t); }
-  else { prompt = ask('Choose the word that fits:', `<span style="font-weight:600">“${gapSentence(w)}”</span>`); optText = o => esc(o.t); }
+  else if (q.type === 'term') { prompt = ask('Which word has this meaning?', `<b style="color:${L.c}">“${esc(meaningOf(w))}”</b>`); optText = o => esc(o.t + (o.a ? ` (${o.a})` : '')); }
+  else if (q.type === 'define') { prompt = ask('Which word matches this definition?', `<span style="font-weight:600">“${esc(w.d)}”</span>`); optText = o => esc(o.t + (o.a ? ` (${o.a})` : '')); }
+  else if (q.type === 'listen') { prompt = ask('Listen and choose the word you hear.', `${spkBtn(w.t, '#fff', L.c, 44)} ${spkBtn(w.t, L.c, L.t, 44, true)}`); optText = o => esc(o.t + (o.a ? ` (${o.a})` : '')); }
+  else { prompt = ask('Choose the word that fits:', `<span style="font-weight:600">“${gapSentence(w)}”</span>`); optText = o => esc(o.t + (o.a ? ` (${o.a})` : '')); }
   $('#quizArea').innerHTML = `<div class="card qcard">
     <div class="qtop"><span class="count">Question ${QZ.i + 1} of 10 · Score ${QZ.score}</span>${q.corp ? `<span class="pill" style="background:#E8F0FE;color:#1D4ED8">${CATS[w.cat].n}</span>` : levelPill(w)}</div>
     <div class="progress"><i style="width:${QZ.i * 10}%"></i></div>
