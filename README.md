@@ -102,6 +102,11 @@ To change interface text, edit `data/i18n.txt` and rebuild.
 - Audio uses the device's voices (Web Speech API). Vietnamese, Korean and French need those voices installed; most phones have them.
 - AI text and the built-in meanings should be checked by a teacher before use in class. Learners can report mistakes; admins fix them in a click.
 
-## Weekly e-mail summary
+## Weekly e-mail and Power BI
 
-`tools/weekly-email/` is a Google Apps Script that e-mails the admin every Monday at 8:00 (Asia/Bangkok): active and new learners, visitors and where they come from, reports waiting, searches with no result and explanations learners found unclear. It runs free under your Google account. Setup steps are at the top of `Code.gs`.
+`tools/apps-script/` is a Google Apps Script project that runs free under your Google account:
+
+- `Code.gs` e-mails the admin every Monday at 8:00 (Asia/Bangkok): active and new learners, visitors and sources, reports waiting, searches with no result and explanations learners found unclear.
+- `PowerBI.gs` copies the Insights data into a Google Sheet every night at 2:00 (12 tables: Learners, LearnerLanguages, DailyActivity, WordStatus, WordActivity, Words, MissedSearches, QuizAnswers, Listening, Visits, VisitDetails, Reports). Learners appear only as an anonymous code. Publish the sheet to the web as .xlsx and Power BI (browser) reads it with the Web connector.
+
+Setup steps are at the top of `Code.gs`. The Power BI setup guide (model, relationships, DAX measures, pages) is the Claude doc *Learn IT Vocab – Power BI Insights report: setup guide*.

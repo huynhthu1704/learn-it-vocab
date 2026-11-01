@@ -6,12 +6,13 @@
  * and e-mails the summary to you every Monday at 8:00 (Asia/Bangkok).
  *
  * Set up once:
- *   1. Open https://script.google.com → New project. Name it "Learn IT Vocab weekly e-mail".
+ *   1. Open https://script.google.com → New project. Name it "Learn IT Vocab admin tools".
  *   2. Project Settings (gear) → tick "Show appsscript.json manifest file in editor".
- *   3. Editor: paste this file into Code.gs, and appsscript.json from the repo into appsscript.json. Save.
+ *   3. Editor: paste this file into Code.gs, add a script file named PowerBI and paste PowerBI.gs,
+ *      and paste appsscript.json from the repo into appsscript.json. Save.
  *   4. Choose the function "setup" at the top and click Run. Allow the permissions it asks for.
- *      It sends the first summary straight away and schedules the rest.
- * To stop: run "stop", or delete the project.
+ *      It sends the first summary straight away, schedules the weekly e-mail and the nightly Power BI data refresh.
+ * To stop everything: run "stop", or delete the project.
  */
 const PROJECT_ID = 'learn-it-vocab';
 const SITE = 'https://huynhthu1704.github.io/learn-it-vocab/';
@@ -20,6 +21,8 @@ const SEND_TO = ''; // leave empty to send to the account that runs the script
 function setup() {
   stop();
   ScriptApp.newTrigger('sendWeeklySummary').timeBased().onWeekDay(ScriptApp.WeekDay.MONDAY).atHour(8).inTimezone('Asia/Bangkok').create();
+  ScriptApp.newTrigger('refreshPowerBIData').timeBased().everyDays(1).atHour(2).inTimezone('Asia/Bangkok').create();
+  refreshPowerBIData();
   sendWeeklySummary();
 }
 function stop() { ScriptApp.getProjectTriggers().forEach(function (t) { ScriptApp.deleteTrigger(t); }); }
