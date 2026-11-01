@@ -16,11 +16,17 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, getDocs, query, where, orderBy, limit, writeBatch, serverTimestamp, increment, documentId } from 'firebase/firestore';
 import { getAI, getGenerativeModel, GoogleAIBackend } from 'firebase/ai';
-import { firebaseConfig } from './firebase-config.js';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
+import { firebaseConfig, recaptchaSiteKey } from './firebase-config.js';
 
 const enabled = Boolean(firebaseConfig.apiKey);
 let app = null, auth = null, db = null, ai = null;
-if (enabled) { app = initializeApp(firebaseConfig); auth = getAuth(app); db = getFirestore(app); }
+if (enabled) {
+  app = initializeApp(firebaseConfig);
+  // App Check proves requests come from this website. Firebase AI Logic rejects calls without it once it is enforced.
+  if (recaptchaSiteKey) { try { initializeAppCheck(app, { provider: new ReCaptchaV3Provider(recaptchaSiteKey), isTokenAutoRefreshEnabled: true }); } catch (e) { console.warn('App Check not started', e); } }
+  auth = getAuth(app); db = getFirestore(app);
+}
 
 const WORDS_PER_BUNDLE = 150, CORP_PER_BUNDLE = 100, LAYOUT = 2;
 const pad = (n, len) => String(n).padStart(len, '0');
@@ -212,7 +218,7 @@ const loadProgress = async (uid) => { const s = await getDoc(doc(db, 'users', ui
 const saveProgress = (uid, p) => setDoc(doc(db, 'users', uid), { ...p, updatedAt: serverTimestamp() }, { merge: true });
 
 window.Cloud = {
-  enabled, projectId: firebaseConfig.projectId,
+  enabled, projectId: firebaseConfig.projectId, appCheck: Boolean(recaptchaSiteKey),
   loadContent, syncBuiltin, rebuildBundles, saveItems,
   submitReport, listReports, updateReport, myReports,
   listLists, saveList, deleteList, listUsers, listAllReports, recordVisit, listVisits,

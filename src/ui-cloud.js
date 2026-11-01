@@ -387,6 +387,7 @@ function admEdit(el) {
 /* ---------- AI (Gemini through Firebase AI Logic) ---------- */
 function aiError(e) {
   const m = String(e.code || '') + ' ' + String(e.message || e);
+  if (/App Check/i.test(m)) return 'AI is blocked by App Check: Firebase console → App Check → APIs → Firebase AI Logic is “Enforced” but the site has no App Check key yet. Either set Firebase AI Logic to Unenforced, or add a reCAPTCHA key (see README).';
   if (/api-not-enabled|not been used|firebasevertexai|AI Logic|PERMISSION_DENIED|403/i.test(m)) return 'AI is not turned on yet: Firebase console → AI Logic → Get started → Gemini Developer API.';
   if (/quota|429|RESOURCE_EXHAUSTED/i.test(m)) return 'AI limit reached for now. Wait a minute and try again.';
   if (/billing|FAILED_PRECONDITION/i.test(m)) return 'This AI model needs billing on the Firebase project (Blaze plan).';

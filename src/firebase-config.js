@@ -11,3 +11,7 @@ export const firebaseConfig = {
   messagingSenderId: '782463429248',
   appId: '1:782463429248:web:9cef1eb417f26478641465',
 };
+
+// App Check (protects the AI quota). Paste the reCAPTCHA v3 *site* key here after registering the web app
+// in Firebase console → App Check → Apps → learn-it-vocab → reCAPTCHA. Leave empty to turn App Check off.
+export const recaptchaSiteKey = '';

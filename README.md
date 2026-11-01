@@ -91,7 +91,11 @@ To change interface text, edit `data/i18n.txt` and rebuild.
 2. Firebase console → **AI Logic** → **Get started** → **Gemini Developer API**. The text tools and file upload use `gemini-2.5-flash`, which works on the free plan.
 3. Open the site → **Admin → Content & sync → Sync built-in words to Firestore**.
 4. **Admin → AI tools**: run *Translate examples*, *Plain-language explanations*, *Stories for complex words*, and *Translate Workplace English*. Start with "Next 10" to check the quality, then run the rest. Each run saves as it goes and can be stopped.
-5. Later: turn on **App Check** so other sites cannot use your AI quota.
+5. **App Check** (protects your AI quota). If Firebase console → App Check → APIs shows *Firebase AI Logic: Enforced*, the AI tools only work once the site has an App Check key:
+   1. Go to https://www.google.com/recaptcha/admin/create → reCAPTCHA **v3** → domain `huynhthu1704.github.io` (add `localhost` for testing) → Submit. Copy the **site key** and the **secret key**.
+   2. Firebase console → App Check → **Apps** → learn-it-vocab (web) → **reCAPTCHA** → paste the secret key → Save.
+   3. Put the site key in `src/firebase-config.js` (`recaptchaSiteKey`), run `npm run build`, push.
+   Or, quicker but unprotected: App Check → APIs → Firebase AI Logic → **Unenforce**.
 
 ## Notes
 
