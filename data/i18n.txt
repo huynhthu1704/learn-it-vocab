@@ -413,3 +413,22 @@ Browse, flashcards and quizzes use this role. | Tra từ, thẻ ghi nhớ và tr
 See the words | Xem các từ | 단어 보기 | Voir les mots
 Show all roles | Hiện tất cả vai trò | 모든 직무 보기 | Afficher tous les métiers
 {0} word | {0} từ | {0}개 단어 | {0} mot
+# role picker, review reminders, feedback
+What do you do? | Bạn làm công việc gì? | 어떤 일을 하시나요? | Que faites-vous ?
+Pick your role and we'll show the words you need first. You can change it any time in My profile. | Chọn vai trò, chúng tôi sẽ ưu tiên những từ bạn cần. Bạn có thể đổi bất cứ lúc nào trong Hồ sơ của tôi. | 직무를 고르면 필요한 단어부터 보여 드립니다. 내 프로필에서 언제든 바꿀 수 있습니다. | Choisissez votre métier : nous afficherons d'abord les mots utiles. Vous pouvez le changer à tout moment dans Mon profil.
+Skip for now | Để sau | 나중에 | Plus tard
+You can still browse every word. | Bạn vẫn xem được mọi từ. | 모든 단어는 계속 볼 수 있습니다. | Vous pouvez toujours parcourir tous les mots.
+Showing words for {0} first. | Đang ưu tiên từ cho {0}. | {0} 단어를 먼저 보여 줍니다. | Mots pour {0} affichés en premier.
+word to review today | từ cần ôn hôm nay | 오늘 복습할 단어 | mot à réviser aujourd'hui
+words to review today | từ cần ôn hôm nay | 오늘 복습할 단어 | mots à réviser aujourd'hui
+Review now | Ôn ngay | 지금 복습 | Réviser
+Due for review | Cần ôn | 복습할 단어 | À réviser
+Due for review ({0}) | Cần ôn ({0}) | 복습할 단어 ({0}) | À réviser ({0})
+Nothing to review today. Words you mark “Still learning” come back here after 1, 3 and 7 days. | Hôm nay chưa có từ cần ôn. Từ bạn đánh dấu “Đang học” sẽ quay lại sau 1, 3 và 7 ngày. | 오늘은 복습할 단어가 없습니다. “아직 학습 중”으로 표시한 단어는 1일, 3일, 7일 뒤에 다시 나옵니다. | Rien à réviser aujourd'hui. Les mots marqués « J'apprends encore » reviennent après 1, 3 et 7 jours.
+{0}-day review | Ôn sau {0} ngày | {0}일 복습 | Révision à {0} jours
+Was this explanation clear? | Giải thích này có dễ hiểu không? | 이 설명이 이해되나요? | Cette explication était-elle claire ?
+Yes, clear | Có, dễ hiểu | 네, 이해돼요 | Oui, claire
+No, confusing | Không, khó hiểu | 아니요, 헷갈려요 | Non, confuse
+Thanks for the feedback! | Cảm ơn góp ý của bạn! | 의견 감사합니다! | Merci pour votre avis !
+Thanks! Tell us what was unclear with “Report a wrong meaning or example”. | Cảm ơn bạn! Hãy cho chúng tôi biết chỗ chưa rõ qua “Báo nghĩa hoặc ví dụ sai”. | 감사합니다! “잘못된 뜻이나 예문 신고”로 어떤 점이 헷갈렸는지 알려 주세요. | Merci ! Dites-nous ce qui n'était pas clair avec « Signaler un sens ou un exemple faux ».
+Done! Words for your role now come first. | Xong! Từ cho vai trò của bạn sẽ hiện trước. | 완료! 이제 내 직무 단어가 먼저 나옵니다. | C'est fait ! Les mots de votre métier s'affichent en premier.

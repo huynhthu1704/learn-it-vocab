@@ -313,6 +313,20 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   .ccard .phrase{font-size:19px}
 }
 .view{display:none}
+.duebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#FFFBEB;border:1px solid #FDE68A;border-radius:14px;padding:10px 12px;margin:-8px 0 20px;font-size:15px;color:#78350F}
+.duebar span{flex:1}
+.fbk{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.fbk-b{border:1px solid var(--line);background:#fff;border-radius:999px;width:40px;height:34px;font-size:16px;line-height:1}
+.fbk-b.on{border-color:var(--blue);background:var(--blue-t)}
+.dlg .box.wide{width:min(760px,100%)}
+.rolepick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0}
+.rp{display:flex;gap:10px;align-items:flex-start;text-align:left;border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px;color:var(--ink);font:inherit}
+.rp:hover{border-color:var(--blue);background:#FAFCFF}
+.rp.on{border:2px solid var(--blue);background:var(--blue-t)}
+.rp .itile{width:40px;height:40px;border-radius:12px;flex:none}
+.rp b{display:block;font-size:15px}
+.rp small{display:block;color:var(--muted);font-size:12px;line-height:1.35;margin-top:2px}
+@media (max-width:760px){.rolepick{grid-template-columns:1fr}.rp small{display:none}.rp{align-items:center;padding:10px}}
 .vz-filters{margin-bottom:16px}
 .vz-tiles{grid-template-columns:repeat(4,1fr)}
 .vz-tile small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
@@ -321,6 +335,7 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 .vz-sub{color:var(--muted);font-size:13px;margin:0 0 12px}
 .vz-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .vz-grid>.vz-card{margin-bottom:0}
+.vz-grid>*,.vz-card{min-width:0}
 .vz-grid+.vz-card,.vz-grid+.vz-grid{margin-top:18px}
 .vz-bars{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 .vz-row{display:grid;grid-template-columns:minmax(90px,38%) 1fr auto;gap:10px;align-items:center;font-size:14px}
@@ -336,6 +351,7 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 .vz-tip small{opacity:.75}
 .vz-sugg{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:10px 12px;font-size:14px}
 .vz-sugg>span{flex:1}
+.vz-h4{font-size:15px;margin:0 0 6px}
 .vz-sugg svg{flex:none;margin-top:2px}
 .vz-table td,.vz-table th{padding:8px 10px;font-size:14px;white-space:nowrap}
 .vz-table a{text-decoration:none}
@@ -444,6 +460,7 @@ h1 .tl,h2 .tl{font-size:.55em;margin-top:6px}
         <span class="pill" style="background:var(--blue-t);color:var(--blue);font-size:13px;padding:6px 12px">ENGLISH FOR IT TEAMS</span>
         <h1 data-i18n-html>Speak the language of <em>tech</em>, one word at a time.</h1>
         <p class="lead">Illustrated vocabulary for IT students, developers, testers, BAs, PMs, HR, sales and managers. Every word has a picture, pronunciation you can listen to, an English definition, meanings in Vietnamese, Korean and French, and a real workplace example.</p>
+        <div class="duebar" id="dueBar" style="display:none"></div>
         <div class="ctas">
           <a class="btn primary lg" href="#browse">Start learning <span data-icon="arrow" data-c="#fff" data-s="20"></span></a>
           <a class="btn secondary lg" href="#quiz">Take a quick quiz</a>
@@ -553,7 +570,7 @@ h1 .tl,h2 .tl{font-size:.55em;margin-top:6px}
     <div class="setup">
       <select class="sel" id="fcLevel"></select>
       <select class="sel" id="fcRole"></select>
-      <select class="sel" id="fcMode"><option value="new">New and learning words</option><option value="all">All words</option><option value="saved">Saved words ★</option></select>
+      <select class="sel" id="fcMode"><option value="due">Due for review</option><option value="new">New and learning words</option><option value="all">All words</option><option value="saved">Saved words ★</option></select>
       <button class="btn primary sm" id="fcStart">Start a set of 10</button>
     </div>
     <div class="fc-wrap" id="fcArea"></div>
@@ -631,6 +648,7 @@ h1 .tl,h2 .tl{font-size:.55em;margin-top:6px}
   <button class="btn sm" data-bulk="reset">Reset to new</button><button class="btn sm" data-bulk="clear">✕ Done</button></div>
 
 <script>
+const LANDING = location.hash + '&' + location.search.slice(1); // read before the router tidies the address
 const BUILTIN_WORDS = /*__WORDS__*/[];
 const BUILTIN_CORP = /*__CORP__*/[];
 // Full-form cards merged into their abbreviation card: retired id → kept id.
@@ -730,6 +748,8 @@ try { const raw = localStorage.getItem(STORE); if (raw) S = Object.assign(S, JSO
 // Move progress on a merged full-form word (e.g. "job description") to its abbreviation card ("JD").
 function migrateMerged(st) { for (const k of ['known', 'learning', 'saved']) for (const [from, to] of Object.entries(MERGED)) if (st[k] && st[k][from]) { st[k][to] = 1; delete st[k][from]; } for (const id in st.known || {}) if (st.learning) delete st.learning[id]; }
 migrateMerged(S);
+// Words already in "still learning" before reminders existed are due for a first review today.
+if (!S.reviewInit) { S.review = S.review || {}; for (const id in S.learning) if (!S.review[id]) S.review[id] = { s: 0, d: new Date().toISOString().slice(0, 10) }; S.reviewInit = 1; }
 function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} updateChips(); if (typeof queueCloudSave === 'function') queueCloudSave(); }
 const today = () => new Date().toISOString().slice(0, 10);
 // Light usage stats for the admin Insights page (only saved to the cloud for signed-in learners).
@@ -745,7 +765,19 @@ function track(kind, key, n = 1) {
 function practised(n = 1) { const d = today(); S.days[d] = (S.days[d] || 0) + n; save(); }
 function streak() { let n = 0; const d = new Date(); if (!S.days[today()]) d.setDate(d.getDate() - 1); for (;;) { const k = d.toISOString().slice(0, 10); if (S.days[k]) { n++; d.setDate(d.getDate() - 1); } else break; } return n; }
 function status(id) { return S.known[id] ? 'known' : S.learning[id] ? 'learning' : 'new'; }
-function setKnown(id, yes) { if (yes) { S.known[id] = 1; delete S.learning[id]; } else { S.learning[id] = 1; delete S.known[id]; } practised(); }
+// Review reminders: a word marked "still learning" comes back after 1 day, then 3, then 7. Getting it right on the
+// 7-day review marks it as known. S.review[id] = { s: step 0-2, d: due date YYYY-MM-DD }.
+const REVIEW_GAPS = [1, 3, 7];
+const addDays = n => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
+function schedule(id, step = 0) { S.review = S.review || {}; S.review[id] = { s: step, d: addDays(REVIEW_GAPS[step]) }; }
+function dueIds() { const t = today(); return Object.entries(S.review || {}).filter(([id, r]) => r.d <= t && S.learning[id] && BY_ID.has(+id)).sort((a, b) => a[1].d.localeCompare(b[1].d)).map(([id]) => +id); }
+function setKnown(id, yes) { if (yes) { S.known[id] = 1; delete S.learning[id]; if (S.review) delete S.review[id]; } else { S.learning[id] = 1; delete S.known[id]; schedule(id, 0); } practised(); updateDue(); }
+function updateDue() {
+  const n = dueIds().length, bar = $('#dueBar'); if (!bar) return;
+  bar.style.display = n ? '' : 'none';
+  bar.innerHTML = n ? `${svg('time', '#B45309', 18, 2)}<span><b>${n}</b> ${n === 1 ? 'word to review today' : 'words to review today'}</span><a class="btn sm primary" href="#flashcards" data-review>Review now</a>` : '';
+  const opt = $('#fcMode option[value="due"]'); if (opt) opt.textContent = `Due for review (${n})`;
+}
 function toggleSave(id) { if (S.saved[id]) delete S.saved[id]; else S.saved[id] = 1; save(); }
 function updateChips() {
   $('#knownChip').innerHTML = svg('check', '#16A34A', 16, 2.5) + `${Object.keys(S.known).length} known`;
@@ -870,6 +902,7 @@ function openWord(id, list) {
         <button class="btn secondary" data-star="${w.id}">${svg('star', S.saved[w.id] ? '#F59E0B' : '#9AA3B2', 18, 2)} ${S.saved[w.id] ? 'Saved' : 'Save'}</button>
       </div>
       ${rel.length ? `<div><div class="eyebrow" style="margin-bottom:8px;color:var(--muted)">More words on this topic</div><div class="related" data-notr>${rel.map(r => `<button data-open="${r.id}">${esc(r.t)}</button>`).join('')}</div></div>` : ''}
+      <div class="fbk"><span>Was this explanation clear?</span><button class="fbk-b ${(S.stats?.fb || {})[w.id] === 1 ? 'on' : ''}" data-fb="1" data-fbid="${w.id}" aria-label="Yes, clear">👍</button><button class="fbk-b ${(S.stats?.fb || {})[w.id] === -1 ? 'on' : ''}" data-fb="-1" data-fbid="${w.id}" aria-label="No, confusing">👎</button></div>
       <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="reportlink" data-report="${w.id}">${svg('flag', '#5B6475', 15, 2)}<span>Report a wrong meaning or example</span></button>${cloudAdmin ? `<button class="reportlink" data-adminedit="${w.id}">${svg('edit', '#5B6475', 15, 2)}<span>Edit this word</span></button>` : ''}</div>
       <div class="closebar"><button class="btn secondary" data-close>${svg('x', '#1B1F2A', 18, 2.2)} Close</button></div>
       ${idx >= 0 ? `<div class="navarrows"><button class="btn ghost sm" data-step="-1" ${idx <= 0 ? 'disabled' : ''}>${svg('back', '#1B1F2A', 18, 2)} Previous</button><span class="count">${idx + 1} / ${fmt(modalList.length)}</span><button class="btn ghost sm" data-step="1" ${idx >= modalList.length - 1 ? 'disabled' : ''}>Next ${svg('arrow', '#1B1F2A', 18, 2)}</button></div>` : ''}
@@ -882,9 +915,13 @@ function closeModal() { $('#overlay').classList.remove('open'); if (location.has
 
 /* ---------- global clicks ---------- */
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-say],[data-star],[data-open],[data-known],[data-learning],[data-close],[data-step],[data-report],[data-adminedit]');
+  const t = e.target.closest('[data-say],[data-star],[data-open],[data-known],[data-learning],[data-close],[data-step],[data-report],[data-adminedit],[data-fb],[data-review]');
   if (!t) { if (e.target === $('#overlay')) closeModal(); return; }
   if (t.dataset.say !== undefined) { e.stopPropagation(); speak(t.dataset.say, +t.dataset.rate || undefined, t.dataset.lang); return; }
+  if (t.dataset.review !== undefined) { $('#fcMode').value = 'due'; FC = null; return; }
+  if (t.dataset.fb) { e.stopPropagation(); const id = +t.dataset.fbid, v = +t.dataset.fb; S.stats = S.stats || {}; const fb = S.stats.fb = S.stats.fb || {};
+    if (fb[id] === v) delete fb[id]; else fb[id] = v; track('count', 'feedback', 0); openWord(id);
+    if (fb[id] === -1) toast('Thanks! Tell us what was unclear with “Report a wrong meaning or example”.'); else if (fb[id] === 1) toast('Thanks for the feedback!'); return; }
   if (t.dataset.report) { e.stopPropagation(); openReport(t.dataset.kind || 'words', +t.dataset.report); return; }
   if (t.dataset.adminedit) { e.stopPropagation(); closeModal(); ADM.tab = 'edit'; ADM.kind = t.dataset.kind || 'words'; ADM.editId = +t.dataset.adminedit; location.hash = '#admin'; if (currentView === 'admin') renderAdmin(); return; }
   if (t.dataset.star) { e.stopPropagation(); toggleSave(+t.dataset.star); if ($('#overlay').classList.contains('open')) openWord($('#modal').dataset.id); else refreshVisible(); toast(S.saved[t.dataset.star] ? 'Saved to your list ★' : 'Removed from saved'); return; }
@@ -993,12 +1030,12 @@ $('#bulkbar').onclick = e => {
   if (!SEL.size) { toast('Select some words first.'); return; }
   const n = SEL.size;
   for (const id of SEL) {
-    if (a === 'known') { S.known[id] = 1; delete S.learning[id]; } else if (a === 'learning') { S.learning[id] = 1; delete S.known[id]; }
-    else if (a === 'save') S.saved[id] = 1; else if (a === 'unsave') delete S.saved[id]; else if (a === 'reset') { delete S.known[id]; delete S.learning[id]; }
+    if (a === 'known') { S.known[id] = 1; delete S.learning[id]; if (S.review) delete S.review[id]; } else if (a === 'learning') { S.learning[id] = 1; delete S.known[id]; schedule(id, 0); }
+    else if (a === 'save') S.saved[id] = 1; else if (a === 'unsave') delete S.saved[id]; else if (a === 'reset') { delete S.known[id]; delete S.learning[id]; if (S.review) delete S.review[id]; }
   }
   if (a === 'known' || a === 'learning') practised(0); else save();
   toast({ known: `${n} words marked as learnt.`, learning: `${n} words added to learning.`, save: `${n} words saved ★`, unsave: `${n} words removed from saved.`, reset: `${n} words reset.` }[a]);
-  SEL.clear(); refreshVisible(); updateBulk();
+  SEL.clear(); refreshVisible(); updateBulk(); updateDue();
 };
 
 /* ---------- workplace english ---------- */
@@ -1040,6 +1077,11 @@ if (S.focusRole && ROLES[S.focusRole]) { $('#fcRole').value = S.focusRole; $('#q
 let FC = null;
 function startFC() {
   const mode = $('#fcMode').value;
+  if (mode === 'due') {
+    const ids = dueIds().slice(0, 10);
+    if (!ids.length) { $('#fcArea').innerHTML = `<div class="empty">Nothing to review today. Words you mark “Still learning” come back here after 1, 3 and 7 days.</div>`; return; }
+    FC = { queue: ids, done: 0, total: ids.length, got: 0, again: 0, review: true }; renderFC(); return;
+  }
   let pool = filterPool($('#fcLevel').value, $('#fcRole').value, mode);
   if (mode === 'new') pool.sort((a, b) => (!!S.learning[b.id]) - (!!S.learning[a.id]));
   pool = mode === 'new' ? [...pool.filter(w => S.learning[w.id]).slice(0, 4), ...shuffle(pool.filter(w => !S.learning[w.id]))].slice(0, 10) : shuffle(pool).slice(0, 10);
@@ -1054,7 +1096,7 @@ function renderFC() {
   }
   const w = BY_ID.get(FC.queue[0]); const L = LEVELS[w.l];
   $('#fcArea').innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span class="count">Card ${FC.done + 1} · ${FC.queue.length} left</span>${levelPill(w)}</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span class="count">Card ${FC.done + 1} · ${FC.queue.length} left</span>${FC.review && S.review && S.review[w.id] ? `<span class="pill" style="background:#FEF3C7;color:#B45309">${['1-day review', '3-day review', '7-day review'][S.review[w.id].s] || 'Review'}</span>` : levelPill(w)}</div>
     <div class="progress" style="margin-bottom:20px"><i style="width:${FC.done / (FC.done + FC.queue.length) * 100}%"></i></div>
     <div class="fc" id="fc"><div class="fc-inner">
       <div class="fc-face"><div style="width:120px;height:120px;border-radius:32px;background:${L.t};display:grid;place-items:center">${svg(w.c, L.c, 62, 1.6)}</div>
@@ -1069,7 +1111,7 @@ function renderFC() {
     <p class="hint">Keyboard: Space to flip · 1 = Again · 2 = I knew it</p>`;
  
   $('#fc').onclick = e => { if (!e.target.closest('[data-say]')) $('#fc').classList.toggle('flip'); };
-  $('#fcYes').onclick = () => { setKnown(w.id, true); FC.got++; FC.done++; track('count', 'cards'); FC.queue.shift(); renderFC(); };
+  $('#fcYes').onclick = () => { if (FC.review && S.review && S.review[w.id] && S.review[w.id].s < REVIEW_GAPS.length - 1) { schedule(w.id, S.review[w.id].s + 1); practised(); updateDue(); } else setKnown(w.id, true); FC.got++; FC.done++; track('count', 'cards'); FC.queue.shift(); renderFC(); };
   $('#fcNo').onclick = () => { setKnown(w.id, false); FC.again++; FC.done++; track('count', 'cards'); const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
 }
 $('#fcStart').onclick = startFC;
@@ -1133,7 +1175,7 @@ function renderQ() {
     <div id="qfb"></div></div>`;
   if (q.type === 'listen') setTimeout(() => speak(w.t), 300);
   document.querySelectorAll('[data-ans]').forEach(b => b.onclick = () => {
-    const ok = +b.dataset.ans === w.id;
+    const ok = +b.dataset.ans === w.id; { S.stats = S.stats || {}; const qt = S.stats.qt = S.stats.qt || {}; const r = qt[q.type] = qt[q.type] || [0, 0]; r[ok ? 0 : 1]++; }
     document.querySelectorAll('[data-ans]').forEach(x => { x.disabled = true; if (+x.dataset.ans === w.id) { x.classList.add('right'); x.lastChild.innerHTML = svg('check', '#16A34A', 20, 2.5); } });
     if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); if (!q.corp) track('wrong', w.id); if (!q.corp) setKnown(w.id, false); else practised(0); } else { QZ.score++; practised(); }
     if (q.corp) { $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <b data-notr>${esc(w.p)}</b><div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:8px;font-style:italic" data-notr>${esc(w.ex)}${xRows(w.x, '#2563EB', '#fff', 22)}</div></div><div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`; $('#qNext').onclick = () => { QZ.i++; renderQ(); }; $('#qNext').focus(); return; }
@@ -1203,13 +1245,14 @@ function route() {
 function show(v) {
   if (selecting && v !== 'browse') setSelecting(false);
   currentView = lastView = v;
+  if (typeof countPage === 'function') countPage(v);
   document.querySelectorAll('.view').forEach(x => x.classList.toggle('on', x.id === 'v-' + v));
   document.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('active', a.dataset.nav === v));
   $('#links').classList.remove('open');
   if (v === 'home') renderHome();
   if (v === 'browse') renderBrowse();
   if (v === 'workplace') renderCorp();
-  if (v === 'flashcards' && !FC) startFC();
+  if (v === 'flashcards' && !FC) { const due = dueIds().length; if (due) $('#fcMode').value = 'due'; else if ($('#fcMode').value === 'due') $('#fcMode').value = 'new'; startFC(); }
   if (v === 'quiz') { $('#qzSource').onchange(); if (!QZ) startQuiz(); }
   if (v === 'progress') { renderProgress(); renderAccount(); }
   if (v === 'lists') renderLists();
@@ -1224,6 +1267,8 @@ syncFilterUI();
 renderFocus();
 route();
 applyLanguage();
+updateDue();
+maybeAskRole();
 if (window.Cloud) initCloud();
 </script>
 <script type="module" src="cloud.js"></script>

@@ -11,9 +11,10 @@
 //   admins/{uid}           who may edit content (create by hand in the console)
 //   users/{uid}            a learner's progress and preferences (owner only)
 //   users/{uid}/lists/{id} a learner's own word lists built from uploaded files (owner only)
+//   visits/{YYYY-MM-DD}    anonymous daily counts of visits, sources, regions, devices and pages (anyone adds, admins read)
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, getDocs, query, where, orderBy, limit, writeBatch, serverTimestamp } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, getDocs, query, where, orderBy, limit, writeBatch, serverTimestamp, increment, documentId } from 'firebase/firestore';
 import { getAI, getGenerativeModel, GoogleAIBackend } from 'firebase/ai';
 import { firebaseConfig } from './firebase-config.js';
 
@@ -163,6 +164,15 @@ async function listAllReports() {
   return s.docs.map((d) => ({ id: d.id, ...d.data(), createdAt: d.data().createdAt?.toDate?.() || null }));
 }
 
+// ---------- anonymous visit counter: one document per day, numbers only (visits/{YYYY-MM-DD}) ----------
+// counts = { sessions: 1, src: { direct: 1 }, pages: { home: 3 } } → every number is added to that day's totals.
+function inc(obj) { const o = {}; for (const [k, v] of Object.entries(obj)) o[k] = typeof v === 'number' ? increment(v) : inc(v); return o; }
+const recordVisit = (day, counts) => setDoc(doc(db, 'visits', day), inc(counts), { merge: true });
+async function listVisits(fromDay) {
+  const s = await getDocs(query(collection(db, 'visits'), where(documentId(), '>=', fromDay)));
+  return s.docs.map((d) => ({ day: d.id, ...d.data() }));
+}
+
 // ---------- personal word lists ----------
 async function listLists(uid) {
   const s = await getDocs(collection(db, 'users', uid, 'lists'));
@@ -205,7 +215,7 @@ window.Cloud = {
   enabled, projectId: firebaseConfig.projectId,
   loadContent, syncBuiltin, rebuildBundles, saveItems,
   submitReport, listReports, updateReport, myReports,
-  listLists, saveList, deleteList, listUsers, listAllReports,
+  listLists, saveList, deleteList, listUsers, listAllReports, recordVisit, listVisits,
   aiJSON,
   signIn, logOut, onUser, isAdmin, loadProgress, saveProgress,
 };

@@ -1,17 +1,21 @@
 /* ---------- admin: Insights dashboard ----------
    Reads every signed-in learner's top-level document (users/{uid}) and all reports, then works out
    segments, learning results, content gaps and suggested actions. Visitors who never sign in are not counted. */
-const INS = { users: null, reports: null, loadedAt: null, range: 30, role: 'all', q: { top: '', hard: '' }, err: '' };
+const INS = { users: null, reports: null, visits: null, visitsErr: '', loadedAt: null, range: 30, role: 'all', q: { top: '', hard: '' }, err: '' };
 const VZ = { blue: '#2a78d6', blueSoft: '#cde2fb', grid: '#E4E7EE', ink: '#1B1F2A', muted: '#5B6475' };
 const dayKey = d => d.toISOString().slice(0, 10);
 const daysAgo = n => { const d = new Date(); d.setDate(d.getDate() - n); return dayKey(d); };
 const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+const QT_LABEL = { meaning: 'Meaning of a word', term: 'Word from its meaning', define: 'Word from an English definition', listen: 'Listening', gap: 'Fill the gap', cmeaning: 'Workplace: meaning of a phrase', cwhich: 'Workplace: phrase from its meaning', csituation: 'Workplace: what to say' };
+const PAGE_LABEL = { home: 'Home', browse: 'Browse words', workplace: 'Workplace English', flashcards: 'Flashcards', quiz: 'Quiz', progress: 'My profile', lists: 'My lists', admin: 'Admin' };
 const ROLE_LABEL = r => (ROLES[r] ? ROLES[r].name : 'Not chosen yet');
 
 async function loadInsights(force) {
   if (INS.users && !force) return;
   INS.err = ''; loading(true);
-  try { [INS.users, INS.reports] = await Promise.all([Cloud.listUsers(), Cloud.listAllReports()]); INS.loadedAt = new Date(); }
+  INS.visitsErr = '';
+  const visits = Cloud.listVisits(daysAgo(179)).catch(e => { INS.visitsErr = String(e.code || e.message); return []; });
+  try { [INS.users, INS.reports, INS.visits] = await Promise.all([Cloud.listUsers(), Cloud.listAllReports(), visits]); INS.loadedAt = new Date(); }
   catch (e) { INS.err = /permission/i.test(String(e.code || e.message)) ? 'Firestore said no. Publish the new firestore.rules (it lets admins read learners’ progress), then refresh.' : 'Could not load: ' + (e.code || e.message); }
   finally { loading(false); }
 }
@@ -62,6 +66,14 @@ function computeInsights() {
     streaks: users.map(streakOf), sleeping: users.filter(u => { const l = lastSeenOf(u); return l && l < daysAgo(13); }).length,
     listUsers: users.filter(u => (u.meta?.lists || 0) > 0).length, listWords: users.reduce((n, u) => n + (u.meta?.listWords || 0), 0),
     reports: INS.reports || [], lastSeenOf,
+    fb: (() => { const m = new Map(); for (const u of users) for (const [id, v] of Object.entries(u.stats?.fb || {})) { if (!BY_ID.has(+id)) continue; const e = m.get(+id) || { id: +id, up: 0, down: 0 }; v > 0 ? e.up++ : e.down++; m.set(+id, e); } return [...m.values()]; })(),
+    qt: (() => { const m = {}; for (const u of users) for (const [k, [a, b]] of Object.entries(u.stats?.qt || {})) { m[k] = m[k] || [0, 0]; m[k][0] += a; m[k][1] += b; } return m; })(),
+    due: users.reduce((n, u) => n + Object.values(u.review || {}).filter(r => r.d <= dayKey(new Date())).length, 0),
+    dueUsers: users.filter(u => Object.values(u.review || {}).some(r => r.d <= dayKey(new Date()))).length,
+    visits: (() => { const v = (INS.visits || []).filter(x => INS.range === 'all' || x.day >= from); const sum = k => v.reduce((n, x) => n + (x[k] || 0), 0);
+      const merge = k => { const m = new Map(); for (const x of v) for (const [a, b] of Object.entries(x[k] || {})) m.set(a, (m.get(a) || 0) + b); return [...m.entries()].sort((a, b) => b[1] - a[1]); };
+      const byDay = new Map((INS.visits || []).map(x => [x.day, x])); const trend = []; for (let i = span - 1; i >= 0; i--) { const d = daysAgo(i); trend.push({ d, v: (byDay.get(d) || {}).sessions || 0 }); }
+      return { sessions: sum('sessions'), visitors: sum('visitors'), newVisitors: sum('newVisitors'), views: sum('views'), signedIn: sum('signedIn'), src: merge('src'), region: merge('region'), device: merge('device'), lang: merge('lang'), pages: merge('pages'), trend }; })(),
   };
 }
 
@@ -72,14 +84,14 @@ function hbars(rows, opts = {}) {
   return `<div class="vz-bars">${rows.map(r => `<div class="vz-row" title="${esc(r.label)}: ${fmt(r.v)}${opts.noPct ? '' : ` (${pct(r.v, total)}%)`}">
     <span class="vz-lab" data-notr>${esc(r.label)}</span><span class="vz-track"><i style="width:${Math.max(1.5, r.v / max * 100)}%"></i></span><span class="vz-val">${fmt(r.v)}${opts.noPct ? '' : `<small>${pct(r.v, total)}%</small>`}</span></div>`).join('')}</div>`;
 }
-function lineChart(pts) {
+function lineChart(pts, unit = ['learner active', 'learners active']) {
   const W = 640, H = 180, P = { l: 30, r: 10, t: 12, b: 24 };
   const max = Math.max(2, ...pts.map(p => p.v)), n = pts.length;
   const x = i => P.l + (n === 1 ? 0 : i / (n - 1) * (W - P.l - P.r)), y = v => H - P.b - v / max * (H - P.t - P.b);
   const ticks = [0, Math.ceil(max / 2), max];
   const path = pts.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.v).toFixed(1)}`).join('');
   const lab = [0, Math.floor((n - 1) / 2), n - 1];
-  return `<div class="vz-line" data-pts='${JSON.stringify(pts)}'><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Learners active each day">
+  return `<div class="vz-line" data-pts='${JSON.stringify(pts)}' data-unit='${JSON.stringify(unit)}'><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${unit[1]} each day">
     ${ticks.map(t => `<line x1="${P.l}" x2="${W - P.r}" y1="${y(t)}" y2="${y(t)}" stroke="${VZ.grid}" stroke-width="1"/><text x="${P.l - 6}" y="${y(t) + 4}" text-anchor="end" font-size="11" fill="${VZ.muted}">${t}</text>`).join('')}
     <path d="${path} L${x(n - 1)},${H - P.b} L${x(0)},${H - P.b}Z" fill="${VZ.blueSoft}" opacity=".55"/>
     <path d="${path}" fill="none" stroke="${VZ.blue}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
@@ -96,7 +108,7 @@ function wireLine(root) {
       const i = Math.max(0, Math.min(n - 1, Math.round((fx - P.l) / (W - P.l - P.r) * (n - 1)))); const px = P.l + i / Math.max(1, n - 1) * (W - P.l - P.r), py = H - P.b - pts[i].v / max * (H - P.t - P.b);
       box.querySelector('.vz-x').setAttribute('x1', px); box.querySelector('.vz-x').setAttribute('x2', px); box.querySelector('.vz-x').setAttribute('opacity', .25);
       const dot = box.querySelector('.vz-dot'); dot.setAttribute('cx', px); dot.setAttribute('cy', py); dot.setAttribute('opacity', 1);
-      tip.style.display = 'block'; tip.style.left = Math.min(r.width - 120, Math.max(0, px / W * r.width - 60)) + 'px'; tip.innerHTML = `<b>${pts[i].v}</b> <span>learner${pts[i].v === 1 ? '' : 's'} active</span><br><small>${pts[i].d}</small>`;
+      tip.style.display = 'block'; tip.style.left = Math.min(r.width - 120, Math.max(0, px / W * r.width - 60)) + 'px'; const unit = JSON.parse(box.dataset.unit); tip.innerHTML = `<b>${pts[i].v}</b> <span>${unit[pts[i].v === 1 ? 0 : 1]}</span><br><small>${pts[i].d}</small>`;
     };
     svgEl.onmousemove = move; svgEl.ontouchstart = e => move(e.touches[0]);
     svgEl.onmouseleave = () => { tip.style.display = 'none'; box.querySelector('.vz-dot').setAttribute('opacity', 0); box.querySelector('.vz-x').setAttribute('opacity', 0); };
@@ -134,6 +146,12 @@ function suggestions(R) {
   const lp = R.levelPct.find(x => x.l == 1); if (lp && lp.pct > 60) out.push(['star', `Active learners already know ${Math.round(lp.pct)}% of Beginner words. Point them to Intermediate on the home page.`]);
   const mob = (R.devices.find(d => d[0] === 'mobile') || [0, 0])[1]; if (n >= 5 && mob / n > 0.6) out.push(['mobile', `${pct(mob, n)}% of learners use a phone. Keep new features phone-first.`]);
   if (R.avgScore != null && R.avgScore < 6) out.push(['quality', `The average quiz score is ${R.avgScore.toFixed(1)}/10. Quizzes may be too hard; consider a Beginner-only quiz by default.`]);
+  const confusing = R.fb.filter(f => f.down >= 2 && f.down > f.up).sort((a, b) => b.down - a.down);
+  if (confusing.length) out.push(['quality', `Learners found these explanations unclear (👎): ${confusing.slice(0, 4).map(f => BY_ID.get(f.id).t).join(', ')}. Rewrite them or add a plain explanation.`, 'Edit the first one', () => { ADM.tab = 'edit'; ADM.kind = 'words'; ADM.editId = confusing[0].id; renderAdmin(); }]);
+  const qts = Object.entries(R.qt).filter(([, [a, b]]) => a + b >= 10).map(([k, [a, b]]) => [k, b / (a + b)]).sort((a, b) => b[1] - a[1]);
+  if (qts.length && qts[0][1] > 0.35) out.push(['testing', `“${QT_LABEL[qts[0][0]] || qts[0][0]}” questions are answered wrong ${Math.round(qts[0][1] * 100)}% of the time, the hardest question type. Worth a lesson or more practice.`]);
+  if (R.dueUsers >= Math.max(2, n * 0.3)) out.push(['time', `${R.dueUsers} learners have ${fmt(R.due)} words waiting for review. Reminders bring them back.`]);
+  const V = R.visits; if (V.sessions >= 20 && V.signedIn / V.sessions < 0.1) out.push(['people', `Only ${pct(V.signedIn, V.sessions)}% of visits sign in. Their progress is lost when they switch devices; a sign-in nudge after the first 10 words could help.`]);
   if (!out.length) out.push(['check', n ? 'Nothing needs your attention right now.' : 'No signed-in learners yet. Share the site and ask learners to sign in with Google so their progress shows up here.']);
   return out;
 }
@@ -166,8 +184,18 @@ async function admInsights(el) {
     ${tile(fmt(R.cards), 'flashcards reviewed')}
     ${tile(fmt(R.returning), 'came back on 2+ days', `${pct(R.returning, n)}% of learners`)}
     ${tile(fmt(R.reports.filter(r => r.status === 'open').length), 'reports waiting')}
+    ${tile(fmt(R.due), 'words due for review', `${R.dueUsers} learners`)}
   </div>
   <div class="card vz-card"><h3>${svg('sparkle', '#7C3AED', 18, 2)} What to do next</h3><div class="stack" style="gap:8px">${sugg.map(([ic, t, btn], i) => `<div class="vz-sugg">${svg(ic, '#2563EB', 18, 2)}<span>${esc(t)}</span>${btn ? `<button class="btn secondary sm" data-sugg="${i}">${esc(btn)}</button>` : ''}</div>`).join('')}</div></div>
+  <div class="card vz-card vz-visitors"><h3>Everyone who visits</h3><p class="vz-sub">Signed in or not. Anonymous counts only: no names, e-mails or IP addresses.${INS.visitsErr ? ' <b style="color:var(--red)">Visit counts need the new firestore.rules.</b>' : ''}</p>
+    <div class="statgrid vz-tiles" style="margin-bottom:14px">${tile(fmt(R.visits.sessions), 'visits')}${tile(fmt(R.visits.visitors), 'visitors', 'counted once per day')}${tile(fmt(R.visits.newVisitors), 'first-time visitors')}${tile(pct(R.visits.signedIn, R.visits.sessions) + '%', 'of visits signed in')}</div>
+    ${lineChart(R.visits.trend, ['visit', 'visits'])}
+    <div class="vz-grid" style="margin-top:14px">
+      <div><h4 class="vz-h4">Where visitors come from</h4>${hbars(R.visits.src.slice(0, 8).map(([k, v]) => ({ label: k === 'direct' ? 'Direct or bookmark' : k.replace(/_/g, '.'), v })))}</div>
+      <div><h4 class="vz-h4">Country or region</h4><p class="vz-sub">From the device's time zone.</p>${hbars(R.visits.region.slice(0, 8).map(([k, v]) => ({ label: k.replace(/_/g, ' '), v })))}</div>
+      <div><h4 class="vz-h4">Pages viewed</h4>${hbars(R.visits.pages.map(([k, v]) => ({ label: PAGE_LABEL[k] || k, v })))}</div>
+      <div><h4 class="vz-h4">Device and browser language</h4>${hbars(R.visits.device.map(([k, v]) => ({ label: k === 'mobile' ? 'Phone' : 'Computer', v })))}<div style="height:10px"></div>${hbars(R.visits.lang.slice(0, 6).map(([k, v]) => ({ label: ({ vi: 'Vietnamese', ko: 'Korean', fr: 'French', en: 'English' })[k] || k, v })))}</div>
+    </div></div>
   <div class="card vz-card"><h3>Learners active each day</h3><p class="vz-sub">How many learners practised on each day${INS.range === 'all' ? ' (last 90 days)' : ''}. Hover for the exact number.</p>${lineChart(R.trend)}</div>
   <div class="vz-grid">
     <div class="card vz-card"><h3>Learners by role</h3>${hbars(R.roles.map(([k, v]) => ({ label: ROLE_LABEL(k), v })), { total: n })}</div>
@@ -182,6 +210,10 @@ async function admInsights(el) {
     <div class="card vz-card"><h3>Hardest words</h3><p class="vz-sub">Most often “still learning” or answered wrong in quizzes. Good candidates for a story or plain explanation.</p>${wordTable('hard', R.hard, [['Still learning', r => r.learning], ['Wrong answers', r => r.wrong], ['Help', (r, w) => `${w.s && w.s.en ? '💡' : ''}${w.st && w.st.en ? '📖' : ''}` || '–']], 50)}</div>
     <div class="card vz-card"><h3>Words learners look for but can't find</h3><p class="vz-sub">Searches with no result. Add the useful ones.</p>
       <div style="overflow:auto;max-height:420px"><table class="ptable vz-table"><tr><th>Search</th><th>Learners</th><th>Last</th><th></th></tr>${R.missed.slice(0, 50).map((m, i) => `<tr><td data-notr><b>${esc(m.q)}</b></td><td>${m.users}</td><td>${m.last}</td><td><button class="btn ghost sm" data-addq="${i}">Add</button></td></tr>`).join('') || '<tr><td colspan="4" class="hint">No missed searches yet.</td></tr>'}</table></div></div>
+  </div>
+  <div class="vz-grid">
+    <div class="card vz-card"><h3>Quiz: which questions are hardest</h3><p class="vz-sub">Share of answers that were wrong, by question type.</p>${hbars(Object.entries(R.qt).map(([k, [a, b]]) => ({ label: QT_LABEL[k] || k, v: Math.round(b / Math.max(1, a + b) * 100), n: a + b })).sort((x, y) => y.v - x.v), { noPct: true, max: 100 }).replace(/(<span class="vz-val">)(\d+)/g, '$1$2%')}<p class="vz-sub" style="margin-top:8px">${fmt(Object.values(R.qt).reduce((n, [a, b]) => n + a + b, 0))} answers counted.</p></div>
+    <div class="card vz-card"><h3>Was the explanation clear?</h3><p class="vz-sub">👍 / 👎 from the word cards. Most 👎 first.</p>${wordTable('fb', R.fb.sort((a, b) => b.down - a.down || b.up - a.up), [['👎', r => r.down], ['👍', r => r.up]], 50)}</div>
   </div>
   <div class="vz-grid">
     <div class="card vz-card"><h3>Most saved ★</h3>${wordTable('saved', topSaved, [['Learners', r => r.c]], 30)}</div>
@@ -210,6 +242,7 @@ async function admInsights(el) {
     const k = b.dataset.csv; const wr = id => { const w = word(id); return [w.t, w.a || '', LEVELS[w.l].name, TOPIC_NAMES[w.c] || w.c, w.v]; };
     if (k === 'top') csv('top-known-words', ['Rank', 'Word', 'Full form', 'Level', 'Topic', 'Vietnamese', 'Learners', '% of learners'], topKnown.map((r, i) => [i + 1, ...wr(r.id), r.c, pct(r.c, n)]));
     if (k === 'hard') csv('hardest-words', ['Rank', 'Word', 'Full form', 'Level', 'Topic', 'Vietnamese', 'Still learning', 'Wrong answers'], R.hard.map((r, i) => [i + 1, ...wr(r.id), r.learning, r.wrong]));
+    if (k === 'fb') csv('word-feedback', ['Rank', 'Word', 'Full form', 'Level', 'Topic', 'Vietnamese', 'Not clear', 'Clear'], R.fb.map((r, i) => [i + 1, ...wr(r.id), r.down, r.up]));
     if (k === 'saved') csv('most-saved-words', ['Rank', 'Word', 'Full form', 'Level', 'Topic', 'Vietnamese', 'Learners'], topSaved.map((r, i) => [i + 1, ...wr(r.id), r.c]));
     if (k === 'viewed') csv('most-opened-words', ['Rank', 'Word', 'Full form', 'Level', 'Topic', 'Vietnamese', 'Opens'], topViewed.map((r, i) => [i + 1, ...wr(r.id), r.c]));
     if (k === 'users') csv('learners', ['Learner', 'Role', 'Languages', 'Interface', 'Known', 'Learning', 'Saved', 'Quizzes', 'Best quiz', 'Days practised', 'First seen', 'Last active', 'Device', 'Word lists'], R.users.map((u, i) => [i + 1, ROLE_LABEL(u.prefs?.role), (u.prefs?.langs || []).join(' '), u.prefs?.ui || 'en', Object.keys(u.known || {}).length, Object.keys(u.learning || {}).length, Object.keys(u.saved || {}).length, u.quizzes || 0, u.best || 0, Object.keys(u.days || {}).length, u.meta?.firstSeen || '', R.lastSeenOf(u), u.meta?.device || '', u.meta?.lists || 0]));

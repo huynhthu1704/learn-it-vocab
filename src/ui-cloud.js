@@ -18,7 +18,7 @@ const prefsPayload = () => ({ langs: S.langs, ui: S.ui, plain: S.plain, role: S.
 const isMobile = () => matchMedia('(max-width: 760px)').matches;
 // What the admin Insights page reads. No names or e-mails: learners are counted, not identified.
 const progressPayload = () => ({ known: S.known, learning: S.learning, saved: S.saved, days: S.days, quizzes: S.quizzes, best: S.best, prefs: prefsPayload(),
-  stats: S.stats || {}, meta: { firstSeen: S.firstSeen || today(), lastSeen: today(), device: isMobile() ? 'mobile' : 'desktop', lists: S.listCount || 0, listWords: S.listWords || 0 } });
+  review: S.review || {}, stats: S.stats || {}, meta: { firstSeen: S.firstSeen || today(), lastSeen: today(), device: isMobile() ? 'mobile' : 'desktop', lists: S.listCount || 0, listWords: S.listWords || 0 } });
 function queueCloudSave() {
   if (!cloudUser || !window.Cloud) return;
   clearTimeout(cloudSaveT);
@@ -36,10 +36,11 @@ async function syncProgress() {
       S.quizzes = Math.max(S.quizzes, c.quizzes || 0); S.best = Math.max(S.best, c.best || 0);
       if (c.meta && c.meta.firstSeen && (!S.firstSeen || c.meta.firstSeen < S.firstSeen)) S.firstSeen = c.meta.firstSeen;
       if (c.stats && !S.stats) S.stats = c.stats;
+      if (c.review) { S.review = { ...c.review, ...(S.review || {}) }; for (const id in S.review) if (!S.learning[id]) delete S.review[id]; }
       if (c.prefs && (c.prefs.prefsAt || 0) > (S.prefsAt || 0)) { Object.assign(S, c.prefs); applyLanguage(); }
     }
     if (!S.firstSeen) S.firstSeen = today();
-    save(); cloudStatus = 'Progress synced with your account';
+    save(); updateDue(); cloudStatus = 'Progress synced with your account';
   } catch (e) { cloudStatus = 'Could not load your saved progress: ' + e.message; }
   refreshVisible();
 }
@@ -191,12 +192,32 @@ function applyLanguage() {
 
 /* ---------- small dialog (reports, confirmations) ---------- */
 function openDlg(html) { $('#dlgBox').innerHTML = `<button class="close" data-dlgclose aria-label="Close">${svg('x', '#1B1F2A', 20, 2)}</button>` + html; $('#dlg').classList.add('open'); }
-function closeDlg() { $('#dlg').classList.remove('open'); }
+function closeDlg() { $('#dlg').classList.remove('open'); $('#dlgBox').classList.remove('wide'); }
 $('#dlg').addEventListener('click', e => { if (e.target === $('#dlg') || e.target.closest('[data-dlgclose]')) closeDlg(); });
 const getPath = (o, p) => p.split('.').reduce((a, k) => (a == null ? a : a[k]), o);
 function setPath(o, p, v) { const ks = p.split('.'); let a = o; ks.slice(0, -1).forEach(k => { a[k] = { ...(a[k] || {}) }; a = a[k]; }); a[ks[ks.length - 1]] = v; return o; }
 const findItem = (kind, id) => kind === 'corporate' ? CORP.find(c => c.id === id) : BY_ID.get(id);
 const itemName = (kind, o) => kind === 'corporate' ? o.p : o.t;
+
+/* ---------- first visit: pick your role ----------
+   The role decides which words come first and whether word cards explain things in plain language. */
+function openRolePicker(fromProfile) {
+  openDlg(`<h3 style="font-size:24px">What do you do?</h3><p style="color:var(--muted);margin:0">Pick your role and we'll show the words you need first. You can change it any time in My profile.</p>
+    <div class="rolepick">${Object.entries(ROLES).map(([k, R]) => `<button class="rp ${S.role === k ? 'on' : ''}" data-pickrole="${k}"><span class="itile" style="background:${R.t}">${svg(R.icon, R.c, 22, 2)}</span><span><b>${R.name}</b><small>${R.d}</small></span></button>`).join('')}</div>
+    <div class="mrow" style="justify-content:space-between;align-items:center"><button class="btn ghost sm" id="rpSkip">${fromProfile ? 'Cancel' : 'Skip for now'}</button><span class="count">You can still browse every word.</span></div>`);
+  $('#dlgBox').classList.add('wide');
+  $('#dlgBox').querySelectorAll('[data-pickrole]').forEach(b => b.onclick = () => {
+    const r = b.dataset.pickrole; S.rolePrompted = 1;
+    setPrefs({ role: r }); if (typeof setFocusRole === 'function') setFocusRole(r);
+    closeDlg(); toast('Done! Words for your role now come first.');
+  });
+  $('#rpSkip').onclick = () => { S.rolePrompted = 1; save(); closeDlg(); };
+}
+// Ask once, on the first visit, unless a link already chose a role (e.g. #home?role=ba) or the visitor is on the admin page.
+function maybeAskRole() {
+  if (S.role || S.rolePrompted || S.focusRole) { if (!S.role && S.focusRole) { S.role = S.focusRole; save(); } return; }
+  setTimeout(() => { if (!S.role && !S.rolePrompted && currentView !== 'admin' && !$('#dlg').classList.contains('open') && !$('#overlay').classList.contains('open')) openRolePicker(); }, 1200);
+}
 
 /* ---------- report a problem ---------- */
 const REPORT_FIELDS = {
@@ -576,17 +597,49 @@ function renderOneList(el) {
   $('#loGrid').onclick = async e => { const b = e.target.closest('[data-lrm]'); if (!b) return; L.items = items.filter(x => x.id !== +b.dataset.lrm); try { await Cloud.saveList(cloudUser.uid, { id: L.id, items: L.items }); renderLists(); } catch (err) { toast('Could not save: ' + err.message); } };
 }
 
+/* ---------- anonymous visit counter (everyone, signed in or not; numbers only) ---------- */
+const TZ_COUNTRY = { 'Asia/Ho_Chi_Minh': 'Vietnam', 'Asia/Saigon': 'Vietnam', 'Asia/Seoul': 'South Korea', 'Asia/Bangkok': 'Thailand', 'Asia/Singapore': 'Singapore', 'Asia/Tokyo': 'Japan', 'Asia/Shanghai': 'China', 'Asia/Hong_Kong': 'Hong Kong', 'Asia/Taipei': 'Taiwan', 'Asia/Manila': 'Philippines', 'Asia/Jakarta': 'Indonesia', 'Asia/Kuala_Lumpur': 'Malaysia', 'Asia/Kolkata': 'India', 'Asia/Calcutta': 'India', 'Australia/Sydney': 'Australia', 'Australia/Melbourne': 'Australia', 'Europe/Paris': 'France', 'Europe/London': 'United Kingdom', 'Europe/Berlin': 'Germany', 'Europe/Amsterdam': 'Netherlands', 'Europe/Brussels': 'Belgium', 'Europe/Zurich': 'Switzerland', 'America/Montreal': 'Canada', 'America/Toronto': 'Canada', 'America/Vancouver': 'Canada', 'America/New_York': 'United States', 'America/Chicago': 'United States', 'America/Denver': 'United States', 'America/Los_Angeles': 'United States' };
+const keyOf = s => String(s || 'unknown').replace(/[.\/#$\[\]~*`]/g, '_').slice(0, 60) || 'unknown';
+const VISIT = { pages: {}, views: 0, started: false };
+function countPage(v) { if (!VISIT.started) return; VISIT.pages[v] = (VISIT.pages[v] || 0) + 1; VISIT.views++; }
+function flushPages() {
+  if (!VISIT.views || !window.Cloud || !Cloud.enabled) return;
+  const counts = { views: VISIT.views, pages: {} }; for (const [k, v] of Object.entries(VISIT.pages)) counts.pages[keyOf(k)] = v;
+  VISIT.pages = {}; VISIT.views = 0; Cloud.recordVisit(today(), counts).catch(() => {});
+}
+function startVisit() {
+  let skip = false; try { skip = localStorage.getItem('itv-admin') === '1'; } catch (e) {}
+  if (skip || VISIT.started) return; VISIT.started = true;
+  countPage(currentView);
+  let first = false, newToday = false, newSession = false;
+  try { first = !localStorage.getItem('itv-first'); if (first) localStorage.setItem('itv-first', today()); newToday = localStorage.getItem('itv-day') !== today(); localStorage.setItem('itv-day', today()); newSession = !sessionStorage.getItem('itv-s'); sessionStorage.setItem('itv-s', '1'); } catch (e) { newSession = true; }
+  if (newSession) {
+    const params = new URLSearchParams(LANDING.split('?').slice(1).join('&'));
+    let src = params.get('utm_source') || (params.get('role') ? 'link role=' + params.get('role') : '');
+    if (!src) { try { const h = document.referrer ? new URL(document.referrer).hostname : ''; src = h && h !== location.hostname ? h.replace(/^www\./, '') : 'direct'; } catch (e) { src = 'direct'; } }
+    const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || ''); const region = TZ_COUNTRY[tz] || tz.split('/')[0] || 'unknown';
+    const counts = { sessions: 1, src: { [keyOf(src)]: 1 }, region: { [keyOf(region)]: 1 }, device: { [isMobile() ? 'mobile' : 'desktop']: 1 }, lang: { [keyOf((navigator.language || 'unknown').slice(0, 2))]: 1 } };
+    if (newToday) counts.visitors = 1; if (first) counts.newVisitors = 1;
+    Cloud.recordVisit(today(), counts).catch(() => {});
+  }
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushPages(); });
+  setInterval(flushPages, 120000);
+}
+
 let cloudStarted = false;
 async function initCloud() {
   if (cloudStarted || !window.Cloud) return; cloudStarted = true;
   const C = window.Cloud;
   if (!C.enabled) { renderAccount(); return; }
+  startVisit();
   loading(true);
   try { const c = await C.loadContent(); if (c && c.words.length) applyContent(c); } catch (e) { console.warn('Firestore content not loaded, using built-in copy', e); }
   loading(false);
   C.onUser(async u => {
     cloudUser = u; LST.lists = null; ADM.reports = null; renderNavAccount(); if (u) loading(true);
     cloudAdmin = u ? await C.isAdmin(u.uid) : false;
+    try { if (cloudAdmin) localStorage.setItem('itv-admin', '1'); } catch (e) {}
+    if (u && !cloudAdmin && VISIT.started) { let k = ''; try { k = sessionStorage.getItem('itv-si'); sessionStorage.setItem('itv-si', '1'); } catch (e) {} if (!k) C.recordVisit(today(), { signedIn: 1 }).catch(() => {}); }
     if (u) { await syncProgress(); loading(false); }
     renderAccount(); renderNavAccount();
     if (currentView === 'admin') renderAdmin(); if (currentView === 'lists') renderLists(); if (currentView === 'progress') renderLangCard();

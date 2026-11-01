@@ -26,6 +26,9 @@ browser until the learner clears it; `?role=all` clears it too. Role ids: `stude
 - **My lists**: upload a PDF, Word file, text or Markdown (in any language) or paste text. AI picks out the key words, adds the English term, IPA, meanings in all languages and an example, and the learner saves them as their own list.
 - **Report a problem**: on any word, a signed-in learner can say what is wrong and suggest the correct text.
 - **Insights** (Admin → Insights): learners by role, language and device, daily active learners, the top 100 known words, hardest words, most saved and opened words, searches with no result (content gaps), engagement, reports, a learner table, CSV downloads and a “What to do next” list worked out from the data. It counts signed-in learners only and stores no names or e-mails.
+- **First visit**: a role picker, so each learner sees their role's words first (and plain explanations for non-tech roles).
+- **Review reminders**: a word marked “still learning” comes back after 1, 3 and 7 days (Flashcards → Due for review, and a reminder on the home page).
+- **Was this clear? 👍/👎** on every word card; the Insights page lists the words learners find unclear.
 - **Admin**: review reports (accept, edit, reject), edit any word or Workplace English item, run the AI tools (translations, explanations, stories), and sync the built-in data to Firestore.
 - **Mobile**: every page works on a phone.
 
@@ -79,6 +82,7 @@ To change interface text, edit `data/i18n.txt` and rebuild.
 | `meta/info` | layout, counts, bundle names, publish date | admins |
 | `reports/{id}` | learners' corrections | signed-in learners create, admins review |
 | `admins/{uid}` | who is an admin (create by hand in the console) | console only |
+| `visits/{YYYY-MM-DD}` | anonymous daily counts: visits, sources, country (from time zone), device, browser language, pages | anyone adds numbers, admins read |
 | `users/{uid}` and `users/{uid}/lists/{id}` | a learner's progress, language settings and word lists | that learner |
 
 **Set up once**
@@ -93,3 +97,7 @@ To change interface text, edit `data/i18n.txt` and rebuild.
 
 - Audio uses the device's voices (Web Speech API). Vietnamese, Korean and French need those voices installed; most phones have them.
 - AI text and the built-in meanings should be checked by a teacher before use in class. Learners can report mistakes; admins fix them in a click.
+
+## Weekly e-mail summary
+
+`tools/weekly-email/` is a Google Apps Script that e-mails the admin every Monday at 8:00 (Asia/Bangkok): active and new learners, visitors and where they come from, reports waiting, searches with no result and explanations learners found unclear. It runs free under your Google account. Setup steps are at the top of `Code.gs`.
