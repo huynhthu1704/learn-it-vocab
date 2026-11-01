@@ -12,6 +12,8 @@ export const firebaseConfig = {
   appId: '1:782463429248:web:9cef1eb417f26478641465',
 };
 
-// App Check (protects the AI quota). Paste the reCAPTCHA v3 *site* key here after registering the web app
-// in Firebase console → App Check → Apps → learn-it-vocab → reCAPTCHA. Leave empty to turn App Check off.
-export const recaptchaSiteKey = '6LfpWwsuAAAAAL8not00HVb9X88shB8202bsyoCb';
+// App Check (protects the AI quota). The web app is registered in Firebase console → App Check → Apps
+// with "Fraud Defense (reCAPTCHA Enterprise)"; this is that provider's site key (public, not a secret).
+// Set recaptchaEnterprise to false if you switch the registration to classic reCAPTCHA v3. Empty key = App Check off.
+export const recaptchaSiteKey = '6LfpWwsuAAAAAKfVA2JGYlt4gRyZXWQu8ULqog5v';
+export const recaptchaEnterprise = true;
