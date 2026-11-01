@@ -387,11 +387,13 @@ function admEdit(el) {
 /* ---------- AI (Gemini through Firebase AI Logic) ---------- */
 function aiError(e) {
   const m = String(e.code || '') + ' ' + String(e.message || e);
-  if (/App Check/i.test(m)) return 'AI is blocked by App Check: Firebase console → App Check → APIs → Firebase AI Logic is “Enforced” but the site has no App Check key yet. Either set Firebase AI Logic to Unenforced, or add a reCAPTCHA key (see README).';
-  if (/api-not-enabled|not been used|firebasevertexai|AI Logic|PERMISSION_DENIED|403/i.test(m)) return 'AI is not turned on yet: Firebase console → AI Logic → Get started → Gemini Developer API.';
-  if (/quota|429|RESOURCE_EXHAUSTED/i.test(m)) return 'AI limit reached for now. Wait a minute and try again.';
-  if (/billing|FAILED_PRECONDITION/i.test(m)) return 'This AI model needs billing on the Firebase project (Blaze plan).';
-  return 'AI error: ' + m.trim().slice(0, 200);
+  const raw = ' (' + m.replace(/Error fetching from \S+:/, '').trim().slice(0, 220) + ')';
+  if (/App Check/i.test(m)) return 'AI is blocked by App Check: Firebase console → App Check → APIs → Firebase AI Logic is “Enforced” but the site has no App Check key. Set it to Unenforced.' + raw;
+  if (/api-not-enabled|SERVICE_DISABLED|has not been used in project|API has not been enabled/i.test(m)) return 'AI is not turned on yet: Firebase console → AI Logic → Get started → Gemini Developer API.' + raw;
+  if (/quota|\[429|RESOURCE_EXHAUSTED/i.test(m)) return 'AI limit reached for now. Wait a minute and try again.' + raw;
+  if (/billing|FAILED_PRECONDITION/i.test(m)) return 'This AI model needs billing on the Firebase project (Blaze plan).' + raw;
+  if (/no longer available|\[404/i.test(m)) return 'The AI model is not available. Reload the page (Ctrl+Shift+R) to get the latest version of the site.' + raw;
+  return 'AI error' + raw;
 }
 const COMPLEX_TOPICS = ['architecture', 'cloud', 'security', 'data', 'ai', 'agile', 'release', 'process', 'performance', 'network', 'business', 'money'];
 const isComplex = w => w.l === 3 || (w.l === 2 && COMPLEX_TOPICS.includes(w.c)) || /\s/.test(w.t) && w.l >= 2;
@@ -469,7 +471,7 @@ async function runAI(task, max) {
         log(`saved ${patches.length}: ${patches.slice(0, 4).map(x => itemName(T.kind, x.o)).join(', ')}${patches.length > 4 ? '…' : ''}`);
       }
       fails = 0;
-    } catch (e) { fails++; log(aiError(e)); if (fails >= 3 || /not turned on|billing/.test(aiError(e))) { toast(aiError(e)); break; } await new Promise(r => setTimeout(r, 4000)); i -= T.batch; continue; }
+    } catch (e) { fails++; log(aiError(e)); if (fails >= 3 || /not turned on|billing|App Check|not available/.test(aiError(e))) { toast(aiError(e)); break; } await new Promise(r => setTimeout(r, 4000)); i -= T.batch; continue; }
     R.done = Math.min(R.total, i + list.length); if (currentView === 'admin' && ADM.tab === 'ai') renderAdmin();
   }
   loading(false); log(`${T.label}: ${R.stop ? 'stopped' : 'finished'} (${R.done} / ${R.total})`); ADM.run = null;
