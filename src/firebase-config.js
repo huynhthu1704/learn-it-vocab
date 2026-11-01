@@ -14,4 +14,4 @@ export const firebaseConfig = {
 
 // App Check (protects the AI quota). Paste the reCAPTCHA v3 *site* key here after registering the web app
 // in Firebase console → App Check → Apps → learn-it-vocab → reCAPTCHA. Leave empty to turn App Check off.
-export const recaptchaSiteKey = '';
+export const recaptchaSiteKey = '6LfpWwsuAAAAAL8not00HVb9X88shB8202bsyoCb';
