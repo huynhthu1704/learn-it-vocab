@@ -138,7 +138,19 @@ for (const line of fs.readFileSync('data/corporate.txt', 'utf8').split('\n')) {
 }
 console.log('corporate entries', CORP.length, Object.entries(CORP.reduce((a, c) => (a[c.cat] = (a[c.cat] || 0) + 1, a), {})).map(x => x.join(':')).join(' '));
 const safe = s => s.replace(/<\//g, '<\\/');
-const html = fs.readFileSync('src/template.html', 'utf8').replace('/*__WORDS__*/[]', safe(out)).replace('/*__CORP__*/[]', safe(JSON.stringify(CORP)));
+// Interface translations (English → Vietnamese, Korean, French) and the account/admin/lists code.
+const I18N = {};
+for (const line of fs.readFileSync('data/i18n.txt', 'utf8').split('\n')) {
+  if (!line.trim() || line.startsWith('#')) continue;
+  const parts = line.split(' | ').map(x => x.trim());
+  if (parts.length !== 4) { console.error('data/i18n.txt: expected English | Vietnamese | Korean | French →', line.slice(0, 80)); process.exit(1); }
+  I18N[parts[0]] = parts.slice(1);
+}
+console.log('interface strings', Object.keys(I18N).length);
+const html = fs.readFileSync('src/template.html', 'utf8')
+  .replace('/*__CLOUD_UI__*/', () => fs.readFileSync('src/ui-cloud.js', 'utf8'))
+  .replace('/*__WORDS__*/[]', () => safe(out)).replace('/*__CORP__*/[]', () => safe(JSON.stringify(CORP)))
+  .replace('/*__I18N__*/{}', () => safe(JSON.stringify(I18N)));
 fs.writeFileSync('index.html', html);
 // Bundle the Firebase code (src/cloud.js + src/firebase-config.js) into cloud.js
 await esbuild({ entryPoints: ['src/cloud.js'], bundle: true, format: 'esm', minify: true, outfile: 'cloud.js', logLevel: 'warning' });

@@ -1,83 +1,191 @@
-// All Firebase access (Auth + Cloud Firestore) lives in this file.
+// All Firebase access (Auth, Cloud Firestore and Firebase AI Logic) lives in this file.
 // It is bundled by build.mjs into cloud.js, which index.html loads as a module.
 //
 // Firestore layout
-//   words/{w0001}        one document per word        (read: everyone, write: admins)  ← edit words here
-//   corporate/{c001}     one document per Workplace English entry (read: everyone, write: admins)
-//   bundles/{name}       packed copies of the two collections, so a visit costs ~7 reads, not 2,500
-//   meta/info            version, counts and publish date
-//   admins/{uid}         who may publish (create by hand in the console)
-//   users/{uid}          a signed-in learner's progress (owner only)
+//   words/{w0001}          one document per word                (read: everyone, write: admins)  ← the master copy
+//   corporate/{c001}       one document per Workplace English item (read: everyone, write: admins)
+//   bundles/words-01..     packed copies, 150 words each, so a visit costs ~20 reads instead of 2,500
+//   bundles/corp-01..      packed Workplace English, 100 items each
+//   meta/info              layout version, counts, bundle names and publish date
+//   images/{w0001}         one photo per word, stored as a compressed WebP data URL (read: everyone, write: admins)
+//   reports/{id}           "this word is wrong" reports from learners (create: signed in, review: admins)
+//   admins/{uid}           who may edit content (create by hand in the console)
+//   users/{uid}            a learner's progress and preferences (owner only)
+//   users/{uid}/lists/{id} a learner's own word lists built from uploaded files (owner only)
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, collection, getDocs, writeBatch, serverTimestamp } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, collection, getDocs, query, where, orderBy, limit, writeBatch, serverTimestamp } from 'firebase/firestore';
+import { getAI, getGenerativeModel, GoogleAIBackend, ResponseModality } from 'firebase/ai';
 import { firebaseConfig } from './firebase-config.js';
 
 const enabled = Boolean(firebaseConfig.apiKey);
-let auth = null, db = null;
-if (enabled) { const app = initializeApp(firebaseConfig); auth = getAuth(app); db = getFirestore(app); }
+let app = null, auth = null, db = null, ai = null;
+if (enabled) { app = initializeApp(firebaseConfig); auth = getAuth(app); db = getFirestore(app); }
 
-const WORDS_PER_BUNDLE = 500;
+const WORDS_PER_BUNDLE = 150, CORP_PER_BUNDLE = 100, LAYOUT = 2;
+const pad = (n, len) => String(n).padStart(len, '0');
+const wid = (id) => `w${pad(id, 4)}`, cid = (id) => `c${pad(id, 3)}`;
 
 // Readable field names in the console ⇄ short names used by the website.
-const wordToDoc = (w) => ({ id: w.id, term: w.t, partOfSpeech: w.p, vietnamese: w.v, english: w.d, korean: w.k, example: w.e, topic: w.c, level: w.l, roles: w.r, ipa: w.i });
-const docToWord = (d) => ({ id: d.id, t: d.term, p: d.partOfSpeech, v: d.vietnamese, d: d.english, k: d.korean, e: d.example, c: d.topic, l: d.level, r: d.roles, i: d.ipa });
-const corpToDoc = (c) => ({ id: c.id, category: c.cat, type: c.type, phrase: c.p, tone: c.tone, english: c.d, vietnamese: c.v, korean: c.k, whenToUse: c.ctx, example: c.ex, avoid: c.av || '' });
-const docToCorp = (d) => ({ id: d.id, cat: d.category, type: d.type, p: d.phrase, tone: d.tone, d: d.english, v: d.vietnamese, k: d.korean, ctx: d.whenToUse, ex: d.example, av: d.avoid || '' });
-const pad = (n, len) => String(n).padStart(len, '0');
+const WORD_FIELDS = { id: 'id', term: 't', partOfSpeech: 'p', vietnamese: 'v', english: 'd', korean: 'k', french: 'f', example: 'e', exampleTranslations: 'x', plainExplanation: 's', story: 'st', topic: 'c', level: 'l', roles: 'r', ipa: 'i', hasImage: 'img' };
+const CORP_FIELDS = { id: 'id', category: 'cat', type: 'type', phrase: 'p', tone: 'tone', english: 'd', vietnamese: 'v', korean: 'k', french: 'f', whenToUse: 'ctx', whenToUseTranslations: 'ct', example: 'ex', exampleTranslations: 'x', avoid: 'av' };
+// Fields that come from the site's built-in data files. A sync refreshes them unless an admin edited the item.
+const CORE = { words: ['t', 'p', 'v', 'd', 'k', 'f', 'e', 'c', 'l', 'r', 'i'], corporate: ['cat', 'type', 'p', 'tone', 'd', 'v', 'k', 'f', 'ctx', 'ex', 'av'] };
+const toDoc = (map, o) => { const d = {}; for (const [long, short] of Object.entries(map)) if (o[short] !== undefined) d[long] = o[short]; return d; };
+const fromDoc = (map, d) => { const o = {}; for (const [long, short] of Object.entries(map)) if (d[long] !== undefined && d[long] !== null) o[short] = d[long]; return o; };
+const KIND = {
+  words: { map: WORD_FIELDS, docId: wid, size: WORDS_PER_BUNDLE, prefix: 'words' },
+  corporate: { map: CORP_FIELDS, docId: cid, size: CORP_PER_BUNDLE, prefix: 'corp' },
+};
+const bundleName = (kind, id) => `${KIND[kind].prefix}-${pad(Math.floor((id - 1) / KIND[kind].size) + 1, 2)}`;
 
 async function loadContent() {
   if (!enabled) return null;
   const meta = await getDoc(doc(db, 'meta', 'info'));
   if (!meta.exists()) return null; // nothing published yet → the site keeps its built-in copy
   const m = meta.data();
-  const parts = await Promise.all(m.wordBundles.map((name) => getDoc(doc(db, 'bundles', name))));
-  const corp = await getDoc(doc(db, 'bundles', 'corporate'));
-  const words = parts.flatMap((p) => (p.exists() ? p.data().items : []));
-  return { words, corp: corp.exists() ? corp.data().items : [], meta: { version: m.version, publishedAt: m.publishedAt?.toDate?.() || null, words: m.words, corporate: m.corporate } };
+  const [wp, cp] = await Promise.all([
+    Promise.all((m.wordBundles || []).map((n) => getDoc(doc(db, 'bundles', n)))),
+    Promise.all((m.corpBundles || ['corporate']).map((n) => getDoc(doc(db, 'bundles', n)))),
+  ]);
+  const items = (parts) => parts.flatMap((p) => (p.exists() ? p.data().items : []));
+  return { words: items(wp), corp: items(cp), meta: { layout: m.layout || 1, version: m.version, publishedAt: m.publishedAt?.toDate?.() || null, words: m.words, corporate: m.corporate } };
 }
 
 // Writes many documents in batches of at most 500 operations (Firestore's limit).
 async function writeAll(ops, onProgress) {
-  for (let i = 0; i < ops.length; i += 450) {
+  for (let i = 0; i < ops.length; i += 400) {
     const batch = writeBatch(db);
-    for (const [path, id, data] of ops.slice(i, i + 450)) batch.set(doc(db, path, id), data);
+    for (const [path, id, data, merge] of ops.slice(i, i + 400)) batch.set(doc(db, path, id), data, merge ? { merge: true } : undefined);
     await batch.commit();
-    onProgress?.(Math.min(i + 450, ops.length), ops.length);
+    onProgress?.(Math.min(i + 400, ops.length), ops.length);
   }
 }
 
-async function writeBundlesAndMeta(words, corp, onProgress) {
-  const names = [];
-  const ops = [];
-  for (let i = 0; i < words.length; i += WORDS_PER_BUNDLE) {
-    const name = `words-${pad(i / WORDS_PER_BUNDLE + 1, 2)}`;
-    names.push(name);
-    ops.push(['bundles', name, { items: words.slice(i, i + WORDS_PER_BUNDLE) }]);
-  }
-  ops.push(['bundles', 'corporate', { items: corp }]);
-  ops.push(['meta', 'info', { version: Date.now(), publishedAt: serverTimestamp(), words: words.length, corporate: corp.length, wordBundles: names }]);
-  await writeAll(ops, onProgress);
+const groupBundles = (kind, list) => { const g = new Map(); for (const o of list) { const n = bundleName(kind, o.id); if (!g.has(n)) g.set(n, []); g.get(n).push(o); } return g; };
+async function writeBundlesAndMeta(words, corp) {
+  const wb = groupBundles('words', words), cb = groupBundles('corporate', corp);
+  const ops = [...wb].map(([n, items]) => ['bundles', n, { items }]).concat([...cb].map(([n, items]) => ['bundles', n, { items }]));
+  ops.push(['meta', 'info', { layout: LAYOUT, version: Date.now(), publishedAt: serverTimestamp(), words: words.length, corporate: corp.length, wordBundles: [...wb.keys()], corpBundles: [...cb.keys()] }]);
+  // Bundles must stay below Firestore's 1 MB document limit.
+  for (const [, , data] of ops) if (data.items && JSON.stringify(data.items).length > 950000) throw new Error('A bundle is too large. Lower WORDS_PER_BUNDLE in src/cloud.js.');
+  await writeAll(ops);
 }
 
-// Upload everything from the website's built-in copy: one document per item, plus bundles.
-async function publishAll(words, corp, onProgress) {
-  const ops = [
-    ...words.map((w) => ['words', `w${pad(w.id, 4)}`, wordToDoc(w)]),
-    ...corp.map((c) => ['corporate', `c${pad(c.id, 3)}`, corpToDoc(c)]),
-  ];
-  await writeAll(ops, (n, total) => onProgress?.(n, total + 8));
-  await writeBundlesAndMeta(words, corp);
-  onProgress?.(ops.length + 8, ops.length + 8);
-}
-
-// After editing words/corporate documents in the Firebase console, rebuild the bundles the site reads.
-async function rebuildBundles() {
+async function readAll() {
   const [w, c] = await Promise.all([getDocs(collection(db, 'words')), getDocs(collection(db, 'corporate'))]);
-  const words = w.docs.map((d) => docToWord(d.data())).sort((a, b) => a.id - b.id);
-  const corp = c.docs.map((d) => docToCorp(d.data())).sort((a, b) => a.id - b.id);
-  await writeBundlesAndMeta(words, corp);
+  return {
+    words: w.docs.map((d) => ({ ...fromDoc(WORD_FIELDS, d.data()), _edited: !!d.data().editedAt })).sort((a, b) => a.id - b.id),
+    corp: c.docs.map((d) => ({ ...fromDoc(CORP_FIELDS, d.data()), _edited: !!d.data().editedAt })).sort((a, b) => a.id - b.id),
+  };
+}
+const strip = (list) => list.map(({ _edited, ...o }) => o);
+
+// Bring the site's built-in data into Firestore without losing work done online:
+// new items are added; for existing items the built-in fields are refreshed unless an admin edited the item;
+// AI-made content (translations, explanations, stories, photos) is always kept.
+async function syncBuiltin(builtinWords, builtinCorp, onProgress) {
+  const cur = await readAll();
+  const ops = []; const out = {};
+  for (const [kind, builtin, have] of [['words', builtinWords, cur.words], ['corporate', builtinCorp, cur.corp]]) {
+    const byId = new Map(have.map((o) => [o.id, o])); let added = 0, updated = 0;
+    for (const b of builtin) {
+      const o = byId.get(b.id);
+      if (!o) { byId.set(b.id, { ...b }); ops.push([kind, KIND[kind].docId(b.id), toDoc(KIND[kind].map, b)]); added++; continue; }
+      const patch = {};
+      for (const k of CORE[kind]) {
+        const empty = o[k] === undefined || o[k] === '' || (Array.isArray(o[k]) && !o[k].length);
+        if (b[k] !== undefined && (empty || !o._edited) && JSON.stringify(o[k]) !== JSON.stringify(b[k])) { patch[k] = b[k]; o[k] = b[k]; }
+      }
+      if (Object.keys(patch).length) { ops.push([kind, KIND[kind].docId(b.id), toDoc(KIND[kind].map, patch), true]); updated++; }
+    }
+    out[kind] = { list: [...byId.values()].sort((a, b) => a.id - b.id), added, updated };
+  }
+  await writeAll(ops, (n, t) => onProgress?.(n, t));
+  await writeBundlesAndMeta(strip(out.words.list), strip(out.corporate.list));
+  return { words: out.words.list.length, corporate: out.corporate.list.length, added: out.words.added + out.corporate.added, updated: out.words.updated + out.corporate.updated };
+}
+
+// After editing documents in the Firebase console, rebuild the bundles the site reads.
+async function rebuildBundles() {
+  const { words, corp } = await readAll();
+  await writeBundlesAndMeta(strip(words), strip(corp));
   return { words: words.length, corporate: corp.length };
+}
+
+// Save edited or AI-filled items: their documents, then only the bundles that contain them.
+// opts.edited marks a human edit, so a later sync from the built-in files will not overwrite it.
+async function saveItems(kind, items, opts = {}) {
+  const K = KIND[kind];
+  const ops = items.map((o) => [kind, K.docId(o.id), { ...toDoc(K.map, o), ...(opts.edited ? { editedAt: serverTimestamp() } : {}) }, true]);
+  await writeAll(ops);
+  const meta = await getDoc(doc(db, 'meta', 'info'));
+  if (!meta.exists() || (meta.data().layout || 1) < LAYOUT) { await rebuildBundles(); return; }
+  const m = meta.data(); const names = new Set(m[kind === 'words' ? 'wordBundles' : 'corpBundles']);
+  const batch = writeBatch(db); let added = false;
+  for (const [name, list] of groupBundles(kind, items)) {
+    const snap = await getDoc(doc(db, 'bundles', name));
+    const byId = new Map((snap.exists() ? snap.data().items : []).map((o) => [o.id, o]));
+    for (const o of list) { if (!byId.has(o.id)) added = true; byId.set(o.id, { ...(byId.get(o.id) || {}), ...o }); }
+    batch.set(doc(db, 'bundles', name), { items: [...byId.values()].sort((a, b) => a.id - b.id) });
+    if (!names.has(name)) { names.add(name); added = true; }
+  }
+  const key = kind === 'words' ? 'wordBundles' : 'corpBundles';
+  batch.update(doc(db, 'meta', 'info'), { version: Date.now(), publishedAt: serverTimestamp(), [key]: [...names].sort() });
+  await batch.commit();
+}
+
+// ---------- photos ----------
+const getImage = async (id) => { const s = await getDoc(doc(db, 'images', wid(id))); return s.exists() ? s.data().data : null; };
+const saveImage = (id, dataUrl, prompt) => setDoc(doc(db, 'images', wid(id)), { data: dataUrl, prompt: prompt || '', updatedAt: serverTimestamp() });
+const deleteImage = (id) => deleteDoc(doc(db, 'images', wid(id)));
+
+// ---------- reports ----------
+const submitReport = (r) => addDoc(collection(db, 'reports'), { ...r, uid: auth.currentUser.uid, email: auth.currentUser.email || '', name: auth.currentUser.displayName || '', status: 'open', createdAt: serverTimestamp() });
+async function listReports(status = 'open') {
+  const s = await getDocs(query(collection(db, 'reports'), where('status', '==', status), limit(200)));
+  return s.docs.map((d) => ({ id: d.id, ...d.data(), createdAt: d.data().createdAt?.toDate?.() || null })).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+}
+const updateReport = (id, data) => updateDoc(doc(db, 'reports', id), { ...data, reviewedBy: auth.currentUser.email || auth.currentUser.uid, reviewedAt: serverTimestamp() });
+async function myReports() {
+  const s = await getDocs(query(collection(db, 'reports'), where('uid', '==', auth.currentUser.uid), limit(50)));
+  return s.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+// ---------- personal word lists ----------
+async function listLists(uid) {
+  const s = await getDocs(collection(db, 'users', uid, 'lists'));
+  return s.docs.map((d) => ({ id: d.id, ...d.data(), createdAt: d.data().createdAt?.toDate?.() || null })).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+}
+async function saveList(uid, list) {
+  const { id, ...data } = list;
+  if (id) { await setDoc(doc(db, 'users', uid, 'lists', id), { ...data, updatedAt: serverTimestamp() }, { merge: true }); return id; }
+  return (await addDoc(collection(db, 'users', uid, 'lists'), { ...data, createdAt: serverTimestamp() })).id;
+}
+const deleteList = (uid, id) => deleteDoc(doc(db, 'users', uid, 'lists', id));
+
+// ---------- AI (Firebase AI Logic → Gemini) ----------
+// Turn it on once: Firebase console → AI Logic → Get started → Gemini Developer API.
+const TEXT_MODEL = 'gemini-2.5-flash', IMAGE_MODEL = 'gemini-2.5-flash-image';
+let textModel = null, imageModel = null;
+function aiModels() {
+  if (!ai) ai = getAI(app, { backend: new GoogleAIBackend() });
+  if (!textModel) textModel = getGenerativeModel(ai, { model: TEXT_MODEL, generationConfig: { responseMimeType: 'application/json', temperature: 0.3 } });
+  return ai;
+}
+async function aiJSON(prompt) {
+  aiModels();
+  const r = await textModel.generateContent(prompt);
+  const text = r.response.text().trim().replace(/^```(?:json)?\s*|\s*```$/g, '');
+  return JSON.parse(text);
+}
+async function aiImage(prompt) {
+  aiModels();
+  if (!imageModel) imageModel = getGenerativeModel(ai, { model: IMAGE_MODEL, generationConfig: { responseModalities: [ResponseModality.TEXT, ResponseModality.IMAGE] } });
+  const r = await imageModel.generateContent(prompt);
+  const part = r.response.inlineDataParts?.()?.[0];
+  if (!part) throw new Error('The model did not return an image. Try again or change the prompt.');
+  return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
 }
 
 // ---------- auth ----------
@@ -86,9 +194,17 @@ const logOut = () => signOut(auth);
 const onUser = (cb) => onAuthStateChanged(auth, cb);
 const isAdmin = async (uid) => { try { return (await getDoc(doc(db, 'admins', uid))).exists(); } catch (e) { return false; } };
 
-// ---------- learner progress ----------
+// ---------- learner progress and preferences ----------
 const loadProgress = async (uid) => { const s = await getDoc(doc(db, 'users', uid)); return s.exists() ? s.data() : null; };
 const saveProgress = (uid, p) => setDoc(doc(db, 'users', uid), { ...p, updatedAt: serverTimestamp() }, { merge: true });
 
-window.Cloud = { enabled, projectId: firebaseConfig.projectId, loadContent, publishAll, rebuildBundles, signIn, logOut, onUser, isAdmin, loadProgress, saveProgress };
+window.Cloud = {
+  enabled, projectId: firebaseConfig.projectId,
+  loadContent, syncBuiltin, rebuildBundles, saveItems,
+  getImage, saveImage, deleteImage,
+  submitReport, listReports, updateReport, myReports,
+  listLists, saveList, deleteList,
+  aiJSON, aiImage,
+  signIn, logOut, onUser, isAdmin, loadProgress, saveProgress,
+};
 window.dispatchEvent(new Event('cloud-ready'));

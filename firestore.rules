@@ -10,6 +10,7 @@ service cloud.firestore {
     match /corporate/{id} { allow read: if true; allow write: if isAdmin(); }
     match /bundles/{id}   { allow read: if true; allow write: if isAdmin(); }
     match /meta/{id}      { allow read: if true; allow write: if isAdmin(); }
+    match /images/{id}    { allow read: if true; allow write: if isAdmin(); }
 
     // Admin list: a signed-in user may check only their own entry. Create entries by hand in the console.
     match /admins/{uid} { allow read: if signedIn() && request.auth.uid == uid; allow write: if false; }

@@ -194,3 +194,6 @@ digital signature|signature numérique
 SSL/TLS certificate|certificat SSL/TLS
 graduation project|projet de fin d'études
 internship report|rapport de stage
+SDLC|cycle de vie du développement logiciel
+SIT|tests d'intégration système
+CI/CD|intégration et déploiement continus

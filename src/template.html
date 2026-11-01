@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Learn IT Vocab</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<meta name="theme-color" content="#2563EB">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -28,9 +30,9 @@ a{color:inherit}
 .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;text-decoration:none;white-space:nowrap}
-.logo .mark{width:36px;height:36px;border-radius:10px;background:var(--blue);display:grid;place-items:center}
+.logo svg{flex:none}
 .links{display:flex;gap:6px}
-.links a{text-decoration:none;color:var(--muted);font-weight:600;font-size:15px;padding:8px 12px;border-radius:10px}
+.links a{text-decoration:none;color:var(--muted);font-weight:600;font-size:15px;padding:8px 11px;border-radius:10px;white-space:nowrap}
 .links a.active,.links a:hover{color:var(--ink);background:var(--bg)}
 .navr{display:flex;align-items:center;gap:10px}
 .chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;background:#fff;border:1px solid var(--line);white-space:nowrap}
@@ -228,7 +230,100 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 .bulkbar.on{display:flex}
 .bulkbar .btn{background:rgba(255,255,255,.12);color:#fff;border:0}
 .bulkbar .btn:hover{background:rgba(255,255,255,.22)}
+
+.lang.fr{background:#E0F2FE;color:#0369A1}
+.xrows{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.xrow{display:flex;gap:8px;align-items:flex-start;font-style:normal;font-size:.93em;color:var(--muted)}
+.xrow .lang{margin-top:3px}
+.exbox .body-ex{flex:1;min-width:0}
+.plain{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:14px;padding:12px 14px;font-size:15px}
+.plain>b,.story>b{display:flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#15803D;margin-bottom:4px}
+.plain .tline,.story .tline{display:flex;gap:8px;align-items:baseline;margin-top:6px;color:var(--muted)}
+.story{background:#FFFBEB;border:1px solid #FDE68A;border-radius:14px;padding:12px 14px;font-size:15px}
+.story>b{color:#B45309}
+.story details summary{cursor:pointer;font-weight:700;color:#B45309;font-size:14px;margin-top:6px}
+.wcard .plain{padding:8px 10px;font-size:13px;border-radius:10px}
+.ill img.photo,.fc-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fc-photo{width:100%;max-width:300px;height:170px;border-radius:20px;position:relative;overflow:hidden;display:grid;place-items:center;flex:none}
+.ill{overflow:hidden}
+.langbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-weight:800;font-size:12px;letter-spacing:.04em;color:var(--ink);display:inline-flex;gap:4px;align-items:center}
+.langpop{position:absolute;right:16px;top:62px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);padding:14px;width:min(320px,calc(100vw - 32px));z-index:30;display:none}
+.langpop.on{display:block}
+.lchks{display:flex;gap:8px;flex-wrap:wrap}
+.lchk{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-weight:700;font-size:14px;cursor:pointer;user-select:none}
+.lchk input{width:18px;height:18px;accent-color:var(--blue)}
+.lchk.on{border-color:var(--blue);background:var(--blue-t)}
+.tl{display:block;font-size:.8em;font-weight:500;opacity:.78;line-height:1.35}
+.btn .tl,.links .tl,.pill .tl,.seg .tl,.chip .tl,.catchips .tl,.gbtn .tl,.tabs .tl,.lchk .tl,.count .tl,.go .tl,label .tl,.related .tl,th .tl{display:inline;font-size:.85em}
+.btn .tl::before,.links .tl::before,.pill .tl::before,.seg .tl::before,.chip .tl::before,.catchips .tl::before,.gbtn .tl::before,.tabs .tl::before,.lchk .tl::before,.count .tl::before,.go .tl::before,label .tl::before,.related .tl::before,th .tl::before{content:" · "}
+.dlg{position:fixed;inset:0;background:rgba(15,20,35,.5);z-index:70;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}
+.dlg.open{display:flex}
+.dlg .box{background:#fff;border-radius:24px;width:min(560px,100%);padding:26px 28px;box-shadow:var(--shadow-lg);position:relative;display:flex;flex-direction:column;gap:12px}
+.fld{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:14px}
+.fld input,.fld textarea,.fld select{font:inherit;font-weight:500;font-size:15px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;color:var(--ink);width:100%}
+.fld textarea{min-height:76px;resize:vertical}
+.fld input:focus,.fld textarea:focus,.fld select:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-t)}
+.fgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.fgrid .full{grid-column:1/-1}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.tabs button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px;color:var(--muted)}
+.tabs button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.rep{border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;background:#fff}
+.rep .cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rep .cmp>div{background:var(--bg);border-radius:10px;padding:8px 10px;font-size:14px}
+.rep .cmp b{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stack{display:flex;flex-direction:column;gap:12px}
+.pickrow{display:flex;flex-direction:column;gap:4px;max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:6px}
+.pickrow button{text-align:left;border:0;background:#fff;border-radius:8px;padding:8px 10px;font-size:14px;display:flex;justify-content:space-between;gap:8px}
+.pickrow button:hover,.pickrow button.on{background:var(--blue-t)}
+.aitool{border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.aitool h4{margin:0;font-size:17px}
+.aitool p{margin:0;color:var(--muted);font-size:14px}
+.agrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.log{font-family:Inter,monospace;font-size:12px;background:var(--bg);border-radius:10px;padding:10px;max-height:160px;overflow:auto;white-space:pre-wrap}
+.drop{border:2px dashed #C7D2FE;border-radius:20px;padding:30px 20px;text-align:center;background:#F8FAFF;display:flex;flex-direction:column;align-items:center;gap:10px}
+.drop.over{border-color:var(--blue);background:var(--blue-t)}
+.listcard{padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.cand{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.cand input[type=checkbox]{width:18px;height:18px;margin-top:4px;accent-color:var(--blue)}
+.pwrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.thumb{width:120px;height:90px;border-radius:12px;object-fit:cover;background:var(--bg)}
+.reportlink{background:none;border:0;color:var(--muted);font-weight:600;font-size:13px;display:inline-flex;gap:6px;align-items:center;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:1440px){.navr .chip{display:none}}
+@media (max-width:1300px){.links a{padding:8px 8px;font-size:14px}}
+@media (max-width:1180px){
+  .links{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;padding:10px 16px 16px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+  .links.open{display:flex}
+  .links a{font-size:16px;padding:10px 12px}
+  .menu-btn{display:block}
+}
+@media (max-width:760px){
+  .fgrid,.agrid,.rep .cmp{grid-template-columns:1fr}
+  .dlg{padding:12px}
+  .dlg .box{padding:20px}
+  .modal .body{padding:20px 18px 24px}
+  .modal .ill{height:170px}
+  .wrap{padding:0 16px}
+  .logo{font-size:17px}
+  .wgrid{grid-template-columns:1fr}
+  .setup .sel,.setup .btn{flex:1 1 100%}
+  .fc-photo{height:130px}
+  .exbox p{font-size:15px}
+  .defs.big{font-size:15px}
+  .tabs{flex-wrap:nowrap;overflow-x:auto}
+  .tabs button{flex:none}
+  .ccard{padding:18px}
+  .ccard .phrase{font-size:19px}
+}
 .view{display:none}
+html,body{overflow-x:clip}
+select.sel{max-width:100%}
+h1 .tl,h2 .tl{font-size:.55em;margin-top:6px}
+.ui-multi .pill{white-space:normal}
+.ui-multi .btn{flex-wrap:wrap;text-align:center}
+@media (max-width:480px){.nav .wrap{gap:8px}.navr{gap:6px}.logo{font-size:16px;gap:8px}.logo svg{width:30px;height:30px}.langbtn{padding:6px 8px}.avatar{width:32px;height:32px}}
+@media (min-width:1181px){.ui-multi .links .tl{display:none}}
+@media (max-width:760px){.admgrid{grid-template-columns:1fr!important}}
 .view.on{display:block}
 .settings{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 @media (max-width:1000px){
@@ -239,10 +334,6 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   .hero h1{font-size:44px}
 }
 @media (max-width:760px){
-  #navUser{display:none!important}
-  .links{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;padding:10px 16px 16px;border-bottom:1px solid var(--line)}
-  .links.open{display:flex}
-  .menu-btn{display:block}
   .navr .chip.hide-sm{display:none}
   .navr #knownChip{display:none}
   .hide-sm{display:none}
@@ -282,21 +373,22 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 <body>
 <nav class="nav">
   <div class="wrap">
-    <a class="logo" href="#home"><span class="mark" data-icon="book" data-c="#fff" data-s="22"></span>Learn IT Vocab</a>
+    <a class="logo" href="#home" data-notr><svg width="36" height="36" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lgm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs><path d="M10 5h28a6 6 0 0 1 6 6v19a6 6 0 0 1-6 6H23l-9.5 7.5V36H10a6 6 0 0 1-6-6V11a6 6 0 0 1 6-6z" fill="url(#lgm)"/><path d="M17 14.5l-5.5 6 5.5 6M31 14.5l5.5 6-5.5 6" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M26.5 12.5l-5 16" stroke="#FDE68A" stroke-width="3.2" stroke-linecap="round"/></svg><span>Learn <b style="color:var(--blue)">IT</b> Vocab</span></a>
     <div class="links" id="links">
       <a href="#home" data-nav="home">Home</a>
       <a href="#browse" data-nav="browse">Browse words</a>
       <a href="#workplace" data-nav="workplace">Workplace English</a>
       <a href="#flashcards" data-nav="flashcards">Flashcards</a>
       <a href="#quiz" data-nav="quiz">Quiz</a>
+      <a href="#lists" data-nav="lists">My lists</a>
       <a href="#progress" data-nav="progress">My profile</a>
+      <a href="#admin" data-nav="admin" id="navAdmin" style="display:none">Admin</a>
     </div>
     <div class="navr">
       <span class="chip hide-sm" id="streakChip" title="Days in a row with practice"></span>
       <span class="chip" id="knownChip" title="Words you know"></span>
       <span id="navAccount"></span>
-      <button class="btn primary sm" id="navSignIn" style="display:none">Sign in</button>
-      <a class="chip" id="navUser" href="#progress" style="display:none;text-decoration:none"></a>
+      <button class="langbtn" id="navLang" title="Languages" aria-label="Languages"></button>
       <button class="menu-btn" id="menuBtn" aria-label="Menu"><span data-icon="menu" data-c="#1B1F2A" data-s="20"></span></button>
     </div>
   </div>
@@ -314,8 +406,8 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
     <div class="wrap">
       <div>
         <span class="pill" style="background:var(--blue-t);color:var(--blue);font-size:13px;padding:6px 12px">ENGLISH FOR IT TEAMS</span>
-        <h1>Speak the language of <em>tech</em>, one word at a time.</h1>
-        <p class="lead">Illustrated vocabulary for IT students, developers, testers, BAs, PMs, HR, sales and managers. Every word has a picture, pronunciation you can listen to, an English definition, Vietnamese and Korean meanings, and a real workplace example.</p>
+        <h1 data-i18n-html>Speak the language of <em>tech</em>, one word at a time.</h1>
+        <p class="lead">Illustrated vocabulary for IT students, developers, testers, BAs, PMs, HR, sales and managers. Every word has a picture, pronunciation you can listen to, an English definition, meanings in Vietnamese, Korean and French, and a real workplace example.</p>
         <div class="ctas">
           <a class="btn primary lg" href="#browse">Start learning <span data-icon="arrow" data-c="#fff" data-s="20"></span></a>
           <a class="btn secondary lg" href="#quiz">Take a quick quiz</a>
@@ -354,7 +446,7 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   </section>
   <section class="block">
     <div class="wrap">
-      <div class="sec-head"><div class="eyebrow">Three levels</div><h2>Grow from first words to fluent meetings</h2><p>Pick a level and move up any time. Your progress is saved in this browser.</p></div>
+      <div class="sec-head"><div class="eyebrow">Three levels</div><h2>Grow from first words to fluent meetings</h2><p>Pick a level and move up any time. Your progress is saved in this browser, or in your account when you sign in.</p></div>
       <div class="grid3" id="levelCards"></div>
     </div>
   </section>
@@ -362,7 +454,7 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
     <div class="wrap">
       <div class="sec-head center"><div class="eyebrow">How each word is taught</div><h2>See it. Hear it. Use it.</h2><p>Three short steps per word, so the meaning, the sound and the usage stick together.</p></div>
       <div class="grid3">
-        <div class="step"><div class="itile" style="background:#fff;box-shadow:var(--shadow)" data-icon="image" data-c="#2563EB" data-s="30"></div><h3>See it</h3><p>Every word has a topic picture, so you link the meaning to an image, not just a translation.</p></div>
+        <div class="step"><div class="itile" style="background:#fff;box-shadow:var(--shadow)" data-icon="image" data-c="#2563EB" data-s="30"></div><h3>See it</h3><p>Every word has a picture, so you link the meaning to an image, not just a translation.</p></div>
         <div class="step"><div class="itile" style="background:#fff;box-shadow:var(--shadow)" data-icon="speaker" data-c="#2563EB" data-s="30"></div><h3>Hear it</h3><p>Tap the speaker to hear the word and the example. Read the IPA to check every sound.</p></div>
         <div class="step"><div class="itile" style="background:#fff;box-shadow:var(--shadow)" data-icon="chat" data-c="#2563EB" data-s="30"></div><h3>Use it</h3><p>Read a real workplace sentence, then test yourself with flashcards and quizzes.</p></div>
       </div>
@@ -380,10 +472,10 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 
 <!-- BROWSE -->
 <main id="v-browse" class="view">
-  <div class="wrap page-head"><h1>Browse words</h1><p>Search in English, Vietnamese or Korean. Click any card for details and audio.</p></div>
+  <div class="wrap page-head"><h1>Browse words</h1><p>Search in English, Vietnamese, Korean or French. Click any card for details and audio.</p></div>
   <div class="filters"><div class="wrap">
     <div class="frow">
-      <label class="search"><span data-icon="search" data-c="#5B6475" data-s="18"></span><input id="q" type="search" placeholder="Search in English, Vietnamese or Korean, e.g. deploy, kiểm thử, 배포" autocomplete="off"></label>
+      <label class="search"><span data-icon="search" data-c="#5B6475" data-s="18"></span><input id="q" type="search" placeholder="Search, e.g. deploy, kiểm thử, 배포, déployer" autocomplete="off"></label>
       <select class="sel" id="fTopic" aria-label="Topic"></select>
       <button class="btn secondary sm" id="selectBtn">Select words</button>
       <select class="sel" id="fStatus" aria-label="Status"><option value="all">All words</option><option value="new">New</option><option value="learning">Learning</option><option value="known">Known</option><option value="saved">Saved ★</option></select>
@@ -451,6 +543,7 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   <div class="wrap page-head"><h1>My profile</h1><p>Your account, language preferences and learning progress.</p></div>
   <div class="wrap" style="padding-bottom:72px">
     <div class="card" id="accountCard" style="padding:24px;margin-bottom:24px"></div>
+    <div class="card" style="padding:24px;margin-bottom:24px" id="langCard"></div>
     <div class="statgrid" id="statgrid"></div>
     <div class="card" style="padding:24px;margin-bottom:24px">
       <h3 style="font-size:20px;margin-bottom:8px">Progress by level and role</h3>
@@ -473,10 +566,27 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   </div>
 </main>
 
-<footer><div class="wrap"><span><b style="color:var(--ink)">Learn IT Vocab</b> · <span id="footCount"></span> words · 3 levels · 9 roles</span><span>Pronunciation: IPA (American) + your device's voice</span></div></footer>
+<!-- MY LISTS -->
+<main id="v-lists" class="view">
+  <div class="wrap page-head"><h1>My word lists</h1><p>Upload a document and AI picks out the IT and business words, with meanings in every language. Save them as your own list.</p></div>
+  <div class="wrap" style="padding-bottom:72px" id="listsArea"></div>
+</main>
+
+<!-- ADMIN -->
+<main id="v-admin" class="view" data-notr>
+  <div class="wrap page-head"><h1>Admin</h1><p>Review reports from learners, correct any word, and use AI to fill in translations, explanations, stories and photos.</p></div>
+  <div class="wrap" style="padding-bottom:72px">
+    <div class="tabs" id="adminTabs"></div>
+    <div id="adminArea"></div>
+  </div>
+</main>
+
+<footer><div class="wrap"><span><b style="color:var(--ink)" data-notr>Learn IT Vocab</b> · <span id="footCount"></span> · <span>3 levels</span> · <span>9 roles</span> · <span data-notr>English, Tiếng Việt, 한국어, Français</span></span><span>Pronunciation: IPA (American) + your device's voice</span></div></footer>
 
 <div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
 <div class="toast" id="toast"></div>
+<div class="dlg" id="dlg"><div class="box" id="dlgBox"></div></div>
+<div class="langpop" id="langPop"></div>
 <div class="topbar" id="topbar"><i></i></div>
 <div class="busy" id="busy"><div class="spinner"></div><div id="busyText">Loading…</div></div>
 <div class="bulkbar" id="bulkbar"><span id="bulkCount"></span>
@@ -554,7 +664,15 @@ const IC = {
   image:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>',
   chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/>',
   flame:'<path d="M12 22c4 0 7-3 7-7 0-4-3-6-4-10-2 2-3 4-3 6-1-1-2-2-2-4-3 3-5 5-5 8 0 4 3 7 7 7z"/>',
-  headphones:'<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><rect x="2" y="15" width="5" height="7" rx="1.5"/><rect x="17" y="15" width="5" height="7" rx="1.5"/>'
+  headphones:'<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><rect x="2" y="15" width="5" height="7" rx="1.5"/><rect x="17" y="15" width="5" height="7" rx="1.5"/>',
+  upload:'<path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/>',
+  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  sparkle:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  list:'<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/>',
+  edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>',
+  trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',
+  bulb:'<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>'
 };
 const svg = (name, c = '#1B1F2A', s = 20, sw = 1.9) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[name] || IC.book}</svg>`;
 const esc = s => String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
@@ -563,7 +681,13 @@ function hydrateIcons(root = document) { root.querySelectorAll('[data-icon]').fo
 
 /* ---------- state ---------- */
 const STORE = 'itvocab-v1';
-let S = { known: {}, learning: {}, saved: {}, days: {}, quizzes: 0, best: 0, accent: 'en-US', rate: 1 };
+let S = { known: {}, learning: {}, saved: {}, days: {}, quizzes: 0, best: 0, accent: 'en-US', rate: 1, langs: ['vi', 'ko'], ui: 'en', plain: 'auto', role: '', prefsAt: 0 };
+// Languages the site can show next to English. key = short field name on a word.
+const LANGS = { vi: { name: 'Tiếng Việt', en: 'Vietnamese', short: 'VI', key: 'v', tts: 'vi-VN' }, ko: { name: '한국어', en: 'Korean', short: 'KO', key: 'k', tts: 'ko-KR' }, fr: { name: 'Français', en: 'French', short: 'FR', key: 'f', tts: 'fr-FR' } };
+const NONTECH = ['hr', 'bizdev', 'sales', 'exec'];
+const myLangs = () => (S.langs || []).filter(l => LANGS[l]);
+const showPlain = () => S.plain === 'on' || (S.plain === 'auto' && NONTECH.includes(S.role));
+const meaningOf = w => { const l = myLangs()[0]; return (l && w[LANGS[l].key]) || w.d; };
 try { const raw = localStorage.getItem(STORE); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
 function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} updateChips(); if (typeof queueCloudSave === 'function') queueCloudSave(); }
 const today = () => new Date().toISOString().slice(0, 10);
@@ -586,14 +710,16 @@ function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.ad
 let voices = [];
 function loadVoices() { try { voices = speechSynthesis.getVoices(); } catch (e) {} }
 if ('speechSynthesis' in window) { loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
-function speak(text, rate) {
+function speak(text, rate, lang) {
   if (!('speechSynthesis' in window)) { toast('Audio is not supported in this browser. Use the IPA to check the sound.'); return; }
   try {
     speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text.replace(/\//g, ' ').replace(/\bvs\b/g, 'versus'));
-    u.lang = S.accent; u.rate = rate || +S.rate || 1;
-    const v = voices.find(v => v.lang === S.accent && /Google|Samantha|Daniel|Natural|Microsoft/.test(v.name)) || voices.find(v => v.lang === S.accent) || voices.find(v => v.lang && v.lang.startsWith('en'));
-    if (v) u.voice = v;
+    const code = lang && LANGS[lang] ? LANGS[lang].tts : S.accent;
+    const u = new SpeechSynthesisUtterance(lang ? text : text.replace(/\//g, ' ').replace(/\bvs\b/g, 'versus'));
+    u.lang = code; u.rate = rate || +S.rate || 1;
+    const base = code.slice(0, 2), norm2 = l => (l || '').replace('_', '-');
+    const v = voices.find(v => norm2(v.lang) === code && /Google|Samantha|Daniel|Natural|Microsoft/.test(v.name)) || voices.find(v => norm2(v.lang) === code) || voices.find(v => norm2(v.lang).startsWith(base));
+    if (v) u.voice = v; else if (lang && voices.length) toast(`No ${LANGS[lang].en} voice on this device, so it may sound wrong. Add one in your system settings.`);
     speechSynthesis.speak(u);
   } catch (e) { toast('Could not play audio here.'); }
 }
@@ -616,10 +742,44 @@ function filterPool(level, role, mode) {
     (mode === 'all' || !mode || (mode === 'new' && !S.known[w.id]) || (mode === 'saved' && S.saved[w.id])));
 }
 function levelPill(w) { const L = LEVELS[w.l]; return `<span class="pill" style="background:${L.t};color:${L.c}">${L.name}</span>`; }
-function spkBtn(text, color, tint, size = 30, slow) { return `<button class="spk" style="background:${tint};width:${size}px;height:${size}px" data-say="${esc(text)}" ${slow ? 'data-rate="0.6"' : ''} title="Listen${slow ? ' slowly' : ''}" aria-label="Listen">${svg(slow ? 'slow' : 'speaker', color, size * 0.55, 2)}</button>`; }
-
+function spkBtn(text, color, tint, size = 30, slow, lang) { return `<button class="spk" style="background:${tint};width:${size}px;height:${size}px" data-say="${esc(text)}" ${slow ? 'data-rate="0.6"' : ''} ${lang ? `data-lang="${lang}"` : ''} title="Listen${slow ? ' slowly' : ''}${lang ? ' (' + LANGS[lang].en + ')' : ''}" aria-label="Listen">${svg(slow ? 'slow' : 'speaker', color, size * 0.55, 2)}</button>`; }
+const langTag = l => `<span class="lang ${l}">${l === 'en' ? 'EN' : LANGS[l].short}</span>`;
 function defsHTML(w, big) {
-  return `<div class="defs${big ? ' big' : ''}"><div class="row"><span class="lang en">EN</span><span>${esc(w.d)}</span></div><div class="row"><span class="lang vi">VI</span><span style="font-weight:600">${esc(w.v)}</span></div><div class="row"><span class="lang ko">KO</span><span lang="ko">${esc(w.k)}</span></div></div>`;
+  return `<div class="defs${big ? ' big' : ''}" data-notr><div class="row">${langTag('en')}<span>${esc(w.d)}</span></div>${myLangs().filter(l => w[LANGS[l].key]).map((l, i) => `<div class="row">${langTag(l)}<span lang="${l}"${i === 0 ? ' style="font-weight:600"' : ''}>${esc(w[LANGS[l].key])}</span></div>`).join('')}</div>`;
+}
+// Translations of an English sentence (w.x = { vi, ko, fr }), each with its own listen button.
+function xRows(x, color, tint, size = 24) {
+  if (!x) return '';
+  const rows = myLangs().filter(l => x[l]).map(l => `<div class="xrow">${spkBtn(x[l], color, tint, size, false, l)}${langTag(l)}<span lang="${l}">${esc(x[l])}</span></div>`).join('');
+  return rows ? `<div class="xrows">${rows}</div>` : '';
+}
+function exampleHTML(w, color, tint, size = 36, box = true) {
+  const body = `<div class="body-ex"><p>${highlight(w, color)}</p>${xRows(w.x, color, box ? '#fff' : tint, Math.max(22, size - 10))}</div>`;
+  return box ? `<div class="exbox" data-notr>${spkBtn(w.e, color, '#fff', size)}${body}</div>` : `<div class="ex" data-notr>${spkBtn(w.e, color, tint, size)}${body}</div>`;
+}
+// Plain-language explanation for people without a tech background (w.s = { en, vi, ko, fr }).
+function plainHTML(w, small) {
+  if (!w.s || !w.s.en) return '';
+  return `<div class="plain"><b>${svg('bulb', '#15803D', 15, 2.2)}<span>In plain words</span></b><div data-notr>${esc(w.s.en)}${small ? '' : myLangs().filter(l => w.s[l]).map(l => `<div class="tline">${langTag(l)}<span lang="${l}">${esc(w.s[l])}</span></div>`).join('')}</div></div>`;
+}
+// A short story that shows a complex word in a real situation (w.st = { en, vi, ko, fr }).
+function storyHTML(w) {
+  if (!w.st || !w.st.en) return '';
+  return `<div class="story"><b>${svg('book', '#B45309', 15, 2.2)}<span>Story: how it works in real life</span></b><div data-notr><p style="margin:0">${spkBtn(w.st.en, '#B45309', '#fff', 26)} ${esc(w.st.en)}</p>${myLangs().filter(l => w.st[l]).map(l => `<details><summary>${LANGS[l].name}</summary><p style="margin:6px 0 0">${spkBtn(w.st[l], '#B45309', '#fff', 24, false, l)} <span lang="${l}">${esc(w.st[l])}</span></p></details>`).join('')}</div></div>`;
+}
+/* ---------- photos (one per word, stored in Firestore images/{id}) ---------- */
+const PHOTOS = new Map();
+function photoTag(w) { const d = PHOTOS.get(w.id); return d ? `<img class="photo" src="${d}" alt="${esc(w.t)}" loading="lazy">` : (w.img ? `<span data-photo="${w.id}" hidden></span>` : ''); }
+let photoQ = new Set(), photoT = null;
+function loadPhotos(root = document) {
+  if (!window.Cloud || !Cloud.enabled) return;
+  root.querySelectorAll('[data-photo]').forEach(el => photoQ.add(+el.dataset.photo));
+  clearTimeout(photoT);
+  photoT = setTimeout(async () => {
+    const ids = [...photoQ].filter(id => !PHOTOS.has(id)); photoQ.clear();
+    await Promise.all(ids.slice(0, 40).map(async id => { try { const d = await Cloud.getImage(id); PHOTOS.set(id, d || ''); } catch (e) { PHOTOS.set(id, ''); } }));
+    document.querySelectorAll('[data-photo]').forEach(el => { const d = PHOTOS.get(+el.dataset.photo); if (d) { const w = BY_ID.get(+el.dataset.photo); el.outerHTML = `<img class="photo" src="${d}" alt="${esc(w ? w.t : '')}">`; } else if (d === '') el.remove(); });
+  }, 60);
 }
 /* ---------- multi-select ---------- */
 const SEL = new Set(); let selecting = false;
@@ -632,12 +792,13 @@ function wordCard(w) {
   return `<div class="wcard${SEL.has(w.id) ? ' sel' : ''}" role="button" tabindex="0" data-open="${w.id}">
     <div class="ill" style="background:${L.t}"><span class="selbox">${svg('check', '#fff', 16, 3)}</span><span class="badge-corner">${stBadge}</span>
       <span class="status-dot"><button class="star ${S.saved[w.id] ? 'on' : ''}" data-star="${w.id}" title="Save word" aria-label="Save word">${svg('star', S.saved[w.id] ? '#F59E0B' : '#9AA3B2', 16, 2)}</button></span>
-      <div class="tile">${svg(w.c, L.c, 40, 1.7)}</div></div>
+      <div class="tile">${svg(w.c, L.c, 40, 1.7)}</div>${photoTag(w)}</div>
     <div class="body">
-      <div class="term">${esc(w.t)}</div>
-      <div class="prow">${spkBtn(w.t, L.c, L.t)}<span class="ipa" style="font-size:14px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
+      <div class="term" data-notr>${esc(w.t)}</div>
+      <div class="prow" data-notr>${spkBtn(w.t, L.c, L.t)}<span class="ipa" style="font-size:14px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
       ${defsHTML(w)}
-      <div class="ex">${spkBtn(w.e, L.c, L.t, 26)}<span>${highlight(w, L.c)}</span></div>
+      ${showPlain() ? plainHTML(w, true) : ''}
+      ${exampleHTML(w, L.c, L.t, 26, false)}
     </div></div>`;
 }
 
@@ -651,32 +812,37 @@ function openWord(id, list) {
   const rel = shuffle(WORDS.filter(x => x.c === w.c && x.id !== w.id && x.l === w.l)).slice(0, 8);
   $('#modal').innerHTML = `
     <button class="close" data-close aria-label="Close">${svg('x', '#1B1F2A', 20, 2)}</button>
-    <div class="ill" style="background:${L.t}"><div class="tile">${svg(w.c, L.c, 68, 1.6)}</div></div>
+    <div class="ill" style="background:${L.t};position:relative"><div class="tile">${svg(w.c, L.c, 68, 1.6)}</div>${photoTag(w)}</div>
     <div class="body">
       <div class="prow">${levelPill(w)}${w.r.map(r => `<span class="pill" style="background:${ROLES[r].t};color:${ROLES[r].c}">${ROLES[r].name}</span>`).join('')}<span class="pill" style="background:var(--bg);color:var(--muted)">${TOPIC_NAMES[w.c]}</span></div>
-      <div class="term">${esc(w.t)}</div>
-      <div class="prow">${spkBtn(w.t, '#fff', L.c, 44)}${spkBtn(w.t, L.c, L.t, 44, true)}<span class="ipa" style="font-size:20px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
+      <div class="term" data-notr>${esc(w.t)}</div>
+      <div class="prow" data-notr>${spkBtn(w.t, '#fff', L.c, 44)}${spkBtn(w.t, L.c, L.t, 44, true)}<span class="ipa" style="font-size:20px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
       ${defsHTML(w, true)}
-      <div class="exbox">${spkBtn(w.e, L.c, '#fff', 36)}<p>${highlight(w, L.c)}</p></div>
+      ${plainHTML(w)}
+      ${exampleHTML(w, L.c, L.t, 36)}
+      ${storyHTML(w)}
       <div class="mrow">
         <button class="btn ${st === 'known' ? 'primary' : 'secondary'}" data-known="${w.id}">${svg('check', st === 'known' ? '#fff' : '#16A34A', 18, 2.5)} I know this word</button>
         <button class="btn ${st === 'learning' ? 'primary' : 'secondary'}" data-learning="${w.id}">Still learning</button>
         <button class="btn secondary" data-star="${w.id}">${svg('star', S.saved[w.id] ? '#F59E0B' : '#9AA3B2', 18, 2)} ${S.saved[w.id] ? 'Saved' : 'Save'}</button>
       </div>
-      ${rel.length ? `<div><div class="eyebrow" style="margin-bottom:8px;color:var(--muted)">More ${TOPIC_NAMES[w.c]} words</div><div class="related">${rel.map(r => `<button data-open="${r.id}">${esc(r.t)}</button>`).join('')}</div></div>` : ''}
+      ${rel.length ? `<div><div class="eyebrow" style="margin-bottom:8px;color:var(--muted)">More words on this topic</div><div class="related" data-notr>${rel.map(r => `<button data-open="${r.id}">${esc(r.t)}</button>`).join('')}</div></div>` : ''}
+      <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="reportlink" data-report="${w.id}">${svg('flag', '#5B6475', 15, 2)}<span>Report a wrong meaning or example</span></button>${cloudAdmin ? `<button class="reportlink" data-adminedit="${w.id}">${svg('edit', '#5B6475', 15, 2)}<span>Edit this word</span></button>` : ''}</div>
       ${idx >= 0 ? `<div class="navarrows"><button class="btn ghost sm" data-step="-1" ${idx <= 0 ? 'disabled' : ''}>${svg('back', '#1B1F2A', 18, 2)} Previous</button><span class="count">${idx + 1} / ${fmt(modalList.length)}</span><button class="btn ghost sm" data-step="1" ${idx >= modalList.length - 1 ? 'disabled' : ''}>Next ${svg('arrow', '#1B1F2A', 18, 2)}</button></div>` : ''}
     </div>`;
   $('#modal').dataset.id = w.id;
-  $('#overlay').classList.add('open');
+  $('#overlay').classList.add('open'); loadPhotos($('#modal'));
   if (location.hash !== '#word-' + w.id) { history.replaceState(null, '', '#word-' + w.id); }
 }
 function closeModal() { $('#overlay').classList.remove('open'); if (location.hash.startsWith('#word-')) history.replaceState(null, '', '#' + (lastView || 'browse')); refreshVisible(); }
 
 /* ---------- global clicks ---------- */
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-say],[data-star],[data-open],[data-known],[data-learning],[data-close],[data-step]');
+  const t = e.target.closest('[data-say],[data-star],[data-open],[data-known],[data-learning],[data-close],[data-step],[data-report],[data-adminedit]');
   if (!t) { if (e.target === $('#overlay')) closeModal(); return; }
-  if (t.dataset.say !== undefined) { e.stopPropagation(); speak(t.dataset.say, +t.dataset.rate || undefined); return; }
+  if (t.dataset.say !== undefined) { e.stopPropagation(); speak(t.dataset.say, +t.dataset.rate || undefined, t.dataset.lang); return; }
+  if (t.dataset.report) { e.stopPropagation(); openReport(t.dataset.kind || 'words', +t.dataset.report); return; }
+  if (t.dataset.adminedit) { e.stopPropagation(); closeModal(); ADM.tab = 'edit'; ADM.kind = t.dataset.kind || 'words'; ADM.editId = +t.dataset.adminedit; location.hash = '#admin'; if (currentView === 'admin') renderAdmin(); return; }
   if (t.dataset.star) { e.stopPropagation(); toggleSave(+t.dataset.star); if ($('#overlay').classList.contains('open')) openWord($('#modal').dataset.id); else refreshVisible(); toast(S.saved[t.dataset.star] ? 'Saved to your list ★' : 'Removed from saved'); return; }
   if (t.dataset.known) { setKnown(+t.dataset.known, true); toast('Nice! Marked as known.'); openWord(t.dataset.known); return; }
   if (t.dataset.learning) { setKnown(+t.dataset.learning, false); toast('Added to your learning list.'); openWord(t.dataset.learning); return; }
@@ -697,14 +863,16 @@ function renderWotd() {
   const day = Math.floor(Date.now() / 864e5);
   const w = WORDS[(day * 7919 + wotdIdx * 131) % WORDS.length]; const L = LEVELS[w.l];
   $('#wotd').innerHTML = `<div class="card" style="overflow:hidden;border-radius:28px;box-shadow:var(--shadow-lg)">
-    <div style="height:180px;background:${L.t};display:grid;place-items:center"><div class="tile" style="width:116px;height:116px;border-radius:30px;background:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(26,31,51,.1)">${svg(w.c, L.c, 62, 1.6)}</div></div>
+    <div class="ill" style="height:180px;background:${L.t};display:grid;place-items:center;position:relative"><div class="tile" style="width:116px;height:116px;border-radius:30px;background:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(26,31,51,.1)">${svg(w.c, L.c, 62, 1.6)}</div>${photoTag(w)}</div>
     <div style="padding:24px 28px 28px;display:flex;flex-direction:column;gap:12px">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-size:34px;font-weight:800;line-height:1.1">${esc(w.t)}</span><span class="pill" style="background:${ROLES[w.r[0]].t};color:${ROLES[w.r[0]].c}">${ROLES[w.r[0]].short} · ${L.name}</span></div>
-      <div class="prow">${spkBtn(w.t, '#fff', L.c, 40)}<span class="ipa" style="font-size:18px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span style="font-size:34px;font-weight:800;line-height:1.1" data-notr>${esc(w.t)}</span><span class="pill" style="background:${ROLES[w.r[0]].t};color:${ROLES[w.r[0]].c}">${ROLES[w.r[0]].short} · ${L.name}</span></div>
+      <div class="prow" data-notr>${spkBtn(w.t, '#fff', L.c, 40)}<span class="ipa" style="font-size:18px">${esc(w.i)}</span><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span></div>
       ${defsHTML(w)}
-      <div class="exbox">${spkBtn(w.e, L.c, '#fff', 32)}<p style="font-size:16px">${highlight(w, L.c)}</p></div>
+      ${showPlain() ? plainHTML(w, true) : ''}
+      ${exampleHTML(w, L.c, L.t, 32)}
       <button class="btn secondary" data-open="${w.id}">See full word card</button>
     </div></div>`;
+  loadPhotos($('#wotd'));
 }
 function renderHome() {
   $('#statWords').textContent = fmt(WORDS.length);
@@ -713,14 +881,14 @@ function renderHome() {
     const n = WORDS.filter(w => w.r.includes(k)).length;
     const sample = (WORDS.filter(w => w.r[0] === k && w.l === 2).length ? WORDS.filter(w => w.r[0] === k && w.l === 2) : WORDS.filter(w => w.r.includes(k) && w.l === 2 && w.r.length < 5)).slice(0, 3);
     return `<a class="card role-card" href="#browse" data-role-link="${k}"><div class="itile" style="background:${R.t}">${svg(R.icon, R.c, 30, 2)}</div><h3>${R.name}</h3><p>${R.d}</p>
-      <div class="mini-words">${sample.map(s => `<span class="pill" style="background:${R.t};color:${R.c}">${esc(s.t)}</span>`).join('')}</div>
+      <div class="mini-words" data-notr>${sample.map(s => `<span class="pill" style="background:${R.t};color:${R.c}">${esc(s.t)}</span>`).join('')}</div>
       <div class="go" style="color:${R.c}">${fmt(n)} words ${svg('arrow', R.c, 18, 2)}</div></a>`;
   }).join('');
-  $('#wpSamples').innerHTML = ['EOD', 'Let\'s take this offline.', 'circle back'].map(p => CORP.find(c => c.p === p)).filter(Boolean).map(c => `<div class="sample"><b>${esc(c.p)}</b><span>${esc(c.d)}</span></div>`).join('') + `<div style="color:#C7D2FE;font-size:14px">${CORP.length} items in ${Object.keys(CATS).length} categories</div>`;
+  $('#wpSamples').setAttribute('data-notr', ''); $('#wpSamples').innerHTML = ['EOD', 'Let\'s take this offline.', 'circle back'].map(p => CORP.find(c => c.p === p)).filter(Boolean).map(c => `<div class="sample"><b>${esc(c.p)}</b><span>${esc(c.d)}</span></div>`).join('') + `<div style="color:#C7D2FE;font-size:14px">${CORP.length} items in ${Object.keys(CATS).length} categories</div>`;
   $('#domainCards').innerHTML = Object.entries(DOMAINS).map(([k, D]) => {
     const pool = WORDS.filter(w => w.c === k); const sample = pool.filter(w => w.l === 2).slice(0, 3);
     return `<a class="card role-card" href="#browse" data-domain-link="${k}"><div class="itile" style="background:${D.t}">${svg(k, D.c, 30, 2)}</div><h3>${TOPIC_NAMES[k]}</h3><p>${D.d}</p>
-      <div class="mini-words">${sample.map(s => `<span class="pill" style="background:${D.t};color:${D.c}">${esc(s.t)}</span>`).join('')}</div>
+      <div class="mini-words" data-notr>${sample.map(s => `<span class="pill" style="background:${D.t};color:${D.c}">${esc(s.t)}</span>`).join('')}</div>
       <div class="go" style="color:${D.c}">${fmt(pool.length)} words ${svg('arrow', D.c, 18, 2)}</div></a>`;
   }).join('');
   $('#levelCards').innerHTML = Object.entries(LEVELS).map(([k, L]) => {
@@ -728,7 +896,7 @@ function renderHome() {
     const sample = shuffle(pool).slice(0, 4);
     return `<a class="card level-card" href="#browse" data-level-link="${k}"><div class="band" style="background:${L.c}"></div><div class="in">
       <span class="pill" style="background:${L.t};color:${L.c};align-self:flex-start">LEVEL ${k}</span><h3>${L.name}</h3><p>${L.d}</p>
-      <div class="mini-words">${sample.map(s => `<span class="pill" style="background:#fff;border:1px solid var(--line);color:var(--ink);font-size:13px;padding:4px 12px">${esc(s.t)}</span>`).join('')}</div>
+      <div class="mini-words" data-notr>${sample.map(s => `<span class="pill" style="background:#fff;border:1px solid var(--line);color:var(--ink);font-size:13px;padding:4px 12px">${esc(s.t)}</span>`).join('')}</div>
       <div style="margin-top:auto;padding-top:8px"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px"><span>${fmt(kn)} of ${fmt(pool.length)} known</span><span>${Math.round(kn / pool.length * 100)}%</span></div><div class="progress"><i style="width:${kn / pool.length * 100}%;background:${L.c}"></i></div></div>
       <div class="go" style="color:${L.c};margin-top:12px">Start ${L.name} ${svg('arrow', L.c, 18, 2)}</div></div></a>`;
   }).join('');
@@ -753,11 +921,11 @@ function renderBrowse() {
   const q = norm(F.q.trim());
   const list = WORDS.filter(w => (F.level === 'all' || w.l == F.level) && (F.role === 'all' || w.r.includes(F.role)) && (F.topic === 'all' || w.c === F.topic) &&
     (F.status === 'all' || (F.status === 'saved' ? S.saved[w.id] : status(w.id) === F.status)) &&
-    (!q || norm(w.t).includes(q) || norm(w.v).includes(q) || norm(w.k).includes(q) || norm(w.d).includes(q)));
+    (!q || norm(w.t).includes(q) || norm(w.v).includes(q) || norm(w.k).includes(q) || norm(w.d).includes(q) || norm(w.f || '').includes(q)));
   if (F.role !== 'all' && !q) list.sort((a, b) => (b.r[0] === F.role) - (a.r[0] === F.role) || a.l - b.l || a.id - b.id);
   if (q) list.sort((a, b) => (norm(b.t).startsWith(q) - norm(a.t).startsWith(q)) || a.t.length - b.t.length);
   browseIds = list.map(w => w.id);
-  $('#grid').innerHTML = list.slice(0, shown).map(wordCard).join('');
+  $('#grid').innerHTML = list.slice(0, shown).map(wordCard).join(''); loadPhotos($('#grid'));
   $('#count').textContent = `${fmt(list.length)} words`;
   $('#empty').style.display = list.length ? 'none' : 'block';
   $('#moreBtn').style.display = list.length > shown ? '' : 'none';
@@ -793,12 +961,13 @@ const CF = { q: '', cat: 'all', type: 'all' };
 function corpCard(c) {
   const C = CATS[c.cat];
   return `<div class="ccard">
-    <div class="top"><div class="phrase">${esc(c.p)}</div>${spkBtn(c.p.replace(/\[name\]/g, 'Minh').replace(/\[date\]/g, 'Monday'), '#fff', '#2563EB', 36)}</div>
+    <div class="top"><div class="phrase" data-notr>${esc(c.p)}</div>${spkBtn(c.p.replace(/\[name\]/g, 'Minh').replace(/\[date\]/g, 'Monday'), '#fff', '#2563EB', 36)}</div>
     <div class="prow"><span class="pill" style="background:#E8F0FE;color:#1D4ED8">${TYPES[c.type]}</span><span class="pill tone-${c.tone}">${c.tone[0].toUpperCase() + c.tone.slice(1)}</span><span class="pill" style="background:var(--bg);color:var(--muted)">${C.n}</span></div>
     ${defsHTML(c)}
-    <div class="ctx">${svg('time', '#5B6475', 18, 2)}<div><b>When to use</b>${esc(c.ctx)}</div></div>
-    <div class="cex">${spkBtn(c.ex.replace(/^"|"$/g, '').replace(/[“”"]/g, ''), '#2563EB', '#E8F0FE', 28)}<span>${esc(c.ex)}</span></div>
-    ${c.av ? `<div class="avoid">${svg('x', '#DC2626', 18, 2.5)}<div><b>Avoid:</b> ${esc(c.av)}</div></div>` : ''}
+    <div class="ctx">${svg('time', '#5B6475', 18, 2)}<div><b>When to use</b><span data-notr>${esc(c.ctx)}${c.ct ? myLangs().filter(l => c.ct[l]).map(l => `<span class="tline" style="display:flex;gap:8px;margin-top:4px;color:var(--muted)">${langTag(l)}<span lang="${l}">${esc(c.ct[l])}</span></span>`).join('') : ''}</span></div></div>
+    <div class="cex" data-notr>${spkBtn(c.ex.replace(/^"|"$/g, '').replace(/[“”"]/g, ''), '#2563EB', '#E8F0FE', 28)}<div style="flex:1"><span>${esc(c.ex)}</span>${xRows(c.x, '#2563EB', '#E8F0FE', 24)}</div></div>
+    ${c.av ? `<div class="avoid">${svg('x', '#DC2626', 18, 2.5)}<div><b>Avoid:</b> <span data-notr>${esc(c.av)}</span></div></div>` : ''}
+    <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="reportlink" data-report="${c.id}" data-kind="corporate">${svg('flag', '#5B6475', 15, 2)}<span>Report a problem</span></button>${cloudAdmin ? `<button class="reportlink" data-adminedit="${c.id}" data-kind="corporate">${svg('edit', '#5B6475', 15, 2)}<span>Edit</span></button>` : ''}</div>
   </div>`;
 }
 function renderCorp() {
@@ -806,7 +975,7 @@ function renderCorp() {
   $('#cCats').innerHTML = `<button data-cc="all" class="${CF.cat === 'all' ? 'on' : ''}">All (${CORP.length})</button>` + Object.entries(CATS).map(([k, C]) => `<button data-cc="${k}" class="${CF.cat === k ? 'on' : ''}">${svg(C.i, CF.cat === k ? '#fff' : '#5B6475', 15, 2)}${C.n} (${CORP.filter(c => c.cat === k).length})</button>`).join('');
   const q = norm(CF.q.trim());
   const list = CORP.filter(c => (CF.cat === 'all' || c.cat === CF.cat) && (CF.type === 'all' || c.type === CF.type) &&
-    (!q || [c.p, c.d, c.v, c.k, c.ex, c.ctx].some(x => norm(x).includes(q))));
+    (!q || [c.p, c.d, c.v, c.k, c.f || '', c.ex, c.ctx].some(x => norm(x).includes(q))));
   $('#cGrid').innerHTML = list.map(corpCard).join('');
   $('#cCount').textContent = `${list.length} items`;
   $('#cEmpty').style.display = list.length ? 'none' : 'block';
@@ -843,15 +1012,17 @@ function renderFC() {
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span class="count">Card ${FC.done + 1} · ${FC.queue.length} left</span>${levelPill(w)}</div>
     <div class="progress" style="margin-bottom:20px"><i style="width:${FC.done / (FC.done + FC.queue.length) * 100}%"></i></div>
     <div class="fc" id="fc"><div class="fc-inner">
-      <div class="fc-face"><div style="width:120px;height:120px;border-radius:32px;background:${L.t};display:grid;place-items:center">${svg(w.c, L.c, 62, 1.6)}</div>
-        <div class="term">${esc(w.t)}</div><div class="prow" style="justify-content:center">${spkBtn(w.t, '#fff', L.c, 44)}<span class="ipa" style="font-size:20px">${esc(w.i)}</span></div>
+      <div class="fc-face"><div class="fc-photo" style="background:${L.t}${PHOTOS.get(w.id) || w.img ? '' : ';width:120px;height:120px;border-radius:32px'}">${svg(w.c, L.c, 62, 1.6)}${photoTag(w)}</div>
+        <div class="term" data-notr>${esc(w.t)}</div><div class="prow" style="justify-content:center" data-notr>${spkBtn(w.t, '#fff', L.c, 44)}<span class="ipa" style="font-size:20px">${esc(w.i)}</span></div>
         <div class="hint">Say it out loud. What does it mean? Tap the card to flip.</div></div>
-      <div class="fc-face fc-back"><span class="pill" style="background:${L.t};color:${L.c}">${esc(w.p)}</span><div class="term" style="font-size:30px">${esc(w.t)}</div>
+      <div class="fc-face fc-back" style="justify-content:flex-start"><span class="pill" style="background:${L.t};color:${L.c}" data-notr>${esc(w.p)}</span><div class="term" style="font-size:30px" data-notr>${esc(w.t)}</div>
         <div style="text-align:left;width:100%">${defsHTML(w, true)}</div>
-        <div class="exbox" style="text-align:left;width:100%">${spkBtn(w.e, L.c, '#fff', 34)}<p>${highlight(w, L.c)}</p></div></div>
+        ${showPlain() && w.s ? `<div style="text-align:left;width:100%">${plainHTML(w)}</div>` : ''}
+        <div style="text-align:left;width:100%">${exampleHTML(w, L.c, L.t, 34)}</div></div>
     </div></div>
     <div class="fc-actions"><button class="btn secondary lg" id="fcNo">Again</button><button class="btn primary lg" id="fcYes">${svg('check', '#fff', 20, 2.5)} I knew it</button></div>
     <p class="hint">Keyboard: Space to flip · 1 = Again · 2 = I knew it</p>`;
+  loadPhotos($('#fcArea'));
   $('#fc').onclick = e => { if (!e.target.closest('[data-say]')) $('#fc').classList.toggle('flip'); };
   $('#fcYes').onclick = () => { setKnown(w.id, true); FC.got++; FC.done++; FC.queue.shift(); renderFC(); };
   $('#fcNo').onclick = () => { setKnown(w.id, false); FC.again++; FC.done++; const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
@@ -868,7 +1039,7 @@ let QZ = null;
 function makeQuestion(w, pool) {
   const near = shuffle(pool.filter(x => x.id !== w.id && x.c === w.c && x.t.toLowerCase() !== w.t.toLowerCase()));
   const far = shuffle(pool.filter(x => x.id !== w.id && x.c !== w.c));
-  const dis = [...near, ...far].filter((x, i, a) => a.findIndex(y => y.v === x.v || y.t === x.t) === i && x.v !== w.v).slice(0, 3);
+  const dis = [...near, ...far].filter((x, i, a) => a.findIndex(y => meaningOf(y) === meaningOf(x) || y.t === x.t) === i && meaningOf(x) !== meaningOf(w)).slice(0, 3);
   const types = ['meaning', 'term', 'listen', 'define', 'define']; if (gapSentence(w)) types.push('gap', 'gap');
   const type = types[Math.floor(Math.random() * types.length)];
   const opts = shuffle([w, ...dis]);
@@ -894,33 +1065,34 @@ function renderQ() {
   if (!q) {
     S.quizzes++; S.best = Math.max(S.best, QZ.score); practised(0);
     $('#quizArea').innerHTML = `<div class="card qcard" style="text-align:center"><div class="eyebrow">Quiz complete</div><div class="result-big" style="margin:14px 0">${QZ.score}/10</div><p style="color:var(--muted)">${QZ.score >= 8 ? 'Excellent work!' : QZ.score >= 5 ? 'Good job. Review the words below.' : 'Keep practising, you will get there.'}</p>
-      ${QZ.wrong.length ? `<div style="text-align:left;margin-top:18px"><b>Words to review</b><ul class="review">${QZ.wrong.map(w => w.p ? `<li><b>${esc(w.p)}</b> · ${esc(w.d)}</li>` : `<li><a href="#" data-open="${w.id}" style="font-weight:700">${esc(w.t)}</a> <span class="ipa">${esc(w.i)}</span> · ${esc(w.v)}</li>`).join('')}</ul></div>` : ''}
+      ${QZ.wrong.length ? `<div style="text-align:left;margin-top:18px"><b>Words to review</b><ul class="review" data-notr>${QZ.wrong.map(w => w.cat ? `<li><b>${esc(w.p)}</b> · ${esc(meaningOf(w))}</li>` : `<li><a href="#" data-open="${w.id}" style="font-weight:700">${esc(w.t)}</a> <span class="ipa">${esc(w.i)}</span> · ${esc(meaningOf(w))}</li>`).join('')}</ul></div>` : ''}
       <div class="fc-actions"><button class="btn primary" id="qzAgain">New quiz</button><a class="btn secondary" href="#flashcards">Practise with flashcards</a></div></div>`;
     $('#qzAgain').onclick = startQuiz; return;
   }
   const w = q.w; const L = q.corp ? { c: '#2563EB', t: '#E8F0FE', name: CATS[w.cat].n } : LEVELS[w.l];
   let prompt = '', optText;
-  if (q.type === 'cmeaning') { prompt = `What does <b style="color:#2563EB">“${esc(w.p)}”</b> mean? ${spkBtn(w.p, '#2563EB', '#E8F0FE', 32)}`; optText = o => esc(o.d); }
-  else if (q.type === 'cwhich') { prompt = `Which ${TYPES[w.type].toLowerCase()} means <b style="color:#2563EB">“${esc(w.d)}”</b>?`; optText = o => esc(o.p); }
-  else if (q.type === 'csituation') { prompt = `What would you say or write here?<br><span style="font-weight:600">${esc(w.ctx)}</span>`; optText = o => esc(o.p); }
-  else if (q.type === 'meaning') { prompt = `What does <b style="color:${L.c}">${esc(w.t)}</b> mean? ${spkBtn(w.t, L.c, L.t, 32)}`; optText = o => esc(o.v); }
-  else if (q.type === 'term') { prompt = `Which word means <b style="color:${L.c}">“${esc(w.v)}”</b>?`; optText = o => esc(o.t); }
-  else if (q.type === 'define') { prompt = `Which word matches this definition?<br><span style="font-weight:600">“${esc(w.d)}”</span>`; optText = o => esc(o.t); }
-  else if (q.type === 'listen') { prompt = `Listen and choose the word you hear. ${spkBtn(w.t, '#fff', L.c, 44)} ${spkBtn(w.t, L.c, L.t, 44, true)}`; optText = o => esc(o.t); }
-  else { prompt = `Choose the word that fits:<br><span style="font-weight:600">“${gapSentence(w)}”</span>`; optText = o => esc(o.t); }
+  const ask = (t, subject) => `<div>${t}</div>${subject ? `<div data-notr style="margin-top:6px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">${subject}</div>` : ''}`;
+  if (q.type === 'cmeaning') { prompt = ask('What does this mean?', `<b style="color:#2563EB">“${esc(w.p)}”</b> ${spkBtn(w.p, '#2563EB', '#E8F0FE', 32)}`); optText = o => esc(o.d); }
+  else if (q.type === 'cwhich') { prompt = ask('Which phrase has this meaning?', `<b style="color:#2563EB">“${esc(w.d)}”</b>`); optText = o => esc(o.p); }
+  else if (q.type === 'csituation') { prompt = ask('What would you say or write here?', `<span style="font-weight:600">${esc(w.ctx)}</span>`); optText = o => esc(o.p); }
+  else if (q.type === 'meaning') { prompt = ask('What does this word mean?', `<b style="color:${L.c}">${esc(w.t)}</b> ${spkBtn(w.t, L.c, L.t, 32)}`); optText = o => esc(meaningOf(o)); }
+  else if (q.type === 'term') { prompt = ask('Which word has this meaning?', `<b style="color:${L.c}">“${esc(meaningOf(w))}”</b>`); optText = o => esc(o.t); }
+  else if (q.type === 'define') { prompt = ask('Which word matches this definition?', `<span style="font-weight:600">“${esc(w.d)}”</span>`); optText = o => esc(o.t); }
+  else if (q.type === 'listen') { prompt = ask('Listen and choose the word you hear.', `${spkBtn(w.t, '#fff', L.c, 44)} ${spkBtn(w.t, L.c, L.t, 44, true)}`); optText = o => esc(o.t); }
+  else { prompt = ask('Choose the word that fits:', `<span style="font-weight:600">“${gapSentence(w)}”</span>`); optText = o => esc(o.t); }
   $('#quizArea').innerHTML = `<div class="card qcard">
     <div class="qtop"><span class="count">Question ${QZ.i + 1} of 10 · Score ${QZ.score}</span>${q.corp ? `<span class="pill" style="background:#E8F0FE;color:#1D4ED8">${CATS[w.cat].n}</span>` : levelPill(w)}</div>
     <div class="progress"><i style="width:${QZ.i * 10}%"></i></div>
     <div class="qtext">${prompt}</div>
-    <div class="opts">${q.opts.map(o => `<button class="opt" data-ans="${o.id}">${optText(o)}<span></span></button>`).join('')}</div>
+    <div class="opts" data-notr>${q.opts.map(o => `<button class="opt" data-ans="${o.id}">${optText(o)}<span></span></button>`).join('')}</div>
     <div id="qfb"></div></div>`;
   if (q.type === 'listen') setTimeout(() => speak(w.t), 300);
   document.querySelectorAll('[data-ans]').forEach(b => b.onclick = () => {
     const ok = +b.dataset.ans === w.id;
     document.querySelectorAll('[data-ans]').forEach(x => { x.disabled = true; if (+x.dataset.ans === w.id) { x.classList.add('right'); x.lastChild.innerHTML = svg('check', '#16A34A', 20, 2.5); } });
     if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); if (!q.corp) setKnown(w.id, false); else practised(0); } else { QZ.score++; practised(); }
-    if (q.corp) { $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <b>${esc(w.p)}</b>: ${esc(w.d)}<div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:8px;font-style:italic">${esc(w.ex)}</div></div><div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`; $('#qNext').onclick = () => { QZ.i++; renderQ(); }; $('#qNext').focus(); return; }
-    $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <b>${esc(w.t)}</b> <span class="ipa">${esc(w.i)}</span> = ${esc(w.v)}<div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:6px;font-style:italic">${highlight(w, L.c)}</div></div>
+    if (q.corp) { $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <b data-notr>${esc(w.p)}</b><div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:8px;font-style:italic" data-notr>${esc(w.ex)}${xRows(w.x, '#2563EB', '#fff', 22)}</div></div><div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`; $('#qNext').onclick = () => { QZ.i++; renderQ(); }; $('#qNext').focus(); return; }
+    $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <span data-notr><b>${esc(w.t)}</b> <span class="ipa">${esc(w.i)}</span></span><div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:6px">${exampleHTML(w, L.c, L.t, 28, false)}</div></div>
       <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`;
     $('#qNext').onclick = () => { QZ.i++; renderQ(); };
     $('#qNext').focus();
@@ -940,7 +1112,7 @@ function renderProgress() {
   }
   $('#ptable').innerHTML = rows;
   const sv = WORDS.filter(w => S.saved[w.id]);
-  $('#savedGrid').innerHTML = sv.length ? sv.map(wordCard).join('') : '<p style="color:var(--muted);margin:0">No saved words yet. Tap ★ on any word card.</p>';
+  $('#savedGrid').innerHTML = sv.length ? sv.map(wordCard).join('') : '<p style="color:var(--muted);margin:0">No saved words yet. Tap ★ on any word card.</p>'; loadPhotos($('#savedGrid')); renderLangCard();
   $('#accent').value = S.accent; $('#rate').value = String(S.rate);
 }
 $('#accent').onchange = e => { S.accent = e.target.value; save(); };
@@ -950,123 +1122,10 @@ let resetArmed = false;
 $('#resetBtn').onclick = () => { if (!resetArmed) { resetArmed = true; $('#resetBtn').textContent = 'Click again to confirm reset'; setTimeout(() => { resetArmed = false; $('#resetBtn').textContent = 'Reset all progress'; }, 4000); return; }
   S.known = {}; S.learning = {}; S.saved = {}; S.days = {}; S.quizzes = 0; S.best = 0; save(); resetArmed = false; $('#resetBtn').textContent = 'Reset all progress'; renderProgress(); toast('Progress reset.'); };
 
-/* ---------- cloud (Firebase) ---------- */
-let cloudUser = null, cloudAdmin = false, cloudMeta = null, cloudBusy = '', cloudSaveT = null, cloudStatus = '';
-// Cloud content wins for words it has, but words and role tags added to the code after the last
-// publish are kept, so a new release shows up even before an admin re-publishes.
-function mergeWords(cloud) {
-  const byId = new Map(cloud.map(w => [w.id, w]));
-  const out = cloud.map(w => { const b = BY_TERM_BUILTIN.get(w.t); return b ? { ...w, r: [...new Set([...w.r, ...b.r])] } : w; });
-  for (const b of BUILTIN_WORDS) if (!byId.has(b.id) && !cloud.some(w => w.t === b.t)) out.push(b);
-  return out;
-}
-const BY_TERM_BUILTIN = new Map(BUILTIN_WORDS.map(w => [w.t, w]));
-function applyContent(c) {
-  WORDS = mergeWords(c.words); CORP = c.corp; BY_ID = new Map(WORDS.map(w => [w.id, w])); cloudMeta = c.meta;
-  fillTopics(); $('#footCount').textContent = fmt(WORDS.length); modalList = []; FC = null; QZ = null;
-  refreshVisible(); renderFocus(); if (currentView === 'workplace') renderCorp();
-}
-const progressPayload = () => ({ known: S.known, learning: S.learning, saved: S.saved, days: S.days, quizzes: S.quizzes, best: S.best });
-function queueCloudSave() {
-  if (!cloudUser || !window.Cloud) return;
-  clearTimeout(cloudSaveT);
-  cloudSaveT = setTimeout(async () => { try { await Cloud.saveProgress(cloudUser.uid, progressPayload()); cloudStatus = 'Progress synced ' + new Date().toLocaleTimeString(); } catch (e) { cloudStatus = 'Could not sync progress: ' + e.message; } if (currentView === 'progress') renderAccount(); }, 1500);
-}
-async function syncProgress() {
-  try {
-    const c = await Cloud.loadProgress(cloudUser.uid);
-    if (c) {
-      S.known = { ...(c.known || {}), ...S.known };
-      S.learning = { ...(c.learning || {}), ...S.learning }; for (const k in S.known) delete S.learning[k];
-      S.saved = { ...(c.saved || {}), ...S.saved };
-      for (const [d, n] of Object.entries(c.days || {})) S.days[d] = Math.max(S.days[d] || 0, n);
-      S.quizzes = Math.max(S.quizzes, c.quizzes || 0); S.best = Math.max(S.best, c.best || 0);
-    }
-    save(); cloudStatus = 'Progress synced with your account';
-  } catch (e) { cloudStatus = 'Could not load your saved progress: ' + e.message; }
-  refreshVisible();
-}
-function renderNavAccount() {
-  const C = window.Cloud, b = $('#navSignIn'), u = $('#navUser');
-  if (!C || !C.enabled) { b.style.display = u.style.display = 'none'; return; }
-  if (cloudUser) {
-    b.style.display = 'none'; u.style.display = '';
-    const name = cloudUser.displayName || cloudUser.email || 'Account';
-    u.innerHTML = `<span style="width:22px;height:22px;border-radius:99px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:12px">${esc(name[0].toUpperCase())}</span>${esc(name.split(' ')[0])}`;
-  } else { u.style.display = 'none'; b.style.display = ''; }
-}
-$('#navSignIn').onclick = async () => { try { await Cloud.signIn(); } catch (e) { toast('Sign-in failed: ' + (e.code || e.message)); } };
-const G_ICON = '<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17z"/><path fill="#FBBC05" d="M10.6 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.7 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.8-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.4 2.3-6.2 0-11.5-4.1-13.4-9.9l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg>';
-async function doSignIn(btn) { try { await withButton(btn, () => Cloud.signIn()); } catch (e) { if (e.code !== 'auth/popup-closed-by-user') toast('Sign-in failed: ' + (e.code || e.message)); } }
-function renderNavAccount() {
-  const el = $('#navAccount'); const C = window.Cloud; if (!el) return;
-  if (!C || !C.enabled) { el.innerHTML = ''; return; }
-  if (!cloudUser) { el.innerHTML = `<button class="gbtn" id="navSignIn">${G_ICON}<span class="hide-sm">Sign in</span></button>`; $('#navSignIn').onclick = () => doSignIn($('#navSignIn')); return; }
-  const u = cloudUser; const ini = (u.displayName || u.email || '?').trim()[0].toUpperCase();
-  el.innerHTML = `<a class="avatar" href="#progress" title="${esc(u.displayName || u.email)}">${u.photoURL ? `<img src="${esc(u.photoURL)}" alt="" referrerpolicy="no-referrer">` : ini}</a>`;
-}
-function renderAccount() {
-  renderNavAccount();
-  renderNavAccount();
-  const el = $('#accountCard'); if (!el) return;
-  const C = window.Cloud;
-  const source = cloudMeta ? `Content: loaded from Firestore (${fmt(cloudMeta.words)} words, ${cloudMeta.corporate} Workplace English items${cloudMeta.publishedAt ? ', published ' + cloudMeta.publishedAt.toLocaleString() : ''}).` : 'Content: built-in copy of the data.';
-  if (!C || !C.enabled) { el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0">Cloud sync is not set up on this copy of the site, so progress is saved in this browser only. ${source}</p>`; return; }
-  if (!cloudUser) {
-    el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0 0 14px">Sign in to keep your progress on every device. Without signing in, progress stays in this browser.</p>
-      <button class="btn secondary" id="signInBtn">${G_ICON} Sign in with Google</button><p class="hint" style="text-align:left">${source}</p>`;
-    $('#signInBtn').onclick = () => doSignIn($('#signInBtn'));
-    return;
-  }
-  const u = cloudUser;
-  let admin = '';
-  if (cloudAdmin) admin = `<div style="border-top:1px solid var(--line);margin-top:18px;padding-top:18px">
-      <h3 style="font-size:18px;margin-bottom:6px">Admin: content in Firestore</h3>
-      <p style="color:var(--muted);margin:0 0 12px">${cloudMeta ? `Published: ${fmt(cloudMeta.words)} words and ${cloudMeta.corporate} Workplace English items.` : 'Nothing published yet. Publish to copy all content into Firestore.'}</p>
-      <div class="mrow"><button class="btn primary sm" id="publishBtn" ${cloudBusy ? 'disabled' : ''}>Publish built-in content to Firestore</button>
-      <button class="btn secondary sm" id="rebuildBtn" ${cloudBusy || !cloudMeta ? 'disabled' : ''}>Rebuild after console edits</button></div>
-      <p class="hint" style="text-align:left">${cloudBusy || 'Publish uploads the 2,268 words and 226 Workplace English items from this site (it overwrites edits made in the console). After editing words or corporate documents in the Firebase console, click Rebuild so visitors see the changes.'}</p></div>`;
-  el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3>
-    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
-      <div><b>${esc(u.displayName || u.email)}</b> <span style="color:var(--muted)">${esc(u.email || '')}</span>${cloudAdmin ? ' <span class="pill" style="background:#FEF3C7;color:#B45309">Admin</span>' : ''}
-        <div class="hint" style="text-align:left;margin-top:4px">${esc(cloudStatus || 'Progress syncs automatically.')}</div>
-        <div class="hint" style="text-align:left;margin-top:2px">User ID: <code id="uidText">${esc(u.uid)}</code> <button class="btn ghost sm" id="copyUid" style="padding:2px 8px">Copy</button></div></div>
-      <button class="btn secondary sm" id="signOutBtn">Sign out</button></div>
-    <p class="hint" style="text-align:left">${source}</p>${admin}`;
-  $('#signOutBtn').onclick = () => Cloud.logOut();
-  $('#copyUid').onclick = async () => { try { await navigator.clipboard.writeText(u.uid); toast('User ID copied'); } catch (e) { toast('Select the ID and copy it.'); } };
-  let armed = false;
-  if ($('#publishBtn')) $('#publishBtn').onclick = async () => {
-    if (!armed) { armed = true; $('#publishBtn').textContent = 'Click again to confirm publish'; return; }
-    try {
-      cloudBusy = 'Publishing… 0%'; renderAccount(); busy('Publishing to Firestore…');
-      await Cloud.publishAll(BUILTIN_WORDS, BUILTIN_CORP, (n, t) => { cloudBusy = `Publishing… ${Math.round(n / t * 100)}%`; busy(cloudBusy); renderAccount(); });
-      cloudBusy = ''; const c = await Cloud.loadContent(); if (c) applyContent(c); busy(''); toast('Published to Firestore.');
-    } catch (e) { cloudBusy = ''; busy(''); toast('Publish failed: ' + (e.code || e.message)); }
-    renderAccount();
-  };
-  if ($('#rebuildBtn')) $('#rebuildBtn').onclick = async () => {
-    try { cloudBusy = 'Rebuilding…'; renderAccount(); const r = await Cloud.rebuildBundles(); cloudBusy = ''; const c = await Cloud.loadContent(); if (c) applyContent(c); toast(`Rebuilt: ${r.words} words, ${r.corporate} items.`); }
-    catch (e) { cloudBusy = ''; toast('Rebuild failed: ' + (e.code || e.message)); }
-    renderAccount();
-  };
-}
-let cloudStarted = false;
-async function initCloud() {
-  if (cloudStarted || !window.Cloud) return; cloudStarted = true;
-  const C = window.Cloud;
-  if (!C.enabled) { renderAccount(); return; }
-  loading(true);
-  try { const c = await C.loadContent(); if (c && c.words.length) applyContent(c); } catch (e) { console.warn('Firestore content not loaded, using built-in copy', e); }
-  loading(false);
-  C.onUser(async u => { cloudUser = u; renderNavAccount(); if (u) loading(true); cloudAdmin = u ? await C.isAdmin(u.uid) : false; if (u) { await syncProgress(); loading(false); } renderAccount(); });
-  renderAccount();
-}
-window.addEventListener('cloud-ready', initCloud);
-
+/*__CLOUD_UI__*/
 /* ---------- router ---------- */
 let currentView = 'home', lastView = 'home';
-function refreshVisible() { if (currentView === 'browse') renderBrowse(); if (currentView === 'progress') renderProgress(); if (currentView === 'home') renderHome(); }
+function refreshVisible() { if (currentView === 'browse') renderBrowse(); if (currentView === 'progress') renderProgress(); if (currentView === 'home') renderHome(); if (currentView === 'lists' && LST.open) renderLists(); }
 // A link can open the site focused on one role, e.g. #home?role=ba (BA / PO / PM) or #browse?role=ba.
 // The choice is remembered until the learner clicks "Show all roles". ?role=all clears it.
 function setFocusRole(r) {
@@ -1080,7 +1139,7 @@ function renderFocus() {
   $('#focusBar').classList.toggle('on', !!r);
   if (!r) return;
   const n = WORDS.filter(w => w.r.includes(S.focusRole)).length;
-  $('#focusText').innerHTML = `Showing words for <b>${esc(r.name)}</b> · ${fmt(n)} of ${fmt(WORDS.length)} words<span class="hint">. Browse, flashcards and quizzes use this role.</span>`;
+  $('#focusText').innerHTML = `<span>Showing words for</span> <b>${esc(r.name)}</b> · <span>${fmt(n)} of ${fmt(WORDS.length)} words</span><span class="hint"> · <span>Browse, flashcards and quizzes use this role.</span></span>`;
 }
 $('#focusClear').onclick = () => setFocusRole(null);
 $('#focusBrowse').onclick = () => { F.role = S.focusRole || 'all'; syncFilterUI(); };
@@ -1094,7 +1153,7 @@ function route() {
   }
   if (h.startsWith('word-')) { if (!document.querySelector('.view.on')) show('browse'); openWord(h.slice(5), modalList.length ? undefined : browseIds); return; }
   $('#overlay').classList.remove('open');
-  show(['home', 'browse', 'workplace', 'flashcards', 'quiz', 'progress'].includes(h) ? h : 'home');
+  show(['home', 'browse', 'workplace', 'flashcards', 'quiz', 'progress', 'lists', 'admin'].includes(h) ? h : 'home');
 }
 function show(v) {
   if (selecting && v !== 'browse') setSelecting(false);
@@ -1108,15 +1167,18 @@ function show(v) {
   if (v === 'flashcards' && !FC) startFC();
   if (v === 'quiz') { $('#qzSource').onchange(); if (!QZ) startQuiz(); }
   if (v === 'progress') { renderProgress(); renderAccount(); }
+  if (v === 'lists') renderLists();
+  if (v === 'admin') renderAdmin();
   window.scrollTo(0, 0);
 }
 $('#menuBtn').onclick = () => $('#links').classList.toggle('open');
 window.addEventListener('hashchange', route);
 hydrateIcons(); updateChips();
-$('#footCount').textContent = fmt(WORDS.length);
+$('#footCount').textContent = fmt(WORDS.length) + ' words';
 syncFilterUI();
 renderFocus();
 route();
+applyLanguage();
 if (window.Cloud) initCloud();
 </script>
 <script type="module" src="cloud.js"></script>

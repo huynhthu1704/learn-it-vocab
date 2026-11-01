@@ -1,23 +1,10 @@
 # Learn IT Vocab
 
-Illustrated IT vocabulary for Vietnamese learners. It has **2,268 words and phrases** across 3 levels, 4 roles in IT teams and 8 business domains. Every word has a topic icon, American IPA, audio, an English definition, Vietnamese and Korean meanings, and a workplace example sentence.
+<img src="logo.svg" width="56" align="right" alt="Learn IT Vocab logo">
 
-| | Beginner | Intermediate | Advanced |
-|---|---|---|---|
-| University students | ✓ | ✓ | ✓ |
-| Developers | ✓ | ✓ | ✓ |
-| Testers (QA) | ✓ | ✓ | ✓ |
-| BA / PO / PM | ✓ | ✓ | ✓ |
+Illustrated IT vocabulary for people who work in IT in Vietnam, Korea and beyond. It has **2,466 words and phrases** across 3 levels, 9 roles and 8 business domains, plus **226 Workplace English** items. Every word has a picture, American IPA, audio, an English definition, meanings in Vietnamese, Korean and French, and a workplace example.
 
-## Business domains
-
-The domain list in `data/7-domains.txt` follows the 8 domains in [BAPO Path](https://huynhthu1704.github.io/bapo-path/): Banking & Fintech, E-commerce & Retail, Healthcare, Insurance, Logistics & Supply Chain, Education (EdTech), Telecom, and HR & Payroll. These words are tagged for BA/PO/PM, developers and testers.
-
-## Workplace English module
-
-`data/corporate.txt` holds 226 corporate abbreviations, terms and expressions in 10 categories: meetings, emails, chat & abbreviations, documentation, status updates, agreeing & disagreeing, requests & follow-ups, feedback, business jargon, and presentations & demos.
-
-Each line: `type|phrase|tone|English meaning|Vietnamese|Korean|When to use|Example|Avoid (optional)`. Types are `abbr`, `term` and `expr`; tone is `formal`, `neutral` or `casual`. A line `# category=meetings` sets the category for the lines below it.
+Roles: University students · Developers · Testers (QA) · BA / PO / PM · PMO · IT HR · Business development · Sales · Manager / C-level. A word that matters to several roles (for example *share*, *deadline*, *budget*) shows up under each of them (`roles.mjs`).
 
 ## Open the site for one role
 
@@ -29,88 +16,80 @@ browser until the learner clears it; `?role=all` clears it too. Role ids: `stude
 
 ## Features
 
-- **Browse**: search in English or Vietnamese, with or without accents. Filter by level, role, topic and status (new, learning, known, saved).
-- **Word card**: listen at normal and slow speed, read the IPA, see the meaning and an example, and jump to related words.
-- **Flashcards**: sets of 10. Missed cards come back later in the same set.
-- **Workplace English**: browse corporate language by category and type, with when to use it, examples and what to avoid.
-- **Quiz**: 10 mixed questions on IT vocabulary (meaning, word, definition, fill the gap, listening) or Workplace English (meaning, phrase, what to say in a situation).
-- **My progress**: known words, daily streak, saved words, and a choice of American or British voice and speed.
-
-Progress is saved in each visitor's browser, and synced to Firestore when they sign in with Google.
+- **Languages**: English is always shown. Each learner picks any of Vietnamese, Korean and French in *My profile* (or with the globe button in the top bar). Meanings, example translations, plain explanations and stories appear in every chosen language, each with its own listen button in that language's voice.
+- **Interface language**: English only, Vietnamese only, Korean only, French only, or English plus the learner's languages. The interface text lives in `data/i18n.txt`.
+- **Plain words**: a short everyday explanation of each word for people without a tech background. It shows on word cards automatically for HR, business development, sales and managers.
+- **Stories**: a short real-life story for advanced and complex words, in all four languages.
+- **Photos**: one photo per word, made with AI or uploaded by an admin. Words without a photo show their topic icon.
+- **Browse**: search in English, Vietnamese, Korean or French. Filter by level, role, topic and status. Select many words at once to mark them as learnt, still learning or saved.
+- **Flashcards**, **Quiz** and **Workplace English** as before; quiz meanings follow the learner's first language.
+- **My lists**: upload a PDF, Word file, text or Markdown (in any language) or paste text. AI picks out the key words, adds the English term, IPA, meanings in all languages and an example, and the learner saves them as their own list.
+- **Report a problem**: on any word, a signed-in learner can say what is wrong and suggest the correct text.
+- **Admin**: review reports (accept, edit, reject), edit any word or Workplace English item, run the AI tools, and sync the built-in data to Firestore.
+- **Mobile**: every page works on a phone.
 
 ## Project structure
 
 ```
-index.html                       ← the website (generated, served by GitHub Pages)
-words.json                       ← the word database (generated)
-src/template.html                ← website code: HTML, CSS and JavaScript
-data/1-student.txt … 6-extra-l3.txt   ← the word lists you edit
-data/pronunciation-overrides.json     ← IPA for words the dictionary doesn't know
-data/definitions/*.txt           ← English definition and Korean meaning: term|English|Korean
-build.mjs                        ← builds words.json, index.html and cloud.js
+index.html                         ← the website (generated, served by GitHub Pages)
+logo.svg                           ← logo and favicon
+words.json                         ← the word database (generated)
+src/template.html                  ← website code: HTML, CSS and JavaScript
+src/ui-cloud.js                    ← account, languages, reports, admin, AI tools and lists (inlined into index.html)
 src/cloud.js, src/firebase-config.js  ← Firebase code and config (bundled into cloud.js)
-firestore.rules                  ← Firestore security rules
+data/1-student.txt … 9-student-curriculum.txt  ← the word lists you edit
+data/definitions/*.txt             ← English definition and Korean meaning: term|English|Korean
+data/fr/*.txt                      ← French meaning: term|French (corporate.txt is for Workplace English)
+data/corporate.txt                 ← Workplace English
+data/i18n.txt                      ← interface text: English | Vietnamese | Korean | French
+data/pronunciation-overrides.json  ← IPA for words the dictionary doesn't know
+roles.mjs                          ← which roles each word belongs to
+build.mjs                          ← builds words.json, index.html and cloud.js
+firestore.rules                    ← Firestore security rules
 ```
 
 ## How to add or edit words
 
-1. Open a file in `data/`. Each line is one word:
+The quickest way is online: **Admin → Edit words**. Changes publish straight away.
+
+To change the built-in data files instead:
+
+1. Add a line to a file in `data/` (add new files at the end, e.g. `10-…txt`, so word IDs stay the same):
 
    ```
    term|part of speech|Vietnamese meaning|example sentence|topic
    deploy|v|triển khai (đưa phần mềm lên chạy)|We deploy the new version every Friday.|release
    ```
 
-   - The line `# level=1 role=dev` sets the level (1, 2 or 3) and role (`student`, `dev`, `test`, `ba`) for the lines below it. Use commas for several roles: `role=ba,dev,test`.
-   - Part of speech: `n`, `v`, `adj`, `adv` or `phr`.
-   - Topic is one of: agile, ai, architecture, bug, business, career, cloud, code, communication, data, design, devices, document, math, meeting, mobile, money, network, people, performance, process, quality, release, security, study, testing, time, web, or a domain: banking, ecommerce, healthcare, insurance, logistics, education, telecom, hr. The topic picks the icon.
-   - Put the word itself in the example sentence, so it can be highlighted and used in "fill the gap" quiz questions.
+   - `# level=1 role=dev` sets the level (1, 2 or 3) and roles for the lines below it. Roles: `student`, `dev`, `test`, `ba`, `pmo`, `hr`, `bizdev`, `sales`, `exec`.
+   - Add the English definition and Korean meaning in `data/definitions/` and the French meaning in `data/fr/`. The build lists anything missing.
+2. Run `npm install` once, then `npm run build`.
+3. Commit and push. Then **Admin → Content & sync → Sync built-in words to Firestore**. Sync adds new words and refreshes built-in fields of words nobody edited online; edits, accepted reports and AI content are kept.
 
-   - Add the word's English definition and Korean meaning to a file in `data/definitions/` (`term|English definition|Korean`). The build stops and lists any word without one.
+To change interface text, edit `data/i18n.txt` and rebuild.
 
-2. Rebuild:
-
-   ```bash
-   npm install
-   npm run build
-   ```
-
-   The IPA comes from the CMU Pronouncing Dictionary (American English). If a word isn't in it, the build stops and lists the word. Add its IPA to `data/pronunciation-overrides.json`, then build again.
-
-3. Commit and push. GitHub Pages updates the live site within a minute or two.
-
-## Firebase (Firestore + Google sign-in)
-
-The site reads its content from Cloud Firestore and lets learners sign in with Google to sync progress. If Firebase isn't configured or can't be reached, it falls back to the built-in copy of the data and keeps progress in the browser.
-
-**Firestore layout**
+## Firebase
 
 | Collection | Contents | Who can write |
 |---|---|---|
-| `words/{w0001}` | one document per word (term, ipa, english, vietnamese, korean, example, topic, level, roles) | admins |
-| `corporate/{c001}` | one document per Workplace English entry | admins |
-| `bundles/{name}` | packed copies of both collections; the site reads these, so a visit costs about 7 reads instead of 2,500 | admins |
-| `meta/info` | version, counts, publish date | admins |
-| `admins/{uid}` | who may publish (create by hand in the console) | nobody (console only) |
-| `users/{uid}` | a learner's own progress | that user |
-
-Everyone can read the content collections. The rules are in `firestore.rules`.
+| `words/{w0001}` | one document per word: term, ipa, english, vietnamese, korean, french, example, exampleTranslations, plainExplanation, story, topic, level, roles, hasImage | admins |
+| `corporate/{c001}` | one document per Workplace English item, with whenToUseTranslations and exampleTranslations | admins |
+| `bundles/words-01…`, `corp-01…` | packed copies the site reads (150 words each), so a visit costs about 20 reads | admins |
+| `meta/info` | layout, counts, bundle names, publish date | admins |
+| `images/{w0001}` | one compressed photo per word | admins |
+| `reports/{id}` | learners' corrections | signed-in learners create, admins review |
+| `admins/{uid}` | who is an admin (create by hand in the console) | console only |
+| `users/{uid}` and `users/{uid}/lists/{id}` | a learner's progress, language settings and word lists | that learner |
 
 **Set up once**
 
-1. Put the web app config in `src/firebase-config.js` and run `npm run build`.
-2. Firebase console → Firestore Database → Rules: paste `firestore.rules` and click **Publish**.
-3. Open the site → My progress → **Sign in with Google** → copy your User ID.
-4. Firebase console → Firestore → **Start collection** `admins` → Document ID = your User ID → add any field (e.g. `role` = `admin`) → Save.
-5. Reload the site → My progress → **Publish built-in content to Firestore** (click twice to confirm).
-
-**Editing content later**
-
-- Edit a document in `words` or `corporate` in the Firebase console, then click **Rebuild after console edits** on the My progress page so visitors see the change.
-- Or edit the files in `data/`, run `npm run build`, push, and click **Publish built-in content to Firestore**. Publishing overwrites edits made in the console.
+1. Firebase console → Firestore Database → Rules: paste `firestore.rules` and click **Publish** (it now includes `images`).
+2. Firebase console → **AI Logic** → **Get started** → **Gemini Developer API**. The text tools and file upload use `gemini-2.5-flash`. Photos use `gemini-2.5-flash-image`, which may need the Blaze (pay-as-you-go) plan.
+3. Open the site → **Admin → Content & sync → Sync built-in words to Firestore**.
+4. **Admin → AI tools**: run *Translate examples*, *Plain-language explanations*, *Stories for complex words*, *Translate Workplace English* and, if billing is on, *Photos*. Start with "Next 10" to check the quality, then run the rest. Each run saves as it goes and can be stopped.
+5. Later: turn on **App Check** so other sites cannot use your AI quota.
 
 ## Notes
 
-- Audio uses the browser's built-in voice (Web Speech API), so it sounds different on each device and may be missing in some browsers. The IPA is always shown.
-- Icons are per topic (36 topics), not one per word.
-- The Vietnamese and Korean meanings and the examples should be reviewed by a teacher before use in class.
+- Audio uses the device's voices (Web Speech API). Vietnamese, Korean and French need those voices installed; most phones have them.
+- AI text and the built-in meanings should be checked by a teacher before use in class. Learners can report mistakes; admins fix them in a click.
