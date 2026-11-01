@@ -193,18 +193,27 @@ const deleteList = (uid, id) => deleteDoc(doc(db, 'users', uid, 'lists', id));
 
 // ---------- AI (Firebase AI Logic → Gemini) ----------
 // Turn it on once: Firebase console → AI Logic → Get started → Gemini Developer API.
-const TEXT_MODEL = 'gemini-2.5-flash';
-let textModel = null;
-function aiModels() {
+// Newest first: if Google retires a model (404 "no longer available"), the next one is tried.
+const TEXT_MODELS = ['gemini-3.8-flash', 'gemini-3-flash', 'gemini-2.5-flash'];
+let modelIdx = 0; const textModels = {};
+function textModel() {
   if (!ai) ai = getAI(app, { backend: new GoogleAIBackend() });
-  if (!textModel) textModel = getGenerativeModel(ai, { model: TEXT_MODEL, generationConfig: { responseMimeType: 'application/json', temperature: 0.3 } });
-  return ai;
+  const name = TEXT_MODELS[modelIdx];
+  if (!textModels[name]) textModels[name] = getGenerativeModel(ai, { model: name, generationConfig: { responseMimeType: 'application/json', temperature: 0.3 } });
+  return textModels[name];
 }
 async function aiJSON(prompt) {
-  aiModels();
-  const r = await textModel.generateContent(prompt);
-  const text = r.response.text().trim().replace(/^```(?:json)?\s*|\s*```$/g, '');
-  return JSON.parse(text);
+  for (;;) {
+    try {
+      const r = await textModel().generateContent(prompt);
+      const text = r.response.text().trim().replace(/^```(?:json)?\s*|\s*```$/g, '');
+      return JSON.parse(text);
+    } catch (e) {
+      const retired = /\[404|no longer available|not found for API version|is not supported/i.test(String(e.message));
+      if (retired && modelIdx < TEXT_MODELS.length - 1) { modelIdx++; continue; }
+      throw e;
+    }
+  }
 }
 
 // ---------- auth ----------

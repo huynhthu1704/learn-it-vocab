@@ -15,5 +15,5 @@ export const firebaseConfig = {
 // App Check (protects the AI quota). The web app is registered in Firebase console → App Check → Apps
 // with "Fraud Defense (reCAPTCHA Enterprise)"; this is that provider's site key (public, not a secret).
 // Set recaptchaEnterprise to false if you switch the registration to classic reCAPTCHA v3. Empty key = App Check off.
-export const recaptchaSiteKey = '6LfpWwsuAAAAAL8not00HVb9X88shB8202bsyoCb';
+export const recaptchaSiteKey = ''; // was '6LfpWwsuAAAAAL8not00HVb9X88shB8202bsyoCb' — the web app is not registered in App Check yet
 export const recaptchaEnterprise = true;
