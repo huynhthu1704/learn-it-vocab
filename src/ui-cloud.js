@@ -61,10 +61,9 @@ function renderAccount() {
     <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
       <div><span data-notr><b>${esc(u.displayName || u.email)}</b> <span style="color:var(--muted)">${esc(u.email || '')}</span></span>${cloudAdmin ? ' <span class="pill" style="background:#FEF3C7;color:#B45309">Admin</span>' : ''}
         <div class="hint" style="text-align:left;margin-top:4px">${esc(cloudStatus || 'Progress syncs automatically.')}</div>
-        <div class="hint" style="text-align:left;margin-top:2px"><span>User ID:</span> <code id="uidText" data-notr>${esc(u.uid)}</code> <button class="btn ghost sm" id="copyUid" style="padding:2px 8px">Copy</button></div></div>
+</div>
       <div class="mrow">${cloudAdmin ? '<a class="btn primary sm" href="#admin">Open admin</a>' : ''}<a class="btn secondary sm" href="#lists">My word lists</a><button class="btn secondary sm" id="signOutBtn">Sign out</button></div></div>`;
   $('#signOutBtn').onclick = () => Cloud.logOut();
-  $('#copyUid').onclick = async () => { try { await navigator.clipboard.writeText(u.uid); toast('User ID copied'); } catch (e) { toast('Select the ID and copy it.'); } };
 }
 
 /* ---------- language preferences ---------- */
@@ -247,7 +246,7 @@ function renderAdmin() {
   const area = $('#adminArea');
   if (!window.Cloud || !Cloud.enabled) { area.innerHTML = '<p>Firebase is not set up on this copy of the site.</p>'; $('#adminTabs').innerHTML = ''; return; }
   if (!cloudUser) { area.innerHTML = `<div class="card" style="padding:24px"><p style="margin-top:0">Sign in with an admin account.</p>${signInButton('admSignIn')}</div>`; $('#admSignIn').onclick = () => doSignIn($('#admSignIn')); $('#adminTabs').innerHTML = ''; return; }
-  if (!cloudAdmin) { area.innerHTML = `<div class="card" style="padding:24px"><p style="margin:0">This account is not an admin. To make it one, add a document with your user ID in the <b>admins</b> collection in the Firebase console.</p></div>`; $('#adminTabs').innerHTML = ''; return; }
+  if (!cloudAdmin) { area.innerHTML = `<div class="card" style="padding:24px"><p style="margin:0">This account is not an admin. To make it one, add a document with this user ID in the <b>admins</b> collection in the Firebase console: <code>${esc(cloudUser.uid)}</code></p></div>`; $('#adminTabs').innerHTML = ''; return; }
   const open = ADM.reports && ADM.repStatus === 'open' ? ADM.reports.length : null;
   $('#adminTabs').innerHTML = [['reports', 'Reports' + (open ? ` (${open})` : '')], ['edit', 'Edit words'], ['ai', 'AI tools'], ['content', 'Content & sync']].map(([k, n]) => `<button data-atab="${k}" class="${ADM.tab === k ? 'on' : ''}">${n}</button>`).join('');
   $('#adminTabs').onclick = e => { const b = e.target.closest('[data-atab]'); if (b) { ADM.tab = b.dataset.atab; renderAdmin(); } };
