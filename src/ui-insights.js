@@ -57,7 +57,7 @@ function computeInsights() {
   const lastSeenOf = u => [u.meta?.lastSeen || '', ...daysOf(u)].sort().pop() || '';
   return {
     all, users, active, prevActive, newUsers: users.filter(isNew), knownBy, savedBy, viewsBy, hard, trend, missed: [...missed.values()].sort((a, b) => b.users - a.users || (b.last > a.last ? 1 : -1)),
-    roles: sorted(count(users, u => u.prefs?.role || '')), langs: sorted(count(users, u => (u.prefs?.langs || ['vi', 'ko']))), ui: sorted(count(users, u => u.prefs?.ui || 'en')),
+    roles: sorted(count(users, u => u.prefs?.role || '')), levels: sorted(count(users, u => String(u.prefs?.level || ''))), tested: users.filter(u => u.prefs?.placement?.how === 'test').length, langs: sorted(count(users, u => (u.prefs?.langs || ['vi', 'ko']))), ui: sorted(count(users, u => u.prefs?.ui || 'en')),
     devices: sorted(count(users, u => u.meta?.device || 'unknown')), plays: [...plays.entries()].sort((a, b) => b[1] - a[1]),
     avgKnown: users.length ? Math.round(users.reduce((n, u) => n + known(u).length, 0) / users.length) : 0,
     quizzes: users.reduce((n, u) => n + (u.quizzes || 0), 0), avgScore: scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : null,
@@ -199,6 +199,7 @@ async function admInsights(el) {
   <div class="card vz-card"><h3>Learners active each day</h3><p class="vz-sub">How many learners practised on each day${INS.range === 'all' ? ' (last 90 days)' : ''}. Hover for the exact number.</p>${lineChart(R.trend)}</div>
   <div class="vz-grid">
     <div class="card vz-card"><h3>Learners by role</h3>${hbars(R.roles.map(([k, v]) => ({ label: ROLE_LABEL(k), v })), { total: n })}</div>
+    <div class="card vz-card"><h3>Learners by level</h3><p class="vz-sub">${R.tested} took the level test; the others picked a level.</p>${hbars(R.levels.map(([k, v]) => ({ label: LEVELS[k] ? LEVELS[k].name : 'Not set yet', v })), { total: n })}</div>
     <div class="card vz-card"><h3>Languages learners read</h3><p class="vz-sub">A learner can pick several, so the shares add up to more than 100%.</p>${hbars(R.langs.map(([k, v]) => ({ label: LANGS[k] ? LANGS[k].en : k, v })), { total: n })}</div>
     <div class="card vz-card"><h3>Interface language</h3>${hbars(R.ui.map(([k, v]) => ({ label: k === 'en' ? 'English only' : k === 'multi' ? 'English + their languages' : LANGS[k] ? LANGS[k].en + ' only' : k, v })), { total: n })}</div>
     <div class="card vz-card"><h3>Phone or computer</h3><p class="vz-sub">The device of each learner's latest visit.</p>${hbars(R.devices.map(([k, v]) => ({ label: { mobile: 'Phone', desktop: 'Computer', unknown: 'Not recorded yet' }[k] || k, v })), { total: n })}</div>

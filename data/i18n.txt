@@ -442,3 +442,23 @@ Report wrong meanings and help improve the site | Báo nghĩa sai và giúp tran
 Maybe later | Để sau | 나중에 | Plus tard
 We only use your Google name and e-mail to sign you in. | Chúng tôi chỉ dùng tên và email Google để đăng nhập cho bạn. | Google 이름과 이메일은 로그인에만 사용합니다. | Nous utilisons votre nom et votre e-mail Google uniquement pour vous connecter.
 Welcome! Your progress is now saved to your account. | Chào mừng bạn! Tiến độ học đã được lưu vào tài khoản. | 환영합니다! 이제 학습 기록이 계정에 저장됩니다. | Bienvenue ! Votre progression est maintenant enregistrée dans votre compte.
+# level check
+What's your IT English level? | Trình độ tiếng Anh IT của bạn ở mức nào? | IT 영어 실력이 어느 정도인가요? | Quel est votre niveau d'anglais IT ?
+We'll start you at the right words. If you're Intermediate or Advanced, Beginner words are marked as known so you can skip them. | Chúng tôi sẽ bắt đầu với những từ phù hợp. Nếu bạn ở mức Trung cấp hoặc Nâng cao, các từ Cơ bản sẽ được đánh dấu là đã biết để bạn bỏ qua. | 알맞은 단어부터 시작합니다. 중급이나 고급이면 초급 단어는 아는 단어로 표시되어 건너뛸 수 있습니다. | Nous commençons par les bons mots. Si vous êtes intermédiaire ou avancé, les mots débutants sont marqués comme connus pour que vous puissiez les passer.
+Not sure? Take a 1-minute test | Chưa chắc? Làm bài kiểm tra 1 phút | 잘 모르겠다면? 1분 테스트 | Pas sûr ? Faites un test d'une minute
+{0} words, from easy to hard | {0} từ, từ dễ đến khó | 쉬운 단어부터 어려운 단어까지 {0}개 | {0} mots, du plus facile au plus difficile
+Question {0} of {1} | Câu {0}/{1} | {1}문제 중 {0}번 | Question {0} sur {1}
+I don't know this word | Tôi không biết từ này | 모르는 단어예요 | Je ne connais pas ce mot
+Your level: | Trình độ của bạn: | 내 수준: | Votre niveau :
+Level set: | Đã chọn cấp độ: | 설정한 수준: | Niveau choisi :
+You got | Bạn trả lời đúng | 맞힌 단어 | Vous avez
+words right. | từ. | 개 | mots justes.
+Beginner words are marked as known. Unmark any word you're not sure about. | từ Cơ bản đã được đánh dấu là đã biết. Bạn có thể bỏ đánh dấu từ nào chưa chắc. | 개의 초급 단어를 아는 단어로 표시했습니다. 확실하지 않은 단어는 표시를 해제하세요. | mots débutants sont marqués comme connus. Retirez ceux dont vous n'êtes pas sûr.
+Start with the words at this level. You can change your level any time in My profile. | Hãy bắt đầu với những từ ở cấp độ này. Bạn có thể đổi cấp độ bất cứ lúc nào trong Hồ sơ của tôi. | 이 수준의 단어부터 시작하세요. 내 프로필에서 언제든 수준을 바꿀 수 있습니다. | Commencez par les mots de ce niveau. Vous pouvez changer de niveau à tout moment dans Mon profil.
+Start learning {0} words | Bắt đầu học từ {0} | {0} 단어 학습 시작 | Commencer les mots {0}
+Start learning Beginner words | Bắt đầu học từ Cơ bản | 초급 단어 학습 시작 | Commencer les mots débutants
+Start learning Intermediate words | Bắt đầu học từ Trung cấp | 중급 단어 학습 시작 | Commencer les mots intermédiaires
+Start learning Advanced words | Bắt đầu học từ Nâng cao | 고급 단어 학습 시작 | Commencer les mots avancés
+My level | Cấp độ của tôi | 내 수준 | Mon niveau
+Not set | Chưa chọn | 미설정 | Non défini
+Take the test | Làm bài kiểm tra | 테스트 보기 | Faire le test

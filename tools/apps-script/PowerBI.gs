@@ -70,12 +70,12 @@ function buildTables(src) {
   const keys = function (o) { return Object.keys(o || {}); };
   const wordById = {}; src.words.forEach(function (w) { wordById[w.id] = w; });
 
-  T.Learners = [['LearnerID', 'Role', 'RoleName', 'Languages', 'Interface', 'Device', 'FirstSeen', 'LastActive', 'WordsKnown', 'WordsLearning', 'WordsSaved', 'QuizzesTaken', 'BestQuiz', 'DaysPractised', 'CurrentStreak', 'DueForReview', 'WordLists', 'WordsInLists', 'FlashcardsReviewed']];
+  T.Learners = [['LearnerID', 'Level', 'LevelMethod', 'Role', 'RoleName', 'Languages', 'Interface', 'Device', 'FirstSeen', 'LastActive', 'WordsKnown', 'WordsLearning', 'WordsSaved', 'QuizzesTaken', 'BestQuiz', 'DaysPractised', 'CurrentStreak', 'DueForReview', 'WordLists', 'WordsInLists', 'FlashcardsReviewed']];
   src.users.forEach(function (u) {
     const p = u.prefs || {}, m = u.meta || {}, s = u.stats || {}, days = dayList(u);
     const last = [m.lastSeen || ''].concat(days).sort().pop() || '';
     const due = keys(u.review).filter(function (id) { return (u.review[id].d || '') <= src.today; }).length;
-    T.Learners.push([uid[u._id], p.role || '', ROLE_NAMES[p.role || ''] || p.role, (p.langs || ['vi', 'ko']).map(function (l) { return LANG_NAMES[l] || l; }).join(', '), UI_NAMES[p.ui || 'en'] || p.ui, m.device === 'mobile' ? 'Phone' : m.device === 'desktop' ? 'Computer' : 'Unknown',
+    T.Learners.push([uid[u._id], LEVEL_NAMES[p.level] || 'Not set', (p.placement && p.placement.how) === 'test' ? 'Test' : p.level ? 'Chosen' : '', p.role || '', ROLE_NAMES[p.role || ''] || p.role, (p.langs || ['vi', 'ko']).map(function (l) { return LANG_NAMES[l] || l; }).join(', '), UI_NAMES[p.ui || 'en'] || p.ui, m.device === 'mobile' ? 'Phone' : m.device === 'desktop' ? 'Computer' : 'Unknown',
       m.firstSeen || days[0] || '', last, keys(u.known).length, keys(u.learning).length, keys(u.saved).length, u.quizzes || 0, u.best || 0, days.length, streak(u), due, m.lists || 0, m.listWords || 0, s.cards || 0]);
   });
   T.LearnerLanguages = [['LearnerID', 'Language']];

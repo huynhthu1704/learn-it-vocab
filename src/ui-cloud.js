@@ -14,7 +14,7 @@ function applyContent(c) {
   fillTopics(); $('#footCount').textContent = fmt(WORDS.length) + ' words'; modalList = []; FC = null; QZ = null;
   refreshVisible(); renderFocus(); if (currentView === 'workplace') renderCorp();
 }
-const prefsPayload = () => ({ langs: S.langs, ui: S.ui, plain: S.plain, role: S.role, accent: S.accent, rate: S.rate, prefsAt: S.prefsAt || 0 });
+const prefsPayload = () => ({ langs: S.langs, ui: S.ui, plain: S.plain, role: S.role, level: S.level || 0, levelPrompted: S.levelPrompted || 0, placement: S.placement || null, accent: S.accent, rate: S.rate, prefsAt: S.prefsAt || 0 });
 const isMobile = () => matchMedia('(max-width: 760px)').matches;
 // What the admin Insights page reads. No names or e-mails: learners are counted, not identified.
 const progressPayload = () => ({ known: S.known, learning: S.learning, saved: S.saved, days: S.days, quizzes: S.quizzes, best: S.best, prefs: prefsPayload(),
@@ -90,6 +90,7 @@ function langControls(prefix) {
     <div class="fgrid">
       <label class="fld">Website interface<select data-${prefix}ui>${UI_OPTS().map(([v, n]) => `<option value="${v}" ${S.ui === v ? 'selected' : ''}>${n}</option>`).join('')}</select></label>
       <label class="fld">My role<select data-${prefix}role><option value="">Choose your role</option>${Object.entries(ROLES).map(([k, R]) => `<option value="${k}" ${S.role === k ? 'selected' : ''}>${R.name}</option>`).join('')}</select></label>
+      <div class="fld"><span>My level</span><div class="mrow"><select data-${prefix}level style="flex:1"><option value="">Not set</option>${Object.entries(LEVELS).map(([k, L]) => `<option value="${k}" ${String(S.level) === k ? 'selected' : ''}>${L.name}</option>`).join('')}</select><button class="btn secondary sm" data-leveltest type="button">Take the test</button></div></div>
       <label class="fld full">Plain-language explanations on word cards<select data-${prefix}plain><option value="auto" ${S.plain === 'auto' ? 'selected' : ''}>Automatic: on for HR, business, sales and managers</option><option value="on" ${S.plain === 'on' ? 'selected' : ''}>Always show</option><option value="off" ${S.plain === 'off' ? 'selected' : ''}>Only in the word details</option></select></label>
     </div></div>`;
 }
@@ -101,6 +102,8 @@ function wireLangControls(root, prefix, after) {
   });
   const sel = (k, f) => { const el = root.querySelector(`[data-${prefix}${k}]`); if (el) el.onchange = () => { setPrefs({ [f]: el.value }); after(); }; };
   sel('ui', 'ui'); sel('role', 'role'); sel('plain', 'plain');
+  const lv = root.querySelector(`[data-${prefix}level]`); if (lv) lv.onchange = () => { if (lv.value) { $('#langPop').classList.remove('on'); finishLevel(+lv.value, 'chosen'); } };
+  const lt = root.querySelector('[data-leveltest]'); if (lt) lt.onclick = () => { $('#langPop').classList.remove('on'); startLevelTest(); };
 }
 function renderLangCard() {
   const el = $('#langCard'); if (!el) return;
@@ -192,7 +195,7 @@ function applyLanguage() {
 
 /* ---------- small dialog (reports, confirmations) ---------- */
 function openDlg(html) { $('#dlgBox').innerHTML = `<button class="close" data-dlgclose aria-label="Close">${svg('x', '#1B1F2A', 20, 2)}</button>` + html; $('#dlg').classList.add('open'); }
-function closeDlg() { $('#dlg').classList.remove('open', 'center'); $('#dlgBox').classList.remove('wide', 'narrow'); }
+function closeDlg() { $('#dlg').classList.remove('open', 'center'); $('#dlgBox').classList.remove('wide', 'narrow'); $('#dlgBox').style.textAlign = ''; }
 $('#dlg').addEventListener('click', e => { if (e.target === $('#dlg') || e.target.closest('[data-dlgclose]')) closeDlg(); });
 const getPath = (o, p) => p.split('.').reduce((a, k) => (a == null ? a : a[k]), o);
 function setPath(o, p, v) { const ks = p.split('.'); let a = o; ks.slice(0, -1).forEach(k => { a[k] = { ...(a[k] || {}) }; a = a[k]; }); a[ks[ks.length - 1]] = v; return o; }
@@ -209,14 +212,77 @@ function openRolePicker(fromProfile) {
   $('#dlgBox').querySelectorAll('[data-pickrole]').forEach(b => b.onclick = () => {
     const r = b.dataset.pickrole; S.rolePrompted = 1;
     setPrefs({ role: r }); if (typeof setFocusRole === 'function') setFocusRole(r);
-    closeDlg(); toast('Done! Words for your role now come first.');
+    closeDlg(); toast('Done! Words for your role now come first.'); setTimeout(() => maybeAskLevel(), 400);
   });
-  $('#rpSkip').onclick = () => { S.rolePrompted = 1; save(); closeDlg(); };
+  $('#rpSkip').onclick = () => { S.rolePrompted = 1; save(); closeDlg(); setTimeout(() => maybeAskLevel(), 400); };
 }
 // Ask once, on the first visit, unless a link already chose a role (e.g. #home?role=ba) or the visitor is on the admin page.
 function maybeAskRole() {
-  if (S.role || S.rolePrompted || S.focusRole) { if (!S.role && S.focusRole) { S.role = S.focusRole; save(); } return; }
+  if (S.role || S.rolePrompted || S.focusRole) { if (!S.role && S.focusRole) { S.role = S.focusRole; save(); } setTimeout(maybeAskLevel, 1200); return; }
   setTimeout(() => { if (!S.role && !S.rolePrompted && currentView !== 'admin' && !$('#dlg').classList.contains('open') && !$('#overlay').classList.contains('open')) openRolePicker(); }, 1200);
+}
+
+/* ---------- level check: pick a level or take a 9-word test; Intermediate and Advanced mark Beginner words as known ---------- */
+// Three words per level, chosen to be common to every IT role (tech and business), with one clear meaning each.
+const LEVEL_TEST = [['deadline', 1], ['bug', 1], ['invoice', 1], ['scope creep', 2], ['rollback', 2], ['churn', 2], ['due diligence', 3], ['single point of failure', 3], ['vendor lock-in', 3]];
+function setUserLevel(level, how, score) {
+  S.level = level; S.levelPrompted = 1; S.placement = { level, how, score: score ?? null, at: today() };
+  let n = 0;
+  if (level >= 2) for (const w of WORDS) if (w.l === 1 && !S.known[w.id] && !S.learning[w.id]) { S.known[w.id] = 1; n++; }
+  S.prefsAt = Date.now(); save();
+  F.level = String(level); $('#fcLevel').value = String(level); $('#qzLevel').value = String(level); FC = null; QZ = null;
+  syncFilterUI(); refreshVisible(); updateChips();
+  return n;
+}
+function openLevelPicker() {
+  openDlg(`<h3 style="font-size:24px">What's your IT English level?</h3><p style="color:var(--muted);margin:0">We'll start you at the right words. If you're Intermediate or Advanced, Beginner words are marked as known so you can skip them.</p>
+    <div class="rolepick" style="grid-template-columns:1fr">${Object.entries(LEVELS).map(([k, L]) => `<button class="rp" data-picklevel="${k}"><span class="itile" style="background:${L.t}"><b style="color:${L.c};font-size:18px">${k}</b></span><span><b>${L.name}</b><small>${L.d}</small></span></button>`).join('')}
+    <button class="rp" id="lvTest"><span class="itile" style="background:#FEF3C7">${svg('quality', '#B45309', 22, 2)}</span><span><b>Not sure? Take a 1-minute test</b><small>9 words, from easy to hard</small></span></button></div>
+    <div class="mrow" style="justify-content:flex-start"><button class="btn ghost sm" id="lvSkip">Skip for now</button></div>`);
+  $('#dlgBox').classList.add('narrow'); $('#dlgBox').style.textAlign = 'left';
+  $('#dlgBox').querySelectorAll('[data-picklevel]').forEach(b => b.onclick = () => finishLevel(+b.dataset.picklevel, 'chosen'));
+  $('#lvTest').onclick = startLevelTest;
+  $('#lvSkip').onclick = () => { S.levelPrompted = 1; save(); closeDlg(); };
+}
+function finishLevel(level, how, score) {
+  const n = setUserLevel(level, how, score);
+  const L = LEVELS[level];
+  openDlg(`<div class="invite"><span class="itile" style="background:${L.t};width:64px;height:64px;border-radius:18px;display:grid;place-items:center"><b style="color:${L.c};font-size:28px">${level}</b></span>
+    <h3 style="font-size:24px;margin:0">${how === 'test' ? 'Your level:' : 'Level set:'} ${L.name}</h3>
+    ${score != null ? `<p style="margin:0;color:var(--muted)"><span>You got</span> <b>${score}/${LEVEL_TEST.length}</b> <span>words right.</span></p>` : ''}
+    <p style="margin:0;color:var(--muted)">${n ? `<b>${fmt(n)}</b> <span>Beginner words are marked as known. Unmark any word you're not sure about.</span>` : 'Start with the words at this level. You can change your level any time in My profile.'}</p>
+    <a class="btn primary lg" href="#flashcards" id="lvGo" style="width:100%">Start learning ${L.name} words</a></div>`);
+  $('#dlg').classList.add('center'); $('#dlgBox').classList.add('narrow');
+  $('#lvGo').onclick = () => closeDlg();
+}
+let LT = null;
+function startLevelTest() {
+  const pool = l => WORDS.filter(w => w.l === l && meaningOf(w));
+  LT = { i: 0, right: { 1: 0, 2: 0, 3: 0 }, qs: LEVEL_TEST.map(([t, l]) => { const w = WORDS.find(x => x.t === t) || shuffle(pool(l))[0];
+    const dis = shuffle(pool(w.l).filter(x => x.id !== w.id && meaningOf(x) !== meaningOf(w))).slice(0, 3);
+    return { w, opts: shuffle([w, ...dis]) }; }) };
+  renderLevelQ();
+}
+function renderLevelQ() {
+  const q = LT.qs[LT.i];
+  if (!q) {
+    const r = LT.right, score = r[1] + r[2] + r[3];
+    const level = r[3] >= 2 && r[2] >= 2 ? 3 : r[2] >= 2 && r[1] >= 2 ? 2 : 1;
+    track('count', 'levelTests'); finishLevel(level, 'test', score); return;
+  }
+  const L = LEVELS[q.w.l];
+  openDlg(`<div class="count">Question ${LT.i + 1} of ${LT.qs.length}</div><div class="progress"><i style="width:${LT.i / LT.qs.length * 100}%"></i></div>
+    <h3 style="font-size:20px;margin:6px 0 0">What does this mean?</h3>
+    <div data-notr style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><b style="font-size:28px">${esc(q.w.t)}</b>${spkBtn(q.w.t, L.c, L.t, 34)}</div>
+    <div class="opts" data-notr>${q.opts.map(o => `<button class="opt" data-lt="${o.id}">${esc(meaningOf(o))}</button>`).join('')}</div>
+    <button class="btn ghost sm" data-lt="0" style="align-self:flex-start">I don't know this word</button>`);
+  $('#dlgBox').classList.add('narrow'); $('#dlgBox').style.textAlign = 'left';
+  $('#dlgBox').querySelectorAll('[data-lt]').forEach(b => b.onclick = () => { if (+b.dataset.lt === q.w.id) LT.right[q.w.l]++; LT.i++; renderLevelQ(); });
+}
+function maybeAskLevel() {
+  if (S.levelPrompted || S.level || currentView === 'admin') return;
+  if ($('#dlg').classList.contains('open') || $('#overlay').classList.contains('open')) { setTimeout(maybeAskLevel, 1500); return; }
+  openLevelPicker();
 }
 
 /* ---------- sign-in invitation: 5 seconds after arriving, once per visit, for visitors who are not signed in ---------- */
