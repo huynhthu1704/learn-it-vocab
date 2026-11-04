@@ -748,6 +748,8 @@ const IC = {
   bulb:'<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>'
 };
 const svg = (name, c = '#1B1F2A', s = 20, sw = 1.9) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[name] || IC.book}</svg>`;
+// Saved = a solid yellow star; not saved = a grey outline.
+const starIcon = (on, size) => on ? svg('star', '#F59E0B', size, 2).replace('fill="none"', 'fill="#FBBF24"') : svg('star', '#9AA3B2', size, 2);
 const esc = s => String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 const $ = s => document.querySelector(s);
 function hydrateIcons(root = document) { root.querySelectorAll('[data-icon]').forEach(el => { if (el.dataset.done) return; el.innerHTML = svg(el.dataset.icon, el.dataset.c, +el.dataset.s || 20) + el.innerHTML; el.dataset.done = 1; }); }
@@ -880,7 +882,7 @@ function wordCard(w) {
   const stBadge = st === 'known' ? `<span class="pill" style="background:#DCFCE7;color:#15803D">Known</span>` : st === 'learning' ? `<span class="pill" style="background:#FEF3C7;color:#B45309">Learning</span>` : '';
   return `<div class="wcard${SEL.has(w.id) ? ' sel' : ''}" role="button" tabindex="0" data-open="${w.id}">
     <div class="ill" style="background:${L.t}"><span class="selbox">${svg('check', '#fff', 16, 3)}</span><span class="badge-corner">${stBadge}</span>
-      <span class="status-dot"><button class="star ${S.saved[w.id] ? 'on' : ''}" data-star="${w.id}" title="Save word" aria-label="Save word">${svg('star', S.saved[w.id] ? '#F59E0B' : '#9AA3B2', 16, 2)}</button></span>
+      <span class="status-dot"><button class="star ${S.saved[w.id] ? 'on' : ''}" data-star="${w.id}" title="Save word" aria-label="Save word">${starIcon(S.saved[w.id], 16)}</button></span>
       <div class="tile">${svg(w.c, L.c, 40, 1.7)}</div></div>
     <div class="body">
       <div class="term" data-notr>${esc(w.t)}</div>
@@ -916,7 +918,7 @@ function openWord(id, list) {
       <div class="mrow">
         <button class="btn ${st === 'known' ? 'primary' : 'secondary'}" data-known="${w.id}">${svg('check', st === 'known' ? '#fff' : '#16A34A', 18, 2.5)} I know this word</button>
         <button class="btn ${st === 'learning' ? 'primary' : 'secondary'}" data-learning="${w.id}">Still learning</button>
-        <button class="btn secondary" data-star="${w.id}">${svg('star', S.saved[w.id] ? '#F59E0B' : '#9AA3B2', 18, 2)} ${S.saved[w.id] ? 'Saved' : 'Save'}</button>
+        <button class="btn secondary" data-star="${w.id}">${starIcon(S.saved[w.id], 18)} ${S.saved[w.id] ? 'Saved' : 'Save'}</button>
       </div>
       ${rel.length ? `<div><div class="eyebrow" style="margin-bottom:8px;color:var(--muted)">More words on this topic</div><div class="related" data-notr>${rel.map(r => `<button data-open="${r.id}">${esc(r.t)}</button>`).join('')}</div></div>` : ''}
       <div class="fbk"><span>Was this explanation clear?</span><button class="fbk-b ${(S.stats?.fb || {})[w.id] === 1 ? 'on' : ''}" data-fb="1" data-fbid="${w.id}" aria-label="Yes, clear">👍</button><button class="fbk-b ${(S.stats?.fb || {})[w.id] === -1 ? 'on' : ''}" data-fb="-1" data-fbid="${w.id}" aria-label="No, confusing">👎</button></div>
