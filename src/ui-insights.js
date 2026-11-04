@@ -6,7 +6,7 @@ const VZ = { blue: '#2a78d6', blueSoft: '#cde2fb', grid: '#E4E7EE', ink: '#1B1F2
 const dayKey = d => d.toISOString().slice(0, 10);
 const daysAgo = n => { const d = new Date(); d.setDate(d.getDate() - n); return dayKey(d); };
 const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
-const QT_LABEL = { meaning: 'Meaning of a word', term: 'Word from its meaning', define: 'Word from an English definition', listen: 'Listening', gap: 'Fill the gap', cmeaning: 'Workplace: meaning of a phrase', cwhich: 'Workplace: phrase from its meaning', csituation: 'Workplace: what to say' };
+const QT_LABEL = { meaning: 'Meaning of a word', term: 'Word from its meaning', define: 'Word from an English definition', listen: 'Listening', gap: 'Fill the gap', cmeaning: 'Workplace: meaning of a phrase', cwhich: 'Workplace: phrase from its meaning', csituation: 'Workplace: what to say', cgap: 'Workplace: complete the sentence', clisten: 'Workplace: listening' };
 const PAGE_LABEL = { home: 'Home', browse: 'Browse words', workplace: 'Workplace English', flashcards: 'Flashcards', quiz: 'Quiz', progress: 'My profile', lists: 'My lists', admin: 'Admin' };
 const ROLE_LABEL = r => (ROLES[r] ? ROLES[r].name : 'Not chosen yet');
 

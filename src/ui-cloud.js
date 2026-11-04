@@ -18,7 +18,7 @@ const prefsPayload = () => ({ langs: S.langs, ui: S.ui, plain: S.plain, role: S.
 const isMobile = () => matchMedia('(max-width: 760px)').matches;
 // What the admin Insights page reads. No names or e-mails: learners are counted, not identified.
 const progressPayload = () => ({ known: S.known, learning: S.learning, saved: S.saved, days: S.days, quizzes: S.quizzes, best: S.best, prefs: prefsPayload(),
-  review: S.review || {}, stats: S.stats || {}, meta: { firstSeen: S.firstSeen || today(), lastSeen: today(), device: isMobile() ? 'mobile' : 'desktop', lists: S.listCount || 0, listWords: S.listWords || 0 } });
+  review: S.review || {}, ck: S.ck || {}, cl: S.cl || {}, stats: S.stats || {}, meta: { firstSeen: S.firstSeen || today(), lastSeen: today(), device: isMobile() ? 'mobile' : 'desktop', lists: S.listCount || 0, listWords: S.listWords || 0 } });
 function queueCloudSave() {
   if (!cloudUser || !window.Cloud) return;
   clearTimeout(cloudSaveT);
@@ -36,6 +36,7 @@ async function syncProgress() {
       S.quizzes = Math.max(S.quizzes, c.quizzes || 0); S.best = Math.max(S.best, c.best || 0);
       if (c.meta && c.meta.firstSeen && (!S.firstSeen || c.meta.firstSeen < S.firstSeen)) S.firstSeen = c.meta.firstSeen;
       if (c.stats && !S.stats) S.stats = c.stats;
+      S.ck = { ...(c.ck || {}), ...(S.ck || {}) }; S.cl = { ...(c.cl || {}), ...(S.cl || {}) }; for (const k in S.ck) delete S.cl[k];
       if (c.review) { S.review = { ...c.review, ...(S.review || {}) }; for (const id in S.review) if (!S.learning[id]) delete S.review[id]; }
       if (c.prefs && (c.prefs.prefsAt || 0) > (S.prefsAt || 0)) { Object.assign(S, c.prefs); applyLanguage(); }
     }

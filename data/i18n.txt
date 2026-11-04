@@ -465,3 +465,18 @@ Take the test | Làm bài kiểm tra | 테스트 보기 | Faire le test
 I know it | Tôi biết rồi | 알아요 | Je le connais
 Marked as new. | Đã đặt lại thành từ mới. | 새 단어로 되돌렸습니다. | Remis à nouveau.
 Previous word | Từ trước | 이전 단어 | Mot précédent
+# workplace english learning
+All items | Tất cả mục | 전체 항목 | Tous les éléments
+{0} / {1} known | Đã biết {0}/{1} | {1}개 중 {0}개 앎 | {0} / {1} connus
+Learn with flashcards | Học bằng thẻ ghi nhớ | 플래시카드로 학습 | Apprendre avec les cartes
+All categories | Tất cả chủ đề | 모든 분류 | Toutes les catégories
+New and learning items | Mục mới và đang học | 새 항목과 학습 중 항목 | Éléments nouveaux et en cours
+Still learning only | Chỉ mục đang học | 학습 중인 항목만 | Seulement en cours
+No items marked “Still learning” yet. | Chưa có mục nào được đánh dấu “Đang học”. | 아직 “학습 중”으로 표시한 항목이 없습니다. | Aucun élément marqué « J'apprends encore » pour l'instant.
+You know every item here. Pick another category or “All items”. | Bạn đã biết hết mục ở đây. Hãy chọn chủ đề khác hoặc “Tất cả mục”. | 여기 있는 항목을 모두 압니다. 다른 분류나 “전체 항목”을 고르세요. | Vous connaissez tous ces éléments. Choisissez une autre catégorie ou « Tous les éléments ».
+What does it mean, and when would you say it? Tap the card to flip. | Nghĩa là gì, và khi nào bạn nói câu này? Chạm vào thẻ để lật. | 무슨 뜻이고 언제 쓸까요? 카드를 눌러 뒤집으세요. | Que veut-il dire, et quand le diriez-vous ? Touchez la carte pour la retourner.
+phrases learned in this set | cụm từ đã học trong bộ này | 이번 세트에서 익힌 표현 | expressions apprises dans cette série
+Complete the sentence: | Hoàn thành câu: | 문장을 완성하세요: | Complétez la phrase :
+Listen and choose what you hear. | Nghe và chọn câu bạn nghe thấy. | 듣고 들은 표현을 고르세요. | Écoutez et choisissez ce que vous entendez.
+Workplace English progress | Tiến độ tiếng Anh công sở | 직장 영어 진도 | Progression en anglais au travail
+Category | Chủ đề | 분류 | Catégorie

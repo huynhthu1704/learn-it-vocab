@@ -310,6 +310,8 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   .ccard .phrase{font-size:19px}
 }
 .view{display:none}
+.cprog{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);margin-right:auto}
+.ccard .wact{margin-top:0}
 .wact{display:flex;gap:6px;margin-top:auto;padding-top:8px}
 .wact-b{flex:1;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 8px;font:inherit;font-size:13px;font-weight:700;color:var(--ink)}
 .wact-b:hover{border-color:#c9cfdb;background:var(--bg)}

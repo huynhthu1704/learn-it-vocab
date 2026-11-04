@@ -273,9 +273,12 @@ function closeModal() { $('#overlay').classList.remove('open'); if (location.has
 
 /* ---------- global clicks ---------- */
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-say],[data-star],[data-open],[data-known],[data-learning],[data-close],[data-step],[data-report],[data-adminedit],[data-fb],[data-review]');
+  const t = e.target.closest('[data-say],[data-star],[data-open],[data-known],[data-learning],[data-close],[data-step],[data-report],[data-adminedit],[data-fb],[data-review],[data-cknown],[data-clearning]');
   if (!t) { if (e.target === $('#overlay')) closeModal(); return; }
   if (t.dataset.say !== undefined) { e.stopPropagation(); speak(t.dataset.say, +t.dataset.rate || undefined, t.dataset.lang); return; }
+  if (t.dataset.cknown || t.dataset.clearning) { e.stopPropagation(); const id = +(t.dataset.cknown || t.dataset.clearning), want = t.dataset.cknown ? 'known' : 'learning';
+    if (cstatus(id) === want) { setCorp(id, 'new'); toast('Marked as new.'); } else { setCorp(id, want); toast(want === 'known' ? 'Nice! Marked as known.' : 'Added to your learning list.'); }
+    renderCorp(); return; }
   if (t.dataset.review !== undefined) { $('#fcMode').value = 'due'; FC = null; return; }
   if (t.dataset.fb) { e.stopPropagation(); const id = +t.dataset.fbid, v = +t.dataset.fb; S.stats = S.stats || {}; const fb = S.stats.fb = S.stats.fb || {};
     if (fb[id] === v) delete fb[id]; else fb[id] = v; track('count', 'feedback', 0); openWord(id);
@@ -410,16 +413,24 @@ $('#bulkbar').onclick = e => {
 };
 
 /* ---------- workplace english ---------- */
-const CF = { q: '', cat: 'all', type: 'all' };
+const CF = { q: '', cat: 'all', type: 'all', status: 'all' };
+// Progress on Workplace English items is kept apart from word progress: S.ck = known, S.cl = still learning.
+const cstatus = id => (S.ck || {})[id] ? 'known' : (S.cl || {})[id] ? 'learning' : 'new';
+function setCorp(id, st) { S.ck = S.ck || {}; S.cl = S.cl || {}; delete S.ck[id]; delete S.cl[id]; if (st === 'known') S.ck[id] = 1; if (st === 'learning') S.cl[id] = 1; st === 'new' ? save() : practised(); }
+function corpActions(c) {
+  const st = cstatus(c.id);
+  return `<div class="wact"><button class="wact-b ${st === 'known' ? 'on known' : ''}" data-cknown="${c.id}">${svg('check', st === 'known' ? '#fff' : '#16A34A', 15, 2.6)}<span>${st === 'known' ? 'Known' : 'I know it'}</span></button><button class="wact-b ${st === 'learning' ? 'on learning' : ''}" data-clearning="${c.id}">${svg('time', st === 'learning' ? '#fff' : '#B45309', 15, 2.2)}<span>Still learning</span></button></div>`;
+}
 function corpCard(c) {
   const C = CATS[c.cat];
   return `<div class="ccard">
     <div class="top"><div class="phrase" data-notr>${esc(c.p)}</div>${spkBtn(c.p.replace(/\[name\]/g, 'Minh').replace(/\[date\]/g, 'Monday'), '#fff', '#2563EB', 36)}</div>
-    <div class="prow"><span class="pill" style="background:#E8F0FE;color:#1D4ED8">${TYPES[c.type]}</span><span class="pill tone-${c.tone}">${c.tone[0].toUpperCase() + c.tone.slice(1)}</span><span class="pill" style="background:var(--bg);color:var(--muted)">${C.n}</span></div>
+    <div class="prow">${cstatus(c.id) === 'known' ? '<span class="pill" style="background:#DCFCE7;color:#15803D">Known</span>' : cstatus(c.id) === 'learning' ? '<span class="pill" style="background:#FEF3C7;color:#B45309">Learning</span>' : ''}<span class="pill" style="background:#E8F0FE;color:#1D4ED8">${TYPES[c.type]}</span><span class="pill tone-${c.tone}">${c.tone[0].toUpperCase() + c.tone.slice(1)}</span><span class="pill" style="background:var(--bg);color:var(--muted)">${C.n}</span></div>
     ${defsHTML(c)}
     <div class="ctx">${svg('time', '#5B6475', 18, 2)}<div><b>When to use</b><span data-notr>${esc(c.ctx)}${c.ct ? myLangs().filter(l => c.ct[l]).map(l => `<span class="tline" style="display:flex;gap:8px;margin-top:4px;color:var(--muted)">${langTag(l)}<span lang="${l}">${esc(c.ct[l])}</span></span>`).join('') : ''}</span></div></div>
     <div class="cex" data-notr>${spkBtn(c.ex.replace(/^"|"$/g, '').replace(/[“”"]/g, ''), '#2563EB', '#E8F0FE', 28)}<div style="flex:1"><span>${esc(c.ex)}</span>${xRows(c.x, '#2563EB', '#E8F0FE', 24)}</div></div>
     ${c.av ? `<div class="avoid">${svg('x', '#DC2626', 18, 2.5)}<div><b>Avoid:</b> <span data-notr>${esc(c.av)}</span></div></div>` : ''}
+    ${corpActions(c)}
     <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="reportlink" data-report="${c.id}" data-kind="corporate">${svg('flag', '#5B6475', 15, 2)}<span>Report a problem</span></button>${cloudAdmin ? `<button class="reportlink" data-adminedit="${c.id}" data-kind="corporate">${svg('edit', '#5B6475', 15, 2)}<span>Edit</span></button>` : ''}</div>
   </div>`;
 }
@@ -427,7 +438,9 @@ function renderCorp() {
   $('#cType').innerHTML = segHTML([['all', 'All'], ['abbr', 'Abbreviations'], ['term', 'Terms'], ['expr', 'Expressions']], CF.type, 'ct');
   $('#cCats').innerHTML = `<button data-cc="all" class="${CF.cat === 'all' ? 'on' : ''}">All (${CORP.length})</button>` + Object.entries(CATS).map(([k, C]) => `<button data-cc="${k}" class="${CF.cat === k ? 'on' : ''}">${svg(C.i, CF.cat === k ? '#fff' : '#5B6475', 15, 2)}${C.n} (${CORP.filter(c => c.cat === k).length})</button>`).join('');
   const q = norm(CF.q.trim());
-  const list = CORP.filter(c => (CF.cat === 'all' || c.cat === CF.cat) && (CF.type === 'all' || c.type === CF.type) &&
+  const inCat = CORP.filter(c => CF.cat === 'all' || c.cat === CF.cat), kn = inCat.filter(c => cstatus(c.id) === 'known').length;
+  $('#cProg').innerHTML = `<span><b>${kn}</b> / ${inCat.length} known</span><span class="progress" style="width:120px;display:inline-block"><i style="width:${inCat.length ? kn / inCat.length * 100 : 0}%;background:#16A34A"></i></span>`;
+  const list = CORP.filter(c => (CF.cat === 'all' || c.cat === CF.cat) && (CF.type === 'all' || c.type === CF.type) && (CF.status === 'all' || cstatus(c.id) === CF.status) &&
     (!q || [c.p, c.d, c.v, c.k, c.f || '', c.ex, c.ctx].some(x => norm(x).includes(q))));
   $('#cGrid').innerHTML = list.map(corpCard).join('');
   $('#cCount').textContent = `${list.length} items`;
@@ -436,7 +449,14 @@ function renderCorp() {
 $('#cType').onclick = e => { const b = e.target.closest('[data-ct]'); if (b) { CF.type = b.dataset.ct; renderCorp(); } };
 $('#cCats').onclick = e => { const b = e.target.closest('[data-cc]'); if (b) { CF.cat = b.dataset.cc; renderCorp(); } };
 let cqT; $('#cq').oninput = e => { clearTimeout(cqT); cqT = setTimeout(() => { CF.q = e.target.value; renderCorp(); }, 120); };
-$('#cPractice').onclick = () => { $('#qzSource').value = 'corp'; QZ = null; };
+$('#cStatus').onchange = e => { CF.status = e.target.value; renderCorp(); };
+$('#cPractice').onclick = () => { $('#qzSource').value = 'corp'; $('#qzCat').value = CF.cat; QZ = null; };
+$('#cLearn').onclick = () => { $('#fcSource').value = 'corp'; $('#fcCat').value = CF.cat; FC = null; };
+const catOptions = () => '<option value="all">All categories</option>' + Object.entries(CATS).map(([k, C]) => `<option value="${k}">${C.n}</option>`).join('');
+$('#fcCat').innerHTML = catOptions(); $('#qzCat').innerHTML = catOptions();
+$('#fcSource').onchange = () => { const c = $('#fcSource').value === 'corp'; $('#fcCat').style.display = c ? '' : 'none'; $('#fcLevel').style.display = $('#fcRole').style.display = c ? 'none' : '';
+  if ($('#fcMode').dataset.src === $('#fcSource').value) return; $('#fcMode').dataset.src = $('#fcSource').value; FC = null;
+  $('#fcMode').innerHTML = c ? '<option value="new">New and learning items</option><option value="learning">Still learning only</option><option value="all">All items</option>' : '<option value="due">Due for review</option><option value="new">New and learning words</option><option value="all">All words</option><option value="saved">Saved words ★</option>'; updateDue(); };
 
 /* ---------- flashcards ---------- */
 function fillLR(lvSel, rlSel) {
@@ -448,6 +468,15 @@ if (S.focusRole && ROLES[S.focusRole]) { $('#fcRole').value = S.focusRole; $('#q
 let FC = null;
 function startFC() {
   const mode = $('#fcMode').value;
+  if ($('#fcSource').value === 'corp') {
+    const cat = $('#fcCat').value; let pool = CORP.filter(c => cat === 'all' || c.cat === cat);
+    if (mode === 'learning') pool = pool.filter(c => cstatus(c.id) === 'learning');
+    else if (mode === 'new') pool = [...shuffle(pool.filter(c => cstatus(c.id) === 'learning')).slice(0, 4), ...shuffle(pool.filter(c => cstatus(c.id) === 'new'))];
+    else pool = shuffle(pool);
+    pool = pool.slice(0, 10);
+    if (!pool.length) { $('#fcArea').innerHTML = `<div class="empty">${mode === 'learning' ? 'No items marked “Still learning” yet.' : 'You know every item here. Pick another category or “All items”.'}</div>`; return; }
+    FC = { queue: pool.map(c => c.id), done: 0, total: pool.length, got: 0, again: 0, corp: true }; renderFC(); return;
+  }
   if (mode === 'due') {
     const ids = dueIds().slice(0, 10);
     if (!ids.length) { $('#fcArea').innerHTML = `<div class="empty">Nothing to review today. Words you mark “Still learning” come back here after 1, 3 and 7 days.</div>`; return; }
@@ -462,9 +491,10 @@ function startFC() {
 }
 function renderFC() {
   if (!FC.queue.length) {
-    $('#fcArea').innerHTML = `<div class="card" style="padding:40px;text-align:center;border-radius:28px"><div class="result-big" style="color:var(--l1)">${FC.got}</div><p style="font-size:18px;font-weight:700">words learned in this set</p><p style="color:var(--muted)">You repeated ${FC.again} card${FC.again === 1 ? '' : 's'}. Keep going to build your streak.</p><div class="fc-actions"><button class="btn primary" id="fcAgain">Next set of 10</button><a class="btn secondary" href="#quiz">Test yourself in a quiz</a></div></div>`;
+    $('#fcArea').innerHTML = `<div class="card" style="padding:40px;text-align:center;border-radius:28px"><div class="result-big" style="color:var(--l1)">${FC.got}</div><p style="font-size:18px;font-weight:700">${FC.corp ? 'phrases learned in this set' : 'words learned in this set'}</p><p style="color:var(--muted)">You repeated ${FC.again} card${FC.again === 1 ? '' : 's'}. Keep going to build your streak.</p><div class="fc-actions"><button class="btn primary" id="fcAgain">Next set of 10</button><a class="btn secondary" href="#quiz">Test yourself in a quiz</a></div></div>`;
     $('#fcAgain').onclick = startFC; practised(0); return;
   }
+  if (FC.corp) return renderCorpFC();
   const w = BY_ID.get(FC.queue[0]); const L = LEVELS[w.l];
   $('#fcArea').innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span class="count">Card ${FC.done + 1} · ${FC.queue.length} left</span>${FC.review && S.review && S.review[w.id] ? `<span class="pill" style="background:#FEF3C7;color:#B45309">${['1-day review', '3-day review', '7-day review'][S.review[w.id].s] || 'Review'}</span>` : levelPill(w)}</div>
@@ -485,6 +515,29 @@ function renderFC() {
   $('#fcYes').onclick = () => { if (FC.review && S.review && S.review[w.id] && S.review[w.id].s < REVIEW_GAPS.length - 1) { schedule(w.id, S.review[w.id].s + 1); practised(); updateDue(); } else setKnown(w.id, true); FC.got++; FC.done++; track('count', 'cards'); FC.queue.shift(); renderFC(); };
   $('#fcNo').onclick = () => { setKnown(w.id, false); FC.again++; FC.done++; track('count', 'cards'); const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
 }
+function renderCorpFC() {
+  const c = CORP.find(x => x.id === FC.queue[0]); const C = CATS[c.cat];
+  const say = c.p.replace(/\[name\]/g, 'Minh').replace(/\[date\]/g, 'Monday');
+  $('#fcArea').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span class="count">Card ${FC.done + 1} · ${FC.queue.length} left</span><span class="pill" style="background:#E8F0FE;color:#1D4ED8">${C.n}</span></div>
+    <div class="progress" style="margin-bottom:20px"><i style="width:${FC.done / (FC.done + FC.queue.length) * 100}%"></i></div>
+    <div class="fc" id="fc"><div class="fc-inner">
+      <div class="fc-face"><div style="width:100px;height:100px;border-radius:28px;background:#E8F0FE;display:grid;place-items:center">${svg(C.i, '#2563EB', 52, 1.7)}</div>
+        <div class="prow" style="justify-content:center"><span class="pill" style="background:#E8F0FE;color:#1D4ED8">${TYPES[c.type]}</span><span class="pill tone-${c.tone}">${c.tone[0].toUpperCase() + c.tone.slice(1)}</span></div>
+        <div class="term" data-notr style="font-size:36px">${esc(c.p)}</div>${spkBtn(say, '#fff', '#2563EB', 44)}
+        <div class="hint">What does it mean, and when would you say it? Tap the card to flip.</div></div>
+      <div class="fc-face fc-back" style="justify-content:flex-start;text-align:left;align-items:stretch"><div class="term" style="font-size:26px;text-align:center" data-notr>${esc(c.p)}</div>
+        ${defsHTML(c, true)}
+        <div class="ctx">${svg('time', '#5B6475', 18, 2)}<div><b>When to use</b><span data-notr>${esc(c.ctx)}</span></div></div>
+        <div class="cex" data-notr>${spkBtn(c.ex.replace(/[“”"]/g, ''), '#2563EB', '#E8F0FE', 28)}<div style="flex:1"><span>${esc(c.ex)}</span>${xRows(c.x, '#2563EB', '#E8F0FE', 24)}</div></div>
+        ${c.av ? `<div class="avoid">${svg('x', '#DC2626', 18, 2.5)}<div><b>Avoid:</b> <span data-notr>${esc(c.av)}</span></div></div>` : ''}</div>
+    </div></div>
+    <div class="fc-actions"><button class="btn secondary lg" id="fcNo">Again</button><button class="btn primary lg" id="fcYes">${svg('check', '#fff', 20, 2.5)} I knew it</button></div>
+    <p class="hint">Keyboard: Space to flip · 1 = Again · 2 = I knew it</p>`;
+  $('#fc').onclick = e => { if (!e.target.closest('[data-say]')) $('#fc').classList.toggle('flip'); };
+  $('#fcYes').onclick = () => { setCorp(c.id, 'known'); FC.got++; FC.done++; track('count', 'cards'); FC.queue.shift(); renderFC(); };
+  $('#fcNo').onclick = () => { setCorp(c.id, 'learning'); FC.again++; FC.done++; track('count', 'cards'); const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
+}
 $('#fcStart').onclick = startFC;
 document.addEventListener('keydown', e => {
   if (currentView !== 'flashcards' || !FC || !$('#fc') || e.target.matches('input,select')) return;
@@ -503,14 +556,22 @@ function makeQuestion(w, pool) {
   const opts = shuffle([w, ...dis]);
   return { w, type, opts };
 }
+// The phrase blanked out of its own example sentence ("Let's ____ on the pricing…").
+function corpGap(c) { const core = c.p.replace(/\[.*?\]/g, '').replace(/[.?!]+$/, '').trim(); if (core.length < 2) return null; const i = c.ex.toLowerCase().indexOf(core.toLowerCase()); if (i < 0) return null; return esc(c.ex.slice(0, i)) + '<span style="display:inline-block;min-width:90px;border-bottom:2px solid var(--blue)">&nbsp;</span>' + esc(c.ex.slice(i + core.length)); }
 function makeCorpQuestion(c) {
   const same = shuffle(CORP.filter(x => x.id !== c.id && x.cat === c.cat)), other = shuffle(CORP.filter(x => x.id !== c.id && x.cat !== c.cat));
   const dis = [...same, ...other].filter((x, i, a) => a.findIndex(y => y.d === x.d) === i && x.d !== c.d).slice(0, 3);
-  const type = ['cmeaning', 'cwhich', 'csituation'][Math.floor(Math.random() * 3)];
+  const types = ['cmeaning', 'cwhich', 'csituation', 'clisten']; if (corpGap(c)) types.push('cgap', 'cgap');
+  const type = types[Math.floor(Math.random() * types.length)];
   return { w: c, corp: true, type, opts: shuffle([c, ...dis]) };
 }
 function startQuiz() {
-  if ($('#qzSource').value === 'corp') { QZ = { qs: shuffle(CORP).slice(0, 10).map(makeCorpQuestion), i: 0, score: 0, wrong: [] }; renderQ(); return; }
+  if ($('#qzSource').value === 'corp') {
+    const cat = $('#qzCat').value; let pool = CORP.filter(c => cat === 'all' || c.cat === cat); if (pool.length < 4) pool = CORP;
+    const learning = shuffle(pool.filter(c => cstatus(c.id) === 'learning')).slice(0, 4);
+    const pick = [...learning, ...shuffle(pool.filter(c => !learning.includes(c)))].slice(0, 10);
+    QZ = { qs: shuffle(pick).map(makeCorpQuestion), i: 0, score: 0, wrong: [] }; renderQ(); return;
+  }
   let pool = filterPool($('#qzLevel').value, $('#qzRole').value, 'all');
   if (pool.length < 8) pool = WORDS;
   const learning = shuffle(pool.filter(w => S.learning[w.id])).slice(0, 3);
@@ -533,6 +594,8 @@ function renderQ() {
   if (q.type === 'cmeaning') { prompt = ask('What does this mean?', `<b style="color:#2563EB">“${esc(w.p)}”</b> ${spkBtn(w.p, '#2563EB', '#E8F0FE', 32)}`); optText = o => esc(o.d); }
   else if (q.type === 'cwhich') { prompt = ask('Which phrase has this meaning?', `<b style="color:#2563EB">“${esc(w.d)}”</b>`); optText = o => esc(o.p); }
   else if (q.type === 'csituation') { prompt = ask('What would you say or write here?', `<span style="font-weight:600">${esc(w.ctx)}</span>`); optText = o => esc(o.p); }
+  else if (q.type === 'cgap') { prompt = ask('Complete the sentence:', `<span style="font-weight:600">${corpGap(w)}</span>`); optText = o => esc(o.p); }
+  else if (q.type === 'clisten') { const say = w.p.replace(/\[name\]/g, 'Minh').replace(/\[date\]/g, 'Monday'); prompt = ask('Listen and choose what you hear.', `${spkBtn(say, '#fff', '#2563EB', 44)} ${spkBtn(say, '#2563EB', '#E8F0FE', 44, true)}`); optText = o => esc(o.p); }
   else if (q.type === 'meaning') { prompt = ask('What does this word mean?', `<b style="color:${L.c}">${esc(w.t)}</b> ${spkBtn(w.t, L.c, L.t, 32)}`); optText = o => esc(meaningOf(o)); }
   else if (q.type === 'term') { prompt = ask('Which word has this meaning?', `<b style="color:${L.c}">“${esc(meaningOf(w))}”</b>`); optText = o => esc(o.t + (o.a ? ` (${o.a})` : '')); }
   else if (q.type === 'define') { prompt = ask('Which word matches this definition?', `<span style="font-weight:600">“${esc(w.d)}”</span>`); optText = o => esc(o.t + (o.a ? ` (${o.a})` : '')); }
@@ -545,10 +608,11 @@ function renderQ() {
     <div class="opts" data-notr>${q.opts.map(o => `<button class="opt" data-ans="${o.id}">${optText(o)}<span></span></button>`).join('')}</div>
     <div id="qfb"></div></div>`;
   if (q.type === 'listen') setTimeout(() => speak(w.t), 300);
+  if (q.type === 'clisten') setTimeout(() => speak(w.p.replace(/\[name\]/g, 'Minh').replace(/\[date\]/g, 'Monday')), 300);
   document.querySelectorAll('[data-ans]').forEach(b => b.onclick = () => {
     const ok = +b.dataset.ans === w.id; { S.stats = S.stats || {}; const qt = S.stats.qt = S.stats.qt || {}; const r = qt[q.type] = qt[q.type] || [0, 0]; r[ok ? 0 : 1]++; }
     document.querySelectorAll('[data-ans]').forEach(x => { x.disabled = true; if (+x.dataset.ans === w.id) { x.classList.add('right'); x.lastChild.innerHTML = svg('check', '#16A34A', 20, 2.5); } });
-    if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); if (!q.corp) track('wrong', w.id); if (!q.corp) setKnown(w.id, false); else practised(0); } else { QZ.score++; practised(); }
+    if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); if (!q.corp) track('wrong', w.id); if (!q.corp) setKnown(w.id, false); else setCorp(w.id, 'learning'); } else { QZ.score++; practised(); }
     if (q.corp) { $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <b data-notr>${esc(w.p)}</b><div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:8px;font-style:italic" data-notr>${esc(w.ex)}${xRows(w.x, '#2563EB', '#fff', 22)}</div></div><div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`; $('#qNext').onclick = () => { QZ.i++; renderQ(); }; $('#qNext').focus(); return; }
     $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <span data-notr><b>${esc(w.t)}</b> <span class="ipa">${esc(w.i)}</span></span><div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:6px">${exampleHTML(w, L.c, L.t, 28, false)}</div></div>
       <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`;
@@ -557,7 +621,7 @@ function renderQ() {
   });
 }
 $('#qzStart').onclick = startQuiz;
-$('#qzSource').onchange = () => { const c = $('#qzSource').value === 'corp'; $('#qzLevel').style.display = $('#qzRole').style.display = c ? 'none' : ''; };
+$('#qzSource').onchange = () => { const c = $('#qzSource').value === 'corp'; $('#qzLevel').style.display = $('#qzRole').style.display = c ? 'none' : ''; $('#qzCat').style.display = c ? '' : 'none'; };
 
 /* ---------- progress ---------- */
 function renderProgress() {
@@ -569,6 +633,8 @@ function renderProgress() {
     rows += `<tr><td><b>${R.name}</b></td>` + Object.keys(LEVELS).map(l => { const p = WORDS.filter(w => w.l == l && w.r.includes(k)); const n = p.filter(w => S.known[w.id]).length; return `<td><div style="font-size:13px;color:var(--muted);margin-bottom:4px">${n} / ${p.length}</div><div class="progress"><i style="width:${n / p.length * 100}%;background:${LEVELS[l].c}"></i></div></td>`; }).join('') + '</tr>';
   }
   $('#ptable').innerHTML = rows;
+  $('#cptable').innerHTML = '<tr><th>Category</th><th>Known</th><th>Learning</th></tr>' + Object.entries(CATS).map(([k, C]) => { const p = CORP.filter(c => c.cat === k); const n = p.filter(c => cstatus(c.id) === 'known').length, l = p.filter(c => cstatus(c.id) === 'learning').length;
+    return `<tr><td><b>${C.n}</b></td><td><div style="font-size:13px;color:var(--muted);margin-bottom:4px">${n} / ${p.length}</div><div class="progress"><i style="width:${p.length ? n / p.length * 100 : 0}%;background:#16A34A"></i></div></td><td>${l}</td></tr>`; }).join('');
   const sv = WORDS.filter(w => S.saved[w.id]);
   $('#savedGrid').innerHTML = sv.length ? sv.map(wordCard).join('') : '<p style="color:var(--muted);margin:0">No saved words yet. Tap ★ on any word card.</p>'; renderLangCard();
   $('#accent').value = S.accent; $('#rate').value = String(S.rate);
@@ -623,7 +689,8 @@ function show(v) {
   if (v === 'home') renderHome();
   if (v === 'browse') renderBrowse();
   if (v === 'workplace') renderCorp();
-  if (v === 'flashcards' && !FC) { const due = dueIds().length; if (due) $('#fcMode').value = 'due'; else if ($('#fcMode').value === 'due') $('#fcMode').value = 'new'; startFC(); }
+  if (v === 'flashcards') $('#fcSource').onchange.call(null, true);
+  if (v === 'flashcards' && !FC) { const due = dueIds().length; if ($('#fcSource').value === 'corp') startFC(); else { if (due) $('#fcMode').value = 'due'; else if ($('#fcMode').value === 'due') $('#fcMode').value = 'new'; startFC(); } }
   if (v === 'quiz') { $('#qzSource').onchange(); if (!QZ) startQuiz(); }
   if (v === 'progress') { renderProgress(); renderAccount(); }
   if (v === 'lists') renderLists();

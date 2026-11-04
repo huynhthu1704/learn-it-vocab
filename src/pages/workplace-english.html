@@ -4,9 +4,10 @@
     <div class="frow">
       <label class="search"><span data-icon="search" data-c="#5B6475" data-s="18"></span><input id="cq" type="search" placeholder="Search, e.g. EOD, circle back, push back, nhắc nhở, 회의" autocomplete="off"></label>
       <div class="seg" id="cType"></div>
-      <a class="btn primary sm" href="#quiz" id="cPractice">Practise in a quiz</a>
+      <select class="sel" id="cStatus" aria-label="Status"><option value="all">All items</option><option value="new">New</option><option value="learning">Learning</option><option value="known">Known</option></select>
     </div>
-    <div class="frow"><div class="catchips" id="cCats"></div><span class="count" id="cCount"></span></div>
+    <div class="frow"><div class="catchips" id="cCats"></div></div>
+    <div class="frow"><div class="cprog" id="cProg"></div><a class="btn secondary sm" href="#flashcards" id="cLearn"><span data-icon="book" data-c="#1B1F2A" data-s="16"></span> Learn with flashcards</a><a class="btn primary sm" href="#quiz" id="cPractice">Practise in a quiz</a><span class="count" id="cCount"></span></div>
   </div></div>
   <div class="wrap" style="padding-bottom:72px">
     <div class="cgrid" id="cGrid"></div>
