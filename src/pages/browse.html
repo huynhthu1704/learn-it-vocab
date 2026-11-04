@@ -1,0 +1,21 @@
+<main id="v-browse" class="view">
+  <div class="wrap page-head"><h1>Browse words</h1><p>Search in English, Vietnamese, Korean or French. Click any card for details and audio.</p></div>
+  <div class="filters"><div class="wrap">
+    <div class="frow">
+      <label class="search"><span data-icon="search" data-c="#5B6475" data-s="18"></span><input id="q" type="search" placeholder="Search, e.g. deploy, kiểm thử, 배포, déployer" autocomplete="off"></label>
+      <select class="sel" id="fTopic" aria-label="Topic"></select>
+      <button class="btn secondary sm" id="selectBtn">Select words</button>
+      <select class="sel" id="fStatus" aria-label="Status"><option value="all">All words</option><option value="new">New</option><option value="learning">Learning</option><option value="known">Known</option><option value="saved">Saved ★</option></select>
+    </div>
+    <div class="frow">
+      <div class="seg" id="fLevel"></div>
+      <div class="seg" id="fRole"></div>
+      <span class="count" id="count"></span>
+    </div>
+  </div></div>
+  <div class="wrap">
+    <div class="wgrid" id="grid"></div>
+    <div class="empty" id="empty" style="display:none">No words match. Try another search or clear the filters.</div>
+    <div class="more"><button class="btn secondary" id="moreBtn">Show more words</button></div>
+  </div>
+</main>

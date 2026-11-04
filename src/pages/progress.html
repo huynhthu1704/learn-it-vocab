@@ -1,0 +1,26 @@
+<main id="v-progress" class="view">
+  <div class="wrap page-head"><h1>My profile</h1><p>Your account, language preferences and learning progress.</p></div>
+  <div class="wrap" style="padding-bottom:72px">
+    <div class="card" id="accountCard" style="padding:24px;margin-bottom:24px"></div>
+    <div class="card" style="padding:24px;margin-bottom:24px" id="langCard"></div>
+    <div class="statgrid" id="statgrid"></div>
+    <div class="card" style="padding:24px;margin-bottom:24px">
+      <h3 style="font-size:20px;margin-bottom:8px">Progress by level and role</h3>
+      <div style="overflow:auto"><table class="ptable" id="ptable"></table></div>
+    </div>
+    <div class="card" style="padding:24px;margin-bottom:24px">
+      <h3 style="font-size:20px;margin-bottom:12px">Audio settings</h3>
+      <div class="settings">
+        <select class="sel" id="accent"><option value="en-US">American English</option><option value="en-GB">British English</option></select>
+        <select class="sel" id="rate"><option value="1">Normal speed</option><option value="0.8">Slower</option><option value="0.6">Very slow</option></select>
+        <button class="btn secondary sm" id="testVoice"><span data-icon="speaker" data-c="#1B1F2A" data-s="16"></span> Test voice</button>
+      </div>
+      <p class="hint" style="text-align:left">IPA on this site shows American pronunciation. The voice comes from your device, so it can sound different on each phone or computer.</p>
+    </div>
+    <div class="card" style="padding:24px">
+      <h3 style="font-size:20px;margin-bottom:12px">Saved words ★</h3>
+      <div class="wgrid" id="savedGrid"></div>
+      <div style="margin-top:20px"><button class="btn ghost sm" id="resetBtn" style="color:var(--red)">Reset all progress</button></div>
+    </div>
+  </div>
+</main>
