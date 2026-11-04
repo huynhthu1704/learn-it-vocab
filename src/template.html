@@ -60,7 +60,8 @@ h1,h2,h3{margin:0;letter-spacing:-.02em}
 .stats{display:flex;gap:40px;margin-top:36px;flex-wrap:wrap}
 .stats b{display:block;font-size:30px;font-weight:800}
 .stats span{font-size:14px;color:var(--muted);font-weight:500}
-.wotd-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.wotd-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px}
+.wotd-label .btn{white-space:nowrap}
 section.block{padding:88px 0}
 section.alt{background:var(--bg)}
 .sec-head{margin-bottom:40px;max-width:680px}
@@ -496,7 +497,7 @@ h1 .tl,h2 .tl{font-size:.55em;margin-top:6px}
         </div>
       </div>
       <div>
-        <div class="wotd-label"><span class="eyebrow">Word of the day</span><button class="btn sm secondary" id="wotdNext">Another word</button></div>
+        <div class="wotd-label"><span class="eyebrow">Word of the day</span><div class="mrow" style="gap:8px"><button class="btn sm secondary" id="wotdPrev" disabled title="Previous word" aria-label="Previous word"><span data-icon="back" data-c="#1B1F2A" data-s="16"></span><span class="hide-sm">Previous word</span></button><button class="btn sm secondary" id="wotdNext">Another word <span data-icon="arrow" data-c="#1B1F2A" data-s="16"></span></button></div></div>
         <div id="wotd"></div>
       </div>
     </div>
@@ -963,7 +964,7 @@ document.addEventListener('click', e => {
     // On a card, pressing the state the word already has sets it back to new.
     if (!inModal && status(id) === want) { delete S.known[id]; delete S.learning[id]; if (S.review) delete S.review[id]; save(); updateDue(); toast('Marked as new.'); }
     else { setKnown(id, want === 'known'); toast(want === 'known' ? 'Nice! Marked as known.' : 'Added to your learning list.'); }
-    if (inModal) openWord(id); else { if (t.closest('#wotd')) renderWotd(); else refreshVisible(); }
+    if (inModal) openWord(id); else if (t.closest('#wotd')) { renderWotd(); if (status(id) !== 'new') setTimeout(wotdForward, 450); } else refreshVisible();
     return;
   }
   if (t.dataset.close !== undefined) { closeModal(); return; }
@@ -978,10 +979,15 @@ document.addEventListener('keydown', e => {
 });
 
 /* ---------- home ---------- */
-let wotdIdx = 0;
+let wotdIdx = 0; const wotdHistory = [];
+const wotdAt = i => { const n = WORDS.length; return WORDS[(((Math.floor(Date.now() / 864e5) * 7919 + i * 131) % n) + n) % n]; };
+// Next word: skip words the learner already marked, so each tap brings something new.
+function wotdForward() { wotdHistory.push(wotdIdx); let i = wotdIdx + 1; for (let k = 0; k < 60 && status(wotdAt(i).id) !== 'new'; k++) i++; wotdIdx = i; renderWotd(); }
+function wotdBack() { if (!wotdHistory.length) return; wotdIdx = wotdHistory.pop(); renderWotd(); }
 function renderWotd() {
   const day = Math.floor(Date.now() / 864e5);
-  const w = WORDS[(day * 7919 + wotdIdx * 131) % WORDS.length]; const L = LEVELS[w.l];
+  const w = wotdAt(wotdIdx); const L = LEVELS[w.l];
+  if ($('#wotdPrev')) $('#wotdPrev').disabled = !wotdHistory.length;
   $('#wotd').innerHTML = `<div class="card" style="overflow:hidden;border-radius:28px;box-shadow:var(--shadow-lg)">
     <div class="ill" style="height:180px;background:${L.t};display:grid;place-items:center;position:relative"><div class="tile" style="width:116px;height:116px;border-radius:30px;background:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(26,31,51,.1)">${svg(w.c, L.c, 62, 1.6)}</div></div>
     <div style="padding:24px 28px 28px;display:flex;flex-direction:column;gap:12px">
@@ -1025,7 +1031,7 @@ function renderHome() {
   document.querySelectorAll('[data-domain-link]').forEach(a => a.onclick = () => { F.topic = a.dataset.domainLink; F.level = 'all'; F.role = 'all'; syncFilterUI(); });
   document.querySelectorAll('[data-level-link]').forEach(a => a.onclick = () => { F.level = a.dataset.levelLink; F.role = 'all'; syncFilterUI(); });
 }
-$('#wotdNext').onclick = () => { wotdIdx++; renderWotd(); };
+$('#wotdNext').onclick = wotdForward; $('#wotdPrev').onclick = wotdBack;
 
 /* ---------- browse ---------- */
 const F = { q: '', level: 'all', role: (S.focusRole && ROLES[S.focusRole]) ? S.focusRole : 'all', topic: 'all', status: 'all' };
