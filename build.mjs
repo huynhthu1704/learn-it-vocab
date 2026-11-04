@@ -110,6 +110,17 @@ for (const f of fs.readdirSync('data/fr').filter(f => f.endsWith('.txt')).sort()
 for (const w of words) w.fr = FR.get(w.term.toLowerCase()) || '';
 const noFr = words.filter(w => !w.fr);
 if (noFr.length) console.warn('Words without French (AI can fill these in the admin panel):', noFr.length);
+// Level fixes from a review (data/level-overrides.txt: term|level).
+{
+  const byTerm = new Map(words.map(w => [w.term.toLowerCase(), w])); let n = 0;
+  for (const line of fs.readFileSync('data/level-overrides.txt', 'utf8').split('\n')) {
+    if (!line.trim() || line.startsWith('#')) continue;
+    const [t, l] = line.split('|').map(x => x.trim()); const w = byTerm.get(t.toLowerCase());
+    if (!w || !/^[123]$/.test(l)) { console.error('data/level-overrides.txt: not found or bad level →', line); process.exit(1); }
+    if (w.level !== +l) { w.level = +l; n++; }
+  }
+  console.log('levels changed by review:', n);
+}
 for (const w of words) tagRoles(w);
 // Abbreviation + full form → one word card (data/merge-abbreviations.txt). The abbreviation keeps its id;
 // the full form's id is retired and listed in MERGED so saved progress moves to the kept card.

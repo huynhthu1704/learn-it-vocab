@@ -1,0 +1,546 @@
+# Level fixes after a review (Nov 2026): term|level. 1 = Beginner, 2 = Intermediate, 3 = Advanced.
+# Applied after the word lists are read, so a word keeps its id and only its level changes.
+prioritization|2
+ROI|2
+product manager|2
+influence|2
+persuade|2
+storytelling|2
+narrative|2
+compromise|2
+say no|2
+conflict resolution|2
+difficult conversation|2
+manage expectations|2
+lessons learned|2
+continuous improvement|2
+customer satisfaction|2
+NPS|2
+B2B|2
+B2C|2
+SaaS|2
+partnership|2
+scalability|2
+procurement|2
+fixed price|2
+technical debt|2
+microservices|2
+monolith|2
+Kubernetes|2
+postmortem|2
+root cause analysis|2
+runbook|2
+hotfix release|2
+feature toggle|2
+code coverage|2
+static analysis|2
+data migration|2
+GraphQL|2
+WebSocket|2
+OAuth|2
+JWT|2
+single sign-on|2
+vulnerability|2
+penetration test|2
+XSS|2
+audit log|2
+race condition|2
+DRY|2
+KISS|2
+YAGNI|2
+design document|2
+proof of concept|2
+legacy system|2
+engineering manager|2
+justify|2
+sunset|2
+deprecate|2
+thesis defense|2
+throughput|2
+quantitative|2
+qualitative|2
+research question|2
+abstract|2
+journal|2
+publish|2
+evaluation|2
+precision|2
+recall|2
+deep learning|2
+large language model|2
+bias|2
+ethics|2
+data cleaning|2
+visualization|2
+correlation|2
+sample size|2
+virtualization|2
+serverless|2
+design pattern|2
+system design|2
+behavioural interview|2
+STAR method|2
+salary negotiation|2
+graduate program|2
+PhD|2
+research assistant|2
+technical writing|2
+academic English|2
+paraphrase|2
+critique|2
+elevator pitch|2
+license|2
+code quality|2
+IoT|2
+real-time|2
+simulation|2
+GDPR|2
+fintech|2
+edtech|2
+findings|2
+quality control|2
+test pyramid|2
+BDD|2
+stub|2
+accessibility testing|2
+screen reader|2
+vulnerability scan|2
+penetration testing|2
+risk assessment|2
+likelihood|2
+flaky test|2
+DevOps|2
+verification|2
+test level|2
+test type|2
+critical thinking|2
+customer-facing|2
+QA manager|2
+coach|2
+upskill|2
+stakeholder communication|2
+known limitation|2
+outage|2
+standard deviation|2
+outlier|2
+data collection|2
+data analysis|2
+distribution|2
+figure caption|2
+recommendation|2
+implication|2
+grant|2
+mentorship|2
+Playwright|2
+Cypress|2
+Appium|2
+A/B experiment|2
+data validation|2
+alt text|2
+keyboard navigation|2
+color contrast|2
+user interview|2
+insight|2
+friction|2
+drop-off|2
+engagement|2
+DAU|2
+MAU|2
+referral program|2
+self-service|2
+headcount|2
+quarterly planning|2
+annual budget|2
+board meeting|2
+credit limit|2
+dynamic pricing|2
+recommendation engine|2
+click and collect|2
+gamification|2
+learning path|2
+microlearning|2
+talent acquisition|2
+employer branding|2
+compensation and benefits|2
+attrition rate|2
+time to hire|2
+cost per hire|2
+performance improvement plan|2
+retention bonus|2
+diversity and inclusion|2
+MRR|2
+ARR|2
+sales forecast|2
+discount approval|2
+shareholder|2
+mission statement|2
+board of directors|2
+fundraising|2
+regular expression|2
+linear algebra|2
+calculus|2
+digital signature|2
+SSL/TLS certificate|2
+blockchain|2
+cryptography|2
+hash function|2
+public key|2
+human-computer interaction|2
+embedded system|2
+CI/CD pipeline|2
+continuous delivery|2
+autoscaling|2
+horizontal scaling|2
+vertical scaling|2
+API gateway|2
+disaster recovery|2
+zero downtime|2
+chief product officer|2
+C-level|2
+executive summary|2
+buy-in|2
+cross-functional team|2
+design sprint|2
+empathy map|2
+touchpoint|2
+feature adoption|2
+product analytics|2
+dashboard requirement|2
+customer escalation|2
+war room|2
+on-call rotation|2
+data warehouse|2
+data lake|2
+prompt engineering|2
+hallucination|2
+whiteboard interview|2
+hiring loop|2
+UI automation|2
+API automation|2
+mobile automation|2
+installation testing|2
+upgrade testing|2
+acceptance test|2
+problem statement|2
+test reporting|2
+traceability|2
+quality metrics|2
+process improvement|2
+test maintenance|2
+payroll run|2
+employee self-service|2
+360-degree feedback|2
+upskilling budget|2
+white label|2
+revenue share|2
+strategic partnership|2
+competitive landscape|2
+competitive analysis|2
+market research|2
+SWOT analysis|2
+business value|2
+benchmark|2
+data quality|2
+data-driven decision|2
+business intelligence|2
+audit trail|2
+data protection|2
+burndown chart|2
+burnup chart|2
+forecast|2
+stakeholder management|2
+lean|2
+success criteria|2
+contingency plan|2
+mitigation plan|2
+five whys|2
+process automation|2
+decision matrix|2
+product vision|2
+gap analysis|2
+value proposition|2
+platform|1
+one-on-one|1
+GPU|1
+cloud computing|1
+job offer|1
+probation|1
+career path|1
+master's degree|1
+lab report|1
+argue|1
+Q&A session|1
+startup|1
+participant|1
+personal data|1
+conclusion|1
+mean|1
+median|1
+appendix|1
+oral presentation|1
+revision|1
+customer support|1
+graduation project|1
+internship report|1
+prioritize|1
+must-have|1
+nice-to-have|1
+expectation|1
+conflict|1
+brainstorming|1
+effort|1
+resource|1
+phase|1
+revenue|1
+profit|1
+contract|1
+e-commerce|1
+inventory|1
+shipping|1
+promotion|1
+voucher|1
+support team|1
+open question|1
+recap|1
+outcome|1
+main branch|1
+tag|1
+API|1
+session|1
+cookie|1
+transaction|1
+event|1
+state|1
+component|1
+module|1
+helper function|1
+constant|1
+duplicate code|1
+error handling|1
+reproduce|1
+performance|1
+optimize|1
+third-party|1
+integration|1
+deployment|1
+monitoring|1
+alert|1
+incident|1
+unit testing|1
+sprint planning|1
+retrospective|1
+readable|1
+reusable|1
+analytics|1
+tracking|1
+logging|1
+spec|1
+mentoring|1
+side project|1
+version control|1
+stack|1
+tree|1
+graph|1
+node|1
+iteration|1
+sorting|1
+searching|1
+pseudocode|1
+syntax error|1
+logic error|1
+debugger|1
+breakpoint|1
+SQL|1
+query|1
+primary key|1
+operating systems|1
+CPU|1
+RAM|1
+binary|1
+bit|1
+byte|1
+protocol|1
+IP address|1
+router|1
+HTTP|1
+web development|1
+software engineering|1
+life cycle|1
+requirements|1
+Agile|1
+Scrum|1
+GitHub repository|1
+pull request|1
+open source|1
+report writing|1
+citation|1
+reference|1
+plagiarism|1
+experiment|1
+dataset|1
+statistics|1
+probability|1
+formula|1
+calculate|1
+average|1
+percentage|1
+supervisor|1
+advisor|1
+TA|1
+office hours|1
+syllabus|1
+prerequisite|1
+elective|1
+GPA|1
+transcript|1
+scholarship|1
+exchange program|1
+hackathon|1
+competition|1
+club|1
+mentor|1
+portfolio|1
+LinkedIn|1
+cover letter|1
+recruiter|1
+entry-level|1
+fresher|1
+coding test|1
+soft skills|1
+teamwork|1
+time management|1
+presentation skills|1
+peer|1
+revise|1
+retake|1
+attendance|1
+group member|1
+contribute|1
+divide|1
+responsibility|1
+command line|1
+AI|1
+phishing|1
+thesis|1
+proposal|1
+in scope|1
+out of scope|1
+expected behaviour|1
+actual behaviour|1
+inconsistent|1
+mismatch|1
+screenshot evidence|1
+source code submission|1
+zip file|1
+lab assignment|1
+course outline|1
+learning outcome|1
+rubric|1
+grading criteria|1
+weighting|1
+group contract|1
+peer assessment|1
+free rider|1
+meeting log|1
+task allocation|1
+work log|1
+user manual|1
+installation guide|1
+system requirements|1
+reference list|1
+in-text citation|1
+quotation|1
+key point|1
+evidence|1
+comparison|1
+advantage|1
+disadvantage|1
+pros and cons|1
+case study|1
+guest speaker|1
+field trip|1
+career fair|1
+alumni|1
+suggestion|1
+dev environment|1
+file upload|1
+error page|1
+modal|1
+loading state|1
+empty state|1
+invalid input|1
+special characters|1
+emoji input|1
+long text|1
+timeout error|1
+retry|1
+clarification|1
+meeting invite|1
+reschedule|1
+time slot|1
+mandatory field|1
+default value|1
+dropdown list|1
+merchant|1
+marketplace|1
+return policy|1
+waiting time|1
+claim|1
+packing|1
+live class|1
+prepaid|1
+postpaid|1
+SIM activation|1
+data usage|1
+add-on|1
+recruitment|1
+overtime pay|1
+leave balance|1
+software testing|1
+dependency|2
+assumption|2
+JSON|2
+environment|2
+staging|2
+hotfix|2
+token|2
+domain|2
+hosting|2
+cache|2
+config|2
+npm|2
+port|2
+localhost|2
+exploratory testing|2
+smoke test|2
+sanity check|2
+UAT|2
+regression|2
+root cause|2
+coverage|2
+workaround|2
+precondition|2
+happy path|2
+negative test|2
+positive test|2
+eKYC|2
+SDLC|2
+tech stack|2
+notice period|2
+contractor|2
+benefits package|2
+exit interview|2
+pitch deck|2
+target market|2
+account manager|2
+flow of control|2
+client-server model|2
+DNS|2
+packet|2
+bandwidth|2
+kernel|2
+file system|2
+encoding|2
+case sensitive|2
+change request|2
+policyholder|2

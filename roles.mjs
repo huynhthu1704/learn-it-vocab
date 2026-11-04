@@ -37,6 +37,9 @@ const EXEC = L(`technical debt, digital transformation, build vs buy, vendor loc
   organizational change, customer centricity, operational efficiency, revenue, profit, budget, annual budget, burn rate, unit economics, go-to-market,
   pricing strategy, partnership, due diligence, engineering culture, psychological safety, technical leadership, developer experience, outage, disaster recovery`);
 
+// Everyday office words every working role uses.
+const OFFICE = L(`report, status, survey, Excel, spreadsheet, export, training, attachment, remote, onboarding, presentation, slide, schedule, calendar, online meeting, chat, message`);
+
 // IT terms every BA, PO and PM needs (the IT glossary that used to live in BAPO Path's General Knowledge).
 const BAPO_IT = L(`SDLC, requirement, functional requirement, non-functional requirement, MVP, scope creep, technical debt, change request, API,
   frontend, backend, integration, microservices, database, SQL, data migration, dashboard, UAT, bug, test case, regression testing, SIT,
@@ -45,15 +48,21 @@ const BAPO_IT = L(`SDLC, requirement, functional requirement, non-functional req
 export function tagRoles(w) {
   const add = (rs) => { for (const r of rs) if (!w.roles.includes(r)) w.roles.push(r); };
   const t = w.term.toLowerCase(), c = w.topic, l = w.level;
+  // Words that only university lists use (lectures, theses, academic writing) stay with students.
+  const studentOnly = w.roles.length === 1 && w.roles[0] === 'student';
   // Everyday workplace words: every role.
-  if (['communication', 'meeting', 'time'].includes(c)) add(ROLE_IDS);
-  if (l === 1 && ['document', 'people', 'devices', 'career', 'business', 'money'].includes(c)) add(ROLE_IDS);
-  if (l === 1 && ['web', 'security', 'mobile', 'design', 'data'].includes(c)) add(WORK);
+  if (!studentOnly && ['communication', 'meeting', 'time'].includes(c)) add(ROLE_IDS);
+  if (!studentOnly && l === 1 && ['document', 'people', 'business', 'money'].includes(c)) add(ROLE_IDS);
+  // Basic screen, device and career-start words: the hands-on product roles, not business roles.
+  if (!studentOnly && l === 1 && ['web', 'security', 'mobile', 'design', 'data', 'devices'].includes(c)) add(['dev', 'test', 'ba', 'pmo']);
+  if (!studentOnly && l === 1 && c === 'career') add(['dev', 'test', 'ba', 'hr']);
   if (TECH_FOR_NONTECH.includes(t)) add(['hr', 'bizdev', 'sales', 'pmo', 'exec']);
   // IT HR
   if (['people', 'career', 'hr'].includes(c) || HR.includes(t)) add(['hr']);
-  // Business development and Sales
-  if (['business', 'money', 'banking', 'ecommerce', 'healthcare', 'insurance', 'logistics', 'education', 'telecom', 'hr'].includes(c) || BIZ.includes(t)) add(['bizdev', 'sales']);
+  // Business development and Sales: business and money words, and domain words beyond the everyday consumer ones
+  // (a bizdev person selling to a bank needs "loan origination", not "ATM").
+  if (['business', 'money'].includes(c) || (l >= 2 && ['banking', 'ecommerce', 'healthcare', 'insurance', 'logistics', 'education', 'telecom'].includes(c)) || BIZ.includes(t)) add(['bizdev', 'sales']);
+  if (OFFICE.includes(t)) add(WORK);
   // PMO
   if (['agile', 'process'].includes(c) || (c === 'release' && l <= 2) || PMO.includes(t)) add(['pmo']);
   // Manager / C-level
