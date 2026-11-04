@@ -192,7 +192,7 @@ function applyLanguage() {
 
 /* ---------- small dialog (reports, confirmations) ---------- */
 function openDlg(html) { $('#dlgBox').innerHTML = `<button class="close" data-dlgclose aria-label="Close">${svg('x', '#1B1F2A', 20, 2)}</button>` + html; $('#dlg').classList.add('open'); }
-function closeDlg() { $('#dlg').classList.remove('open'); $('#dlgBox').classList.remove('wide'); }
+function closeDlg() { $('#dlg').classList.remove('open', 'center'); $('#dlgBox').classList.remove('wide', 'narrow'); }
 $('#dlg').addEventListener('click', e => { if (e.target === $('#dlg') || e.target.closest('[data-dlgclose]')) closeDlg(); });
 const getPath = (o, p) => p.split('.').reduce((a, k) => (a == null ? a : a[k]), o);
 function setPath(o, p, v) { const ks = p.split('.'); let a = o; ks.slice(0, -1).forEach(k => { a[k] = { ...(a[k] || {}) }; a = a[k]; }); a[ks[ks.length - 1]] = v; return o; }
@@ -217,6 +217,38 @@ function openRolePicker(fromProfile) {
 function maybeAskRole() {
   if (S.role || S.rolePrompted || S.focusRole) { if (!S.role && S.focusRole) { S.role = S.focusRole; save(); } return; }
   setTimeout(() => { if (!S.role && !S.rolePrompted && currentView !== 'admin' && !$('#dlg').classList.contains('open') && !$('#overlay').classList.contains('open')) openRolePicker(); }, 1200);
+}
+
+/* ---------- sign-in invitation: 5 seconds after arriving, once per visit, for visitors who are not signed in ---------- */
+let signInAuthKnown = false;
+function openSignInInvite() {
+  openDlg(`<div class="invite">
+    <div class="invite-mark">${$('.logo svg') ? $('.logo svg').outerHTML : ''}</div>
+    <h3 style="font-size:24px;margin:0">Save your progress with Google</h3>
+    <p style="color:var(--muted);margin:0">It's free and takes one click. Sign in and the words you learn follow you to every phone and computer.</p>
+    <ul class="invite-list">
+      <li>${svg('check', '#16A34A', 18, 2.5)}<span>Keep your known words, streak and saved words on every device</span></li>
+      <li>${svg('check', '#16A34A', 18, 2.5)}<span>Get review reminders for the words you're still learning</span></li>
+      <li>${svg('check', '#16A34A', 18, 2.5)}<span>Build your own word lists from your notes and documents</span></li>
+      <li>${svg('check', '#16A34A', 18, 2.5)}<span>Report wrong meanings and help improve the site</span></li>
+    </ul>
+    <button class="btn primary lg" id="inviteSignIn" style="width:100%">${G_ICON.replace('width="18" height="18"', 'width="20" height="20"')} Sign in with Google</button>
+    <button class="btn ghost sm" id="inviteLater">Maybe later</button>
+    <p class="hint" style="margin:0">We only use your Google name and e-mail to sign you in.</p></div>`);
+  $('#dlg').classList.add('center'); $('#dlgBox').classList.add('narrow');
+  $('#inviteSignIn').onclick = async () => { await doSignIn($('#inviteSignIn')); if (cloudUser) { closeDlg(); toast('Welcome! Your progress is now saved to your account.'); } };
+  $('#inviteLater').onclick = () => closeDlg();
+}
+function scheduleSignInInvite() {
+  let shown = false; try { shown = sessionStorage.getItem('itv-invite') === '1'; } catch (e) {}
+  if (shown || !window.Cloud || !Cloud.enabled) return;
+  const tryShow = () => {
+    if (cloudUser || currentView === 'admin') return;
+    if (!signInAuthKnown || $('#dlg').classList.contains('open') || $('#overlay').classList.contains('open')) { setTimeout(tryShow, 2000); return; } // wait for the role picker or a word card to close
+    try { sessionStorage.setItem('itv-invite', '1'); } catch (e) {}
+    openSignInInvite();
+  };
+  setTimeout(tryShow, 5000);
 }
 
 /* ---------- report a problem ---------- */
@@ -638,7 +670,9 @@ async function initCloud() {
   loading(true);
   try { const c = await C.loadContent(); if (c && c.words.length) applyContent(c); } catch (e) { console.warn('Firestore content not loaded, using built-in copy', e); }
   loading(false);
+  scheduleSignInInvite();
   C.onUser(async u => {
+    signInAuthKnown = true; if (u && $('#dlg').classList.contains('center')) closeDlg();
     cloudUser = u; LST.lists = null; ADM.reports = null; renderNavAccount(); if (u) loading(true);
     cloudAdmin = u ? await C.isAdmin(u.uid) : false;
     try { if (cloudAdmin) localStorage.setItem('itv-admin', '1'); } catch (e) {}

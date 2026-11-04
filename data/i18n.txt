@@ -432,3 +432,13 @@ No, confusing | Không, khó hiểu | 아니요, 헷갈려요 | Non, confuse
 Thanks for the feedback! | Cảm ơn góp ý của bạn! | 의견 감사합니다! | Merci pour votre avis !
 Thanks! Tell us what was unclear with “Report a wrong meaning or example”. | Cảm ơn bạn! Hãy cho chúng tôi biết chỗ chưa rõ qua “Báo nghĩa hoặc ví dụ sai”. | 감사합니다! “잘못된 뜻이나 예문 신고”로 어떤 점이 헷갈렸는지 알려 주세요. | Merci ! Dites-nous ce qui n'était pas clair avec « Signaler un sens ou un exemple faux ».
 Done! Words for your role now come first. | Xong! Từ cho vai trò của bạn sẽ hiện trước. | 완료! 이제 내 직무 단어가 먼저 나옵니다. | C'est fait ! Les mots de votre métier s'affichent en premier.
+# sign-in invitation
+Save your progress with Google | Lưu tiến độ học bằng tài khoản Google | Google로 학습 기록을 저장하세요 | Enregistrez votre progression avec Google
+It's free and takes one click. Sign in and the words you learn follow you to every phone and computer. | Miễn phí và chỉ cần một cú bấm. Đăng nhập để những từ bạn học theo bạn trên mọi điện thoại và máy tính. | 무료이고 한 번만 누르면 됩니다. 로그인하면 배운 단어가 모든 휴대폰과 컴퓨터에서 이어집니다. | C'est gratuit et ne prend qu'un clic. Connectez-vous et vos mots vous suivent sur tous vos téléphones et ordinateurs.
+Keep your known words, streak and saved words on every device | Giữ từ đã biết, chuỗi ngày học và từ đã lưu trên mọi thiết bị | 아는 단어, 연속 기록, 저장한 단어를 모든 기기에서 유지 | Gardez vos mots connus, votre série et vos mots enregistrés sur tous vos appareils
+Get review reminders for the words you're still learning | Nhận nhắc ôn những từ bạn đang học | 학습 중인 단어의 복습 알림 받기 | Recevez des rappels pour réviser les mots en cours
+Build your own word lists from your notes and documents | Tạo danh sách từ riêng từ ghi chú và tài liệu của bạn | 노트와 문서로 나만의 단어장 만들기 | Créez vos listes de mots à partir de vos notes et documents
+Report wrong meanings and help improve the site | Báo nghĩa sai và giúp trang tốt hơn | 잘못된 뜻을 신고하고 사이트 개선에 참여하기 | Signalez les erreurs et aidez à améliorer le site
+Maybe later | Để sau | 나중에 | Plus tard
+We only use your Google name and e-mail to sign you in. | Chúng tôi chỉ dùng tên và email Google để đăng nhập cho bạn. | Google 이름과 이메일은 로그인에만 사용합니다. | Nous utilisons votre nom et votre e-mail Google uniquement pour vous connecter.
+Welcome! Your progress is now saved to your account. | Chào mừng bạn! Tiến độ học đã được lưu vào tài khoản. | 환영합니다! 이제 학습 기록이 계정에 저장됩니다. | Bienvenue ! Votre progression est maintenant enregistrée dans votre compte.
