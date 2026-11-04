@@ -63,3 +63,69 @@ statutory benefits|n|các quyền lợi theo luật định|Statutory benefits i
 annual salary review|n|xét tăng lương hằng năm|The annual salary review is based on performance.|hr
 # level=3 role=hr,ba,dev,test,pmo,bizdev,sales,exec
 ESOP|n|chương trình cổ phần cho nhân viên|With the ESOP, staff can own shares in the company.|hr
+# Legal domain for BA / PO / PM (legal tech, contract systems, case management, compliance).
+# level=1 role=ba
+lawyer|n|luật sư|The lawyer checks every contract before the client signs it.|legal
+law firm|n|công ty luật|We are building a case management app for a law firm.|legal
+legal document|n|văn bản pháp lý|Users can upload legal documents as PDF files.|legal
+clause|n|điều khoản|Clause 5 says the vendor must fix bugs within 48 hours.|legal
+agreement|n|thỏa thuận, hợp đồng|Both sides signed the agreement last week.|legal
+signature|n|chữ ký|The contract is not valid without a signature.|legal
+consent|n|sự đồng ý|The app must ask for consent before it collects location data.|legal
+court|n|tòa án|The case will go to court next month.|legal
+legal case|n|vụ việc pháp lý, vụ án|Each legal case has a number, a client and a lawyer.|legal
+contracting party|n|bên ký kết hợp đồng|The system stores the name and address of each contracting party.|legal
+effective date|n|ngày có hiệu lực|The effective date of the contract is 1 January.|legal
+expiry date|n|ngày hết hạn|Send a reminder 30 days before the contract expiry date.|legal
+confidentiality|n|tính bảo mật|Confidentiality is very important, so only lawyers can open these files.|legal
+copyright|n|bản quyền|The client owns the copyright to all the code we write.|legal
+trademark|n|nhãn hiệu (đã đăng ký)|We cannot use that logo because it is another company's trademark.|legal
+# level=2 role=ba
+e-signature|n|chữ ký điện tử|Clients can sign the contract with an e-signature on their phone.|legal
+NDA|n|thỏa thuận bảo mật thông tin|Please sign the NDA before we share the requirements.|legal
+non-disclosure agreement|n|thỏa thuận bảo mật thông tin|The vendor signed a non-disclosure agreement.|legal
+CLM|n|quản lý vòng đời hợp đồng|The bank is replacing its old CLM tool.|legal
+contract lifecycle management|n|quản lý vòng đời hợp đồng|Contract lifecycle management covers drafting, approval, signing and renewal.|legal
+MSA|n|hợp đồng khung dịch vụ|We signed an MSA, so each new project only needs a statement of work.|legal
+master service agreement|n|hợp đồng khung dịch vụ|The master service agreement sets the general terms for all projects.|legal
+DPA|n|thỏa thuận xử lý dữ liệu|The client asked us to sign a DPA because we store their customers' data.|legal
+data processing agreement|n|thỏa thuận xử lý dữ liệu|A data processing agreement explains how a vendor may use personal data.|legal
+case management system|n|hệ thống quản lý hồ sơ vụ việc|The case management system shows every task and deadline for a case.|legal
+legal matter|n|vụ việc pháp lý (hồ sơ)|Lawyers log their time against each legal matter.|legal
+document management system|n|hệ thống quản lý tài liệu|All signed contracts are stored in the document management system.|legal
+contract approval|n|phê duyệt hợp đồng|Contract approval needs the legal team and the finance manager.|legal
+redline|n|bản sửa đổi có đánh dấu|The client sent back a redline with ten changes.|legal
+clause library|n|thư viện điều khoản mẫu|Lawyers pick standard text from the clause library.|legal
+amendment|n|phụ lục sửa đổi hợp đồng|We signed an amendment to extend the contract by six months.|legal
+termination clause|n|điều khoản chấm dứt hợp đồng|The termination clause allows either side to end the contract with 30 days' notice.|legal
+obligation|n|nghĩa vụ|The system tracks each obligation and its due date.|legal
+penalty|n|tiền phạt, chế tài|There is a penalty if the go-live is late.|legal
+liability|n|trách nhiệm pháp lý|The contract limits our liability to the value of the project.|legal
+breach of contract|n|vi phạm hợp đồng|Missing the deadline three times is a breach of contract.|legal
+dispute|n|tranh chấp|The two companies settled the dispute without going to court.|legal
+power of attorney|n|giấy ủy quyền|The director gave her a power of attorney to sign for the company.|legal
+notarization|n|công chứng|Some documents still need notarization in person.|legal
+retention period|n|thời hạn lưu trữ|The retention period for contracts is ten years.|legal
+retention policy|n|chính sách lưu trữ|The retention policy says when old files are deleted.|legal
+billable hours|n|số giờ tính phí|Lawyers enter their billable hours every day.|legal
+time entry|n|bản ghi thời gian làm việc|Each time entry is linked to a client and a legal matter.|legal
+conflict check|n|kiểm tra xung đột lợi ích|Run a conflict check before you accept a new client.|legal
+paralegal|n|trợ lý luật sư|The paralegal prepares the documents for the lawyer.|legal
+legal review|n|rà soát pháp lý|The new terms of use are waiting for legal review.|legal
+redaction|n|che/xóa thông tin nhạy cảm|Redaction hides names and ID numbers before we share the file.|legal
+data subject|n|chủ thể dữ liệu (người có dữ liệu)|A data subject can ask to see the data we hold about them.|legal
+e-filing|n|nộp hồ sơ điện tử|With e-filing, lawyers send documents to the court online.|legal
+patent|n|bằng sáng chế|The company has a patent for its payment algorithm.|legal
+# level=3 role=ba
+litigation|n|tranh tụng, kiện tụng|The litigation team needs a dashboard of all open cases.|legal
+indemnity|n|bồi thường (cam kết bồi hoàn)|The indemnity clause says the vendor pays if its software causes a data leak.|legal
+governing law|n|luật điều chỉnh (luật áp dụng)|The governing law of this contract is Vietnamese law.|legal
+jurisdiction|n|thẩm quyền xét xử|Which court has jurisdiction if there is a dispute?|legal
+force majeure|n|bất khả kháng|The floods were treated as force majeure, so there was no penalty.|legal
+legal hold|n|lệnh giữ nguyên dữ liệu (phục vụ tố tụng)|Files under a legal hold must not be deleted, even after the retention period.|legal
+e-discovery|n|thu thập chứng cứ điện tử|The e-discovery tool searches emails for evidence.|legal
+chain of custody|n|chuỗi lưu giữ chứng cứ|The audit trail proves the chain of custody for each document.|legal
+statute of limitations|n|thời hiệu khởi kiện|The system warns lawyers before the statute of limitations ends.|legal
+attorney-client privilege|n|đặc quyền bảo mật giữa luật sư và khách hàng|Emails between the client and the lawyer are protected by attorney-client privilege.|legal
+in-house counsel|n|luật sư nội bộ (pháp chế doanh nghiệp)|Our in-house counsel reviews every vendor contract.|legal
+right to be forgotten|n|quyền được xóa dữ liệu|Under the right to be forgotten, users can ask us to delete their account data.|legal

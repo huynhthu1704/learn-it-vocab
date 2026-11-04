@@ -53,3 +53,66 @@ job rotation|Moving staff between roles or teams for a period to build skills.|�
 statutory benefits|Benefits an employer must give by law, such as social insurance and paid leave.|법정 복리후생
 annual salary review|A yearly check of an employee's pay, often linked to performance.|연봉 재검토
 ESOP|Employee stock ownership plan: a programme that gives staff shares in the company.|우리사주제도(ESOP)
+# Legal domain
+lawyer|A person whose job is to give legal advice and act for clients.|변호사
+law firm|A company of lawyers that serves clients.|법률 사무소
+legal document|A document with legal effect, such as a contract or a court form.|법률 문서
+clause|One section of a contract that covers one point.|조항
+agreement|A deal between two or more sides, often written down and signed.|합의, 계약
+signature|A person's name written by hand or electronically to show they agree.|서명
+consent|Permission given by a person, for example to use their data.|동의
+court|The place and the people that decide legal cases.|법원
+legal case|A matter that a court or lawyer deals with.|소송 사건
+contracting party|A person or company that signs a contract.|계약 당사자
+effective date|The date a contract or rule starts to apply.|발효일
+expiry date|The date a contract or document stops being valid.|만료일
+confidentiality|Keeping information secret and sharing it only with allowed people.|기밀성
+copyright|The legal right to own and control creative work such as code, text or images.|저작권
+trademark|A registered name, logo or symbol that belongs to a company.|상표
+e-signature|A signature made electronically instead of on paper.|전자 서명
+NDA|Non-disclosure agreement: a contract in which people agree to keep information secret.|비밀유지계약(NDA)
+non-disclosure agreement|A contract in which people agree to keep information secret.|비밀유지계약
+CLM|Contract lifecycle management: managing a contract from drafting to renewal or end.|계약 수명주기 관리(CLM)
+contract lifecycle management|Managing a contract through every stage: drafting, approval, signing, obligations, renewal and end.|계약 수명주기 관리
+MSA|Master service agreement: a framework contract with general terms for future projects.|기본 서비스 계약(MSA)
+master service agreement|A framework contract with general terms for all future projects between two companies.|기본 서비스 계약
+DPA|Data processing agreement: a contract on how a vendor may use and protect personal data.|데이터 처리 계약(DPA)
+data processing agreement|A contract that says how a vendor may process and protect personal data.|데이터 처리 계약
+case management system|Software that tracks legal cases, tasks, documents and deadlines.|사건 관리 시스템
+legal matter|One piece of legal work for a client, such as a case or a contract.|법률 사안
+document management system|Software to store, organise, version and find documents.|문서 관리 시스템
+contract approval|The step where the right people check and approve a contract before signing.|계약 승인
+redline|A version of a document that shows changes, such as added and deleted text.|수정 표시본(레드라인)
+clause library|A collection of approved standard clauses to reuse in contracts.|조항 라이브러리
+amendment|A formal change added to a signed contract.|계약 수정(변경 계약)
+termination clause|The part of a contract that says how and when it can be ended.|해지 조항
+obligation|Something a party must do under a contract or law.|의무
+penalty|Money or another punishment for breaking a rule or contract.|위약금, 벌금
+liability|Legal responsibility for damage, loss or a debt.|법적 책임
+breach of contract|Failing to do what a contract requires.|계약 위반
+dispute|A disagreement between two sides, often about a contract.|분쟁
+power of attorney|A legal document that lets one person act or sign for another.|위임장
+notarization|Official checking and stamping of a document by a notary.|공증
+retention period|How long records must be kept before they can be deleted.|보존 기간
+retention policy|The rules for how long each type of record is kept and when it is deleted.|보존 정책
+billable hours|Hours of work that can be charged to a client.|청구 가능 시간
+time entry|A record of time spent on a task, used for billing.|시간 기록
+conflict check|A check that a new client or case does not clash with existing clients.|이해충돌 검토
+paralegal|A trained assistant who helps lawyers with legal work.|법률 보조원
+legal review|A check of a document or feature by the legal team.|법률 검토
+redaction|Hiding or removing sensitive information from a document before sharing it.|민감 정보 가림(편집)
+data subject|The person that personal data is about.|정보주체
+e-filing|Sending legal documents to a court or authority online.|전자 소송 제출
+patent|A legal right that protects an invention for a number of years.|특허
+litigation|The process of taking a dispute to court.|소송
+indemnity|A promise to pay for loss or damage caused to the other party.|면책 보상
+governing law|The law of the country or state that applies to a contract.|준거법
+jurisdiction|The power of a court to decide a case, or the area where it has that power.|관할권
+force majeure|An event no one can control, such as a disaster, that excuses a party from its obligations.|불가항력
+legal hold|An order to keep certain data and documents because of a legal case.|법적 보존 조치
+e-discovery|Finding and collecting electronic data, such as emails, as evidence for a case.|전자 증거 개시
+chain of custody|A record of who handled evidence and when, to prove it was not changed.|증거 관리 연속성
+statute of limitations|The time limit for starting a legal case.|공소시효(소멸시효)
+attorney-client privilege|The rule that keeps communication between a lawyer and client confidential.|변호사-의뢰인 특권
+in-house counsel|A lawyer who works for a company rather than a law firm.|사내 변호사
+right to be forgotten|A person's right to ask a company to delete their personal data.|잊힐 권리

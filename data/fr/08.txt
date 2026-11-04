@@ -53,3 +53,66 @@ job rotation|rotation des postes
 statutory benefits|avantages légaux
 annual salary review|révision salariale annuelle
 ESOP|plan d'actionnariat salarié
+# Legal domain
+lawyer|avocat
+law firm|cabinet d'avocats
+legal document|document juridique
+clause|clause
+agreement|accord, contrat
+signature|signature
+consent|consentement
+court|tribunal
+legal case|affaire juridique
+contracting party|partie contractante
+effective date|date d'entrée en vigueur
+expiry date|date d'expiration
+confidentiality|confidentialité
+copyright|droit d'auteur
+trademark|marque déposée
+e-signature|signature électronique
+NDA|accord de confidentialité
+non-disclosure agreement|accord de confidentialité
+CLM|gestion du cycle de vie des contrats
+contract lifecycle management|gestion du cycle de vie des contrats
+MSA|contrat-cadre de services
+master service agreement|contrat-cadre de services
+DPA|accord de traitement des données
+data processing agreement|accord de traitement des données
+case management system|système de gestion des dossiers
+legal matter|dossier juridique
+document management system|système de gestion documentaire
+contract approval|approbation du contrat
+redline|version annotée (suivi des modifications)
+clause library|bibliothèque de clauses
+amendment|avenant
+termination clause|clause de résiliation
+obligation|obligation
+penalty|pénalité
+liability|responsabilité
+breach of contract|rupture de contrat
+dispute|litige
+power of attorney|procuration
+notarization|certification notariale
+retention period|durée de conservation
+retention policy|politique de conservation
+billable hours|heures facturables
+time entry|saisie de temps
+conflict check|vérification des conflits d'intérêts
+paralegal|assistant juridique
+legal review|revue juridique
+redaction|caviardage
+data subject|personne concernée
+e-filing|dépôt électronique
+patent|brevet
+litigation|contentieux
+indemnity|indemnisation
+governing law|droit applicable
+jurisdiction|compétence juridictionnelle
+force majeure|force majeure
+legal hold|conservation pour litige
+e-discovery|recherche de preuves électroniques
+chain of custody|chaîne de traçabilité des preuves
+statute of limitations|délai de prescription
+attorney-client privilege|secret professionnel de l'avocat
+in-house counsel|juriste d'entreprise
+right to be forgotten|droit à l'oubli

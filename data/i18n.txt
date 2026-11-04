@@ -482,3 +482,5 @@ Workplace English progress | Tiến độ tiếng Anh công sở | 직장 영어
 Category | Chủ đề | 분류 | Catégorie
 Loyalty & Rewards | Khách hàng thân thiết & Phần thưởng | 로열티 & 리워드 | Fidélité & Récompenses
 Vouchers, rewards, loyalty programmes, campaigns and gifting. | Voucher, phần thưởng, chương trình khách hàng thân thiết, chiến dịch và tặng quà. | 바우처, 리워드, 로열티 프로그램, 캠페인, 선물하기. | Bons d'achat, récompenses, programmes de fidélité, campagnes et cadeaux.
+Legal & Compliance | Pháp lý & Tuân thủ | 법률 & 컴플라이언스 | Juridique & Conformité
+Contracts, cases, e-signatures, data rules and legal holds. | Hợp đồng, vụ việc, chữ ký điện tử, quy định dữ liệu và lưu giữ pháp lý. | 계약, 사건, 전자 서명, 데이터 규정, 법적 보존. | Contrats, dossiers, signatures électroniques, règles sur les données et conservation pour litige.

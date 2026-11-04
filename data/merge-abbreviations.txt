@@ -22,3 +22,7 @@ AML|anti-money laundering
 GMV|gross merchandise value
 ARPU|average revenue per user
 JD|job description
+NDA|non-disclosure agreement
+CLM|contract lifecycle management
+MSA|master service agreement
+DPA|data processing agreement
