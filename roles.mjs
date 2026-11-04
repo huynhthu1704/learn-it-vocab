@@ -61,7 +61,7 @@ export function tagRoles(w) {
   if (['people', 'career', 'hr'].includes(c) || HR.includes(t)) add(['hr']);
   // Business development and Sales: business and money words, and domain words beyond the everyday consumer ones
   // (a bizdev person selling to a bank needs "loan origination", not "ATM").
-  if (['business', 'money'].includes(c) || (l >= 2 && ['banking', 'ecommerce', 'healthcare', 'insurance', 'logistics', 'education', 'telecom'].includes(c)) || BIZ.includes(t)) add(['bizdev', 'sales']);
+  if (['business', 'money'].includes(c) || (l >= 2 && ['banking', 'ecommerce', 'healthcare', 'insurance', 'logistics', 'education', 'telecom', 'loyalty'].includes(c)) || BIZ.includes(t)) add(['bizdev', 'sales']);
   if (OFFICE.includes(t)) add(WORK);
   // PMO
   if (['agile', 'process'].includes(c) || (c === 'release' && l <= 2) || PMO.includes(t)) add(['pmo']);

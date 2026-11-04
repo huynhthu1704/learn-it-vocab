@@ -1,0 +1,55 @@
+# Words from job descriptions (data/99-jd-glossary.txt)
+reward|récompense
+digital voucher|bon d'achat numérique
+marketing campaign|campagne marketing
+brand|marque
+loyalty platform|plateforme de fidélité
+digital gifting|cadeaux numériques
+social gifting|cadeaux sociaux (entre amis en ligne)
+person-to-person|de personne à personne (P2P)
+employee rewards|récompenses des employés
+partner incentive|incitation pour les partenaires
+customer acquisition|acquisition de clients
+customer engagement|engagement client
+data-driven campaign|campagne basée sur les données
+customer base|base de clients
+end-to-end solution|solution de bout en bout
+at scale|à grande échelle
+launch|lancer
+project plan|plan de projet
+project status|état d'avancement du projet
+resolve|résoudre
+Confluence|Confluence (outil de documentation)
+product initiative|initiative produit
+product roadmap|feuille de route produit
+roadmap planning|planification de la feuille de route
+product delivery|livraison du produit
+execution|exécution
+implementation|mise en œuvre
+rollout|déploiement progressif
+post-launch|après le lancement
+requirement clarification|clarification des exigences
+business objective|objectif commercial
+project outcome|résultat du projet
+quality standard|norme de qualité
+risk management|gestion des risques
+delivery process|processus de livraison
+cross-functional|transversal
+digital product|produit numérique
+project governance|gouvernance de projet
+measurable value|valeur mesurable
+key responsibilities|responsabilités principales
+years of experience|années d'expérience
+bachelor's degree|licence (diplôme universitaire)
+internal training|formation interne
+health insurance|assurance santé
+preferred qualifications|qualifications souhaitées
+Agile certification|certification Agile
+fast-paced environment|environnement dynamique
+multiple priorities|priorités multiples
+proactive|proactif
+career advancement|évolution de carrière
+job rotation|rotation des postes
+statutory benefits|avantages légaux
+annual salary review|révision salariale annuelle
+ESOP|plan d'actionnariat salarié

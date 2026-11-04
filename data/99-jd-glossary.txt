@@ -1,0 +1,65 @@
+# Words from job descriptions (first one: Senior Product Owner at Dayone / Got It, a digital rewards and loyalty company).
+# Kept in the last file so existing word ids don't change.
+# level=1 role=ba,dev,test,bizdev,sales
+reward|n|phần thưởng|Customers get a reward after their fifth order.|loyalty
+digital voucher|n|phiếu quà tặng điện tử (e-voucher)|The client sent 5,000 digital vouchers to its customers by SMS.|loyalty
+marketing campaign|n|chiến dịch marketing|The summer marketing campaign gave a free drink with every order.|loyalty
+brand|n|thương hiệu|Big coffee brands use our app to reward their customers.|loyalty
+# level=2 role=ba,dev,test,bizdev,sales
+loyalty platform|n|nền tảng khách hàng thân thiết|The loyalty platform tracks points for two million members.|loyalty
+digital gifting|n|tặng quà trực tuyến|Digital gifting lets users send a voucher in a chat message.|loyalty
+social gifting|n|tặng quà qua mạng xã hội|Social gifting lets friends send small treats to each other online.|loyalty
+person-to-person|adj|giữa người với người (P2P)|The new app is a person-to-person gifting platform.|loyalty
+employee rewards|n|phần thưởng cho nhân viên|HR uses vouchers for employee rewards at the end of each quarter.|loyalty
+partner incentive|n|ưu đãi khuyến khích cho đối tác|We offer a partner incentive to resellers who reach their target.|loyalty
+customer acquisition|n|thu hút khách hàng mới|A free first voucher helps with customer acquisition.|loyalty
+customer engagement|n|mức độ gắn kết của khách hàng|Weekly mini-games increased customer engagement.|loyalty
+data-driven campaign|n|chiến dịch dựa trên dữ liệu|We ran a data-driven campaign for customers who had not bought in 60 days.|loyalty
+customer base|n|tập khách hàng|The brand wants to grow its customer base in Hanoi.|loyalty
+end-to-end solution|n|giải pháp trọn gói (từ đầu đến cuối)|We deliver an end-to-end solution: front end, integration and rewards.|loyalty
+# level=3 role=ba,dev,test,bizdev,sales
+at scale|phr|ở quy mô lớn|We distribute over 1.5 million vouchers a month, so everything must work at scale.|loyalty
+# level=1 role=ba
+launch|v|ra mắt (sản phẩm, tính năng)|We will launch the new gifting feature in December.|release
+project plan|n|kế hoạch dự án|The project plan shows each phase and its deadline.|process
+project status|n|tình trạng dự án|I share the project status with stakeholders every Friday.|process
+resolve|v|giải quyết (vấn đề, lỗi)|The team resolved the payment issue in two hours.|bug
+Confluence|n|Confluence (công cụ tài liệu nhóm)|The requirements are on the Confluence page.|document
+# level=2 role=ba
+product initiative|n|sáng kiến sản phẩm|Our biggest product initiative this year is the new loyalty app.|business
+product roadmap|n|lộ trình sản phẩm|The product roadmap shows what we will build in the next two quarters.|business
+roadmap planning|n|lập lộ trình|Roadmap planning happens at the start of each quarter.|process
+product delivery|n|bàn giao sản phẩm|She owns product delivery from planning to launch.|process
+execution|n|thực thi, triển khai|The plan is good, but execution is what matters.|process
+implementation|n|triển khai, thực hiện|The implementation took three sprints.|process
+rollout|n|việc triển khai dần (cho người dùng)|We plan a rollout to 10% of users first.|release
+post-launch|adj|sau khi ra mắt|Post-launch, we fixed small bugs and added two enhancements.|release
+requirement clarification|n|làm rõ yêu cầu|We need a requirement clarification session with the client.|document
+business objective|n|mục tiêu kinh doanh|Every feature must support a business objective.|business
+project outcome|n|kết quả dự án|We track the project outcome against the success criteria.|business
+quality standard|n|tiêu chuẩn chất lượng|The release must meet our quality standards before go-live.|quality
+risk management|n|quản lý rủi ro|Good risk management means finding problems before they happen.|process
+delivery process|n|quy trình bàn giao|We improved the delivery process by automating the release notes.|process
+cross-functional|adj|liên chức năng (nhiều bộ phận)|This is a cross-functional project with design, engineering and operations.|people
+digital product|n|sản phẩm số|I have five years of experience with digital products.|business
+# level=3 role=ba
+project governance|n|quản trị dự án|Project governance includes weekly status reports and a monthly steering meeting.|process
+measurable value|n|giá trị đo lường được|Each initiative should create measurable value for customers.|business
+# level=1 role=hr,ba,dev,test,pmo,bizdev,sales,exec
+key responsibilities|n|trách nhiệm chính|Read the key responsibilities before you apply.|career
+years of experience|phr|số năm kinh nghiệm|The role needs 5+ years of experience in product delivery.|career
+bachelor's degree|n|bằng cử nhân|A bachelor's degree in IT or business is required.|career
+internal training|n|đào tạo nội bộ|New staff join internal training in their first month.|hr
+health insurance|n|bảo hiểm sức khỏe|The company offers health insurance for staff and their families.|hr
+# level=2 role=hr,ba,dev,test,pmo,bizdev,sales,exec
+preferred qualifications|n|yêu cầu ưu tiên (điểm cộng)|Scrum certification is one of the preferred qualifications.|career
+Agile certification|n|chứng chỉ Agile|An Agile certification such as PSM or PSPO is a plus.|career
+fast-paced environment|phr|môi trường làm việc nhịp độ nhanh|We are a startup, so it is a fast-paced environment.|career
+multiple priorities|n|nhiều việc ưu tiên cùng lúc|You must manage multiple priorities in the same week.|career
+proactive|adj|chủ động|A proactive PO raises risks before anyone asks.|career
+career advancement|n|thăng tiến sự nghiệp|The company offers clear career advancement for juniors.|career
+job rotation|n|luân chuyển công việc|Job rotation lets you work in another team for six months.|hr
+statutory benefits|n|các quyền lợi theo luật định|Statutory benefits include social insurance and paid leave.|hr
+annual salary review|n|xét tăng lương hằng năm|The annual salary review is based on performance.|hr
+# level=3 role=hr,ba,dev,test,pmo,bizdev,sales,exec
+ESOP|n|chương trình cổ phần cho nhân viên|With the ESOP, staff can own shares in the company.|hr

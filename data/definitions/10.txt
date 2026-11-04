@@ -1,0 +1,55 @@
+# Words from job descriptions (data/99-jd-glossary.txt)
+reward|Something good you get for doing something, such as buying, finishing a task or reaching a target.|보상
+digital voucher|An electronic voucher, sent by app, SMS or email, that can be used for goods or services.|디지털 바우처
+marketing campaign|A planned set of marketing activities over a period of time to reach a goal, such as more sales.|마케팅 캠페인
+brand|A company or product name that customers know and recognise.|브랜드
+loyalty platform|Software that runs a loyalty programme: members, points, rewards and offers.|로열티 플랫폼
+digital gifting|Sending gifts such as vouchers or e-gift cards online instead of physical presents.|디지털 선물하기
+social gifting|Sending small gifts to friends through social or chat apps.|소셜 선물하기
+person-to-person|Directly from one person to another, not from a company to a customer (P2P).|개인 간(P2P)
+employee rewards|Gifts or benefits a company gives staff to thank or motivate them.|직원 보상
+partner incentive|A reward given to business partners, such as resellers, for reaching targets.|파트너 인센티브
+customer acquisition|Getting new customers.|고객 확보
+customer engagement|How much customers interact with a brand or product over time.|고객 참여
+data-driven campaign|A campaign designed and targeted using customer data.|데이터 기반 캠페인
+customer base|All the customers a business has.|고객층
+end-to-end solution|A solution that covers every step, from start to finish, so the client needs no other provider.|엔드투엔드 솔루션
+at scale|At a very large size or volume, for many users or transactions.|대규모로
+launch|To make a new product or feature available to users for the first time.|출시하다
+project plan|A document that lists a project's tasks, timeline, deliverables and owners.|프로젝트 계획
+project status|How a project is doing now: progress, risks and issues.|프로젝트 현황
+resolve|To find a solution to a problem or issue.|해결하다
+Confluence|An Atlassian tool where teams write and share documents, often used with Jira.|컨플루언스
+product initiative|A large piece of product work aimed at one business goal.|제품 이니셔티브
+product roadmap|A plan that shows what a product team will build and when.|제품 로드맵
+roadmap planning|Deciding which work goes on the product roadmap and in what order.|로드맵 계획 수립
+product delivery|Getting product work built, tested and released to users.|제품 딜리버리
+execution|Carrying out a plan.|실행
+implementation|The work of putting a plan, system or feature into action.|구현, 도입
+rollout|Releasing a product or feature to users, often in stages.|롤아웃(단계적 배포)
+post-launch|After a product or feature has been released.|출시 후
+requirement clarification|Asking questions and agreeing on details so a requirement is clear.|요구사항 명확화
+business objective|A goal the business wants to reach, such as more revenue or lower cost.|비즈니스 목표
+project outcome|The result a project achieves.|프로젝트 성과
+quality standard|A level of quality that work must reach to be accepted.|품질 기준
+risk management|Finding, assessing and reducing risks in a project.|위험 관리
+delivery process|The steps a team follows to plan, build and release work.|딜리버리 프로세스
+cross-functional|Involving people from several departments or skills.|교차 기능의
+digital product|A product used on a screen, such as an app, website or online service.|디지털 제품
+project governance|The rules, roles and meetings used to oversee and control a project.|프로젝트 거버넌스
+measurable value|A benefit that can be shown with numbers.|측정 가능한 가치
+key responsibilities|The main duties of a job.|주요 업무
+years of experience|How long someone has worked in a field.|경력 연수
+bachelor's degree|A university degree, usually after three or four years of study.|학사 학위
+internal training|Training a company runs for its own staff.|사내 교육
+health insurance|Insurance that pays for medical care.|건강 보험
+preferred qualifications|Skills or certificates that are a plus for a job but not required.|우대 사항
+Agile certification|A certificate showing knowledge of Agile, such as PSM, PSPO or CSM.|애자일 자격증
+fast-paced environment|A workplace where things change quickly and there is a lot to do.|빠르게 변화하는 환경
+multiple priorities|Several important tasks that need attention at the same time.|여러 우선순위
+proactive|Acting early to prevent problems instead of waiting for them.|주도적인
+career advancement|Moving up to more senior roles over time.|경력 발전
+job rotation|Moving staff between roles or teams for a period to build skills.|직무 순환
+statutory benefits|Benefits an employer must give by law, such as social insurance and paid leave.|법정 복리후생
+annual salary review|A yearly check of an employee's pay, often linked to performance.|연봉 재검토
+ESOP|Employee stock ownership plan: a programme that gives staff shares in the company.|우리사주제도(ESOP)
