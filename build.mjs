@@ -177,14 +177,30 @@ for (const line of fs.readFileSync('data/i18n.txt', 'utf8').split('\n')) {
   I18N[parts[0]] = parts.slice(1);
 }
 console.log('interface strings', Object.keys(I18N).length);
-const html = fs.readFileSync('src/template.html', 'utf8')
+const pageFiles = [
+  'home.html', 'browse.html', 'workplace-english.html', 'flashcards.html',
+  'quiz.html', 'progress.html', 'my-lists.html', 'admin.html'
+];
+const pages = pageFiles.map(file => fs.readFileSync(`src/pages/${file}`, 'utf8')).join('\n');
+const app = fs.readFileSync('src/app.js', 'utf8')
   .replace('/*__CLOUD_UI__*/', () => fs.readFileSync('src/ui-cloud.js', 'utf8') + '\n' + fs.readFileSync('src/ui-insights.js', 'utf8'))
   .replace('/*__WORDS__*/[]', () => safe(out)).replace('/*__CORP__*/[]', () => safe(JSON.stringify(CORP)))
   .replace('/*__I18N__*/{}', () => safe(JSON.stringify(I18N)))
   .replace('/*__MERGED__*/{}', () => JSON.stringify(MERGED));
-// Bundle cloud.js first, then point index.html at it with a version tag so browsers never mix an old cloud.js with a new page.
+const css = fs.readFileSync('src/styles.css', 'utf8');
+const html = fs.readFileSync('src/template.html', 'utf8').replace('<!--__PAGES__-->', pages);
+fs.writeFileSync('app.js', app);
+fs.writeFileSync('styles.css', css);
+// Bundle Firebase and version each asset so browsers do not mix files from different builds.
 await esbuild({ entryPoints: ['src/cloud.js'], bundle: true, format: 'esm', minify: true, outfile: 'cloud.js', logLevel: 'warning' });
-const cloudVer = (await import('node:crypto')).createHash('sha1').update(fs.readFileSync('cloud.js')).digest('hex').slice(0, 10);
-fs.writeFileSync('index.html', html.replace('src="cloud.js"', `src="cloud.js?v=${cloudVer}"`));
-// Bundle the Firebase code (src/cloud.js + src/firebase-config.js) into cloud.js
-console.log('Wrote words.json, index.html and cloud.js');
+const { createHash } = await import('node:crypto');
+const version = file => createHash('sha1').update(fs.readFileSync(file)).digest('hex').slice(0, 10);
+const cloudVer = version('cloud.js');
+const appVer = version('app.js');
+const cssVer = version('styles.css');
+const versionedHtml = html
+  .replace('href="styles.css"', `href="styles.css?v=${cssVer}"`)
+  .replace('src="app.js"', `src="app.js?v=${appVer}"`)
+  .replace('src="cloud.js"', `src="cloud.js?v=${cloudVer}"`);
+fs.writeFileSync('index.html', versionedHtml);
+console.log('Wrote words.json, index.html, app.js, styles.css and cloud.js');

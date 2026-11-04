@@ -35,12 +35,16 @@ browser until the learner clears it; `?role=all` clears it too. Role ids: `stude
 ## Project structure
 
 ```
-index.html                         ← the website (generated, served by GitHub Pages)
+index.html                         ← generated site shell, served by GitHub Pages
+app.js, styles.css                 ← generated, versioned application assets
 logo.svg                           ← logo and favicon
-words.json                         ← the word database (generated)
-src/template.html                  ← website code: HTML, CSS and JavaScript
-src/ui-cloud.js                    ← account, languages, reports, admin, AI tools and lists (inlined into index.html)
-src/cloud.js, src/firebase-config.js  ← Firebase code and config (bundled into cloud.js)
+words.json                         ← generated word database
+src/template.html                  ← shared document shell and navigation
+src/pages/*.html                   ← one source fragment per application page
+src/styles.css                     ← application styles
+src/app.js                          ← shared state, rendering and hash router
+src/ui-cloud.js, src/ui-insights.js ← account, admin, lists and insights code (included in generated app.js)
+src/cloud.js, src/firebase-config.js ← Firebase integration and config (bundled into cloud.js)
 data/1-student.txt … 9-student-curriculum.txt  ← the word lists you edit
 data/definitions/*.txt             ← English definition and Korean meaning: term|English|Korean
 data/fr/*.txt                      ← French meaning: term|French (corporate.txt is for Workplace English)
@@ -48,9 +52,14 @@ data/corporate.txt                 ← Workplace English
 data/i18n.txt                      ← interface text: English | Vietnamese | Korean | French
 data/pronunciation-overrides.json  ← IPA for words the dictionary doesn't know
 roles.mjs                          ← which roles each word belongs to
-build.mjs                          ← builds words.json, index.html and cloud.js
+build.mjs                          ← builds words.json and the versioned site assets
 firestore.rules                    ← Firestore security rules
 ```
+
+The site remains a single-page app, but its source is split by responsibility: the shared shell,
+individual page markup, styles, core app/router, cloud features and Firebase integration. Add a new
+page fragment under `src/pages/` and register it in `build.mjs`'s `pageFiles` list to include it in
+the generated site.
 
 ## How to add or edit words
 
