@@ -321,6 +321,13 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
   .ccard .phrase{font-size:19px}
 }
 .view{display:none}
+.wact{display:flex;gap:6px;margin-top:auto;padding-top:8px}
+.wact-b{flex:1;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 8px;font:inherit;font-size:13px;font-weight:700;color:var(--ink)}
+.wact-b:hover{border-color:#c9cfdb;background:var(--bg)}
+.wact-b.on.known{background:#16A34A;border-color:#16A34A;color:#fff}
+.wact-b.on.learning{background:#F59E0B;border-color:#F59E0B;color:#fff}
+.wact.big .wact-b{font-size:14px;padding:10px}
+.selecting .wact{display:none}
 .dlg.center{align-items:center}
 .dlg .box.narrow{width:min(440px,100%);text-align:center}
 .dlg .box h3{padding-right:36px}
@@ -877,6 +884,11 @@ const SEL = new Set(); let selecting = false;
 function setSelecting(on) { selecting = on; if (!on) SEL.clear(); $('#grid').classList.toggle('selecting', on); $('#savedGrid') && $('#savedGrid').classList.toggle('selecting', on); $('#selectBtn').textContent = on ? 'Select all shown' : 'Select words'; updateBulk(); }
 function updateBulk() { $('#bulkbar').classList.toggle('on', selecting); $('#bulkCount').textContent = `${SEL.size} selected`; document.querySelectorAll('.wcard[data-open]').forEach(c => c.classList.toggle('sel', SEL.has(+c.dataset.open))); }
 /* ---------- word card ---------- */
+// Quick "I know it" / "Still learning" buttons on cards, so learners don't have to open the full card.
+function cardActions(w, big) {
+  const st = status(w.id);
+  return `<div class="wact${big ? ' big' : ''}"><button class="wact-b ${st === 'known' ? 'on known' : ''}" data-known="${w.id}" title="I know this word">${svg('check', st === 'known' ? '#fff' : '#16A34A', 15, 2.6)}<span>${st === 'known' ? 'Known' : 'I know it'}</span></button><button class="wact-b ${st === 'learning' ? 'on learning' : ''}" data-learning="${w.id}" title="Still learning">${svg('time', st === 'learning' ? '#fff' : '#B45309', 15, 2.2)}<span>${big ? 'Still learning' : 'Learning'}</span></button></div>`;
+}
 function wordCard(w) {
   const L = LEVELS[w.l]; const st = status(w.id);
   const stBadge = st === 'known' ? `<span class="pill" style="background:#DCFCE7;color:#15803D">Known</span>` : st === 'learning' ? `<span class="pill" style="background:#FEF3C7;color:#B45309">Learning</span>` : '';
@@ -891,6 +903,7 @@ function wordCard(w) {
       ${defsHTML(w)}
       ${showPlain() ? plainHTML(w, true) : ''}
       ${exampleHTML(w, L.c, L.t, 26, false)}
+      ${cardActions(w)}
     </div></div>`;
 }
 
@@ -944,8 +957,15 @@ document.addEventListener('click', e => {
   if (t.dataset.report) { e.stopPropagation(); openReport(t.dataset.kind || 'words', +t.dataset.report); return; }
   if (t.dataset.adminedit) { e.stopPropagation(); closeModal(); ADM.tab = 'edit'; ADM.kind = t.dataset.kind || 'words'; ADM.editId = +t.dataset.adminedit; location.hash = '#admin'; if (currentView === 'admin') renderAdmin(); return; }
   if (t.dataset.star) { e.stopPropagation(); toggleSave(+t.dataset.star); if ($('#overlay').classList.contains('open')) openWord($('#modal').dataset.id); else refreshVisible(); toast(S.saved[t.dataset.star] ? 'Saved to your list ★' : 'Removed from saved'); return; }
-  if (t.dataset.known) { setKnown(+t.dataset.known, true); toast('Nice! Marked as known.'); openWord(t.dataset.known); return; }
-  if (t.dataset.learning) { setKnown(+t.dataset.learning, false); toast('Added to your learning list.'); openWord(t.dataset.learning); return; }
+  if (t.dataset.known || t.dataset.learning) {
+    e.stopPropagation(); const id = +(t.dataset.known || t.dataset.learning), inModal = !!t.closest('#overlay');
+    const want = t.dataset.known ? 'known' : 'learning';
+    // On a card, pressing the state the word already has sets it back to new.
+    if (!inModal && status(id) === want) { delete S.known[id]; delete S.learning[id]; if (S.review) delete S.review[id]; save(); updateDue(); toast('Marked as new.'); }
+    else { setKnown(id, want === 'known'); toast(want === 'known' ? 'Nice! Marked as known.' : 'Added to your learning list.'); }
+    if (inModal) openWord(id); else { if (t.closest('#wotd')) renderWotd(); else refreshVisible(); }
+    return;
+  }
   if (t.dataset.close !== undefined) { closeModal(); return; }
   if (t.dataset.step) { const i = modalList.indexOf(+$('#modal').dataset.id) + +t.dataset.step; if (modalList[i]) openWord(modalList[i]); return; }
   if (t.dataset.open && selecting && t.closest('.wcard') && !t.closest('#overlay')) { const id = +t.dataset.open; SEL.has(id) ? SEL.delete(id) : SEL.add(id); updateBulk(); return; }
@@ -970,6 +990,7 @@ function renderWotd() {
       ${defsHTML(w)}
       ${showPlain() ? plainHTML(w, true) : ''}
       ${exampleHTML(w, L.c, L.t, 32)}
+      ${cardActions(w, true)}
       <button class="btn secondary" data-open="${w.id}">See full word card</button>
     </div></div>`;
  

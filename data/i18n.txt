@@ -462,3 +462,5 @@ Start learning Advanced words | Bắt đầu học từ Nâng cao | 고급 단�
 My level | Cấp độ của tôi | 내 수준 | Mon niveau
 Not set | Chưa chọn | 미설정 | Non défini
 Take the test | Làm bài kiểm tra | 테스트 보기 | Faire le test
+I know it | Tôi biết rồi | 알아요 | Je le connais
+Marked as new. | Đã đặt lại thành từ mới. | 새 단어로 되돌렸습니다. | Remis à nouveau.
