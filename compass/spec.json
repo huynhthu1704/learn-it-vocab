@@ -58,6 +58,16 @@
       "context": "Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; confirmed by the Product Owner on 2026-11-27.",
       "decision": "compass/guardrails.json keeps the Google API key pattern (AIza…) but exempts this project's own Firebase web API key, which is public by design (src/firebase-config.js) and bundled into cloud.js on one long line.",
       "consequences": "Without the exemption, every rebuild of cloud.js would fail the guardrails check. Any other Google API key is still blocked."
+    },
+    {
+      "id": "ADR-007",
+      "date": "2026-11-27",
+      "title": "GitHub Pages serves the site without Jekyll",
+      "status": "Accepted",
+      "context": "The site is prebuilt by build.mjs (ADR-001), but GitHub Pages still ran Jekyll on the main branch. Jekyll renders Markdown files without front matter, so Liquid tags (double curly braces, or a brace followed by a percent sign) in any compass/*.md would fail the Pages build and stop the live site from updating. Raised in the independent review of #2; the Product Owner asked for the fix.",
+      "decision": "An empty .nojekyll at the repository root turns Jekyll off; Pages serves the committed files as they are.",
+      "consequences": "Markdown files are no longer turned into HTML pages on the site (none are linked from it). Files and folders starting with _ are served too.",
+      "reqIds": []
     }
   ]
 }
