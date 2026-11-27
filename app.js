@@ -909,10 +909,14 @@ function maybeAskRole() {
 /* ---------- level check: pick a level or take a 9-word test; Intermediate and Advanced mark Beginner words as known ---------- */
 // Three words per level, chosen to be common to every IT role (tech and business), with one clear meaning each.
 const LEVEL_TEST = [['deadline', 1], ['bug', 1], ['invoice', 1], ['scope creep', 2], ['rollback', 2], ['churn', 2], ['due diligence', 3], ['single point of failure', 3], ['vendor lock-in', 3]];
+// Intermediate and Advanced learners already know the Beginner words.
+function markLevelKnown(level) { let n = 0; if (level >= 2) for (const w of WORDS) if (w.l === 1 && !S.known[w.id] && !S.learning[w.id]) { S.known[w.id] = 1; n++; } return n; }
+// Guests' progress isn't saved, but their level is (it's a preference): mark the Beginner words known again on each visit.
+// Not for signed-in learners: their account already has these, and any they set back to "new" must stay that way.
+function applyGuestLevel() { if (cloudUser || !(S.level >= 2)) return; if (markLevelKnown(S.level)) { updateChips(); refreshVisible(); if (currentView === 'progress') renderProgress(); } }
 function setUserLevel(level, how, score) {
   S.level = level; S.levelPrompted = 1; S.placement = { level, how, score: score ?? null, at: today() };
-  let n = 0;
-  if (level >= 2) for (const w of WORDS) if (w.l === 1 && !S.known[w.id] && !S.learning[w.id]) { S.known[w.id] = 1; n++; }
+  const n = markLevelKnown(level);
   S.prefsAt = Date.now(); save();
   F.level = String(level); $('#fcLevel').value = String(level); $('#qzLevel').value = String(level); FC = null; QZ = null;
   syncFilterUI(); refreshVisible(); updateChips();
@@ -1415,7 +1419,7 @@ let cloudStarted = false;
 async function initCloud() {
   if (cloudStarted || !window.Cloud) return; cloudStarted = true;
   const C = window.Cloud;
-  if (!C.enabled) { renderAccount(); return; }
+  if (!C.enabled) { applyGuestLevel(); renderAccount(); return; }
   startVisit();
   loading(true);
   try { const c = await C.loadContent(); if (c && c.words.length) applyContent(c); } catch (e) { console.warn('Firestore content not loaded, using built-in copy', e); }
@@ -1428,7 +1432,7 @@ async function initCloud() {
     cloudAdmin = u ? await C.isAdmin(u.uid) : false;
     try { if (cloudAdmin) localStorage.setItem('itv-admin', '1'); } catch (e) {}
     if (u && !cloudAdmin && VISIT.started) { let k = ''; try { k = sessionStorage.getItem('itv-si'); sessionStorage.setItem('itv-si', '1'); } catch (e) {} if (!k) C.recordVisit(today(), { signedIn: 1 }).catch(() => {}); }
-    if (u) { await syncProgress(); loading(false); }
+    if (u) { await syncProgress(); loading(false); } else applyGuestLevel();
     renderAccount(); renderNavAccount();
     if (currentView === 'admin') renderAdmin(); if (currentView === 'lists') renderLists(); if (currentView === 'progress') renderLangCard();
     if (u && cloudAdmin && !ADM.reports) { try { ADM.reports = await C.listReports('open'); if (ADM.reports.length) { $('#navAdmin').textContent = `Admin (${ADM.reports.length})`; } if (currentView === 'admin') renderAdmin(); } catch (e) {} }
