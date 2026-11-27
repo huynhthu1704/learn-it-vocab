@@ -70,4 +70,4 @@ _2026-11-27 · Accepted_
 
 **Decision:** An empty .nojekyll at the repository root turns Jekyll off; Pages serves the committed files as they are.
 
-**Consequences:** Markdown files are no longer turned into HTML pages on the site (none are linked from it). Files and folders starting with _ are served too.
+**Consequences:** Markdown files are no longer turned into HTML pages on the site (none are linked from it). Files and folders starting with _ or . (such as .github/, .claude/settings.json and .gitignore) are served too; none holds a secret, and the repo is public.
