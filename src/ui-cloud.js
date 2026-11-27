@@ -24,26 +24,44 @@ function queueCloudSave() {
   clearTimeout(cloudSaveT);
   cloudSaveT = setTimeout(async () => { try { await Cloud.saveProgress(cloudUser.uid, progressPayload()); cloudStatus = 'Progress synced ' + new Date().toLocaleTimeString(); } catch (e) { cloudStatus = 'Could not sync progress: ' + e.message; } if (currentView === 'progress') renderAccount(); }, 1500);
 }
+// Add progress from another source (the cloud copy, or progress an older version saved in this browser) to S.
+function mergeProgress(c) {
+  migrateMerged(c);
+  S.known = { ...(c.known || {}), ...S.known };
+  S.learning = { ...(c.learning || {}), ...S.learning }; for (const k in S.known) delete S.learning[k];
+  S.saved = { ...(c.saved || {}), ...S.saved };
+  for (const [d, n] of Object.entries(c.days || {})) S.days[d] = Math.max(S.days[d] || 0, n);
+  S.quizzes = Math.max(S.quizzes, c.quizzes || 0); S.best = Math.max(S.best, c.best || 0);
+  const fs = (c.meta && c.meta.firstSeen) || c.firstSeen; if (fs && (!S.firstSeen || fs < S.firstSeen)) S.firstSeen = fs;
+  if (c.stats && !S.stats) S.stats = c.stats;
+  S.ck = { ...(c.ck || {}), ...(S.ck || {}) }; S.cl = { ...(c.cl || {}), ...(S.cl || {}) }; for (const k in S.ck) delete S.cl[k];
+  if (c.review) S.review = { ...c.review, ...(S.review || {}) };
+  S.review = S.review || {}; for (const id in S.review) if (!S.learning[id]) delete S.review[id];
+  for (const id in S.learning) if (!S.review[id]) S.review[id] = { s: 0, d: today() }; // still-learning words without a review date are due now
+}
 async function syncProgress() {
   try {
+    let legacy = null; try { legacy = JSON.parse(localStorage.getItem(LEGACY_STORE) || 'null'); } catch (e) {}
+    if (legacy) mergeProgress(legacy);
     const c = await Cloud.loadProgress(cloudUser.uid);
     if (c) {
-      migrateMerged(c);
-      S.known = { ...(c.known || {}), ...S.known };
-      S.learning = { ...(c.learning || {}), ...S.learning }; for (const k in S.known) delete S.learning[k];
-      S.saved = { ...(c.saved || {}), ...S.saved };
-      for (const [d, n] of Object.entries(c.days || {})) S.days[d] = Math.max(S.days[d] || 0, n);
-      S.quizzes = Math.max(S.quizzes, c.quizzes || 0); S.best = Math.max(S.best, c.best || 0);
-      if (c.meta && c.meta.firstSeen && (!S.firstSeen || c.meta.firstSeen < S.firstSeen)) S.firstSeen = c.meta.firstSeen;
-      if (c.stats && !S.stats) S.stats = c.stats;
-      S.ck = { ...(c.ck || {}), ...(S.ck || {}) }; S.cl = { ...(c.cl || {}), ...(S.cl || {}) }; for (const k in S.ck) delete S.cl[k];
-      if (c.review) { S.review = { ...c.review, ...(S.review || {}) }; for (const id in S.review) if (!S.learning[id]) delete S.review[id]; }
+      mergeProgress(c);
       if (c.prefs && (c.prefs.prefsAt || 0) > (S.prefsAt || 0)) { Object.assign(S, c.prefs); applyLanguage(); }
     }
     if (!S.firstSeen) S.firstSeen = today();
-    save(); updateDue(); cloudStatus = 'Progress synced with your account';
+    persistLocal(); updateChips(); updateDue();
+    await Cloud.saveProgress(cloudUser.uid, progressPayload());
+    if (legacy) { try { localStorage.removeItem(LEGACY_STORE); } catch (e) {} }
+    cloudStatus = 'Progress synced with your account';
   } catch (e) { cloudStatus = 'Could not load your saved progress: ' + e.message; }
   refreshVisible();
+}
+// Guests: progress is not saved. Say so once per visit, the first time they learn something.
+let guestNudged = false;
+function nudgeGuestSave() {
+  if (guestNudged || cloudUser || !signInAuthKnown || !window.Cloud || !Cloud.enabled) return;
+  if (!Object.keys(S.days).length && !Object.keys(S.saved).length) return;
+  guestNudged = true; setTimeout(() => toast('Sign in to save your progress. Without an account it is lost when you close the page.'), 2600);
 }
 const G_ICON = '<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17z"/><path fill="#FBBC05" d="M10.6 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.7 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.8-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.4 2.3-6.2 0-11.5-4.1-13.4-9.9l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg>';
 async function doSignIn(btn) { try { await withButton(btn, () => Cloud.signIn()); } catch (e) { if (e.code !== 'auth/popup-closed-by-user') toast('Sign-in failed: ' + (e.code || e.message)); } }
@@ -60,9 +78,9 @@ function renderAccount() {
   renderNavAccount();
   const el = $('#accountCard'); if (!el) return;
   const C = window.Cloud;
-  if (!C || !C.enabled) { el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0">Cloud sync is not set up on this copy of the site, so progress is saved in this browser only.</p>`; return; }
+  if (!C || !C.enabled) { el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0">Cloud sync is not set up on this copy of the site, so progress is not saved after you close the page.</p>`; return; }
   if (!cloudUser) {
-    el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0 0 14px">Sign in to keep your progress and languages on every device, report mistakes and build your own word lists.</p>${signInButton('signInBtn')}`;
+    el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0 0 14px">Your progress is <b>not saved</b> until you sign in: it is lost when you close the page. Sign in to keep your known words, streak and saved words on every device, report mistakes and build your own word lists.</p>${signInButton('signInBtn')}`;
     $('#signInBtn').onclick = () => doSignIn($('#signInBtn'));
     return;
   }
@@ -740,6 +758,7 @@ async function initCloud() {
   scheduleSignInInvite();
   C.onUser(async u => {
     signInAuthKnown = true; if (u && $('#dlg').classList.contains('center')) closeDlg();
+    if (!u && cloudUser) { clearTimeout(cloudSaveT); clearProgress(); persistLocal(); updateChips(); updateDue(); refreshVisible(); if (currentView === 'progress') renderProgress(); } // signed out: don't leave this learner's progress on screen
     cloudUser = u; LST.lists = null; ADM.reports = null; renderNavAccount(); if (u) loading(true);
     cloudAdmin = u ? await C.isAdmin(u.uid) : false;
     try { if (cloudAdmin) localStorage.setItem('itv-admin', '1'); } catch (e) {}
