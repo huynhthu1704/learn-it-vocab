@@ -253,7 +253,7 @@ select.sel{border:1px solid var(--line);border-radius:12px;padding:10px 12px;fon
 .btn .tl::before,.links .tl::before,.pill .tl::before,.seg .tl::before,.chip .tl::before,.catchips .tl::before,.gbtn .tl::before,.tabs .tl::before,.lchk .tl::before,.count .tl::before,.go .tl::before,label .tl::before,.related .tl::before,th .tl::before{content:" · "}
 .dlg{position:fixed;inset:0;background:rgba(15,20,35,.5);z-index:70;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}
 .dlg.open{display:flex}
-.dlg .box{background:#fff;border-radius:24px;width:min(560px,100%);padding:26px 28px;box-shadow:var(--shadow-lg);position:relative;display:flex;flex-direction:column;gap:12px}
+.dlg .box{margin:auto 0;background:#fff;border-radius:24px;width:min(560px,100%);padding:26px 28px;box-shadow:var(--shadow-lg);position:relative;display:flex;flex-direction:column;gap:12px}
 .fld{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:14px}
 .fld input,.fld textarea,.fld select{font:inherit;font-weight:500;font-size:15px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;color:var(--ink);width:100%}
 .fld textarea{min-height:76px;resize:vertical}
