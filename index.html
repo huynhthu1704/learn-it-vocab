@@ -9,10 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=b7df41ab01">
+<link rel="stylesheet" href="styles.css?v=4cdd9443d0">
 <style>
 /* Loading screen: inline so it shows before styles.css and app.js arrive */
-body:not(.ready) footer,body:not(.ready) .navr>*{visibility:hidden}
+body:not(.ready) .navr>*{visibility:hidden}
 .boot{position:relative;min-height:calc(100vh - 69px);background:linear-gradient(180deg,#F3F7FF,#fff 60%);font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#1B1F2A;transition:opacity .25s ease}
 .boot.out{position:fixed;top:69px;left:0;right:0;bottom:0;z-index:15;opacity:0;pointer-events:none}
 .boot-bar{position:absolute;top:0;left:0;right:0;height:3px;overflow:hidden;background:#E8F0FE}
@@ -96,7 +96,7 @@ body:not(.ready) footer,body:not(.ready) .navr>*{visibility:hidden}
     </div>
   </div>
 </div>
-<noscript><style>.boot{display:none}body:not(.ready) footer{visibility:visible}</style><p style="max-width:640px;margin:48px auto;padding:0 24px;font-family:system-ui,sans-serif;font-size:17px">Learn IT Vocab needs JavaScript. Please turn it on in your browser settings and reload the page.</p></noscript>
+<noscript><style>.boot{display:none}</style><p style="max-width:640px;margin:48px auto;padding:0 24px;font-family:system-ui,sans-serif;font-size:17px">Learn IT Vocab needs JavaScript. Please turn it on in your browser settings and reload the page.</p></noscript>
 <script>
 (function () {
   var boot = document.getElementById('boot'), msg = document.getElementById('bootMsg'), title = document.getElementById('bootTitle');
@@ -300,7 +300,6 @@ body:not(.ready) footer,body:not(.ready) .navr>*{visibility:hidden}
   </div>
 </main>
 
-<footer><div class="wrap"><span><b style="color:var(--ink)" data-notr>Learn IT Vocab</b> · <span id="footCount"></span> · <span>3 levels</span> · <span>9 roles</span> · <span data-notr>English, Tiếng Việt, 한국어, Français</span></span><span>Pronunciation: IPA (American) + your device's voice</span></div></footer>
 
 <div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
 <div class="toast" id="toast"></div>
@@ -313,7 +312,7 @@ body:not(.ready) footer,body:not(.ready) .navr>*{visibility:hidden}
   <button class="btn sm" data-bulk="save">★ Save</button><button class="btn sm" data-bulk="unsave">Remove from saved</button>
   <button class="btn sm" data-bulk="reset">Reset to new</button><button class="btn sm" data-bulk="clear">✕ Done</button></div>
 
-<script src="app.js?v=9da9b6b7da"></script>
+<script src="app.js?v=3c997eab83"></script>
 
 <script type="module" src="cloud.js?v=3f1da1b888"></script>
 </body>
