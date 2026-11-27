@@ -6,7 +6,7 @@ When the Product Owner decides an approach, a trade-off, a scope cut or a rule, 
 
 _2026-11-27 · Accepted_
 
-**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; the Product Owner should confirm it.
+**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; confirmed by the Product Owner on 2026-11-27.
 
 **Decision:** build.mjs generates index.html, app.js, styles.css, cloud.js and words.json from src/ and data/, and those files are committed. GitHub Pages serves the main branch as it is, with no deploy workflow.
 
@@ -16,7 +16,7 @@ _2026-11-27 · Accepted_
 
 _2026-11-27 · Accepted_
 
-**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; the Product Owner should confirm it.
+**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; confirmed by the Product Owner on 2026-11-27.
 
 **Decision:** Learner accounts, progress, lists, reports and the word content live in Firestore. The site reads words as packed bundles of 150 words (bundles/words-01…), so a visit costs about 20 reads. Access is controlled by firestore.rules; admins are listed in admins/{uid}.
 
@@ -26,7 +26,7 @@ _2026-11-27 · Accepted_
 
 _2026-11-27 · Accepted_
 
-**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; the Product Owner should confirm it.
+**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; confirmed by the Product Owner on 2026-11-27.
 
 **Decision:** Translations, plain explanations, stories and My lists extraction call Gemini through Firebase AI Logic, trying several flash models in turn (src/cloud.js TEXT_MODELS), with long timeouts for slow free-tier replies. App Check protects the AI quota when a site key is set in src/firebase-config.js.
 
@@ -36,7 +36,7 @@ _2026-11-27 · Accepted_
 
 _2026-11-27 · Accepted_
 
-**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; the Product Owner should confirm it.
+**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; confirmed by the Product Owner on 2026-11-27.
 
 **Decision:** Word ids are assigned in the order of the data/ files, so new files are added at the end (e.g. 10-…txt) and existing lines are not reordered.
 
@@ -46,7 +46,7 @@ _2026-11-27 · Accepted_
 
 _2026-11-27 · Accepted_
 
-**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; the Product Owner should confirm it.
+**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; confirmed by the Product Owner on 2026-11-27.
 
 **Decision:** Admin → Insights counts signed-in learners only and stores no names or e-mails; visits/{date} holds anonymous daily counts; the Power BI export shows learners only as an anonymous code.
 
@@ -56,7 +56,7 @@ _2026-11-27 · Accepted_
 
 _2026-11-27 · Accepted_
 
-**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; the Product Owner should confirm it.
+**Context:** Decided before Compass was adopted; recorded when the project was onboarded to the Compass Framework (2026-11-27). Back-filled from the README and git history; confirmed by the Product Owner on 2026-11-27.
 
 **Decision:** compass/guardrails.json keeps the Google API key pattern (AIza…) but exempts this project's own Firebase web API key, which is public by design (src/firebase-config.js) and bundled into cloud.js on one long line.
 
