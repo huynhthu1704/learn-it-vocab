@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "protectedPaths": [
+    ".github/workflows/",
+    "compass/guardrails.json",
+    "compass/check-guardrails.mjs",
+    "compass/guardrails-lib.mjs",
+    "compass/hooks/",
+    ".claude/settings.json",
+    ".env",
+    "firestore.rules",
+    "src/firebase-config.js",
+    "CNAME"
+  ],
+  "forbiddenPaths": [
+    ".env",
+    ".env.local",
+    "secrets/",
+    "node_modules/",
+    ".claude/approved-paths.local.json"
+  ],
+  "maxFilesPerChange": 12,
+  "maxLinesPerFile": 600,
+  "requireRequirementReference": true,
+  "requireHumanApprovalFor": [
+    "delete",
+    "protected-path",
+    "dependency-change"
+  ],
+  "secretPatterns": [
+    "sk-ant-[A-Za-z0-9_-]{10,}",
+    "ghp_[A-Za-z0-9]{20,}",
+    "github_pat_[A-Za-z0-9_]{20,}",
+    "AKIA[0-9A-Z]{16}",
+    "-----BEGIN [A-Z ]*PRIVATE KEY-----",
+    "AIza(?!SyAaI76a3_DacfghbfnKjUOPTxBJ2P0zVYc)[0-9A-Za-z_-]{30,}"
+  ]
+}

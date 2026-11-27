@@ -1,0 +1,42 @@
+name: Compass CI
+on:
+  pull_request:
+    # labeled/unlabeled: adding the human-approved label re-runs the guardrails check
+    types: [opened, edited, synchronize, reopened, labeled, unlabeled]
+  push:
+    branches: [main, master]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Spec traceability check
+        run: node compass/check-spec.mjs
+      # Runs the BASE branch's copy of the check and its rules, so a PR cannot weaken the check that judges it.
+      # (Skipped on the PR that first installs it.)
+      - name: Guardrails check
+        if: github.event_name == 'pull_request'
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/guardrails-base" HEAD^1
+          if [ -f "$RUNNER_TEMP/guardrails-base/compass/check-guardrails.mjs" ]; then
+            node "$RUNNER_TEMP/guardrails-base/compass/check-guardrails.mjs"
+          else
+            echo "::notice::Guardrails check not on the base branch yet — skipped on this install PR."
+          fi
+      - name: Install
+        run: if [ -f package-lock.json ]; then npm ci; elif [ -f package.json ]; then npm install; fi
+      - name: Test
+        run: if [ -f package.json ]; then npm test --if-present; fi
+      - name: Build
+        run: if [ -f package.json ]; then npm run build --if-present; fi
+      # ADR-001: GitHub Pages serves the committed build output, so it must match the sources.
+      - name: Build output is committed
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git status --short
+            echo "::error::The generated files are stale. Run npm run build and commit the result."
+            exit 1
+          fi
