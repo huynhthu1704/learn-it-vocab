@@ -702,7 +702,7 @@ function renderNavAccount() {
   const el = $('#navAccount'); const C = window.Cloud; if (!el) return;
   $('#navAdmin').style.display = cloudAdmin ? '' : 'none';
   if (!C || !C.enabled) { el.innerHTML = ''; return; }
-  if (!cloudUser) { el.innerHTML = `<button class="gbtn" id="navSignIn">${G_ICON}<span class="hide-sm">Sign in</span></button>`; $('#navSignIn').onclick = () => doSignIn($('#navSignIn')); return; }
+  if (!cloudUser) { el.innerHTML = `<button class="gbtn" id="navSignIn" title="Sign in with Google" aria-label="Sign in with Google">${G_ICON}<span class="hide-sm">Sign in</span></button>`; $('#navSignIn').onclick = () => doSignIn($('#navSignIn')); return; }
   const u = cloudUser; const ini = (u.displayName || u.email || '?').trim()[0].toUpperCase();
   el.innerHTML = `<a class="avatar" href="#progress" title="${esc(u.displayName || u.email)}" data-notr>${u.photoURL ? `<img src="${esc(u.photoURL)}" alt="" referrerpolicy="no-referrer">` : ini}</a>`;
 }
