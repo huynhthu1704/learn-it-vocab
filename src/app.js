@@ -724,4 +724,5 @@ route();
 applyLanguage();
 updateDue();
 maybeAskRole();
+if (window.bootDone) window.bootDone();
 if (window.Cloud) initCloud();
