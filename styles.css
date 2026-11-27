@@ -390,6 +390,7 @@ h1 .tl,h2 .tl{font-size:.55em;margin-top:6px}
 .ui-multi .pill{white-space:normal}
 .ui-multi .btn{flex-wrap:wrap;text-align:center}
 @media (max-width:480px){.nav .wrap{gap:8px}.navr{gap:6px}.logo{font-size:16px;gap:8px}.logo svg{width:30px;height:30px}.langbtn{padding:6px 8px}.avatar{width:32px;height:32px}}
+@media (max-width:374px){.nav .wrap{padding:0 12px;gap:6px}.navr{gap:4px}.logo{font-size:15px;gap:6px}.logo svg{width:26px;height:26px}.gbtn{padding:6px 7px}.langbtn{padding:5px 6px}}
 @media (min-width:1181px){.ui-multi .links .tl{display:none}}
 @media (max-width:760px){.admgrid{grid-template-columns:1fr!important}}
 .view.on{display:block}
