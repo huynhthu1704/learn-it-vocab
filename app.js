@@ -996,6 +996,7 @@ function openSignInInvite(then) {
     <button class="btn ghost sm" id="inviteLater">Maybe later</button>
     <p class="hint" style="margin:0">We only use your Google name and e-mail to sign you in.</p></div>`);
   $('#dlg').classList.add('center'); $('#dlgBox').classList.add('narrow');
+  try { sessionStorage.setItem('itv-invite', '1'); } catch (e) {} // counts as this visit's invitation, so the automatic one doesn't show again
   $('#inviteSignIn').onclick = async () => { await doSignIn($('#inviteSignIn')); if (cloudUser) { closeDlg(); toast('Welcome! Your progress is now saved to your account.'); if (typeof then === 'function') setTimeout(then, 300); } };
   $('#inviteLater').onclick = () => closeDlg();
 }
@@ -1003,9 +1004,9 @@ function scheduleSignInInvite() {
   let shown = false; try { shown = sessionStorage.getItem('itv-invite') === '1'; } catch (e) {}
   if (shown || !window.Cloud || !Cloud.enabled) return;
   const tryShow = () => {
-    if (cloudUser || currentView === 'admin') return;
+    let seen = false; try { seen = sessionStorage.getItem('itv-invite') === '1'; } catch (e) {}
+    if (cloudUser || seen || currentView === 'admin') return; // signed in, or already invited this visit (e.g. after clicking ★)
     if (!signInAuthKnown || $('#dlg').classList.contains('open') || $('#overlay').classList.contains('open')) { setTimeout(tryShow, 2000); return; } // wait for the role picker or a word card to close
-    try { sessionStorage.setItem('itv-invite', '1'); } catch (e) {}
     openSignInInvite();
   };
   setTimeout(tryShow, 5000);
