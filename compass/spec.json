@@ -7,7 +7,7 @@
       "id": "REQ-001",
       "title": "Admin turns features on and off on a Features tab",
       "priority": "Must",
-      "status": "Draft",
+      "status": "In build",
       "intent": "compass/intent/2026-11-27-feature-flags.md",
       "design": "compass/design/2026-11-27-feature-flags.md",
       "ac": [
@@ -21,7 +21,7 @@
       "id": "REQ-002",
       "title": "My lists can be switched off",
       "priority": "Must",
-      "status": "Draft",
+      "status": "In build",
       "intent": "compass/intent/2026-11-27-feature-flags.md",
       "design": "compass/design/2026-11-27-feature-flags.md",
       "ac": [
@@ -34,7 +34,7 @@
       "id": "REQ-003",
       "title": "AI features can be switched off",
       "priority": "Must",
-      "status": "Draft",
+      "status": "In build",
       "intent": "compass/intent/2026-11-27-feature-flags.md",
       "design": "compass/design/2026-11-27-feature-flags.md",
       "ac": [
@@ -47,7 +47,7 @@
       "id": "REQ-004",
       "title": "Learner prompts can be switched off",
       "priority": "Should",
-      "status": "Draft",
+      "status": "In build",
       "intent": "compass/intent/2026-11-27-feature-flags.md",
       "design": "compass/design/2026-11-27-feature-flags.md",
       "ac": [
@@ -59,7 +59,7 @@
       "id": "REQ-005",
       "title": "Report a mistake can be switched off",
       "priority": "Should",
-      "status": "Draft",
+      "status": "In build",
       "intent": "compass/intent/2026-11-27-feature-flags.md",
       "design": "compass/design/2026-11-27-feature-flags.md",
       "ac": [
@@ -71,7 +71,7 @@
       "id": "REQ-006",
       "title": "Every feature stays on when the flags cannot be loaded",
       "priority": "Must",
-      "status": "Draft",
+      "status": "In build",
       "intent": "compass/intent/2026-11-27-feature-flags.md",
       "design": "compass/design/2026-11-27-feature-flags.md",
       "ac": [

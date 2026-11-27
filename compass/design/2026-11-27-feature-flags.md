@@ -1,6 +1,6 @@
 # Design: Admins turn site features on and off
 
-Status: Draft
+Status: Approved (by the Product Owner, 2026-11-27)
 Requirements: REQ-001, REQ-002, REQ-003, REQ-004, REQ-005, REQ-006
 Design tool: none yet. The project has no `designTool` link, so the screens are described here and reuse existing components.
 
