@@ -98,13 +98,29 @@ const NONTECH = ['hr', 'bizdev', 'sales', 'exec'];
 const myLangs = () => (S.langs || []).filter(l => LANGS[l]);
 const showPlain = () => S.plain === 'on' || (S.plain === 'auto' && NONTECH.includes(S.role));
 const meaningOf = w => { const l = myLangs()[0]; return (l && w[LANGS[l].key]) || w.d; };
-try { const raw = localStorage.getItem(STORE); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
+// Learning progress is only kept for signed-in learners (in their cloud account). This browser stores
+// preferences only; a guest's progress lives in memory and is gone when the page closes, unless they sign in.
+const PROGRESS_KEYS = ['known', 'learning', 'saved', 'days', 'quizzes', 'best', 'review', 'reviewInit', 'ck', 'cl', 'stats', 'firstSeen', 'listCount', 'listWords'];
+const LEGACY_STORE = 'itvocab-legacy-progress'; // progress saved in this browser before sign-in was required
+const blankProgress = () => ({ known: {}, learning: {}, saved: {}, days: {}, quizzes: 0, best: 0, review: {}, reviewInit: 0, ck: {}, cl: {}, stats: undefined, firstSeen: undefined, listCount: 0, listWords: 0 });
+const prefsOnly = st => { const o = {}; for (const k in st) if (!PROGRESS_KEYS.includes(k)) o[k] = st[k]; return o; };
+function persistLocal() { try { localStorage.setItem(STORE, JSON.stringify(prefsOnly(S))); } catch (e) {} }
+function clearProgress() { Object.assign(S, blankProgress()); }
+try {
+  const raw = localStorage.getItem(STORE);
+  if (raw) {
+    const st = JSON.parse(raw);
+    // Older versions kept progress here: move it aside so it can be added to the learner's account when they sign in.
+    if (PROGRESS_KEYS.some(k => k in st) && !localStorage.getItem(LEGACY_STORE)) { const old = {}; for (const k of PROGRESS_KEYS) if (k in st) old[k] = st[k]; localStorage.setItem(LEGACY_STORE, JSON.stringify(old)); }
+    S = Object.assign(S, prefsOnly(st)); localStorage.setItem(STORE, JSON.stringify(prefsOnly(st)));
+  }
+} catch (e) {}
 // Move progress on a merged full-form word (e.g. "job description") to its abbreviation card ("JD").
 function migrateMerged(st) { for (const k of ['known', 'learning', 'saved']) for (const [from, to] of Object.entries(MERGED)) if (st[k] && st[k][from]) { st[k][to] = 1; delete st[k][from]; } for (const id in st.known || {}) if (st.learning) delete st.learning[id]; }
 migrateMerged(S);
 // Words already in "still learning" before reminders existed are due for a first review today.
 if (!S.reviewInit) { S.review = S.review || {}; for (const id in S.learning) if (!S.review[id]) S.review[id] = { s: 0, d: new Date().toISOString().slice(0, 10) }; S.reviewInit = 1; }
-function save() { try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {} updateChips(); if (typeof queueCloudSave === 'function') queueCloudSave(); }
+function save() { persistLocal(); updateChips(); if (typeof queueCloudSave === 'function') queueCloudSave(); if (typeof nudgeGuestSave === 'function') nudgeGuestSave(); }
 const today = () => new Date().toISOString().slice(0, 10);
 // Light usage stats for the admin Insights page (only saved to the cloud for signed-in learners).
 function track(kind, key, n = 1) {
@@ -113,7 +129,6 @@ function track(kind, key, n = 1) {
   else if (kind === 'score') { T.scores = [...(T.scores || []), key].slice(-20); }
   else if (kind === 'count') { T[key] = (T[key] || 0) + n; }
   else { const m = T[kind] = T[kind] || {}; m[key] = (m[key] || 0) + n; const ks = Object.keys(m); if (ks.length > 400) { ks.sort((a, b) => m[b] - m[a]).slice(300).forEach(k => delete m[k]); } }
-  try { localStorage.setItem(STORE, JSON.stringify(S)); } catch (e) {}
   if (typeof queueCloudSave === 'function') queueCloudSave();
 }
 function practised(n = 1) { const d = today(); S.days[d] = (S.days[d] || 0) + n; save(); }
