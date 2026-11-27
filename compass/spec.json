@@ -2,8 +2,130 @@
   "version": 2,
   "stack": "Static single-page app in plain JavaScript (ES modules) and HTML page fragments, built by build.mjs with esbuild into committed index.html, app.js, styles.css, cloud.js and words.json; word data in data/*.txt; Firebase (Google sign-in, Firestore, Firebase AI Logic with Gemini, optional App Check); Google Apps Script for the weekly e-mail and the Power BI export; node:test for checks; GitHub Pages from the main branch",
   "features": [],
-  "requirements": [],
-  "tests": [],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "title": "Admin turns features on and off on a Features tab",
+      "priority": "Must",
+      "status": "Draft",
+      "intent": "compass/intent/2026-11-27-feature-flags.md",
+      "design": "compass/design/2026-11-27-feature-flags.md",
+      "ac": [
+        "Given I am signed in as an admin, When I open Admin, Then I see a Features tab listing My lists, AI features, Learner prompts and Report a mistake, each with a short description and an on/off toggle showing its current state",
+        "Given I am on the Features tab, When I switch a toggle, Then the change is saved to Firestore meta/flags, I see a confirmation, and the toggle keeps its new state after I reload the page",
+        "Given the save fails, When I switch a toggle, Then I see an error message and the toggle returns to its previous state",
+        "Given an admin switched a feature off, When a learner loads the site afterwards, Then the learner sees the new state without any deploy or rebuild"
+      ]
+    },
+    {
+      "id": "REQ-002",
+      "title": "My lists can be switched off",
+      "priority": "Must",
+      "status": "Draft",
+      "intent": "compass/intent/2026-11-27-feature-flags.md",
+      "design": "compass/design/2026-11-27-feature-flags.md",
+      "ac": [
+        "Given My lists is off, When a learner (signed in or not) views the site, Then the My lists menu link is hidden",
+        "Given My lists is off, When a learner opens #lists directly, Then they see a short \"This feature is not available right now\" message instead of the page",
+        "Given My lists is off, When an admin views the site, Then the My lists link and page still work for the admin"
+      ]
+    },
+    {
+      "id": "REQ-003",
+      "title": "AI features can be switched off",
+      "priority": "Must",
+      "status": "Draft",
+      "intent": "compass/intent/2026-11-27-feature-flags.md",
+      "design": "compass/design/2026-11-27-feature-flags.md",
+      "ac": [
+        "Given AI features is off, When a learner opens My lists, Then the AI extraction option is hidden and no AI request is sent",
+        "Given AI features is off, When a learner opens a word card, Then AI-written plain explanations and stories are not shown",
+        "Given AI features is off, When an admin uses the site, Then the admin still sees the AI options and Admin → AI tools still works"
+      ]
+    },
+    {
+      "id": "REQ-004",
+      "title": "Learner prompts can be switched off",
+      "priority": "Should",
+      "status": "Draft",
+      "intent": "compass/intent/2026-11-27-feature-flags.md",
+      "design": "compass/design/2026-11-27-feature-flags.md",
+      "ac": [
+        "Given Learner prompts is off, When a new visitor loads the site, Then the role picker, the level picker and the sign-in invite do not open by themselves",
+        "Given Learner prompts is off, When a visitor chooses a role or level from the page, Then they can still do so"
+      ]
+    },
+    {
+      "id": "REQ-005",
+      "title": "Report a mistake can be switched off",
+      "priority": "Should",
+      "status": "Draft",
+      "intent": "compass/intent/2026-11-27-feature-flags.md",
+      "design": "compass/design/2026-11-27-feature-flags.md",
+      "ac": [
+        "Given Report a mistake is off, When a learner opens a word or Workplace English card, Then the \"Report a wrong meaning or example\" / \"Report a problem\" link is hidden",
+        "Given Report a mistake is off, When an admin opens a card, Then the report link and the admin Edit link are still shown"
+      ]
+    },
+    {
+      "id": "REQ-006",
+      "title": "Every feature stays on when the flags cannot be loaded",
+      "priority": "Must",
+      "status": "Draft",
+      "intent": "compass/intent/2026-11-27-feature-flags.md",
+      "design": "compass/design/2026-11-27-feature-flags.md",
+      "ac": [
+        "Given Firebase is not set up, or meta/flags is missing or cannot be read, When anyone loads the site, Then every feature is on, as it is today",
+        "Given meta/flags has a flag name the site does not know, or is missing a known flag, When the site loads, Then unknown names are ignored and missing flags count as on"
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "id": "TC-001",
+      "title": "Flags resolve to all on when the document is missing, unreadable or partial; unknown names are ignored",
+      "reqIds": [
+        "REQ-006"
+      ],
+      "type": "automated",
+      "status": "Not run",
+      "file": "tests/flags.test.mjs"
+    },
+    {
+      "id": "TC-002",
+      "title": "An off flag hides the feature for learners but not for admins",
+      "reqIds": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-005"
+      ],
+      "type": "automated",
+      "status": "Not run",
+      "file": "tests/flags.test.mjs"
+    },
+    {
+      "id": "TC-003",
+      "title": "Admin switches each flag on the Features tab; the state survives a reload and a learner sees it on next load; a failed save reverts the toggle",
+      "reqIds": [
+        "REQ-001"
+      ],
+      "type": "manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-004",
+      "title": "With each flag off, as a learner: My lists link and page, AI options, first-visit prompts and report links are hidden or show the not-available message",
+      "reqIds": [
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-005"
+      ],
+      "type": "manual",
+      "status": "Not run"
+    }
+  ],
   "decisions": [
     {
       "id": "ADR-001",
