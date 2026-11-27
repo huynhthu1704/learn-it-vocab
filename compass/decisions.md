@@ -61,3 +61,13 @@ _2026-11-27 · Accepted_
 **Decision:** compass/guardrails.json keeps the Google API key pattern (AIza…) but exempts this project's own Firebase web API key, which is public by design (src/firebase-config.js) and bundled into cloud.js on one long line.
 
 **Consequences:** Without the exemption, every rebuild of cloud.js would fail the guardrails check. Any other Google API key is still blocked.
+
+## ADR-007 · GitHub Pages serves the site without Jekyll
+
+_2026-11-27 · Accepted_
+
+**Context:** The site is prebuilt by build.mjs (ADR-001), but GitHub Pages still ran Jekyll on the main branch. Jekyll renders Markdown files without front matter, so Liquid tags (double curly braces, or a brace followed by a percent sign) in any compass/*.md would fail the Pages build and stop the live site from updating. Raised in the independent review of #2; the Product Owner asked for the fix.
+
+**Decision:** An empty .nojekyll at the repository root turns Jekyll off; Pages serves the committed files as they are.
+
+**Consequences:** Markdown files are no longer turned into HTML pages on the site (none are linked from it). Files and folders starting with _ are served too.
