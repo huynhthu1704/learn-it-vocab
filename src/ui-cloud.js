@@ -49,19 +49,13 @@ async function syncProgress() {
       if (c.prefs && (c.prefs.prefsAt || 0) > (S.prefsAt || 0)) { Object.assign(S, c.prefs); applyLanguage(); }
     }
     if (!S.firstSeen) S.firstSeen = today();
+    if (S.levelPending) { markLevelKnown(S.level); delete S.levelPending; } // level picked before signing in
     persistLocal(); updateChips(); updateDue();
     await Cloud.saveProgress(cloudUser.uid, progressPayload());
     if (legacy) { try { localStorage.removeItem(LEGACY_STORE); } catch (e) {} }
     cloudStatus = 'Progress synced with your account';
   } catch (e) { cloudStatus = 'Could not load your saved progress: ' + e.message; }
   refreshVisible();
-}
-// Guests: progress is not saved. Say so once per visit, the first time they learn something.
-let guestNudged = false;
-function nudgeGuestSave() {
-  if (guestNudged || cloudUser || !signInAuthKnown || !window.Cloud || !Cloud.enabled) return;
-  if (!Object.keys(S.days).length && !Object.keys(S.saved).length) return;
-  guestNudged = true; setTimeout(() => toast('Sign in to save your progress. Without an account it is lost when you close the page.'), 2600);
 }
 const G_ICON = '<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17z"/><path fill="#FBBC05" d="M10.6 28.6A14.6 14.6 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.7 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.8-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.4 2.3-6.2 0-11.5-4.1-13.4-9.9l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg>';
 async function doSignIn(btn) { try { await withButton(btn, () => Cloud.signIn()); } catch (e) { if (e.code !== 'auth/popup-closed-by-user') toast('Sign-in failed: ' + (e.code || e.message)); } }
@@ -78,9 +72,9 @@ function renderAccount() {
   renderNavAccount();
   const el = $('#accountCard'); if (!el) return;
   const C = window.Cloud;
-  if (!C || !C.enabled) { el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0">Cloud sync is not set up on this copy of the site, so progress is not saved after you close the page.</p>`; return; }
+  if (!C || !C.enabled) { el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0">Cloud sync is not set up on this copy of the site, so progress is kept only until you close the page.</p>`; return; }
   if (!cloudUser) {
-    el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0 0 14px">Your progress is <b>not saved</b> until you sign in: it is lost when you close the page. Sign in to keep your known words, streak and saved words on every device, report mistakes and build your own word lists.</p>${signInButton('signInBtn')}`;
+    el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0 0 14px">Sign in to save words, mark them as known or still learning, and get review reminders, on every device. You can also report mistakes and build your own word lists.</p>${signInButton('signInBtn')}`;
     $('#signInBtn').onclick = () => doSignIn($('#signInBtn'));
     return;
   }
@@ -246,12 +240,10 @@ function maybeAskRole() {
 const LEVEL_TEST = [['deadline', 1], ['bug', 1], ['invoice', 1], ['scope creep', 2], ['rollback', 2], ['churn', 2], ['due diligence', 3], ['single point of failure', 3], ['vendor lock-in', 3]];
 // Intermediate and Advanced learners already know the Beginner words.
 function markLevelKnown(level) { let n = 0; if (level >= 2) for (const w of WORDS) if (w.l === 1 && !S.known[w.id] && !S.learning[w.id]) { S.known[w.id] = 1; n++; } return n; }
-// Guests' progress isn't saved, but their level is (it's a preference): mark the Beginner words known again on each visit.
-// Not for signed-in learners: their account already has these, and any they set back to "new" must stay that way.
-function applyGuestLevel() { if (cloudUser || !(S.level >= 2)) return; if (markLevelKnown(S.level)) { updateChips(); refreshVisible(); if (currentView === 'progress') renderProgress(); } }
+// Guests can't mark words: for them the level is remembered and the Beginner words are marked when they sign in.
 function setUserLevel(level, how, score) {
   S.level = level; S.levelPrompted = 1; S.placement = { level, how, score: score ?? null, at: today() };
-  const n = markLevelKnown(level);
+  let n = 0; if (isGuest()) S.levelPending = level >= 2 ? 1 : 0; else n = markLevelKnown(level);
   S.prefsAt = Date.now(); save();
   F.level = String(level); $('#fcLevel').value = String(level); $('#qzLevel').value = String(level); FC = null; QZ = null;
   syncFilterUI(); refreshVisible(); updateChips();
@@ -273,7 +265,7 @@ function finishLevel(level, how, score) {
   openDlg(`<div class="invite"><span class="itile" style="background:${L.t};width:64px;height:64px;border-radius:18px;display:grid;place-items:center"><b style="color:${L.c};font-size:28px">${level}</b></span>
     <h3 style="font-size:24px;margin:0">${how === 'test' ? 'Your level:' : 'Level set:'} ${L.name}</h3>
     ${score != null ? `<p style="margin:0;color:var(--muted)"><span>You got</span> <b>${score}/${LEVEL_TEST.length}</b> <span>words right.</span></p>` : ''}
-    <p style="margin:0;color:var(--muted)">${n ? `<b>${fmt(n)}</b> <span>Beginner words are marked as known. Unmark any word you're not sure about.</span>` : 'Start with the words at this level. You can change your level any time in My profile.'}</p>
+    <p style="margin:0;color:var(--muted)">${n ? `<b>${fmt(n)}</b> <span>Beginner words are marked as known. Unmark any word you're not sure about.</span>` : S.levelPending ? 'Sign in and the Beginner words will be marked as known, so you can skip them.' : 'Start with the words at this level. You can change your level any time in My profile.'}</p>
     <a class="btn primary lg" href="#flashcards" id="lvGo" style="width:100%">Start learning ${L.name} words</a></div>`);
   $('#dlg').classList.add('center'); $('#dlgBox').classList.add('narrow');
   $('#lvGo').onclick = () => closeDlg();
@@ -310,7 +302,7 @@ function maybeAskLevel() {
 
 /* ---------- sign-in invitation: 5 seconds after arriving, once per visit, for visitors who are not signed in ---------- */
 let signInAuthKnown = false;
-function openSignInInvite() {
+function openSignInInvite(then) {
   openDlg(`<div class="invite">
     <div class="invite-mark">${$('.logo svg') ? $('.logo svg').outerHTML : ''}</div>
     <h3 style="font-size:24px;margin:0">Save your progress with Google</h3>
@@ -325,7 +317,7 @@ function openSignInInvite() {
     <button class="btn ghost sm" id="inviteLater">Maybe later</button>
     <p class="hint" style="margin:0">We only use your Google name and e-mail to sign you in.</p></div>`);
   $('#dlg').classList.add('center'); $('#dlgBox').classList.add('narrow');
-  $('#inviteSignIn').onclick = async () => { await doSignIn($('#inviteSignIn')); if (cloudUser) { closeDlg(); toast('Welcome! Your progress is now saved to your account.'); } };
+  $('#inviteSignIn').onclick = async () => { await doSignIn($('#inviteSignIn')); if (cloudUser) { closeDlg(); toast('Welcome! Your progress is now saved to your account.'); if (typeof then === 'function') setTimeout(then, 300); } };
   $('#inviteLater').onclick = () => closeDlg();
 }
 function scheduleSignInInvite() {
@@ -754,7 +746,7 @@ let cloudStarted = false;
 async function initCloud() {
   if (cloudStarted || !window.Cloud) return; cloudStarted = true;
   const C = window.Cloud;
-  if (!C.enabled) { applyGuestLevel(); renderAccount(); return; }
+  if (!C.enabled) { renderAccount(); return; }
   startVisit();
   loading(true);
   try { const c = await C.loadContent(); if (c && c.words.length) applyContent(c); } catch (e) { console.warn('Firestore content not loaded, using built-in copy', e); }
@@ -767,7 +759,7 @@ async function initCloud() {
     cloudAdmin = u ? await C.isAdmin(u.uid) : false;
     try { if (cloudAdmin) localStorage.setItem('itv-admin', '1'); } catch (e) {}
     if (u && !cloudAdmin && VISIT.started) { let k = ''; try { k = sessionStorage.getItem('itv-si'); sessionStorage.setItem('itv-si', '1'); } catch (e) {} if (!k) C.recordVisit(today(), { signedIn: 1 }).catch(() => {}); }
-    if (u) { await syncProgress(); loading(false); } else applyGuestLevel();
+    if (u) { await syncProgress(); loading(false); }
     renderAccount(); renderNavAccount();
     if (currentView === 'admin') renderAdmin(); if (currentView === 'lists') renderLists(); if (currentView === 'progress') renderLangCard();
     if (u && cloudAdmin && !ADM.reports) { try { ADM.reports = await C.listReports('open'); if (ADM.reports.length) { $('#navAdmin').textContent = `Admin (${ADM.reports.length})`; } if (currentView === 'admin') renderAdmin(); } catch (e) {} }
