@@ -120,7 +120,7 @@ function migrateMerged(st) { for (const k of ['known', 'learning', 'saved']) for
 migrateMerged(S);
 // Words already in "still learning" before reminders existed are due for a first review today.
 if (!S.reviewInit) { S.review = S.review || {}; for (const id in S.learning) if (!S.review[id]) S.review[id] = { s: 0, d: new Date().toISOString().slice(0, 10) }; S.reviewInit = 1; }
-function save() { persistLocal(); updateChips(); if (typeof queueCloudSave === 'function') queueCloudSave(); if (typeof nudgeGuestSave === 'function') nudgeGuestSave(); }
+function save() { persistLocal(); updateChips(); if (typeof queueCloudSave === 'function') queueCloudSave(); }
 const today = () => new Date().toISOString().slice(0, 10);
 // Light usage stats for the admin Insights page (only saved to the cloud for signed-in learners).
 function track(kind, key, n = 1) {
@@ -146,6 +146,14 @@ function updateDue() {
   bar.style.display = n ? '' : 'none';
   bar.innerHTML = n ? `${svg('time', '#B45309', 18, 2)}<span><b>${n}</b> ${n === 1 ? 'word to review today' : 'words to review today'}</span><a class="btn sm primary" href="#flashcards" data-review>Review now</a>` : '';
   const opt = $('#fcMode option[value="due"]'); if (opt) opt.textContent = `Due for review (${n})`;
+}
+// Guests must sign in to save words or mark them. isGuest: the site can sign people in and this visitor is not signed in.
+const isGuest = () => !(window.Cloud && !Cloud.enabled) && !(typeof cloudUser !== 'undefined' && cloudUser);
+// Returns true (and asks the visitor to sign in) when the action must wait for sign-in. `then` runs after a successful sign-in.
+function needSignIn(then) {
+  if (!isGuest()) return false;
+  if (!window.Cloud || typeof signInAuthKnown === 'undefined' || !signInAuthKnown) { toast('One moment: checking whether you are signed in…'); return true; }
+  openSignInInvite(then); return true;
 }
 function toggleSave(id) { if (S.saved[id]) delete S.saved[id]; else S.saved[id] = 1; save(); }
 function updateChips() {
@@ -290,10 +298,12 @@ function closeModal() { $('#overlay').classList.remove('open'); if (location.has
 
 /* ---------- global clicks ---------- */
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-say],[data-star],[data-open],[data-known],[data-learning],[data-close],[data-step],[data-report],[data-adminedit],[data-fb],[data-review],[data-cknown],[data-clearning]');
+  const t = e.target.closest('[data-say],[data-star],[data-open],[data-known],[data-learning],[data-close],[data-step],[data-report],[data-adminedit],[data-fb],[data-review],[data-cknown],[data-clearning],[data-signin]');
   if (!t) { if (e.target === $('#overlay')) closeModal(); return; }
+  if (t.dataset.signin !== undefined) { e.preventDefault(); if (window.Cloud && Cloud.enabled) openSignInInvite(() => { if (currentView === 'flashcards' && FC) renderFC(); }); return; }
   if (t.dataset.say !== undefined) { e.stopPropagation(); speak(t.dataset.say, +t.dataset.rate || undefined, t.dataset.lang); return; }
   if (t.dataset.cknown || t.dataset.clearning) { e.stopPropagation(); const id = +(t.dataset.cknown || t.dataset.clearning), want = t.dataset.cknown ? 'known' : 'learning';
+    if (needSignIn(() => { setCorp(id, want); renderCorp(); toast(want === 'known' ? 'Nice! Marked as known.' : 'Added to your learning list.'); })) return;
     if (cstatus(id) === want) { setCorp(id, 'new'); toast('Marked as new.'); } else { setCorp(id, want); toast(want === 'known' ? 'Nice! Marked as known.' : 'Added to your learning list.'); }
     renderCorp(); return; }
   if (t.dataset.review !== undefined) { $('#fcMode').value = 'due'; FC = null; return; }
@@ -302,10 +312,11 @@ document.addEventListener('click', e => {
     if (fb[id] === -1) toast('Thanks! Tell us what was unclear with “Report a wrong meaning or example”.'); else if (fb[id] === 1) toast('Thanks for the feedback!'); return; }
   if (t.dataset.report) { e.stopPropagation(); openReport(t.dataset.kind || 'words', +t.dataset.report); return; }
   if (t.dataset.adminedit) { e.stopPropagation(); closeModal(); ADM.tab = 'edit'; ADM.kind = t.dataset.kind || 'words'; ADM.editId = +t.dataset.adminedit; location.hash = '#admin'; if (currentView === 'admin') renderAdmin(); return; }
-  if (t.dataset.star) { e.stopPropagation(); toggleSave(+t.dataset.star); if ($('#overlay').classList.contains('open')) openWord($('#modal').dataset.id); else refreshVisible(); toast(S.saved[t.dataset.star] ? 'Saved to your list ★' : 'Removed from saved'); return; }
+  if (t.dataset.star) { e.stopPropagation(); const sid = +t.dataset.star; if (needSignIn(() => { if (!S.saved[sid]) toggleSave(sid); refreshVisible(); toast('Saved to your list ★'); })) return; toggleSave(+t.dataset.star); if ($('#overlay').classList.contains('open')) openWord($('#modal').dataset.id); else refreshVisible(); toast(S.saved[t.dataset.star] ? 'Saved to your list ★' : 'Removed from saved'); return; }
   if (t.dataset.known || t.dataset.learning) {
     e.stopPropagation(); const id = +(t.dataset.known || t.dataset.learning), inModal = !!t.closest('#overlay');
     const want = t.dataset.known ? 'known' : 'learning';
+    if (needSignIn(() => { setKnown(id, want === 'known'); refreshVisible(); toast(want === 'known' ? 'Nice! Marked as known.' : 'Added to your learning list.'); })) return;
     // On a card, pressing the state the word already has sets it back to new.
     if (!inModal && status(id) === want) { delete S.known[id]; delete S.learning[id]; if (S.review) delete S.review[id]; save(); updateDue(); toast('Marked as new.'); }
     else { setKnown(id, want === 'known'); toast(want === 'known' ? 'Nice! Marked as known.' : 'Added to your learning list.'); }
@@ -419,6 +430,7 @@ $('#bulkbar').onclick = e => {
   const b = e.target.closest('[data-bulk]'); if (!b) return; const a = b.dataset.bulk;
   if (a === 'clear') { setSelecting(false); return; }
   if (!SEL.size) { toast('Select some words first.'); return; }
+  if (needSignIn(() => { const nb = document.querySelector(`[data-bulk="${a}"]`); if (nb && SEL.size) nb.click(); })) return;
   const n = SEL.size;
   for (const id of SEL) {
     if (a === 'known') { S.known[id] = 1; delete S.learning[id]; if (S.review) delete S.review[id]; } else if (a === 'learning') { S.learning[id] = 1; delete S.known[id]; schedule(id, 0); }
@@ -506,6 +518,8 @@ function startFC() {
   FC = { queue: pool.map(w => w.id), done: 0, total: pool.length, got: 0, again: 0 };
   renderFC();
 }
+// Flashcards still work for guests as practice; the cards they get right or wrong are not marked.
+const guestHint = () => isGuest() ? `<p class="hint guest-hint">Practice mode: <a href="#" data-signin>sign in</a> to keep track of the words you know.</p>` : '';
 function renderFC() {
   if (!FC.queue.length) {
     $('#fcArea').innerHTML = `<div class="card" style="padding:40px;text-align:center;border-radius:28px"><div class="result-big" style="color:var(--l1)">${FC.got}</div><p style="font-size:18px;font-weight:700">${FC.corp ? 'phrases learned in this set' : 'words learned in this set'}</p><p style="color:var(--muted)">You repeated ${FC.again} card${FC.again === 1 ? '' : 's'}. Keep going to build your streak.</p><div class="fc-actions"><button class="btn primary" id="fcAgain">Next set of 10</button><a class="btn secondary" href="#quiz">Test yourself in a quiz</a></div></div>`;
@@ -526,11 +540,11 @@ function renderFC() {
         <div style="text-align:left;width:100%">${exampleHTML(w, L.c, L.t, 34)}</div></div>
     </div></div>
     <div class="fc-actions"><button class="btn secondary lg" id="fcNo">Again</button><button class="btn primary lg" id="fcYes">${svg('check', '#fff', 20, 2.5)} I knew it</button></div>
-    <p class="hint">Keyboard: Space to flip · 1 = Again · 2 = I knew it</p>`;
+    <p class="hint">Keyboard: Space to flip · 1 = Again · 2 = I knew it</p>${guestHint()}`;
  
   $('#fc').onclick = e => { if (!e.target.closest('[data-say]')) $('#fc').classList.toggle('flip'); };
-  $('#fcYes').onclick = () => { if (FC.review && S.review && S.review[w.id] && S.review[w.id].s < REVIEW_GAPS.length - 1) { schedule(w.id, S.review[w.id].s + 1); practised(); updateDue(); } else setKnown(w.id, true); FC.got++; FC.done++; track('count', 'cards'); FC.queue.shift(); renderFC(); };
-  $('#fcNo').onclick = () => { setKnown(w.id, false); FC.again++; FC.done++; track('count', 'cards'); const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
+  $('#fcYes').onclick = () => { if (isGuest()) { FC.got++; FC.done++; FC.queue.shift(); renderFC(); return; } if (FC.review && S.review && S.review[w.id] && S.review[w.id].s < REVIEW_GAPS.length - 1) { schedule(w.id, S.review[w.id].s + 1); practised(); updateDue(); } else setKnown(w.id, true); FC.got++; FC.done++; track('count', 'cards'); FC.queue.shift(); renderFC(); };
+  $('#fcNo').onclick = () => { if (!isGuest()) setKnown(w.id, false); FC.again++; FC.done++; track('count', 'cards'); const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
 }
 function renderCorpFC() {
   const c = CORP.find(x => x.id === FC.queue[0]); const C = CATS[c.cat];
@@ -550,10 +564,10 @@ function renderCorpFC() {
         ${c.av ? `<div class="avoid">${svg('x', '#DC2626', 18, 2.5)}<div><b>Avoid:</b> <span data-notr>${esc(c.av)}</span></div></div>` : ''}</div>
     </div></div>
     <div class="fc-actions"><button class="btn secondary lg" id="fcNo">Again</button><button class="btn primary lg" id="fcYes">${svg('check', '#fff', 20, 2.5)} I knew it</button></div>
-    <p class="hint">Keyboard: Space to flip · 1 = Again · 2 = I knew it</p>`;
+    <p class="hint">Keyboard: Space to flip · 1 = Again · 2 = I knew it</p>${guestHint()}`;
   $('#fc').onclick = e => { if (!e.target.closest('[data-say]')) $('#fc').classList.toggle('flip'); };
-  $('#fcYes').onclick = () => { setCorp(c.id, 'known'); FC.got++; FC.done++; track('count', 'cards'); FC.queue.shift(); renderFC(); };
-  $('#fcNo').onclick = () => { setCorp(c.id, 'learning'); FC.again++; FC.done++; track('count', 'cards'); const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
+  $('#fcYes').onclick = () => { if (!isGuest()) setCorp(c.id, 'known'); FC.got++; FC.done++; track('count', 'cards'); FC.queue.shift(); renderFC(); };
+  $('#fcNo').onclick = () => { if (!isGuest()) setCorp(c.id, 'learning'); FC.again++; FC.done++; track('count', 'cards'); const id = FC.queue.shift(); FC.queue.splice(Math.min(3, FC.queue.length), 0, id); renderFC(); };
 }
 $('#fcStart').onclick = startFC;
 document.addEventListener('keydown', e => {
@@ -629,7 +643,7 @@ function renderQ() {
   document.querySelectorAll('[data-ans]').forEach(b => b.onclick = () => {
     const ok = +b.dataset.ans === w.id; { S.stats = S.stats || {}; const qt = S.stats.qt = S.stats.qt || {}; const r = qt[q.type] = qt[q.type] || [0, 0]; r[ok ? 0 : 1]++; }
     document.querySelectorAll('[data-ans]').forEach(x => { x.disabled = true; if (+x.dataset.ans === w.id) { x.classList.add('right'); x.lastChild.innerHTML = svg('check', '#16A34A', 20, 2.5); } });
-    if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); if (!q.corp) track('wrong', w.id); if (!q.corp) setKnown(w.id, false); else setCorp(w.id, 'learning'); } else { QZ.score++; practised(); }
+    if (!ok) { b.classList.add('wrong'); b.lastChild.innerHTML = svg('x', '#DC2626', 20, 2.5); QZ.wrong.push(w); if (!q.corp) track('wrong', w.id); if (!isGuest()) { if (!q.corp) setKnown(w.id, false); else setCorp(w.id, 'learning'); } } else { QZ.score++; practised(); }
     if (q.corp) { $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <b data-notr>${esc(w.p)}</b><div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:8px;font-style:italic" data-notr>${esc(w.ex)}${xRows(w.x, '#2563EB', '#fff', 22)}</div></div><div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`; $('#qNext').onclick = () => { QZ.i++; renderQ(); }; $('#qNext').focus(); return; }
     $('#qfb').innerHTML = `<div class="fb"><b style="color:${ok ? '#16A34A' : '#DC2626'}">${ok ? 'Correct!' : 'Not quite.'}</b> <span data-notr><b>${esc(w.t)}</b> <span class="ipa">${esc(w.i)}</span></span><div style="margin-top:6px">${defsHTML(w)}</div><div style="margin-top:6px">${exampleHTML(w, L.c, L.t, 28, false)}</div></div>
       <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn primary" id="qNext">${QZ.i === 9 ? 'See results' : 'Next question'} ${svg('arrow', '#fff', 18, 2)}</button></div>`;
