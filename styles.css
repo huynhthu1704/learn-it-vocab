@@ -24,6 +24,7 @@ a{color:inherit}
 .links a.active,.links a:hover{color:var(--ink);background:var(--bg)}
 .navr{display:flex;align-items:center;gap:10px}
 .chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;background:#fff;border:1px solid var(--line);white-space:nowrap}
+.chip:empty{display:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:11px 20px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .1s,box-shadow .2s,background .2s}
 .btn:active{transform:translateY(1px)}
 .btn.primary{background:var(--blue);color:#fff;box-shadow:0 6px 16px rgba(37,99,235,.22)}

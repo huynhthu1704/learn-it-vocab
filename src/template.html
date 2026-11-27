@@ -10,6 +10,35 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+/* Loading screen: inline so it shows before styles.css and app.js arrive */
+body:not(.ready) footer,body:not(.ready) .navr>*{visibility:hidden}
+.boot{position:relative;min-height:calc(100vh - 69px);background:linear-gradient(180deg,#F3F7FF,#fff 60%);font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#1B1F2A;transition:opacity .25s ease}
+.boot.out{position:fixed;top:69px;left:0;right:0;bottom:0;z-index:15;opacity:0;pointer-events:none}
+.boot-bar{position:absolute;top:0;left:0;right:0;height:3px;overflow:hidden;background:#E8F0FE}
+.boot-bar i{position:absolute;top:0;height:100%;width:35%;background:linear-gradient(90deg,#60A5FA,#2563EB,#7C3AED);animation:bootbar 1.1s ease-in-out infinite}
+@keyframes bootbar{0%{left:-35%}100%{left:100%}}
+.boot-status{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:56px 24px 8px}
+.boot-logo{position:relative;width:72px;height:72px;display:grid;place-items:center}
+.boot-logo svg{width:44px;height:44px;animation:bootpulse 1.6s ease-in-out infinite}
+.boot-logo::before{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid #DBE4F5;border-top-color:#2563EB;border-right-color:#7C3AED;animation:bootspin .9s linear infinite}
+@keyframes bootspin{to{transform:rotate(360deg)}}
+@keyframes bootpulse{50%{transform:scale(.92)}}
+.boot-title{font-size:18px;font-weight:800;margin:4px 0 0}
+.boot-msg{font-size:15px;color:#5B6475;margin:0;min-height:1.5em;max-width:440px}
+.boot-retry{display:none;margin-top:4px;border:0;border-radius:12px;padding:10px 18px;background:#2563EB;color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.boot.slow .boot-retry,.boot.fail .boot-retry{display:inline-block}
+.boot.fail .boot-logo::before{animation:none;border-color:#FECACA}
+.boot.fail .boot-logo svg{animation:none}
+.boot.fail .boot-bar,.boot.fail .boot-skel{display:none}
+.boot-skel{max-width:1200px;margin:0 auto;padding:40px 24px 64px;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.boot-skel b{display:block;border-radius:12px;background:linear-gradient(90deg,#EEF2F9 25%,#F7F9FD 50%,#EEF2F9 75%);background-size:200% 100%;animation:bootshine 1.4s ease-in-out infinite}
+@keyframes bootshine{0%{background-position:150% 0}100%{background-position:-50% 0}}
+.boot-row{display:flex;gap:12px;margin-top:28px}
+.boot-card{border:1px solid #E4E7EE;border-radius:24px;padding:24px;background:#fff;box-shadow:0 4px 16px rgba(26,31,51,.06)}
+@media (max-width:860px){.boot-skel{grid-template-columns:1fr;gap:32px}.boot-status{padding-top:40px}}
+@media (prefers-reduced-motion:reduce){.boot *,.boot *::before{animation-duration:3s!important}.boot-skel b{animation:none}}
+</style>
 </head>
 <body>
 <nav class="nav">
@@ -41,6 +70,54 @@
   <button class="btn sm ghost" id="focusClear">Show all roles</button>
 </div></div>
 
+<div class="boot" id="boot" role="status" aria-live="polite" aria-busy="true">
+  <div class="boot-bar"><i></i></div>
+  <div class="boot-status">
+    <div class="boot-logo"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lgb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs><path d="M10 5h28a6 6 0 0 1 6 6v19a6 6 0 0 1-6 6H23l-9.5 7.5V36H10a6 6 0 0 1-6-6V11a6 6 0 0 1 6-6z" fill="url(#lgb)"/><path d="M17 14.5l-5.5 6 5.5 6M31 14.5l5.5 6-5.5 6" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M26.5 12.5l-5 16" stroke="#FDE68A" stroke-width="3.2" stroke-linecap="round"/></svg></div>
+    <p class="boot-title" id="bootTitle">Getting your words ready…</p>
+    <p class="boot-msg" id="bootMsg">Loading 2,000+ IT words with pictures, audio and translations.</p>
+    <button class="boot-retry" id="bootRetry" type="button" onclick="location.reload()">Reload the page</button>
+  </div>
+  <div class="boot-skel" aria-hidden="true">
+    <div>
+      <b style="width:190px;height:28px;border-radius:99px"></b>
+      <b style="width:92%;height:44px;margin-top:22px"></b>
+      <b style="width:70%;height:44px;margin-top:12px"></b>
+      <b style="width:100%;height:16px;margin-top:24px"></b>
+      <b style="width:84%;height:16px;margin-top:10px"></b>
+      <div class="boot-row"><b style="width:170px;height:52px;border-radius:14px"></b><b style="width:170px;height:52px;border-radius:14px"></b></div>
+    </div>
+    <div class="boot-card">
+      <b style="width:100%;height:150px;border-radius:16px"></b>
+      <b style="width:55%;height:26px;margin-top:20px"></b>
+      <b style="width:35%;height:14px;margin-top:10px"></b>
+      <b style="width:100%;height:14px;margin-top:20px"></b>
+      <b style="width:80%;height:14px;margin-top:10px"></b>
+    </div>
+  </div>
+</div>
+<noscript><style>.boot{display:none}body:not(.ready) footer{visibility:visible}</style><p style="max-width:640px;margin:48px auto;padding:0 24px;font-family:system-ui,sans-serif;font-size:17px">Learn IT Vocab needs JavaScript. Please turn it on in your browser settings and reload the page.</p></noscript>
+<script>
+(function () {
+  var boot = document.getElementById('boot'), msg = document.getElementById('bootMsg'), title = document.getElementById('bootTitle');
+  var t1 = setTimeout(function () { if (boot.isConnected) msg.textContent = 'Almost there. The word list is large, so the first visit takes a moment.'; }, 4000);
+  var t2 = setTimeout(function () { if (boot.isConnected && !boot.classList.contains('fail')) { boot.classList.add('slow'); msg.textContent = 'This is taking longer than usual. Check your connection, or reload the page.'; } }, 15000);
+  function fail() {
+    if (document.body.classList.contains('ready') || !boot.isConnected) return;
+    clearTimeout(t1); clearTimeout(t2);
+    boot.classList.add('fail'); boot.setAttribute('aria-busy', 'false');
+    title.textContent = 'Something went wrong while loading';
+    msg.textContent = 'Please check your internet connection and reload the page.';
+  }
+  window.addEventListener('error', function (e) { if (e.target && e.target.tagName === 'SCRIPT' || e.filename && /app\.js/.test(e.filename)) fail(); }, true);
+  window.addEventListener('load', function () { setTimeout(fail, 800); });
+  window.bootDone = function () {
+    clearTimeout(t1); clearTimeout(t2);
+    document.body.classList.add('ready'); boot.setAttribute('aria-busy', 'false'); boot.classList.add('out');
+    setTimeout(function () { boot.remove(); }, 260);
+  };
+})();
+</script>
 <!--__PAGES__-->
 <footer><div class="wrap"><span><b style="color:var(--ink)" data-notr>Learn IT Vocab</b> · <span id="footCount"></span> · <span>3 levels</span> · <span>9 roles</span> · <span data-notr>English, Tiếng Việt, 한국어, Français</span></span><span>Pronunciation: IPA (American) + your device's voice</span></div></footer>
 
