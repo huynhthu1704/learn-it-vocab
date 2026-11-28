@@ -731,7 +731,6 @@ function show(v) {
 $('#menuBtn').onclick = () => $('#links').classList.toggle('open');
 window.addEventListener('hashchange', route);
 hydrateIcons(); updateChips();
-$('#footCount').textContent = fmt(WORDS.length) + ' words';
 syncFilterUI();
 renderFocus();
 route();
