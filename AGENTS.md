@@ -17,7 +17,7 @@ Project: **Learn IT Vocab** — Illustrated IT vocabulary for IT teams: 3 levels
 1b. **Requirement → Design:** once every requirement of the feature is approved, the design is drafted in `compass/spec.json → features[].design` (view: `compass/design/F-xxx.md`): screens traced to REQ ids, drawn in the project's design tool (in Figma: components only on the "Components" page, one section per feature — `compass/design/README.md`). **No code before the design is Approved** — CI fails a requirement In build whose feature design is still a Draft.
 2. **Requirement → Test:** add at least one test case that references the requirement id. For a bug, commit the failing test first.
 3. **Plan:** before changing code, write `compass/plans/<REQ-ids>-<short-name>.md` from the template in [`compass/plans/README.md`](compass/plans/README.md) (Files, Steps, Risks, Proof) and commit it first. CI fails a PR that changes code without a plan.
-4. **Code:** branch `compass/f-xxx-req-xxx-short-name` (feature + requirement). Commit messages start with the requirement id, e.g. `REQ-004: add guest checkout`.
+4. **Code:** branch `<type>/<short-description>` from the latest main, e.g. `feat/loading-screen` (types in `CLAUDE.md → Git branches`). Commit messages start with the requirement id, e.g. `REQ-004: add guest checkout`.
 5. **Pull request:** use the PR template; list REQ and TC ids; write `Closes #<issue>`; CI must be green (tests, `node compass/check-spec.mjs`, `node compass/check-guardrails.mjs`).
 6. **Independent review:** a fresh agent that did not write the code reviews the PR per [`compass/REVIEW.md`](compass/REVIEW.md). `CHANGES NEEDED` blocks the merge until fixed and re-reviewed.
 7. **Decisions:** when the Product Owner decides an approach, trade-off, scope cut or rule, add an ADR to `compass/spec.json → decisions` in the same PR.
@@ -28,7 +28,7 @@ Project: **Learn IT Vocab** — Illustrated IT vocabulary for IT teams: 3 levels
 npm run build                            # regenerate index.html, app.js, styles.css, cloud.js, words.json — commit them
 npm test                                 # run automated tests (node --test)
 node compass/check-spec.mjs              # traceability, approved intents, ADR log
-node compass/check-guardrails.mjs main   # the CI guardrails check, run locally before pushing
+git fetch && node compass/check-guardrails.mjs   # the CI guardrails check against origin/main, run before pushing
 ```
 
 ## Rules for AI agents
