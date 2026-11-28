@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="styles.css">
 <style>
 /* Loading screen: inline so it shows before styles.css and app.js arrive */
-body:not(.ready) footer,body:not(.ready) .navr>*{visibility:hidden}
+body:not(.ready) .navr>*{visibility:hidden}
 .boot{position:relative;min-height:calc(100vh - 69px);background:linear-gradient(180deg,#F3F7FF,#fff 60%);font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#1B1F2A;transition:opacity .25s ease}
 .boot.out{position:fixed;top:69px;left:0;right:0;bottom:0;z-index:15;opacity:0;pointer-events:none}
 .boot-bar{position:absolute;top:0;left:0;right:0;height:3px;overflow:hidden;background:#E8F0FE}
@@ -96,7 +96,7 @@ body:not(.ready) footer,body:not(.ready) .navr>*{visibility:hidden}
     </div>
   </div>
 </div>
-<noscript><style>.boot{display:none}body:not(.ready) footer{visibility:visible}</style><p style="max-width:640px;margin:48px auto;padding:0 24px;font-family:system-ui,sans-serif;font-size:17px">Learn IT Vocab needs JavaScript. Please turn it on in your browser settings and reload the page.</p></noscript>
+<noscript><style>.boot{display:none}</style><p style="max-width:640px;margin:48px auto;padding:0 24px;font-family:system-ui,sans-serif;font-size:17px">Learn IT Vocab needs JavaScript. Please turn it on in your browser settings and reload the page.</p></noscript>
 <script>
 (function () {
   var boot = document.getElementById('boot'), msg = document.getElementById('bootMsg'), title = document.getElementById('bootTitle');
@@ -119,7 +119,6 @@ body:not(.ready) footer,body:not(.ready) .navr>*{visibility:hidden}
 })();
 </script>
 <!--__PAGES__-->
-<footer><div class="wrap"><span><b style="color:var(--ink)" data-notr>Learn IT Vocab</b> · <span id="footCount"></span> · <span>3 levels</span> · <span>9 roles</span> · <span data-notr>English, Tiếng Việt, 한국어, Français</span></span><span>Pronunciation: IPA (American) + your device's voice</span></div></footer>
 
 <div class="overlay" id="overlay"><div class="modal" id="modal"></div></div>
 <div class="toast" id="toast"></div>

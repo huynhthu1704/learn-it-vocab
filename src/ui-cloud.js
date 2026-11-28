@@ -11,7 +11,7 @@ function mergeBuiltin(list, builtin, layout) {
 }
 function applyContent(c) {
   WORDS = mergeBuiltin(c.words, BUILTIN_WORDS, c.meta.layout); CORP = mergeBuiltin(c.corp, BUILTIN_CORP, c.meta.layout); BY_ID = new Map(WORDS.map(w => [w.id, w])); cloudMeta = c.meta;
-  fillTopics(); $('#footCount').textContent = fmt(WORDS.length) + ' words'; modalList = []; FC = null; QZ = null;
+  fillTopics(); modalList = []; FC = null; QZ = null;
   refreshVisible(); renderFocus(); if (currentView === 'workplace') renderCorp();
 }
 const prefsPayload = () => ({ langs: S.langs, ui: S.ui, plain: S.plain, role: S.role, level: S.level || 0, levelPrompted: S.levelPrompted || 0, placement: S.placement || null, accent: S.accent, rate: S.rate, prefsAt: S.prefsAt || 0 });

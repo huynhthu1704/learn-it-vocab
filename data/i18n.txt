@@ -76,7 +76,6 @@ words | từ | 단어 | mots
 {0} levels | {0} cấp độ | {0}단계 | {0} niveaux
 {0} roles | {0} vai trò | {0}개 직무 | {0} métiers
 {0} items | {0} mục | {0}개 항목 | {0} éléments
-Pronunciation: IPA (American) + your device's voice | Phát âm: IPA (Anh-Mỹ) + giọng đọc của thiết bị | 발음: IPA(미국식) + 기기 음성 | Prononciation : API (américain) + la voix de votre appareil
 # roles
 University students | Sinh viên đại học | 대학생 | Étudiants
 Students | Sinh viên | 학생 | Étudiants
