@@ -22,7 +22,7 @@ As a content maintainer I want the build to turn the data files into one checked
 
 _AC1_
 ```gherkin
-Given a line "term|pos|Vietnamese|example|topic" in a data/<digit>*.txt file below a header "# level=2 role=dev" and the term has an English definition and Korean meaning in data/definitions and is not listed in data/level-overrides.txt
+Given a line "term|pos|Vietnamese|example|topic" in a data/<digit>*.txt file below a header "# level=2 role=dev" and the term has an English definition and Korean meaning in data/definitions and is not listed in data/level-overrides.txt, is not in an earlier data/<digit>*.txt file (files are read in name order) and is not in data/merge-abbreviations.txt
 When the maintainer runs npm run build
 Then words.json contains the word with level 2, role dev among its roles, its topic, an IPA string, the English definition (d), Vietnamese (v), Korean (k) and the example (e)
 ```
@@ -31,7 +31,7 @@ _AC2_
 ```gherkin
 Given a line "term|level" in data/level-overrides.txt
 When the maintainer runs npm run build
-Then words.json gives that term the listed level; if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
+Then words.json gives that term the listed level, unless the term is an abbreviation merged in data/merge-abbreviations.txt, whose card then takes the lower of its own and its full form's level (the merge runs after the overrides); if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
 ```
 
 _AC3_
@@ -52,7 +52,7 @@ _AC5_
 ```gherkin
 Given the same term (case-insensitive) appears in two data files
 When the build runs
-Then words.json keeps one word for it and that word's roles include the roles from both files
+Then words.json keeps one word for it with the level, topic, Vietnamese meaning and example from the first file in name order, and its roles include the roles from both files
 ```
 
 _AC6_
@@ -163,7 +163,7 @@ Then every selected word gets that status, a message such as "<n> words marked a
 _AC3_
 ```gherkin
 Given a guest has selected words
-When they click a bulk action
+When they click a bulk action once the site knows they are not signed in
 Then the "Save your progress with Google" pop-up opens and nothing is marked; after signing in from the pop-up the action is applied to the selection
 ```
 
@@ -332,7 +332,7 @@ _AC1_
 ```gherkin
 Given the plain-language setting is Automatic (the default) and My role is IT HR, Business development, Sales or Manager / C-level
 When the learner sees a word card in Browse, Saved words or the word of the day for a word that has a plain explanation
-Then the card shows "In plain words" with the English explanation
+Then the card shows "In plain words" with the English explanation, and the back of the flashcard shows it in English and each chosen language
 ```
 
 _AC2_

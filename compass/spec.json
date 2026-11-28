@@ -34,7 +34,9 @@
           "Meanings and IPA come from data files and AI tools and may be wrong until a learner reports them",
           "The ?role= parameter only works inside the hash (#home?role=ba); a link like /?role=ba is only counted as a visit source and does not filter",
           "A guest who clicks Save or a mark button must sign in first, which may put off casual visitors",
-          "A full form merged into an abbreviation is not checked for IPA: if its IPA cannot be worked out, the build still passes and the card shows no IPA for the full form (build.mjs:135 copies it before the missing-IPA check at :144). Today every merged full form has one."
+          "A full form merged into an abbreviation is not checked for IPA: if its IPA cannot be worked out, the build still passes and the card shows no IPA for the full form (build.mjs:135 copies it before the missing-IPA check at :144). Today every merged full form has one.",
+          "A term repeated in a later data file keeps the first file's level, topic, meaning and example without a warning; only the roles are combined (build.mjs:85). The later lines (for example approve in data/2-dev.txt) look edited but change nothing.",
+          "Some level overrides have no effect: an override on an abbreviation is undone by the merge with its full form (data/level-overrides.txt has UAT|2, but UAT is level 1 because \"user acceptance testing\" is level 1)."
         ]
       },
       "createdAt": "2026-10-31T00:00:00.000Z"
@@ -83,28 +85,26 @@
       "title": "Word database with levels, roles, topics, IPA, meanings and examples",
       "story": "As a content maintainer I want the build to turn the data files into one checked word database so that every word card has complete, consistent data.",
       "ac": [
-        "Given a line \"term|pos|Vietnamese|example|topic\" in a data/<digit>*.txt file below a header \"# level=2 role=dev\" and the term has an English definition and Korean meaning in data/definitions and is not listed in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen words.json contains the word with level 2, role dev among its roles, its topic, an IPA string, the English definition (d), Vietnamese (v), Korean (k) and the example (e)",
-        "Given a line \"term|level\" in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen words.json gives that term the listed level; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
+        "Given a line \"term|pos|Vietnamese|example|topic\" in a data/<digit>*.txt file below a header \"# level=2 role=dev\" and the term has an English definition and Korean meaning in data/definitions and is not listed in data/level-overrides.txt, is not in an earlier data/<digit>*.txt file (files are read in name order) and is not in data/merge-abbreviations.txt\nWhen the maintainer runs npm run build\nThen words.json contains the word with level 2, role dev among its roles, its topic, an IPA string, the English definition (d), Vietnamese (v), Korean (k) and the example (e)",
+        "Given a line \"term|level\" in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen words.json gives that term the listed level, unless the term is an abbreviation merged in data/merge-abbreviations.txt, whose card then takes the lower of its own and its full form's level (the merge runs after the overrides); if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
         "Given a term that has no English definition in data/definitions\nWhen the maintainer runs npm run build\nThen the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
         "Given a term that is kept as its own card (not a full form merged into an abbreviation) and whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json\nWhen the maintainer runs npm run build\nThen the build asks to add it to data/pronunciation-overrides.json and exits non-zero",
-        "Given the same term (case-insensitive) appears in two data files\nWhen the build runs\nThen words.json keeps one word for it and that word's roles include the roles from both files",
+        "Given the same term (case-insensitive) appears in two data files\nWhen the build runs\nThen words.json keeps one word for it with the level, topic, Vietnamese meaning and example from the first file in name order, and its roles include the roles from both files",
         "Given an abbreviation pair \"BA|business analyst\" in data/merge-abbreviations.txt\nWhen the build runs\nThen words.json has one card \"BA\" whose full form (a) is \"business analyst\" with its own IPA (ai), the lower of the two levels and the roles of both, the full-form card is removed, and a card shows \"= business analyst\" under the term with its own listen button"
       ],
       "priority": "Must",
       "status": "Done",
       "sources": [
+        "build.mjs:113-123",
+        "build.mjs:127-145",
+        "build.mjs:155-157",
         "build.mjs:73-89",
         "build.mjs:90-100",
-        "build.mjs:113-124",
-        "build.mjs:125-143",
-        "build.mjs:155-157",
         "roles.mjs:3",
         "roles.mjs:48-74",
         "src/app.js:118-120",
         "src/app.js:208",
-        "tests/words.test.mjs:1-39",
-        "build.mjs:113-123",
-        "build.mjs:127-145"
+        "tests/words.test.mjs:1-39"
       ]
     },
     {
@@ -157,7 +157,7 @@
       "ac": [
         "Given the Browse page\nWhen the learner clicks Select words\nThen cards become selectable, the button changes to Select all shown and a bar appears with \"<n> selected\", Mark as learnt, Still learning, Save, Remove from saved, Reset to new and Done",
         "Given a signed-in learner has selected words\nWhen they click Mark as learnt, Still learning, Save, Remove from saved or Reset to new\nThen every selected word gets that status, a message such as \"<n> words marked as learnt.\" shows, and Still learning schedules each word for a 1-day review",
-        "Given a guest has selected words\nWhen they click a bulk action\nThen the \"Save your progress with Google\" pop-up opens and nothing is marked; after signing in from the pop-up the action is applied to the selection",
+        "Given a guest has selected words\nWhen they click a bulk action once the site knows they are not signed in\nThen the \"Save your progress with Google\" pop-up opens and nothing is marked; after signing in from the pop-up the action is applied to the selection",
         "Given select mode with no word selected\nWhen the learner clicks a bulk action\nThen the message \"Select some words first.\" shows",
         "Given select mode is on\nWhen the learner clicks Done or leaves Browse\nThen select mode ends and the selection is cleared"
       ],
@@ -266,7 +266,7 @@
       "title": "Plain-language explanations",
       "story": "As a learner without a tech background (HR, business development, sales or a manager) I want each word explained in everyday language so that I understand what my IT colleagues mean.",
       "ac": [
-        "Given the plain-language setting is Automatic (the default) and My role is IT HR, Business development, Sales or Manager / C-level\nWhen the learner sees a word card in Browse, Saved words or the word of the day for a word that has a plain explanation\nThen the card shows \"In plain words\" with the English explanation",
+        "Given the plain-language setting is Automatic (the default) and My role is IT HR, Business development, Sales or Manager / C-level\nWhen the learner sees a word card in Browse, Saved words or the word of the day for a word that has a plain explanation\nThen the card shows \"In plain words\" with the English explanation, and the back of the flashcard shows it in English and each chosen language",
         "Given the setting is Automatic and My role is Developers, Testers, BA / PO / PM, PMO, University students or not set\nWhen the learner sees a word card\nThen no plain explanation is shown on the card",
         "Given the setting is Always show\nWhen any learner sees a word card or the back of a flashcard for a word that has a plain explanation\nThen the explanation is shown (on the flashcard also in each chosen language)",
         "Given any setting, including Only in the word details\nWhen the learner opens the word dialog for a word that has a plain explanation\nThen \"In plain words\" is shown in English and in each chosen language"
@@ -311,7 +311,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC1",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC1\n  Given a line \"term|pos|Vietnamese|example|topic\" in a data/<digit>*.txt file below a header \"# level=2 role=dev\" and the term has an English definition and Korean meaning in data/definitions and is not listed in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then words.json contains the word with level 2, role dev among its roles, its topic, an IPA string, the English definition (d), Vietnamese (v), Korean (k) and the example (e)",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC1\n  Given a line \"term|pos|Vietnamese|example|topic\" in a data/<digit>*.txt file below a header \"# level=2 role=dev\" and the term has an English definition and Korean meaning in data/definitions and is not listed in data/level-overrides.txt, is not in an earlier data/<digit>*.txt file (files are read in name order) and is not in data/merge-abbreviations.txt\n  When the maintainer runs npm run build\n  Then words.json contains the word with level 2, role dev among its roles, its topic, an IPA string, the English definition (d), Vietnamese (v), Korean (k) and the example (e)",
       "type": "Manual",
       "status": "Not run"
     },
@@ -321,7 +321,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC2",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC2\n  Given a line \"term|level\" in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then words.json gives that term the listed level; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC2\n  Given a line \"term|level\" in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then words.json gives that term the listed level, unless the term is an abbreviation merged in data/merge-abbreviations.txt, whose card then takes the lower of its own and its full form's level (the merge runs after the overrides); if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
       "type": "Manual",
       "status": "Not run"
     },
@@ -351,7 +351,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC5",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC5\n  Given the same term (case-insensitive) appears in two data files\n  When the build runs\n  Then words.json keeps one word for it and that word's roles include the roles from both files",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC5\n  Given the same term (case-insensitive) appears in two data files\n  When the build runs\n  Then words.json keeps one word for it with the level, topic, Vietnamese meaning and example from the first file in name order, and its roles include the roles from both files",
       "type": "Manual",
       "status": "Not run"
     },
@@ -532,7 +532,7 @@
         "REQ-104"
       ],
       "title": "Select many words and mark them at once: AC3",
-      "gherkin": "Scenario: Select many words and mark them at once, AC3\n  Given a guest has selected words\n  When they click a bulk action\n  Then the \"Save your progress with Google\" pop-up opens and nothing is marked; after signing in from the pop-up the action is applied to the selection",
+      "gherkin": "Scenario: Select many words and mark them at once, AC3\n  Given a guest has selected words\n  When they click a bulk action once the site knows they are not signed in\n  Then the \"Save your progress with Google\" pop-up opens and nothing is marked; after signing in from the pop-up the action is applied to the selection",
       "type": "Manual",
       "status": "Not run"
     },
@@ -802,7 +802,7 @@
         "REQ-109"
       ],
       "title": "Plain-language explanations: AC1",
-      "gherkin": "Scenario: Plain-language explanations, AC1\n  Given the plain-language setting is Automatic (the default) and My role is IT HR, Business development, Sales or Manager / C-level\n  When the learner sees a word card in Browse, Saved words or the word of the day for a word that has a plain explanation\n  Then the card shows \"In plain words\" with the English explanation",
+      "gherkin": "Scenario: Plain-language explanations, AC1\n  Given the plain-language setting is Automatic (the default) and My role is IT HR, Business development, Sales or Manager / C-level\n  When the learner sees a word card in Browse, Saved words or the word of the day for a word that has a plain explanation\n  Then the card shows \"In plain words\" with the English explanation, and the back of the flashcard shows it in English and each chosen language",
       "type": "Manual",
       "status": "Not run"
     },
