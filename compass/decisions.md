@@ -76,8 +76,8 @@ _2026-11-27 · Accepted_
 
 _2026-11-27 · Accepted_
 
-**Context:** The ten features built before Compass was adopted were not in the spec. Writing them up touches about 36 files, and the guardrails cap a PR at 12 files (the human-approved label does not lift that cap). The Product Owner chose to keep the cap and split the work.
+**Context:** The ten features built before Compass was adopted were not in the spec. Writing them up touches about 36 files, and the guardrails cap a PR at 12 files (the human-approved label does not lift that cap). The Product Owner chose to keep the cap and split the work, to number the back-fill from REQ-101 and TC-101 so it stays clear of the feature-flag work (REQ-001…006, TC-001…004 in open PRs), and to give every acceptance criterion its own test case.
 
-**Decision:** Each shipped feature becomes F-001…F-010, with requirements written from what the code does today (status Done, sources listing the code) and one or two test cases per requirement. They go in five PRs of two features each. Test cases are Manual with status Not run unless an automated test covers them. Features get no design object: they predate the design stage.
+**Decision:** Each shipped feature becomes F-001…F-010, with requirements REQ-101 onwards written from what the code does today (status Done, sources listing the code). Every acceptance criterion gets its own test case, and the concrete example scenarios are kept as extra test cases. They go in five PRs of two features each. Test cases are Manual with status Not run unless an automated test covers them. Features get no design object: they predate the design stage.
 
-**Consequences:** Every requirement is traced to a test case, but most tests have not been run yet; QA can run them and set Pass or Fail. Known gaps found while writing (README drift, possible bugs) are listed as risks on the feature, not fixed in these PRs.
+**Consequences:** Every acceptance criterion is traced to a test case, but most tests have not been run yet; QA can run them and set Pass or Fail. New requirements continue from REQ-007 and new test cases from TC-005 (after the feature-flag work), below the back-fill block. Gaps found while writing (README drift, possible bugs) are listed as risks on the feature, not fixed in these PRs.

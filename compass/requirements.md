@@ -2,18 +2,18 @@
 
 | ID | Feature | Title | Priority | Status | Tests |
 |---|---|---|---|---|---|
-| REQ-001 | F-001 | Word database with levels, roles, topics, IPA, meanings and examples | Must | Done | TC-001, TC-002 |
-| REQ-002 | F-001 | Open the site for one role with a link | Should | Done | TC-003 |
-| REQ-003 | F-001 | Search and filter the word library | Must | Done | TC-004, TC-005 |
-| REQ-004 | F-001 | Select many words and mark them at once | Should | Done | TC-006, TC-007 |
-| REQ-005 | F-001 | Listen to words and examples | Must | Done | TC-008 |
-| REQ-006 | F-002 | Choose meaning languages | Must | Done | TC-009, TC-010 |
-| REQ-007 | F-002 | Choose the interface language | Should | Done | TC-011, TC-012 |
-| REQ-008 | F-002 | Listen to translations in their own language | Should | Done | TC-013 |
-| REQ-009 | F-002 | Plain-language explanations | Should | Done | TC-014 |
-| REQ-010 | F-002 | Stories for complex words | Could | Done | TC-015 |
+| REQ-101 | F-001 | Word database with levels, roles, topics, IPA, meanings and examples | Must | Done | TC-101, TC-102, TC-103, TC-104, TC-105, TC-106, TC-107, TC-108 |
+| REQ-102 | F-001 | Open the site for one role with a link | Should | Done | TC-109, TC-110, TC-111, TC-112, TC-113 |
+| REQ-103 | F-001 | Search and filter the word library | Must | Done | TC-114, TC-115, TC-116, TC-117, TC-118, TC-119, TC-120 |
+| REQ-104 | F-001 | Select many words and mark them at once | Should | Done | TC-121, TC-122, TC-123, TC-124, TC-125, TC-126, TC-127 |
+| REQ-105 | F-001 | Listen to words and examples | Must | Done | TC-128, TC-129, TC-130, TC-131 |
+| REQ-106 | F-002 | Choose meaning languages | Must | Done | TC-132, TC-133, TC-134, TC-135, TC-136, TC-137, TC-138 |
+| REQ-107 | F-002 | Choose the interface language | Should | Done | TC-139, TC-140, TC-141, TC-142, TC-143, TC-144, TC-145 |
+| REQ-108 | F-002 | Listen to translations in their own language | Should | Done | TC-146, TC-147, TC-148, TC-149 |
+| REQ-109 | F-002 | Plain-language explanations | Should | Done | TC-150, TC-151, TC-152, TC-153, TC-154 |
+| REQ-110 | F-002 | Stories for complex words | Could | Done | TC-155, TC-156, TC-157, TC-158 |
 
-## REQ-001 · Word database with levels, roles, topics, IPA, meanings and examples
+## REQ-101 · Word database with levels, roles, topics, IPA, meanings and examples
 As a content maintainer I want the build to turn the data files into one checked word database so that every word card has complete, consistent data.
 
 **Priority:** Must · **Status:** Done
@@ -22,40 +22,47 @@ As a content maintainer I want the build to turn the data files into one checked
 
 _AC1_
 ```gherkin
-Given a line "term|pos|Vietnamese|example|topic" in a data/<digit>*.txt file below a header "# level=2 role=dev" and the term has an English definition and Korean meaning in data/definitions
+Given a line "term|pos|Vietnamese|example|topic" in a data/<digit>*.txt file below a header "# level=2 role=dev" and the term has an English definition and Korean meaning in data/definitions and is not listed in data/level-overrides.txt
 When the maintainer runs npm run build
 Then words.json contains the word with level 2, role dev among its roles, its topic, an IPA string, the English definition (d), Vietnamese (v), Korean (k) and the example (e)
 ```
 
 _AC2_
 ```gherkin
+Given a line "term|level" in data/level-overrides.txt
+When the maintainer runs npm run build
+Then words.json gives that term the listed level; if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
+```
+
+_AC3_
+```gherkin
 Given a term that has no English definition in data/definitions
 When the maintainer runs npm run build
 Then the build prints "Missing definitions in data/definitions/:" with the term and exits non-zero
 ```
 
-_AC3_
+_AC4_
 ```gherkin
-Given a term whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json
+Given a term that is kept as its own card (not a full form merged into an abbreviation) and whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json
 When the maintainer runs npm run build
 Then the build asks to add it to data/pronunciation-overrides.json and exits non-zero
 ```
 
-_AC4_
+_AC5_
 ```gherkin
 Given the same term (case-insensitive) appears in two data files
 When the build runs
 Then words.json keeps one word for it and that word's roles include the roles from both files
 ```
 
-_AC5_
+_AC6_
 ```gherkin
 Given an abbreviation pair "BA|business analyst" in data/merge-abbreviations.txt
 When the build runs
 Then words.json has one card "BA" whose full form (a) is "business analyst" with its own IPA (ai), the lower of the two levels and the roles of both, the full-form card is removed, and a card shows "= business analyst" under the term with its own listen button
 ```
 
-## REQ-002 · Open the site for one role with a link
+## REQ-102 · Open the site for one role with a link
 As a partner site (for example BAPO Path) I want to link learners to one role's words so that they see the vocabulary for their job straight away.
 
 **Priority:** Should · **Status:** Done
@@ -90,7 +97,7 @@ When the page loads
 Then the first-visit role picker is not shown and My role is set to BA / PO / PM
 ```
 
-## REQ-003 · Search and filter the word library
+## REQ-103 · Search and filter the word library
 As a learner I want to search in English or my own language and filter by level, role, topic and status so that I find the words I need quickly.
 
 **Priority:** Must · **Status:** Done
@@ -132,7 +139,7 @@ When the list is shown
 Then the message "No words match. Try another search or clear the filters." appears
 ```
 
-## REQ-004 · Select many words and mark them at once
+## REQ-104 · Select many words and mark them at once
 As a signed-in learner I want to select many words and mark, save or reset them together so that I do not have to open each card.
 
 **Priority:** Should · **Status:** Done
@@ -174,7 +181,7 @@ When the learner clicks Done or leaves Browse
 Then select mode ends and the selection is cleared
 ```
 
-## REQ-005 · Listen to words and examples
+## REQ-105 · Listen to words and examples
 As a learner I want to hear each word, its full form and its example so that I learn how to say them.
 
 **Priority:** Must · **Status:** Done
@@ -202,7 +209,7 @@ When the learner taps a listen button
 Then the message "Audio is not supported in this browser. Use the IPA to check the sound." shows
 ```
 
-## REQ-006 · Choose meaning languages
+## REQ-106 · Choose meaning languages
 As a learner I want to choose which of Vietnamese, Korean and French appear next to English so that I see meanings in the languages I read.
 
 **Priority:** Must · **Status:** Done
@@ -244,7 +251,7 @@ When they sign in on another device
 Then the most recently changed preferences are used
 ```
 
-## REQ-007 · Choose the interface language
+## REQ-107 · Choose the interface language
 As a learner who is new to English I want the menus and buttons in my language so that I can use the site without getting lost.
 
 **Priority:** Should · **Status:** Done
@@ -286,7 +293,7 @@ When the maintainer runs npm run build
 Then the build exits non-zero naming the line
 ```
 
-## REQ-008 · Listen to translations in their own language
+## REQ-108 · Listen to translations in their own language
 As a learner I want to hear example and story translations in that language's voice so that I can check my understanding by ear.
 
 **Priority:** Should · **Status:** Done
@@ -302,7 +309,7 @@ Then the translation is read with a Korean (ko-KR) voice; Vietnamese uses vi-VN 
 
 _AC2_
 ```gherkin
-Given the device has no voice for the chosen language
+Given the device has speech voices, but none for the chosen language
 When the learner taps that language's listen button
 Then the message "No <language> voice on this device, so it may sound wrong. Add one in your system settings." shows
 ```
@@ -314,7 +321,7 @@ When the learner opens the story in a chosen language
 Then that translation has its own listen button in that language's voice
 ```
 
-## REQ-009 · Plain-language explanations
+## REQ-109 · Plain-language explanations
 As a learner without a tech background (HR, business development, sales or a manager) I want each word explained in everyday language so that I understand what my IT colleagues mean.
 
 **Priority:** Should · **Status:** Done
@@ -349,7 +356,7 @@ When the learner opens the word dialog for a word that has a plain explanation
 Then "In plain words" is shown in English and in each chosen language
 ```
 
-## REQ-010 · Stories for complex words
+## REQ-110 · Stories for complex words
 As a learner I want a short real-life story for hard words so that I see how the word is used at work.
 
 **Priority:** Could · **Status:** Done

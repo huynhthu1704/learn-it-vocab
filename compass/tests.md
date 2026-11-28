@@ -3,19 +3,73 @@
 ## Traceability matrix
 | Requirement | Test cases |
 |---|---|
-| REQ-001 Word database with levels, roles, topics, IPA, meanings and examples | TC-001 (Pass), TC-002 (Not run) |
-| REQ-002 Open the site for one role with a link | TC-003 (Not run) |
-| REQ-003 Search and filter the word library | TC-004 (Not run), TC-005 (Not run) |
-| REQ-004 Select many words and mark them at once | TC-006 (Not run), TC-007 (Not run) |
-| REQ-005 Listen to words and examples | TC-008 (Not run) |
-| REQ-006 Choose meaning languages | TC-009 (Not run), TC-010 (Not run) |
-| REQ-007 Choose the interface language | TC-011 (Not run), TC-012 (Not run) |
-| REQ-008 Listen to translations in their own language | TC-013 (Not run) |
-| REQ-009 Plain-language explanations | TC-014 (Not run) |
-| REQ-010 Stories for complex words | TC-015 (Not run) |
+| REQ-101 Word database with levels, roles, topics, IPA, meanings and examples | TC-101 (Not run), TC-102 (Not run), TC-103 (Not run), TC-104 (Not run), TC-105 (Not run), TC-106 (Not run), TC-107 (Pass), TC-108 (Not run) |
+| REQ-102 Open the site for one role with a link | TC-109 (Not run), TC-110 (Not run), TC-111 (Not run), TC-112 (Not run), TC-113 (Not run) |
+| REQ-103 Search and filter the word library | TC-114 (Not run), TC-115 (Not run), TC-116 (Not run), TC-117 (Not run), TC-118 (Not run), TC-119 (Not run), TC-120 (Not run) |
+| REQ-104 Select many words and mark them at once | TC-121 (Not run), TC-122 (Not run), TC-123 (Not run), TC-124 (Not run), TC-125 (Not run), TC-126 (Not run), TC-127 (Not run) |
+| REQ-105 Listen to words and examples | TC-128 (Not run), TC-129 (Not run), TC-130 (Not run), TC-131 (Not run) |
+| REQ-106 Choose meaning languages | TC-132 (Not run), TC-133 (Not run), TC-134 (Not run), TC-135 (Not run), TC-136 (Not run), TC-137 (Not run), TC-138 (Not run) |
+| REQ-107 Choose the interface language | TC-139 (Not run), TC-140 (Not run), TC-141 (Not run), TC-142 (Not run), TC-143 (Not run), TC-144 (Not run), TC-145 (Not run) |
+| REQ-108 Listen to translations in their own language | TC-146 (Not run), TC-147 (Not run), TC-148 (Not run), TC-149 (Not run) |
+| REQ-109 Plain-language explanations | TC-150 (Not run), TC-151 (Not run), TC-152 (Not run), TC-153 (Not run), TC-154 (Not run) |
+| REQ-110 Stories for complex words | TC-155 (Not run), TC-156 (Not run), TC-157 (Not run), TC-158 (Not run) |
 
-## TC-001 · words.json integrity
-Covers: REQ-001 · Type: Automated · Status: Pass
+## TC-101 · Word database with levels, roles, topics, IPA, meanings and examples: AC1
+Covers: REQ-101 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC1
+  Given a line "term|pos|Vietnamese|example|topic" in a data/<digit>*.txt file below a header "# level=2 role=dev" and the term has an English definition and Korean meaning in data/definitions and is not listed in data/level-overrides.txt
+  When the maintainer runs npm run build
+  Then words.json contains the word with level 2, role dev among its roles, its topic, an IPA string, the English definition (d), Vietnamese (v), Korean (k) and the example (e)
+```
+
+## TC-102 · Word database with levels, roles, topics, IPA, meanings and examples: AC2
+Covers: REQ-101 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC2
+  Given a line "term|level" in data/level-overrides.txt
+  When the maintainer runs npm run build
+  Then words.json gives that term the listed level; if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
+```
+
+## TC-103 · Word database with levels, roles, topics, IPA, meanings and examples: AC3
+Covers: REQ-101 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC3
+  Given a term that has no English definition in data/definitions
+  When the maintainer runs npm run build
+  Then the build prints "Missing definitions in data/definitions/:" with the term and exits non-zero
+```
+
+## TC-104 · Word database with levels, roles, topics, IPA, meanings and examples: AC4
+Covers: REQ-101 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC4
+  Given a term that is kept as its own card (not a full form merged into an abbreviation) and whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json
+  When the maintainer runs npm run build
+  Then the build asks to add it to data/pronunciation-overrides.json and exits non-zero
+```
+
+## TC-105 · Word database with levels, roles, topics, IPA, meanings and examples: AC5
+Covers: REQ-101 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC5
+  Given the same term (case-insensitive) appears in two data files
+  When the build runs
+  Then words.json keeps one word for it and that word's roles include the roles from both files
+```
+
+## TC-106 · Word database with levels, roles, topics, IPA, meanings and examples: AC6
+Covers: REQ-101 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC6
+  Given an abbreviation pair "BA|business analyst" in data/merge-abbreviations.txt
+  When the build runs
+  Then words.json has one card "BA" whose full form (a) is "business analyst" with its own IPA (ai), the lower of the two levels and the roles of both, the full-form card is removed, and a card shows "= business analyst" under the term with its own listen button
+```
+
+## TC-107 · words.json integrity
+Covers: REQ-101 · Type: Automated · Status: Pass
 ```gherkin
 Feature: Word database
   Scenario: Generated words are complete and valid
@@ -27,8 +81,8 @@ Feature: Word database
     And every level is 1, 2 or 3 and every role is one of the nine known roles
 ```
 
-## TC-002 · Abbreviation and full form share one card
-Covers: REQ-001 · Type: Manual · Status: Not run
+## TC-108 · Example: Abbreviation and full form share one card
+Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Abbreviation cards
   Scenario: JD card shows its full form
@@ -38,8 +92,44 @@ Feature: Abbreviation cards
     And under it "= job description" with its own listen button and IPA
 ```
 
-## TC-003 · Role link filters the site
-Covers: REQ-002 · Type: Manual · Status: Not run
+## TC-109 · Open the site for one role with a link: AC1
+Covers: REQ-102 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Open the site for one role with a link, AC1
+  Given a visitor opens #home?role=ba
+  When the page loads
+  Then a bar shows "Showing words for BA / PO / PM · <n> of <total> words" with See the words and Show all roles, the Browse role filter, the flashcard role and the quiz role are set to BA / PO / PM, and the address becomes #home
+```
+
+## TC-110 · Open the site for one role with a link: AC2
+Covers: REQ-102 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Open the site for one role with a link, AC2
+  Given a role was chosen by a link
+  When the visitor reloads the page in the same browser
+  Then the bar and the role filter are still set to that role
+```
+
+## TC-111 · Open the site for one role with a link: AC3
+Covers: REQ-102 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Open the site for one role with a link, AC3
+  Given the role bar is showing
+  When the visitor clicks Show all roles, or opens a link with ?role=all
+  Then the bar disappears and Browse shows all roles
+```
+
+## TC-112 · Open the site for one role with a link: AC4
+Covers: REQ-102 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Open the site for one role with a link, AC4
+  Given a first-time visitor with no role opens #home?role=ba
+  When the page loads
+  Then the first-visit role picker is not shown and My role is set to BA / PO / PM
+```
+
+## TC-113 · Example: Role link filters the site
+Covers: REQ-102 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Role link
   Scenario: Open the site for BA / PO / PM
@@ -53,8 +143,53 @@ Feature: Role link
     Then the bar disappears and All roles is selected
 ```
 
-## TC-004 · Search in Vietnamese without accents
-Covers: REQ-003 · Type: Manual · Status: Not run
+## TC-114 · Search and filter the word library: AC1
+Covers: REQ-103 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Search and filter the word library, AC1
+  Given the Browse page
+  When the learner types a word in the search box in English, Vietnamese (with or without accents), Korean or French
+  Then the grid shows words whose term, full form, English definition, Vietnamese, Korean or French meaning contains it, terms that start with it first, and the count shows "<n> words"
+```
+
+## TC-115 · Search and filter the word library: AC2
+Covers: REQ-103 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Search and filter the word library, AC2
+  Given the Browse page
+  When the learner picks a level, a role, a topic (grouped under Business domains and IT topics, each with its word count) and a status (All words, New, Learning, Known, Saved ★)
+  Then only words matching all chosen filters are shown
+```
+
+## TC-116 · Search and filter the word library: AC3
+Covers: REQ-103 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Search and filter the word library, AC3
+  Given a role filter and no search text
+  When the list is shown
+  Then words whose main role is that role come first, then by level
+```
+
+## TC-117 · Search and filter the word library: AC4
+Covers: REQ-103 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Search and filter the word library, AC4
+  Given more than 36 matching words
+  When the list is shown
+  Then 36 cards appear with "Show more words (<n> left)", and each click shows 48 more
+```
+
+## TC-118 · Search and filter the word library: AC5
+Covers: REQ-103 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Search and filter the word library, AC5
+  Given no word matches
+  When the list is shown
+  Then the message "No words match. Try another search or clear the filters." appears
+```
+
+## TC-119 · Example: Search in Vietnamese without accents
+Covers: REQ-103 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Browse search
   Scenario: Accent-free Vietnamese search
@@ -64,8 +199,8 @@ Feature: Browse search
     And the count shows the number of matches
 ```
 
-## TC-005 · Combined filters
-Covers: REQ-003 · Type: Manual · Status: Not run
+## TC-120 · Example: Combined filters
+Covers: REQ-103 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Browse filters
   Scenario: Level, role and topic together
@@ -76,8 +211,53 @@ Feature: Browse filters
     Then I see "No words match. Try another search or clear the filters."
 ```
 
-## TC-006 · Bulk mark as signed-in learner
-Covers: REQ-004 · Type: Manual · Status: Not run
+## TC-121 · Select many words and mark them at once: AC1
+Covers: REQ-104 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Select many words and mark them at once, AC1
+  Given the Browse page
+  When the learner clicks Select words
+  Then cards become selectable, the button changes to Select all shown and a bar appears with "<n> selected", Mark as learnt, Still learning, Save, Remove from saved, Reset to new and Done
+```
+
+## TC-122 · Select many words and mark them at once: AC2
+Covers: REQ-104 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Select many words and mark them at once, AC2
+  Given a signed-in learner has selected words
+  When they click Mark as learnt, Still learning, Save, Remove from saved or Reset to new
+  Then every selected word gets that status, a message such as "<n> words marked as learnt." shows, and Still learning schedules each word for a 1-day review
+```
+
+## TC-123 · Select many words and mark them at once: AC3
+Covers: REQ-104 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Select many words and mark them at once, AC3
+  Given a guest has selected words
+  When they click a bulk action
+  Then the "Save your progress with Google" pop-up opens and nothing is marked; after signing in from the pop-up the action is applied to the selection
+```
+
+## TC-124 · Select many words and mark them at once: AC4
+Covers: REQ-104 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Select many words and mark them at once, AC4
+  Given select mode with no word selected
+  When the learner clicks a bulk action
+  Then the message "Select some words first." shows
+```
+
+## TC-125 · Select many words and mark them at once: AC5
+Covers: REQ-104 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Select many words and mark them at once, AC5
+  Given select mode is on
+  When the learner clicks Done or leaves Browse
+  Then select mode ends and the selection is cleared
+```
+
+## TC-126 · Example: Bulk mark as signed-in learner
+Covers: REQ-104 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Bulk marking
   Scenario: Mark three words as learnt
@@ -88,8 +268,8 @@ Feature: Bulk marking
     And the three cards show Known
 ```
 
-## TC-007 · Bulk action asks a guest to sign in
-Covers: REQ-004 · Type: Manual · Status: Not run
+## TC-127 · Example: Bulk action asks a guest to sign in
+Covers: REQ-104 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Bulk marking
   Scenario: Guest tries to save selected words
@@ -99,8 +279,35 @@ Feature: Bulk marking
     And no word is saved
 ```
 
-## TC-008 · Listen at normal and slow speed
-Covers: REQ-005 · Type: Manual · Status: Not run
+## TC-128 · Listen to words and examples: AC1
+Covers: REQ-105 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Listen to words and examples, AC1
+  Given a word card, the word dialog, a flashcard or the word of the day
+  When the learner taps a listen button
+  Then the device reads the term (or the full form, or the example sentence) aloud in the English accent chosen in My profile (American or British) at the chosen speed
+```
+
+## TC-129 · Listen to words and examples: AC2
+Covers: REQ-105 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Listen to words and examples, AC2
+  Given the word dialog
+  When the learner taps the slow listen button
+  Then the term is read at 0.6 speed
+```
+
+## TC-130 · Listen to words and examples: AC3
+Covers: REQ-105 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Listen to words and examples, AC3
+  Given a browser without speech synthesis
+  When the learner taps a listen button
+  Then the message "Audio is not supported in this browser. Use the IPA to check the sound." shows
+```
+
+## TC-131 · Example: Listen at normal and slow speed
+Covers: REQ-105 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Audio
   Scenario: Hear a word
@@ -111,8 +318,53 @@ Feature: Audio
     Then I hear it more slowly
 ```
 
-## TC-009 · Default meaning languages
-Covers: REQ-006 · Type: Manual · Status: Not run
+## TC-132 · Choose meaning languages: AC1
+Covers: REQ-106 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Choose meaning languages, AC1
+  Given a new visitor
+  When they open a word card
+  Then the English definition is shown with the Vietnamese and Korean meanings (the default languages), Vietnamese in bold as the first language
+```
+
+## TC-133 · Choose meaning languages: AC2
+Covers: REQ-106 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Choose meaning languages, AC2
+  Given My profile → Languages, or the globe button in the top bar
+  When the learner ticks or unticks Tiếng Việt, 한국어 or Français
+  Then word cards, the word dialog and flashcards show the English definition plus a meaning row for each ticked language, and the globe button shows the chosen languages (for example "VI·FR") or "EN" when none is ticked
+```
+
+## TC-134 · Choose meaning languages: AC3
+Covers: REQ-106 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Choose meaning languages, AC3
+  Given the learner's first chosen language is Korean
+  When they get a "What does this word mean?" quiz question or take the level test
+  Then the answer options show the Korean meanings, falling back to the English definition where a word has none
+```
+
+## TC-135 · Choose meaning languages: AC4
+Covers: REQ-106 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Choose meaning languages, AC4
+  Given a guest changes languages
+  When they reload the page in the same browser
+  Then the same languages are chosen, and the Languages card says "Saved in this browser. Sign in to use them on every device."
+```
+
+## TC-136 · Choose meaning languages: AC5
+Covers: REQ-106 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Choose meaning languages, AC5
+  Given a signed-in learner changes languages on one device
+  When they sign in on another device
+  Then the most recently changed preferences are used
+```
+
+## TC-137 · Example: Default meaning languages
+Covers: REQ-106 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Meaning languages
   Scenario: First visit
@@ -122,8 +374,8 @@ Feature: Meaning languages
     And the globe button shows "VI·KO"
 ```
 
-## TC-010 · Add French and remove Korean
-Covers: REQ-006 · Type: Manual · Status: Not run
+## TC-138 · Example: Add French and remove Korean
+Covers: REQ-106 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Meaning languages
   Scenario: Change languages from the globe button
@@ -133,8 +385,53 @@ Feature: Meaning languages
     And after a reload the same languages are still chosen
 ```
 
-## TC-011 · Interface in one language
-Covers: REQ-007 · Type: Manual · Status: Not run
+## TC-139 · Choose the interface language: AC1
+Covers: REQ-107 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Choose the interface language, AC1
+  Given the learner has chosen Vietnamese and French as meaning languages
+  When they open Website interface
+  Then the options are English only, Tiếng Việt only, Français only and English + my languages
+```
+
+## TC-140 · Choose the interface language: AC2
+Covers: REQ-107 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Choose the interface language, AC2
+  Given the learner picks Tiếng Việt only
+  When any page is shown
+  Then interface text listed in data/i18n.txt is shown in Vietnamese, while words, meanings, examples and names stay as they are
+```
+
+## TC-141 · Choose the interface language: AC3
+Covers: REQ-107 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Choose the interface language, AC3
+  Given the learner picks English + my languages
+  When any page is shown
+  Then each translated interface text shows the English followed by its translation in each chosen language
+```
+
+## TC-142 · Choose the interface language: AC4
+Covers: REQ-107 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Choose the interface language, AC4
+  Given the interface is in French
+  When the learner unticks Français as a meaning language
+  Then the interface switches to English only
+```
+
+## TC-143 · Choose the interface language: AC5
+Covers: REQ-107 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Choose the interface language, AC5
+  Given a line in data/i18n.txt without exactly four parts separated by " | "
+  When the maintainer runs npm run build
+  Then the build exits non-zero naming the line
+```
+
+## TC-144 · Example: Interface in one language
+Covers: REQ-107 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Interface language
   Scenario: Vietnamese interface
@@ -144,8 +441,8 @@ Feature: Interface language
     And the English terms on word cards are unchanged
 ```
 
-## TC-012 · Interface falls back to English
-Covers: REQ-007 · Type: Manual · Status: Not run
+## TC-145 · Example: Interface falls back to English
+Covers: REQ-107 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Interface language
   Scenario: Remove the interface language
@@ -154,8 +451,35 @@ Feature: Interface language
     Then the interface is English only
 ```
 
-## TC-013 · Korean listen button on an example translation
-Covers: REQ-008 · Type: Manual · Status: Not run
+## TC-146 · Listen to translations in their own language: AC1
+Covers: REQ-108 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Listen to translations in their own language, AC1
+  Given a word whose example has translations and the learner has chosen Korean
+  When they tap the listen button on the Korean example row
+  Then the translation is read with a Korean (ko-KR) voice; Vietnamese uses vi-VN and French fr-FR
+```
+
+## TC-147 · Listen to translations in their own language: AC2
+Covers: REQ-108 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Listen to translations in their own language, AC2
+  Given the device has speech voices, but none for the chosen language
+  When the learner taps that language's listen button
+  Then the message "No <language> voice on this device, so it may sound wrong. Add one in your system settings." shows
+```
+
+## TC-148 · Listen to translations in their own language: AC3
+Covers: REQ-108 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Listen to translations in their own language, AC3
+  Given a word dialog with a story
+  When the learner opens the story in a chosen language
+  Then that translation has its own listen button in that language's voice
+```
+
+## TC-149 · Example: Korean listen button on an example translation
+Covers: REQ-108 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Per-language audio
   Scenario: Hear a Korean translation
@@ -164,8 +488,44 @@ Feature: Per-language audio
     Then I hear the sentence in a Korean voice
 ```
 
-## TC-014 · Plain words shown automatically for sales
-Covers: REQ-009 · Type: Manual · Status: Not run
+## TC-150 · Plain-language explanations: AC1
+Covers: REQ-109 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Plain-language explanations, AC1
+  Given the plain-language setting is Automatic (the default) and My role is IT HR, Business development, Sales or Manager / C-level
+  When the learner sees a word card in Browse, Saved words or the word of the day for a word that has a plain explanation
+  Then the card shows "In plain words" with the English explanation
+```
+
+## TC-151 · Plain-language explanations: AC2
+Covers: REQ-109 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Plain-language explanations, AC2
+  Given the setting is Automatic and My role is Developers, Testers, BA / PO / PM, PMO, University students or not set
+  When the learner sees a word card
+  Then no plain explanation is shown on the card
+```
+
+## TC-152 · Plain-language explanations: AC3
+Covers: REQ-109 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Plain-language explanations, AC3
+  Given the setting is Always show
+  When any learner sees a word card or the back of a flashcard for a word that has a plain explanation
+  Then the explanation is shown (on the flashcard also in each chosen language)
+```
+
+## TC-153 · Plain-language explanations: AC4
+Covers: REQ-109 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Plain-language explanations, AC4
+  Given any setting, including Only in the word details
+  When the learner opens the word dialog for a word that has a plain explanation
+  Then "In plain words" is shown in English and in each chosen language
+```
+
+## TC-154 · Example: Plain words shown automatically for sales
+Covers: REQ-109 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Plain-language explanations
   Scenario: Automatic for a non-technical role
@@ -178,8 +538,35 @@ Feature: Plain-language explanations
     But the word dialog still shows it
 ```
 
-## TC-015 · Story in the word dialog
-Covers: REQ-010 · Type: Manual · Status: Not run
+## TC-155 · Stories for complex words: AC1
+Covers: REQ-110 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Stories for complex words, AC1
+  Given a word that has a story
+  When the learner opens its word dialog
+  Then "Story: how it works in real life" shows the English story with a listen button, and each chosen language as a collapsible section named after the language
+```
+
+## TC-156 · Stories for complex words: AC2
+Covers: REQ-110 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Stories for complex words, AC2
+  Given a word without a story
+  When the learner opens its word dialog
+  Then no story section is shown
+```
+
+## TC-157 · Stories for complex words: AC3
+Covers: REQ-110 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Stories for complex words, AC3
+  Given an admin runs the AI tool Stories for complex words
+  When it picks words
+  Then it only writes stories for level 3 words, level 2 words in the architecture, cloud, security, data, AI, Agile, release, process, performance, network, business or money topics, and multi-word terms at level 2 or 3
+```
+
+## TC-158 · Example: Story in the word dialog
+Covers: REQ-110 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Stories
   Scenario: Read a story in Vietnamese
