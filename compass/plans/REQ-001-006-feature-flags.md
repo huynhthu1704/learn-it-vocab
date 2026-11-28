@@ -32,8 +32,13 @@ Intent: compass/intent/2026-11-27-feature-flags.md · Design: compass/design/202
    2. `initCloud` calls `FLAGS.reading()` before it reads the content. That cancels the 6 s fallback, so a slow read
       is waited for. The flags settle when `meta/info` arrives, or as all on if the read fails, finds no document,
       or Firebase is not set up.
-   3. If `initCloud` never runs (`cloud.js` failed), the 6 s fallback sets every feature on.
+   3. If `initCloud` never runs (`cloud.js` failed to load or threw), the fallback sets every feature on. It fires 6 s
+      after start-up, but never before the page's `load` event: a `cloud.js` that is only slow still arrives and
+      starts the read first.
    4. `applyFlags()` runs again after the admin status is known.
+   5. The first-visit prompts (role picker, level picker, sign-in invite) open only once the flags are known
+      (`FLAGS.when` / `FLAGS.known()`). A new visitor has no cached copy, so everything starts as on, and a prompt
+      that opened early could not be taken back.
 4. Gate each feature where it is rendered:
    - `ai`: the nav link, the Account card, `renderLists`, `plainHTML` and `storyHTML`, and the invite line.
    - `prompts`: `maybeAskRole`, `maybeAskLevel` and `scheduleSignInInvite`.
@@ -50,12 +55,21 @@ Intent: compass/intent/2026-11-27-feature-flags.md · Design: compass/design/202
 ## Risks
 - **A learner is locked out when the flags fail to load.** Anything not exactly `false` counts as on. A failed or
   missing read, Firebase not set up, and `cloud.js` never loading each end with every feature on (TC-001).
-- **A slow read turns features on for a moment.** The 6 s fallback is cancelled once the real read starts (TC-001).
+- **A slow read turns features on for a moment.** The 6 s fallback is cancelled once the real read starts, and
+  never fires before the page has loaded, so a slow `cloud.js` is waited for too (TC-001).
+- **A new visitor gets a prompt that is switched off.** Prompts wait for the flags (Steps 3.5). TC-001 tests the
+  waiting, and TC-004 covers a fresh profile on a slow network.
 - **Admins lose access to a feature that is off.** `isOn` returns true for admins (TC-002), and `applyFlags` runs
   again once the admin status is known.
 - **An admin saving from a stale view switches other features back on.** The tab reads fresh, and each click saves
   a single key with a merge.
-- **Sync or Rebuild wipes the flags.** `writeBundlesAndMeta` now writes `meta/info` with a merge.
+- **Something that writes `meta/info` wipes the flags.** Every writer keeps them:
+  - `writeBundlesAndMeta` (Sync, Rebuild) now writes with a merge.
+  - `saveItems` already uses `update`, which changes only the fields it names.
+  - `saveFlags` merges into the nested `flags` map.
+
+  If an admin saves a flag before the first Sync, `meta/info` holds only `flags`. The site treats that as "nothing
+  published yet" (no bundles) and keeps its built-in words, and the next Sync adds the rest (TC-003).
 - **Cost.** No extra read for learners. An admin pays one read each time they open Features.
 
 ## Proof
@@ -66,7 +80,8 @@ Intent: compass/intent/2026-11-27-feature-flags.md · Design: compass/design/202
   - an admin with every flag off;
   - a partial live document saved one key at a time;
   - an admin whose read fails, and a save that fails;
-  - `cloud.js` blocked, and a read that takes 8 s;
+  - `cloud.js` blocked, `cloud.js` arriving after 7 s, and a read that takes 8 s, on a fresh profile and with a
+    cached copy;
   - a phone width of 390px.
 
   TC-003, TC-004 and TC-005 are run manually on the live site after the merge.

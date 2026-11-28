@@ -44,6 +44,7 @@ components.
     page heading and its AI intro are hidden.
   - On word cards and flashcards, the "In plain words" and "Story" boxes are not shown.
 - **Learner prompts off:** the first-visit role picker, level picker and sign-in invite don't open by themselves.
+  They only ever open once the flags are known, so a new visitor on a slow network never sees one that is off.
   Picking a role or level by hand (the Home role and level cards, a `?role=` link, the Browse filters) works as today.
 - **Report a mistake off:** the "Report a wrong meaning or example" / "Report a problem" links are hidden on cards.
   So are the sign-in invite's "Report wrong meanings" line and the reporting mention in the signed-out Account card.

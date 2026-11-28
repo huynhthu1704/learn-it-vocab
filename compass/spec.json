@@ -69,7 +69,7 @@
       "ac": [
         "Given Firebase is not set up, or meta/info is missing, has no flags or cannot be read, When anyone loads the site, Then every feature is on, as it is today, even if this browser cached an earlier \"off\"",
         "Given meta/info.flags has a flag name the site does not know, or is missing a known flag, When the site loads, Then unknown names are ignored and missing flags count as on",
-        "Given the Firebase script never loads, When 6 seconds pass, Then every feature is on; Given the flags read has started but is slow, When 6 seconds pass, Then the site keeps waiting for it and does not switch features on in between"
+        "Given the Firebase script fails to load, When 6 seconds have passed and the page has finished loading, Then every feature is on; Given the Firebase script or the flags read is slow, When 6 seconds pass, Then the site keeps waiting for it and does not switch features on in between"
       ],
       "issue": 17
     }
@@ -77,7 +77,7 @@
   "tests": [
     {
       "id": "TC-001",
-      "title": "Flags resolve to all on when the value is missing, unreadable or partial (unknown names ignored); with no read at all the cached copy is dropped after 6 s; a read that has started is waited for, even when slow",
+      "title": "Flags resolve to all on when the value is missing, unreadable or partial (unknown names ignored); with no read at all the cached copy is dropped by the fallback; a read that has started is waited for, even when slow; code waiting for the flags (the prompts) runs only once they are known",
       "reqIds": [
         "REQ-006"
       ],
@@ -99,7 +99,7 @@
     },
     {
       "id": "TC-003",
-      "title": "Admin switches each flag on the Features tab: only that flag changes in meta/info.flags, the state survives a reload and a learner sees it on next load; a failed save reverts the toggle; a failed read shows an error and no switches; Sync built-in words keeps the flags",
+      "title": "Admin switches each flag on the Features tab: only that flag changes in meta/info.flags, the state survives a reload and a learner sees it on next load; a failed save reverts the toggle; a failed read shows an error and no switches; Sync built-in words keeps the flags; on a project never synced, saving a flag creates meta/info with only flags, the site keeps its built-in words, and the next Sync keeps the flag",
       "reqIds": [
         "REQ-001"
       ],
@@ -108,7 +108,7 @@
     },
     {
       "id": "TC-004",
-      "title": "As a learner, with each flag off in turn: (AI and My lists) the My lists menu link, the Account card button and texts and the invite line are hidden, #lists shows only the not-available message, no request goes to the AI (DevTools → Network shows no firebasevertexai / generativelanguage call), and the plain-words and story boxes are hidden on word cards and flashcards; (prompts) on a fresh browser profile no role picker, level picker or sign-in invite opens, while the Home role and level cards, a ?role= link and the Browse filters still work; (report) the report links are hidden on word and Workplace English cards, the invite and Account card do not mention reporting, and the 👎 message does not point to the report link",
+      "title": "As a learner, with each flag off in turn: (AI and My lists) the My lists menu link, the Account card button and texts and the invite line are hidden, #lists shows only the not-available message, no request goes to the AI (DevTools → Network shows no firebasevertexai / generativelanguage call), and the plain-words and story boxes are hidden on word cards and flashcards; (prompts) on a fresh browser profile, also with DevTools network throttling set to Slow 3G, no role picker, level picker or sign-in invite opens; picking a role from My profile does not open the level picker by itself; while the Home role and level cards, a ?role= link and the Browse filters still work; (report) the report links are hidden on word and Workplace English cards, the invite and Account card do not mention reporting, and the 👎 message does not point to the report link",
       "reqIds": [
         "REQ-002",
         "REQ-004",
@@ -228,7 +228,7 @@
       ],
       "context": "A separate meta/flags document would add one read per visit (about 5% more on the free plan, 50,000 reads a day, about 20 reads per visit).",
       "decision": "The Product Owner decided on 2026-11-28 to store the flags in the `flags` field of meta/info, which every visit already reads. The Features tab reads meta/info fresh and saves one flag at a time with a merge.",
-      "consequences": "Learners pay no extra reads; an admin pays one read each time they open Features. Anything that writes meta/info (Sync, Rebuild) must merge so it keeps the flags."
+      "consequences": "Learners pay no extra reads; an admin pays one read each time they open Admin or Features, and one write per switch. Every writer of meta/info keeps the flags: writeBundlesAndMeta (Sync, Rebuild) merges, saveItems updates named fields only, saveFlags merges into the nested map. Saving a flag before the first Sync creates meta/info with only flags, which the site treats as nothing published yet."
     }
   ]
 }
