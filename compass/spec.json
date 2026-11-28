@@ -2,8 +2,132 @@
   "version": 2,
   "stack": "Static single-page app in plain JavaScript (ES modules) and HTML page fragments, built by build.mjs with esbuild into committed index.html, app.js, styles.css, cloud.js and words.json; word data in data/*.txt; Firebase (Google sign-in, Firestore, Firebase AI Logic with Gemini, optional App Check); Google Apps Script for the weekly e-mail and the Power BI export; node:test for checks; GitHub Pages from the main branch",
   "features": [],
-  "requirements": [],
-  "tests": [],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "title": "Admin turns features on and off on a Features tab",
+      "priority": "Must",
+      "status": "In build",
+      "intent": "compass/intent/2026-11-27-feature-flags.md",
+      "design": "compass/design/2026-11-27-feature-flags.md",
+      "ac": [
+        "Given I am signed in as an admin, When I open Admin → Features, Then after a fresh read of the flags I see AI and My lists, Learner prompts and Report a mistake, each with a short description and an on/off switch showing its current state; if the read fails I see an error and no switches",
+        "Given I am on the Features tab, When I switch a toggle, Then only that flag is saved to Firestore (the flags field of meta/info), I see a confirmation, the other flags keep their stored values, and the toggle keeps its new state after I reload the page",
+        "Given the save fails, When I switch a toggle, Then I see an error message and the toggle returns to its previous state",
+        "Given an admin switched a feature off, When a learner loads the site afterwards, Then once the flags have loaded the learner sees the new state, without any deploy or rebuild (a learner who visited before may see the previous state for a moment while the flags load)"
+      ],
+      "issue": 17
+    },
+    {
+      "id": "REQ-002",
+      "title": "AI and My lists can be switched off (one switch)",
+      "priority": "Must",
+      "status": "In build",
+      "intent": "compass/intent/2026-11-27-feature-flags.md",
+      "design": "compass/design/2026-11-27-feature-flags.md",
+      "ac": [
+        "Given AI and My lists is off, When a learner (signed in or not) views the site, Then the My lists menu link, the \"My word lists\" button in the Account card, the word-lists line in the sign-in invite and the word-lists mention in the signed-out Account card are hidden",
+        "Given AI and My lists is off, When a learner opens #lists directly, Then they see only a short \"This feature is not available right now\" message, without the page's AI intro, and no AI request is sent",
+        "Given AI and My lists is off, When a learner opens a word card or a flashcard, Then the AI-written \"In plain words\" and \"Story\" boxes are not shown (stored text is hidden too, ADR-008)",
+        "Given AI and My lists is off, When an admin uses the site, Then the admin still sees the My lists link and page, the AI extraction and the plain-words and story boxes, and Admin → AI tools still works"
+      ],
+      "issue": 17
+    },
+    {
+      "id": "REQ-004",
+      "title": "Learner prompts can be switched off",
+      "priority": "Should",
+      "status": "In build",
+      "intent": "compass/intent/2026-11-27-feature-flags.md",
+      "design": "compass/design/2026-11-27-feature-flags.md",
+      "ac": [
+        "Given Learner prompts is off, When a new visitor loads the site, Then the role picker, the level picker and the sign-in invite do not open by themselves",
+        "Given Learner prompts is off, When a visitor picks a role or level by hand (the role and level cards on Home, a link with ?role=, or the Browse filters), Then the choice works as it does today, and no level picker opens by itself afterwards"
+      ],
+      "issue": 17
+    },
+    {
+      "id": "REQ-005",
+      "title": "Report a mistake can be switched off",
+      "priority": "Should",
+      "status": "In build",
+      "intent": "compass/intent/2026-11-27-feature-flags.md",
+      "design": "compass/design/2026-11-27-feature-flags.md",
+      "ac": [
+        "Given Report a mistake is off, When a learner opens a word or Workplace English card, Then the \"Report a wrong meaning or example\" / \"Report a problem\" link is hidden, the sign-in invite and the signed-out Account card do not mention reporting, and the 👎 feedback message does not point to the report link",
+        "Given Report a mistake is off, When an admin opens a card, Then the report link and the admin Edit link are still shown"
+      ],
+      "issue": 17
+    },
+    {
+      "id": "REQ-006",
+      "title": "Every feature stays on when the flags cannot be loaded",
+      "priority": "Must",
+      "status": "In build",
+      "intent": "compass/intent/2026-11-27-feature-flags.md",
+      "design": "compass/design/2026-11-27-feature-flags.md",
+      "ac": [
+        "Given Firebase is not set up, or meta/info is missing, has no flags or cannot be read, When anyone loads the site, Then every feature is on, as it is today, even if this browser cached an earlier \"off\"",
+        "Given meta/info.flags has a flag name the site does not know, or is missing a known flag, When the site loads, Then unknown names are ignored and missing flags count as on",
+        "Given the Firebase script fails to load, When 6 seconds have passed and the page has finished loading, Then every feature is on; Given the Firebase script or the flags read is slow, When 6 seconds pass, Then the site keeps waiting for it and does not switch features on in between"
+      ],
+      "issue": 17
+    }
+  ],
+  "tests": [
+    {
+      "id": "TC-001",
+      "title": "Flags resolve to all on when the value is missing, unreadable or partial (unknown names ignored); with no read at all the cached copy is dropped by the fallback; a read that has started is waited for, even when slow; code waiting for the flags (the prompts) runs only once they are known",
+      "reqIds": [
+        "REQ-006"
+      ],
+      "type": "automated",
+      "status": "Not run",
+      "file": "tests/flags.test.mjs"
+    },
+    {
+      "id": "TC-002",
+      "title": "An off flag hides the feature for learners but not for admins",
+      "reqIds": [
+        "REQ-002",
+        "REQ-004",
+        "REQ-005"
+      ],
+      "type": "automated",
+      "status": "Not run",
+      "file": "tests/flags.test.mjs"
+    },
+    {
+      "id": "TC-003",
+      "title": "Admin switches each flag on the Features tab: only that flag changes in meta/info.flags, the state survives a reload and a learner sees it on next load; a failed save reverts the toggle; a failed read shows an error and no switches; Sync built-in words keeps the flags; on a project never synced, saving a flag creates meta/info with only flags, the site keeps its built-in words, and the next Sync keeps the flag",
+      "reqIds": [
+        "REQ-001"
+      ],
+      "type": "manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-004",
+      "title": "As a learner, with each flag off in turn: (AI and My lists) the My lists menu link, the Account card button and texts and the invite line are hidden, #lists shows only the not-available message, no request goes to the AI (DevTools → Network shows no firebasevertexai / generativelanguage call), and the plain-words and story boxes are hidden on word cards and flashcards; (prompts) on a fresh browser profile, also with DevTools network throttling set to Slow 3G, no role picker, level picker or sign-in invite opens; picking a role from My profile does not open the level picker by itself; while the Home role and level cards, a ?role= link and the Browse filters still work; (report) the report links are hidden on word and Workplace English cards, the invite and Account card do not mention reporting, and the 👎 message does not point to the report link",
+      "reqIds": [
+        "REQ-002",
+        "REQ-004",
+        "REQ-005"
+      ],
+      "type": "manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-005",
+      "title": "As an admin, with every flag off: the My lists link and page work, the AI extraction block and the plain-words and story boxes show, Admin → AI tools runs, and the report and Edit links show on word and Workplace English cards; after signing out, the same browser shows the learner view",
+      "reqIds": [
+        "REQ-002",
+        "REQ-005"
+      ],
+      "type": "manual",
+      "status": "Not run"
+    }
+  ],
   "decisions": [
     {
       "id": "ADR-001",
@@ -68,6 +192,43 @@
       "decision": "An empty .nojekyll at the repository root turns Jekyll off; Pages serves the committed files as they are.",
       "consequences": "Markdown files are no longer turned into HTML pages on the site (none are linked from it). Files and folders starting with _ or . (such as .github/, .claude/settings.json and .gitignore) are served too; none holds a secret, and the repo is public.",
       "reqIds": []
+    },
+    {
+      "id": "ADR-008",
+      "date": "2026-11-28",
+      "title": "Turning AI off also hides stored AI-written text",
+      "status": "Accepted",
+      "reqIds": [
+        "REQ-002"
+      ],
+      "context": "Review of huynhthu1704/learn-it-vocab#14 noted that the \"In plain words\" and \"Story\" boxes show text that admins generated earlier and stored with each word, so hiding them saves no AI quota.",
+      "decision": "The Product Owner decided on 2026-11-28 to keep them hidden: when AI features is off, learners see neither live AI calls (My lists extraction) nor stored AI-written text.",
+      "consequences": "Turning AI off changes what learners read on word cards, not just what calls the AI. Admins still see the boxes."
+    },
+    {
+      "id": "ADR-009",
+      "date": "2026-11-28",
+      "title": "My lists and AI features are one switch",
+      "status": "Accepted",
+      "reqIds": [
+        "REQ-002"
+      ],
+      "context": "Review of huynhthu1704/learn-it-vocab#15: with AI features off but My lists on, learners could see their lists but not create new ones, and the page still promised AI extraction.",
+      "decision": "The Product Owner decided on 2026-11-28 to merge the two into one switch, \"AI and My lists\" (flag `ai`). REQ-003 is merged into REQ-002 and removed.",
+      "consequences": "Three switches: AI and My lists, Learner prompts, Report a mistake. Turning AI off also hides My lists."
+    },
+    {
+      "id": "ADR-010",
+      "date": "2026-11-28",
+      "title": "Feature flags live in meta/info, at no extra read per visit",
+      "status": "Accepted",
+      "reqIds": [
+        "REQ-001",
+        "REQ-006"
+      ],
+      "context": "A separate meta/flags document would add one read per visit (about 5% more on the free plan, 50,000 reads a day, about 20 reads per visit).",
+      "decision": "The Product Owner decided on 2026-11-28 to store the flags in the `flags` field of meta/info, which every visit already reads. The Features tab reads meta/info fresh and saves one flag at a time with a merge.",
+      "consequences": "Learners pay no extra reads; an admin pays one read each time they open Admin or Features, and one write per switch. Every writer of meta/info keeps the flags: writeBundlesAndMeta (Sync, Rebuild) merges, saveItems updates named fields only, saveFlags merges into the nested map. Saving a flag before the first Sync creates meta/info with only flags, which the site treats as nothing published yet."
     }
   ]
 }

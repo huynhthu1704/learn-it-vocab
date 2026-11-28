@@ -31,3 +31,4 @@ single place for lessons. Keep this file under one page.
 - **Piped checks hide failures:** `npm test | grep …` exits with grep's status. Use `set -o pipefail` or run the check on its own.
 - **The Compass portal writes `compass/spec.json` on main:** merge by requirement/test id, never take one side.
 - **Branch every PR from fresh main.** Chained branches conflict after squash-merges.
+- **Fail-safe defaults need a test per failure path:** remote config or data that falls back to a default must be tested when the read is missing, fails, never starts and is slow, before review.
