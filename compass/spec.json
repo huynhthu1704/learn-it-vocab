@@ -82,7 +82,7 @@
         "REQ-006"
       ],
       "type": "automated",
-      "status": "Not run",
+      "status": "Pass",
       "file": "tests/flags.test.mjs"
     },
     {
@@ -94,7 +94,7 @@
         "REQ-005"
       ],
       "type": "automated",
-      "status": "Not run",
+      "status": "Pass",
       "file": "tests/flags.test.mjs"
     },
     {

@@ -183,7 +183,7 @@ const pageFiles = [
 ];
 const pages = pageFiles.map(file => fs.readFileSync(`src/pages/${file}`, 'utf8')).join('\n');
 const app = fs.readFileSync('src/app.js', 'utf8')
-  .replace('/*__CLOUD_UI__*/', () => fs.readFileSync('src/ui-cloud.js', 'utf8') + '\n' + fs.readFileSync('src/ui-insights.js', 'utf8'))
+  .replace('/*__CLOUD_UI__*/', () => fs.readFileSync('src/flags.mjs', 'utf8').replace(/^export /gm, '') + '\n' + fs.readFileSync('src/ui-cloud.js', 'utf8') + '\n' + fs.readFileSync('src/ui-insights.js', 'utf8'))
   .replace('/*__WORDS__*/[]', () => safe(out)).replace('/*__CORP__*/[]', () => safe(JSON.stringify(CORP)))
   .replace('/*__I18N__*/{}', () => safe(JSON.stringify(I18N)))
   .replace('/*__MERGED__*/{}', () => JSON.stringify(MERGED));
