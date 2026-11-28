@@ -2,16 +2,16 @@
 
 | ID | Feature | Title | Priority | Status | Tests |
 |---|---|---|---|---|---|
-| REQ-101 | F-001 | Word database with levels, roles, topics, IPA, meanings and examples | Must | Done | TC-101, TC-102, TC-103, TC-104, TC-105, TC-106, TC-107, TC-108 |
-| REQ-102 | F-001 | Open the site for one role with a link | Should | Done | TC-109, TC-110, TC-111, TC-112, TC-113 |
-| REQ-103 | F-001 | Search and filter the word library | Must | Done | TC-114, TC-115, TC-116, TC-117, TC-118, TC-119, TC-120 |
-| REQ-104 | F-001 | Select many words and mark them at once | Should | Done | TC-121, TC-122, TC-123, TC-124, TC-125, TC-126, TC-127 |
-| REQ-105 | F-001 | Listen to words and examples | Must | Done | TC-128, TC-129, TC-130, TC-131 |
-| REQ-106 | F-002 | Choose meaning languages | Must | Done | TC-132, TC-133, TC-134, TC-135, TC-136, TC-137, TC-138 |
-| REQ-107 | F-002 | Choose the interface language | Should | Done | TC-139, TC-140, TC-141, TC-142, TC-143, TC-144, TC-145 |
-| REQ-108 | F-002 | Listen to translations in their own language | Should | Done | TC-146, TC-147, TC-148, TC-149 |
-| REQ-109 | F-002 | Plain-language explanations | Should | Done | TC-150, TC-151, TC-152, TC-153, TC-154 |
-| REQ-110 | F-002 | Stories for complex words | Could | Done | TC-155, TC-156, TC-157, TC-158 |
+| REQ-101 | F-001 | Word database with levels, roles, topics, IPA, meanings and examples | Must | Done | TC-101, TC-102, TC-103, TC-104, TC-105, TC-106, TC-107, TC-108, TC-109 |
+| REQ-102 | F-001 | Open the site for one role with a link | Should | Done | TC-110, TC-111, TC-112, TC-113, TC-114 |
+| REQ-103 | F-001 | Search and filter the word library | Must | Done | TC-115, TC-116, TC-117, TC-118, TC-119, TC-120, TC-121 |
+| REQ-104 | F-001 | Select many words and mark them at once | Should | Done | TC-122, TC-123, TC-124, TC-125, TC-126, TC-127, TC-128 |
+| REQ-105 | F-001 | Listen to words and examples | Must | Done | TC-129, TC-130, TC-131, TC-132 |
+| REQ-106 | F-002 | Choose meaning languages | Must | Done | TC-133, TC-134, TC-135, TC-136, TC-137, TC-138, TC-139 |
+| REQ-107 | F-002 | Choose the interface language | Should | Done | TC-140, TC-141, TC-142, TC-143, TC-144, TC-145, TC-146 |
+| REQ-108 | F-002 | Listen to translations in their own language | Should | Done | TC-147, TC-148, TC-149, TC-150 |
+| REQ-109 | F-002 | Plain-language explanations | Should | Done | TC-151, TC-152, TC-153, TC-154, TC-155 |
+| REQ-110 | F-002 | Stories for complex words | Could | Done | TC-156, TC-157, TC-158, TC-159 |
 
 ## REQ-101 · Word database with levels, roles, topics, IPA, meanings and examples
 As a content maintainer I want the build to turn the data files into one checked word database so that every word card has complete, consistent data.
@@ -36,7 +36,7 @@ Then the word has that English definition (d) and Korean meaning (k); if no line
 
 _AC3_
 ```gherkin
-Given the term's first line in data/fr (files in name order, not corporate.txt) is "term|French meaning"
+Given the first line in data/fr (files in name order, not corporate.txt) that gives the term a French meaning is "term|French meaning"
 When the maintainer runs npm run build
 Then the word has that French meaning (f); a word with no French line gets an empty one and the build only warns
 ```
@@ -45,17 +45,24 @@ _AC4_
 ```gherkin
 Given a line "term|level" in data/level-overrides.txt
 When the maintainer runs npm run build
-Then that level replaces the word's starting level; next, roles.mjs adds roles using the word's term, topic, starting roles and its level after overrides; abbreviations are merged after both; if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
+Then that level replaces the word's starting level, before roles.mjs adds roles (next AC) and before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
 ```
 
 _AC5_
 ```gherkin
-Given a line "ABBR|full form" in data/merge-abbreviations.txt, after level overrides
+Given any word, with or without a line in data/level-overrides.txt
+When the maintainer runs npm run build
+Then after the level overrides, roles.mjs adds roles to the word using its term, topic, starting roles and its level after any override, and the word's roles are its starting roles plus the roles roles.mjs adds; abbreviations are merged after this
+```
+
+_AC6_
+```gherkin
+Given a line "ABBR|full form" in data/merge-abbreviations.txt, after level overrides and roles.mjs
 When the maintainer runs npm run build
 Then words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows "= <full form>" under the term with its own listen button; if either term is not a word, the build prints "data/merge-abbreviations.txt: not found" and exits non-zero
 ```
 
-_AC6_
+_AC7_
 ```gherkin
 Given a kept word (not a full form merged into an abbreviation) whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json
 When the maintainer runs npm run build

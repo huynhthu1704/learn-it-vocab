@@ -3,16 +3,16 @@
 ## Traceability matrix
 | Requirement | Test cases |
 |---|---|
-| REQ-101 Word database with levels, roles, topics, IPA, meanings and examples | TC-101 (Not run), TC-102 (Not run), TC-103 (Not run), TC-104 (Not run), TC-105 (Not run), TC-106 (Not run), TC-107 (Pass), TC-108 (Not run) |
-| REQ-102 Open the site for one role with a link | TC-109 (Not run), TC-110 (Not run), TC-111 (Not run), TC-112 (Not run), TC-113 (Not run) |
-| REQ-103 Search and filter the word library | TC-114 (Not run), TC-115 (Not run), TC-116 (Not run), TC-117 (Not run), TC-118 (Not run), TC-119 (Not run), TC-120 (Not run) |
-| REQ-104 Select many words and mark them at once | TC-121 (Not run), TC-122 (Not run), TC-123 (Not run), TC-124 (Not run), TC-125 (Not run), TC-126 (Not run), TC-127 (Not run) |
-| REQ-105 Listen to words and examples | TC-128 (Not run), TC-129 (Not run), TC-130 (Not run), TC-131 (Not run) |
-| REQ-106 Choose meaning languages | TC-132 (Not run), TC-133 (Not run), TC-134 (Not run), TC-135 (Not run), TC-136 (Not run), TC-137 (Not run), TC-138 (Not run) |
-| REQ-107 Choose the interface language | TC-139 (Not run), TC-140 (Not run), TC-141 (Not run), TC-142 (Not run), TC-143 (Not run), TC-144 (Not run), TC-145 (Not run) |
-| REQ-108 Listen to translations in their own language | TC-146 (Not run), TC-147 (Not run), TC-148 (Not run), TC-149 (Not run) |
-| REQ-109 Plain-language explanations | TC-150 (Not run), TC-151 (Not run), TC-152 (Not run), TC-153 (Not run), TC-154 (Not run) |
-| REQ-110 Stories for complex words | TC-155 (Not run), TC-156 (Not run), TC-157 (Not run), TC-158 (Not run) |
+| REQ-101 Word database with levels, roles, topics, IPA, meanings and examples | TC-101 (Not run), TC-102 (Not run), TC-103 (Not run), TC-104 (Not run), TC-105 (Not run), TC-106 (Not run), TC-107 (Not run), TC-108 (Pass), TC-109 (Not run) |
+| REQ-102 Open the site for one role with a link | TC-110 (Not run), TC-111 (Not run), TC-112 (Not run), TC-113 (Not run), TC-114 (Not run) |
+| REQ-103 Search and filter the word library | TC-115 (Not run), TC-116 (Not run), TC-117 (Not run), TC-118 (Not run), TC-119 (Not run), TC-120 (Not run), TC-121 (Not run) |
+| REQ-104 Select many words and mark them at once | TC-122 (Not run), TC-123 (Not run), TC-124 (Not run), TC-125 (Not run), TC-126 (Not run), TC-127 (Not run), TC-128 (Not run) |
+| REQ-105 Listen to words and examples | TC-129 (Not run), TC-130 (Not run), TC-131 (Not run), TC-132 (Not run) |
+| REQ-106 Choose meaning languages | TC-133 (Not run), TC-134 (Not run), TC-135 (Not run), TC-136 (Not run), TC-137 (Not run), TC-138 (Not run), TC-139 (Not run) |
+| REQ-107 Choose the interface language | TC-140 (Not run), TC-141 (Not run), TC-142 (Not run), TC-143 (Not run), TC-144 (Not run), TC-145 (Not run), TC-146 (Not run) |
+| REQ-108 Listen to translations in their own language | TC-147 (Not run), TC-148 (Not run), TC-149 (Not run), TC-150 (Not run) |
+| REQ-109 Plain-language explanations | TC-151 (Not run), TC-152 (Not run), TC-153 (Not run), TC-154 (Not run), TC-155 (Not run) |
+| REQ-110 Stories for complex words | TC-156 (Not run), TC-157 (Not run), TC-158 (Not run), TC-159 (Not run) |
 
 ## TC-101 · Word database with levels, roles, topics, IPA, meanings and examples: AC1
 Covers: REQ-101 · Type: Manual · Status: Not run
@@ -36,7 +36,7 @@ Scenario: Word database with levels, roles, topics, IPA, meanings and examples, 
 Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC3
-  Given the term's first line in data/fr (files in name order, not corporate.txt) is "term|French meaning"
+  Given the first line in data/fr (files in name order, not corporate.txt) that gives the term a French meaning is "term|French meaning"
   When the maintainer runs npm run build
   Then the word has that French meaning (f); a word with no French line gets an empty one and the build only warns
 ```
@@ -47,28 +47,37 @@ Covers: REQ-101 · Type: Manual · Status: Not run
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC4
   Given a line "term|level" in data/level-overrides.txt
   When the maintainer runs npm run build
-  Then that level replaces the word's starting level; next, roles.mjs adds roles using the word's term, topic, starting roles and its level after overrides; abbreviations are merged after both; if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
+  Then that level replaces the word's starting level, before roles.mjs adds roles (next AC) and before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
 ```
 
 ## TC-105 · Word database with levels, roles, topics, IPA, meanings and examples: AC5
 Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC5
-  Given a line "ABBR|full form" in data/merge-abbreviations.txt, after level overrides
+  Given any word, with or without a line in data/level-overrides.txt
   When the maintainer runs npm run build
-  Then words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows "= <full form>" under the term with its own listen button; if either term is not a word, the build prints "data/merge-abbreviations.txt: not found" and exits non-zero
+  Then after the level overrides, roles.mjs adds roles to the word using its term, topic, starting roles and its level after any override, and the word's roles are its starting roles plus the roles roles.mjs adds; abbreviations are merged after this
 ```
 
 ## TC-106 · Word database with levels, roles, topics, IPA, meanings and examples: AC6
 Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC6
+  Given a line "ABBR|full form" in data/merge-abbreviations.txt, after level overrides and roles.mjs
+  When the maintainer runs npm run build
+  Then words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows "= <full form>" under the term with its own listen button; if either term is not a word, the build prints "data/merge-abbreviations.txt: not found" and exits non-zero
+```
+
+## TC-107 · Word database with levels, roles, topics, IPA, meanings and examples: AC7
+Covers: REQ-101 · Type: Manual · Status: Not run
+```gherkin
+Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC7
   Given a kept word (not a full form merged into an abbreviation) whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json
   When the maintainer runs npm run build
   Then the build prints "Add these to data/pronunciation-overrides.json first:" with the term and exits non-zero
 ```
 
-## TC-107 · words.json integrity
+## TC-108 · words.json integrity
 Covers: REQ-101 · Type: Automated · Status: Pass
 ```gherkin
 Feature: Word database
@@ -81,7 +90,7 @@ Feature: Word database
     And every level is 1, 2 or 3 and every role is one of the nine known roles
 ```
 
-## TC-108 · Example: Abbreviation and full form share one card
+## TC-109 · Example: Abbreviation and full form share one card
 Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Abbreviation cards
@@ -92,7 +101,7 @@ Feature: Abbreviation cards
     And under it "= job description" with its own listen button and IPA
 ```
 
-## TC-109 · Open the site for one role with a link: AC1
+## TC-110 · Open the site for one role with a link: AC1
 Covers: REQ-102 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Open the site for one role with a link, AC1
@@ -101,7 +110,7 @@ Scenario: Open the site for one role with a link, AC1
   Then a bar shows "Showing words for BA / PO / PM · <n> of <total> words" with See the words and Show all roles, the Browse role filter, the flashcard role and the quiz role are set to BA / PO / PM, and the address becomes #home
 ```
 
-## TC-110 · Open the site for one role with a link: AC2
+## TC-111 · Open the site for one role with a link: AC2
 Covers: REQ-102 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Open the site for one role with a link, AC2
@@ -110,7 +119,7 @@ Scenario: Open the site for one role with a link, AC2
   Then the bar and the role filter are still set to that role
 ```
 
-## TC-111 · Open the site for one role with a link: AC3
+## TC-112 · Open the site for one role with a link: AC3
 Covers: REQ-102 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Open the site for one role with a link, AC3
@@ -119,7 +128,7 @@ Scenario: Open the site for one role with a link, AC3
   Then the bar disappears and Browse shows all roles
 ```
 
-## TC-112 · Open the site for one role with a link: AC4
+## TC-113 · Open the site for one role with a link: AC4
 Covers: REQ-102 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Open the site for one role with a link, AC4
@@ -128,7 +137,7 @@ Scenario: Open the site for one role with a link, AC4
   Then the first-visit role picker is not shown and My role is set to BA / PO / PM
 ```
 
-## TC-113 · Example: Role link filters the site
+## TC-114 · Example: Role link filters the site
 Covers: REQ-102 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Role link
@@ -143,7 +152,7 @@ Feature: Role link
     Then the bar disappears and All roles is selected
 ```
 
-## TC-114 · Search and filter the word library: AC1
+## TC-115 · Search and filter the word library: AC1
 Covers: REQ-103 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Search and filter the word library, AC1
@@ -152,7 +161,7 @@ Scenario: Search and filter the word library, AC1
   Then the grid shows words whose term, full form, English definition, Vietnamese, Korean or French meaning contains it, terms that start with it first, and the count shows "<n> words"
 ```
 
-## TC-115 · Search and filter the word library: AC2
+## TC-116 · Search and filter the word library: AC2
 Covers: REQ-103 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Search and filter the word library, AC2
@@ -161,7 +170,7 @@ Scenario: Search and filter the word library, AC2
   Then only words matching all chosen filters are shown
 ```
 
-## TC-116 · Search and filter the word library: AC3
+## TC-117 · Search and filter the word library: AC3
 Covers: REQ-103 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Search and filter the word library, AC3
@@ -170,7 +179,7 @@ Scenario: Search and filter the word library, AC3
   Then words whose main role is that role come first, then by level
 ```
 
-## TC-117 · Search and filter the word library: AC4
+## TC-118 · Search and filter the word library: AC4
 Covers: REQ-103 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Search and filter the word library, AC4
@@ -179,7 +188,7 @@ Scenario: Search and filter the word library, AC4
   Then 36 cards appear with "Show more words (<n> left)", and each click shows 48 more
 ```
 
-## TC-118 · Search and filter the word library: AC5
+## TC-119 · Search and filter the word library: AC5
 Covers: REQ-103 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Search and filter the word library, AC5
@@ -188,7 +197,7 @@ Scenario: Search and filter the word library, AC5
   Then the message "No words match. Try another search or clear the filters." appears
 ```
 
-## TC-119 · Example: Search in Vietnamese without accents
+## TC-120 · Example: Search in Vietnamese without accents
 Covers: REQ-103 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Browse search
@@ -199,7 +208,7 @@ Feature: Browse search
     And the count shows the number of matches
 ```
 
-## TC-120 · Example: Combined filters
+## TC-121 · Example: Combined filters
 Covers: REQ-103 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Browse filters
@@ -211,7 +220,7 @@ Feature: Browse filters
     Then I see "No words match. Try another search or clear the filters."
 ```
 
-## TC-121 · Select many words and mark them at once: AC1
+## TC-122 · Select many words and mark them at once: AC1
 Covers: REQ-104 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Select many words and mark them at once, AC1
@@ -220,7 +229,7 @@ Scenario: Select many words and mark them at once, AC1
   Then cards become selectable, the button changes to Select all shown and a bar appears with "<n> selected", Mark as learnt, Still learning, Save, Remove from saved, Reset to new and Done
 ```
 
-## TC-122 · Select many words and mark them at once: AC2
+## TC-123 · Select many words and mark them at once: AC2
 Covers: REQ-104 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Select many words and mark them at once, AC2
@@ -229,7 +238,7 @@ Scenario: Select many words and mark them at once, AC2
   Then every selected word gets that status, a message such as "<n> words marked as learnt." shows, and Still learning schedules each word for a 1-day review
 ```
 
-## TC-123 · Select many words and mark them at once: AC3
+## TC-124 · Select many words and mark them at once: AC3
 Covers: REQ-104 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Select many words and mark them at once, AC3
@@ -238,7 +247,7 @@ Scenario: Select many words and mark them at once, AC3
   Then the "Save your progress with Google" pop-up opens and nothing is marked; after signing in from the pop-up the action is applied to the selection
 ```
 
-## TC-124 · Select many words and mark them at once: AC4
+## TC-125 · Select many words and mark them at once: AC4
 Covers: REQ-104 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Select many words and mark them at once, AC4
@@ -247,7 +256,7 @@ Scenario: Select many words and mark them at once, AC4
   Then the message "Select some words first." shows
 ```
 
-## TC-125 · Select many words and mark them at once: AC5
+## TC-126 · Select many words and mark them at once: AC5
 Covers: REQ-104 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Select many words and mark them at once, AC5
@@ -256,7 +265,7 @@ Scenario: Select many words and mark them at once, AC5
   Then select mode ends and the selection is cleared
 ```
 
-## TC-126 · Example: Bulk mark as signed-in learner
+## TC-127 · Example: Bulk mark as signed-in learner
 Covers: REQ-104 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Bulk marking
@@ -268,7 +277,7 @@ Feature: Bulk marking
     And the three cards show Known
 ```
 
-## TC-127 · Example: Bulk action asks a guest to sign in
+## TC-128 · Example: Bulk action asks a guest to sign in
 Covers: REQ-104 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Bulk marking
@@ -279,7 +288,7 @@ Feature: Bulk marking
     And no word is saved
 ```
 
-## TC-128 · Listen to words and examples: AC1
+## TC-129 · Listen to words and examples: AC1
 Covers: REQ-105 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Listen to words and examples, AC1
@@ -288,7 +297,7 @@ Scenario: Listen to words and examples, AC1
   Then the device reads the term (or the full form, or the example sentence) aloud in the English accent chosen in My profile (American or British) at the chosen speed
 ```
 
-## TC-129 · Listen to words and examples: AC2
+## TC-130 · Listen to words and examples: AC2
 Covers: REQ-105 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Listen to words and examples, AC2
@@ -297,7 +306,7 @@ Scenario: Listen to words and examples, AC2
   Then the term is read at 0.6 speed
 ```
 
-## TC-130 · Listen to words and examples: AC3
+## TC-131 · Listen to words and examples: AC3
 Covers: REQ-105 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Listen to words and examples, AC3
@@ -306,7 +315,7 @@ Scenario: Listen to words and examples, AC3
   Then the message "Audio is not supported in this browser. Use the IPA to check the sound." shows
 ```
 
-## TC-131 · Example: Listen at normal and slow speed
+## TC-132 · Example: Listen at normal and slow speed
 Covers: REQ-105 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Audio
@@ -318,7 +327,7 @@ Feature: Audio
     Then I hear it more slowly
 ```
 
-## TC-132 · Choose meaning languages: AC1
+## TC-133 · Choose meaning languages: AC1
 Covers: REQ-106 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Choose meaning languages, AC1
@@ -327,7 +336,7 @@ Scenario: Choose meaning languages, AC1
   Then the English definition is shown with the Vietnamese and Korean meanings (the default languages), Vietnamese in bold as the first language
 ```
 
-## TC-133 · Choose meaning languages: AC2
+## TC-134 · Choose meaning languages: AC2
 Covers: REQ-106 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Choose meaning languages, AC2
@@ -336,7 +345,7 @@ Scenario: Choose meaning languages, AC2
   Then word cards, the word dialog and flashcards show the English definition plus a meaning row for each ticked language, and the globe button shows the chosen languages (for example "VI·FR") or "EN" when none is ticked
 ```
 
-## TC-134 · Choose meaning languages: AC3
+## TC-135 · Choose meaning languages: AC3
 Covers: REQ-106 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Choose meaning languages, AC3
@@ -345,7 +354,7 @@ Scenario: Choose meaning languages, AC3
   Then the answer options show the Korean meanings, falling back to the English definition where a word has none
 ```
 
-## TC-135 · Choose meaning languages: AC4
+## TC-136 · Choose meaning languages: AC4
 Covers: REQ-106 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Choose meaning languages, AC4
@@ -354,7 +363,7 @@ Scenario: Choose meaning languages, AC4
   Then the same languages are chosen, and the Languages card says "Saved in this browser. Sign in to use them on every device."
 ```
 
-## TC-136 · Choose meaning languages: AC5
+## TC-137 · Choose meaning languages: AC5
 Covers: REQ-106 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Choose meaning languages, AC5
@@ -363,7 +372,7 @@ Scenario: Choose meaning languages, AC5
   Then the most recently changed preferences are used
 ```
 
-## TC-137 · Example: Default meaning languages
+## TC-138 · Example: Default meaning languages
 Covers: REQ-106 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Meaning languages
@@ -374,7 +383,7 @@ Feature: Meaning languages
     And the globe button shows "VI·KO"
 ```
 
-## TC-138 · Example: Add French and remove Korean
+## TC-139 · Example: Add French and remove Korean
 Covers: REQ-106 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Meaning languages
@@ -385,7 +394,7 @@ Feature: Meaning languages
     And after a reload the same languages are still chosen
 ```
 
-## TC-139 · Choose the interface language: AC1
+## TC-140 · Choose the interface language: AC1
 Covers: REQ-107 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Choose the interface language, AC1
@@ -394,7 +403,7 @@ Scenario: Choose the interface language, AC1
   Then the options are English only, Tiếng Việt only, Français only and English + my languages
 ```
 
-## TC-140 · Choose the interface language: AC2
+## TC-141 · Choose the interface language: AC2
 Covers: REQ-107 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Choose the interface language, AC2
@@ -403,7 +412,7 @@ Scenario: Choose the interface language, AC2
   Then interface text listed in data/i18n.txt is shown in Vietnamese, while words, meanings, examples and names stay as they are
 ```
 
-## TC-141 · Choose the interface language: AC3
+## TC-142 · Choose the interface language: AC3
 Covers: REQ-107 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Choose the interface language, AC3
@@ -412,7 +421,7 @@ Scenario: Choose the interface language, AC3
   Then each translated interface text shows the English followed by its translation in each chosen language
 ```
 
-## TC-142 · Choose the interface language: AC4
+## TC-143 · Choose the interface language: AC4
 Covers: REQ-107 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Choose the interface language, AC4
@@ -421,7 +430,7 @@ Scenario: Choose the interface language, AC4
   Then the interface switches to English only
 ```
 
-## TC-143 · Choose the interface language: AC5
+## TC-144 · Choose the interface language: AC5
 Covers: REQ-107 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Choose the interface language, AC5
@@ -430,7 +439,7 @@ Scenario: Choose the interface language, AC5
   Then the build exits non-zero naming the line
 ```
 
-## TC-144 · Example: Interface in one language
+## TC-145 · Example: Interface in one language
 Covers: REQ-107 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Interface language
@@ -441,7 +450,7 @@ Feature: Interface language
     And the English terms on word cards are unchanged
 ```
 
-## TC-145 · Example: Interface falls back to English
+## TC-146 · Example: Interface falls back to English
 Covers: REQ-107 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Interface language
@@ -451,7 +460,7 @@ Feature: Interface language
     Then the interface is English only
 ```
 
-## TC-146 · Listen to translations in their own language: AC1
+## TC-147 · Listen to translations in their own language: AC1
 Covers: REQ-108 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Listen to translations in their own language, AC1
@@ -460,7 +469,7 @@ Scenario: Listen to translations in their own language, AC1
   Then the translation is read with a Korean (ko-KR) voice; Vietnamese uses vi-VN and French fr-FR
 ```
 
-## TC-147 · Listen to translations in their own language: AC2
+## TC-148 · Listen to translations in their own language: AC2
 Covers: REQ-108 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Listen to translations in their own language, AC2
@@ -469,7 +478,7 @@ Scenario: Listen to translations in their own language, AC2
   Then the message "No <language> voice on this device, so it may sound wrong. Add one in your system settings." shows
 ```
 
-## TC-148 · Listen to translations in their own language: AC3
+## TC-149 · Listen to translations in their own language: AC3
 Covers: REQ-108 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Listen to translations in their own language, AC3
@@ -478,7 +487,7 @@ Scenario: Listen to translations in their own language, AC3
   Then that translation has its own listen button in that language's voice
 ```
 
-## TC-149 · Example: Korean listen button on an example translation
+## TC-150 · Example: Korean listen button on an example translation
 Covers: REQ-108 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Per-language audio
@@ -488,7 +497,7 @@ Feature: Per-language audio
     Then I hear the sentence in a Korean voice
 ```
 
-## TC-150 · Plain-language explanations: AC1
+## TC-151 · Plain-language explanations: AC1
 Covers: REQ-109 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Plain-language explanations, AC1
@@ -497,7 +506,7 @@ Scenario: Plain-language explanations, AC1
   Then the card shows "In plain words" with the English explanation, and the back of the flashcard shows it in English and each chosen language
 ```
 
-## TC-151 · Plain-language explanations: AC2
+## TC-152 · Plain-language explanations: AC2
 Covers: REQ-109 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Plain-language explanations, AC2
@@ -506,7 +515,7 @@ Scenario: Plain-language explanations, AC2
   Then no plain explanation is shown on the card
 ```
 
-## TC-152 · Plain-language explanations: AC3
+## TC-153 · Plain-language explanations: AC3
 Covers: REQ-109 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Plain-language explanations, AC3
@@ -515,7 +524,7 @@ Scenario: Plain-language explanations, AC3
   Then the explanation is shown (on the flashcard also in each chosen language)
 ```
 
-## TC-153 · Plain-language explanations: AC4
+## TC-154 · Plain-language explanations: AC4
 Covers: REQ-109 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Plain-language explanations, AC4
@@ -524,7 +533,7 @@ Scenario: Plain-language explanations, AC4
   Then "In plain words" is shown in English and in each chosen language
 ```
 
-## TC-154 · Example: Plain words shown automatically for sales
+## TC-155 · Example: Plain words shown automatically for sales
 Covers: REQ-109 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Plain-language explanations
@@ -538,7 +547,7 @@ Feature: Plain-language explanations
     But the word dialog still shows it
 ```
 
-## TC-155 · Stories for complex words: AC1
+## TC-156 · Stories for complex words: AC1
 Covers: REQ-110 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Stories for complex words, AC1
@@ -547,7 +556,7 @@ Scenario: Stories for complex words, AC1
   Then "Story: how it works in real life" shows the English story with a listen button, and each chosen language as a collapsible section named after the language
 ```
 
-## TC-156 · Stories for complex words: AC2
+## TC-157 · Stories for complex words: AC2
 Covers: REQ-110 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Stories for complex words, AC2
@@ -556,7 +565,7 @@ Scenario: Stories for complex words, AC2
   Then no story section is shown
 ```
 
-## TC-157 · Stories for complex words: AC3
+## TC-158 · Stories for complex words: AC3
 Covers: REQ-110 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Stories for complex words, AC3
@@ -565,7 +574,7 @@ Scenario: Stories for complex words, AC3
   Then it only writes stories for level 3 words, level 2 words in the architecture, cloud, security, data, AI, Agile, release, process, performance, network, business or money topics, and multi-word terms at level 2 or 3
 ```
 
-## TC-158 · Example: Story in the word dialog
+## TC-159 · Example: Story in the word dialog
 Covers: REQ-110 · Type: Manual · Status: Not run
 ```gherkin
 Feature: Stories

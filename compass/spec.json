@@ -90,9 +90,10 @@
       "ac": [
         "Given a term appears on one or more lines of the data/<digit>*.txt files (read in file-name order, then line order), each below a header such as \"# level=2 role=dev\"\nWhen the maintainer runs npm run build\nThen words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its starting roles are the header roles of every line it appears on",
         "Given the first line in data/definitions (files in name order) that gives the term both an English definition and a Korean meaning is \"term|English definition|Korean meaning\"\nWhen the maintainer runs npm run build\nThen the word has that English definition (d) and Korean meaning (k); if no line gives the term both, the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
-        "Given the term's first line in data/fr (files in name order, not corporate.txt) is \"term|French meaning\"\nWhen the maintainer runs npm run build\nThen the word has that French meaning (f); a word with no French line gets an empty one and the build only warns",
-        "Given a line \"term|level\" in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen that level replaces the word's starting level; next, roles.mjs adds roles using the word's term, topic, starting roles and its level after overrides; abbreviations are merged after both; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
-        "Given a line \"ABBR|full form\" in data/merge-abbreviations.txt, after level overrides\nWhen the maintainer runs npm run build\nThen words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows \"= <full form>\" under the term with its own listen button; if either term is not a word, the build prints \"data/merge-abbreviations.txt: not found\" and exits non-zero",
+        "Given the first line in data/fr (files in name order, not corporate.txt) that gives the term a French meaning is \"term|French meaning\"\nWhen the maintainer runs npm run build\nThen the word has that French meaning (f); a word with no French line gets an empty one and the build only warns",
+        "Given a line \"term|level\" in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen that level replaces the word's starting level, before roles.mjs adds roles (next AC) and before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
+        "Given any word, with or without a line in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen after the level overrides, roles.mjs adds roles to the word using its term, topic, starting roles and its level after any override, and the word's roles are its starting roles plus the roles roles.mjs adds; abbreviations are merged after this",
+        "Given a line \"ABBR|full form\" in data/merge-abbreviations.txt, after level overrides and roles.mjs\nWhen the maintainer runs npm run build\nThen words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows \"= <full form>\" under the term with its own listen button; if either term is not a word, the build prints \"data/merge-abbreviations.txt: not found\" and exits non-zero",
         "Given a kept word (not a full form merged into an abbreviation) whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json\nWhen the maintainer runs npm run build\nThen the build prints \"Add these to data/pronunciation-overrides.json first:\" with the term and exits non-zero"
       ],
       "priority": "Must",
@@ -336,7 +337,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC3",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC3\n  Given the term's first line in data/fr (files in name order, not corporate.txt) is \"term|French meaning\"\n  When the maintainer runs npm run build\n  Then the word has that French meaning (f); a word with no French line gets an empty one and the build only warns",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC3\n  Given the first line in data/fr (files in name order, not corporate.txt) that gives the term a French meaning is \"term|French meaning\"\n  When the maintainer runs npm run build\n  Then the word has that French meaning (f); a word with no French line gets an empty one and the build only warns",
       "type": "Manual",
       "status": "Not run"
     },
@@ -346,7 +347,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC4",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC4\n  Given a line \"term|level\" in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then that level replaces the word's starting level; next, roles.mjs adds roles using the word's term, topic, starting roles and its level after overrides; abbreviations are merged after both; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC4\n  Given a line \"term|level\" in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then that level replaces the word's starting level, before roles.mjs adds roles (next AC) and before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
       "type": "Manual",
       "status": "Not run"
     },
@@ -356,7 +357,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC5",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC5\n  Given a line \"ABBR|full form\" in data/merge-abbreviations.txt, after level overrides\n  When the maintainer runs npm run build\n  Then words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows \"= <full form>\" under the term with its own listen button; if either term is not a word, the build prints \"data/merge-abbreviations.txt: not found\" and exits non-zero",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC5\n  Given any word, with or without a line in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then after the level overrides, roles.mjs adds roles to the word using its term, topic, starting roles and its level after any override, and the word's roles are its starting roles plus the roles roles.mjs adds; abbreviations are merged after this",
       "type": "Manual",
       "status": "Not run"
     },
@@ -366,12 +367,22 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC6",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC6\n  Given a kept word (not a full form merged into an abbreviation) whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json\n  When the maintainer runs npm run build\n  Then the build prints \"Add these to data/pronunciation-overrides.json first:\" with the term and exits non-zero",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC6\n  Given a line \"ABBR|full form\" in data/merge-abbreviations.txt, after level overrides and roles.mjs\n  When the maintainer runs npm run build\n  Then words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows \"= <full form>\" under the term with its own listen button; if either term is not a word, the build prints \"data/merge-abbreviations.txt: not found\" and exits non-zero",
       "type": "Manual",
       "status": "Not run"
     },
     {
       "id": "TC-107",
+      "reqIds": [
+        "REQ-101"
+      ],
+      "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC7",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC7\n  Given a kept word (not a full form merged into an abbreviation) whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json\n  When the maintainer runs npm run build\n  Then the build prints \"Add these to data/pronunciation-overrides.json first:\" with the term and exits non-zero",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-108",
       "reqIds": [
         "REQ-101"
       ],
@@ -382,7 +393,7 @@
       "file": "tests/words.test.mjs"
     },
     {
-      "id": "TC-108",
+      "id": "TC-109",
       "reqIds": [
         "REQ-101"
       ],
@@ -392,7 +403,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-109",
+      "id": "TC-110",
       "reqIds": [
         "REQ-102"
       ],
@@ -402,7 +413,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-110",
+      "id": "TC-111",
       "reqIds": [
         "REQ-102"
       ],
@@ -412,7 +423,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-111",
+      "id": "TC-112",
       "reqIds": [
         "REQ-102"
       ],
@@ -422,7 +433,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-112",
+      "id": "TC-113",
       "reqIds": [
         "REQ-102"
       ],
@@ -432,7 +443,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-113",
+      "id": "TC-114",
       "reqIds": [
         "REQ-102"
       ],
@@ -442,7 +453,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-114",
+      "id": "TC-115",
       "reqIds": [
         "REQ-103"
       ],
@@ -452,7 +463,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-115",
+      "id": "TC-116",
       "reqIds": [
         "REQ-103"
       ],
@@ -462,7 +473,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-116",
+      "id": "TC-117",
       "reqIds": [
         "REQ-103"
       ],
@@ -472,7 +483,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-117",
+      "id": "TC-118",
       "reqIds": [
         "REQ-103"
       ],
@@ -482,7 +493,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-118",
+      "id": "TC-119",
       "reqIds": [
         "REQ-103"
       ],
@@ -492,7 +503,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-119",
+      "id": "TC-120",
       "reqIds": [
         "REQ-103"
       ],
@@ -502,7 +513,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-120",
+      "id": "TC-121",
       "reqIds": [
         "REQ-103"
       ],
@@ -512,7 +523,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-121",
+      "id": "TC-122",
       "reqIds": [
         "REQ-104"
       ],
@@ -522,7 +533,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-122",
+      "id": "TC-123",
       "reqIds": [
         "REQ-104"
       ],
@@ -532,7 +543,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-123",
+      "id": "TC-124",
       "reqIds": [
         "REQ-104"
       ],
@@ -542,7 +553,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-124",
+      "id": "TC-125",
       "reqIds": [
         "REQ-104"
       ],
@@ -552,7 +563,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-125",
+      "id": "TC-126",
       "reqIds": [
         "REQ-104"
       ],
@@ -562,7 +573,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-126",
+      "id": "TC-127",
       "reqIds": [
         "REQ-104"
       ],
@@ -572,7 +583,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-127",
+      "id": "TC-128",
       "reqIds": [
         "REQ-104"
       ],
@@ -582,7 +593,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-128",
+      "id": "TC-129",
       "reqIds": [
         "REQ-105"
       ],
@@ -592,7 +603,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-129",
+      "id": "TC-130",
       "reqIds": [
         "REQ-105"
       ],
@@ -602,7 +613,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-130",
+      "id": "TC-131",
       "reqIds": [
         "REQ-105"
       ],
@@ -612,7 +623,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-131",
+      "id": "TC-132",
       "reqIds": [
         "REQ-105"
       ],
@@ -622,7 +633,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-132",
+      "id": "TC-133",
       "reqIds": [
         "REQ-106"
       ],
@@ -632,7 +643,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-133",
+      "id": "TC-134",
       "reqIds": [
         "REQ-106"
       ],
@@ -642,7 +653,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-134",
+      "id": "TC-135",
       "reqIds": [
         "REQ-106"
       ],
@@ -652,7 +663,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-135",
+      "id": "TC-136",
       "reqIds": [
         "REQ-106"
       ],
@@ -662,7 +673,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-136",
+      "id": "TC-137",
       "reqIds": [
         "REQ-106"
       ],
@@ -672,7 +683,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-137",
+      "id": "TC-138",
       "reqIds": [
         "REQ-106"
       ],
@@ -682,7 +693,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-138",
+      "id": "TC-139",
       "reqIds": [
         "REQ-106"
       ],
@@ -692,7 +703,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-139",
+      "id": "TC-140",
       "reqIds": [
         "REQ-107"
       ],
@@ -702,7 +713,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-140",
+      "id": "TC-141",
       "reqIds": [
         "REQ-107"
       ],
@@ -712,7 +723,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-141",
+      "id": "TC-142",
       "reqIds": [
         "REQ-107"
       ],
@@ -722,7 +733,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-142",
+      "id": "TC-143",
       "reqIds": [
         "REQ-107"
       ],
@@ -732,7 +743,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-143",
+      "id": "TC-144",
       "reqIds": [
         "REQ-107"
       ],
@@ -742,7 +753,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-144",
+      "id": "TC-145",
       "reqIds": [
         "REQ-107"
       ],
@@ -752,7 +763,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-145",
+      "id": "TC-146",
       "reqIds": [
         "REQ-107"
       ],
@@ -762,7 +773,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-146",
+      "id": "TC-147",
       "reqIds": [
         "REQ-108"
       ],
@@ -772,7 +783,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-147",
+      "id": "TC-148",
       "reqIds": [
         "REQ-108"
       ],
@@ -782,7 +793,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-148",
+      "id": "TC-149",
       "reqIds": [
         "REQ-108"
       ],
@@ -792,7 +803,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-149",
+      "id": "TC-150",
       "reqIds": [
         "REQ-108"
       ],
@@ -802,7 +813,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-150",
+      "id": "TC-151",
       "reqIds": [
         "REQ-109"
       ],
@@ -812,7 +823,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-151",
+      "id": "TC-152",
       "reqIds": [
         "REQ-109"
       ],
@@ -822,7 +833,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-152",
+      "id": "TC-153",
       "reqIds": [
         "REQ-109"
       ],
@@ -832,7 +843,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-153",
+      "id": "TC-154",
       "reqIds": [
         "REQ-109"
       ],
@@ -842,7 +853,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-154",
+      "id": "TC-155",
       "reqIds": [
         "REQ-109"
       ],
@@ -852,7 +863,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-155",
+      "id": "TC-156",
       "reqIds": [
         "REQ-110"
       ],
@@ -862,7 +873,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-156",
+      "id": "TC-157",
       "reqIds": [
         "REQ-110"
       ],
@@ -872,7 +883,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-157",
+      "id": "TC-158",
       "reqIds": [
         "REQ-110"
       ],
@@ -882,7 +893,7 @@
       "status": "Not run"
     },
     {
-      "id": "TC-158",
+      "id": "TC-159",
       "reqIds": [
         "REQ-110"
       ],
