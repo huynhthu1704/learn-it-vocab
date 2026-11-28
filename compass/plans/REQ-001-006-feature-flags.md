@@ -1,6 +1,6 @@
 # Plan: REQ-001–REQ-006 Admins turn site features on and off
 
-Requirements: REQ-001, REQ-002, REQ-003, REQ-004, REQ-005, REQ-006 · Test cases: TC-001, TC-002, TC-003, TC-004
+Requirements: REQ-001, REQ-002, REQ-003, REQ-004, REQ-005, REQ-006 · Test cases: TC-001, TC-002, TC-003, TC-004, TC-005 · Issue: #17
 Intent: compass/intent/2026-11-27-feature-flags.md · Design: compass/design/2026-11-27-feature-flags.md
 
 ## Files
@@ -44,4 +44,4 @@ Intent: compass/intent/2026-11-27-feature-flags.md · Design: compass/design/202
 - `node compass/check-spec.mjs` and `node compass/check-guardrails.mjs` pass.
 - A Playwright run in Chromium with a stubbed `window.Cloud`: the Features tab renders and toggles, and with every
   flag off, a learner gets no My lists link, the not-available message on `#lists`, no report link and no
-  plain-words box (TC-003 and TC-004 are covered manually on the live site after the merge).
+  plain-words box (TC-003, TC-004 and TC-005 are run manually on the live site after the merge).

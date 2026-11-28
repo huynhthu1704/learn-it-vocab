@@ -1,6 +1,6 @@
 # Design: Admins turn site features on and off
 
-Status: Approved (by the Product Owner, 2026-11-27)
+Status: Approved (by the Product Owner, 2026-11-27; review clarifications and ADR-008 approved 2026-11-28)
 Requirements: REQ-001, REQ-002, REQ-003, REQ-004, REQ-005, REQ-006
 Design tool: none yet. The project has no `designTool` link, so the screens are described here and reuse existing components.
 
@@ -30,14 +30,14 @@ Design tool: none yet. The project has no `designTool` link, so the screens are 
 
 ### SCR-2 · Feature off, as a learner: REQ-002, REQ-003, REQ-004, REQ-005
 - **My lists off:** the `My lists` nav link (desktop and mobile menu) and the "My word lists" button in the account
-  pop-up are hidden. Opening `#lists` shows a card: "This feature is not available right now." with a
+  pop-up are hidden, and so is the "Build your own word lists" line in the sign-in invite. Opening `#lists` shows a card: "This feature is not available right now." with a
   `Back to Home` button.
-- **AI features off:** in My lists, the upload/paste-a-document AI extraction block is hidden. On word cards and
+- **AI features off** (stored AI text is hidden too, ADR-008): in My lists, the upload/paste-a-document AI extraction block is hidden. On word cards and
   flashcards, the "In plain words" and "Story" boxes are not shown.
 - **Learner prompts off:** the first-visit role picker, level picker and sign-in invite don't open by themselves.
-  Manual role and level choices on the pages stay as they are.
+  Picking a role or level by hand (the Home role and level cards, a `?role=` link, the Browse filters) works as today.
 - **Report a mistake off:** the "Report a wrong meaning or example" / "Report a problem" links are hidden on
-  cards. For admins, the link and the Edit link still show.
+  cards. The sign-in invite's "Report wrong meanings" line is hidden too. For admins, the link and the Edit link still show.
 - States: the same as today when every flag is on, or when the flags could not be read.
 
 ## Notes

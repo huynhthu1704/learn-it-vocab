@@ -1,7 +1,7 @@
 # Intent: Admins turn site features on and off
 
 Status: Approved (by the Product Owner, 2026-11-27)
-Requested: 2026-11-27 by the Product Owner, in a Claude Code session
+Requested: 2026-11-27 by the Product Owner, in a Claude Code session · Issue: #17
 
 ## What we want
 An admin can switch parts of the site on or off from the Admin page, without a code change or a rebuild.
@@ -33,9 +33,9 @@ AI quota) is to change code and redeploy. Admins need a quick way to do it thems
 - Scheduling a flag to switch on or off at a set time.
 
 ## Requirements
-- REQ-001: Admin turns features on and off on a Features tab
-- REQ-002: My lists can be switched off
-- REQ-003: AI features can be switched off
-- REQ-004: Learner prompts can be switched off
-- REQ-005: Report a mistake can be switched off
-- REQ-006: Every feature stays on when the flags cannot be loaded
+- REQ-001 (#17): Admin turns features on and off on a Features tab
+- REQ-002 (#17): My lists can be switched off
+- REQ-003 (#17): AI features can be switched off
+- REQ-004 (#17): Learner prompts can be switched off
+- REQ-005 (#17): Report a mistake can be switched off
+- REQ-006 (#17): Every feature stays on when the flags cannot be loaded
