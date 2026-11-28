@@ -20,14 +20,14 @@ Covers: REQ-101 · Type: Manual · Status: Not run
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC1
   Given a term appears on one or more lines of the data/<digit>*.txt files (read in file-name order, then line order), each below a header such as "# level=2 role=dev"
   When the maintainer runs npm run build
-  Then words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its roles are the header roles of every line it appears on, plus any roles that roles.mjs adds
+  Then words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its starting roles are the header roles of every line it appears on
 ```
 
 ## TC-102 · Word database with levels, roles, topics, IPA, meanings and examples: AC2
 Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC2
-  Given the term's first line in data/definitions (files in name order) is "term|English definition|Korean meaning"
+  Given the first line in data/definitions (files in name order) that gives the term both an English definition and a Korean meaning is "term|English definition|Korean meaning"
   When the maintainer runs npm run build
   Then the word has that English definition (d) and Korean meaning (k); if no line gives the term both, the build prints "Missing definitions in data/definitions/:" with the term and exits non-zero
 ```
@@ -47,7 +47,7 @@ Covers: REQ-101 · Type: Manual · Status: Not run
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC4
   Given a line "term|level" in data/level-overrides.txt
   When the maintainer runs npm run build
-  Then that level replaces the word's starting level, before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
+  Then that level replaces the word's starting level; next, roles.mjs adds roles using the word's term, topic, starting roles and its level after overrides; abbreviations are merged after both; if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
 ```
 
 ## TC-105 · Word database with levels, roles, topics, IPA, meanings and examples: AC5

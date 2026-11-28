@@ -32,13 +32,14 @@
         "risks": [
           "Speech voices depend on the device; some devices have no voice for a language or accent",
           "Meanings and IPA come from data files and AI tools and may be wrong until a learner reports them",
-          "The ?role= parameter only works inside the hash (#home?role=ba); a link like /?role=ba is only counted as a visit source and does not filter The README says ?role= works on \"any page link\".",
+          "The ?role= parameter only works inside the hash (#home?role=ba); a link like /?role=ba is only counted as a visit source and does not filter. The README says ?role= works on \"any page link\".",
           "A guest who clicks Save or a mark button must sign in first, which may put off casual visitors",
           "A full form merged into an abbreviation is not checked for IPA: if its IPA cannot be worked out, the build still passes and the card shows no IPA for the full form (build.mjs:135 copies it before the missing-IPA check at :144). Today every merged full form has one.",
           "Some level overrides have no effect: an override on an abbreviation is undone by the merge with its full form (data/level-overrides.txt has UAT|2, but UAT is level 1 because \"user acceptance testing\" is level 1).",
           "A term repeated on a later line (in the same or a later data file) keeps the first line's part of speech, meaning, example, topic and level without a warning; only the roles are combined (build.mjs:85). For example, approve in data/2-dev.txt and reliability at data/6-extra-l3.txt:43 look edited but change nothing.",
           "Home page text is out of date: it says \"Every word has a picture\" (words have topic icons only) and \"Your progress is saved in this browser\" (progress is saved only for signed-in learners) (src/pages/home.html:7, :47, :55).",
-          "Not checked in a browser: after a guest signs in from the bulk-action pop-up, the action runs again about 300 ms later, and loading the account then joins its saved, known and learning words with the local ones (src/ui-cloud.js:28-33, :321). If the account loads after the action, \"Remove from saved\" and \"Reset to new\" may be undone for words the account already had."
+          "Not checked in a browser: after a guest signs in from the bulk-action pop-up, the action runs again about 300 ms later, and loading the account then joins its saved, known and learning words with the local ones (src/ui-cloud.js:28-33, :321). If the account loads after the action, \"Remove from saved\" and \"Reset to new\" may be undone for words the account already had.",
+          "A data line with fewer than five fields is skipped: the build prints \"BAD LINE\" but still succeeds, so the term silently disappears (build.mjs:83)."
         ]
       },
       "createdAt": "2026-10-31T00:00:00.000Z"
@@ -87,10 +88,10 @@
       "title": "Word database with levels, roles, topics, IPA, meanings and examples",
       "story": "As a content maintainer I want the build to turn the data files into one checked word database so that every word card has complete, consistent data.",
       "ac": [
-        "Given a term appears on one or more lines of the data/<digit>*.txt files (read in file-name order, then line order), each below a header such as \"# level=2 role=dev\"\nWhen the maintainer runs npm run build\nThen words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its roles are the header roles of every line it appears on, plus any roles that roles.mjs adds",
-        "Given the term's first line in data/definitions (files in name order) is \"term|English definition|Korean meaning\"\nWhen the maintainer runs npm run build\nThen the word has that English definition (d) and Korean meaning (k); if no line gives the term both, the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
+        "Given a term appears on one or more lines of the data/<digit>*.txt files (read in file-name order, then line order), each below a header such as \"# level=2 role=dev\"\nWhen the maintainer runs npm run build\nThen words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its starting roles are the header roles of every line it appears on",
+        "Given the first line in data/definitions (files in name order) that gives the term both an English definition and a Korean meaning is \"term|English definition|Korean meaning\"\nWhen the maintainer runs npm run build\nThen the word has that English definition (d) and Korean meaning (k); if no line gives the term both, the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
         "Given the term's first line in data/fr (files in name order, not corporate.txt) is \"term|French meaning\"\nWhen the maintainer runs npm run build\nThen the word has that French meaning (f); a word with no French line gets an empty one and the build only warns",
-        "Given a line \"term|level\" in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen that level replaces the word's starting level, before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
+        "Given a line \"term|level\" in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen that level replaces the word's starting level; next, roles.mjs adds roles using the word's term, topic, starting roles and its level after overrides; abbreviations are merged after both; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
         "Given a line \"ABBR|full form\" in data/merge-abbreviations.txt, after level overrides\nWhen the maintainer runs npm run build\nThen words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows \"= <full form>\" under the term with its own listen button; if either term is not a word, the build prints \"data/merge-abbreviations.txt: not found\" and exits non-zero",
         "Given a kept word (not a full form merged into an abbreviation) whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json\nWhen the maintainer runs npm run build\nThen the build prints \"Add these to data/pronunciation-overrides.json first:\" with the term and exits non-zero"
       ],
@@ -98,11 +99,11 @@
       "status": "Done",
       "sources": [
         "build.mjs:113-123",
+        "build.mjs:124",
         "build.mjs:127-145",
         "build.mjs:146-151",
         "build.mjs:155-157",
         "build.mjs:73-89",
-        "build.mjs:90-100",
         "build.mjs:90-112",
         "roles.mjs:3",
         "roles.mjs:48-74",
@@ -315,7 +316,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC1",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC1\n  Given a term appears on one or more lines of the data/<digit>*.txt files (read in file-name order, then line order), each below a header such as \"# level=2 role=dev\"\n  When the maintainer runs npm run build\n  Then words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its roles are the header roles of every line it appears on, plus any roles that roles.mjs adds",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC1\n  Given a term appears on one or more lines of the data/<digit>*.txt files (read in file-name order, then line order), each below a header such as \"# level=2 role=dev\"\n  When the maintainer runs npm run build\n  Then words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its starting roles are the header roles of every line it appears on",
       "type": "Manual",
       "status": "Not run"
     },
@@ -325,7 +326,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC2",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC2\n  Given the term's first line in data/definitions (files in name order) is \"term|English definition|Korean meaning\"\n  When the maintainer runs npm run build\n  Then the word has that English definition (d) and Korean meaning (k); if no line gives the term both, the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC2\n  Given the first line in data/definitions (files in name order) that gives the term both an English definition and a Korean meaning is \"term|English definition|Korean meaning\"\n  When the maintainer runs npm run build\n  Then the word has that English definition (d) and Korean meaning (k); if no line gives the term both, the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
       "type": "Manual",
       "status": "Not run"
     },
@@ -345,7 +346,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC4",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC4\n  Given a line \"term|level\" in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then that level replaces the word's starting level, before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC4\n  Given a line \"term|level\" in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then that level replaces the word's starting level; next, roles.mjs adds roles using the word's term, topic, starting roles and its level after overrides; abbreviations are merged after both; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
       "type": "Manual",
       "status": "Not run"
     },
