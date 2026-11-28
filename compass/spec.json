@@ -1,9 +1,908 @@
 {
   "version": 2,
   "stack": "Static single-page app in plain JavaScript (ES modules) and HTML page fragments, built by build.mjs with esbuild into committed index.html, app.js, styles.css, cloud.js and words.json; word data in data/*.txt; Firebase (Google sign-in, Firestore, Firebase AI Logic with Gemini, optional App Check); Google Apps Script for the weekly e-mail and the Power BI export; node:test for checks; GitHub Pages from the main branch",
-  "features": [],
-  "requirements": [],
-  "tests": [],
+  "features": [
+    {
+      "id": "F-001",
+      "name": "Word library & browse",
+      "idea": {
+        "need": "People who work in IT need one place to look up the IT words for their job and level, hear them, and find any word fast, in English or in their own language.",
+        "intent": "Learners in all nine IT roles (students, developers, testers, BA/PO/PM, PMO, IT HR, business development, sales, managers) get a searchable library of IT words at three levels, each with IPA, a definition, meanings in Vietnamese, Korean and French, a workplace example and audio. Partners such as BAPO Path can link straight to one role's words.",
+        "problem": "IT vocabulary is spread across courses and glossaries, is rarely sorted by role or level, and seldom comes with pronunciation and a meaning in the learner's language, so learners cannot quickly find and practise the words their job needs.",
+        "users": [
+          "Guest learner",
+          "Signed-in learner",
+          "Content maintainer (edits data/ and runs the build)"
+        ],
+        "outcomeMetric": "Done when every word in words.json has a term, part of speech, IPA, English definition, Vietnamese, Korean and French meanings, an example, a topic, a level from 1 to 3 and at least one known role; when a learner can find any word in Browse by typing it (or its meaning) in English, Vietnamese, Korean or French and narrow the list by level, role, topic and status; and when a ?role= link opens the site filtered to that role.",
+        "scopeIn": [
+          "Word database built from data/*.txt by build.mjs, with definitions (data/definitions), French meanings (data/fr), IPA (CMU dictionary plus data/pronunciation-overrides.json), level overrides and role tagging (roles.mjs)",
+          "Abbreviation cards: an abbreviation and its full form merged into one card (data/merge-abbreviations.txt)",
+          "Role link (#<page>?role=<id>) and the focus bar with See the words and Show all roles",
+          "Browse search across term, full form, English definition, Vietnamese, Korean and French, ignoring accents",
+          "Browse filters: level, role, topic (business domains and IT topics), status (new, learning, known, saved)",
+          "Select mode and bulk actions: mark as learnt, still learning, save, remove from saved, reset to new",
+          "Listen buttons using the device's speech voices, with a slow button in the word dialog, accent and speed settings"
+        ],
+        "scopeOut": [
+          "Recorded human audio: all audio is the device's text-to-speech voice",
+          "Word photos: cards show topic icons only (photos were removed on 2026-11-01)",
+          "Bulk actions outside Browse (select mode closes when the learner leaves Browse)"
+        ],
+        "risks": [
+          "Speech voices depend on the device; some devices have no voice for a language or accent",
+          "Meanings and IPA come from data files and AI tools and may be wrong until a learner reports them",
+          "The ?role= parameter only works inside the hash (#home?role=ba); a link like /?role=ba is only counted as a visit source and does not filter. The README says ?role= works on \"any page link\".",
+          "A guest who clicks Save or a mark button must sign in first, which may put off casual visitors",
+          "A full form merged into an abbreviation is not checked for IPA: if its IPA cannot be worked out, the build still passes and the card shows no IPA for the full form (build.mjs:135 copies it before the missing-IPA check at :144). Today every merged full form has one.",
+          "Some level overrides have no effect: an override on an abbreviation is undone by the merge with its full form (data/level-overrides.txt has UAT|2, but UAT is level 1 because \"user acceptance testing\" is level 1).",
+          "A term repeated on a later line (in the same or a later data file) keeps the first line's part of speech, meaning, example, topic and level without a warning; only the roles are combined (build.mjs:85). For example, approve in data/2-dev.txt and reliability at data/6-extra-l3.txt:43 look edited but change nothing.",
+          "Home page text is out of date: it says \"Every word has a picture\" (words have topic icons only) and \"Your progress is saved in this browser\" (progress is saved only for signed-in learners) (src/pages/home.html:7, :47, :55).",
+          "Not checked in a browser: after a guest signs in from the bulk-action pop-up, the action runs again about 300 ms later, and loading the account then joins its saved, known and learning words with the local ones (src/ui-cloud.js:28-33, :321). If the account loads after the action, \"Remove from saved\" and \"Reset to new\" may be undone for words the account already had.",
+          "A data line with fewer than five fields is skipped: the build prints \"BAD LINE\" but still succeeds, so the term silently disappears (build.mjs:83)."
+        ]
+      },
+      "createdAt": "2026-10-31T00:00:00.000Z"
+    },
+    {
+      "id": "F-002",
+      "name": "Languages & explanations",
+      "idea": {
+        "need": "Learners in Vietnam and Korea, and French readers, should see meanings, translations and the site itself in their own language, and people without a tech background need words explained in everyday language.",
+        "intent": "Each learner chooses any of Vietnamese, Korean and French next to English and an interface language; meanings, example translations, plain explanations and stories then appear in those languages, with listen buttons for translated sentences. Non-technical roles see plain explanations on cards automatically.",
+        "problem": "A single translation language does not fit a mixed audience, an English-only interface is a barrier for beginners, and IT definitions are hard to follow for HR, sales and managers.",
+        "users": [
+          "Guest learner",
+          "Signed-in learner",
+          "Non-technical learner (IT HR, business development, sales, managers)",
+          "Admin (runs the AI tools that write translations, explanations and stories)"
+        ],
+        "outcomeMetric": "Done when a learner can choose any mix of Vietnamese, Korean and French and see meanings (and, where the word has them, example translations, plain explanations and stories) in each chosen language; can switch the interface to one of their languages or to English plus their languages; and when HR, business development, sales and manager learners see plain explanations on word cards without changing a setting.",
+        "scopeIn": [
+          "Meaning languages Vietnamese, Korean, French (any combination) chosen in My profile or the globe button; English always shown",
+          "Interface language: English only, one chosen language only, or English plus my languages, from data/i18n.txt",
+          "Listen buttons in each language's voice for example translations and story translations",
+          "Plain-language explanations with an Automatic / Always show / Only in the word details setting",
+          "Stories for complex words in the word dialog",
+          "Preferences kept in the browser for guests and in the account for signed-in learners"
+        ],
+        "scopeOut": [
+          "Languages other than English, Vietnamese, Korean and French",
+          "Listen buttons for meanings and for plain explanations",
+          "Plain explanations, stories and example translations in the built-in words.json: they exist only after an admin runs the AI tools and they are read from Firestore"
+        ],
+        "risks": [
+          "Translations, explanations and stories are AI-written and may be wrong until checked or reported",
+          "If Firestore content has not been published or the AI tools have not run, no plain explanations, stories or example translations appear at all",
+          "Devices without a Vietnamese, Korean or French voice read translations with the wrong voice",
+          "Interface strings missing from data/i18n.txt stay in English"
+        ]
+      },
+      "createdAt": "2026-11-01T00:00:00.000Z"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-101",
+      "featureId": "F-001",
+      "title": "Word database with levels, roles, topics, IPA, meanings and examples",
+      "story": "As a content maintainer I want the build to turn the data files into one checked word database so that every word card has complete, consistent data.",
+      "ac": [
+        "Given a term appears on one or more lines of the data/<digit>*.txt files (read in file-name order, then line order), each below a header such as \"# level=2 role=dev\"\nWhen the maintainer runs npm run build\nThen words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its starting roles are the header roles of every line it appears on",
+        "Given the first line in data/definitions (files in name order) that gives the term both an English definition and a Korean meaning is \"term|English definition|Korean meaning\"\nWhen the maintainer runs npm run build\nThen the word has that English definition (d) and Korean meaning (k); if no line gives the term both, the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
+        "Given the first line in data/fr (files in name order, not corporate.txt) that gives the term a French meaning is \"term|French meaning\"\nWhen the maintainer runs npm run build\nThen the word has that French meaning (f); a word with no French line gets an empty one and the build only warns",
+        "Given a line \"term|level\" in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen that level replaces the word's starting level, before roles.mjs adds roles (next AC) and before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
+        "Given any word, with or without a line in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen after the level overrides, roles.mjs adds roles to the word using its term, topic, starting roles and its level after any override, and the word's roles are its starting roles plus the roles roles.mjs adds; abbreviations are merged after this",
+        "Given a line \"ABBR|full form\" in data/merge-abbreviations.txt, after level overrides and roles.mjs\nWhen the maintainer runs npm run build\nThen words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows \"= <full form>\" under the term with its own listen button; if either term is not a word, the build prints \"data/merge-abbreviations.txt: not found\" and exits non-zero",
+        "Given a kept word (not a full form merged into an abbreviation) whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json\nWhen the maintainer runs npm run build\nThen the build prints \"Add these to data/pronunciation-overrides.json first:\" with the term and exits non-zero"
+      ],
+      "priority": "Must",
+      "status": "Done",
+      "sources": [
+        "build.mjs:113-123",
+        "build.mjs:124",
+        "build.mjs:127-145",
+        "build.mjs:146-151",
+        "build.mjs:155-157",
+        "build.mjs:73-89",
+        "build.mjs:90-112",
+        "roles.mjs:3",
+        "roles.mjs:48-74",
+        "src/app.js:118-120",
+        "src/app.js:208",
+        "tests/words.test.mjs:1-39"
+      ]
+    },
+    {
+      "id": "REQ-102",
+      "featureId": "F-001",
+      "title": "Open the site for one role with a link",
+      "story": "As a partner site (for example BAPO Path) I want to link learners to one role's words so that they see the vocabulary for their job straight away.",
+      "ac": [
+        "Given a visitor opens #home?role=ba\nWhen the page loads\nThen a bar shows \"Showing words for BA / PO / PM · <n> of <total> words\" with See the words and Show all roles, the Browse role filter, the flashcard role and the quiz role are set to BA / PO / PM, and the address becomes #home",
+        "Given a role was chosen by a link\nWhen the visitor reloads the page in the same browser\nThen the bar and the role filter are still set to that role",
+        "Given the role bar is showing\nWhen the visitor clicks Show all roles, or opens a link with ?role=all\nThen the bar disappears and Browse shows all roles",
+        "Given a first-time visitor with no role opens #home?role=ba\nWhen the page loads\nThen the first-visit role picker is not shown and My role is set to BA / PO / PM"
+      ],
+      "priority": "Should",
+      "status": "Done",
+      "sources": [
+        "src/app.js:393",
+        "src/app.js:684-700",
+        "src/app.js:701-712",
+        "src/template.html:66-71",
+        "src/ui-cloud.js:232-236"
+      ]
+    },
+    {
+      "id": "REQ-103",
+      "featureId": "F-001",
+      "title": "Search and filter the word library",
+      "story": "As a learner I want to search in English or my own language and filter by level, role, topic and status so that I find the words I need quickly.",
+      "ac": [
+        "Given the Browse page\nWhen the learner types a word in the search box in English, Vietnamese (with or without accents), Korean or French\nThen the grid shows words whose term, full form, English definition, Vietnamese, Korean or French meaning contains it, terms that start with it first, and the count shows \"<n> words\"",
+        "Given the Browse page\nWhen the learner picks a level, a role, a topic (grouped under Business domains and IT topics, each with its word count) and a status (All words, New, Learning, Known, Saved ★)\nThen only words matching all chosen filters are shown",
+        "Given a role filter and no search text\nWhen the list is shown\nThen words whose main role is that role come first, then by level",
+        "Given more than 36 matching words\nWhen the list is shown\nThen 36 cards appear with \"Show more words (<n> left)\", and each click shows 48 more",
+        "Given no word matches\nWhen the list is shown\nThen the message \"No words match. Try another search or clear the filters.\" appears"
+      ],
+      "priority": "Must",
+      "status": "Done",
+      "sources": [
+        "src/pages/browse.html:1-21",
+        "src/app.js:393-428",
+        "src/app.js:402-417",
+        "src/app.js:418-421"
+      ]
+    },
+    {
+      "id": "REQ-104",
+      "featureId": "F-001",
+      "title": "Select many words and mark them at once",
+      "story": "As a signed-in learner I want to select many words and mark, save or reset them together so that I do not have to open each card.",
+      "ac": [
+        "Given the Browse page\nWhen the learner clicks Select words\nThen cards become selectable, the button changes to Select all shown and a bar appears with \"<n> selected\", Mark as learnt, Still learning, Save, Remove from saved, Reset to new and Done",
+        "Given a signed-in learner has selected words\nWhen they click Mark as learnt, Still learning, Save, Remove from saved or Reset to new\nThen every selected word gets that status, a message such as \"<n> words marked as learnt.\" shows, and Still learning schedules each word for a 1-day review",
+        "Given a guest has selected words\nWhen they click a bulk action once the site knows they are not signed in\nThen the \"Save your progress with Google\" pop-up opens and nothing is marked; after signing in from the pop-up the action is applied to the selection",
+        "Given select mode with no word selected\nWhen the learner clicks a bulk action\nThen the message \"Select some words first.\" shows",
+        "Given select mode is on\nWhen the learner clicks Done or leaves Browse\nThen select mode ends and the selection is cleared"
+      ],
+      "priority": "Should",
+      "status": "Done",
+      "sources": [
+        "src/app.js:233-236",
+        "src/app.js:328",
+        "src/app.js:428-442",
+        "src/app.js:714",
+        "src/app.js:150-157",
+        "src/template.html:130-133"
+      ]
+    },
+    {
+      "id": "REQ-105",
+      "featureId": "F-001",
+      "title": "Listen to words and examples",
+      "story": "As a learner I want to hear each word, its full form and its example so that I learn how to say them.",
+      "ac": [
+        "Given a word card, the word dialog, a flashcard or the word of the day\nWhen the learner taps a listen button\nThen the device reads the term (or the full form, or the example sentence) aloud in the English accent chosen in My profile (American or British) at the chosen speed",
+        "Given the word dialog\nWhen the learner taps the slow listen button\nThen the term is read at 0.6 speed",
+        "Given a browser without speech synthesis\nWhen the learner taps a listen button\nThen the message \"Audio is not supported in this browser. Use the IPA to check the sound.\" shows"
+      ],
+      "priority": "Must",
+      "status": "Done",
+      "sources": [
+        "src/app.js:169-185",
+        "src/app.js:206",
+        "src/app.js:219-222",
+        "src/app.js:277",
+        "src/app.js:304",
+        "src/app.js:673-675",
+        "src/pages/progress.html:15-23"
+      ]
+    },
+    {
+      "id": "REQ-106",
+      "featureId": "F-002",
+      "title": "Choose meaning languages",
+      "story": "As a learner I want to choose which of Vietnamese, Korean and French appear next to English so that I see meanings in the languages I read.",
+      "ac": [
+        "Given a new visitor\nWhen they open a word card\nThen the English definition is shown with the Vietnamese and Korean meanings (the default languages), Vietnamese in bold as the first language",
+        "Given My profile → Languages, or the globe button in the top bar\nWhen the learner ticks or unticks Tiếng Việt, 한국어 or Français\nThen word cards, the word dialog and flashcards show the English definition plus a meaning row for each ticked language, and the globe button shows the chosen languages (for example \"VI·FR\") or \"EN\" when none is ticked",
+        "Given the learner's first chosen language is Korean\nWhen they get a \"What does this word mean?\" quiz question or take the level test\nThen the answer options show the Korean meanings, falling back to the English definition where a word has none",
+        "Given a guest changes languages\nWhen they reload the page in the same browser\nThen the same languages are chosen, and the Languages card says \"Saved in this browser. Sign in to use them on every device.\"",
+        "Given a signed-in learner changes languages on one device\nWhen they sign in on another device\nThen the most recently changed preferences are used"
+      ],
+      "priority": "Must",
+      "status": "Done",
+      "sources": [
+        "src/app.js:94-100",
+        "src/app.js:210-212",
+        "src/ui-cloud.js:17",
+        "src/ui-cloud.js:49",
+        "src/ui-cloud.js:92-129",
+        "src/ui-cloud.js:275-292",
+        "src/app.js:630-634"
+      ]
+    },
+    {
+      "id": "REQ-107",
+      "featureId": "F-002",
+      "title": "Choose the interface language",
+      "story": "As a learner who is new to English I want the menus and buttons in my language so that I can use the site without getting lost.",
+      "ac": [
+        "Given the learner has chosen Vietnamese and French as meaning languages\nWhen they open Website interface\nThen the options are English only, Tiếng Việt only, Français only and English + my languages",
+        "Given the learner picks Tiếng Việt only\nWhen any page is shown\nThen interface text listed in data/i18n.txt is shown in Vietnamese, while words, meanings, examples and names stay as they are",
+        "Given the learner picks English + my languages\nWhen any page is shown\nThen each translated interface text shows the English followed by its translation in each chosen language",
+        "Given the interface is in French\nWhen the learner unticks Français as a meaning language\nThen the interface switches to English only",
+        "Given a line in data/i18n.txt without exactly four parts separated by \" | \"\nWhen the maintainer runs npm run build\nThen the build exits non-zero naming the line"
+      ],
+      "priority": "Should",
+      "status": "Done",
+      "sources": [
+        "src/ui-cloud.js:98",
+        "src/ui-cloud.js:104",
+        "src/ui-cloud.js:110-115",
+        "src/ui-cloud.js:131-207",
+        "build.mjs:171-179",
+        "data/i18n.txt:1-3"
+      ]
+    },
+    {
+      "id": "REQ-108",
+      "featureId": "F-002",
+      "title": "Listen to translations in their own language",
+      "story": "As a learner I want to hear example and story translations in that language's voice so that I can check my understanding by ear.",
+      "ac": [
+        "Given a word whose example has translations and the learner has chosen Korean\nWhen they tap the listen button on the Korean example row\nThen the translation is read with a Korean (ko-KR) voice; Vietnamese uses vi-VN and French fr-FR",
+        "Given the device has speech voices, but none for the chosen language\nWhen the learner taps that language's listen button\nThen the message \"No <language> voice on this device, so it may sound wrong. Add one in your system settings.\" shows",
+        "Given a word dialog with a story\nWhen the learner opens the story in a chosen language\nThen that translation has its own listen button in that language's voice"
+      ],
+      "priority": "Should",
+      "status": "Done",
+      "sources": [
+        "src/app.js:96",
+        "src/app.js:173-185",
+        "src/app.js:214-218",
+        "src/app.js:229-232"
+      ]
+    },
+    {
+      "id": "REQ-109",
+      "featureId": "F-002",
+      "title": "Plain-language explanations",
+      "story": "As a learner without a tech background (HR, business development, sales or a manager) I want each word explained in everyday language so that I understand what my IT colleagues mean.",
+      "ac": [
+        "Given the plain-language setting is Automatic (the default) and My role is IT HR, Business development, Sales or Manager / C-level\nWhen the learner sees a word card in Browse, Saved words or the word of the day for a word that has a plain explanation\nThen the card shows \"In plain words\" with the English explanation, and the back of the flashcard shows it in English and each chosen language",
+        "Given the setting is Automatic and My role is Developers, Testers, BA / PO / PM, PMO, University students or not set\nWhen the learner sees a word card\nThen no plain explanation is shown on the card",
+        "Given the setting is Always show\nWhen any learner sees a word card or the back of a flashcard for a word that has a plain explanation\nThen the explanation is shown (on the flashcard also in each chosen language)",
+        "Given any setting, including Only in the word details\nWhen the learner opens the word dialog for a word that has a plain explanation\nThen \"In plain words\" is shown in English and in each chosen language"
+      ],
+      "priority": "Should",
+      "status": "Done",
+      "sources": [
+        "src/app.js:97-99",
+        "src/app.js:223-227",
+        "src/app.js:255",
+        "src/app.js:279",
+        "src/app.js:353",
+        "src/app.js:539",
+        "src/ui-cloud.js:107",
+        "src/ui-cloud.js:526-529"
+      ]
+    },
+    {
+      "id": "REQ-110",
+      "featureId": "F-002",
+      "title": "Stories for complex words",
+      "story": "As a learner I want a short real-life story for hard words so that I see how the word is used at work.",
+      "ac": [
+        "Given a word that has a story\nWhen the learner opens its word dialog\nThen \"Story: how it works in real life\" shows the English story with a listen button, and each chosen language as a collapsible section named after the language",
+        "Given a word without a story\nWhen the learner opens its word dialog\nThen no story section is shown",
+        "Given an admin runs the AI tool Stories for complex words\nWhen it picks words\nThen it only writes stories for level 3 words, level 2 words in the architecture, cloud, security, data, AI, Agile, release, process, performance, network, business or money topics, and multi-word terms at level 2 or 3"
+      ],
+      "priority": "Could",
+      "status": "Done",
+      "sources": [
+        "src/app.js:228-232",
+        "src/app.js:281",
+        "src/ui-cloud.js:512-513",
+        "src/ui-cloud.js:530-533"
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "id": "TC-101",
+      "reqIds": [
+        "REQ-101"
+      ],
+      "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC1",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC1\n  Given a term appears on one or more lines of the data/<digit>*.txt files (read in file-name order, then line order), each below a header such as \"# level=2 role=dev\"\n  When the maintainer runs npm run build\n  Then words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its starting roles are the header roles of every line it appears on",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-102",
+      "reqIds": [
+        "REQ-101"
+      ],
+      "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC2",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC2\n  Given the first line in data/definitions (files in name order) that gives the term both an English definition and a Korean meaning is \"term|English definition|Korean meaning\"\n  When the maintainer runs npm run build\n  Then the word has that English definition (d) and Korean meaning (k); if no line gives the term both, the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-103",
+      "reqIds": [
+        "REQ-101"
+      ],
+      "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC3",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC3\n  Given the first line in data/fr (files in name order, not corporate.txt) that gives the term a French meaning is \"term|French meaning\"\n  When the maintainer runs npm run build\n  Then the word has that French meaning (f); a word with no French line gets an empty one and the build only warns",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-104",
+      "reqIds": [
+        "REQ-101"
+      ],
+      "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC4",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC4\n  Given a line \"term|level\" in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then that level replaces the word's starting level, before roles.mjs adds roles (next AC) and before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-105",
+      "reqIds": [
+        "REQ-101"
+      ],
+      "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC5",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC5\n  Given any word, with or without a line in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then after the level overrides, roles.mjs adds roles to the word using its term, topic, starting roles and its level after any override, and the word's roles are its starting roles plus the roles roles.mjs adds; abbreviations are merged after this",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-106",
+      "reqIds": [
+        "REQ-101"
+      ],
+      "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC6",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC6\n  Given a line \"ABBR|full form\" in data/merge-abbreviations.txt, after level overrides and roles.mjs\n  When the maintainer runs npm run build\n  Then words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows \"= <full form>\" under the term with its own listen button; if either term is not a word, the build prints \"data/merge-abbreviations.txt: not found\" and exits non-zero",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-107",
+      "reqIds": [
+        "REQ-101"
+      ],
+      "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC7",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC7\n  Given a kept word (not a full form merged into an abbreviation) whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json\n  When the maintainer runs npm run build\n  Then the build prints \"Add these to data/pronunciation-overrides.json first:\" with the term and exits non-zero",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-108",
+      "reqIds": [
+        "REQ-101"
+      ],
+      "title": "words.json integrity",
+      "gherkin": "Feature: Word database\n  Scenario: Generated words are complete and valid\n    Given words.json built by npm run build\n    When npm test runs tests/words.test.mjs\n    Then every word id is unique\n    And every term appears once, ignoring case\n    And fields t, p, v, e, c, i, d, k and f are filled in\n    And every level is 1, 2 or 3 and every role is one of the nine known roles",
+      "type": "Automated",
+      "status": "Pass",
+      "file": "tests/words.test.mjs"
+    },
+    {
+      "id": "TC-109",
+      "reqIds": [
+        "REQ-101"
+      ],
+      "title": "Example: Abbreviation and full form share one card",
+      "gherkin": "Feature: Abbreviation cards\n  Scenario: JD card shows its full form\n    Given the site is built with data/merge-abbreviations.txt\n    When I search Browse for \"job description\"\n    Then I see one card \"JD\"\n    And under it \"= job description\" with its own listen button and IPA",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-110",
+      "reqIds": [
+        "REQ-102"
+      ],
+      "title": "Open the site for one role with a link: AC1",
+      "gherkin": "Scenario: Open the site for one role with a link, AC1\n  Given a visitor opens #home?role=ba\n  When the page loads\n  Then a bar shows \"Showing words for BA / PO / PM · <n> of <total> words\" with See the words and Show all roles, the Browse role filter, the flashcard role and the quiz role are set to BA / PO / PM, and the address becomes #home",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-111",
+      "reqIds": [
+        "REQ-102"
+      ],
+      "title": "Open the site for one role with a link: AC2",
+      "gherkin": "Scenario: Open the site for one role with a link, AC2\n  Given a role was chosen by a link\n  When the visitor reloads the page in the same browser\n  Then the bar and the role filter are still set to that role",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-112",
+      "reqIds": [
+        "REQ-102"
+      ],
+      "title": "Open the site for one role with a link: AC3",
+      "gherkin": "Scenario: Open the site for one role with a link, AC3\n  Given the role bar is showing\n  When the visitor clicks Show all roles, or opens a link with ?role=all\n  Then the bar disappears and Browse shows all roles",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-113",
+      "reqIds": [
+        "REQ-102"
+      ],
+      "title": "Open the site for one role with a link: AC4",
+      "gherkin": "Scenario: Open the site for one role with a link, AC4\n  Given a first-time visitor with no role opens #home?role=ba\n  When the page loads\n  Then the first-visit role picker is not shown and My role is set to BA / PO / PM",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-114",
+      "reqIds": [
+        "REQ-102"
+      ],
+      "title": "Example: Role link filters the site",
+      "gherkin": "Feature: Role link\n  Scenario: Open the site for BA / PO / PM\n    Given a browser that has not visited the site\n    When I open #home?role=ba\n    Then the bar shows \"Showing words for BA / PO / PM\"\n    And no role picker appears\n    When I click See the words\n    Then Browse shows the BA/PO/PM role filter selected\n    When I click Show all roles\n    Then the bar disappears and All roles is selected",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-115",
+      "reqIds": [
+        "REQ-103"
+      ],
+      "title": "Search and filter the word library: AC1",
+      "gherkin": "Scenario: Search and filter the word library, AC1\n  Given the Browse page\n  When the learner types a word in the search box in English, Vietnamese (with or without accents), Korean or French\n  Then the grid shows words whose term, full form, English definition, Vietnamese, Korean or French meaning contains it, terms that start with it first, and the count shows \"<n> words\"",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-116",
+      "reqIds": [
+        "REQ-103"
+      ],
+      "title": "Search and filter the word library: AC2",
+      "gherkin": "Scenario: Search and filter the word library, AC2\n  Given the Browse page\n  When the learner picks a level, a role, a topic (grouped under Business domains and IT topics, each with its word count) and a status (All words, New, Learning, Known, Saved ★)\n  Then only words matching all chosen filters are shown",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-117",
+      "reqIds": [
+        "REQ-103"
+      ],
+      "title": "Search and filter the word library: AC3",
+      "gherkin": "Scenario: Search and filter the word library, AC3\n  Given a role filter and no search text\n  When the list is shown\n  Then words whose main role is that role come first, then by level",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-118",
+      "reqIds": [
+        "REQ-103"
+      ],
+      "title": "Search and filter the word library: AC4",
+      "gherkin": "Scenario: Search and filter the word library, AC4\n  Given more than 36 matching words\n  When the list is shown\n  Then 36 cards appear with \"Show more words (<n> left)\", and each click shows 48 more",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-119",
+      "reqIds": [
+        "REQ-103"
+      ],
+      "title": "Search and filter the word library: AC5",
+      "gherkin": "Scenario: Search and filter the word library, AC5\n  Given no word matches\n  When the list is shown\n  Then the message \"No words match. Try another search or clear the filters.\" appears",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-120",
+      "reqIds": [
+        "REQ-103"
+      ],
+      "title": "Example: Search in Vietnamese without accents",
+      "gherkin": "Feature: Browse search\n  Scenario: Accent-free Vietnamese search\n    Given I am on Browse\n    When I type \"kiem thu\"\n    Then the grid shows words whose Vietnamese meaning contains \"kiểm thử\"\n    And the count shows the number of matches",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-121",
+      "reqIds": [
+        "REQ-103"
+      ],
+      "title": "Example: Combined filters",
+      "gherkin": "Feature: Browse filters\n  Scenario: Level, role and topic together\n    Given I am on Browse\n    When I pick Advanced, Testers and the topic Testing\n    Then every card shown is level Advanced, tagged Testers and in Testing\n    When I pick status Saved ★ with no saved words\n    Then I see \"No words match. Try another search or clear the filters.\"",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-122",
+      "reqIds": [
+        "REQ-104"
+      ],
+      "title": "Select many words and mark them at once: AC1",
+      "gherkin": "Scenario: Select many words and mark them at once, AC1\n  Given the Browse page\n  When the learner clicks Select words\n  Then cards become selectable, the button changes to Select all shown and a bar appears with \"<n> selected\", Mark as learnt, Still learning, Save, Remove from saved, Reset to new and Done",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-123",
+      "reqIds": [
+        "REQ-104"
+      ],
+      "title": "Select many words and mark them at once: AC2",
+      "gherkin": "Scenario: Select many words and mark them at once, AC2\n  Given a signed-in learner has selected words\n  When they click Mark as learnt, Still learning, Save, Remove from saved or Reset to new\n  Then every selected word gets that status, a message such as \"<n> words marked as learnt.\" shows, and Still learning schedules each word for a 1-day review",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-124",
+      "reqIds": [
+        "REQ-104"
+      ],
+      "title": "Select many words and mark them at once: AC3",
+      "gherkin": "Scenario: Select many words and mark them at once, AC3\n  Given a guest has selected words\n  When they click a bulk action once the site knows they are not signed in\n  Then the \"Save your progress with Google\" pop-up opens and nothing is marked; after signing in from the pop-up the action is applied to the selection",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-125",
+      "reqIds": [
+        "REQ-104"
+      ],
+      "title": "Select many words and mark them at once: AC4",
+      "gherkin": "Scenario: Select many words and mark them at once, AC4\n  Given select mode with no word selected\n  When the learner clicks a bulk action\n  Then the message \"Select some words first.\" shows",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-126",
+      "reqIds": [
+        "REQ-104"
+      ],
+      "title": "Select many words and mark them at once: AC5",
+      "gherkin": "Scenario: Select many words and mark them at once, AC5\n  Given select mode is on\n  When the learner clicks Done or leaves Browse\n  Then select mode ends and the selection is cleared",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-127",
+      "reqIds": [
+        "REQ-104"
+      ],
+      "title": "Example: Bulk mark as signed-in learner",
+      "gherkin": "Feature: Bulk marking\n  Scenario: Mark three words as learnt\n    Given I am signed in and on Browse\n    When I click Select words and select three cards\n    And I click Mark as learnt\n    Then I see \"3 words marked as learnt.\"\n    And the three cards show Known",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-128",
+      "reqIds": [
+        "REQ-104"
+      ],
+      "title": "Example: Bulk action asks a guest to sign in",
+      "gherkin": "Feature: Bulk marking\n  Scenario: Guest tries to save selected words\n    Given I am not signed in and on Browse\n    When I select two cards and click Save\n    Then the \"Save your progress with Google\" pop-up opens\n    And no word is saved",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-129",
+      "reqIds": [
+        "REQ-105"
+      ],
+      "title": "Listen to words and examples: AC1",
+      "gherkin": "Scenario: Listen to words and examples, AC1\n  Given a word card, the word dialog, a flashcard or the word of the day\n  When the learner taps a listen button\n  Then the device reads the term (or the full form, or the example sentence) aloud in the English accent chosen in My profile (American or British) at the chosen speed",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-130",
+      "reqIds": [
+        "REQ-105"
+      ],
+      "title": "Listen to words and examples: AC2",
+      "gherkin": "Scenario: Listen to words and examples, AC2\n  Given the word dialog\n  When the learner taps the slow listen button\n  Then the term is read at 0.6 speed",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-131",
+      "reqIds": [
+        "REQ-105"
+      ],
+      "title": "Listen to words and examples: AC3",
+      "gherkin": "Scenario: Listen to words and examples, AC3\n  Given a browser without speech synthesis\n  When the learner taps a listen button\n  Then the message \"Audio is not supported in this browser. Use the IPA to check the sound.\" shows",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-132",
+      "reqIds": [
+        "REQ-105"
+      ],
+      "title": "Example: Listen at normal and slow speed",
+      "gherkin": "Feature: Audio\n  Scenario: Hear a word\n    Given a device with an English voice\n    When I open a word card and tap the listen button\n    Then I hear the term\n    When I tap the slow listen button\n    Then I hear it more slowly",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-133",
+      "reqIds": [
+        "REQ-106"
+      ],
+      "title": "Choose meaning languages: AC1",
+      "gherkin": "Scenario: Choose meaning languages, AC1\n  Given a new visitor\n  When they open a word card\n  Then the English definition is shown with the Vietnamese and Korean meanings (the default languages), Vietnamese in bold as the first language",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-134",
+      "reqIds": [
+        "REQ-106"
+      ],
+      "title": "Choose meaning languages: AC2",
+      "gherkin": "Scenario: Choose meaning languages, AC2\n  Given My profile → Languages, or the globe button in the top bar\n  When the learner ticks or unticks Tiếng Việt, 한국어 or Français\n  Then word cards, the word dialog and flashcards show the English definition plus a meaning row for each ticked language, and the globe button shows the chosen languages (for example \"VI·FR\") or \"EN\" when none is ticked",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-135",
+      "reqIds": [
+        "REQ-106"
+      ],
+      "title": "Choose meaning languages: AC3",
+      "gherkin": "Scenario: Choose meaning languages, AC3\n  Given the learner's first chosen language is Korean\n  When they get a \"What does this word mean?\" quiz question or take the level test\n  Then the answer options show the Korean meanings, falling back to the English definition where a word has none",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-136",
+      "reqIds": [
+        "REQ-106"
+      ],
+      "title": "Choose meaning languages: AC4",
+      "gherkin": "Scenario: Choose meaning languages, AC4\n  Given a guest changes languages\n  When they reload the page in the same browser\n  Then the same languages are chosen, and the Languages card says \"Saved in this browser. Sign in to use them on every device.\"",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-137",
+      "reqIds": [
+        "REQ-106"
+      ],
+      "title": "Choose meaning languages: AC5",
+      "gherkin": "Scenario: Choose meaning languages, AC5\n  Given a signed-in learner changes languages on one device\n  When they sign in on another device\n  Then the most recently changed preferences are used",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-138",
+      "reqIds": [
+        "REQ-106"
+      ],
+      "title": "Example: Default meaning languages",
+      "gherkin": "Feature: Meaning languages\n  Scenario: First visit\n    Given a browser with no saved preferences\n    When I open Browse\n    Then each card shows the EN, VI and KO rows\n    And the globe button shows \"VI·KO\"",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-139",
+      "reqIds": [
+        "REQ-106"
+      ],
+      "title": "Example: Add French and remove Korean",
+      "gherkin": "Feature: Meaning languages\n  Scenario: Change languages from the globe button\n    Given I open the globe button\n    When I tick Français and untick 한국어\n    Then cards show EN, VI and FR rows\n    And after a reload the same languages are still chosen",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-140",
+      "reqIds": [
+        "REQ-107"
+      ],
+      "title": "Choose the interface language: AC1",
+      "gherkin": "Scenario: Choose the interface language, AC1\n  Given the learner has chosen Vietnamese and French as meaning languages\n  When they open Website interface\n  Then the options are English only, Tiếng Việt only, Français only and English + my languages",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-141",
+      "reqIds": [
+        "REQ-107"
+      ],
+      "title": "Choose the interface language: AC2",
+      "gherkin": "Scenario: Choose the interface language, AC2\n  Given the learner picks Tiếng Việt only\n  When any page is shown\n  Then interface text listed in data/i18n.txt is shown in Vietnamese, while words, meanings, examples and names stay as they are",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-142",
+      "reqIds": [
+        "REQ-107"
+      ],
+      "title": "Choose the interface language: AC3",
+      "gherkin": "Scenario: Choose the interface language, AC3\n  Given the learner picks English + my languages\n  When any page is shown\n  Then each translated interface text shows the English followed by its translation in each chosen language",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-143",
+      "reqIds": [
+        "REQ-107"
+      ],
+      "title": "Choose the interface language: AC4",
+      "gherkin": "Scenario: Choose the interface language, AC4\n  Given the interface is in French\n  When the learner unticks Français as a meaning language\n  Then the interface switches to English only",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-144",
+      "reqIds": [
+        "REQ-107"
+      ],
+      "title": "Choose the interface language: AC5",
+      "gherkin": "Scenario: Choose the interface language, AC5\n  Given a line in data/i18n.txt without exactly four parts separated by \" | \"\n  When the maintainer runs npm run build\n  Then the build exits non-zero naming the line",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-145",
+      "reqIds": [
+        "REQ-107"
+      ],
+      "title": "Example: Interface in one language",
+      "gherkin": "Feature: Interface language\n  Scenario: Vietnamese interface\n    Given Tiếng Việt is a chosen meaning language\n    When I choose Website interface: Tiếng Việt only\n    Then the menu shows \"Trang chủ\" instead of \"Home\"\n    And the English terms on word cards are unchanged",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-146",
+      "reqIds": [
+        "REQ-107"
+      ],
+      "title": "Example: Interface falls back to English",
+      "gherkin": "Feature: Interface language\n  Scenario: Remove the interface language\n    Given the interface is Français only\n    When I untick Français\n    Then the interface is English only",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-147",
+      "reqIds": [
+        "REQ-108"
+      ],
+      "title": "Listen to translations in their own language: AC1",
+      "gherkin": "Scenario: Listen to translations in their own language, AC1\n  Given a word whose example has translations and the learner has chosen Korean\n  When they tap the listen button on the Korean example row\n  Then the translation is read with a Korean (ko-KR) voice; Vietnamese uses vi-VN and French fr-FR",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-148",
+      "reqIds": [
+        "REQ-108"
+      ],
+      "title": "Listen to translations in their own language: AC2",
+      "gherkin": "Scenario: Listen to translations in their own language, AC2\n  Given the device has speech voices, but none for the chosen language\n  When the learner taps that language's listen button\n  Then the message \"No <language> voice on this device, so it may sound wrong. Add one in your system settings.\" shows",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-149",
+      "reqIds": [
+        "REQ-108"
+      ],
+      "title": "Listen to translations in their own language: AC3",
+      "gherkin": "Scenario: Listen to translations in their own language, AC3\n  Given a word dialog with a story\n  When the learner opens the story in a chosen language\n  Then that translation has its own listen button in that language's voice",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-150",
+      "reqIds": [
+        "REQ-108"
+      ],
+      "title": "Example: Korean listen button on an example translation",
+      "gherkin": "Feature: Per-language audio\n  Scenario: Hear a Korean translation\n    Given Korean is chosen and a word has a Korean example translation\n    When I tap the listen button on the KO example row\n    Then I hear the sentence in a Korean voice",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-151",
+      "reqIds": [
+        "REQ-109"
+      ],
+      "title": "Plain-language explanations: AC1",
+      "gherkin": "Scenario: Plain-language explanations, AC1\n  Given the plain-language setting is Automatic (the default) and My role is IT HR, Business development, Sales or Manager / C-level\n  When the learner sees a word card in Browse, Saved words or the word of the day for a word that has a plain explanation\n  Then the card shows \"In plain words\" with the English explanation, and the back of the flashcard shows it in English and each chosen language",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-152",
+      "reqIds": [
+        "REQ-109"
+      ],
+      "title": "Plain-language explanations: AC2",
+      "gherkin": "Scenario: Plain-language explanations, AC2\n  Given the setting is Automatic and My role is Developers, Testers, BA / PO / PM, PMO, University students or not set\n  When the learner sees a word card\n  Then no plain explanation is shown on the card",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-153",
+      "reqIds": [
+        "REQ-109"
+      ],
+      "title": "Plain-language explanations: AC3",
+      "gherkin": "Scenario: Plain-language explanations, AC3\n  Given the setting is Always show\n  When any learner sees a word card or the back of a flashcard for a word that has a plain explanation\n  Then the explanation is shown (on the flashcard also in each chosen language)",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-154",
+      "reqIds": [
+        "REQ-109"
+      ],
+      "title": "Plain-language explanations: AC4",
+      "gherkin": "Scenario: Plain-language explanations, AC4\n  Given any setting, including Only in the word details\n  When the learner opens the word dialog for a word that has a plain explanation\n  Then \"In plain words\" is shown in English and in each chosen language",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-155",
+      "reqIds": [
+        "REQ-109"
+      ],
+      "title": "Example: Plain words shown automatically for sales",
+      "gherkin": "Feature: Plain-language explanations\n  Scenario: Automatic for a non-technical role\n    Given words with plain explanations are published\n    And My role is Sales and the setting is Automatic\n    When I open Browse\n    Then cards with an explanation show \"In plain words\"\n    When I change My role to Developers\n    Then the cards no longer show it\n    But the word dialog still shows it",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-156",
+      "reqIds": [
+        "REQ-110"
+      ],
+      "title": "Stories for complex words: AC1",
+      "gherkin": "Scenario: Stories for complex words, AC1\n  Given a word that has a story\n  When the learner opens its word dialog\n  Then \"Story: how it works in real life\" shows the English story with a listen button, and each chosen language as a collapsible section named after the language",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-157",
+      "reqIds": [
+        "REQ-110"
+      ],
+      "title": "Stories for complex words: AC2",
+      "gherkin": "Scenario: Stories for complex words, AC2\n  Given a word without a story\n  When the learner opens its word dialog\n  Then no story section is shown",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-158",
+      "reqIds": [
+        "REQ-110"
+      ],
+      "title": "Stories for complex words: AC3",
+      "gherkin": "Scenario: Stories for complex words, AC3\n  Given an admin runs the AI tool Stories for complex words\n  When it picks words\n  Then it only writes stories for level 3 words, level 2 words in the architecture, cloud, security, data, AI, Agile, release, process, performance, network, business or money topics, and multi-word terms at level 2 or 3",
+      "type": "Manual",
+      "status": "Not run"
+    },
+    {
+      "id": "TC-159",
+      "reqIds": [
+        "REQ-110"
+      ],
+      "title": "Example: Story in the word dialog",
+      "gherkin": "Feature: Stories\n  Scenario: Read a story in Vietnamese\n    Given a word with a story and Vietnamese chosen\n    When I open its word dialog\n    Then I see \"Story: how it works in real life\" with the English story and a listen button\n    When I open the Tiếng Việt section\n    Then I see the Vietnamese story with its own listen button",
+      "type": "Manual",
+      "status": "Not run"
+    }
+  ],
   "decisions": [
     {
       "id": "ADR-001",
@@ -67,6 +966,16 @@
       "context": "The site is prebuilt by build.mjs (ADR-001), but GitHub Pages still ran Jekyll on the main branch. Jekyll renders Markdown files without front matter, so Liquid tags (double curly braces, or a brace followed by a percent sign) in any compass/*.md would fail the Pages build and stop the live site from updating. Raised in the independent review of #2; the Product Owner asked for the fix.",
       "decision": "An empty .nojekyll at the repository root turns Jekyll off; Pages serves the committed files as they are.",
       "consequences": "Markdown files are no longer turned into HTML pages on the site (none are linked from it). Files and folders starting with _ or . (such as .github/, .claude/settings.json and .gitignore) are served too; none holds a secret, and the repo is public.",
+      "reqIds": []
+    },
+    {
+      "id": "ADR-101",
+      "date": "2026-11-27",
+      "title": "Back-fill the shipped features as Done requirements, two features per PR",
+      "status": "Accepted",
+      "context": "The ten features built before Compass was adopted were not in the spec. Writing them up touches about 36 files, and the guardrails cap a PR at 12 files (the human-approved label does not lift that cap). The Product Owner chose to keep the cap and split the work, to number the back-fill in its own blocks (ADR-101, REQ-101, TC-101) so it stays clear of the ids that other open work uses, and to give every acceptance criterion its own test case.",
+      "decision": "Each shipped feature becomes F-001…F-010, with requirements REQ-101 onwards written from what the code does today (status Done, sources listing the code). Every acceptance criterion gets its own test case, and the concrete example scenarios are kept as extra test cases. They go in five PRs of two features each. Test cases are Manual with status Not run unless an automated test covers them. Features get no design object: they predate the design stage.",
+      "consequences": "Every acceptance criterion is traced to a test case, but most tests have not been run yet; QA can run them and set Pass or Fail. New ADRs, requirements and test cases take the next free id below the back-fill blocks, after checking main and every open branch. Gaps found while writing (README drift, possible bugs) are listed as risks on the feature, not fixed in these PRs.",
       "reqIds": []
     }
   ]

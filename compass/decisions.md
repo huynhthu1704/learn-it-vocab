@@ -71,3 +71,13 @@ _2026-11-27 · Accepted_
 **Decision:** An empty .nojekyll at the repository root turns Jekyll off; Pages serves the committed files as they are.
 
 **Consequences:** Markdown files are no longer turned into HTML pages on the site (none are linked from it). Files and folders starting with _ or . (such as .github/, .claude/settings.json and .gitignore) are served too; none holds a secret, and the repo is public.
+
+## ADR-101 · Back-fill the shipped features as Done requirements, two features per PR
+
+_2026-11-27 · Accepted_
+
+**Context:** The ten features built before Compass was adopted were not in the spec. Writing them up touches about 36 files, and the guardrails cap a PR at 12 files (the human-approved label does not lift that cap). The Product Owner chose to keep the cap and split the work, to number the back-fill in its own blocks (ADR-101, REQ-101, TC-101) so it stays clear of the ids that other open work uses, and to give every acceptance criterion its own test case.
+
+**Decision:** Each shipped feature becomes F-001…F-010, with requirements REQ-101 onwards written from what the code does today (status Done, sources listing the code). Every acceptance criterion gets its own test case, and the concrete example scenarios are kept as extra test cases. They go in five PRs of two features each. Test cases are Manual with status Not run unless an automated test covers them. Features get no design object: they predate the design stage.
+
+**Consequences:** Every acceptance criterion is traced to a test case, but most tests have not been run yet; QA can run them and set Pass or Fail. New ADRs, requirements and test cases take the next free id below the back-fill blocks, after checking main and every open branch. Gaps found while writing (README drift, possible bugs) are listed as risks on the feature, not fixed in these PRs.
