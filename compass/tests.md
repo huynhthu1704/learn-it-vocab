@@ -18,54 +18,54 @@
 Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC1
-  Given a line "term|pos|Vietnamese|example|topic" in a data/<digit>*.txt file below a header "# level=2 role=dev" and the term has an English definition and Korean meaning in data/definitions and is not listed in data/level-overrides.txt, is not in an earlier data/<digit>*.txt file (files are read in name order) and is not in data/merge-abbreviations.txt
+  Given a term appears on one or more lines of the data/<digit>*.txt files (read in file-name order, then line order), each below a header such as "# level=2 role=dev"
   When the maintainer runs npm run build
-  Then words.json contains the word with level 2, role dev among its roles, its topic, an IPA string, the English definition (d), Vietnamese (v), Korean (k) and the example (e)
+  Then words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its roles are the header roles of every line it appears on, plus any roles that roles.mjs adds
 ```
 
 ## TC-102 · Word database with levels, roles, topics, IPA, meanings and examples: AC2
 Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC2
-  Given a line "term|level" in data/level-overrides.txt
+  Given the term's first line in data/definitions (files in name order) is "term|English definition|Korean meaning"
   When the maintainer runs npm run build
-  Then words.json gives that term the listed level, unless the term is an abbreviation merged in data/merge-abbreviations.txt, whose card then takes the lower of its own and its full form's level (the merge runs after the overrides); if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
+  Then the word has that English definition (d) and Korean meaning (k); if no line gives the term both, the build prints "Missing definitions in data/definitions/:" with the term and exits non-zero
 ```
 
 ## TC-103 · Word database with levels, roles, topics, IPA, meanings and examples: AC3
 Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC3
-  Given a term that has no English definition in data/definitions
+  Given the term's first line in data/fr (files in name order, not corporate.txt) is "term|French meaning"
   When the maintainer runs npm run build
-  Then the build prints "Missing definitions in data/definitions/:" with the term and exits non-zero
+  Then the word has that French meaning (f); a word with no French line gets an empty one and the build only warns
 ```
 
 ## TC-104 · Word database with levels, roles, topics, IPA, meanings and examples: AC4
 Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC4
-  Given a term that is kept as its own card (not a full form merged into an abbreviation) and whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json
+  Given a line "term|level" in data/level-overrides.txt
   When the maintainer runs npm run build
-  Then the build asks to add it to data/pronunciation-overrides.json and exits non-zero
+  Then that level replaces the word's starting level, before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints "data/level-overrides.txt: not found or bad level" with the line and exits non-zero
 ```
 
 ## TC-105 · Word database with levels, roles, topics, IPA, meanings and examples: AC5
 Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC5
-  Given the same term (case-insensitive) appears in two data files
-  When the build runs
-  Then words.json keeps one word for it with the level, topic, Vietnamese meaning and example from the first file in name order, and its roles include the roles from both files
+  Given a line "ABBR|full form" in data/merge-abbreviations.txt, after level overrides
+  When the maintainer runs npm run build
+  Then words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows "= <full form>" under the term with its own listen button; if either term is not a word, the build prints "data/merge-abbreviations.txt: not found" and exits non-zero
 ```
 
 ## TC-106 · Word database with levels, roles, topics, IPA, meanings and examples: AC6
 Covers: REQ-101 · Type: Manual · Status: Not run
 ```gherkin
 Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC6
-  Given an abbreviation pair "BA|business analyst" in data/merge-abbreviations.txt
-  When the build runs
-  Then words.json has one card "BA" whose full form (a) is "business analyst" with its own IPA (ai), the lower of the two levels and the roles of both, the full-form card is removed, and a card shows "= business analyst" under the term with its own listen button
+  Given a kept word (not a full form merged into an abbreviation) whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json
+  When the maintainer runs npm run build
+  Then the build prints "Add these to data/pronunciation-overrides.json first:" with the term and exits non-zero
 ```
 
 ## TC-107 · words.json integrity

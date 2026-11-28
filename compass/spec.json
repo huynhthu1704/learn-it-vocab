@@ -32,11 +32,13 @@
         "risks": [
           "Speech voices depend on the device; some devices have no voice for a language or accent",
           "Meanings and IPA come from data files and AI tools and may be wrong until a learner reports them",
-          "The ?role= parameter only works inside the hash (#home?role=ba); a link like /?role=ba is only counted as a visit source and does not filter",
+          "The ?role= parameter only works inside the hash (#home?role=ba); a link like /?role=ba is only counted as a visit source and does not filter The README says ?role= works on \"any page link\".",
           "A guest who clicks Save or a mark button must sign in first, which may put off casual visitors",
           "A full form merged into an abbreviation is not checked for IPA: if its IPA cannot be worked out, the build still passes and the card shows no IPA for the full form (build.mjs:135 copies it before the missing-IPA check at :144). Today every merged full form has one.",
-          "A term repeated in a later data file keeps the first file's level, topic, meaning and example without a warning; only the roles are combined (build.mjs:85). The later lines (for example approve in data/2-dev.txt) look edited but change nothing.",
-          "Some level overrides have no effect: an override on an abbreviation is undone by the merge with its full form (data/level-overrides.txt has UAT|2, but UAT is level 1 because \"user acceptance testing\" is level 1)."
+          "Some level overrides have no effect: an override on an abbreviation is undone by the merge with its full form (data/level-overrides.txt has UAT|2, but UAT is level 1 because \"user acceptance testing\" is level 1).",
+          "A term repeated on a later line (in the same or a later data file) keeps the first line's part of speech, meaning, example, topic and level without a warning; only the roles are combined (build.mjs:85). For example, approve in data/2-dev.txt and reliability at data/6-extra-l3.txt:43 look edited but change nothing.",
+          "Home page text is out of date: it says \"Every word has a picture\" (words have topic icons only) and \"Your progress is saved in this browser\" (progress is saved only for signed-in learners) (src/pages/home.html:7, :47, :55).",
+          "Not checked in a browser: after a guest signs in from the bulk-action pop-up, the action runs again about 300 ms later, and loading the account then joins its saved, known and learning words with the local ones (src/ui-cloud.js:28-33, :321). If the account loads after the action, \"Remove from saved\" and \"Reset to new\" may be undone for words the account already had."
         ]
       },
       "createdAt": "2026-10-31T00:00:00.000Z"
@@ -85,21 +87,23 @@
       "title": "Word database with levels, roles, topics, IPA, meanings and examples",
       "story": "As a content maintainer I want the build to turn the data files into one checked word database so that every word card has complete, consistent data.",
       "ac": [
-        "Given a line \"term|pos|Vietnamese|example|topic\" in a data/<digit>*.txt file below a header \"# level=2 role=dev\" and the term has an English definition and Korean meaning in data/definitions and is not listed in data/level-overrides.txt, is not in an earlier data/<digit>*.txt file (files are read in name order) and is not in data/merge-abbreviations.txt\nWhen the maintainer runs npm run build\nThen words.json contains the word with level 2, role dev among its roles, its topic, an IPA string, the English definition (d), Vietnamese (v), Korean (k) and the example (e)",
-        "Given a line \"term|level\" in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen words.json gives that term the listed level, unless the term is an abbreviation merged in data/merge-abbreviations.txt, whose card then takes the lower of its own and its full form's level (the merge runs after the overrides); if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
-        "Given a term that has no English definition in data/definitions\nWhen the maintainer runs npm run build\nThen the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
-        "Given a term that is kept as its own card (not a full form merged into an abbreviation) and whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json\nWhen the maintainer runs npm run build\nThen the build asks to add it to data/pronunciation-overrides.json and exits non-zero",
-        "Given the same term (case-insensitive) appears in two data files\nWhen the build runs\nThen words.json keeps one word for it with the level, topic, Vietnamese meaning and example from the first file in name order, and its roles include the roles from both files",
-        "Given an abbreviation pair \"BA|business analyst\" in data/merge-abbreviations.txt\nWhen the build runs\nThen words.json has one card \"BA\" whose full form (a) is \"business analyst\" with its own IPA (ai), the lower of the two levels and the roles of both, the full-form card is removed, and a card shows \"= business analyst\" under the term with its own listen button"
+        "Given a term appears on one or more lines of the data/<digit>*.txt files (read in file-name order, then line order), each below a header such as \"# level=2 role=dev\"\nWhen the maintainer runs npm run build\nThen words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its roles are the header roles of every line it appears on, plus any roles that roles.mjs adds",
+        "Given the term's first line in data/definitions (files in name order) is \"term|English definition|Korean meaning\"\nWhen the maintainer runs npm run build\nThen the word has that English definition (d) and Korean meaning (k); if no line gives the term both, the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
+        "Given the term's first line in data/fr (files in name order, not corporate.txt) is \"term|French meaning\"\nWhen the maintainer runs npm run build\nThen the word has that French meaning (f); a word with no French line gets an empty one and the build only warns",
+        "Given a line \"term|level\" in data/level-overrides.txt\nWhen the maintainer runs npm run build\nThen that level replaces the word's starting level, before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
+        "Given a line \"ABBR|full form\" in data/merge-abbreviations.txt, after level overrides\nWhen the maintainer runs npm run build\nThen words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows \"= <full form>\" under the term with its own listen button; if either term is not a word, the build prints \"data/merge-abbreviations.txt: not found\" and exits non-zero",
+        "Given a kept word (not a full form merged into an abbreviation) whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json\nWhen the maintainer runs npm run build\nThen the build prints \"Add these to data/pronunciation-overrides.json first:\" with the term and exits non-zero"
       ],
       "priority": "Must",
       "status": "Done",
       "sources": [
         "build.mjs:113-123",
         "build.mjs:127-145",
+        "build.mjs:146-151",
         "build.mjs:155-157",
         "build.mjs:73-89",
         "build.mjs:90-100",
+        "build.mjs:90-112",
         "roles.mjs:3",
         "roles.mjs:48-74",
         "src/app.js:118-120",
@@ -311,7 +315,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC1",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC1\n  Given a line \"term|pos|Vietnamese|example|topic\" in a data/<digit>*.txt file below a header \"# level=2 role=dev\" and the term has an English definition and Korean meaning in data/definitions and is not listed in data/level-overrides.txt, is not in an earlier data/<digit>*.txt file (files are read in name order) and is not in data/merge-abbreviations.txt\n  When the maintainer runs npm run build\n  Then words.json contains the word with level 2, role dev among its roles, its topic, an IPA string, the English definition (d), Vietnamese (v), Korean (k) and the example (e)",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC1\n  Given a term appears on one or more lines of the data/<digit>*.txt files (read in file-name order, then line order), each below a header such as \"# level=2 role=dev\"\n  When the maintainer runs npm run build\n  Then words.json has one word for the term: its part of speech, Vietnamese meaning, example and topic come from the term's first line, its starting level is the header level of that first line, and its roles are the header roles of every line it appears on, plus any roles that roles.mjs adds",
       "type": "Manual",
       "status": "Not run"
     },
@@ -321,7 +325,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC2",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC2\n  Given a line \"term|level\" in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then words.json gives that term the listed level, unless the term is an abbreviation merged in data/merge-abbreviations.txt, whose card then takes the lower of its own and its full form's level (the merge runs after the overrides); if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC2\n  Given the term's first line in data/definitions (files in name order) is \"term|English definition|Korean meaning\"\n  When the maintainer runs npm run build\n  Then the word has that English definition (d) and Korean meaning (k); if no line gives the term both, the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
       "type": "Manual",
       "status": "Not run"
     },
@@ -331,7 +335,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC3",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC3\n  Given a term that has no English definition in data/definitions\n  When the maintainer runs npm run build\n  Then the build prints \"Missing definitions in data/definitions/:\" with the term and exits non-zero",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC3\n  Given the term's first line in data/fr (files in name order, not corporate.txt) is \"term|French meaning\"\n  When the maintainer runs npm run build\n  Then the word has that French meaning (f); a word with no French line gets an empty one and the build only warns",
       "type": "Manual",
       "status": "Not run"
     },
@@ -341,7 +345,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC4",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC4\n  Given a term that is kept as its own card (not a full form merged into an abbreviation) and whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json\n  When the maintainer runs npm run build\n  Then the build asks to add it to data/pronunciation-overrides.json and exits non-zero",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC4\n  Given a line \"term|level\" in data/level-overrides.txt\n  When the maintainer runs npm run build\n  Then that level replaces the word's starting level, before abbreviations are merged; if the term is not a word or the level is not 1, 2 or 3, the build prints \"data/level-overrides.txt: not found or bad level\" with the line and exits non-zero",
       "type": "Manual",
       "status": "Not run"
     },
@@ -351,7 +355,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC5",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC5\n  Given the same term (case-insensitive) appears in two data files\n  When the build runs\n  Then words.json keeps one word for it with the level, topic, Vietnamese meaning and example from the first file in name order, and its roles include the roles from both files",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC5\n  Given a line \"ABBR|full form\" in data/merge-abbreviations.txt, after level overrides\n  When the maintainer runs npm run build\n  Then words.json keeps one card for ABBR whose full form (a) is the full form's term with its IPA (ai), whose level is the lower of the two words' levels, whose roles are those of both, and whose empty meanings and definition are filled from the full form; the full form's own card is removed, and the card shows \"= <full form>\" under the term with its own listen button; if either term is not a word, the build prints \"data/merge-abbreviations.txt: not found\" and exits non-zero",
       "type": "Manual",
       "status": "Not run"
     },
@@ -361,7 +365,7 @@
         "REQ-101"
       ],
       "title": "Word database with levels, roles, topics, IPA, meanings and examples: AC6",
-      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC6\n  Given an abbreviation pair \"BA|business analyst\" in data/merge-abbreviations.txt\n  When the build runs\n  Then words.json has one card \"BA\" whose full form (a) is \"business analyst\" with its own IPA (ai), the lower of the two levels and the roles of both, the full-form card is removed, and a card shows \"= business analyst\" under the term with its own listen button",
+      "gherkin": "Scenario: Word database with levels, roles, topics, IPA, meanings and examples, AC6\n  Given a kept word (not a full form merged into an abbreviation) whose IPA cannot be worked out from the dictionary or data/pronunciation-overrides.json\n  When the maintainer runs npm run build\n  Then the build prints \"Add these to data/pronunciation-overrides.json first:\" with the term and exits non-zero",
       "type": "Manual",
       "status": "Not run"
     },
@@ -953,13 +957,13 @@
       "reqIds": []
     },
     {
-      "id": "ADR-008",
+      "id": "ADR-101",
       "date": "2026-11-27",
       "title": "Back-fill the shipped features as Done requirements, two features per PR",
       "status": "Accepted",
-      "context": "The ten features built before Compass was adopted were not in the spec. Writing them up touches about 36 files, and the guardrails cap a PR at 12 files (the human-approved label does not lift that cap). The Product Owner chose to keep the cap and split the work, to number the back-fill from REQ-101 and TC-101 so it stays clear of the feature-flag work (REQ-001…006, TC-001…004 in open PRs), and to give every acceptance criterion its own test case.",
+      "context": "The ten features built before Compass was adopted were not in the spec. Writing them up touches about 36 files, and the guardrails cap a PR at 12 files (the human-approved label does not lift that cap). The Product Owner chose to keep the cap and split the work, to number the back-fill in its own blocks (ADR-101, REQ-101, TC-101) so it stays clear of the ids that other open work uses, and to give every acceptance criterion its own test case.",
       "decision": "Each shipped feature becomes F-001…F-010, with requirements REQ-101 onwards written from what the code does today (status Done, sources listing the code). Every acceptance criterion gets its own test case, and the concrete example scenarios are kept as extra test cases. They go in five PRs of two features each. Test cases are Manual with status Not run unless an automated test covers them. Features get no design object: they predate the design stage.",
-      "consequences": "Every acceptance criterion is traced to a test case, but most tests have not been run yet; QA can run them and set Pass or Fail. New requirements continue from REQ-007 and new test cases from TC-005 (after the feature-flag work), below the back-fill block. Gaps found while writing (README drift, possible bugs) are listed as risks on the feature, not fixed in these PRs.",
+      "consequences": "Every acceptance criterion is traced to a test case, but most tests have not been run yet; QA can run them and set Pass or Fail. New ADRs, requirements and test cases take the next free id below the back-fill blocks, after checking main and every open branch. Gaps found while writing (README drift, possible bugs) are listed as risks on the feature, not fixed in these PRs.",
       "reqIds": []
     }
   ]
