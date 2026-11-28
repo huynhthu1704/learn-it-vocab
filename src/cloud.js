@@ -6,7 +6,8 @@
 //   corporate/{c001}       one document per Workplace English item (read: everyone, write: admins)
 //   bundles/words-01..     packed copies, 150 words each, so a visit costs ~20 reads instead of 2,500
 //   bundles/corp-01..      packed Workplace English, 100 items each
-//   meta/info              layout version, counts, bundle names and publish date
+//   meta/info              layout version, counts, bundle names, publish date, and `flags`: the feature switches set in
+//                          Admin → Features, e.g. { ai: false } (missing = on). Always write meta/info with a merge.
 //   reports/{id}           "this word is wrong" reports from learners (create: signed in, review: admins)
 //   admins/{uid}           who may edit content (create by hand in the console)
 //   users/{uid}            a learner's progress and preferences (owner only)
@@ -45,9 +46,11 @@ const KIND = {
 };
 const bundleName = (kind, id) => `${KIND[kind].prefix}-${pad(Math.floor((id - 1) / KIND[kind].size) + 1, 2)}`;
 
-async function loadContent() {
+// onFlags gets meta/info's feature flags (or null) as soon as meta/info is read, before the bundles arrive.
+async function loadContent(onFlags) {
   if (!enabled) return null;
   const meta = await getDoc(doc(db, 'meta', 'info'));
+  try { onFlags?.(meta.exists() ? meta.data().flags || null : null); } catch (e) { console.warn('Applying the feature flags failed', e); } // never lose the content over it
   if (!meta.exists()) return null; // nothing published yet → the site keeps its built-in copy
   const m = meta.data();
   const [wp, cp] = await Promise.all([
@@ -72,7 +75,7 @@ const groupBundles = (kind, list) => { const g = new Map(); for (const o of list
 async function writeBundlesAndMeta(words, corp) {
   const wb = groupBundles('words', words), cb = groupBundles('corporate', corp);
   const ops = [...wb].map(([n, items]) => ['bundles', n, { items }]).concat([...cb].map(([n, items]) => ['bundles', n, { items }]));
-  ops.push(['meta', 'info', { layout: LAYOUT, version: Date.now(), publishedAt: serverTimestamp(), words: words.length, corporate: corp.length, wordBundles: [...wb.keys()], corpBundles: [...cb.keys()] }]);
+  ops.push(['meta', 'info', { layout: LAYOUT, version: Date.now(), publishedAt: serverTimestamp(), words: words.length, corporate: corp.length, wordBundles: [...wb.keys()], corpBundles: [...cb.keys()] }, true]); // merge: keep the feature flags
   // Bundles must stay below Firestore's 1 MB document limit.
   for (const [, , data] of ops) if (data.items && JSON.stringify(data.items).length > 950000) throw new Error('A bundle is too large. Lower WORDS_PER_BUNDLE in src/cloud.js.');
   await writeAll(ops);
@@ -222,6 +225,12 @@ const logOut = () => signOut(auth);
 const onUser = (cb) => onAuthStateChanged(auth, cb);
 const isAdmin = async (uid) => { try { return (await getDoc(doc(db, 'admins', uid))).exists(); } catch (e) { return false; } };
 
+// ---------- feature flags (Admin → Features) in meta/info.flags; meta/* is public-read and admin-write ----------
+// Learners get the flags with the content (loadContent), at no extra read. The admin tab reads them fresh.
+const loadFlags = async () => { const s = await getDoc(doc(db, 'meta', 'info')); return s.exists() ? s.data().flags || null : null; };
+// Saves only the given keys (a deep merge), so other flags and the rest of meta/info are kept.
+const saveFlags = (changes) => setDoc(doc(db, 'meta', 'info'), { flags: changes }, { merge: true });
+
 // ---------- learner progress and preferences ----------
 const loadProgress = async (uid) => { const s = await getDoc(doc(db, 'users', uid)); return s.exists() ? s.data() : null; };
 const saveProgress = (uid, p) => setDoc(doc(db, 'users', uid), { ...p, updatedAt: serverTimestamp() }, { merge: true });
@@ -231,7 +240,7 @@ window.Cloud = {
   loadContent, syncBuiltin, rebuildBundles, saveItems,
   submitReport, listReports, updateReport, myReports,
   listLists, saveList, deleteList, listUsers, listAllReports, recordVisit, listVisits,
-  aiJSON,
+  aiJSON, loadFlags, saveFlags,
   signIn, logOut, onUser, isAdmin, loadProgress, saveProgress,
 };
 window.dispatchEvent(new Event('cloud-ready'));

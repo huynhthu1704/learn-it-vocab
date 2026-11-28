@@ -222,12 +222,12 @@ function exampleHTML(w, color, tint, size = 36, box = true) {
 }
 // Plain-language explanation for people without a tech background (w.s = { en, vi, ko, fr }).
 function plainHTML(w, small) {
-  if (!w.s || !w.s.en) return '';
+  if (!w.s || !w.s.en || !feat('ai')) return ''; // AI-written; hidden when Admin → Features turns AI off
   return `<div class="plain"><b>${svg('bulb', '#15803D', 15, 2.2)}<span>In plain words</span></b><div data-notr>${esc(w.s.en)}${small ? '' : myLangs().filter(l => w.s[l]).map(l => `<div class="tline">${langTag(l)}<span lang="${l}">${esc(w.s[l])}</span></div>`).join('')}</div></div>`;
 }
 // A short story that shows a complex word in a real situation (w.st = { en, vi, ko, fr }).
 function storyHTML(w) {
-  if (!w.st || !w.st.en) return '';
+  if (!w.st || !w.st.en || !feat('ai')) return '';
   return `<div class="story"><b>${svg('book', '#B45309', 15, 2.2)}<span>Story: how it works in real life</span></b><div data-notr><p style="margin:0">${spkBtn(w.st.en, '#B45309', '#fff', 26)} ${esc(w.st.en)}</p>${myLangs().filter(l => w.st[l]).map(l => `<details><summary>${LANGS[l].name}</summary><p style="margin:6px 0 0">${spkBtn(w.st[l], '#B45309', '#fff', 24, false, l)} <span lang="${l}">${esc(w.st[l])}</span></p></details>`).join('')}</div></div>`;
 }
 /* ---------- multi-select ---------- */
@@ -286,7 +286,7 @@ function openWord(id, list) {
       </div>
       ${rel.length ? `<div><div class="eyebrow" style="margin-bottom:8px;color:var(--muted)">More words on this topic</div><div class="related" data-notr>${rel.map(r => `<button data-open="${r.id}">${esc(r.t)}</button>`).join('')}</div></div>` : ''}
       <div class="fbk"><span>Was this explanation clear?</span><button class="fbk-b ${(S.stats?.fb || {})[w.id] === 1 ? 'on' : ''}" data-fb="1" data-fbid="${w.id}" aria-label="Yes, clear">👍</button><button class="fbk-b ${(S.stats?.fb || {})[w.id] === -1 ? 'on' : ''}" data-fb="-1" data-fbid="${w.id}" aria-label="No, confusing">👎</button></div>
-      <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="reportlink" data-report="${w.id}">${svg('flag', '#5B6475', 15, 2)}<span>Report a wrong meaning or example</span></button>${cloudAdmin ? `<button class="reportlink" data-adminedit="${w.id}">${svg('edit', '#5B6475', 15, 2)}<span>Edit this word</span></button>` : ''}</div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">${feat('report') ? `<button class="reportlink" data-report="${w.id}">${svg('flag', '#5B6475', 15, 2)}<span>Report a wrong meaning or example</span></button>` : ''}${cloudAdmin ? `<button class="reportlink" data-adminedit="${w.id}">${svg('edit', '#5B6475', 15, 2)}<span>Edit this word</span></button>` : ''}</div>
       <div class="closebar"><button class="btn secondary" data-close>${svg('x', '#1B1F2A', 18, 2.2)} Close</button></div>
       ${idx >= 0 ? `<div class="navarrows"><button class="btn ghost sm" data-step="-1" ${idx <= 0 ? 'disabled' : ''}>${svg('back', '#1B1F2A', 18, 2)} Previous</button><span class="count">${idx + 1} / ${fmt(modalList.length)}</span><button class="btn ghost sm" data-step="1" ${idx >= modalList.length - 1 ? 'disabled' : ''}>Next ${svg('arrow', '#1B1F2A', 18, 2)}</button></div>` : ''}
     </div>`;
@@ -309,7 +309,7 @@ document.addEventListener('click', e => {
   if (t.dataset.review !== undefined) { $('#fcMode').value = 'due'; FC = null; return; }
   if (t.dataset.fb) { e.stopPropagation(); const id = +t.dataset.fbid, v = +t.dataset.fb; S.stats = S.stats || {}; const fb = S.stats.fb = S.stats.fb || {};
     if (fb[id] === v) delete fb[id]; else fb[id] = v; track('count', 'feedback', 0); openWord(id);
-    if (fb[id] === -1) toast('Thanks! Tell us what was unclear with “Report a wrong meaning or example”.'); else if (fb[id] === 1) toast('Thanks for the feedback!'); return; }
+    if (fb[id] === -1) toast(feat('report') ? 'Thanks! Tell us what was unclear with “Report a wrong meaning or example”.' : 'Thanks for the feedback!'); else if (fb[id] === 1) toast('Thanks for the feedback!'); return; }
   if (t.dataset.report) { e.stopPropagation(); openReport(t.dataset.kind || 'words', +t.dataset.report); return; }
   if (t.dataset.adminedit) { e.stopPropagation(); closeModal(); ADM.tab = 'edit'; ADM.kind = t.dataset.kind || 'words'; ADM.editId = +t.dataset.adminedit; location.hash = '#admin'; if (currentView === 'admin') renderAdmin(); return; }
   if (t.dataset.star) { e.stopPropagation(); const sid = +t.dataset.star; if (needSignIn(() => { if (!S.saved[sid]) toggleSave(sid); refreshVisible(); toast('Saved to your list ★'); })) return; toggleSave(+t.dataset.star); if ($('#overlay').classList.contains('open')) openWord($('#modal').dataset.id); else refreshVisible(); toast(S.saved[t.dataset.star] ? 'Saved to your list ★' : 'Removed from saved'); return; }
@@ -460,7 +460,7 @@ function corpCard(c) {
     <div class="cex" data-notr>${spkBtn(c.ex.replace(/^"|"$/g, '').replace(/[“”"]/g, ''), '#2563EB', '#E8F0FE', 28)}<div style="flex:1"><span>${esc(c.ex)}</span>${xRows(c.x, '#2563EB', '#E8F0FE', 24)}</div></div>
     ${c.av ? `<div class="avoid">${svg('x', '#DC2626', 18, 2.5)}<div><b>Avoid:</b> <span data-notr>${esc(c.av)}</span></div></div>` : ''}
     ${corpActions(c)}
-    <div style="display:flex;gap:14px;flex-wrap:wrap"><button class="reportlink" data-report="${c.id}" data-kind="corporate">${svg('flag', '#5B6475', 15, 2)}<span>Report a problem</span></button>${cloudAdmin ? `<button class="reportlink" data-adminedit="${c.id}" data-kind="corporate">${svg('edit', '#5B6475', 15, 2)}<span>Edit</span></button>` : ''}</div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap">${feat('report') ? `<button class="reportlink" data-report="${c.id}" data-kind="corporate">${svg('flag', '#5B6475', 15, 2)}<span>Report a problem</span></button>` : ''}${cloudAdmin ? `<button class="reportlink" data-adminedit="${c.id}" data-kind="corporate">${svg('edit', '#5B6475', 15, 2)}<span>Edit</span></button>` : ''}</div>
   </div>`;
 }
 function renderCorp() {
@@ -536,7 +536,7 @@ function renderFC() {
         <div class="hint">Say it out loud. What does it mean? Tap the card to flip.</div></div>
       <div class="fc-face fc-back" style="justify-content:flex-start"><span class="pill" style="background:${L.t};color:${L.c}" data-notr>${esc(w.p)}</span><div class="term" style="font-size:30px" data-notr>${esc(w.t)}</div>${altHTML(w, L.c, L.t, 28)}
         <div style="text-align:left;width:100%">${defsHTML(w, true)}</div>
-        ${showPlain() && w.s ? `<div style="text-align:left;width:100%">${plainHTML(w)}</div>` : ''}
+        ${showPlain() && w.s && feat('ai') ? `<div style="text-align:left;width:100%">${plainHTML(w)}</div>` : ''}
         <div style="text-align:left;width:100%">${exampleHTML(w, L.c, L.t, 34)}</div></div>
     </div></div>
     <div class="fc-actions"><button class="btn secondary lg" id="fcNo">Again</button><button class="btn primary lg" id="fcYes">${svg('check', '#fff', 20, 2.5)} I knew it</button></div>
@@ -725,7 +725,7 @@ function show(v) {
   if (v === 'quiz') { $('#qzSource').onchange(); if (!QZ) startQuiz(); }
   if (v === 'progress') { renderProgress(); renderAccount(); }
   if (v === 'lists') renderLists();
-  if (v === 'admin') renderAdmin();
+  if (v === 'admin') { if (!ADM.flagSaving) ADM.flags = null; renderAdmin(); } // Features reads the flags fresh each visit
   window.scrollTo(0, 0);
 }
 $('#menuBtn').onclick = () => $('#links').classList.toggle('open');

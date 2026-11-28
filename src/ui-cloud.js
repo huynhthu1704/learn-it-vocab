@@ -1,5 +1,26 @@
 /* ---------- cloud (Firebase): account, preferences, reports, admin, AI, personal lists ---------- */
 let cloudUser = null, cloudAdmin = false, cloudMeta = null, cloudSaveT = null, cloudStatus = '';
+// Feature flags (src/flags.mjs). Start from the last copy this browser saw so links don't flash, then use Firestore;
+// a failed read, or no read started within 6 s (cloud.js failed), means every feature is on (REQ-006). Admins always
+// see everything. Learners get the flags from meta/info, which the content load reads anyway.
+// The fallback fires 6 s after start-up but never before the page's load event, so a cloud.js that is only slow
+// still arrives and starts the read first (FLAGS.reading() in initCloud); one that fails lets the fallback run.
+const afterLoad = (fn, ms) => setTimeout(() => { if (document.readyState === 'complete') fn(); else window.addEventListener('load', fn, { once: true }); }, ms);
+const FLAGS = createFlagStore({ timer: afterLoad, cached: (() => { try { return JSON.parse(localStorage.getItem('itv-flags')); } catch (e) { return null; } })() });
+const feat = name => isOn(FLAGS.get(), name, cloudAdmin);
+// Show or hide the flagged links; re-render the open page only when what it shows may have changed.
+// Called with rerender only after start-up (from the flag store or sign-in), when currentView exists.
+function applyFlags(rerender) {
+  document.querySelectorAll('[data-nav="lists"]').forEach(a => { a.style.display = feat('ai') ? '' : 'none'; });
+  if (!rerender) return;
+  if (currentView === 'lists') renderLists(); else if (currentView === 'progress') renderAccount();
+  else if (currentView === 'browse' || currentView === 'home') refreshVisible();
+  else if (currentView === 'workplace') renderCorp();
+  else if (currentView === 'flashcards' && FC) renderFC();
+}
+FLAGS.onChange((f, changed) => { try { localStorage.setItem('itv-flags', JSON.stringify(f)); } catch (e) {} applyFlags(changed); });
+applyFlags(false);
+const notAvailable = () => `<div class="card" style="padding:28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px">${svg('flag', '#5B6475', 36, 1.8)}<h3 style="font-size:20px;margin:0">This feature is not available right now.</h3><a class="btn secondary sm" href="#home">Back to Home</a></div>`;
 // Until an admin syncs (old layout), fill in what the built-in data has and Firestore does not yet.
 function mergeBuiltin(list, builtin, layout) {
   if ((layout || 1) >= 2) return builtin === BUILTIN_WORDS ? list.filter(o => !MERGED[o.id]) : list;
@@ -74,7 +95,7 @@ function renderAccount() {
   const C = window.Cloud;
   if (!C || !C.enabled) { el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0">Cloud sync is not set up on this copy of the site, so progress is kept only until you close the page.</p>`; return; }
   if (!cloudUser) {
-    el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0 0 14px">Sign in to save words, mark them as known or still learning, and get review reminders, on every device. You can also report mistakes and build your own word lists.</p>${signInButton('signInBtn')}`;
+    el.innerHTML = `<h3 style="font-size:20px;margin-bottom:6px">Account</h3><p style="color:var(--muted);margin:0 0 14px">Sign in to save words, mark them as known or still learning, and get review reminders, on every device. ${feat('report') && feat('ai') ? 'You can also report mistakes and build your own word lists.' : feat('report') ? 'You can also report mistakes.' : feat('ai') ? 'You can also build your own word lists.' : ''}</p>${signInButton('signInBtn')}`;
     $('#signInBtn').onclick = () => doSignIn($('#signInBtn'));
     return;
   }
@@ -84,7 +105,7 @@ function renderAccount() {
       <div><span data-notr><b>${esc(u.displayName || u.email)}</b> <span style="color:var(--muted)">${esc(u.email || '')}</span></span>${cloudAdmin ? ' <span class="pill" style="background:#FEF3C7;color:#B45309">Admin</span>' : ''}
         <div class="hint" style="text-align:left;margin-top:4px">${esc(cloudStatus || 'Progress syncs automatically.')}</div>
 </div>
-      <div class="mrow">${cloudAdmin ? '<a class="btn primary sm" href="#admin">Open admin</a>' : ''}<a class="btn secondary sm" href="#lists">My word lists</a><button class="btn secondary sm" id="signOutBtn">Sign out</button></div></div>`;
+      <div class="mrow">${cloudAdmin ? '<a class="btn primary sm" href="#admin">Open admin</a>' : ''}${feat('ai') ? '<a class="btn secondary sm" href="#lists">My word lists</a>' : ''}<button class="btn secondary sm" id="signOutBtn">Sign out</button></div></div>`;
   $('#signOutBtn').onclick = () => Cloud.logOut();
 }
 
@@ -232,7 +253,7 @@ function openRolePicker(fromProfile) {
 // Ask once, on the first visit, unless a link already chose a role (e.g. #home?role=ba) or the visitor is on the admin page.
 function maybeAskRole() {
   if (S.role || S.rolePrompted || S.focusRole) { if (!S.role && S.focusRole) { S.role = S.focusRole; save(); } setTimeout(maybeAskLevel, 1200); return; }
-  setTimeout(() => { if (!S.role && !S.rolePrompted && currentView !== 'admin' && !$('#dlg').classList.contains('open') && !$('#overlay').classList.contains('open')) openRolePicker(); }, 1200);
+  setTimeout(() => FLAGS.when(() => { if (feat('prompts') && !S.role && !S.rolePrompted && currentView !== 'admin' && !$('#dlg').classList.contains('open') && !$('#overlay').classList.contains('open')) openRolePicker(); }), 1200);
 }
 
 /* ---------- level check: pick a level or take a 9-word test; Intermediate and Advanced mark Beginner words as known ---------- */
@@ -295,7 +316,8 @@ function renderLevelQ() {
   $('#dlgBox').querySelectorAll('[data-lt]').forEach(b => b.onclick = () => { if (+b.dataset.lt === q.w.id) LT.right[q.w.l]++; LT.i++; renderLevelQ(); });
 }
 function maybeAskLevel() {
-  if (S.levelPrompted || S.level || currentView === 'admin') return;
+  if (!FLAGS.known()) { FLAGS.when(maybeAskLevel); return; }
+  if (!feat('prompts') || S.levelPrompted || S.level || currentView === 'admin') return;
   if ($('#dlg').classList.contains('open') || $('#overlay').classList.contains('open')) { setTimeout(maybeAskLevel, 1500); return; }
   openLevelPicker();
 }
@@ -310,8 +332,8 @@ function openSignInInvite(then) {
     <ul class="invite-list">
       <li>${svg('check', '#16A34A', 18, 2.5)}<span>Keep your known words, streak and saved words on every device</span></li>
       <li>${svg('check', '#16A34A', 18, 2.5)}<span>Get review reminders for the words you're still learning</span></li>
-      <li>${svg('check', '#16A34A', 18, 2.5)}<span>Build your own word lists from your notes and documents</span></li>
-      <li>${svg('check', '#16A34A', 18, 2.5)}<span>Report wrong meanings and help improve the site</span></li>
+      ${feat('ai') ? `<li>${svg('check', '#16A34A', 18, 2.5)}<span>Build your own word lists from your notes and documents</span></li>` : ''}
+      ${feat('report') ? `<li>${svg('check', '#16A34A', 18, 2.5)}<span>Report wrong meanings and help improve the site</span></li>` : ''}
     </ul>
     <button class="btn primary lg" id="inviteSignIn" style="width:100%">${G_ICON.replace('width="18" height="18"', 'width="20" height="20"')} Sign in with Google</button>
     <button class="btn ghost sm" id="inviteLater">Maybe later</button>
@@ -326,8 +348,8 @@ function scheduleSignInInvite() {
   if (shown || !window.Cloud || !Cloud.enabled) return;
   const tryShow = () => {
     let seen = false; try { seen = sessionStorage.getItem('itv-invite') === '1'; } catch (e) {}
-    if (cloudUser || seen || currentView === 'admin') return; // signed in, or already invited this visit (e.g. after clicking ★)
-    if (!signInAuthKnown || $('#dlg').classList.contains('open') || $('#overlay').classList.contains('open')) { setTimeout(tryShow, 2000); return; } // wait for the role picker or a word card to close
+    if (cloudUser || seen || currentView === 'admin' || (FLAGS.known() && !feat('prompts'))) return; // switched off (Admin → Features), signed in, or already invited this visit (e.g. after clicking ★)
+    if (!signInAuthKnown || !FLAGS.known() || $('#dlg').classList.contains('open') || $('#overlay').classList.contains('open')) { setTimeout(tryShow, 2000); return; } // wait for the role picker or a word card to close
     openSignInInvite();
   };
   setTimeout(tryShow, 5000);
@@ -391,11 +413,11 @@ function renderAdmin() {
   if (!cloudUser) { area.innerHTML = `<div class="card" style="padding:24px"><p style="margin-top:0">Sign in with an admin account.</p>${signInButton('admSignIn')}</div>`; $('#admSignIn').onclick = () => doSignIn($('#admSignIn')); $('#adminTabs').innerHTML = ''; return; }
   if (!cloudAdmin) { area.innerHTML = `<div class="card" style="padding:24px"><p style="margin:0">This account is not an admin. To make it one, add a document with this user ID in the <b>admins</b> collection in the Firebase console: <code>${esc(cloudUser.uid)}</code></p></div>`; $('#adminTabs').innerHTML = ''; return; }
   const open = ADM.reports && ADM.repStatus === 'open' ? ADM.reports.length : null;
-  $('#adminTabs').innerHTML = [['insights', 'Insights'], ['reports', 'Reports' + (open ? ` (${open})` : '')], ['edit', 'Edit words'], ['ai', 'AI tools'], ['content', 'Content & sync']].map(([k, n]) => `<button data-atab="${k}" class="${ADM.tab === k ? 'on' : ''}">${n}</button>`).join('');
-  $('#adminTabs').onclick = e => { const b = e.target.closest('[data-atab]'); if (b) { ADM.tab = b.dataset.atab; renderAdmin(); } };
+  $('#adminTabs').innerHTML = [['insights', 'Insights'], ['reports', 'Reports' + (open ? ` (${open})` : '')], ['edit', 'Edit words'], ['ai', 'AI tools'], ['content', 'Content & sync'], ['features', 'Features']].map(([k, n]) => `<button data-atab="${k}" class="${ADM.tab === k ? 'on' : ''}">${n}</button>`).join('');
+  $('#adminTabs').onclick = e => { const b = e.target.closest('[data-atab]'); if (b) { ADM.tab = b.dataset.atab; if (ADM.tab === 'features' && !ADM.flagSaving) ADM.flags = null; renderAdmin(); } };
   const warn = needsSync() ? `<div class="avoid" style="margin-bottom:16px">${svg('flag', '#DC2626', 18, 2)}<div><b>One-time step:</b> open <b>Content & sync</b> and click <b>Sync built-in words to Firestore</b> before editing, so every word (now ${fmt(BUILTIN_WORDS.length)}) is in the database.</div></div>` : '';
   area.innerHTML = warn + '<div id="admBody"></div>';
-  ({ insights: admInsights, reports: admReports, edit: admEdit, ai: admAI, content: admContent })[ADM.tab]($('#admBody'));
+  ({ insights: admInsights, reports: admReports, edit: admEdit, ai: admAI, content: admContent, features: admFeatures })[ADM.tab]($('#admBody'));
 }
 async function admReports(el) {
   el.innerHTML = `<div class="frow" style="margin-bottom:16px"><div class="seg" id="repSeg">${segHTML([['open', 'Waiting'], ['accepted', 'Accepted'], ['rejected', 'Rejected']], ADM.repStatus, 'rs')}</div><button class="btn ghost sm" id="repReload">Refresh</button></div><div class="stack" id="repList"><div class="hint"><span class="spinner sm"></span> Loading reports…</div></div>`;
@@ -613,6 +635,35 @@ function admContent(el) {
   });
 }
 
+/* ---------- admin → features ---------- */
+// Admin → Features: switch site features on and off for learners (REQ-001). Saved to Firestore meta/info.flags.
+// The switches always come from a fresh read of meta/info (never the cache), and a click saves only that one flag,
+// so a stale or failed read can never switch other features back on. Opening Admin or the tab reads them again.
+async function admFeatures() {
+  const box = () => (currentView === 'admin' && ADM.tab === 'features' ? $('#admBody') : null); // always draw into the live tab
+  const intro = '<p style="color:var(--muted);margin:0 0 14px">Changes reach learners on their next page load. Admins always see every feature.</p>';
+  if (!ADM.flags) {
+    if (box()) box().innerHTML = intro + '<div class="hint" style="text-align:left"><span class="spinner sm"></span> Loading…</div>';
+    try { ADM.flags = resolveFlags(await Cloud.loadFlags()); FLAGS.set(ADM.flags); }
+    catch (e) {
+      if (!box()) return;
+      box().innerHTML = intro + `<div class="avoid">${svg('flag', '#DC2626', 18, 2)}<div>Could not load the feature switches: ${esc(e.code || e.message)}. Nothing was changed. <button class="btn secondary sm" id="flagRetry">Try again</button></div></div>`;
+      $('#flagRetry').onclick = () => admFeatures(); return;
+    }
+  }
+  const el = box(); if (!el) return;
+  const F = ADM.flags;
+  el.innerHTML = intro + `<div class="stack">${FLAG_LIST.map(f => `<div class="card frow-flag"><div><b>${esc(f.label)}</b><div class="count">${esc(f.desc)}</div></div>
+      <button class="switch" role="switch" aria-checked="${F[f.name]}" aria-label="${esc(f.label)}" data-flag="${f.name}" ${ADM.flagSaving ? 'disabled' : ''}><span class="knob"></span><span class="lbl">${F[f.name] ? 'On' : 'Off'}</span></button></div>`).join('')}</div>`;
+  el.querySelectorAll('[data-flag]').forEach(b => b.onclick = async () => {
+    const name = b.dataset.flag, value = !ADM.flags[name], before = ADM.flags;
+    ADM.flags = { ...before, [name]: value }; ADM.flagSaving = true; admFeatures();
+    try { await Cloud.saveFlags({ [name]: value }); FLAGS.set(ADM.flags); toast('Saved. Learners see it on their next visit.'); }
+    catch (e) { ADM.flags = before; toast('Could not save: ' + (e.code || e.message)); }
+    ADM.flagSaving = false; admFeatures();
+  });
+}
+
 /* ---------- my word lists (upload a file → AI finds the words) ---------- */
 const LST = { lists: null, open: null, cand: null, text: '', file: '', busy: false };
 async function fileToText(f) {
@@ -634,6 +685,8 @@ async function fileToText(f) {
 }
 function renderLists() {
   const el = $('#listsArea'); if (!el) return;
+  const head = $('#v-lists .page-head'); if (head) head.style.display = feat('ai') ? '' : 'none';
+  if (!feat('ai')) { el.innerHTML = notAvailable(); return; }
   if (!window.Cloud || !Cloud.enabled) { el.innerHTML = '<p>Word lists need the online version of the site.</p>'; return; }
   if (!cloudUser) { el.innerHTML = `<div class="card" style="padding:28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px">${svg('list', '#2563EB', 40, 1.8)}<h3 style="font-size:22px">Build your own word lists</h3><p style="color:var(--muted);margin:0;max-width:520px">Upload lecture notes, a requirement document or an email. AI picks out the key words and adds meanings in English, Vietnamese, Korean and French. Sign in to keep your lists.</p>${signInButton('lsSignIn')}</div>`; $('#lsSignIn').onclick = () => doSignIn($('#lsSignIn')); return; }
   if (LST.open) return renderOneList(el);
@@ -747,10 +800,12 @@ let cloudStarted = false;
 async function initCloud() {
   if (cloudStarted || !window.Cloud) return; cloudStarted = true;
   const C = window.Cloud;
-  if (!C.enabled) { renderAccount(); return; }
+  if (!C.enabled) { FLAGS.set(null); renderAccount(); return; }
   startVisit();
   loading(true);
-  try { const c = await C.loadContent(); if (c && c.words.length) applyContent(c); } catch (e) { console.warn('Firestore content not loaded, using built-in copy', e); }
+  FLAGS.reading(); // the flags come with meta/info; wait for it however slow, instead of the 6 s fallback
+  try { const c = await C.loadContent(FLAGS.set); if (c && c.words.length) applyContent(c); } catch (e) { console.warn('Firestore content not loaded, using built-in copy', e); }
+  if (!FLAGS.known()) FLAGS.set(null); // meta/info could not be read: every feature on
   loading(false);
   scheduleSignInInvite();
   C.onUser(async u => {
@@ -761,7 +816,7 @@ async function initCloud() {
     try { if (cloudAdmin) localStorage.setItem('itv-admin', '1'); } catch (e) {}
     if (u && !cloudAdmin && VISIT.started) { let k = ''; try { k = sessionStorage.getItem('itv-si'); sessionStorage.setItem('itv-si', '1'); } catch (e) {} if (!k) C.recordVisit(today(), { signedIn: 1 }).catch(() => {}); }
     if (u) { await syncProgress(); loading(false); }
-    renderAccount(); renderNavAccount();
+    renderAccount(); renderNavAccount(); applyFlags(Object.values(FLAGS.get()).includes(false));
     if (currentView === 'admin') renderAdmin(); if (currentView === 'lists') renderLists(); if (currentView === 'progress') renderLangCard();
     if (u && cloudAdmin && !ADM.reports) { try { ADM.reports = await C.listReports('open'); if (ADM.reports.length) { $('#navAdmin').textContent = `Admin (${ADM.reports.length})`; } if (currentView === 'admin') renderAdmin(); } catch (e) {} }
   });
